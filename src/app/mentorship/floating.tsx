@@ -8,7 +8,7 @@ export default async function Floating() {
       <Reveal>
         <section className="flex flex-col gap-1">
           <span className={`font-jakarta text-lg`}>
-            ₹<span className="text-2xl">2999</span>
+            ₹<span className="text-2xl">5999</span>
           </span>
 
           <div className="flex gap-2 text-sm font-semibold">
