@@ -1,31 +1,33 @@
 import AnimatedButton from "@/components/animated-button";
 import Reveal from "@/components/framer/reveal";
+import { mentorship } from "@/util/globals";
 import NewRazorpay from "@/util/new-razorpay";
 
 export default async function Floating() {
   return (
-    <div className="lg:hidden fixed bottom-0 z-20 flex justify-between items-center gap-2 p-4 px-6 bg-background/40 bg- w-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30">
-      <Reveal>
-        <section className="flex flex-col gap-1">
-          <span className={`font-jakarta text-lg`}>
-            ₹<span className="text-2xl">5999</span>
-          </span>
-
-          <div className="flex gap-2 text-sm font-semibold">
-            <span className="text-muted-foreground ml-1 line-through">
-              ₹7500
+    <div className="fixed bottom-0 z-20 bg-background/40 w-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30">
+      <div className="flex justify-between items-center gap-2 p-4 px-6 lg:max-w-[80rem] mx-auto">
+        <Reveal>
+          <section className="flex flex-col gap-1">
+            <span className={`font-jakarta text-lg`}>
+              ₹<span className="text-2xl">{mentorship.price}</span>
             </span>
-            <span
-              className={`font-jakarta text-secondary-foreground rounded py-0`}
-            >
-              40% off
-            </span>
-          </div>
-        </section>
-      </Reveal>
 
-      <Reveal>
-        {/* <Link href={"https://courses.30dayscoding.com/s/store"} >
+            <div className="flex gap-2 text-sm font-semibold">
+              <span className="text-muted-foreground ml-1 line-through">
+                ₹{mentorship.ogPrice}
+              </span>
+              <span
+                className={`font-jakarta text-secondary-foreground rounded py-0`}
+              >
+                {mentorship.discount}% off
+              </span>
+            </div>
+          </section>
+        </Reveal>
+
+        <Reveal>
+          {/* <Link href={"https://courses.30dayscoding.com/s/store"} >
           <div className="group relative">
             <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-500 via-lime-500 to-emerald-500 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
             <Button
@@ -40,10 +42,8 @@ export default async function Floating() {
           </div>
         </Link> */}
 
-        <AnimatedButton link="https://rzp.io/l/kZPObNXZ">
-          Buy Now
-        </AnimatedButton>
-        {/* <div
+          <AnimatedButton link={mentorship.link}>Buy Now</AnimatedButton>
+          {/* <div
           className="razorpay-embed-btn"
           data-url="https://pages.razorpay.com/pl_NlXmnJkIOZFVcc/view"
           data-text="Pay Now"
@@ -51,8 +51,9 @@ export default async function Floating() {
           data-size="large"
         ></div> */}
 
-        {/* <NewRazorpay id={"buy-mobile-course"} /> */}
-      </Reveal>
+          {/* <NewRazorpay id={"buy-mobile-course"} /> */}
+        </Reveal>
+      </div>
     </div>
   );
 }

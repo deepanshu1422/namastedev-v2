@@ -18,7 +18,7 @@ export default function Course({
     <div className="grid place-items-center gap-8 max-w-[90rem] m-auto py-8">
       <Reveal>
         <span className="flex items-center gap-4 relative">
-          <hr className="max-phone:hidden h-0.5 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
+          <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
           <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
             Course Glance
           </h2>
@@ -27,12 +27,12 @@ export default function Course({
       </Reveal>
 
       <Reveal>
-        <div className="flex max-lg:flex-col gap-3 max-lg:items-center max-lg:gap-10 min-h-96">
+        <div className="flex max-xl:flex-col gap-3 max-lg:items-center max-lg:gap-10 min-h-96">
           <TabMenu course={course} />
 
           {/* <div className="max-lg:p-8"> */}
           <Reveal width="fit-content">
-            <div className="lg:ml-[2.5rem] max-lg:m-auto flex flex-col items-start lg:p-[2rem_1.5rem_2.5rem] p-4 shadow-[0_2px_40px_0_rgba(0,0,0,.2)] gap-8 rounded-xl bg-second h-fit max-lg:scale-90">
+            <div className="xl:ml-[1.5rem] max-xl:m-auto flex flex-col items-start lg:p-[2rem_1.5rem_2.5rem] p-4 shadow-[0_2px_40px_0_rgba(0,0,0,.2)] gap-8 rounded-xl bg-second h-fit max-lg:scale-90 xl:max-w-[400px]">
               <section className="flex flex-col gap-2">
                 <span className="bg-gradient-to-t from-bg to-second/80 rounded-lg p-4 w-fit">
                   <MapIcon className="h-10 w-10 stroke-prime" />
