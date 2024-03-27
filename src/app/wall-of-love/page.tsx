@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://namastedev-clone.vercel.app"),
+  metadataBase: new URL("https://30dayscoding.com"),
   title: "Wall of Love | 30DaysCoding",
   description:
     "A page dedicated for our love and support for our work and what everything we achieved of till date.",
@@ -79,14 +79,12 @@ export default function Testimonial() {
                 <span className="flex flex-col items-center gap-4 animate-show">
                   <Link
                     href={"https://www.instagram.com/singh.aryan.45/"}
-                    
                     className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-prime relative inline-block before:transition-all"
                   >
                     <span className="relative text-white">@singh.aryan.45</span>
                   </Link>
                   <Link
                     href={"https://www.instagram.com/itsudhwani/"}
-                    
                     className="before:block before:absolute before:-inset-1 before:skew-y-3 before:bg-white relative inline-block before:transition-all w-fit"
                   >
                     <span className="relative text-prime">@itsudhwani</span>

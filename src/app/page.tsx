@@ -10,7 +10,7 @@ import Faqs from "@/components/mentorship-comp/faq";
 import Program from "@/components/program";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://namastedev-clone.vercel.app"),
+  metadataBase: new URL("https://30dayscoding.com"),
   title: "30 Days Coding - Learn Live",
   description:
     "A well organised platform for multiple development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",

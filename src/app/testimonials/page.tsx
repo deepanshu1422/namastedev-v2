@@ -6,7 +6,7 @@ import Watch from "./watch";
 import Public from "./public";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://namastedev-clone.vercel.app"),
+  metadataBase: new URL("https://30dayscoding.com"),
   title: "Testimonial | 30DaysCoding",
   description:
     "A testimonial page for our development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",

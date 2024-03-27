@@ -10,7 +10,7 @@ import Testimonials from "@/components/mentorship-comp/testimonials";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://namastedev-clone.vercel.app"),
+  metadataBase: new URL("https://30dayscoding.com"),
   title: "MERN Full Stack Development Course",
   description:
     "A complete mern full stack development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",

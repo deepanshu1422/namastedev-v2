@@ -132,7 +132,7 @@ let course = [
 ];
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://namastedev-clone.vercel.app"),
+  metadataBase: new URL("https://30dayscoding.com"),
   title: "Get Placed Faster with Live DSA Classes",
   description:
     "A live dsa placement ready course from 30 days coding. Checkout on www.courses.30dayscoding.com",

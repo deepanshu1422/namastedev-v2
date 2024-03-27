@@ -8,7 +8,7 @@ import Mentorship from "./mentorship";
 import JoinUs from "./joinus";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://namastedev-clone.vercel.app"),
+  metadataBase: new URL("https://30dayscoding.com"),
   title: "Mentorship | 30dayscoding",
   description:
     "A live mern stack development cohort from 30 days coding. Checkout on www.courses.30dayscoding.com",

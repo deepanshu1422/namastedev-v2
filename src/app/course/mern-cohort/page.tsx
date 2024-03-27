@@ -8,7 +8,7 @@ import NewMentor from "@/components/new-cohort/new-mentor";
 import Faqs from "@/components/mentorship-comp/faq";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://namastedev-clone.vercel.app"),
+  metadataBase: new URL("https://30dayscoding.com"),
   title: "LIVE Full Stack Web Development (MERN & NEXT) Cohort",
   description:
     "A live mern stack development cohort from 30 days coding. Checkout on www.courses.30dayscoding.com",
