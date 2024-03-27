@@ -7,6 +7,7 @@ import NewMentor from "@/components/new-cohort/new-mentor";
 import Highlights from "@/components/new-cohort/highligths";
 import Faqs from "@/components/mentorship-comp/faq";
 
+
 let course = [
   {
     week: 1,
