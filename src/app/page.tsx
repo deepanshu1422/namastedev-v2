@@ -25,7 +25,7 @@ export default function Home() {
       <Hero
         title="25000+ Students Learning DSA, React, MERN, Next JS, Blockchain, AI"
         desc="The most affordable premium courses. Projects, Guides, and Certificates included."
-        heroImage="bg-[url('/main/hero_section_fullstack.png')]"
+        heroImage="bg-[url('https://i.ibb.co/vDXj2Hn/hero-section-fullstack.webp')]"
         subTitle="Lifetime Validity Courses + Certificates"
         subDesc="Whether you're a beginner looking to dive into programming or an experienced developer seeking skill enhancement, our mentors' guidance and courses are well-designed for all levels of proficiency."
         ytId="SKhJ7HFvq0A"
