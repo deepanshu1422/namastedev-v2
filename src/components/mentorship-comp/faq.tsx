@@ -20,11 +20,9 @@ function Faq({ index, question, answer }: Faq) {
         <AccordionTrigger className="flex items-center gap-4 text-base font-semibold leading-6 text-white w-full">
           {question}
         </AccordionTrigger>
-        <AccordionContent className="flex flex-col gap-4">
+        <AccordionContent className="flex bg-second flex-col gap-4">
           <hr className="h-px w-full border-prime" />
-          <p className="w-full text-sm leading-5 text-muted-foreground">
-            {answer}
-          </p>
+          <p className="w-full max-lg:text-sm text-base leading-5">{answer}</p>
         </AccordionContent>
       </AccordionItem>
     </div>
@@ -85,17 +83,19 @@ export default function Faqs() {
 
     {
       question: "What is the validity of the Course?",
-      answer: "The course if lifetime valid. Take it once and never pay again.",
+      answer:
+        "The validity of the Course typically depends on the institution or organization offering it, as well as the specific nature of the Course itself. Most Courses come with a predetermined duration or validity period, which can range from a few weeks to several years, or certainly for lifetime. It's important for participants to carefully review the terms and conditions outlined by the provider to understand the duration for which the Course materials, access to resources, and any certifications or credentials awarded upon completion remain valid.",
     },
     {
       question: "What's the refund policy?",
       answer:
-        "We will refund you fully without any problem. Email us at projectsnightlight@gmail.com",
+        "Our refund policy is designed to provide peace of mind to our participants. We offer a hassle-free refund process, ensuring complete satisfaction with your experience. If for any reason you're not satisfied with the Course, you can request a refund without encountering any problems. We value your trust and aim to make the refund process as straightforward as possible, prioritizing customer satisfaction above all else.",
     },
 
     {
       question: "How do I contact you?",
-      answer: "Please email us at projectsnightlight@gmail.com",
+      answer:
+        "Please email us at projectsnightlight@gmail.com. You all can directly DM us on our social media links provided below.",
     },
 
     {
@@ -116,7 +116,7 @@ export default function Faqs() {
         </span>
       </Reveal>
       <Accordion
-        type="single"
+        type="multiple"
         className="flex flex-col items-start gap-4 self-stretch w-full"
       >
         {faqs.map(({ answer, question }, i) => (
