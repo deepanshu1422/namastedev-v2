@@ -7,8 +7,6 @@ import NewMentor from "@/components/new-cohort/new-mentor";
 import Highlights from "@/components/new-cohort/highligths";
 import Faqs from "@/components/mentorship-comp/faq";
 
-
-
 let course = [
   {
     week: 1,
@@ -144,6 +142,50 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  let faq = [
+    {
+      question: "What is the duration of the DSA Placement Ready Cohort?",
+      answer:
+        "The DSA Placement Ready Cohort typically lasts for 12 weeks, providing comprehensive mentorship and training to prepare participants for successful placements.",
+    },
+    {
+      question: "How often are live sessions conducted during the cohort?",
+      answer:
+        "Live sessions are conducted regularly throughout the week, offering interactive discussions, Q&A sessions, and guidance from experienced mentors to enhance learning and skill development.",
+    },
+    {
+      question: "What topics are covered in the DSA Placement Ready Cohort?",
+      answer:
+        "The cohort covers a wide range of topics essential for Data Structures and Algorithms mastery, including but not limited to arrays, linked lists, trees, sorting algorithms, graph algorithms, and dynamic programming.",
+    },
+    {
+      question: "Are there any prerequisites to join the cohort?",
+      answer:
+        "While there are no strict prerequisites, participants are expected to have basic programming knowledge and familiarity with concepts like variables, loops, conditionals, and functions.",
+    },
+    {
+      question:
+        "How are mentorship and support provided throughout the cohort?",
+      answer:
+        "Participants receive personalized mentorship and support from industry experts through one-on-one sessions, group discussions, and dedicated forums, ensuring their individual learning needs are addressed effectively.",
+    },
+    {
+      question: "Is there any hands-on project work included in the cohort?",
+      answer:
+        "Yes, participants engage in hands-on projects and coding challenges to apply their knowledge in real-world scenarios, enhancing their practical problem-solving skills and portfolio.",
+    },
+    {
+      question:
+        "What kind of assistance is provided for placement preparation?",
+      answer:
+        "The cohort offers comprehensive placement preparation assistance, including resume review, mock interviews, and career guidance sessions, to help participants confidently navigate the recruitment process and secure job offers.",
+    },
+    {
+      question: "What is the refund policy for the DSA Placement Ready Cohort?",
+      answer:
+        "We understand that circumstances may change, so we offer a refund policy that ensures satisfaction. If for any reason you're not satisfied with the cohort, you can request a refund within X days of enrollment.",
+    },
+  ];
   return (
     <main className="bg-background bg-bg min-h-svh transition-all">
       <Hero
@@ -160,7 +202,7 @@ export default function Home() {
       <Companies />
       <Highlights />
       <Testimonials />
-      <Faqs />
+      <Faqs faq={faq} />
     </main>
   );
 }

@@ -46,7 +46,11 @@ function Faq({ index, question, answer }: Faq) {
   );
 }
 
-export default function Faqs() {
+export default function Faqs({
+  faq,
+}: {
+  faq: { question: string; answer: string }[];
+}) {
   let faqs: Partial<Faq>[] = [
     // {
     //   question:
@@ -119,7 +123,7 @@ export default function Faqs() {
         type="multiple"
         className="flex flex-col items-start gap-4 self-stretch w-full"
       >
-        {faqs.map(({ answer, question }, i) => (
+        {faq.map(({ answer, question }, i) => (
           <Reveal width="100%" key={i}>
             <Faq index={i} question={question!} answer={answer!} />
           </Reveal>
