@@ -6,8 +6,8 @@ export const mentorship = {
 }
 
 export const dsa = {
-    price: 2999,
-    ogPrice: 7500,
+    price: 999,
+    ogPrice: 2999,
     discount: 40,
     link: "https://rzp.io/l/SyV8Ft2WF"
 }

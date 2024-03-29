@@ -10,12 +10,12 @@ export default async function Floating() {
         <Reveal>
           <section className="flex flex-col gap-1">
             <span className={`font-jakarta text-lg`}>
-              ₹<span className="text-2xl">{dsa.price}</span>
+              Just ₹<span className="text-2xl">{dsa.price}/month</span>
             </span>
 
             <div className="flex gap-2 text-sm font-semibold">
               <span className="text-muted-foreground ml-1 line-through">
-                {dsa.ogPrice}
+                {dsa.ogPrice}/month
               </span>
               <span
                 className={`font-jakarta text-secondary-foreground rounded py-0`}
