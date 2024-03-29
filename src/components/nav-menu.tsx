@@ -71,7 +71,18 @@ export const navTitles: {
   {
     title: "Resources",
     href: [
-      {
+        {
+          title: "AI Mock Interview",
+          href: "https://talktohire.com/",
+          description: "",
+        },
+        {
+          title: "Blogs",
+          href: "https://blogs.30dayscoding.com/",
+          description: "",
+        },
+
+        {
         title: "DSA Sheets",
         href: "http://dsa.30dayscoding.com/",
         description:
