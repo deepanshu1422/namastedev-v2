@@ -79,7 +79,7 @@ export default function Home() {
       <Companies />
       <Highlights />
       <Testimonials />
-      <Faqs />
+      {/*<Faqs />*/}
     </main>
   );
 }

@@ -38,7 +38,7 @@ export default function Home() {
         <Projects />
         <Companies />
         <Testimonials />
-        <Faqs />
+        {/*<Faqs />*/}
       </div>
     </main>
   );
