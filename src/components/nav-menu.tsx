@@ -36,17 +36,17 @@ export const navTitles: {
       //   description:
       //     "A live mern stack development cohort from 30 days coding. Checkout on www.courses.30dayscoding.com",
       // },
-      {
-        title: "DSA Live Course",
-        href: "/course/dsa-live-placement-ready-course",
-        description:
-          "A live dsa placement ready course from 30 days coding. Checkout on www.courses.30dayscoding.com",
-      },
+      // {
+      //   title: "DSA Live Course",
+      //   href: "/course/dsa-live-placement-ready-course",
+      //   description:
+      //     "A live dsa placement ready course from 30 days coding. Checkout on www.courses.30dayscoding.com",
+      // },
       {
         title: "Recorded DSA Mastery Course",
         href: "https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312",
         description:
-            "A full dsa mastery course from 30 days coding. Checkout on www.courses.30dayscoding.com",
+          "A full dsa mastery course from 30 days coding. Checkout on www.courses.30dayscoding.com",
       },
       {
         title: "MERN FullStack Course",
@@ -71,18 +71,18 @@ export const navTitles: {
   {
     title: "Resources",
     href: [
-        {
-          title: "AI Mock Interview",
-          href: "https://talktohire.com/",
-          description: "",
-        },
-        {
-          title: "Blogs",
-          href: "https://blogs.30dayscoding.com/",
-          description: "",
-        },
+      {
+        title: "AI Mock Interview",
+        href: "https://talktohire.com/",
+        description: "",
+      },
+      {
+        title: "Blogs",
+        href: "https://blogs.30dayscoding.com/",
+        description: "",
+      },
 
-        {
+      {
         title: "DSA Sheets",
         href: "http://dsa.30dayscoding.com/",
         description:

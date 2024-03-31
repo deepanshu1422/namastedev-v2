@@ -8,12 +8,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly',
             priority: 1,
         },
-        {
-            url: 'https://30dayscoding.com/course/dsa-live-placement-ready-course',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
+        // {
+        //     url: 'https://30dayscoding.com/course/dsa-live-placement-ready-course',
+        //     lastModified: new Date(),
+        //     changeFrequency: 'monthly',
+        //     priority: 0.8,
+        // },
         {
             url: 'https://30dayscoding.com/mentorship',
             lastModified: new Date(),

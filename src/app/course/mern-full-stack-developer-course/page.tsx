@@ -1,13 +1,13 @@
 import Achievements from "@/components/course-components/achievements";
 import Companies from "@/components/course-components/companies";
 import Course from "@/components/course-components/course";
-import Faqs from "@/components/mentorship-comp/faq";
 import Hero from "@/components/course-components/hero";
 import Instructor from "@/components/course-components/instructor";
 import Mission from "@/components/course-components/mission";
 import Projects from "@/components/course-components/projects";
 import Testimonials from "@/components/mentorship-comp/testimonials";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),
@@ -20,6 +20,8 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  return notFound();
+
   return (
     <main className="bg-background dark:bg-bg min-h-svh transition-all">
       <div className="max-w-[1800px] m-auto flex flex-col lg:px-20 lg:py-10 px-6 py-5 gap-10">

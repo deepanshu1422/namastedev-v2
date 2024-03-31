@@ -43,15 +43,14 @@ export default function Hero({
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>
             <Link
-              href={"/course/dsa-live-placement-ready-course"}
+              href={"https://dsa.30dayscoding.com/"}
               className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
             >
-              <span className="text-sm">Live Classes</span>
+              <span className="text-sm">DSA Sheets</span>
               <Radio className="max-lg:hidden w-4 h-4" />
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>
             <Link
-              
               href={"https://courses.30dayscoding.com/s/store"}
               className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
             >

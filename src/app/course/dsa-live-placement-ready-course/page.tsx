@@ -6,6 +6,7 @@ import Course from "@/components/new-cohort/course";
 import NewMentor from "@/components/new-cohort/new-mentor";
 import Highlights from "@/components/new-cohort/highligths";
 import Faqs from "@/components/mentorship-comp/faq";
+import { notFound } from "next/navigation";
 
 let course = [
   {
@@ -186,6 +187,9 @@ export default function Home() {
         "We understand that circumstances may change, so we offer a refund policy that ensures satisfaction. If for any reason you're not satisfied with the cohort, you can request a refund within X days of enrollment.",
     },
   ];
+
+  return notFound();
+
   return (
     <main className="bg-background bg-bg min-h-svh transition-all">
       <Hero

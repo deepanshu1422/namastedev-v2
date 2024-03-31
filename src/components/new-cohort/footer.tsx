@@ -18,12 +18,12 @@ export default function Footer() {
       //   description:
       //     "A live mern stack development cohort from 30 days coding. Checkout on www.courses.30dayscoding.com",
       // },
-      {
-        title: "DSA Live Placement",
-        href: "/course/dsa-live-placement-ready-course",
-        description:
-          "A live dsa placement ready course from 30 days coding. Checkout on www.courses.30dayscoding.com",
-      },
+      // {
+      //   title: "DSA Live Placement",
+      //   href: "/course/dsa-live-placement-ready-course",
+      //   description:
+      //     "A live dsa placement ready course from 30 days coding. Checkout on www.courses.30dayscoding.com",
+      // },
       {
         title: "MERN FullStack Course",
         href: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
@@ -74,10 +74,7 @@ export default function Footer() {
 
             <Reveal>
               <section className="flex gap-4">
-                <Link
-                  
-                  href={"https://www.linkedin.com/company/30dc/"}
-                >
+                <Link href={"https://www.linkedin.com/company/30dc/"}>
                   <svg
                     className="h-6 w-6 fill-white stroke-white transition-all lg:hover:fill-prime"
                     xmlns="http://www.w3.org/2000/svg"
@@ -87,10 +84,7 @@ export default function Footer() {
                   </svg>
                 </Link>
 
-                <Link
-                  
-                  href={"https://www.instagram.com/30dayscoding/"}
-                >
+                <Link href={"https://www.instagram.com/30dayscoding/"}>
                   <svg
                     className="h-6 w-6 fill-white stroke-white transition-all lg:hover:fill-prime"
                     xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +95,6 @@ export default function Footer() {
                 </Link>
 
                 <Link
-                  
                   href={
                     "https://www.youtube.com/channel/UCdu8HnchmMbDqbbC4GdPrjw"
                   }
@@ -115,7 +108,7 @@ export default function Footer() {
                   </svg>
                 </Link>
 
-                <Link  href={"https://twitter.com/30dayscoding"}>
+                <Link href={"https://twitter.com/30dayscoding"}>
                   <svg
                     className="h-6 w-6 fill-white stroke-white transition-all lg:hover:fill-prime"
                     xmlns="http://www.w3.org/2000/svg"

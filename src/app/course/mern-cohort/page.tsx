@@ -6,6 +6,7 @@ import Course from "@/components/new-cohort/course";
 import Highlights from "@/components/new-cohort/highligths";
 import NewMentor from "@/components/new-cohort/new-mentor";
 import Faqs from "@/components/mentorship-comp/faq";
+import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),
@@ -63,6 +64,8 @@ export default function Home() {
       ],
     },
   ];
+
+  return notFound();
 
   return (
     <main className="bg-background bg-bg min-h-svh transition-all">
