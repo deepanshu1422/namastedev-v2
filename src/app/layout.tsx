@@ -33,7 +33,7 @@ export default function RootLayout({
       <body className={`${localJakarta.variable} font-jakarta bg-bg`}>
         <ThemeProvider attribute="class" defaultTheme="dark">
           <MobileMenu />
-          <Banner />
+          {/* <Banner /> */}
           <Navbar />
           {children}
           <Footer />

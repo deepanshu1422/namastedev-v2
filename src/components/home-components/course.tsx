@@ -53,7 +53,7 @@ export default function Course() {
           </Reveal>
         </Link>
 
-        <Link
+        {/* <Link
           href={"/course/dsa-live-placement-ready-course"}
           className="flex-1 max-lg:w-full lg:max-w-[450px] hover:opacity-90"
         >
@@ -75,7 +75,7 @@ export default function Course() {
               </span>
             </div>
           </Reveal>
-        </Link>
+        </Link> */}
       </div>
 
       {/* <Link
