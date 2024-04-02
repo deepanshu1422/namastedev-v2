@@ -1,3 +1,4 @@
+import { AnimatedTooltip } from "@/components/ace-ui/animated-tooltip";
 import Reveal from "@/components/framer/reveal";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -56,6 +57,23 @@ const reviews = [
 ];
 
 export default function Testimonial() {
+  const people = [
+    {
+      id: 1,
+      name: "Aryan Singh",
+      designation: "SDE@Google",
+      image: "https://i.ibb.co/YRBGz7v/instructor.jpg",
+      link: "https://www.instagram.com/singh.aryan.45/",
+    },
+    {
+      id: 2,
+      name: "Deepanshu Udhwani",
+      designation: "Founder",
+      image: "https://i.ibb.co/8mFwp1C/instructor2.jpg",
+      link: "https://www.instagram.com/itsudhwani/",
+    },
+  ];
+
   return (
     <main
       className={`font-jakarta bg-bg min-h-svh text-white p-[3.75rem_0_6.5rem] overflow-hidden`}
@@ -74,9 +92,10 @@ export default function Testimonial() {
             </Reveal>
 
             <Reveal>
-              <span className="flex gap-2  h-10 p-2 overflow-y-hidden">
-                <p>DM us on Instagram</p>
-                <span className="flex flex-col items-center gap-4 animate-show">
+              <span className="flex items-center gap-2 h-10 p-2 my-5">
+                <p>DM us on Instagram </p>
+                <AnimatedTooltip items={people} />
+                {/* <span className="flex flex-col items-center gap-4 animate-show">
                   <Link
                     href={"https://www.instagram.com/singh.aryan.45/"}
                     className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-prime relative inline-block before:transition-all"
@@ -89,7 +108,7 @@ export default function Testimonial() {
                   >
                     <span className="relative text-prime">@itsudhwani</span>
                   </Link>
-                </span>
+                </span> */}
               </span>
             </Reveal>
           </div>
