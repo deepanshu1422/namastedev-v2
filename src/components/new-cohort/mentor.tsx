@@ -129,7 +129,7 @@ export default function Mentor() {
             desc="One of our valuable Abhinav Awasthi, uprising software engineer currently at Zeta, contributing to 30 Days Coding expecially DSA. Having professional expertise with a passion for mentoring keeps him driven."
           />
         </Reveal> */}
-        <div className="max-lg:hidden flex flex-col gap-5 items-center text-center max-w-2xl px-6">
+        <div className="max-lg:hidden flex flex-col gap-5 items-center text-center max-w-xl px-6">
           <Reveal>
             <span className="text-4xl font-bold">
               Faculty and Experts from <span className="text-prime">FAANG</span>{" "}

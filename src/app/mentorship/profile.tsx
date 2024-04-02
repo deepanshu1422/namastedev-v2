@@ -49,14 +49,13 @@ function ProfileCard({
         className={`relative flex flex-col border-prime bg-second rounded-lg overflow-hidden shadow-inner transition-all duration-500 w-full items-start gap-7 border pb-6`}
       >
         <div
-          className={`w-full relative max-md:min-h-30 max-lg:min-h-40 lg:min-h-44 bg-[${cover}] flex items-end justify-end`}
+          className={`w-full relative max-md:min-h-30 max-lg:min-h-40 lg:min-h-44 ${cover} flex items-end justify-end`}
         >
           <Reveal>
             <section className="flex gap-2 p-3 max-phone:grid max-phone:grid-cols-2">
               {social.linkedin && (
                 <Link
                   href={social.linkedin ?? "#"}
-                  
                   className="rounded-md p-1.5 bg-prime/30 h-fit"
                 >
                   <svg
@@ -72,7 +71,6 @@ function ProfileCard({
               {social.instagram && (
                 <Link
                   href={social.instagram ?? "#"}
-                  
                   className="rounded-md p-1.5 bg-prime/30 h-fit"
                 >
                   <svg
@@ -88,7 +86,6 @@ function ProfileCard({
               {social.youtube && (
                 <Link
                   href={social.youtube ?? "#"}
-                  
                   className="rounded-md p-1.5 bg-prime/30 h-fit"
                 >
                   <svg
@@ -104,7 +101,6 @@ function ProfileCard({
               {social.twitter && (
                 <Link
                   href={social.twitter ?? "#"}
-                  
                   className="rounded-md p-1.5 bg-prime/30 h-fit"
                 >
                   <svg
@@ -327,7 +323,7 @@ export default function Profile() {
         // "Android StudioAndroid Studio",
         // "Back-End Web Development",
       ],
-      cover: "url('/main/hero_section_fullstack.png')",
+      cover: "cover",
     },
     {
       name: "Deepanshu Udhwani",
@@ -399,7 +395,7 @@ export default function Profile() {
         "Data Structures",
         "Software Development",
       ],
-      cover: "url('/main/hero_section_fullstack.png')",
+      cover: "cover",
     },
   ];
 

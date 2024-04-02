@@ -40,11 +40,7 @@ export function VideoTestimony({
           </div>
         </div>
 
-        <Link
-          href={linkedinUrl}
-          
-          className="rounded-md p-1.5 bg-prime/30 h-fit"
-        >
+        <Link href={linkedinUrl} className="rounded-md p-1.5 bg-prime/30 h-fit">
           <svg
             className="h-4 w-4 fill-white"
             xmlns="http://www.w3.org/2000/svg"
@@ -62,12 +58,12 @@ export default function Hero() {
   return (
     <div className="grid place-items-center gap-8">
       <Reveal>
-        <h1 className="font-jakarta max-phone:text-[2rem] text-[2.5rem] font-extrabold text-center">
+        <h1 className="font-jakarta max-phone:text-[2rem] text-[2.5rem] font-extrabold text-center max-phone:px-10">
           What do our learners have to say?
         </h1>
       </Reveal>
       <Reveal>
-        <div className="flex flex-wrap gap-8 justify-center p-3">
+        <div className="flex gap-8 justify-center p-3">
           <VideoTestimony
             name="Deepanshu Udhwani"
             designation="Founder 30dayscoding | Ex. MakeMytrip | Ex. Alibaba Cloud"
@@ -75,7 +71,7 @@ export default function Hero() {
             imageUrl="/instructor2.jfif"
             videoId="gIx8D2pyXVI"
           />
-          <VideoTestimony
+          {/* <VideoTestimony
             name="Aryan Singh"
             designation="@Google SWE"
             linkedinUrl="https://www.linkedin.com/in/singh1aryan/"
@@ -88,7 +84,7 @@ export default function Hero() {
             linkedinUrl="https://www.linkedin.com/in/singh1aryan/"
             imageUrl="/instructor.jpg"
             videoId="39MArMcq5Oc"
-          />
+          /> */}
         </div>
       </Reveal>
     </div>
