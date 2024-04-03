@@ -119,6 +119,10 @@ export const navTitles: {
       },
     ],
   },
+  {
+    title: "Blog",
+    href: "/blog",
+  },
 ];
 
 export function NavMenu() {
