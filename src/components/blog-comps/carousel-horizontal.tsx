@@ -23,13 +23,13 @@ export function CarouselHorizontail() {
         align: "start",
         loop: true,
       }}
-      className="w-full lg:hidden"
+      className="w-full lg:hidden phone:px-[1.2rem]"
     >
       <CarouselContent>
         {Array.from({ length: 5 }).map((_, index) => (
           <CarouselItem key={index} className="pt-1 sm:basis-1/2">
             <div className="p-1">
-              <Card className="border-second overflow-hidden">
+              <Card className="border-second bg-background/30 overflow-hidden">
                 <CardContent className="flex p-0">
                   <Image
                     width={90}

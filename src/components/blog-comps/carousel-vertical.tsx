@@ -25,13 +25,13 @@ export function CarouselVertical() {
         loop: true,
       }}
       orientation="vertical"
-      className="w-full max-w-xs max-lg:hidden"
+      className="w-full max-w-xs max-lg:hidden mr-11"
     >
       <CarouselContent className="-mt-1 h-[200px]">
         {Array.from({ length: 5 }).map((_, index) => (
           <CarouselItem key={index} className="pt-1 md:basis-1/2">
             <div className="p-1">
-              <Card className="border-second overflow-hidden">
+              <Card className="border-second bg-background/30 overflow-hidden">
                 <CardContent className="flex p-0">
                   <Image
                     width={90}
@@ -62,8 +62,8 @@ export function CarouselVertical() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      {/* <CarouselPrevious />
+      <CarouselNext /> */}
     </Carousel>
   );
 }

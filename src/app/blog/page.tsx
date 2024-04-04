@@ -4,6 +4,7 @@ import Video from "@/components/new-cohort/video";
 import Hero from "./hero";
 import Faqs from "@/components/mentorship-comp/faq";
 import Mid from "@/components/blog-comps/mid";
+import Latest from "@/components/blog-comps/latest";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),
@@ -57,31 +58,8 @@ export default function Home() {
         desc="Explore insightful and engaging blog posts covering a range of topics to empower your career journey."
         heroImage="https://p0.pxfuel.com/preview/728/375/731/aerial-analog-background-blog.jpg"
       />
-      {/* <Profile /> */}
       <Mid />
-      {/* <Video
-        title={"1:1 Live Query Seesions"}
-        desc={
-          "Resolve all your queries related to the industry and latest jobs with the help of our experts with live interactions and doubt clearing sessions."
-        }
-        youtubeId={"ylUk7kImBeE"}
-      /> */}
-      {/* <Mentorship /> */}
-      <Video
-        title={"Best Practices for Developers by Our Mentors"}
-        desc={
-          "Explore the latest technologies wit the help of our experts with live interactions and doubt clearing sessions."
-        }
-        youtubeId={"KMufzzSF6SE"}
-      />
-      {/* <JoinUs /> */}
-      <Video
-        title={"1:1 Live Session with our Mentors"}
-        desc={
-          "Explore the latest technologies with the help of our experts with live interactions and doubt clearing sessions."
-        }
-        youtubeId={"gIx8D2pyXVI"}
-      />
+      <Latest />
       <Testimonials />
       <Faqs faq={faq} />
     </main>

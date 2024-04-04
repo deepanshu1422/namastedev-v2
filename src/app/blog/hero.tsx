@@ -25,15 +25,15 @@ export default function Hero({
           className="object-cover opacity-10 pointer-events-none"
         />
         <div className="relative bg-gradient-to-t from-bg from-0% to-transparent to-50%">
-          <div className="tab:p-[12.5rem_5.5rem_6.75rem] max-tab:pt-[12rem] max-tab:pb-[2.5rem] m-auto max-w-[75rem] flex place-items-start text-white">
+          <div className="tab:p-[12.5rem_5.5rem_6.75rem] max-tab:pt-[12rem] max-tab:pb-[2.5rem] m-auto max-w-[75rem] flex justify-between text-white">
             <section className="grid gap-7">
               <h1
-                className={`max-w-2xl font-jakarta phone:text-[3.5rem] text-[2.5rem] font-extrabold bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight max-tab:px-11 max-phone:px-6`}
+                className={`max-w-xl font-jakarta phone:text-[3.5rem] text-[2.5rem] font-extrabold bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight max-tab:px-11 max-phone:px-6`}
               >
                 {title}
               </h1>
 
-              <p className="max-w-[43rem] max-tab:px-11 max-phone:px-6 text-lg max-tab:text-[1.05rem] max-tab:leading-6">
+              <p className="max-w-[35rem] max-tab:px-11 max-phone:px-6 text-lg max-tab:text-[1.05rem] max-tab:leading-6">
                 {desc}
               </p>
             </section>
