@@ -5,6 +5,7 @@ import Hero from "./hero";
 import Faqs from "@/components/mentorship-comp/faq";
 import Mid from "@/components/blog-comps/mid";
 import Latest from "@/components/blog-comps/latest";
+import Blog from "./blog";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),
@@ -60,8 +61,8 @@ export default function Home() {
       />
       <Mid />
       <Latest />
-      <Testimonials />
-      <Faqs faq={faq} />
+      <Blog />
+      {/* <Faqs faq={faq} /> */}
     </main>
   );
 }
