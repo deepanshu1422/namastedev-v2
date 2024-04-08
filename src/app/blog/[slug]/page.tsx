@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Hero from "./hero";
-import Mid from "@/components/blog-comps/mid";
-import Latest from "@/components/blog-comps/latest";
-import Blog from "./blog";
+import Reveal from "@/components/framer/reveal";
+import { ReactNode } from "react";
+import Mid from "./Mid";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),
@@ -13,6 +13,26 @@ export const metadata: Metadata = {
     images: "/cohort.jpg",
   },
 };
+
+function Paragraph({ children }: { children: ReactNode }) {
+  return (
+    <Reveal>
+      <p className="max-w-lg md:max-w-3xl m-auto md:text-lg lg:text-xl py-4 px-8 lg:px-5">
+        {children}
+      </p>
+    </Reveal>
+  );
+}
+
+function Heading2({ children }: { children: ReactNode }) {
+  return (
+    <Reveal>
+      <h2 className="max-w-lg md:max-w-3xl m-auto text-2xl max-md:text-xl font-bold px-8 lg:px-5 pt-8 break-words">
+        {children}
+      </h2>
+    </Reveal>
+  );
+}
 
 export default function Home() {
   let faq = [
@@ -56,10 +76,23 @@ export default function Home() {
         desc="Explore insightful and engaging blog posts covering a range of topics to empower your career journey."
         heroImage="https://p0.pxfuel.com/preview/728/375/731/aerial-analog-background-blog.jpg"
       />
-      <Mid />
-      <Latest />
-      <Blog />
-      {/* <Faqs faq={faq} /> */}
+      <Heading2>Introduction</Heading2>
+      <Paragraph>
+        Apple’s newest store in Shanghai opened this Thursday, March 21, to
+        excited customers ready to discover Apple’s full lineup of products and
+        services. Located next to the landmark Jing’an Temple, Apple Jing’an
+        will host a special six-week Today at Apple program that pays homage to
+        the local community and its creatives.
+      </Paragraph>
+      <Paragraph>
+        The series, Let Diverse Creativity Bloom in Jing’an, showcases
+        Shanghai’s next generation of creators and how they use the
+        groundbreaking capabilities of iPhone.
+      </Paragraph>
+      <Mid
+        blogImage="https://www.apple.com/newsroom/images/2024/03/apple-jingan-opens-to-thousands-of-customers-in-shanghai/article/Apple-Jingan-China-opening-day-plaza-overhead_big.jpg.small_2x.jpg"
+        desc="Located near Jing’an Temple and Jing’an Park in Shanghai, the store offers the community a gathering place for special events, as well as providing a one-of-a-kind shopping destination."
+      />
     </main>
   );
 }
