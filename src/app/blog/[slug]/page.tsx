@@ -13,6 +13,38 @@ type PageProps = {
   };
 };
 
+type Props = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+type BlogData = {
+  title: string;
+  metaDescription: string;
+  heroImage: {
+    url: string;
+  };
+  blogSectionCollection: {
+    items: {
+      data: {
+        json: {
+          nodeType: "document";
+          data: {};
+          content: {
+            nodeType: "paragraph";
+            content: {
+              nodeType: "text";
+              value: string;
+              mark: [];
+              data: {};
+            };
+          }[];
+        };
+      };
+    }[];
+  };
+};
+
 export async function generateStaticParams() {
   const slugs = await fetch(
     "https://graphql.contentful.com/content/v1/spaces/f7l5sefbt57k/environments/master",
@@ -99,8 +131,6 @@ async function getBlogData(slug: string): Promise<BlogData> {
               title
               metaDescription
               heroImage{
-                height
-                width
                 url
               }
             }
