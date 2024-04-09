@@ -1,5 +1,5 @@
 import Reveal from "@/components/framer/reveal";
-import { space_mono } from "@/lib/font";
+// import { space_mono } from "@/lib/font";
 import Image from "next/image";
 
 export default function Footer() {

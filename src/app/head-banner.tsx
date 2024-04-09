@@ -3,7 +3,7 @@
 import Unveal from "@/components/framer/unvel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { space_mono } from "@/lib/font";
+// import { space_mono } from "@/lib/font";
 import { X } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
@@ -13,9 +13,7 @@ export default function HeadBanner() {
   return (
     <Unveal>
       <div
-        className={`${hide ? "hidden" : "flex"} ${
-          space_mono.className
-        } relative p-3 items-end lg:justify-center max-lg:justify-between text-white shadow-xl bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600  animate-gradient bg-[length:200%_auto]`}
+        className={`${hide ? "hidden" : "flex"} relative p-3 items-end lg:justify-center max-lg:justify-between text-white shadow-xl bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600  animate-gradient bg-[length:200%_auto]`}
       >
         <div className="flex max-lg:flex-col lg:items-center justify-center lg:gap-6">
           <Image

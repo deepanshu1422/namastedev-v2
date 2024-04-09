@@ -12,14 +12,15 @@ export default function Blog() {
           <div className="lg:min-h-96 lg:w-6/12 h-full w-full flex flex-col gap-3 max-md:px-6 p-12 max-md:pt-0">
             <Reveal>
               <span className="text-2xl lg:text-3xl font-semibold max-w-2xl">
-                Why Product Design must learning Motion
+                Mastering JavaScript Closures: The Definitive Guide
               </span>
             </Reveal>
             <Reveal>
               <p className="text-xs md:max-w-[70%] leading-6 line-clamp-3">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore
-                nisi error esse amet nulla vitae, voluptatem alias aut fuga
-                explicabo ea est. Aliquid soluta
+                Unlock the power of closures in JavaScript with this
+                comprehensive guide. Learn what closures are, how they work, use
+                cases, and best practices to level up your JavaScript
+                fundamentals and JavaScript concepts.
               </p>
             </Reveal>
             <Reveal>
@@ -44,14 +45,11 @@ export default function Blog() {
           <div className="lg:min-h-[450px] min-h-20 min-w-60 lg:w-5/12 flex max-md:flex-col lg:flex-col gap-2 lg:gap-3 px-6 p-12 max-md:pb-5 rounded-md overflow-hidden">
             <Image
               src={
-                "https://w0.peakpx.com/wallpaper/1017/717/HD-wallpaper-cod-ghost-game-thumbnail.jpg"
+                "https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg"
               }
-              loader={() =>
-                "https://w0.peakpx.com/wallpaper/1017/717/HD-wallpaper-cod-ghost-game-thumbnail.jpg"
-              }
-              alt=""
-              width={20}
-              height={20}
+              alt="laptop with typing hands"
+              width={1088}
+              height={832}
               className="w-full h-full object-cover rounded-md"
             />
           </div>

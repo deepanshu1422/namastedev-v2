@@ -1,5 +1,5 @@
 import Reveal from "@/components/framer/reveal";
-import { space_mono } from "@/lib/font";
+// import { space_mono } from "@/lib/font";
 import { Award, Briefcase, Laptop } from "lucide-react";
 
 function Achieved({

@@ -49,90 +49,86 @@ export default function Latest() {
           </div>
 
           <div className="lg:min-h-96 lg:w-5/12 flex max-md:flex-col lg:flex-col gap-2 lg:gap-3">
-            <Reveal>
-              <div className="lg:h-1/2 min-h-32 w-full rounded-md bg-background/20 flex overflow-hidden">
-                <Image
-                  src={
-                    "https://w0.peakpx.com/wallpaper/1017/717/HD-wallpaper-cod-ghost-game-thumbnail.jpg"
-                  }
-                  loader={() =>
-                    "https://w0.peakpx.com/wallpaper/1017/717/HD-wallpaper-cod-ghost-game-thumbnail.jpg"
-                  }
-                  alt=""
-                  width={20}
-                  height={20}
-                  className="w-2/5 object-cover max-phone:hidden"
-                />
-                <div className="px-3 py-2 flex flex-col gap-1">
-                  <Reveal>
-                    <span className="text-white/80 font-semibold">
-                      God Of War: Ragnarok
-                    </span>
-                  </Reveal>
-                  <Reveal>
-                    <span className="uppercase text-muted-foreground text-xs font-semibold">
-                      9 November 2023
-                    </span>
-                  </Reveal>
-                  <Reveal>
-                    <p className="line-clamp-2 lg:line-clamp-3 text-sm my-2">
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Explicabo, sint. A vitae officiis nisi quae? Corporis
-                      nostrum doloribus minus iste placeat. Nam debitis, quaerat
-                      accusantium modi dolor saepe ut quibusdam?
-                    </p>
-                  </Reveal>
+            <div className="lg:h-1/2 min-h-32 w-full rounded-md bg-background/20 flex overflow-hidden">
+              <Image
+                src={
+                  "https://w0.peakpx.com/wallpaper/1017/717/HD-wallpaper-cod-ghost-game-thumbnail.jpg"
+                }
+                loader={() =>
+                  "https://w0.peakpx.com/wallpaper/1017/717/HD-wallpaper-cod-ghost-game-thumbnail.jpg"
+                }
+                alt=""
+                width={20}
+                height={20}
+                className="w-2/5 object-cover max-phone:hidden"
+              />
+              <div className="px-3 py-2 flex flex-col gap-1">
+                <Reveal>
+                  <span className="text-white/80 font-semibold">
+                    God Of War: Ragnarok
+                  </span>
+                </Reveal>
+                <Reveal>
+                  <span className="uppercase text-muted-foreground text-xs font-semibold">
+                    9 November 2023
+                  </span>
+                </Reveal>
+                <Reveal>
+                  <p className="line-clamp-2 lg:line-clamp-3 text-sm my-2">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Explicabo, sint. A vitae officiis nisi quae? Corporis
+                    nostrum doloribus minus iste placeat. Nam debitis, quaerat
+                    accusantium modi dolor saepe ut quibusdam?
+                  </p>
+                </Reveal>
 
-                  <Reveal>
-                    <button className="text-prime text-sm w-fit mt-auto mb-0 pb-2">
-                      Read More
-                    </button>
-                  </Reveal>
-                </div>
+                <Reveal>
+                  <button className="text-prime text-sm w-fit mt-auto mb-0 pb-2">
+                    Read More
+                  </button>
+                </Reveal>
               </div>
-            </Reveal>
-            <Reveal>
-              <div className="lg:h-1/2 min-h-32 w-full rounded-md bg-background/20 flex overflow-hidden">
-                <Image
-                  src={
-                    "https://w0.peakpx.com/wallpaper/1017/717/HD-wallpaper-cod-ghost-game-thumbnail.jpg"
-                  }
-                  loader={() =>
-                    "https://w0.peakpx.com/wallpaper/1017/717/HD-wallpaper-cod-ghost-game-thumbnail.jpg"
-                  }
-                  alt=""
-                  width={20}
-                  height={20}
-                  className="w-2/5 object-cover max-phone:hidden"
-                />
-                <div className="px-3 py-2 flex flex-col gap-1">
-                  <Reveal>
-                    <span className="text-white/80 font-semibold">
-                      God Of War: Ragnarok
-                    </span>
-                  </Reveal>
-                  <Reveal>
-                    <span className="uppercase text-muted-foreground text-xs font-semibold">
-                      9 November 2023
-                    </span>
-                  </Reveal>
-                  <Reveal>
-                    <p className="line-clamp-2 lg:line-clamp-3 text-sm my-2">
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Explicabo, sint. A vitae officiis nisi quae? Corporis
-                      nostrum doloribus minus iste placeat. Nam debitis, quaerat
-                      accusantium modi dolor saepe ut quibusdam?
-                    </p>
-                  </Reveal>
+            </div>
+            <div className="lg:h-1/2 min-h-32 w-full rounded-md bg-background/20 flex overflow-hidden">
+              <Image
+                src={
+                  "https://w0.peakpx.com/wallpaper/1017/717/HD-wallpaper-cod-ghost-game-thumbnail.jpg"
+                }
+                loader={() =>
+                  "https://w0.peakpx.com/wallpaper/1017/717/HD-wallpaper-cod-ghost-game-thumbnail.jpg"
+                }
+                alt=""
+                width={20}
+                height={20}
+                className="w-2/5 object-cover max-phone:hidden"
+              />
+              <div className="px-3 py-2 flex flex-col gap-1">
+                <Reveal>
+                  <span className="text-white/80 font-semibold">
+                    God Of War: Ragnarok
+                  </span>
+                </Reveal>
+                <Reveal>
+                  <span className="uppercase text-muted-foreground text-xs font-semibold">
+                    9 November 2023
+                  </span>
+                </Reveal>
+                <Reveal>
+                  <p className="line-clamp-2 lg:line-clamp-3 text-sm my-2">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Explicabo, sint. A vitae officiis nisi quae? Corporis
+                    nostrum doloribus minus iste placeat. Nam debitis, quaerat
+                    accusantium modi dolor saepe ut quibusdam?
+                  </p>
+                </Reveal>
 
-                  <Reveal>
-                    <button className="text-prime text-sm w-fit mt-auto mb-0 pb-2">
-                      Read More
-                    </button>
-                  </Reveal>
-                </div>
+                <Reveal>
+                  <button className="text-prime text-sm w-fit mt-auto mb-0 pb-2">
+                    Read More
+                  </button>
+                </Reveal>
               </div>
-            </Reveal>
+            </div>
           </div>
         </div>
       </Reveal>

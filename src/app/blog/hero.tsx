@@ -7,10 +7,23 @@ export default function Hero({
   title,
   desc,
   heroImage,
+  blogs,
 }: {
   title: string;
   desc: string;
   heroImage: string;
+  blogs: {
+    title: string;
+    slug: string;
+    metaDescription: string;
+    heroImage: {
+      title: string;
+      description: string;
+      url: string;
+      height: number;
+      width: number;
+    };
+  }[];
 }) {
   return (
     <Reveal>
@@ -38,7 +51,7 @@ export default function Hero({
               </p>
             </section>
 
-            <CarouselVertical />
+            <CarouselVertical blogs={blogs} />
           </div>
         </div>
       </div>
