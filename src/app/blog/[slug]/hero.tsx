@@ -23,15 +23,12 @@ export default function Hero({
         </Reveal>
         <Reveal>
           <h1 className="text-5xl max-md:text-4xl font-bold max-w-3xl max-sm:px-8 px-5">
-            Apple Jighan now open in Sanghai
+            {title}
           </h1>
         </Reveal>
         <Reveal>
           <p className="max-w-3xl px-8 font-medium max-md:text-sm max-md:w-11/12 m-auto md:text-lg">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut at
-            eius reiciendis ex ad odit provident saepe nisi aperiam quasi
-            excepturi, laudantium eos maiores voluptatem modi pariatur
-            distinctio soluta aliquid.
+            {desc}
           </p>
         </Reveal>
         <Reveal>
@@ -101,10 +98,8 @@ export default function Hero({
           <div className="relative w-full max-w-lg md:max-w-[90rem] m-auto h-full bg-slate-500">
             <AspectRatio ratio={16 / 9} className="bg-muted">
               <Image
-                src="https://www.apple.com/newsroom/images/2024/03/apple-jingan-opens-to-thousands-of-customers-in-shanghai/article/Apple-Jingan-China-opening-day-first-customer_Full-Bleed-Image.jpg.xlarge.jpg"
-                loader={() =>
-                  "https://www.apple.com/newsroom/images/2024/03/apple-jingan-opens-to-thousands-of-customers-in-shanghai/article/Apple-Jingan-China-opening-day-first-customer_Full-Bleed-Image.jpg.xlarge.jpg"
-                }
+                src={heroImage}
+                loader={() => heroImage}
                 alt="Photo by Drew Beamer"
                 fill
                 className="phone:rounded-xl object-cover"
@@ -113,7 +108,7 @@ export default function Hero({
           </div>
         </Reveal>
         <Reveal>
-          <section className="flex gap-4 justify-between max-w-lg md:max-w-3xl m-auto md:py-2 px-8">
+          <section className="flex gap-4 justify-between max-w-lg md:max-w-3xl m-auto md:py-2 px-6">
             <p className="text-muted-foreground md:text-sm max-md:text-xs">
               Team members welcome the first customers through the doors at
               Apple Jing’an, Apple’s eighth store in Shanghai.

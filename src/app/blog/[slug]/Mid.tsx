@@ -13,7 +13,7 @@ export default function Mid({
   return (
     <div className={`w-full py-4 grid relative overflow-hidden mx-auto`}>
       {/* Cover Image */}
-      <div className="grid gap-2 mx-auto">
+      <div className="grid gap-2 mx-auto max-w-lg md:max-w-3xl w-full">
         <Reveal>
           <div className="relative max-w-lg md:max-w-5xl w-full h-full bg-slate-500">
             <AspectRatio ratio={16 / 9} className="bg-muted">
@@ -28,7 +28,7 @@ export default function Mid({
           </div>
         </Reveal>
         <Reveal>
-          <section className="flex gap-4 justify-between max-w-lg md:max-w-3xl m-auto md:py-2 px-8">
+          <section className="flex gap-4 justify-between m-auto md:py-2 px-8">
             <p className="text-muted-foreground md:text-sm max-md:text-xs">
               {desc}
             </p>
