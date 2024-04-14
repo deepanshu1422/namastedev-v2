@@ -1,4 +1,3 @@
-"use client";
 import Reveal from "@/components/framer/reveal";
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -11,7 +10,10 @@ export default function Hero({
 }: {
   title: string;
   desc: string;
-  heroImage: string;
+  heroImage: {
+    url: string;
+    description: string;
+  };
 }) {
   return (
     <div className={`w-full grid relative overflow-hidden`}>
@@ -98,9 +100,8 @@ export default function Hero({
           <div className="relative w-full max-w-lg md:max-w-[90rem] m-auto h-full bg-slate-500">
             <AspectRatio ratio={16 / 9} className="bg-muted">
               <Image
-                src={heroImage}
-                loader={() => heroImage}
-                alt="Photo by Drew Beamer"
+                src={heroImage.url}
+                alt={heroImage.description}
                 fill
                 className="phone:rounded-xl object-cover"
               />
@@ -110,8 +111,7 @@ export default function Hero({
         <Reveal>
           <section className="flex gap-4 justify-between max-w-lg md:max-w-3xl m-auto md:py-2 px-6">
             <p className="text-muted-foreground md:text-sm max-md:text-xs">
-              Team members welcome the first customers through the doors at
-              Apple Jing’an, Apple’s eighth store in Shanghai.
+              {heroImage.description}
             </p>
             {/* <div className="p-2 rounded-full bg-second h-fit">
               <Save className="h-4 w-4" />

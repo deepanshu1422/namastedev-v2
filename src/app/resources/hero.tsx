@@ -35,18 +35,18 @@ export default function Hero({
 
           <div className="p-[.5rem_1.75rem_.5rem_1.00rem] rounded-[3.125rem] flex max-lg:flex-col max-lg:w-full lg:flex-wrap items-center gap-5 my-2 mb-1">
             <Link
-              href={"/mentorship"}
+              href={"https://courses.30dayscoding.com/s/store/courses/Package"}
               className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
             >
-              <span className="text-sm">Mentorship</span>
+              <span className="text-sm">Bundles</span>
               <GraduationCap className="max-lg:hidden w-4 h-4" />
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>
             <Link
-              href={"https://dsa.30dayscoding.com/"}
+              href={"https://courses.30dayscoding.com/products"}
               className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
             >
-              <span className="text-sm">DSA Sheets</span>
+              <span className="text-sm">Products</span>
               <Radio className="max-lg:hidden w-4 h-4" />
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>

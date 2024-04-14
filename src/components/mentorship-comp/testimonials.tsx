@@ -89,38 +89,32 @@ const testimonials: TestimonialType[] = [
 export default function Testimonials() {
   return (
     <div className={"grid grid-cols-1 gap-3 py-10 max-w-[90rem] m-auto"}>
-      <Reveal>
-        <span className="flex items-center justify-center gap-4 relative">
-          <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
-          <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
-            Reviews from our students
-          </h2>
-          <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
-        </span>
-      </Reveal>
+      <span className="flex items-center justify-center gap-4 relative">
+        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
+        <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
+          Reviews from our students
+        </h2>
+        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
+      </span>
 
       <div className="py-12 relative flex flex-col gap-7 overflow-hidden bg-gradient-to-tr">
-        <Reveal>
-          <div className="relative flex gap-5 animate-[loop-scroll_40s_infinite_linear] hover:[animation-play-state:paused] w-fit">
-            {testimonials.map(({ name, review }, i) => (
-              <Testimonial key={i} name={name} review={review} />
-            ))}
-          </div>
-        </Reveal>
+        <div className="relative flex gap-5 animate-[loop-scroll_40s_infinite_linear] hover:[animation-play-state:paused] w-fit">
+          {testimonials.map(({ name, review }, i) => (
+            <Testimonial key={i} name={name} review={review} />
+          ))}
+        </div>
 
         <div className="pointer-events-none h-full w-full absolute z-10 bg-gradient-to-r from-bg max-lg:from-0% from-5% via-bg/10 via-50% to-bg max-lg:to-100% to-95%"></div>
       </div>
 
       <div className="m-auto">
-        <Reveal>
-          <Link className="text-sm" href={"/testimonials"}>
-            <button
-              className={`font-jakarta flex items-center font-semibold gap-1 border-white border transition-all px-6 py-3 rounded-md`}
-            >
-              Show More
-            </button>
-          </Link>
-        </Reveal>
+        <Link className="text-sm" href={"/testimonials"}>
+          <button
+            className={`font-jakarta flex items-center font-semibold gap-1 border-white border transition-all px-6 py-3 rounded-md`}
+          >
+            Show More
+          </button>
+        </Link>
       </div>
     </div>
   );
