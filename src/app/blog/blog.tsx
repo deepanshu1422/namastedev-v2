@@ -3,6 +3,7 @@
 import Reveal from "@/components/framer/reveal";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Blog() {
   return (
@@ -12,15 +13,15 @@ export default function Blog() {
           <div className="lg:min-h-96 lg:w-6/12 h-full w-full flex flex-col gap-3 max-md:px-6 p-12 max-md:pt-0">
             <Reveal>
               <span className="text-2xl lg:text-3xl font-semibold max-w-2xl">
-                Mastering JavaScript Closures: The Definitive Guide
+                Mastering the JavaScript Interview: Tips and Strategies for
+                Success
               </span>
             </Reveal>
             <Reveal>
               <p className="text-xs md:max-w-[70%] leading-6 line-clamp-3">
-                Unlock the power of closures in JavaScript with this
-                comprehensive guide. Learn what closures are, how they work, use
-                cases, and best practices to level up your JavaScript
-                fundamentals and JavaScript concepts.
+                Ace your next JavaScript interview with these essential tips and
+                strategies. Learn how to prepare, showcase your skills, and
+                impress potential employers as a fresher in the field.
               </p>
             </Reveal>
             <Reveal>
@@ -37,12 +38,22 @@ export default function Blog() {
               </section>
             </Reveal>
             <Reveal>
-              <button className="flex items-center gap-2 text-sm py-2 text-prime w-fit">
+              <Link
+                href={
+                  "/blog/mastering-the-javascript-interview-tips-and-strategies-for-success"
+                }
+                className="flex items-center gap-2 text-sm py-2 text-prime w-fit"
+              >
                 Read blog <ArrowRight className="h-4 w-4" />
-              </button>
+              </Link>
             </Reveal>
           </div>
-          <div className="lg:min-h-[450px] min-h-20 min-w-60 lg:w-5/12 flex max-md:flex-col lg:flex-col gap-2 lg:gap-3 px-6 p-12 max-md:pb-5 rounded-md overflow-hidden">
+          <Link
+            href={
+              "/blog/mastering-the-javascript-interview-tips-and-strategies-for-success"
+            }
+            className="lg:min-h-[450px] min-h-20 min-w-60 lg:w-5/12 flex max-md:flex-col lg:flex-col gap-2 lg:gap-3 px-6 p-12 max-md:pb-5 rounded-md overflow-hidden"
+          >
             <Image
               src={
                 "https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg"
@@ -52,7 +63,7 @@ export default function Blog() {
               height={832}
               className="w-full h-full object-cover rounded-md"
             />
-          </div>
+          </Link>
         </div>
       </Reveal>
     </div>

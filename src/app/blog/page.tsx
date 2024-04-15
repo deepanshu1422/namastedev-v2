@@ -17,10 +17,24 @@ export const metadata: Metadata = {
 export default function Home() {
   let blogs = [
     {
-      title: "Mastering JavaScript Closures: The Definitive Guide",
-      slug: "javascript-closures",
+      title:
+        "The Ultimate Guide to Preparing for a Python Programming Interview as a Fresher",
+      slug: "python-programming-interview-guide-for-freshers",
       metaDescription:
-        "Unlock the power of closures in JavaScript with this comprehensive guide. Learn what closures are, how they work, use cases, and best practices to level up your JavaScript fundamentals and JavaScript concepts.",
+        "Learn how to ace your Python programming interview as a fresher with these essential tips, resources, and practice problems. Boost your confidence and land your dream job!",
+      heroImage: {
+        title: "laptop with typing hands",
+        description: "laptop with typing hands",
+        url: "https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg",
+        height: 832,
+        width: 1088,
+      },
+    },
+    {
+      title: "Acing Your Technical Interview as a Fresher: Tips and Strategies",
+      slug: "acing-technical-interviews-for-freshers",
+      metaDescription:
+        "Preparing for a technical interview as a fresher can be daunting. This blog post provides actionable tips and strategies to help you succeed, including what to study, practice problems, mock interviews, and more. Boost your confidence and land your dream job!",
       heroImage: {
         title: "laptop with typing hands",
         description: "laptop with typing hands",
@@ -31,23 +45,10 @@ export default function Home() {
     },
     {
       title:
-        "7 JavaScript Interview Questions to Prepare for Technical Interviews",
-      slug: "javascript-interview-questions",
+        "Mastering the JavaScript Interview: Tips and Strategies for Success",
+      slug: "mastering-the-javascript-interview-tips-and-strategies-for-success",
       metaDescription:
-        "Get ahead of the competition with these 7 must-know JavaScript interview questions. From variables to closures, this guide covers key concepts to ace coding interviews.",
-      heroImage: {
-        title: "laptop with typing hands",
-        description: "laptop with typing hands",
-        url: "https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg",
-        height: 832,
-        width: 1088,
-      },
-    },
-    {
-      title: "Bubble Sort – Data Structure and Algorithm Tutorials",
-      slug: "bubble-sort",
-      metaDescription:
-        "Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in the wrong order. This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.",
+        "Ace your next JavaScript interview with these essential tips and strategies. Learn how to prepare, showcase your skills, and impress potential employers as a fresher in the field.",
       heroImage: {
         title: "bubble",
         description: "bubble sorting image",
@@ -57,11 +58,10 @@ export default function Home() {
       },
     },
     {
-      title:
-        "Using JWT (JSON Web Tokens) to authorize users and protect API routes",
-      slug: "jwt-auth",
+      title: "Cracking the Python Interview: Essential Tips for Freshers",
+      slug: "python-interview-preparation-tips-for-freshers",
       metaDescription:
-        "Using JWT (JSON Web Tokens) to authorize users and protect API routes",
+        "Preparing for a Python interview as a fresher can be daunting. This comprehensive guide provides essential tips, common questions, and valuable resources to help you ace your Python interview and land your dream job.",
       heroImage: {
         title: "dancing",
         description: "dancing with joy",
@@ -71,10 +71,11 @@ export default function Home() {
       },
     },
     {
-      title: "our first blog",
-      slug: "this-is-stupid",
+      title:
+        "7 Essential Technical Interview Questions on JavaScript for Freshers",
+      slug: "7-essential-javascript-interview-questions-for-freshers",
       metaDescription:
-        "how the hell am i supposed to know what is blog is about ",
+        "Ace your next JavaScript technical interview with these 7 essential questions covering core concepts like hoisting, closures, 'this' keyword, and more. Perfect prep for freshers and early-career developers.",
       heroImage: {
         title: "testa",
         description: "aff",

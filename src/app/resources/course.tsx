@@ -33,8 +33,8 @@ export default function Course() {
       <div className="flex w-full max-lg:flex-col lg:gap-6 justify-center max-lg:items-center max-lg:gap-10 max-lg:max-w-[550px] px-10">
         {/* Products */}
 
-        {products.map(({ title, imageSrc, purchaseLink }) => (
-          <div className="flex-1 max-lg:w-full lg:max-w-[450px]">
+        {products.map(({ title, imageSrc, purchaseLink }, i) => (
+          <div key={i} className="flex-1 max-lg:w-full lg:max-w-[450px]">
             <div className="overflow-hidden max-lg:m-auto flex items-center h-48 pt-2 px-2 gap-4 rounded-t-xl bg-second">
               <span className="relative h-full w-full bg-black rounded-lg">
                 <Image

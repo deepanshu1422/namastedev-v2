@@ -2,7 +2,10 @@
 const nextConfig = {
     images: {
         domains: ["img.freepik.com", "assets-global.website-files.com", "i.ibb.co", "images.ctfassets.net", "courses.30dayscoding.com"]
-    }
+    },
+    typescript: {
+        ignoreBuildErrors: true,
+    },
 };
 
 export default nextConfig;

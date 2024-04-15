@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Reveal from "../framer/reveal";
+import Link from "next/link";
 
 export default function Latest() {
   return (
@@ -20,12 +21,13 @@ export default function Latest() {
       </div>
       <Reveal width="100%">
         <div className="w-full flex max-lg:flex-col gap-3">
-          <div className="lg:min-h-96 lg:w-7/12 rounded-md bg-[url('https://i.redd.it/kj7h2gkul8p41.jpg')] bg-cover bg-center overflow-hidden">
+          <div className="lg:min-h-96 lg:w-7/12 rounded-md bg-[url('https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg')] bg-cover bg-center overflow-hidden">
             <div className="h-full w-full bg-gradient-to-t from-second/60 from-30% to-transparent flex flex-col gap-3 justify-end px-8 py-6">
               <section className="grid">
                 <Reveal>
-                  <span className="text-2xl font-semibold">
-                    Call of Duty | Mordern Warfare III
+                  <span className="text-2xl font-semibold max-w-sm">
+                    7 Essential Technical Interview Questions on JavaScript for
+                    Freshers
                   </span>
                 </Reveal>
                 <Reveal>
@@ -36,14 +38,21 @@ export default function Latest() {
               </section>
               <Reveal>
                 <p className="text-xs max-w-[70%]">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
-                  quia sit dolorum facere nisi,
+                  Ace your next JavaScript technical interview with these 7
+                  essential questions covering core concepts like hoisting,
+                  closures, &apos;this&apos; keyword, and more. Perfect prep for
+                  freshers and early-career developers.
                 </p>
               </Reveal>
               <Reveal>
-                <button className="font-jakarta flex items-center font-semibold gap-1 w-fit hover:bg-prime/60 bg-prime/40 transition-all px-4 text-sm py-2 rounded">
+                <Link
+                  href={
+                    "/blog/7-essential-javascript-interview-questions-for-freshers"
+                  }
+                  className="font-jakarta flex items-center font-semibold gap-1 w-fit hover:bg-prime/60 bg-prime/40 transition-all px-4 text-sm py-2 rounded"
+                >
                   Read More
-                </button>
+                </Link>
               </Reveal>
             </div>
           </div>
@@ -52,20 +61,17 @@ export default function Latest() {
             <div className="lg:h-1/2 min-h-32 w-full rounded-md bg-background/20 flex overflow-hidden">
               <Image
                 src={
-                  "https://w0.peakpx.com/wallpaper/1017/717/HD-wallpaper-cod-ghost-game-thumbnail.jpg"
-                }
-                loader={() =>
-                  "https://w0.peakpx.com/wallpaper/1017/717/HD-wallpaper-cod-ghost-game-thumbnail.jpg"
+                  "https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg"
                 }
                 alt=""
                 width={20}
                 height={20}
-                className="w-2/5 object-cover max-phone:hidden"
+                className="w-2/5 object-cover max-phone:hidden shrink-0"
               />
               <div className="px-3 py-2 flex flex-col gap-1">
                 <Reveal>
-                  <span className="text-white/80 font-semibold">
-                    God Of War: Ragnarok
+                  <span className="text-white/80 font-semibold line-clamp-2">
+                    Cracking the Python Interview: Essential Tips for Freshers
                   </span>
                 </Reveal>
                 <Reveal>
@@ -75,37 +81,40 @@ export default function Latest() {
                 </Reveal>
                 <Reveal>
                   <p className="line-clamp-2 lg:line-clamp-3 text-sm my-2">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Explicabo, sint. A vitae officiis nisi quae? Corporis
-                    nostrum doloribus minus iste placeat. Nam debitis, quaerat
-                    accusantium modi dolor saepe ut quibusdam?
+                    Preparing for a Python interview as a fresher can be
+                    daunting. This comprehensive guide provides essential tips,
+                    common questions, and valuable resources to help you ace
+                    your Python interview and land your dream job.
                   </p>
                 </Reveal>
 
                 <Reveal>
-                  <button className="text-prime text-sm w-fit mt-auto mb-0 pb-2">
+                  <Link
+                    href={
+                      "/blog/python-interview-preparation-tips-for-freshers"
+                    }
+                    className="text-prime text-sm w-fit mt-auto mb-0 pb-2"
+                  >
                     Read More
-                  </button>
+                  </Link>
                 </Reveal>
               </div>
             </div>
             <div className="lg:h-1/2 min-h-32 w-full rounded-md bg-background/20 flex overflow-hidden">
               <Image
                 src={
-                  "https://w0.peakpx.com/wallpaper/1017/717/HD-wallpaper-cod-ghost-game-thumbnail.jpg"
-                }
-                loader={() =>
-                  "https://w0.peakpx.com/wallpaper/1017/717/HD-wallpaper-cod-ghost-game-thumbnail.jpg"
+                  "https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg"
                 }
                 alt=""
                 width={20}
                 height={20}
-                className="w-2/5 object-cover max-phone:hidden"
+                className="w-2/5 object-cover max-phone:hidden shrink-0"
               />
               <div className="px-3 py-2 flex flex-col gap-1">
                 <Reveal>
-                  <span className="text-white/80 font-semibold">
-                    God Of War: Ragnarok
+                  <span className="text-white/80 font-semibold line-clamp-2">
+                    Acing Your Technical Interview as a Fresher: Tips and
+                    Strategies
                   </span>
                 </Reveal>
                 <Reveal>
@@ -115,17 +124,21 @@ export default function Latest() {
                 </Reveal>
                 <Reveal>
                   <p className="line-clamp-2 lg:line-clamp-3 text-sm my-2">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Explicabo, sint. A vitae officiis nisi quae? Corporis
-                    nostrum doloribus minus iste placeat. Nam debitis, quaerat
-                    accusantium modi dolor saepe ut quibusdam?
+                    Preparing for a technical interview as a fresher can be
+                    daunting. This blog post provides actionable tips and
+                    strategies to help you succeed, including what to study,
+                    practice problems, mock interviews, and more. Boost your
+                    confidence and land your dream job!
                   </p>
                 </Reveal>
 
                 <Reveal>
-                  <button className="text-prime text-sm w-fit mt-auto mb-0 pb-2">
+                  <Link
+                    href={"/blog/acing-technical-interviews-for-freshers"}
+                    className="text-prime text-sm w-fit mt-auto mb-0 pb-2"
+                  >
                     Read More
-                  </button>
+                  </Link>
                 </Reveal>
               </div>
             </div>

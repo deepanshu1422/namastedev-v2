@@ -2,6 +2,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import Hero from "./hero";
 import HtmlParser from "./htmlparser";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
 export const dynamicParams = false;
 
@@ -18,19 +19,14 @@ type Props = {
 
 type BlogData = {
   title: string;
-  metaDescription: string;
+  description: string;
+  slug: string;
+  focusKeywords: string[];
   heroImage: {
-    url: string;
-    description: string;
+    aiPrompt: string;
   };
-  keywords: string[];
-  blogSectionCollection: {
-    items: {
-      data: {
-        json: Document;
-      };
-    }[];
-  };
+  body: string;
+  relatedBlogs: string[];
 };
 
 const arr = [
@@ -127,18 +123,11 @@ const arr = [
     },
     body: "<h1>The Ultimate Guide to Preparing for a Python Programming Interview as a Fresher</h1><p>As a fresher in the world of Python programming, preparing for your first interview can be a daunting task. However, with the right approach and resources, you can boost your confidence and increase your chances of landing your dream job. In this comprehensive guide, we'll walk you through the essential steps to ace your Python programming interview.</p><h2>1. Master the Fundamentals</h2><p>To excel in your Python programming interview, you must have a solid grasp of the language's fundamentals. Ensure that you understand the following concepts:</p><ul><li>Data types (integers, floats, strings, lists, tuples, dictionaries, sets)</li><li>Control structures (if-else, for loops, while loops)</li><li>Functions and modules</li><li>Object-oriented programming (classes, objects, inheritance, polymorphism)</li><li>Exception handling</li><li>File handling</li></ul><p>Practice coding exercises that cover these fundamental concepts to reinforce your understanding.</p><h2>2. Familiarize Yourself with Common Python Libraries</h2><p>Python boasts an extensive collection of libraries that simplify complex tasks. Familiarize yourself with the following commonly used libraries:</p><ul><li>NumPy: For numerical computing</li><li>Pandas: For data manipulation and analysis</li><li>Matplotlib: For data visualization</li><li>Scikit-learn: For machine learning</li><li>Django and Flask: For web development</li></ul><p>Having a basic understanding of these libraries will demonstrate your versatility and adaptability to the interviewer.</p><h2>3. Practice Coding Problems</h2><p>The best way to prepare for a Python programming interview is by solving coding problems. Websites like LeetCode, HackerRank, and Project Euler offer a wide range of problems that test your problem-solving skills and Python proficiency. Start with easy problems and gradually progress to more challenging ones. Focus on understanding the problem statement, developing an efficient algorithm, and writing clean, readable code.</p><h2>4. Understand Data Structures and Algorithms</h2><p>Data structures and algorithms form the backbone of programming. As a fresher, you should have a good understanding of the following data structures:</p><ul><li>Arrays</li><li>Linked Lists</li><li>Stacks and Queues</li><li>Trees (Binary Trees, Binary Search Trees)</li><li>Graphs</li><li>Hash Tables</li></ul><p>Additionally, familiarize yourself with common algorithms such as:</p><ul><li>Searching (Linear Search, Binary Search)</li><li>Sorting (Bubble Sort, Insertion Sort, Merge Sort, Quick Sort)</li><li>Recursion</li><li>Dynamic Programming</li></ul><p>Practice implementing these data structures and algorithms in Python to solidify your understanding.</p><h2>5. Review Python-Specific Interview Questions</h2><p>Apart from coding problems, interviewers may ask Python-specific questions to gauge your knowledge of the language. Some common topics include:</p><ul><li>What are the differences between Python 2 and Python 3?</li><li>Explain the concept of list comprehension in Python.</li><li>What is the purpose of the `self` keyword in Python?</li><li>How does Python manage memory?</li><li>What are decorators in Python, and how do they work?</li></ul><p>Research and prepare concise, clear answers to these questions to demonstrate your Python expertise.</p><h2>6. Work on Projects</h2><p>Practical experience is highly valued by employers. Develop a few Python projects that showcase your skills and creativity. Consider building a web scraper, a simple game, a data analysis tool, or a machine learning model. These projects will give you talking points during your interview and demonstrate your ability to apply your knowledge to real-world scenarios.</p><h2>7. Prepare for Behavioral Questions</h2><p>In addition to technical skills, interviewers also assess your soft skills and personality. Prepare for common behavioral questions such as:</p><ul><li>Tell me about yourself.</li><li>What are your strengths and weaknesses?</li><li>Why do you want to work for our company?</li><li>Describe a time when you faced a challenge and how you overcame it.</li><li>How do you handle stress and tight deadlines?</li></ul><p>Practice answering these questions concisely and confidently, highlighting your relevant experiences and skills.</p><h2>8. Stay Calm and Confident</h2><p>During the interview, stay calm and composed. Remember that the interviewer wants you to succeed. If you encounter a challenging question, take a moment to think and break down the problem into smaller parts. Communicate your thought process clearly, and don't hesitate to ask for clarification if needed. Maintain a positive attitude and show enthusiasm for the opportunity to learn and grow.</p><h2>Conclusion</h2><p>Preparing for a Python programming interview as a fresher requires dedication, practice, and a systematic approach. By mastering the fundamentals, familiarizing yourself with common libraries, practicing coding problems, understanding data structures and algorithms, reviewing Python-specific questions, working on projects, and preparing for behavioral questions, you'll be well-equipped to ace your interview. Remember to stay calm, confident, and enthusiastic throughout the process. Good luck with your Python programming interview!</p>",
     relatedBlogs: [
-      {
-        title: "10 Essential Python Libraries Every Developer Should Know",
-        url: "https://example.com/essential-python-libraries",
-      },
-      {
-        title: "Mastering Data Structures and Algorithms in Python",
-        url: "https://example.com/python-data-structures-algorithms",
-      },
-      {
-        title: "Top 20 Python Interview Questions and Answers",
-        url: "https://example.com/python-interview-questions",
-      },
+      "10 JavaScript Coding Challenges for Interview Prep",
+      "Understanding Asynchronous JavaScript: Callbacks, Promises, and Async/Await",
+      "5 JavaScript Best Practices for Writing Clean and Maintainable Code",
+      "Mastering the JavaScript Interview: Tips and Strategies for Success",
+      "The Evolution of JavaScript: From ES6 to ESNext",
     ],
   },
   {
@@ -158,7 +147,7 @@ const arr = [
       aiPrompt:
         "Create an image featuring JavaScript code snippets and interview-related icons or graphics. Use a color scheme of yellows and blues. Include the title '7 Essential JavaScript Interview Questions for Freshers'.",
     },
-    body: "<h1>7 Essential Technical Interview Questions on JavaScript for Freshers</h1><p>As a fresher or early-career developer, preparing for technical interviews can be daunting, especially when it comes to JavaScript. To help you ace your next interview, we've compiled a list of 7 essential JavaScript questions that cover core concepts and are commonly asked in interviews.</p><h2>1. Explain hoisting in JavaScript</h2><p>Hoisting is a behavior in JavaScript where variable and function declarations are moved to the top of their containing scope during the compilation phase. This means that regardless of where variables and functions are declared in the code, they are treated as if they are declared at the beginning of their scope.</p><p>However, it's important to note that only the declarations are hoisted, not the initializations. Let's look at an example:</p><pre><code>console.log(x); // Output: undefined var x = 5; console.log(x); // Output: 5</code></pre><p>In this case, the variable <code>x</code> is hoisted to the top of its scope, but its initialization <code>x = 5</code> is not. Therefore, when we try to log <code>x</code> before its initialization, we get <code>undefined</code>.</p><h2>2. What are closures in JavaScript?</h2><p>A closure is a function that has access to variables in its outer (enclosing) lexical scope, even after the outer function has returned. In other words, a closure allows a function to access variables from an outer function that has already executed.</p><p>Here's an example:</p><pre><code>function outerFunc(x) {   return function innerFunc(y) {     return x + y;   }; }  const closure = outerFunc(5); console.log(closure(3)); // Output: 8</code></pre><p>In this example, <code>innerFunc</code> has access to the <code>x</code> variable from <code>outerFunc</code>, even after <code>outerFunc</code> has finished executing. The combination of <code>innerFunc</code> and its access to <code>x</code> forms a closure.</p><h2>3. What is the difference between <code>==</code> and <code>===</code> in JavaScript?</h2><p>Both <code>==</code> and <code>===</code> are comparison operators in JavaScript, but they behave differently:</p><ul><li><code>==</code> (loose equality): Compares values for equality after performing type coercion if necessary. For example, <code>5 == '5'</code> evaluates to <code>true</code> because the string <code>'5'</code> is coerced to a number before the comparison.</li><li><code>===</code> (strict equality): Compares both values and types for equality without performing type coercion. For example, <code>5 === '5'</code> evaluates to <code>false</code> because the types (number and string) are different.</li></ul><p>It's generally recommended to use <code>===</code> for comparisons to avoid unexpected type coercion behavior.</p><h2>4. Explain the <code>this</code> keyword in JavaScript</h2><p>The <code>this</code> keyword in JavaScript refers to the object that is currently executing the code. The value of <code>this</code> depends on how a function is called or how it is defined.</p><p>Here are some common scenarios:</p><ul><li>In global scope or a regular function call, <code>this</code> refers to the global object (e.g., <code>window</code> in browsers).</li><li>In a method call, <code>this</code> refers to the object that the method is called on.</li><li>In a constructor function, <code>this</code> refers to the newly created instance.</li><li>When using <code>call</code>, <code>apply</code>, or <code>bind</code>, <code>this</code> is explicitly set to the provided object.</li></ul><p>Understanding how <code>this</code> behaves in different contexts is crucial for writing correct and maintainable JavaScript code.</p><h2>5. What is the purpose of the <code>let</code> and <code>const</code> keywords in JavaScript?</h2><p>The <code>let</code> and <code>const</code> keywords were introduced in ES6 (ECMAScript 2015) to provide block-scoped variable declarations.</p><ul><li><code>let</code>: Declares a block-scoped variable that can be reassigned. It is useful when you need to reassign a variable within a specific block.</li><li><code>const</code>: Declares a block-scoped variable that cannot be reassigned. It is used for variables that should remain constant throughout their lifetime.</li></ul><p>Both <code>let</code> and <code>const</code> provide better scoping and help avoid common pitfalls associated with the <code>var</code> keyword, such as hoisting and global scope pollution.</p><h2>6. Explain the concept of prototype inheritance in JavaScript</h2><p>In JavaScript, objects can inherit properties and methods from other objects through the prototype chain. Each object has an internal <code>[[Prototype]]</code> property that points to its prototype object.</p><p>When you access a property or method on an object, JavaScript first looks for it on the object itself. If it's not found, it looks for it on the object's prototype, then the prototype's prototype, and so on, until it reaches the end of the prototype chain (usually the <code>Object.prototype</code>).</p><p>Here's an example of prototype inheritance:</p><pre><code>function Animal(name) {   this.name = name; }  Animal.prototype.sayHello = function() {   console.log('Hello, my name is ' + this.name); };  function Dog(name) {   Animal.call(this, name); }  Dog.prototype = Object.create(Animal.prototype); Dog.prototype.constructor = Dog;  const dog = new Dog('Buddy'); dog.sayHello(); // Output: Hello, my name is Buddy</code></pre><p>In this example, the <code>Dog</code> constructor inherits from the <code>Animal</code> constructor using <code>Object.create()</code>. The <code>dog</code> instance can access the <code>sayHello</code> method defined on <code>Animal.prototype</code> through the prototype chain.</p><h2>7. What is the event loop in JavaScript?</h2><p>The event loop is a mechanism in JavaScript that handles the execution of code, collection and processing of events, and execution of queued sub-tasks. It allows JavaScript to perform non-blocking I/O operations despite being single-threaded.</p><p>Here's a simplified explanation of how the event loop works:</p><ol><li>The JavaScript engine executes the code in the call stack synchronously, one task at a time.</li><li>When an asynchronous operation is encountered (e.g., a timer, an HTTP request), it is offloaded to the browser's Web API.</li><li>The Web API handles the asynchronous operation and registers a callback function to be executed when the operation is completed.</li><li>The callback function is then pushed into the callback queue (also known as the task queue).</li><li>The event loop continuously checks if the call stack is empty. If it is, it takes the first callback function from the callback queue and pushes it onto the call stack for execution.</li><li>The process repeats, ensuring that the JavaScript engine is never blocked and can handle asynchronous operations efficiently.</li></ol><p>Understanding the event loop is essential for writing efficient and non-blocking JavaScript code, especially when dealing with asynchronous operations like timers, promises, and network requests.</p><h2>Conclusion</h2><p>These 7 essential JavaScript interview questions cover a range of core concepts that every fresher or early-career developer should be familiar with. By understanding hoisting, closures, the <code>this</code> keyword, comparison operators, block-scoped variables, prototype inheritance, and the event loop, you'll be well-prepared to tackle technical interviews and demonstrate your JavaScript knowledge.</p><p>Remember, practice is key to mastering these concepts. Keep coding, exploring, and learning to deepen your understanding of JavaScript and its intricacies. Good luck with your interviews!</p>",
+    body: "<h1>7 Essential Technical Interview Questions on JavaScript for Freshers</h1><p>As a fresher or early-career developer, preparing for technical interviews can be daunting, especially when it comes to JavaScript. To help you ace your next interview, we've compiled a list of 7 essential JavaScript questions that cover core concepts and are commonly asked in interviews.</p><h2>1. Explain hoisting in JavaScript</h2><p>Hoisting is a behavior in JavaScript where variable and function declarations are moved to the top of their containing scope during the compilation phase. This means that regardless of where variables and functions are declared in the code, they are treated as if they are declared at the beginning of their scope.</p><p>However, it's important to note that only the declarations are hoisted, not the initializations. Let's look at an example:</p><code>console.log(x); // Output: undefined var x = 5; console.log(x); // Output: 5</code><p>In this case, the variable <code>x</code> is hoisted to the top of its scope, but its initialization <code>x = 5</code> is not. Therefore, when we try to log <code>x</code> before its initialization, we get <code>undefined</code>.</p><h2>2. What are closures in JavaScript?</h2><p>A closure is a function that has access to variables in its outer (enclosing) lexical scope, even after the outer function has returned. In other words, a closure allows a function to access variables from an outer function that has already executed.</p><p>Here's an example:</p><code>function outerFunc(x) {   return function innerFunc(y) {     return x + y;   }; }  const closure = outerFunc(5); console.log(closure(3)); // Output: 8</code><p>In this example, <code>innerFunc</code> has access to the <code>x</code> variable from <code>outerFunc</code>, even after <code>outerFunc</code> has finished executing. The combination of <code>innerFunc</code> and its access to <code>x</code> forms a closure.</p><h2>3. What is the difference between <code>==</code> and <code>===</code> in JavaScript?</h2><p>Both <code>==</code> and <code>===</code> are comparison operators in JavaScript, but they behave differently:</p><ul><li><code>==</code> (loose equality): Compares values for equality after performing type coercion if necessary. For example, <code>5 == '5'</code> evaluates to <code>true</code> because the string <code>'5'</code> is coerced to a number before the comparison.</li><li><code>===</code> (strict equality): Compares both values and types for equality without performing type coercion. For example, <code>5 === '5'</code> evaluates to <code>false</code> because the types (number and string) are different.</li></ul><p>It's generally recommended to use <code>===</code> for comparisons to avoid unexpected type coercion behavior.</p><h2>4. Explain the <code>this</code> keyword in JavaScript</h2><p>The <code>this</code> keyword in JavaScript refers to the object that is currently executing the code. The value of <code>this</code> depends on how a function is called or how it is defined.</p><p>Here are some common scenarios:</p><ul><li>In global scope or a regular function call, <code>this</code> refers to the global object (e.g., <code>window</code> in browsers).</li><li>In a method call, <code>this</code> refers to the object that the method is called on.</li><li>In a constructor function, <code>this</code> refers to the newly created instance.</li><li>When using <code>call</code>, <code>apply</code>, or <code>bind</code>, <code>this</code> is explicitly set to the provided object.</li></ul><p>Understanding how <code>this</code> behaves in different contexts is crucial for writing correct and maintainable JavaScript code.</p><h2>5. What is the purpose of the <code>let</code> and <code>const</code> keywords in JavaScript?</h2><p>The <code>let</code> and <code>const</code> keywords were introduced in ES6 (ECMAScript 2015) to provide block-scoped variable declarations.</p><ul><li><code>let</code>: Declares a block-scoped variable that can be reassigned. It is useful when you need to reassign a variable within a specific block.</li><li><code>const</code>: Declares a block-scoped variable that cannot be reassigned. It is used for variables that should remain constant throughout their lifetime.</li></ul><p>Both <code>let</code> and <code>const</code> provide better scoping and help avoid common pitfalls associated with the <code>var</code> keyword, such as hoisting and global scope pollution.</p><h2>6. Explain the concept of prototype inheritance in JavaScript</h2><p>In JavaScript, objects can inherit properties and methods from other objects through the prototype chain. Each object has an internal <code>[[Prototype]]</code> property that points to its prototype object.</p><p>When you access a property or method on an object, JavaScript first looks for it on the object itself. If it's not found, it looks for it on the object's prototype, then the prototype's prototype, and so on, until it reaches the end of the prototype chain (usually the <code>Object.prototype</code>).</p><p>Here's an example of prototype inheritance:</p><code>function Animal(name) {   this.name = name; }  Animal.prototype.sayHello = function() {   console.log('Hello, my name is ' + this.name); };  function Dog(name) {   Animal.call(this, name); }  Dog.prototype = Object.create(Animal.prototype); Dog.prototype.constructor = Dog;  const dog = new Dog('Buddy'); dog.sayHello(); // Output: Hello, my name is Buddy</code><p>In this example, the <code>Dog</code> constructor inherits from the <code>Animal</code> constructor using <code>Object.create()</code>. The <code>dog</code> instance can access the <code>sayHello</code> method defined on <code>Animal.prototype</code> through the prototype chain.</p><h2>7. What is the event loop in JavaScript?</h2><p>The event loop is a mechanism in JavaScript that handles the execution of code, collection and processing of events, and execution of queued sub-tasks. It allows JavaScript to perform non-blocking I/O operations despite being single-threaded.</p><p>Here's a simplified explanation of how the event loop works:</p><ol><li>The JavaScript engine executes the code in the call stack synchronously, one task at a time.</li><li>When an asynchronous operation is encountered (e.g., a timer, an HTTP request), it is offloaded to the browser's Web API.</li><li>The Web API handles the asynchronous operation and registers a callback function to be executed when the operation is completed.</li><li>The callback function is then pushed into the callback queue (also known as the task queue).</li><li>The event loop continuously checks if the call stack is empty. If it is, it takes the first callback function from the callback queue and pushes it onto the call stack for execution.</li><li>The process repeats, ensuring that the JavaScript engine is never blocked and can handle asynchronous operations efficiently.</li></ol><p>Understanding the event loop is essential for writing efficient and non-blocking JavaScript code, especially when dealing with asynchronous operations like timers, promises, and network requests.</p><h2>Conclusion</h2><p>These 7 essential JavaScript interview questions cover a range of core concepts that every fresher or early-career developer should be familiar with. By understanding hoisting, closures, the <code>this</code> keyword, comparison operators, block-scoped variables, prototype inheritance, and the event loop, you'll be well-prepared to tackle technical interviews and demonstrate your JavaScript knowledge.</p><p>Remember, practice is key to mastering these concepts. Keep coding, exploring, and learning to deepen your understanding of JavaScript and its intricacies. Good luck with your interviews!</p>",
     relatedBlogs: [
       "10 JavaScript Coding Challenges for Interview Prep",
       "Understanding Asynchronous JavaScript: Callbacks, Promises, and Async/Await",
@@ -243,7 +232,7 @@ export async function generateMetadata(
 }
 
 export async function getBlogData(slug: string) {
-  const result = arr.find((e) => e.slug === slug) || null;
+  const result = arr.find((e) => e.slug === slug);
 
   return result;
 }
@@ -266,6 +255,91 @@ export default async function Home({ params: { slug } }: PageProps) {
 
       <div className="max-w-lg md:max-w-3xl m-auto px-8 lg:px-5 body">
         <HtmlParser body={item.body} />
+      </div>
+
+      <div className="py-10 m-auto px-8 lg:px-5 grid gap-4 max-w-lg md:max-w-3xl">
+        <span className="text-2xl max-md:text-xl font-bold break-words">
+          Share Article
+        </span>
+        <section className="md:py-2 flex gap-5">
+          <Link
+            target="_blank"
+            href={
+              "https://api.whatsapp.com/send?text=Exploring the coding kingdom - 30DC Blog https://30dayscoding.com/  "
+            }
+            title={"Share via Whatsapp"}
+          >
+            <svg
+              className="h-6 w-6 fill-white/50 transition-all duration-200 lg:hover:fill-prime"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+            >
+              <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
+            </svg>
+          </Link>
+
+          <Link
+            href={
+              "mailto:?subject=I wanted you to see this site&amp;body=Check out this site http://www.website.com."
+            }
+            title={"Share via Mail"}
+          >
+            <svg
+              className="h-6 w-6 fill-white/50 transition-all duration-200 lg:hover:fill-prime"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
+            </svg>
+          </Link>
+
+          <Link
+            href={"https://www.youtube.com/channel/UCdu8HnchmMbDqbbC4GdPrjw"}
+            title={"Copy Link"}
+          >
+            <svg
+              className="h-6 w-6 fill-white/50 transition-all duration-200 lg:hover:fill-prime"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 640 512"
+            >
+              <path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z" />
+            </svg>
+          </Link>
+
+          <Link href={"https://twitter.com/30dayscoding"} title={"Share via X"}>
+            <svg
+              className="h-6 w-6 fill-white/50 transition-all duration-200 lg:hover:fill-prime"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 640 512"
+            >
+              <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
+            </svg>
+          </Link>
+        </section>
+        <hr className="border-gray-500 my-3" />
+        <span className="text-2xl max-md:text-xl font-bold break-words">
+          Latest Blogs
+        </span>
+        <div className="flex flex-col gap-3">
+          {arr.map(({ title, slug }, i) => (
+            <Link
+              key={i}
+              href={`/blog/${slug}`}
+              className="flex items-center gap-2"
+            >
+              <div className="bg-second rounded-xl w-32 h-20 shrink-0"></div>
+              <div className="flex flex-col gap-1">
+                <span className="text-xs uppercase text-muted-foreground font-bold">
+                  Press Release
+                </span>
+                <span className="line-clamp-3">{title}</span>
+                <span className="text-xs uppercase text-muted-foreground font-bold">
+                  26 March 2024
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </main>
   );
