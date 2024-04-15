@@ -3,7 +3,7 @@
 import { navbarState } from "@/lib/jotai";
 import { useAtomValue, useSetAtom } from "jotai";
 import { ChevronDown, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Collapsible,
@@ -67,6 +67,14 @@ function CollapsibleMenu({
 export default function MobileMenu() {
   const state = useAtomValue(navbarState);
   const setState = useSetAtom(navbarState);
+
+  const pathName = usePathname();
+
+  useEffect(() => {
+    setState(true);
+    // console.log("Hello");
+  }, [pathName]);
+
   return (
     <div
       className={`tab:hidden fixed z-30 overflow-hidden ${
