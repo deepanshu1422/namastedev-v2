@@ -97,7 +97,7 @@ export default function Hero({
       {/* Cover Image */}
       <div className="grid gap-2">
         <Reveal>
-          <div className="relative w-full max-w-lg md:max-w-[90rem] m-auto h-full bg-slate-500">
+          <div className="relative w-full max-md:max-w-lg max-w-3xl lg:max-w-6xl xl:max-w-[120rem] m-auto h-full bg-slate-500">
             <AspectRatio ratio={16 / 9} className="bg-muted">
               <Image
                 src={heroImage.url}

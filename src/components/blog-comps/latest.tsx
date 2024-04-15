@@ -14,15 +14,28 @@ export default function Latest() {
           </span>
         </Reveal>
         <Reveal>
-          <span className="max-sm:hidden text-prime font-semibold text-sm px-2 py-1 rounded-md bg-second/40 uppercase">
+          <button className="max-sm:hidden text-prime/70 font-semibold text-sm px-2 py-1 rounded-md bg-second/20 uppercase hover:scale-105 transition-all">
             See More
-          </span>
+          </button>
         </Reveal>
       </div>
       <Reveal width="100%">
         <div className="w-full flex max-lg:flex-col gap-3">
-          <div className="lg:min-h-96 lg:w-7/12 rounded-md bg-[url('https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg')] bg-cover bg-center overflow-hidden">
-            <div className="h-full w-full bg-gradient-to-t from-second/60 from-30% to-transparent flex flex-col gap-3 justify-end px-8 py-6">
+          <Link
+            href={
+              "/blog/7-essential-javascript-interview-questions-for-freshers"
+            }
+            className="relative group lg:min-h-96 lg:w-7/12 rounded-md overflow-hidden"
+          >
+            <Image
+              alt="a laptop"
+              fill
+              src={
+                "https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg"
+              }
+              className="object-cover object-center group-hover:scale-110 transition-all duration-200"
+            />
+            <div className="relative h-full w-full bg-gradient-to-t from-second/60 from-30% to-transparent flex flex-col gap-3 justify-end px-8 py-6">
               <section className="grid">
                 <Reveal>
                   <span className="text-2xl font-semibold max-w-sm">
@@ -45,29 +58,28 @@ export default function Latest() {
                 </p>
               </Reveal>
               <Reveal>
-                <Link
-                  href={
-                    "/blog/7-essential-javascript-interview-questions-for-freshers"
-                  }
-                  className="font-jakarta flex items-center font-semibold gap-1 w-fit hover:bg-prime/60 bg-prime/40 transition-all px-4 text-sm py-2 rounded"
-                >
+                <button className="font-jakarta flex items-center font-semibold gap-1 w-fit hover:bg-prime/60 bg-prime/40 transition-all px-4 text-sm py-2 rounded">
                   Read More
-                </Link>
+                </button>
               </Reveal>
             </div>
-          </div>
+          </Link>
 
           <div className="lg:min-h-96 lg:w-5/12 flex max-md:flex-col lg:flex-col gap-2 lg:gap-3">
-            <div className="lg:h-1/2 min-h-32 w-full rounded-md bg-background/20 flex overflow-hidden">
-              <Image
-                src={
-                  "https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg"
-                }
-                alt=""
-                width={20}
-                height={20}
-                className="w-2/5 object-cover max-phone:hidden shrink-0"
-              />
+            <Link
+              href={"/blog/python-interview-preparation-tips-for-freshers"}
+              className="group lg:h-1/2 min-h-32 w-full rounded-md bg-background/20 flex overflow-hidden"
+            >
+              <div className="relative overflow-hidden w-2/5 object-cover max-phone:hidden shrink-0 bg-slate-200">
+                <Image
+                  src={
+                    "https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg"
+                  }
+                  alt=""
+                  fill
+                  className="group-hover:scale-110 transition-all duration-200 object-cover object-center"
+                />
+              </div>
               <div className="px-3 py-2 flex flex-col gap-1">
                 <Reveal>
                   <span className="text-white/80 font-semibold line-clamp-2">
@@ -89,27 +101,27 @@ export default function Latest() {
                 </Reveal>
 
                 <Reveal>
-                  <Link
-                    href={
-                      "/blog/python-interview-preparation-tips-for-freshers"
-                    }
-                    className="text-prime text-sm w-fit mt-auto mb-0 pb-2"
-                  >
+                  <button className="text-prime text-sm w-fit mt-auto mb-0 pb-2">
                     Read More
-                  </Link>
+                  </button>
                 </Reveal>
               </div>
-            </div>
-            <div className="lg:h-1/2 min-h-32 w-full rounded-md bg-background/20 flex overflow-hidden">
-              <Image
-                src={
-                  "https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg"
-                }
-                alt=""
-                width={20}
-                height={20}
-                className="w-2/5 object-cover max-phone:hidden shrink-0"
-              />
+            </Link>
+
+            <Link
+              href={"/blog/acing-technical-interviews-for-freshers"}
+              className="group lg:h-1/2 min-h-32 w-full rounded-md bg-background/20 flex overflow-hidden"
+            >
+              <div className="relative overflow-hidden w-2/5 object-cover max-phone:hidden shrink-0 bg-slate-200">
+                <Image
+                  src={
+                    "https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg"
+                  }
+                  alt=""
+                  fill
+                  className="group-hover:scale-110 transition-all duration-200 object-cover object-center"
+                />
+              </div>
               <div className="px-3 py-2 flex flex-col gap-1">
                 <Reveal>
                   <span className="text-white/80 font-semibold line-clamp-2">
@@ -133,15 +145,12 @@ export default function Latest() {
                 </Reveal>
 
                 <Reveal>
-                  <Link
-                    href={"/blog/acing-technical-interviews-for-freshers"}
-                    className="text-prime text-sm w-fit mt-auto mb-0 pb-2"
-                  >
+                  <button className="text-prime text-sm w-fit mt-auto mb-0 pb-2">
                     Read More
-                  </Link>
+                  </button>
                 </Reveal>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </Reveal>

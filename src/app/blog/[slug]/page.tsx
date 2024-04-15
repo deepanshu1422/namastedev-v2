@@ -3,6 +3,7 @@ import Hero from "./hero";
 import HtmlParser from "./htmlparser";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 export const dynamicParams = false;
 
@@ -321,13 +322,20 @@ export default async function Home({ params: { slug } }: PageProps) {
           Latest Blogs
         </span>
         <div className="flex flex-col gap-3">
-          {arr.map(({ title, slug }, i) => (
+          {arr.map(({ title, slug, heroImage }, i) => (
             <Link
               key={i}
               href={`/blog/${slug}`}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 hover:-translate-y-0.5 transition-all duration-300"
             >
-              <div className="bg-second rounded-xl w-32 h-20 shrink-0"></div>
+              <div className="relative overflow-hidden bg-second rounded-xl w-32 h-20 shrink-0 shadow-xl">
+                <Image
+                  src={"https://i.ibb.co/dWZMSKJ/dsa.webp"}
+                  alt={heroImage.aiPrompt}
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <div className="flex flex-col gap-1">
                 <span className="text-xs uppercase text-muted-foreground font-bold">
                   Press Release
