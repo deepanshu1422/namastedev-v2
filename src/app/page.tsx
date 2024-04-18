@@ -43,6 +43,7 @@ export default function Home() {
       answer: "Yes, you will get a certificate after completion.",
     },
   ];
+
   return (
     <main className={`font-jakarta bg-bg min-h-svh`}>
       <Hero
@@ -64,8 +65,3 @@ export default function Home() {
     </main>
   );
 }
-
-
-
-
-

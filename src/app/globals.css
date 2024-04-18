@@ -99,11 +99,19 @@
   background-image: url("https://i.ibb.co/NVFg8p6/hero-section-course.webp");
 }
 
+.body pre {
+  @apply my-2 text-wrap p-4 rounded-md bg-zinc-800;
+}
+
 .body h2 {
   @apply text-2xl max-md:text-xl font-bold pt-8 break-words;
 }
 
 .body h3 {
+  @apply text-xl max-md:text-lg font-bold pt-6 break-words;
+}
+
+.body h4 {
   @apply text-xl max-md:text-lg font-bold pt-6 break-words;
 }
 
@@ -119,8 +127,20 @@
   @apply p-1 rounded-md bg-gray-700/60;
 }
 
+.body pre > code {
+  @apply bg-transparent;
+}
+
+.body code {
+  @apply p-1 rounded-md bg-gray-700/60;
+}
+
 .body ul {
   @apply list-disc py-4 pl-10;
+}
+
+.body ol {
+  @apply list-decimal py-4 pl-10;
 }
 
 .body li > p {

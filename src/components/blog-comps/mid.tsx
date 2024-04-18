@@ -7,14 +7,11 @@ export default function Mid({
   blogs: {
     title: string;
     slug: string;
-    metaDescription: string;
+    description: string;
     heroImage: {
-      title: string;
-      description: string;
       url: string;
-      height: number;
-      width: number;
-    };
+      alt: string;
+    } | null;
   }[];
 }) {
   return (

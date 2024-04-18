@@ -15,14 +15,11 @@ export function CarouselHorizontail({
   blogs: {
     title: string;
     slug: string;
-    metaDescription: string;
+    description: string;
     heroImage: {
-      title: string;
-      description: string;
+      alt: string;
       url: string;
-      height: number;
-      width: number;
-    };
+    } | null;
   }[];
 }) {
   return (
@@ -39,7 +36,7 @@ export function CarouselHorizontail({
       className="w-full lg:hidden phone:px-[1.2rem]"
     >
       <CarouselContent>
-        {blogs.map(({ title, metaDescription, heroImage, slug }, index) => (
+        {blogs.map(({ title, description, heroImage, slug }, index) => (
           <CarouselItem key={index} className="pt-1 sm:basis-1/2">
             <div className="p-1">
               <Link href={`/blog/${slug}`}>
@@ -49,15 +46,15 @@ export function CarouselHorizontail({
                       width={100}
                       height={100}
                       className="h-28 w-2/5 object-cover"
-                      alt={heroImage.description}
-                      src={heroImage.url}
+                      alt={heroImage?.alt || ""}
+                      src={heroImage?.url || ""}
                     />
                     <section className="p-3 flex flex-col gap-2">
                       <span className="text-lg font-semibold line-clamp-1">
                         {title}
                       </span>
                       <p className="text-xs text-muted-foreground line-clamp-2">
-                        {metaDescription}
+                        {description}
                       </p>
                     </section>
                   </CardContent>

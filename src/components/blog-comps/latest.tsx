@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Latest() {
   return (
-    <div className="m-auto flex flex-col items-start justify-between tab:px-[5.5rem] max-tab:px-11 max-phone:px-6 py-14 gap-10 max-w-[75rem]">
+    <div className="m-auto flex flex-col items-start justify-between tab:px-[5.5rem] max-tab:px-11 max-phone:px-6 pt-14 pb-5 gap-10 max-w-[75rem]">
       <div className="w-full flex justify-between gap-5 shrink">
         <Reveal>
           <span className="max-md:text-2xl max-lg:text-3xl text-4xl max-md:font-semibold font-bold border-l-[6px] max-md:border-l-4 pl-1 border-prime">
@@ -50,7 +50,7 @@ export default function Latest() {
                 </Reveal>
               </section>
               <Reveal>
-                <p className="text-xs max-w-[70%]">
+                <p className="text-xs max-w-[70%] line-clamp-3">
                   Ace your next JavaScript technical interview with these 7
                   essential questions covering core concepts like hoisting,
                   closures, &apos;this&apos; keyword, and more. Perfect prep for

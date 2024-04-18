@@ -15,14 +15,11 @@ export default function Hero({
   blogs: {
     title: string;
     slug: string;
-    metaDescription: string;
+    description: string;
     heroImage: {
-      title: string;
-      description: string;
+      alt: string;
       url: string;
-      height: number;
-      width: number;
-    };
+    } | null;
   }[];
 }) {
   return (

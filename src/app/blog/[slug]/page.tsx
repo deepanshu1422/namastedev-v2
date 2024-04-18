@@ -4,8 +4,12 @@ import HtmlParser from "./htmlparser";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import prisma from "@/util/prismaClient";
+import { blog } from "@prisma/client";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import { unstable_cache } from "next/cache";
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 type PageProps = {
   params: {
@@ -159,103 +163,147 @@ const arr = [
   },
 ];
 
-// export async function generateStaticParams() {
-//   const slugs = await fetch(
-//     "https://graphql.contentful.com/content/v1/spaces/f7l5sefbt57k/environments/master",
-//     {
-//       method: "POST",
-//       headers: contentfulHeaders,
-//       body: JSON.stringify({
-//         query: `query {
-//           blogPageTemplateCollection{
-//             items{
-//               slug
-//             }
-//           }
-//         }`,
-//       }),
-//       next: {
-//         revalidate: 60 * 60,
-//       },
-//     }
-//   ).then((res) => res.json());
+export async function generateStaticParams() {
+  const blogs: Pick<blog, "slug">[] = await prisma.blog.findMany({
+    select: {
+      slug: true,
+    },
+  });
 
-//   return slugs.data.blogPageTemplateCollection.items.map((slug: any) => ({
-//     slug: slug.slug,
-//   }));
-// }
+  return blogs.map(({ slug }) => {
+    if (!slug) return;
+    slug: slug.toString();
+  });
+}
 
 export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // const response = await fetch(
-  //   "https://graphql.contentful.com/content/v1/spaces/f7l5sefbt57k/environments/master",
-  //   {
-  //     method: "POST",
-  //     headers: contentfulHeaders,
-  //     body: JSON.stringify({
-  //       query: `query {
-  //         blogPageTemplateCollection(where: {
-  //           slug: "${params.slug}" }){
-  //           items{
-  //             metaTitle
-  //             metaDescription
-  //             author
-  //             publishedDate
-  //             keywords
-  //             heroImage{
-  //               height
-  //               width
-  //               url
-  //             }
-  //           }
-  //         }
-  //       }`,
-  //     }),
-  //   }
-  // ).then((res) => res.json());
+  let item = null;
 
-  const result = arr.find((e) => e.slug === params.slug) || null;
+  // fetch data
+  try {
+    item = await prisma.blog.findUnique({
+      where: {
+        slug: params.slug,
+      },
+      select: {
+        title: true,
+        description: true,
+        author: true,
+        focusKeyword: true,
+        createdAt: true,
+        heroImage: {
+          select: {
+            url: true,
+          },
+        },
+      },
+    });
+
+    if (!item) throw { error: "Not Found" };
+  } catch (error) {
+    if (error instanceof PrismaClientKnownRequestError)
+      item = {
+        title: "Not Found",
+      };
+  }
+
+  // optionally access and extend (rather than replace) parent metadata
+  // const previousImages = (await parent).openGraph?.images || [];
 
   return {
-    title: result?.title,
-    description: result?.description,
+    title: item?.title,
+    description: item?.description,
     openGraph: {
-      publishedTime: "2024-04-06T00:00:00.000Z",
+      publishedTime: item?.createdAt?.toISOString(),
       type: "article",
+      title: item?.title,
+      description: item?.description,
+      images: {
+        url: item?.heroImage?.url ?? "",
+      },
     },
-    keywords: result?.focusKeywords,
-    // authors: {
-    //   name: result.,
-    // },
+    keywords: item?.focusKeyword,
   };
 }
 
-export async function getBlogData(slug: string) {
-  const result = arr.find((e) => e.slug === slug);
+const getBlog = unstable_cache(
+  async (slug: string) => {
+    const item = await prisma.blog.findFirst({
+      where: {
+        slug: slug,
+      },
+      select: {
+        title: true,
+        description: true,
+        body: true,
+        heroImage: {
+          select: {
+            url: true,
+            alt: true,
+          },
+        },
+        relatedBlogs: true,
+      },
+    });
+    return item;
+  },
+  ["my-blogs"],
+  {
+    revalidate: 3600,
+  }
+);
 
-  return result;
-}
+const getRecents = unstable_cache(
+  async () => {
+    const item = await prisma.blog.findMany({
+      take: 5,
+      select: {
+        title: true,
+        heroImage: {
+          select: {
+            url: true,
+            alt: true,
+          },
+        },
+        createdAt: true,
+        slug: true,
+      },
+    });
+    return item;
+  },
+  ["recent-blogs"],
+  {
+    revalidate: 3600,
+  }
+);
 
 export default async function Home({ params: { slug } }: PageProps) {
-  const item = await getBlogData(slug);
+  const item = await getBlog(slug);
+
+  const recents = await getRecents();
 
   if (!item) return notFound();
+
+  if (item instanceof PrismaClientKnownRequestError) return notFound();
+
+  if (!item.title) return notFound();
 
   return (
     <main className="bg-background bg-bg min-h-svh transition-all">
       <Hero
-        title={item.title}
-        desc={item.description}
+        title={item.title ?? ""}
+        desc={item.description ?? ""}
         heroImage={{
-          url: "https://i.ibb.co/dWZMSKJ/dsa.webp",
-          description: item.heroImage.aiPrompt,
+          url: item.heroImage?.url ?? "https://i.ibb.co/dWZMSKJ/dsa.webp",
+          description: item.heroImage?.alt ?? "",
         }}
       />
 
       <div className="max-w-lg md:max-w-3xl m-auto px-8 lg:px-5 body">
-        <HtmlParser body={item.body} />
+        <HtmlParser body={item.body ?? ""} />
       </div>
 
       <div className="py-10 m-auto px-8 lg:px-5 grid gap-4 max-w-lg md:max-w-3xl">
@@ -322,31 +370,34 @@ export default async function Home({ params: { slug } }: PageProps) {
           Latest Blogs
         </span>
         <div className="flex flex-col gap-3">
-          {arr.map(({ title, slug, heroImage }, i) => (
-            <Link
-              key={i}
-              href={`/blog/${slug}`}
-              className="flex items-center gap-2 hover:-translate-y-0.5 transition-all duration-300"
-            >
-              <div className="relative overflow-hidden bg-second rounded-xl w-32 h-20 shrink-0 shadow-xl">
-                <Image
-                  src={"https://i.ibb.co/dWZMSKJ/dsa.webp"}
-                  alt={heroImage.aiPrompt}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="text-xs uppercase text-muted-foreground font-bold">
-                  Press Release
-                </span>
-                <span className="line-clamp-3">{title}</span>
-                <span className="text-xs uppercase text-muted-foreground font-bold">
-                  26 March 2024
-                </span>
-              </div>
-            </Link>
-          ))}
+          {recents.map(({ title, slug, heroImage, createdAt }, i) => {
+            const date = new Date(createdAt);
+            return (
+              <Link
+                key={i}
+                href={`/blog/${slug}`}
+                className="flex items-center gap-3 hover:-translate-y-0.5 transition-all duration-300"
+              >
+                <div className="relative overflow-hidden bg-second rounded-md w-32 h-20 shrink-0 shadow-xl">
+                  <Image
+                    src={heroImage?.url || ""}
+                    alt={heroImage?.alt || ""}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <span className="text-xs text-prime uppercase text-muted-foreground font-bold">
+                    Javascript
+                  </span>
+                  <span className="line-clamp-2">{title}</span>
+                  <span className="text-xs uppercase text-muted-foreground font-bold">
+                    {date.toDateString()}
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </main>

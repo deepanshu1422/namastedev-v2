@@ -16,14 +16,11 @@ export function CarouselVertical({
   blogs: {
     title: string;
     slug: string;
-    metaDescription: string;
+    description: string;
     heroImage: {
-      title: string;
-      description: string;
+      alt: string;
       url: string;
-      height: number;
-      width: number;
-    };
+    } | null;
   }[];
 }) {
   return (
@@ -41,25 +38,25 @@ export function CarouselVertical({
       className="w-full max-w-xs max-lg:hidden mr-11"
     >
       <CarouselContent className="-mt-1 h-[200px]">
-        {blogs.map(({ title, metaDescription, heroImage, slug }, index) => (
+        {blogs.map(({ title, description, heroImage, slug }, index) => (
           <CarouselItem key={index} className="pt-1 md:basis-1/2">
             <div className="p-1">
               <Link href={`/blog/${slug}`}>
                 <Card className="border-second bg-background/30 overflow-hidden hover:scale-105 transition-all duration-200">
                   <CardContent className="flex p-0">
                     <Image
-                      width={heroImage.width / 2}
-                      height={heroImage.height / 2}
+                      width={100}
+                      height={100}
                       className="min-h-20 w-2/5 object-cover"
-                      alt={heroImage.description}
-                      src={heroImage.url}
+                      alt={heroImage?.alt || ""}
+                      src={heroImage?.url || ""}
                     />
                     <section className="p-3 py-2 flex flex-col gap-2">
                       <span className="font-semibold line-clamp-1">
                         {title}
                       </span>
                       <p className="text-xs text-muted-foreground line-clamp-2">
-                        {metaDescription}
+                        {description}
                       </p>
                     </section>
                   </CardContent>

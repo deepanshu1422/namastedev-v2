@@ -1,0 +1,69 @@
+"use client";
+
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { ChevronRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
+type Props = {
+  title: string;
+  slug: string;
+  description: string;
+  createdAt: Date;
+  heroImage: {
+    url: string;
+    alt: string;
+  } | null;
+};
+
+export default function Gallery({ blogs }: { blogs: Props[] }) {
+  return (
+    <div className="m-auto flex flex-col items-start justify-between tab:px-[5.5rem] max-tab:px-11 max-phone:px-6 py-5 pb-10 gap-5 max-w-[75rem]">
+      <div className="w-full flex justify-between gap-5 shrink">
+        <span className="max-md:text-2xl max-lg:text-3xl text-4xl max-md:font-semibold font-bold border-l-[6px] max-md:border-l-4 pl-1.5 border-prime mb-5">
+          More Blogs
+        </span>
+      </div>
+
+      {blogs.map(({ title, slug, description, createdAt, heroImage }, i) => {
+        let date = new Date(createdAt);
+        return (
+          <Link
+            key={i}
+            href={`/blog/${slug}`}
+            className="flex max-md:flex-col gap-6 max-md:gap-3 group max-md:w-full"
+          >
+            {/* <div className=""></div> */}
+            <div className="w-[300px] max-md:w-full overflow-hidden bg-second/80 shrink-0 rounded-md">
+              <AspectRatio ratio={16 / 11}>
+                <Image
+                  loader={() => heroImage?.url || ""}
+                  src={heroImage?.url || ""}
+                  alt={heroImage?.alt || ""}
+                  fill
+                  className="rounded-md object-cover transition-all lg:group-hover:scale-110"
+                />
+              </AspectRatio>
+            </div>
+            <div className="flex flex-col items-start">
+              <span className="text-xl line-clamp-2 max-w-lg max-md:w-full font-semibold">
+                {title}
+              </span>
+              <span className="py-1 text-prime font-semibold">
+                {date.toDateString() || ""}
+              </span>
+              <p className="max-w-md max-md:w-full line-clamp-2 pt-4 text-muted-foreground">
+                {description}
+              </p>
+
+              <button className="flex items-center gap-2 py-2 rounded mt-auto mb-2 uppercase text-prime max-md:border max-md:border-prime max-md:my-3 max-md:w-full max-md:justify-center">
+                Read More
+                <ChevronRight className="max-md:hidden w-5 h-5 stroke-prime" />
+              </button>
+            </div>
+          </Link>
+        );
+      })}
+    </div>
+  );
+}

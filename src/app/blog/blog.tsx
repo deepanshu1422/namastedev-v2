@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function Blog() {
   return (
-    <div className="m-auto flex flex-col items-start justify-between tab:px-[5.5rem] max-tab:px-11 max-phone:px-6 py-5 pb-14 gap-10 max-w-[75rem]">
+    <div className="m-auto flex flex-col items-start justify-between tab:px-[5.5rem] max-tab:px-11 max-phone:px-6 py-5 gap-10 max-w-[75rem]">
       <Reveal width="100%">
         <div className="w-full flex max-md:flex-col-reverse gap-3 bg-second/40 rounded-md">
           <div className="lg:min-h-96 lg:w-6/12 h-full w-full flex flex-col gap-3 max-md:px-6 p-12 max-md:pt-0">
