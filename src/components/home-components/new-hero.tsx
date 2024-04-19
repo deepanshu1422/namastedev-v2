@@ -1,7 +1,7 @@
 import Reveal from "@/components/framer/reveal";
 import Button from "@/components/home-components/button";
 import Video from "@/components/new-cohort/video";
-import { ArrowRight, GraduationCap, Radio, School } from "lucide-react";
+import { ArrowRight, GraduationCap, School, Star } from "lucide-react";
 import Link from "next/link";
 
 export default function Hero({
@@ -35,27 +35,27 @@ export default function Hero({
 
           <div className="p-[.5rem_1.75rem_.5rem_1.00rem] rounded-[3.125rem] flex max-lg:flex-col max-lg:w-full lg:flex-wrap items-center gap-5 my-2 mb-1">
             <Link
+              href={"https://courses.30dayscoding.com/s/store"}
+              className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
+            >
+              <span className="text-sm">All Courses</span>
+              <School className="max-lg:hidden w-4 h-4" />
+              <ArrowRight className="lg:hidden w-4 h-4" />
+            </Link>
+            <Link
               href={"/mentorship"}
               className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
             >
-              <span className="text-sm">Mentorship</span>
+              <span className="text-sm">Mentorship Groups</span>
               <GraduationCap className="max-lg:hidden w-4 h-4" />
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>
             <Link
-              href={"https://dsa.30dayscoding.com/"}
+              href={"https://30dayscoding.com/testimonials"}
               className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
             >
-              <span className="text-sm">DSA Sheets</span>
-              <Radio className="max-lg:hidden w-4 h-4" />
-              <ArrowRight className="lg:hidden w-4 h-4" />
-            </Link>
-            <Link
-              href={"https://courses.30dayscoding.com/s/store"}
-              className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
-            >
-              <span className="text-sm">Courses</span>
-              <School className="max-lg:hidden w-4 h-4" />
+              <span className="text-sm">Testimonials</span>
+              <Star className="max-lg:hidden w-4 h-4" />
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>
             {/* <Button>

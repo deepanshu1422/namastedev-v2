@@ -67,7 +67,7 @@ export default function Latest() {
 
           <div className="lg:min-h-96 lg:w-5/12 flex max-md:flex-col lg:flex-col gap-2 lg:gap-3">
             <Link
-              href={"/blog/python-interview-preparation-tips-for-freshers"}
+              href={"/blog/javascript-private-variables"}
               className="group lg:h-1/2 min-h-32 w-full rounded-md bg-background/20 flex overflow-hidden"
             >
               <div className="relative overflow-hidden w-2/5 object-cover max-phone:hidden shrink-0 bg-slate-200">
@@ -83,7 +83,7 @@ export default function Latest() {
               <div className="px-3 py-2 flex flex-col gap-1">
                 <Reveal>
                   <span className="text-white/80 font-semibold line-clamp-2">
-                    Cracking the Python Interview: Essential Tips for Freshers
+                    JavaScript Private Variables: Protecting Your Data
                   </span>
                 </Reveal>
                 <Reveal>
@@ -93,10 +93,9 @@ export default function Latest() {
                 </Reveal>
                 <Reveal>
                   <p className="line-clamp-2 lg:line-clamp-3 text-sm my-2">
-                    Preparing for a Python interview as a fresher can be
-                    daunting. This comprehensive guide provides essential tips,
-                    common questions, and valuable resources to help you ace
-                    your Python interview and land your dream job.
+                    In JavaScript, variables are traditionally public and
+                    accessible from anywhere in the code, leading to potential
+                    conflicts and unintended modifications.
                   </p>
                 </Reveal>
 
@@ -109,7 +108,7 @@ export default function Latest() {
             </Link>
 
             <Link
-              href={"/blog/acing-technical-interviews-for-freshers"}
+              href={"/blog/javascript-closures-in-loops"}
               className="group lg:h-1/2 min-h-32 w-full rounded-md bg-background/20 flex overflow-hidden"
             >
               <div className="relative overflow-hidden w-2/5 object-cover max-phone:hidden shrink-0 bg-slate-200">
@@ -125,8 +124,7 @@ export default function Latest() {
               <div className="px-3 py-2 flex flex-col gap-1">
                 <Reveal>
                   <span className="text-white/80 font-semibold line-clamp-2">
-                    Acing Your Technical Interview as a Fresher: Tips and
-                    Strategies
+                    JavaScript Closures in Loops: Avoiding Common Pitfalls
                   </span>
                 </Reveal>
                 <Reveal>
@@ -136,11 +134,11 @@ export default function Latest() {
                 </Reveal>
                 <Reveal>
                   <p className="line-clamp-2 lg:line-clamp-3 text-sm my-2">
-                    Preparing for a technical interview as a fresher can be
-                    daunting. This blog post provides actionable tips and
-                    strategies to help you succeed, including what to study,
-                    practice problems, mock interviews, and more. Boost your
-                    confidence and land your dream job!
+                    Using closures within loops in JavaScript can be tricky and
+                    lead to unexpected behavior if not handled correctly. This
+                    blog post explores the common pitfalls developers face when
+                    working with closures in loops and provides practical
+                    solutions to avoid these issues.
                   </p>
                 </Reveal>
 

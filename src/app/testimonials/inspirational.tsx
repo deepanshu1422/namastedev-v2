@@ -9,6 +9,7 @@ export type TestimonialType = {
   email?: string;
   // profile: string;
   review: string;
+  course?: string;
   // social: "instagram" | "linkedin" | "facebook" | "youtube";
   // link: string;
 };
@@ -20,6 +21,7 @@ export let testimonials: TestimonialType[] = [
     email: "abhisekde96@gmail.com",
     review:
       "Really helpful! I got exposed to new avenues and currently I am building a micro SAAS on my own via python, GCP, flutterflow, firebase",
+    course: "",
   },
   {
     time: "3/6/2024 22:59:38",
@@ -262,7 +264,7 @@ function Testimonial({ name, review }: TestimonialType) {
 
 export default function Inspirational() {
   return (
-    <div className="grid place-items-center gap-8">
+    <div className="grid place-items-center gap-8 px-10">
       <Reveal>
         <span className="flex items-center gap-4 relative">
           <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
@@ -275,17 +277,17 @@ export default function Inspirational() {
 
       <Reveal>
         <div className="relative flex items-start gap-8">
-          <div className="p-3 flex flex-col max-[800px]:[&>*:nth-child(n)]:flex max-xl:[&>*:nth-child(odd)]:flex xl:[&>*:nth-child(3n-2)]:flex gap-8 items-start">
+          <div className="flex flex-col max-[800px]:[&>*:nth-child(n)]:flex max-xl:[&>*:nth-child(odd)]:flex xl:[&>*:nth-child(3n-2)]:flex gap-8 items-start">
             {testimonials.map((e, i) => (
               <Testimonial key={i} name={e.name} review={e.review} />
             ))}
           </div>
-          <div className="p-3 max-[800px]:hidden flex flex-col max-xl:[&>*:nth-child(even)]:flex xl:[&>*:nth-child(3n-1)]:flex gap-8 items-start">
+          <div className="max-[800px]:hidden flex flex-col max-xl:[&>*:nth-child(even)]:flex xl:[&>*:nth-child(3n-1)]:flex gap-8 items-start">
             {testimonials.map((e, i) => (
               <Testimonial key={i} name={e.name} review={e.review} />
             ))}
           </div>
-          <div className="p-3 max-xl:hidden flex flex-col [&>*:nth-child(3n)]:flex gap-8 items-start">
+          <div className="max-xl:hidden flex flex-col [&>*:nth-child(3n)]:flex gap-8 items-start">
             {testimonials.map((e, i) => (
               <Testimonial key={i} name={e.name} review={e.review} />
             ))}

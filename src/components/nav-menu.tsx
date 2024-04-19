@@ -69,7 +69,7 @@ export const navTitles: {
     ],
   },
   {
-    title: "Resources",
+    title: "Products",
     href: [
       {
         title: "AI Mock Interview",
@@ -124,7 +124,7 @@ export const navTitles: {
     href: "/blog",
   },
   {
-    title: "Products",
+    title: "Resources",
     href: "/resources",
   },
 ];

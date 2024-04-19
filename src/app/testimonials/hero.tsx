@@ -1,7 +1,8 @@
 import Image from "next/image";
 import YoutubeEmbed from "./youtube-embed";
 import Link from "next/link";
-import Reveal from "@/components/framer/reveal";
+import Button from "@/components/home-components/button";
+import AnimatedButton from "@/components/animated-button";
 
 type VideoTestimony = {
   name?: string;
@@ -19,7 +20,7 @@ export function VideoTestimony({
   linkedinUrl,
 }: VideoTestimony) {
   return (
-    <div className="max-lg:max-w-[23.75rem] lg:w-[23.75rem] w-full p-6 bg-second rounded-lg min-h-72 relative grid gap-4">
+    <div className=" w-full p-6 bg-second rounded-lg min-h-72 relative grid gap-4">
       <YoutubeEmbed embedId={videoId!} />
       <section className="flex justify-between">
         <div className="flex gap-3">
@@ -56,22 +57,102 @@ export function VideoTestimony({
 
 export default function Hero() {
   return (
-    <div className="grid place-items-center gap-8">
-      <Reveal>
-        <h1 className="font-jakarta max-phone:text-[2rem] text-[2.5rem] font-extrabold text-center max-phone:px-10">
-          What do our learners have to say?
-        </h1>
-      </Reveal>
-      <Reveal>
-        <div className="flex gap-8 justify-center p-3">
-          <VideoTestimony
-            name="Deepanshu Udhwani"
-            designation="Founder 30dayscoding | Ex. MakeMytrip | Ex. Alibaba Cloud"
-            linkedinUrl="https://www.linkedin.com/in/deepanshu-udhwani/"
-            imageUrl="/instructor2.jfif"
-            videoId="gIx8D2pyXVI"
-          />
-          {/* <VideoTestimony
+    <div className="grid place-items-center gap-5">
+      {/* <h1 className="font-jakarta max-phone:text-[2rem] text-[2.5rem] font-extrabold text-center max-phone:px-10">
+        What do our learners have to say?
+      </h1> */}
+
+      <div className="w-full relative">
+        <div className="m-auto flex max-lg:flex-col items-start max-lg:items-center justify-between px-10 pt-5 gap-10 max-w-fit">
+          <div className="lg:w-1/2 grid gap-5 shrink-0">
+            <h1 className="font-jakarta max-phone:text-[2rem] text-[2.5rem] font-extrabold">
+              What do our learners have to say?
+            </h1>
+            <p className="text-lg max-tab:text-[1.05rem]">
+              Whether you&apos;re a beginner or an intermediate professional
+              seeking to upskill, transition, or broaden your horizons in the
+              field, our program is designed to help you succeed.
+            </p>
+            <div className="flex flex-wrap py-3 gap-3 max-lg:hidden">
+              <Button>
+                <Link
+                  className="flex items-center gap-2 px-12"
+                  href={"https://courses.30dayscoding.com/s/store"}
+                >
+                  Buy Courses
+                </Link>
+              </Button>
+              <Button>
+                <Link
+                  className="flex items-center gap-2 px-12"
+                  href={"https://30dayscoding.gumroad.com/"}
+                >
+                  Buy Guides
+                </Link>
+              </Button>
+              <span className="max-w-96">
+                <AnimatedButton
+                  link={
+                    "https://docs.google.com/forms/d/1XUinNoUE-sCZCpAinqxijgSwpuMACiSIHEgit-R49Fo/edit"
+                  }
+                >
+                  <span className="flex gap-2 px-10 items-center">
+                    Send Feedback
+                  </span>
+                </AnimatedButton>
+              </span>
+            </div>
+          </div>
+
+          <div className="">
+            {/* {title.map((e, i) => (
+            <Reveal key={i}>
+              <div className="flex items-start gap-3 p-3 bg-gradient-to-r from-head/40 to-transparent rounded-lg shadow-inner">
+                <LucideCheckCircle className="w-4 h-4 translate-y-2 stroke-prime shrink-0" />
+                <p className="text-lg" key={i}>
+                  {e}
+                </p>
+              </div>
+            </Reveal>
+          ))} */}
+
+            <VideoTestimony
+              name="Deepanshu Udhwani"
+              designation="Founder 30dayscoding | Ex. MakeMytrip | Ex. Alibaba Cloud"
+              linkedinUrl="https://www.linkedin.com/in/deepanshu-udhwani/"
+              imageUrl="/instructor2.jfif"
+              videoId="gIx8D2pyXVI"
+            />
+          </div>
+
+          <div className="flex flex-col items-center gap-5 lg:hidden">
+            <Button>
+              <Link
+                className="flex items-center gap-2 px-12"
+                href={"https://courses.30dayscoding.com/s/store"}
+              >
+                Buy Courses
+              </Link>
+            </Button>
+            <Button>
+              <Link
+                className="flex items-center gap-2 px-12"
+                href={"https://30dayscoding.gumroad.com/"}
+              >
+                Buy Guides
+              </Link>
+            </Button>
+            <AnimatedButton link="https://docs.google.com/forms/d/1XUinNoUE-sCZCpAinqxijgSwpuMACiSIHEgit-R49Fo/edit">
+              <span className="flex gap-2 px-10 items-center">
+                Send Feedback
+              </span>
+            </AnimatedButton>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className="flex gap-8 justify-center p-3"> */}
+      {/* <VideoTestimony
             name="Aryan Singh"
             designation="@Google SWE"
             linkedinUrl="https://www.linkedin.com/in/singh1aryan/"
@@ -85,8 +166,7 @@ export default function Hero() {
             imageUrl="/instructor.jpg"
             videoId="39MArMcq5Oc"
           /> */}
-        </div>
-      </Reveal>
+      {/* </div> */}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 
 export default function Course() {
   let products = [
@@ -9,12 +9,40 @@ export default function Course() {
       imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
       purchaseLink:
         "https://courses.30dayscoding.com/products/65a71fca864efe447acf1909",
+      resources: [
+        {
+          title: "MERN",
+          link: "#",
+        },
+        {
+          title: "Nest JS",
+          link: "#",
+        },
+        {
+          title: "DSA",
+          link: "#",
+        },
+      ],
     },
     {
       title: "DSA revision guide and slides",
       imageSrc: "https://i.ibb.co/NFcwRN4/dsa-free.webp",
       purchaseLink:
         "https://courses.30dayscoding.com/products/653b765e382eb45b17092ffe",
+      resources: [
+        {
+          title: "50k Challenge",
+          link: "#",
+        },
+        {
+          title: "Mentorship",
+          link: "/mentorship",
+        },
+        {
+          title: "DSA Sheets",
+          link: "http://dsa.30dayscoding.com/",
+        },
+      ],
     },
   ];
 
@@ -33,31 +61,45 @@ export default function Course() {
       <div className="flex w-full max-lg:flex-col lg:gap-6 justify-center max-lg:items-center max-lg:gap-10 max-lg:max-w-[550px] px-10">
         {/* Products */}
 
-        {products.map(({ title, imageSrc, purchaseLink }, i) => (
-          <div key={i} className="flex-1 max-lg:w-full lg:max-w-[450px]">
-            <div className="overflow-hidden max-lg:m-auto flex items-center h-48 pt-2 px-2 gap-4 rounded-t-xl bg-second">
-              <span className="relative h-full w-full bg-black rounded-lg">
-                <Image
-                  src={imageSrc}
-                  className="object-cover rounded-lg"
-                  fill
-                  alt={title}
-                />
-              </span>
-            </div>
-            <div className="max-lg:m-auto flex items-center justify-between p-2 gap-4 rounded-b-xl bg-second h-fit text-xs">
-              <span className="rounded-lg p-2 bg-head/70 line-clamp-1">
-                {title}
-              </span>
-              <div className="group relative shrink-0 lg:hover:scale-105 transition-all">
-                <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
-                <Link
-                  href={purchaseLink}
-                  className="relative hover: p-2 pl-4 flex items-center bg-background rounded-lg"
-                >
-                  Buy Now <ChevronRight className="h-3 w-3" />
-                </Link>
+        {products.map(({ title, imageSrc, purchaseLink, resources }, i) => (
+          <div
+            key={i}
+            className="flex max-lg:w-full flex-col lg:max-w-[450px] flex-1 gap-2"
+          >
+            <Link href={purchaseLink} className="flex-1">
+              <div className="overflow-hidden max-lg:m-auto flex items-center h-48 pt-2 px-2 gap-4 rounded-t-xl bg-second">
+                <span className="relative h-full w-full bg-black rounded-lg">
+                  <Image
+                    src={imageSrc}
+                    className="object-cover rounded-lg"
+                    fill
+                    alt={title}
+                  />
+                </span>
               </div>
+              <div className="max-lg:m-auto flex items-center justify-between p-2 gap-4 rounded-b-xl bg-second h-fit text-xs">
+                <span className="rounded-lg p-2 bg-head/70 line-clamp-1">
+                  {title}
+                </span>
+                <div className="group relative shrink-0 lg:hover:scale-105 transition-all">
+                  <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
+                  <button className="relative hover: p-2 pl-4 flex items-center bg-background rounded-lg">
+                    Buy Now <ChevronRight className="h-3 w-3" />
+                  </button>
+                </div>
+              </div>
+            </Link>
+            <div className="flex flex-col gap-3 py-3">
+              {resources.map(({ title, link }, index) => (
+                <Link
+                  key={index}
+                  href={link}
+                  className="flex items-center justify-between font-semibold hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full w-full"
+                >
+                  <span className="text-sm">{title}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              ))}
             </div>
           </div>
         ))}

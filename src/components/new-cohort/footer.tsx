@@ -175,9 +175,25 @@ export default function Footer() {
                 <span className="text-muted-foreground uppercase">
                   About Us
                 </span>
-                <span>Privacy Policy</span>
-                <span>Contact Us</span>
-                <span>Term & Conditions</span>
+
+                <Link
+                  className="lg:hover:text-head transition-all"
+                  href={"/privacy-policy"}
+                >
+                  Privacy Policy
+                </Link>
+                <Link
+                  className="lg:hover:text-head transition-all"
+                  href={"/terms-conditions"}
+                >
+                  Term & Conditions
+                </Link>
+                <Link
+                  className="lg:hover:text-head transition-all"
+                  href={"/support"}
+                >
+                  Support
+                </Link>
               </div>
             </Reveal>
           </section>

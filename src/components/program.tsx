@@ -3,7 +3,6 @@ import Reveal from "./framer/reveal";
 import Button from "./home-components/button";
 import { Button as Btn } from "./ui/button";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function Program() {
   let title = [
@@ -99,7 +98,7 @@ function AnimatedButton({
 }) {
   return (
     // <Link href={link} target={type == "ext" ? "_blank" : "_self"}>
-    <Link href={link}  className="group relative">
+    <Link href={link} className="group relative">
       <div className="absolute -inset-1 rounded-lg bg-gradient-to-r h-9 from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
       <Btn
         variant={"outline"}

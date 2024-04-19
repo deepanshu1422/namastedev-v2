@@ -38,13 +38,13 @@ export default function Public() {
     "https://i.ibb.co/9crgVhD/linkedin19.jpg",
   ];
   return (
-    <div className="grid place-items-center gap-8">
+    <div className="grid place-items-center gap-8 max-md:px-10">
       <Reveal>
         <h1 className="font-jakarta max-phone:text-[2rem] text-[2.5rem] font-extrabold text-center">
           More people are building in public with us
         </h1>
       </Reveal>
-      <div className="relative flex flex-wrap gap-8 justify-center p-3">
+      <div className="relative flex flex-wrap gap-8 justify-center md:p-3">
         {images.map((e, i) => (
           <Reveal key={i}>
             <TestimonyImages imageUrl={e} />
