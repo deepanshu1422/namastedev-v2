@@ -12,15 +12,15 @@ export default function Course() {
       resources: [
         {
           title: "MERN",
-          link: "#",
+          link: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
         },
         {
           title: "Nest JS",
-          link: "#",
+          link: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
         },
         {
           title: "DSA",
-          link: "#",
+          link: "https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312",
         },
       ],
     },
@@ -32,7 +32,7 @@ export default function Course() {
       resources: [
         {
           title: "50k Challenge",
-          link: "#",
+          link: "https://nas.io/jobs-placements-help/klxx",
         },
         {
           title: "Mentorship",
@@ -40,7 +40,7 @@ export default function Course() {
         },
         {
           title: "DSA Sheets",
-          link: "http://dsa.30dayscoding.com/",
+          link: "https://30dayscoding.gumroad.com/",
         },
       ],
     },
