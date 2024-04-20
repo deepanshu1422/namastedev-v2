@@ -15,7 +15,7 @@ export default function Course() {
           link: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
         },
         {
-          title: "Nest JS",
+          title: "Next JS",
           link: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
         },
         {
@@ -39,7 +39,7 @@ export default function Course() {
           link: "/mentorship",
         },
         {
-          title: "DSA Sheets",
+          title: "Guides",
           link: "https://30dayscoding.gumroad.com/",
         },
       ],
