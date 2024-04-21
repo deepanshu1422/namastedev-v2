@@ -5,12 +5,25 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://30dayscoding.com"),
   title: "Wall of Love | 30DaysCoding",
   description:
     "A page dedicated for our love and support for our work and what everything we achieved of till date.",
   openGraph: {
-    images: "/mern.jpg",
+    images: "https://i.ibb.co/f0shfRt/30dc5.webp",
+    title: "Wall of Love | 30DaysCoding",
+    description:
+      "A page dedicated for our love and support for our work and what everything we achieved of till date.",
+    url: "https://30dayscoding.com",
+    type: "website",
+  },
+  keywords: ["30 days coding, coding, coding challenges"],
+  twitter: {
+    card: "summary_large_image",
+    images: "https://i.ibb.co/f0shfRt/30dc5.webp",
+    title: "Wall of Love | 30DaysCoding",
+    description:
+      "A page dedicated for our love and support for our work and what everything we achieved of till date.",
+    site: "https://30dayscoding.com",
   },
 };
 

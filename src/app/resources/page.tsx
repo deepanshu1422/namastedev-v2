@@ -8,7 +8,24 @@ import Faqs from "@/components/mentorship-comp/faq";
 export const metadata: Metadata = {
   title: "Resources | 30dayscoding",
   description:
-    "A well organised platform for multiple development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
+    "Latest resources for all the new technologies updating every day. Resources from our 30 Days Coding Community",
+  openGraph: {
+    images: "https://i.ibb.co/9wb8t8m/30dc4.webp",
+    title: "Resources | 30dayscoding",
+    description:
+      "Latest resources for all the new technologies updating every day. Resources from our 30 Days Coding Community",
+    url: "https://30dayscoding.com",
+    type: "website",
+  },
+  keywords: ["30 days coding, coding, coding challenges"],
+  twitter: {
+    card: "summary_large_image",
+    images: "https://i.ibb.co/9wb8t8m/30dc4.webp",
+    title: "Resources | 30dayscoding",
+    description:
+      "Latest resources for all the new technologies updating every day. Resources from our 30 Days Coding Community",
+    site: "https://30dayscoding.com",
+  },
 };
 
 export default function Resources() {

@@ -8,12 +8,25 @@ import Mentorship from "./mentorship";
 import JoinUs from "./joinus";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://30dayscoding.com"),
   title: "Mentorship | 30dayscoding",
   description:
-    "A live mern stack development cohort from 30 days coding. Checkout on www.courses.30dayscoding.com",
+    "Resolve all your queries related to the industry and latest jobs with the help of our mentors with live interactions and mentorship sessions.",
   openGraph: {
-    images: "/cohort.jpg",
+    images: "https://i.ibb.co/p2jp1S1/30dc2.webp",
+    title: "Mentorship | 30dayscoding",
+    description:
+      "Resolve all your queries related to the industry and latest jobs with the help of our mentors with live interactions and mentorship sessions.",
+    url: "https://30dayscoding.com",
+    type: "website",
+  },
+  keywords: ["30 days coding, coding, coding challenges"],
+  twitter: {
+    card: "summary_large_image",
+    images: "https://i.ibb.co/p2jp1S1/30dc2.webp",
+    title: "Mentorship | 30dayscoding",
+    description:
+      "Resolve all your queries related to the industry and latest jobs with the help of our mentors with live interactions and mentorship sessions.",
+    site: "https://30dayscoding.com",
   },
 };
 

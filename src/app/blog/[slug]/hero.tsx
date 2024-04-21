@@ -2,11 +2,14 @@ import Reveal from "@/components/framer/reveal";
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Link from "next/link";
+import { BASE_URL } from "@/util/constants";
+import CopyBtn from "./copyBtn";
 
 export default function Hero({
   title,
   desc,
   heroImage,
+  slug,
 }: {
   title: string;
   desc: string;
@@ -14,6 +17,7 @@ export default function Hero({
     url: string;
     description: string;
   };
+  slug: string;
 }) {
   return (
     <div className={`w-full grid relative overflow-hidden`}>
@@ -37,9 +41,7 @@ export default function Hero({
           <section className="md:py-2 flex gap-4">
             <Link
               target="_blank"
-              href={
-                "https://api.whatsapp.com/send?text=Exploring the coding kingdom - 30DC Blog https://30dayscoding.com/  "
-              }
+              href={`https://api.whatsapp.com/send?text=${title} - 30DC Blog https://30dayscoding.com/blog/${slug}`}
               title={"Share via Whatsapp"}
             >
               <svg
@@ -52,9 +54,7 @@ export default function Hero({
             </Link>
 
             <Link
-              href={
-                "mailto:?subject=I wanted you to see this site&amp;body=Check out this site http://www.website.com."
-              }
+              href={`mailto:?subject=Do check our latest blog on '${title}'&body=Check out new blog on ${title} via visiting - https://30dayscoding/blog/${slug}.`}
               title={"Share via Mail"}
             >
               <svg
@@ -66,22 +66,12 @@ export default function Hero({
               </svg>
             </Link>
 
-            <Link
-              href={"https://www.youtube.com/channel/UCdu8HnchmMbDqbbC4GdPrjw"}
-              title={"Copy Link"}
-            >
-              <svg
-                className="h-6 w-6 fill-white/50 transition-all duration-200 lg:hover:fill-prime"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 640 512"
-              >
-                <path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z" />
-              </svg>
-            </Link>
+            <CopyBtn slug={slug} />
 
             <Link
-              href={"https://twitter.com/30dayscoding"}
+              href={`https://twitter.com/intent/tweet?text=Read the blog from 30dayscoding on ${title} - ${BASE_URL}/blog/${slug}`}
               title={"Share via X"}
+              target="_blank"
             >
               <svg
                 className="h-6 w-6 fill-white/50 transition-all duration-200 lg:hover:fill-prime"

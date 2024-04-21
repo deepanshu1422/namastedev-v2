@@ -7,15 +7,27 @@ import Gallery from "./gallery";
 import { unstable_cache } from "next/cache";
 import prisma from "@/util/prismaClient";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { blog } from "@prisma/client";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://30dayscoding.com"),
   title: "Blog | 30dayscoding",
   description:
     "Explore insightful and engaging blog posts covering a range of topics to empower your career journey. From professional development tips to industry insights, find the inspiration and guidance you need to unlock your full potential.",
   openGraph: {
-    images: "/cohort.jpg",
+    images: "https://i.ibb.co/ZSkm4HH/30dc1.webp",
+    title: "Blog | 30dayscoding",
+    description:
+      "Explore insightful and engaging blog posts covering a range of topics to empower your career journey. From professional development tips to industry insights, find the inspiration and guidance you need to unlock your full potential.",
+    url: "https://30dayscoding.com",
+    type: "website",
+  },
+  keywords: ["30 days coding, coding, coding challenges"],
+  twitter: {
+    card: "summary_large_image",
+    images: "https://i.ibb.co/ZSkm4HH/30dc1.webp",
+    title: "Blog | 30dayscoding",
+    description:
+      "Explore insightful and engaging blog posts covering a range of topics to empower your career journey. From professional development tips to industry insights, find the inspiration and guidance you need to unlock your full potential.",
+    site: "https://30dayscoding.com",
   },
 };
 

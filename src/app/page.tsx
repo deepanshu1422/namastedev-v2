@@ -15,7 +15,21 @@ export const metadata: Metadata = {
   description:
     "A well organised platform for multiple development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
   openGraph: {
-    images: "https://30dc.graphy.com/logo.png?v=2",
+    images: "https://i.ibb.co/25WQ9gz/home.webp",
+    title: "30 Days Coding - Learn Live",
+    description:
+      "A well organised platform for multiple development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
+    url: "https://30dayscoding.com",
+    type: "website",
+  },
+  keywords: ["30 days coding, coding, coding challenges"],
+  twitter: {
+    card: "summary_large_image",
+    images: "https://i.ibb.co/25WQ9gz/home.webp",
+    title: "30 Days Coding - Learn Live",
+    description:
+      "A well organised platform for multiple development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
+    site: "https://30dayscoding.com",
   },
 };
 
@@ -65,4 +79,3 @@ export default function Home() {
     </main>
   );
 }
-
