@@ -1,4 +1,4 @@
-// import { Inter, Space_Mono, Montserrat, Mulish, Plus_Jakarta_Sans } from 'next/font/google'
+import { Bricolage_Grotesque } from 'next/font/google'
 import localFont from 'next/font/local'
 
 // export const inter = Inter({
@@ -27,6 +27,12 @@ import localFont from 'next/font/local'
 //     weight: ["400", "500", "600", "700"],
 //     variable: "--font-mont"
 // })
+
+export const bric = Bricolage_Grotesque({
+    subsets: ["latin-ext"],
+    variable: "--font-bric",
+    display: "swap",
+});
 
 export const localJakarta = localFont({
     src: [

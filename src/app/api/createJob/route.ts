@@ -1,0 +1,20 @@
+import prisma from "@/util/prismaClient";
+import { job } from "@prisma/client";
+import { NextResponse } from "next/server";
+
+// export async function POST(req: Request) {
+//     try {
+//         const data: Promise<job[]> = await req.json();
+
+//         const filteredData = (await data).map(({ jobId, category, company, imageUrl, link, location, postedDate, title, tags }) => ({ jobId, category, company, imageUrl, link, location, postedDate, title, tags }))
+
+//         const post = await prisma.job.createMany({
+//             data: filteredData
+//         });
+
+//         return NextResponse.json(post, { status: 201 });
+//     } catch (err) {
+//         console.log(err);
+//         return NextResponse.json(err || "Database Error", { status: 500 });
+//     }
+// }

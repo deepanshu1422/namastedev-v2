@@ -1,5 +1,5 @@
 import "./globals.css";
-import { localJakarta } from "@/lib/font";
+import { bric, localJakarta } from "@/lib/font";
 import MobileMenu from "@/components/mobile-menu";
 import Navbar from "@/components/home-components/navbar";
 import Footer from "@/components/new-cohort/footer";
@@ -14,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${localJakarta.variable} font-jakarta bg-bg`}>
+      <body
+        className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
+      >
         <MobileMenu />
         <Navbar />
         {children}
