@@ -66,7 +66,7 @@ export default function Home() {
         heroImage="bg-[url('https://i.ibb.co/nn0YJDY/code-1.png')]"
         subTitle="Lifetime Validity Courses + Certificates"
         subDesc="Whether you're a beginner looking to dive into programming or an experienced developer seeking skill enhancement, our mentors' guidance and courses are well-designed for all levels of proficiency."
-        ytId="SKhJ7HFvq0A"
+        ytId="1fPHHiluoDs"
       />
       <Course />
       <Store />
