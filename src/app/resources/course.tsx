@@ -75,7 +75,7 @@ export default function Course() {
             Join Our community
           </span>
           <p className="max-sm:text-sm max-w-3xl">
-            Welcome to our vibrant community! Here, you'll find exciting
+            Welcome to our vibrant community! Here, you will find exciting
             opportunities like Rs.50,000 cash prize challenges, the latest job
             updates, and valuable resources to help you land high-paying jobs.
           </p>
@@ -188,4 +188,5 @@ export default function Course() {
     </div>
   );
 }
+
 
