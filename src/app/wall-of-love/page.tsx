@@ -42,6 +42,19 @@ function TestimonyImages({ imageUrl }: { imageUrl: string }) {
 }
 
 const reviews = [
+  "https://i.ibb.co/Mg2k5Jt/reviw-12.jpg",
+  "https://i.ibb.co/jJPQqZw/reviw-13.jpg",
+  "https://i.ibb.co/tJFqs8j/reviw-11.jpg",
+  "https://i.ibb.co/WGxCKgD/reviw-10.jpg",
+  "https://i.ibb.co/88QpJnP/reviw-9.jpg",
+  "https://i.ibb.co/TmJbQ31/reviw-8.jpg",
+  "https://i.ibb.co/WPznNKw/reviw-7.jpg",
+  "https://i.ibb.co/t4ZqRkd/reviw-6.jpg",
+  "https://i.ibb.co/mbHc9wN/reviw-5.jpg",
+  "https://i.ibb.co/K9XR6n8/reviw-4.jpg",
+  "https://i.ibb.co/1nMFSqh/reviw-3.jpg",
+  "https://i.ibb.co/V35SvJM/reviw-2.jpg",
+  "https://i.ibb.co/4FBYK6x/reviw-1.jpg",
   "https://i.ibb.co/7JJ7qgH/IMG-0012.jpg",
   "https://i.ibb.co/X3txcLJ/IMG-0013.jpg",
   "https://i.ibb.co/rsds6g5/IMG-0014.jpg",

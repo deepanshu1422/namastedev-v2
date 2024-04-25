@@ -225,13 +225,6 @@ export let testimonials: TestimonialType[] = [
       "Through this mentorship, I've gained invaluable insights, refined my skills, and developed a clearer vision for my career trajectory. The main USP is their 1:1 session, which many big institutes fail to deliver consistently, and the quality of content and customized guidance based on a person's skill set is yet another added advantage. The most liked thing about this community is that mentor's push you to achieve your own goals and create your online presence or identity as well, thereby emphasizing succeeding together. Also, they don't force anyone to take their courses; rather, they motivate one to explore other resources and go with the one suitable for oneself. Be if FAANG/MAANG of any GANG, they would provide you with realistic conditions of the market and different organizations. With all of this package, you get complimentary humor and satirical reels. So, if anyone wants to build in public, I would highly recommend them (Tech main tagde hone pr dhyaan do bs). \n\nThanks a lot for guiding us so far and taking us in your 30DC-verse.\nLastly, there's a suggestion that the mentorship program could be stretched for longer period of time as well.",
   },
   {
-    time: "3/11/2024 9:43:05",
-    name: "Dolly Sharma ",
-    email: "24dollysharma@gmail.com",
-    review:
-      "Aaj se ten days phle mene jab start kiya mujhe YouTube pr videos bhi smj mai nahi aa rhe the two hours ke video dekhne ke baad bhi bs time waste ho rha hai..mene bhut saare famous influencer se 1:1 session liya guidence ke liye vo bhi wastage of time  or money tha mujhe genioun lgne lga tha ye sab apne followers ke followers bdane ke liye fake baate kr rhe hai ..phir mere yha MERN full stack course liya mene socha yha se consult krke mujhe kya Krna hai ye deside kr lunge...phir only 20 percent course complete Kiya hai or jo mene YouTube pr videos dekhe the unka use or sence smj mai aa rha hai...agr mai youtube se hi complete krte toh definitely mera interest zero percent ho jata abhi tak ye such mai 400 rs mai worth it hai ",
-  },
-  {
     time: "3/10/2024 22:15:29",
     name: "Akshat Rai",
     email: "akshatrai21@gmail.com",

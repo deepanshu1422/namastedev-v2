@@ -57,6 +57,21 @@ export default function Store() {
                   imgSrc: "/courses/ai.jpg",
                   link: "https://courses.30dayscoding.com/courses/AI-full-stack-project-development-course-64eebe76e4b002b964b5645d",
                 },
+                {
+                  title: "Complete JavaScript Course - (Lifetime Validity)",
+                  imgSrc: "/courses/javascript.jpg",
+                  link: "https://courses.30dayscoding.com/courses/Complete-Javascript-course-for-developers-652da487e4b0dce56ddde296",
+                },
+                {
+                  title: "Complete Python Course - (Lifetime Validity)",
+                  imgSrc: "/courses/python.jpg",
+                  link: "https://courses.30dayscoding.com/courses/Complete-Python-course-for-developers-652da4c5e4b010a575e0254b",
+                },
+                {
+                  title: "Complete Java Course - (Lifetime Validity)",
+                  imgSrc: "/courses/java.jpg",
+                  link: "https://courses.30dayscoding.com/courses/Complete-Java-course-659ef388e4b0f601f93531b8",
+                },
               ],
             },
             {
@@ -118,6 +133,26 @@ export default function Store() {
                     "Full stack package - MERN, Next JS, Projects - (Lifetime Validity)",
                   imgSrc: "/courses/course2.jpg",
                   link: "https://courses.30dayscoding.com/courses/Full-stack-package-652a0a17e4b0db14394522ed",
+                },
+              ],
+            },
+            {
+              title: "Programming language",
+              courses: [
+                {
+                  title: "Complete JavaScript Course - (Lifetime Validity)",
+                  imgSrc: "/courses/javascript.jpg",
+                  link: "https://courses.30dayscoding.com/courses/Complete-Javascript-course-for-developers-652da487e4b0dce56ddde296",
+                },
+                {
+                  title: "Complete Python Course - (Lifetime Validity)",
+                  imgSrc: "/courses/python.jpg",
+                  link: "https://courses.30dayscoding.com/courses/Complete-Python-course-for-developers-652da4c5e4b010a575e0254b",
+                },
+                {
+                  title: "Complete Java Course - (Lifetime Validity)",
+                  imgSrc: "/courses/java.jpg",
+                  link: "https://courses.30dayscoding.com/courses/Complete-Java-course-659ef388e4b0f601f93531b8",
                 },
               ],
             },

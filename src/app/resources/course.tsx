@@ -66,8 +66,8 @@ export default function Course() {
 
       <span className="text-prime font-semibold uppercase">Our Community</span>
 
-      <div className="relative overflow-hidden xl:ml-[1.5rem] max-xl:m-auto flex flex-col items-start m-3 p-[2rem_1.5rem_2.5rem] shadow-[0_2px_40px_0_rgba(0,0,0,.2)] gap-8 rounded-xl bg-second h-fit max-lg:scale-90 max-w-[70rem] w-full">
-        <section className="flex flex-col gap-2">
+      <div className="relative overflow-hidden flex flex-col items-start m-3 p-[2rem_1.5rem_2.5rem] shadow-[0_2px_40px_0_rgba(0,0,0,.2)] gap-8 rounded-xl bg-second h-fit max-lg:scale-90 max-w-[70rem] w-full">
+        <section className="flex flex-col gap-2 relative">
           <span className="bg-gradient-to-t from-bg to-second/80 rounded-lg p-4 w-fit">
             <IndianRupee className="h-10 w-10 stroke-prime" />
           </span>
@@ -90,9 +90,9 @@ export default function Course() {
             </section>
           </AnimatedButton>
         </span>
-        <div className="h-96 w-[600px] absolute -right-1/4 md:-right-[10%] top-10 -rotate-45 max-md:-z-10 opacity-40 rounded-lg bg-second">
+        <div className="h-96 w-[600px] absolute max-md:-z-10 -right-1/4 top-10 -rotate-45 pointer-events-none opacity-40 rounded-lg bg-second">
           <Image
-            className="object-cover"
+            className="object-cover select-none"
             fill
             alt={"30DC Community"}
             src={
@@ -104,50 +104,27 @@ export default function Course() {
 
       <span className="text-prime font-semibold uppercase">Our Resources</span>
 
-      <div className="flex w-full max-lg:flex-col lg:gap-6 justify-center max-lg:items-center max-lg:gap-10 max-lg:max-w-[550px] px-10">
+      <div className="flex max-w-[65rem] w-full flex-col lg:gap-6 justify-center max-lg:items-center max-lg:gap-10 px-10 mx-auto">
         {/* Products */}
 
         {products.map(({ title, imageSrc, purchaseLink, resources }, i) => (
-          <div
+          <Link
+            href={purchaseLink}
             key={i}
-            className="flex max-lg:w-full flex-col lg:max-w-[450px] flex-1 gap-2"
+            className="flex w-full p-3 gap-2 bg-gray-100 shadow-[rgb(0,_0,_0)_8px_8px_0px_0px] border-2"
           >
-            <Link href={purchaseLink} className="flex-1">
-              <div className="overflow-hidden max-lg:m-auto flex items-center h-48 pt-2 px-2 gap-4 rounded-t-xl bg-second">
-                <span className="relative h-full w-full bg-black rounded-lg">
-                  <Image
-                    src={imageSrc}
-                    className="object-cover rounded-lg"
-                    fill
-                    alt={title}
-                  />
-                </span>
-              </div>
-              <div className="max-lg:m-auto flex items-center justify-between p-2 gap-4 rounded-b-xl bg-second h-fit text-xs">
-                <span className="rounded-lg p-2 bg-head/70 line-clamp-1">
-                  {title}
-                </span>
-                <div className="group relative shrink-0 lg:hover:scale-105 transition-all">
-                  <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
-                  <button className="relative hover: p-2 pl-4 flex items-center bg-background rounded-lg">
-                    Buy Now <ChevronRight className="h-3 w-3" />
-                  </button>
-                </div>
-              </div>
-            </Link>
-            <div className="flex flex-col gap-3 py-3">
-              {resources.map(({ title, link }, index) => (
-                <Link
-                  key={index}
-                  href={link}
-                  className="flex items-center justify-between font-semibold hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full w-full"
-                >
-                  <span className="text-sm">{title}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              ))}
+            <div className="relative h-12 w-12 overflow-hidden">
+              <Image
+                fill
+                src={imageSrc}
+                alt={title}
+                className="object-cover border-2"
+              />
             </div>
-          </div>
+            <span className="flex-1 text-background text-center font-semibold m-auto px-2">
+              {title}
+            </span>
+          </Link>
         ))}
 
         {/* <Link
@@ -188,5 +165,3 @@ export default function Course() {
     </div>
   );
 }
-
-
