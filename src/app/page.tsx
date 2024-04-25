@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description:
     "A well organised platform for multiple development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
   openGraph: {
-    images: "https://i.ibb.co/25WQ9gz/home.webp",
+    images: "https://i.ibb.co/PD9S6CZ/home.webp",
     title: "30 Days Coding - Learn Live",
     description:
       "A well organised platform for multiple development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   keywords: ["30 days coding, coding, coding challenges"],
   twitter: {
     card: "summary_large_image",
-    images: "https://i.ibb.co/25WQ9gz/home.webp",
+    images: "https://i.ibb.co/PD9S6CZ/home.webp",
     title: "30 Days Coding - Learn Live",
     description:
       "A well organised platform for multiple development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
@@ -61,12 +61,12 @@ export default function Home() {
   return (
     <main className={`font-jakarta bg-bg min-h-svh`}>
       <Hero
-        title="25000+ Students Learning DSA, React, MERN, Next JS, Blockchain, AI"
+        title="Premium MERN, Next JS, DSA, Blockchain, AI courses for less than your dinner!"
         desc="The most affordable premium courses. Projects, Guides, and Certificates included."
         heroImage="bg-[url('https://i.ibb.co/nn0YJDY/code-1.png')]"
         subTitle="Lifetime Validity Courses + Certificates"
         subDesc="Whether you're a beginner looking to dive into programming or an experienced developer seeking skill enhancement, our mentors' guidance and courses are well-designed for all levels of proficiency."
-        ytId="SKhJ7HFvq0A"
+        ytId="1fPHHiluoDs"
       />
       <Course />
       <Store />
