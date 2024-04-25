@@ -61,12 +61,12 @@ export default function Home() {
   return (
     <main className={`font-jakarta bg-bg min-h-svh`}>
       <Hero
-        title="30DC | Pocket friendly learning"
+        title="Premium MERN, Next JS, DSA, Blockchain, AI courses for less than your dinner!"
         desc="The most affordable premium courses. Projects, Guides, and Certificates included."
         heroImage="bg-[url('https://i.ibb.co/nn0YJDY/code-1.png')]"
         subTitle="Lifetime Validity Courses + Certificates"
         subDesc="Whether you're a beginner looking to dive into programming or an experienced developer seeking skill enhancement, our mentors' guidance and courses are well-designed for all levels of proficiency."
-        ytId="1fPHHiluoDs"
+        ytId="SKhJ7HFvq0A"
       />
       <Course />
       <Store />
