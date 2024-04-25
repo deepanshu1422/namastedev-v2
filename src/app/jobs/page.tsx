@@ -45,6 +45,7 @@ const fetchJobs = unstable_cache(
         company: true,
         location: true,
         jobId: true,
+        link: true,
       },
     });
     // if (!item) throw { error: "Not found" };

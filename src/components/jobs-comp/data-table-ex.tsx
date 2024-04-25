@@ -17,6 +17,7 @@ import {
   ArrowUpDown,
   ChevronDown,
   Globe,
+  Link as Lnk,
   MapPin,
   MoreHorizontal,
 } from "lucide-react";
@@ -42,6 +43,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "../ui/badge";
+import Link from "next/link";
 
 export type Payment = {
   id: string;
@@ -50,6 +52,7 @@ export type Payment = {
   location: string;
   title: string;
   category: string;
+  link: string;
 };
 
 export const columns: ColumnDef<Payment>[] = [
@@ -57,7 +60,6 @@ export const columns: ColumnDef<Payment>[] = [
     id: "select",
     header: ({ table }) => (
       <Checkbox
-        className=""
         checked={
           table.getIsAllPageRowsSelected() ||
           (table.getIsSomePageRowsSelected() && "indeterminate")
@@ -174,28 +176,33 @@ export const columns: ColumnDef<Payment>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original;
+      const link = row.original;
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy Job ID
-            </DropdownMenuItem>
-            {/* <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem> */}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Link href={link.link} target="_blank">
+          <Button
+            variant="link"
+            className="h-8 w-8 p-0 rounded-full bg-head/20 hover:scale-105 transition-all"
+          >
+            {/* <span className="sr-only">Open menu</span> */}
+            <Lnk className="h-4 w-4" />
+          </Button>
+        </Link>
+        // <DropdownMenu>
+        //   <DropdownMenuTrigger asChild>
+        //   </DropdownMenuTrigger>
+        //   <DropdownMenuContent align="end">
+        //     <DropdownMenuLabel>Actions</DropdownMenuLabel>
+        //     <DropdownMenuItem
+        //       onClick={() => navigator.clipboard.writeText(payment.id)}
+        //     >
+        //       Copy Job ID
+        //     </DropdownMenuItem>
+        //     {/* <DropdownMenuSeparator />
+        //     <DropdownMenuItem>View customer</DropdownMenuItem>
+        //     <DropdownMenuItem>View payment details</DropdownMenuItem> */}
+        //   </DropdownMenuContent>
+        // </DropdownMenu>
       );
     },
   },
