@@ -1,16 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { AlignJustify, Gift } from "lucide-react";
+// import { AlignJustify, Gift } from "lucide-react";
 import { NavMenu } from "../nav-menu";
 import Unveal from "../framer/unvel";
 import Link from "next/link";
-import { useAtom, useSetAtom } from "jotai";
-import { navbarState } from "@/lib/jotai";
-import { ModeToggle } from "../theme-switch";
+// import { ModeToggle } from "../theme-switch";
+import MobileMenu from "../mobile-menu";
 
 export default function Navbar() {
-  const setState = useSetAtom(navbarState);
+  // const setState = useSetAtom(navbarState);
 
   return (
     <Unveal>
@@ -52,12 +51,13 @@ export default function Navbar() {
                 <span className="text-sm">Join Mentorship</span>
                 {/* <ArrowRight className="max-md:hidden h-4 w-4" /> */}
               </Link>
-              <button
+              <MobileMenu />
+              {/* <button
                 onClick={() => setState(false)}
                 className="hover:bg-prime/30 rounded-lg p-1 transition-all"
               >
                 <AlignJustify className="tab:hidden max-tab:h-5 max-tab:w-5 h-6 w-6 stroke-[1.5]" />
-              </button>
+              </button> */}
             </section>
           </div>
         </div>

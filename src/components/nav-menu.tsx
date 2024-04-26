@@ -131,6 +131,10 @@ export const navTitles: {
     title: "Jobs",
     href: "/jobs",
   },
+  {
+    title: "Projects",
+    href: "/projects",
+  },
 ];
 
 export function NavMenu() {

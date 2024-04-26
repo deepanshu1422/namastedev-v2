@@ -111,7 +111,7 @@ export default function Course() {
           <Link
             href={purchaseLink}
             key={i}
-            className="flex w-full p-3 gap-2 bg-gray-100 shadow-[rgb(0,_0,_0)_8px_8px_0px_0px] border-2"
+            className="flex w-full p-3 gap-2 bg-gray-100 shadow-[rgb(0,_0,_0)_8px_8px_0px_0px] border-2 hover:translate-x-1 hover:translate-y-1 transition-all duration-75 hover:shadow-[rgb(0,_0,_0)_4px_4px_0px_0px]"
           >
             <div className="relative h-12 w-12 overflow-hidden">
               <Image

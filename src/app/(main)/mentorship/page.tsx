@@ -68,11 +68,11 @@ export default function Home() {
   return (
     <main className="bg-background bg-bg min-h-svh transition-all">
       <Hero
-        title="Join 30DC Private Mentorship Community"
+        title="30DC Mentorship Group: Get All Courses + 1:1 Help"
         desc="Learn from Aryan, Deepanshu, and the 30DC team to get placed this season."
         heroImage="/main/hero_section_mentor.png"
       />
-      <Profile />
+      <Mentorship />
       <Video
         title={"1:1 Live Query Seesions"}
         desc={
@@ -80,7 +80,7 @@ export default function Home() {
         }
         youtubeId={"ylUk7kImBeE"}
       />
-      <Mentorship />
+      <Profile />
       <Video
         title={"Best Practices for Developers by Our Mentors"}
         desc={

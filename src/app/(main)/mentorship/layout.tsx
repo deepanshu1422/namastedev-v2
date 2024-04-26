@@ -8,7 +8,7 @@ export default function RootLayout({
   return (
     <div>
       {children}
-      <Floating />
+      {/* <Floating /> */}
     </div>
   );
 }

@@ -37,9 +37,18 @@ export default function Gallery({ blogs }: { blogs: Props[] }) {
             <div className="w-[300px] max-md:w-full overflow-hidden bg-second/80 shrink-0 rounded-md">
               <AspectRatio ratio={16 / 11}>
                 <Image
-                  loader={() => heroImage?.url || ""}
-                  src={heroImage?.url || ""}
-                  alt={heroImage?.alt || ""}
+                  loader={() =>
+                    heroImage?.url ||
+                    "https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg"
+                  }
+                  src={
+                    heroImage?.url ||
+                    "https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg"
+                  }
+                  alt={
+                    heroImage?.alt ||
+                    "Create an image featuring JavaScript code snippets and interview-related icons or graphics. Use a color scheme of yellows and blues. Include the title '7 Essential JavaScript Interview Questions for Freshers'."
+                  }
                   fill
                   className="rounded-md object-cover transition-all lg:group-hover:scale-110"
                 />
