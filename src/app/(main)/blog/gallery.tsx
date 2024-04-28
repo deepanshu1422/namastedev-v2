@@ -26,7 +26,12 @@ export default function Gallery({ blogs }: { blogs: Props[] }) {
       </div>
 
       {blogs.map(({ title, slug, description, createdAt, heroImage }, i) => {
-        let date = new Date(createdAt);
+        let date = new Date(createdAt).toLocaleDateString("en-US", {
+          // weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
         return (
           <Link
             key={i}
@@ -58,9 +63,7 @@ export default function Gallery({ blogs }: { blogs: Props[] }) {
               <span className="text-xl line-clamp-2 max-w-lg max-md:w-full font-semibold">
                 {title}
               </span>
-              <span className="py-1 text-prime font-semibold">
-                {date.toDateString() || ""}
-              </span>
+              <span className="py-2 text-prime font-semibold">{date}</span>
               <p className="max-w-md max-md:w-full line-clamp-2 pt-4 text-muted-foreground">
                 {description}
               </p>

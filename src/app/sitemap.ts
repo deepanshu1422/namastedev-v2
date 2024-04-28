@@ -1,6 +1,7 @@
 import { BASE_URL } from '@/util/constants'
 import prisma from '@/util/prismaClient'
 import { MetadataRoute } from 'next'
+import { cache } from 'react'
 
 const staticMaps: MetadataRoute.Sitemap = [
     {
@@ -35,6 +36,18 @@ const staticMaps: MetadataRoute.Sitemap = [
     },
     {
         url: 'https://30dayscoding.com/resources',
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.8,
+    },
+    {
+        url: 'https://30dayscoding.com/jobs',
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.8,
+    },
+    {
+        url: 'https://30dayscoding.com/projects',
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.8,
@@ -101,14 +114,21 @@ const staticMaps: MetadataRoute.Sitemap = [
     },
 ]
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export const revalidate = 3600
 
-    const blogSlugs = await prisma.blog.findMany({
+export const getItem = cache(async () => {
+    const item = await prisma.blog.findMany({
         select: {
             slug: true,
             createdAt: true
         }
     })
+    return item
+})
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+
+    const blogSlugs = await getItem()
 
     const dynamicMaps: MetadataRoute.Sitemap = blogSlugs.map((blog) => ({
         url: `${BASE_URL}/blog/${blog.slug}`,

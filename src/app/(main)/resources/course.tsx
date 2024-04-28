@@ -13,42 +13,87 @@ import AnimatedButton from "@/components/animated-button";
 export default function Course() {
   let products = [
     {
-      title: "All guides (DSA, Full stack, Resume, Process, etc)",
-      imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
-      purchaseLink:
-        "https://courses.30dayscoding.com/products/65a71fca864efe447acf1909",
+      title: "Roadmap",
       resources: [
         {
-          title: "MERN",
-          link: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
+          title: "Tech job Roadmap",
+          imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
+          href: "https://bit.ly/30dc-roadmap ",
         },
         {
-          title: "Next JS",
-          link: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
+          title: "FAANG roadmap",
+          imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
+          href: "https://bit.ly/faang-roadmap",
+        },
+        {
+          title: "Profile building",
+          imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
+          href: "https://bit.ly/30dc-profile",
+        },
+        {
+          title: "Resume",
+          imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
+          href: "https://bit.ly/30dc-resume",
+        },
+        {
+          title: "Cold emails",
+          imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
+          href: "https://bit.ly/30dc-cold-emails",
         },
         {
           title: "DSA",
-          link: "https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312",
+          imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
+          href: "https://bit.ly/30dc-dsa ",
         },
       ],
     },
     {
-      title: "DSA revision guide and slides",
-      imageSrc: "https://i.ibb.co/NFcwRN4/dsa-free.webp",
-      purchaseLink:
-        "https://courses.30dayscoding.com/products/653b765e382eb45b17092ffe",
+      title: "Project Ideas",
       resources: [
         {
-          title: "50k Challenge",
-          link: "https://nas.io/jobs-placements-help/klxx",
+          title: "Project Ideas",
+          imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
+          href: "https://bit.ly/30dc-ideas",
         },
         {
-          title: "Mentorship",
-          link: "/mentorship",
+          title: "Tutorial hell and Projects",
+          imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
+          href: "https://bit.ly/30dc-projects ",
         },
         {
-          title: "Guides",
-          link: "https://30dayscoding.gumroad.com/",
+          title: "Full stack course and guide",
+          imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
+          href: "https://bit.ly/30dc-full-stack  ",
+        },
+      ],
+    },
+    {
+      title: "Tech Stacks",
+      resources: [
+        {
+          title: "Mern",
+          imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
+          href: "https://bit.ly/30dc-mern",
+        },
+        {
+          title: "Firebase",
+          imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
+          href: "https://bit.ly/30dc-firebase",
+        },
+        {
+          title: "AI",
+          imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
+          href: "https://bit.ly/30dc-ai",
+        },
+        {
+          title: "Blockchain",
+          imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
+          href: "https://bit.ly/30dc-blockchain",
+        },
+        {
+          title: "Notion",
+          imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
+          href: "https://bit.ly/30dc-notion",
         },
       ],
     },
@@ -102,66 +147,36 @@ export default function Course() {
         </div>
       </div>
 
-      <span className="text-prime font-semibold uppercase">Our Resources</span>
+      {/* Products */}
 
-      <div className="flex max-w-[65rem] w-full flex-col lg:gap-6 justify-center max-lg:items-center max-lg:gap-10 px-10 mx-auto">
-        {/* Products */}
-
-        {products.map(({ title, imageSrc, purchaseLink, resources }, i) => (
-          <Link
-            href={purchaseLink}
-            key={i}
-            className="flex w-full p-3 gap-2 bg-gray-100 shadow-[rgb(0,_0,_0)_8px_8px_0px_0px] border-2 hover:translate-x-1 hover:translate-y-1 transition-all duration-75 hover:shadow-[rgb(0,_0,_0)_4px_4px_0px_0px]"
-          >
-            <div className="relative h-12 w-12 overflow-hidden">
-              <Image
-                fill
-                src={imageSrc}
-                alt={title}
-                className="object-cover border-2"
-              />
-            </div>
-            <span className="flex-1 text-background text-center font-semibold m-auto px-2">
-              {title}
-            </span>
-          </Link>
-        ))}
-
-        {/* <Link
-          href={"/course/dsa-live-placement-ready-course"}
-          className="flex-1 max-lg:w-full lg:max-w-[450px] hover:opacity-90"
-        >
-          <Reveal>
-            <div className="max-lg:m-auto flex items-center lg:p-[2rem_1.5rem_2.5rem] p-4 shadow-[0_2px_40px_0_rgba(0,0,0,.2)] gap-4 rounded-t-xl bg-second h-fit">
-              <span className="rounded-full shrink-0 p-4 w-fit">
-                <Image src={"/data.webp"} width={35} height={35} alt="dsa" />
-              </span>
-              <span className="text-xl font-semibold line-clamp-2">
-                DSA Live Classes
-              </span>
-            </div>
-            <div className="max-lg:m-auto flex items-center justify-between p-2 px-4 shadow-[0_2px_40px_0_rgba(0,0,0,.2)] gap-4 rounded-b-xl bg-second h-fit text-xs">
-              <span className="rounded-full p-2 bg-prime/50">
-                12 weeks - Everything from A-Z
-              </span>
-              <span className="p-2 flex items-center">
-                See More <ChevronRight className="h-3 w-3" />
-              </span>
-            </div>
-          </Reveal>
-        </Link> */}
-      </div>
-
-      {/* <Link
-        className="text-sm"
-        href={"https://courses.30dayscoding.com/s/store"}
-      >
-        <button
-          className={`font-jakarta flex items-center font-semibold gap-1 border-white border transition-all px-6 py-3 rounded-md`}
-        >
-          Check More Courses
-        </button>
-      </Link> */}
+      {products.map(({ title, resources }, i) => (
+        <>
+          <span key={i} className="text-prime font-semibold uppercase">
+            {title}
+          </span>
+          <div className="flex max-w-[65rem] w-full flex-col lg:gap-6 justify-center max-lg:items-center max-lg:gap-10 px-10 mx-auto">
+            {resources.map(({ title, imageSrc, href }, index) => (
+              <Link
+                key={index}
+                href={href}
+                className="flex w-full p-3 gap-2 bg-gray-100 shadow-[rgb(0,_0,_0)_8px_8px_0px_0px] border-2 hover:translate-x-1 hover:translate-y-1 transition-all duration-75 hover:shadow-[rgb(0,_0,_0)_4px_4px_0px_0px]"
+              >
+                <div className="relative h-12 w-12 overflow-hidden">
+                  <Image
+                    fill
+                    src={imageSrc}
+                    alt={title}
+                    className="object-cover border-2"
+                  />
+                </div>
+                <span className="flex-1 text-background text-center font-semibold m-auto px-2">
+                  {title}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </>
+      ))}
     </div>
   );
 }

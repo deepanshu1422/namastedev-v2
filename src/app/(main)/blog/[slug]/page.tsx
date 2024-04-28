@@ -119,6 +119,7 @@ const getBlog = unstable_cache(
           },
         },
         relatedBlogs: true,
+        createdAt: true,
       },
     });
     return item;
@@ -178,6 +179,7 @@ export default async function Home({ params: { slug } }: PageProps) {
             "Create an image featuring JavaScript code snippets and interview-related icons or graphics. Use a color scheme of yellows and blues. Include the title '7 Essential JavaScript Interview Questions for Freshers'.",
         }}
         slug={slug}
+        createdAt={item.createdAt}
       />
 
       <div className="max-w-lg md:max-w-3xl m-auto px-8 lg:px-5 body">
@@ -238,7 +240,13 @@ export default async function Home({ params: { slug } }: PageProps) {
         </span>
         <div className="flex flex-col gap-3">
           {recents.map(({ title, slug, heroImage, createdAt }, i) => {
-            const date = new Date(createdAt);
+            const date = new Date(createdAt).toLocaleDateString("en-US", {
+              // weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+
             return (
               <Link
                 key={i}
@@ -259,7 +267,7 @@ export default async function Home({ params: { slug } }: PageProps) {
                   </span>
                   <span className="line-clamp-2">{title}</span>
                   <span className="text-xs uppercase text-muted-foreground font-bold">
-                    {date.toDateString()}
+                    {date}
                   </span>
                 </div>
               </Link>

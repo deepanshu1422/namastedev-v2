@@ -10,6 +10,7 @@ export default function Hero({
   desc,
   heroImage,
   slug,
+  createdAt,
 }: {
   title: string;
   desc: string;
@@ -18,13 +19,21 @@ export default function Hero({
     description: string;
   };
   slug: string;
+  createdAt: Date;
 }) {
+  const longDate = new Date(createdAt).toLocaleDateString("en-US", {
+    // weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <div className={`w-full grid relative overflow-hidden`}>
       <div className="tab:p-[4.5rem_5.5rem_2.75rem] max-tab:pt-[4rem] max-tab:pb-[2rem] m-auto max-w-lg md:max-w-[75rem] grid gap-5 md:gap-7 place-items-center text-white text-center">
         <Reveal>
-          <span className="text-sm text-muted-foreground font-bold uppercase text-prime">
-            Photos &#183; 21 March 2023
+          <span className="text-sm font-bold uppercase text-prime">
+            Javascript &#183; {longDate ?? "26 April 2024"}
           </span>
         </Reveal>
         <Reveal>

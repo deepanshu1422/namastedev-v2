@@ -4,7 +4,7 @@ import Mid from "@/components/blog-comps/mid";
 import Latest from "@/components/blog-comps/latest";
 import Blog from "./blog";
 import Gallery from "./gallery";
-import { unstable_cache } from "next/cache";
+import { cache } from "react";
 import prisma from "@/util/prismaClient";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
@@ -31,30 +31,26 @@ export const metadata: Metadata = {
   },
 };
 
-const fetchBlogs = unstable_cache(
-  async () => {
-    const item = await prisma.blog.findMany({
-      select: {
-        title: true,
-        description: true,
-        slug: true,
-        heroImage: {
-          select: {
-            url: true,
-            alt: true,
-          },
+export const revalidate = 3600;
+
+const fetchBlogs = cache(async () => {
+  const item = await prisma.blog.findMany({
+    select: {
+      title: true,
+      description: true,
+      slug: true,
+      heroImage: {
+        select: {
+          url: true,
+          alt: true,
         },
-        createdAt: true,
       },
-    });
-    // if (!item) throw { error: "Not found" };
-    return item;
-  },
-  ["latest-blogs"],
-  {
-    revalidate: 3600,
-  }
-);
+      createdAt: true,
+    },
+  });
+  // if (!item) throw { error: "Not found" };
+  return item;
+});
 
 export default async function Home() {
   // let blogs = [
@@ -140,11 +136,11 @@ export default async function Home() {
         title="Discover Success with Our Blogs"
         desc="Explore insightful and engaging blog posts covering a range of topics to empower your career journey."
         heroImage="https://p0.pxfuel.com/preview/728/375/731/aerial-analog-background-blog.jpg"
-        blogs={blogs}
+        blogs={blogs.slice(3, 13)}
       />
       <Mid blogs={blogs} />
-      <Latest />
-      <Blog />
+      <Latest blogs={[blogs[10], blogs[1], blogs[2]]} />
+      <Blog blog={blogs[26]} />
       <Gallery blogs={blogs} />
       {/* <Faqs faq={faq} /> */}
     </main>

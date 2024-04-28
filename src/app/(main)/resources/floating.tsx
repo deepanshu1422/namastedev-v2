@@ -6,7 +6,7 @@ import NewRazorpay from "@/util/new-razorpay";
 export default async function Floating() {
   return (
     <div className="fixed bottom-0 z-20 bg-background/40 w-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30">
-      <div className="flex justify-between items-center gap-2 p-4 px-6 lg:max-w-[80rem] mx-auto">
+      <div className="flex justify-between items-center gap-2 sm:p-[.875rem_4.25rem] p-[0.5rem_1rem] lg:max-w-[90rem] mx-auto">
         <Reveal>
           <section className="flex flex-col gap-1">
             <span className={`font-jakarta text-lg`}>

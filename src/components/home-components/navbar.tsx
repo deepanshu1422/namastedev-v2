@@ -18,7 +18,7 @@ export default function Navbar() {
 
         <div className="flex bg-bg items-center justify-center text-lg text-white h-20 fixed top-0 w-full z-20 pt-2">
           <div
-            className={`p-[.875rem_6.25rem] max-sm:p-[0.5rem_1rem] text-white flex gap-6 justify-between items-center w-full max-w-[90rem]`}
+            className={`sm:p-[.875rem_4.25rem] p-[0.5rem_1rem] text-white flex gap-6 justify-between items-center w-full max-w-[90rem]`}
           >
             <section className="flex gap-12">
               <Link href={"/"} className="flex items-center gap-1">

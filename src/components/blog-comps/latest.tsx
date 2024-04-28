@@ -4,7 +4,20 @@ import Image from "next/image";
 import Reveal from "../framer/reveal";
 import Link from "next/link";
 
-export default function Latest() {
+export default function Latest({
+  blogs,
+}: {
+  blogs: {
+    title: string;
+    slug: string;
+    description: string;
+    heroImage: {
+      url: string;
+      alt: string;
+    } | null;
+    createdAt: Date;
+  }[];
+}) {
   return (
     <div className="m-auto flex flex-col items-start justify-between tab:px-[5.5rem] max-tab:px-11 max-phone:px-6 pt-14 pb-5 gap-10 max-w-[75rem]">
       <div className="w-full flex justify-between gap-5 shrink">
@@ -22,9 +35,7 @@ export default function Latest() {
       <Reveal width="100%">
         <div className="w-full flex max-lg:flex-col gap-3">
           <Link
-            href={
-              "/blog/7-essential-javascript-interview-questions-for-freshers"
-            }
+            href={`/blog/${blogs[0].slug}`}
             className="relative group lg:min-h-96 lg:w-7/12 rounded-md overflow-hidden"
           >
             <Image
@@ -39,22 +50,23 @@ export default function Latest() {
               <section className="grid">
                 <Reveal>
                   <span className="text-2xl font-semibold max-w-sm">
-                    7 Essential Technical Interview Questions on JavaScript for
-                    Freshers
+                    {blogs[0].title}
                   </span>
                 </Reveal>
                 <Reveal>
                   <span className="text-sm font-semibold uppercase text-muted-foreground">
-                    28 December 2023
+                    {new Date(blogs[0].createdAt).toLocaleDateString("en-US", {
+                      // weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
                   </span>
                 </Reveal>
               </section>
               <Reveal>
                 <p className="text-xs max-w-[70%] line-clamp-3">
-                  Ace your next JavaScript technical interview with these 7
-                  essential questions covering core concepts like hoisting,
-                  closures, &apos;this&apos; keyword, and more. Perfect prep for
-                  freshers and early-career developers.
+                  {blogs[0].description}
                 </p>
               </Reveal>
               <Reveal>
@@ -67,7 +79,7 @@ export default function Latest() {
 
           <div className="lg:min-h-96 lg:w-5/12 flex max-md:flex-col lg:flex-col gap-2 lg:gap-3">
             <Link
-              href={"/blog/javascript-private-variables"}
+              href={`/blog/${blogs[1].slug}`}
               className="group lg:h-1/2 min-h-32 w-full rounded-md bg-background/20 flex overflow-hidden"
             >
               <div className="relative overflow-hidden w-2/5 object-cover max-phone:hidden shrink-0 bg-slate-200">
@@ -83,21 +95,23 @@ export default function Latest() {
               <div className="px-3 py-2 flex flex-col gap-1">
                 <Reveal>
                   <span className="text-white/80 font-semibold line-clamp-2">
-                    JavaScript Private Variables: Protecting Your Data
+                    {blogs[1].title}
                   </span>
                 </Reveal>
                 <Reveal>
                   <span className="uppercase text-muted-foreground text-xs font-semibold">
-                    9 November 2023
+                    {new Date(blogs[1].createdAt).toLocaleDateString("en-US", {
+                      // weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
                   </span>
                 </Reveal>
-                <Reveal>
-                  <p className="line-clamp-2 lg:line-clamp-3 text-sm my-2">
-                    In JavaScript, variables are traditionally public and
-                    accessible from anywhere in the code, leading to potential
-                    conflicts and unintended modifications.
-                  </p>
-                </Reveal>
+
+                <p className="line-clamp-2 lg:line-clamp-3 text-sm my-2">
+                  {blogs[1].description}
+                </p>
 
                 <Reveal>
                   <button className="text-prime text-sm w-fit mt-auto mb-0 pb-2">
@@ -108,7 +122,7 @@ export default function Latest() {
             </Link>
 
             <Link
-              href={"/blog/javascript-closures-in-loops"}
+              href={`/blog/${blogs[2].slug}`}
               className="group lg:h-1/2 min-h-32 w-full rounded-md bg-background/20 flex overflow-hidden"
             >
               <div className="relative overflow-hidden w-2/5 object-cover max-phone:hidden shrink-0 bg-slate-200">
@@ -124,23 +138,22 @@ export default function Latest() {
               <div className="px-3 py-2 flex flex-col gap-1">
                 <Reveal>
                   <span className="text-white/80 font-semibold line-clamp-2">
-                    JavaScript Closures in Loops: Avoiding Common Pitfalls
+                    {blogs[2].title}
                   </span>
                 </Reveal>
                 <Reveal>
                   <span className="uppercase text-muted-foreground text-xs font-semibold">
-                    9 November 2023
+                    {new Date(blogs[2].createdAt).toLocaleDateString("en-US", {
+                      // weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
                   </span>
                 </Reveal>
-                <Reveal>
-                  <p className="line-clamp-2 lg:line-clamp-3 text-sm my-2">
-                    Using closures within loops in JavaScript can be tricky and
-                    lead to unexpected behavior if not handled correctly. This
-                    blog post explores the common pitfalls developers face when
-                    working with closures in loops and provides practical
-                    solutions to avoid these issues.
-                  </p>
-                </Reveal>
+                <p className="line-clamp-2 lg:line-clamp-3 text-sm my-2">
+                  {blogs[1].description}
+                </p>
 
                 <Reveal>
                   <button className="text-prime text-sm w-fit mt-auto mb-0 pb-2">
