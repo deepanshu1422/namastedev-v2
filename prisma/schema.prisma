@@ -44,7 +44,7 @@ model blog {
   id           String     @id @default(auto()) @map("_id") @db.ObjectId
   title        String     @default("")
   description  String     @default("")
-  slug         String     @unique
+  slug         String     @unique()
   focusKeyword String[]   @default([])
   heroImage    heroImage?
   author       String     @default("")
