@@ -95,13 +95,13 @@ const staticMaps: MetadataRoute.Sitemap = [
         priority: 0.5,
     },
     {
-        url: 'http://dsa.30dayscoding.com/',
+        url: 'https://dsa.30dayscoding.com/',
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.5,
     },
     {
-        url: 'http://resume.30dayscoding.com/',
+        url: 'https://resume.30dayscoding.com/',
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.5,

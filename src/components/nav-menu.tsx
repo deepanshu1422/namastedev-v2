@@ -84,13 +84,13 @@ export const navTitles: {
 
       {
         title: "DSA Sheets",
-        href: "http://dsa.30dayscoding.com/",
+        href: "https://dsa.30dayscoding.com/",
         description:
           "Explore our comprehensive Data Structures and Algorithms (DSA) sheet, meticulously curated to aid your journey through our DSA courses.",
       },
       {
         title: "Resume Builder",
-        href: "http://resume.30dayscoding.com/",
+        href: "https://resume.30dayscoding.com/",
         description:
           "Create your best resume ever with our All-in-one AI Builder, Reviewer, and Optimizer.",
       },

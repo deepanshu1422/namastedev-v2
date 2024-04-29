@@ -152,13 +152,13 @@ export default function Footer() {
                 </span>
                 <Link
                   className="lg:hover:text-head transition-all"
-                  href={"http://dsa.30dayscoding.com/"}
+                  href={"https://dsa.30dayscoding.com/"}
                 >
                   DSA Sheets
                 </Link>
                 <Link
                   className="lg:hover:text-head transition-all"
-                  href={"http://resume.30dayscoding.com/"}
+                  href={"https://resume.30dayscoding.com/"}
                 >
                   Resume Builder
                 </Link>
