@@ -27,9 +27,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Image from "next/image";
-import { title } from "process";
 
-export default function Template() {
+export default function Template({ children }: { children: React.ReactNode }) {
   const navBar = [
     {
       title: "Home",
@@ -54,7 +53,7 @@ export default function Template() {
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
-        <div className="flex h-full max-h-screen flex-col gap-2">
+        <div className="flex h-full max-h-screen flex-col gap-2 sticky top-0">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <Link href="/" className="flex items-center gap-2 font-semibold">
               <Image src={"/logo.png"} alt="logo" width={30} height={30} />
@@ -91,7 +90,10 @@ export default function Template() {
               </CardHeader>
               <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
                 <Link href={"https://nas.io/30dayscoding"}>
-                  <Button size="sm" className="bg-prime text-white w-full">
+                  <Button
+                    size="sm"
+                    className="bg-prime hover:bg-prime/80 text-white w-full"
+                  >
                     Join Now
                   </Button>
                 </Link>
@@ -155,7 +157,7 @@ export default function Template() {
                       <Link href={"https://nas.io/30dayscoding"}>
                         <Button
                           size="sm"
-                          className="bg-prime text-white w-full"
+                          className="bg-prime hover:bg-prime/80 text-white w-full"
                         >
                           Join Now
                         </Button>
@@ -166,18 +168,7 @@ export default function Template() {
               </>
             </SheetContent>
           </Sheet>
-          <div className="w-full flex-1">
-            <form>
-              <div className="relative">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="Search projects..."
-                  className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
-                />
-              </div>
-            </form>
-          </div>
+          <div className="w-full flex-1"></div>
           {/* <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
@@ -195,24 +186,7 @@ export default function Template() {
             </DropdownMenuContent>
           </DropdownMenu> */}
         </header>
-        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-          <div className="flex items-center">
-            <h1 className="text-lg font-semibold md:text-2xl">Projects</h1>
-          </div>
-          <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
-            <div className="flex flex-col items-center gap-1 text-center">
-              <h3 className="text-2xl font-bold tracking-tight">
-                You have no projects
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                You can start making projects as soon as you join our community.
-              </p>
-              <Link href={"https://nas.io/30dayscoding"}>
-                <Button className="mt-4 bg-prime text-white">Join Now</Button>
-              </Link>
-            </div>
-          </div>
-        </main>
+        {children}
       </div>
     </div>
   );

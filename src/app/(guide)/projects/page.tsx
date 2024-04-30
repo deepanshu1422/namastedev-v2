@@ -1,9 +1,9 @@
 // import { DataTableDemo, Payment } from "@/components/jobs-comp/data-table-ex";
-import Hero from "@/components/jobs-comp/hero";
 import prisma from "@/util/prismaClient";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { Metadata } from "next";
 import { unstable_cache } from "next/cache";
+import Projects from "./projects";
 
 export const metadata: Metadata = {
   title: "30DC Projects | 30dayscoding",
@@ -29,10 +29,5 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  return (
-    <main className="mx-auto max-w-[90rem] px-5 md:px-10 lg:px-20 flex flex-col min-h-svh">
-      <Hero />
-      {/* <DataTableDemo data={newData} /> */}
-    </main>
-  );
+  return <Projects />;
 }

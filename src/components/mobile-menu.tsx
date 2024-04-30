@@ -3,7 +3,10 @@
 import {
   AlignJustify,
   ChevronDown,
+  CornerDownRight,
+  CornerRightDown,
   Earth,
+  GitCommitHorizontalIcon,
   Layers,
   Network,
   Rss,
@@ -37,45 +40,40 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 function CollapsibleMenu({
+  sources,
+  icon,
   title,
-  href,
 }: {
   title: string;
-  href: string | href[];
+  icon: JSX.Element;
+  sources: { title: string; href: string }[];
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  if (typeof href === "string")
-    return (
-      <span>
-        <Link href={href} className="font-semibold text-lg">
-          {title}
-        </Link>
-      </span>
-    );
-
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-      <div className="flex items-center">
-        <CollapsibleTrigger className="font-semibold items-center flex gap-3">
-          <span className="text-lg">{title}</span>
-          <ChevronDown
-            className={`h-4 w-4 ${
-              isOpen ? "rotate-180" : "rotate-0"
-            } transition-all duration-300`}
-          />
-        </CollapsibleTrigger>
-      </div>
+      {/* <div className="flex items-center"> */}
+      <CollapsibleTrigger className="mx-[-0.65rem] flex w-full items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground">
+        {icon}
+        <span>{title}</span>
+        <ChevronDown
+          className={`ml-auto h-4 w-4 ${
+            isOpen ? "rotate-180" : "rotate-0"
+          } transition-all duration-300`}
+        />
+      </CollapsibleTrigger>
+      {/* </div> */}
 
       {isOpen && (
-        <CollapsibleContent className="flex flex-col gap-5 py-5 overflow-hidden">
-          {href.map(({ title, href }, i) => {
+        <CollapsibleContent className="flex flex-col gap-3 py-2 overflow-hidden">
+          {sources.map(({ title, href }, i) => {
             return (
               <Link
                 key={i}
                 href={href}
-                className="font-semibold text-muted-foreground"
+                className="flex gap-1.5 font-semibold text-sm text-muted-foreground/80 hover:text-foreground"
               >
+                <GitCommitHorizontalIcon />
                 {title}
               </Link>
             );
@@ -100,21 +98,72 @@ export default function MobileMenu() {
     {
       icon: <Layers className="h-5 w-5" />,
       title: "Courses",
-      href: "/",
+      // href: "/",
       selected: false,
+      sources: [
+        {
+          title: "Recorded DSA Mastery Course",
+          href: "https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312",
+        },
+        {
+          title: "MERN FullStack Course",
+          href: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
+        },
+        {
+          title: "Next JS FullStack",
+          href: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
+        },
+        {
+          title: "All Courses Package",
+          href: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0",
+        },
+      ],
     },
     {
       icon: <Package className="h-5 w-5" />,
       title: "Products",
-      href: "/products",
+      // href: "/products",
       selected: false,
+      sources: [
+        {
+          title: "AI Mock Interview",
+          href: "https://talktohire.com/",
+        },
+        {
+          title: "Blogs",
+          href: "https://blogs.30dayscoding.com/",
+        },
+
+        {
+          title: "DSA Sheets",
+          href: "http://dsa.30dayscoding.com/",
+        },
+        {
+          title: "Resume Builder",
+          href: "http://resume.30dayscoding.com/",
+        },
+        {
+          title: "Premium Guides",
+          href: "https://courses.30dayscoding.com/products",
+        },
+      ],
       // number: 6,
     },
     {
       icon: <Users className="h-5 w-5" />,
       title: "Reviews",
-      href: "/testimonials",
+      // href: "/testimonials",
       selected: false,
+      sources: [
+        {
+          title: "Testimonials",
+          href: "/testimonials",
+        },
+        {
+          title: "Wall of Love",
+          href: "/wall-of-love",
+        },
+      ],
     },
     {
       icon: <Rss className="h-5 w-5" />,
@@ -175,7 +224,7 @@ export default function MobileMenu() {
           <span className="sr-only">Toggle navigation menu</span>
         </button>
       </SheetTrigger>
-      <SheetContent side="right" className="flex flex-col">
+      <SheetContent side="right" className="flex flex-col overflow-auto">
         <>
           <nav className="grid gap-2 text-lg font-medium">
             <Link
@@ -185,39 +234,36 @@ export default function MobileMenu() {
               <Image src={"/logo.png"} alt="logo" width={30} height={30} />
               <span className="sr-only">30DC</span>
             </Link>
-            {navTitle.map(({ href, icon, selected, title }, i) => (
-              <Link
-                key={i}
-                href={href}
-                className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl ${
-                  selected && "bg-muted"
-                } px-3 py-2 text-muted-foreground hover:text-foreground`}
-              >
-                {icon}
-                <span>{title}</span>
-                {/* {number && (
-                  <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                    {number}
-                  </Badge>
-                )} */}
-              </Link>
-            ))}
-            {/* <Link
-              href="#"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-foreground hover:text-foreground"
-            ></Link>
-            <Link
-              href="#"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-            ></Link>
-            <Link
-              href="#"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-            ></Link>
-            <Link
-              href="#"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-            ></Link> */}
+            {navTitle.map(({ href, icon, selected, title, sources }, i) => {
+              if (href)
+                return (
+                  <Link
+                    key={i}
+                    href={href}
+                    className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl ${
+                      selected && "bg-muted"
+                    } px-3 py-2 text-muted-foreground hover:text-foreground`}
+                  >
+                    {icon}
+                    <span>{title}</span>
+                    {/* {number && (
+                    <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                      {number}
+                    </Badge>
+                  )} */}
+                  </Link>
+                );
+
+              if (sources !== undefined)
+                return (
+                  <CollapsibleMenu
+                    icon={icon}
+                    sources={sources!}
+                    title={title}
+                    key={i}
+                  />
+                );
+            })}
           </nav>
           <div className="mt-auto">
             <Card>
