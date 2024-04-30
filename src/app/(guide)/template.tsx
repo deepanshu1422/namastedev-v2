@@ -67,7 +67,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                   key={i}
                   href={href}
                   className={`flex items-center gap-3 ${
-                    selected && "bg-muted text-prime"
+                    selected && "bg-second/30 text-prime"
                   } rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-prime`}
                 >
                   {icon}
