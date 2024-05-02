@@ -101,7 +101,7 @@ const staticMaps: MetadataRoute.Sitemap = [
         priority: 0.5,
     },
     {
-        url: 'https://resume.30dayscoding.com/',
+        url: 'https://resumebldr.vercel.app/',
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.5,

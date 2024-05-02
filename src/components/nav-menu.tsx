@@ -90,7 +90,7 @@ export const navTitles: {
       },
       {
         title: "Resume Builder",
-        href: "https://resume.30dayscoding.com/",
+        href: "https://resumebldr.vercel.app/",
         description:
           "Create your best resume ever with our All-in-one AI Builder, Reviewer, and Optimizer.",
       },
@@ -185,7 +185,7 @@ const ListItem = React.forwardRef<
           ref={ref}
           className={cn(
             "flex justify-between items-center select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-prime/30 hover:text-accent-foreground focus:bg-prime/30 focus:text-accent-foreground",
-            className
+
           )}
           {...props}
         >
@@ -200,5 +200,4 @@ const ListItem = React.forwardRef<
   );
 });
 ListItem.displayName = "ListItem";
-
 

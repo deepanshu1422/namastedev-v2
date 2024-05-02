@@ -140,7 +140,7 @@ export default function MobileMenu() {
         },
         {
           title: "Resume Builder",
-          href: "http://resume.30dayscoding.com/",
+          href: "https://resumebldr.vercel.app/",
         },
         {
           title: "Premium Guides",

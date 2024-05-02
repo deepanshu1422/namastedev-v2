@@ -158,7 +158,7 @@ export default function Footer() {
                 </Link>
                 <Link
                   className="lg:hover:text-head transition-all"
-                  href={"https://resume.30dayscoding.com/"}
+                  href={"https://resumebldr.vercel.app/"}
                 >
                   Resume Builder
                 </Link>
