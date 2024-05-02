@@ -101,7 +101,7 @@ const staticMaps: MetadataRoute.Sitemap = [
         priority: 0.5,
     },
     {
-        url: 'https://resumebldr.vercel.app/',
+        url: 'https://resumebldr.vercel.app/app/personal-detail',
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.5,

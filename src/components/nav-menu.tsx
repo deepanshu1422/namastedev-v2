@@ -90,7 +90,7 @@ export const navTitles: {
       },
       {
         title: "Resume Builder",
-        href: "https://resumebldr.vercel.app/",
+        href: "https://resumebldr.vercel.app/app/personal-detail",
         description:
           "Create your best resume ever with our All-in-one AI Builder, Reviewer, and Optimizer.",
       },

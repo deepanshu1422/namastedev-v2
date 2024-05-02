@@ -33,7 +33,7 @@ export default function Course() {
         {
           title: "Resume",
           imageSrc: "https://i.ibb.co/dWZMSKJ/dsa.webp",
-          href: "https://bit.ly/30dc-resume",
+          href: "https://resumebldr.vercel.app/app/personal-detail",
         },
         {
           title: "Cold emails",
