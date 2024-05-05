@@ -58,6 +58,26 @@ export default function Hero({
               <Star className="max-lg:hidden w-4 h-4" />
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>
+
+            <Link
+                href={"https://pages.razorpay.com/pl_NeeE6CfmYyU7sH/view"}
+                className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
+            >
+              <span className="text-sm">Resume Review</span>
+              <Star className="max-lg:hidden w-4 h-4" />
+              <ArrowRight className="lg:hidden w-4 h-4" />
+            </Link>
+
+
+            <Link
+                href={"https://30dayscoding.com/resources"}
+                className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
+            >
+              <span className="text-sm">Free Resources</span>
+              <Star className="max-lg:hidden w-4 h-4" />
+              <ArrowRight className="lg:hidden w-4 h-4" />
+            </Link>
+
             {/* <Button>
               <span className="px-5 flex gap-2 items-center">
                 Mentorship <ArrowRight className="w-4 h-4" />
