@@ -6,6 +6,8 @@ import Profile from "./profile";
 import Faqs from "@/components/mentorship-comp/faq";
 import Mentorship from "./mentorship";
 import JoinUs from "./joinus";
+import Features from "./features";
+import MentorshipGallary from "./mentorship-gallery";
 
 export const metadata: Metadata = {
   title: "Mentorship | 30dayscoding",
@@ -72,9 +74,10 @@ export default function Home() {
         desc="Learn from Aryan, Deepanshu, and the 30DC team to get placed this season."
         heroImage="/main/hero_section_mentor.png"
       />
-      <Mentorship />
+      <Features />
+      <MentorshipGallary />
       <Video
-        title={"1:1 Live Query Seesions"}
+        title={"1:1 Live Query Sessions"}
         desc={
           "Resolve all your queries related to the industry and latest jobs with the help of our experts with live interactions and doubt clearing sessions."
         }

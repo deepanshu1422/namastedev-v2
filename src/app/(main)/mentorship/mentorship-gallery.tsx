@@ -54,20 +54,13 @@ function VideoTestimony({
   );
 }
 
-export default function CourseGallary() {
+export default function MentorshipGallary() {
   const courses = [
     {
       name: "Deepanshu Udhwani",
       designation: "Founder",
       image: "https://i.ibb.co/8mFwp1C/instructor2.jpg",
       embedId: "nTyg09pcOss",
-      link: "https://www.instagram.com/itsudhwani/",
-    },
-    {
-      name: "Deepanshu Udhwani",
-      designation: "Founder",
-      image: "https://i.ibb.co/8mFwp1C/instructor2.jpg",
-      embedId: "eOedBqAA0qM",
       link: "https://www.instagram.com/itsudhwani/",
     },
     {
@@ -81,37 +74,32 @@ export default function CourseGallary() {
       name: "Deepanshu Udhwani",
       designation: "Founder",
       image: "https://i.ibb.co/8mFwp1C/instructor2.jpg",
-      embedId: "d9_gwyP0Mj8",
-      link: "https://www.instagram.com/itsudhwani/",
-    },
-    {
-      name: "Deepanshu Udhwani",
-      designation: "Founder",
-      image: "https://i.ibb.co/8mFwp1C/instructor2.jpg",
-      embedId: "0tgrNNFuohY",
-      link: "https://www.instagram.com/itsudhwani/",
-    },
-    {
-      name: "Deepanshu Udhwani",
-      designation: "Founder",
-      image: "https://i.ibb.co/8mFwp1C/instructor2.jpg",
-      embedId: "OjuzyGwYrjg",
+      embedId: "eOedBqAA0qM",
       link: "https://www.instagram.com/itsudhwani/",
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 justify-center items-center gap-8 w-full">
-      {courses.map(({ embedId, designation, image, link, name }, i) => (
-        <VideoTestimony
-          name={name}
-          designation={designation}
-          imageUrl={image}
-          videoId={embedId}
-          linkedinUrl={link}
-          key={i}
-        />
-      ))}
+    <div className="flex flex-col gap-8 m-auto w-full max-w-[75rem] py-10">
+      <span className="flex items-center justify-center gap-4 relative">
+        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
+        <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
+          Video Testimonials
+        </h2>
+        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
+      </span>
+      <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 justify-center items-center gap-8">
+        {courses.map(({ embedId, designation, image, link, name }, i) => (
+          <VideoTestimony
+            name={name}
+            designation={designation}
+            imageUrl={image}
+            videoId={embedId}
+            linkedinUrl={link}
+            key={i}
+          />
+        ))}
+      </div>
     </div>
   );
 }

@@ -4,7 +4,6 @@ import Hero from "./hero";
 import Inspirational from "./inspirational";
 import Watch from "./watch";
 import Public from "./public";
-import Features from "./features";
 
 export const metadata: Metadata = {
   title: "Testimonial | 30DaysCoding",
@@ -36,7 +35,6 @@ export default function Testimonial() {
     >
       <div className="mx-auto w-full max-w-[90rem] max-phone:p-[0_0_3.5rem] p-[0_min(6rem,_6.66%)] flex flex-col gap-20">
         <Hero />
-        <Features />
         <Inspirational />
         <Watch />
         <Public />

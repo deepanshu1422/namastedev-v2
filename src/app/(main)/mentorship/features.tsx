@@ -163,7 +163,7 @@ export default function Features() {
     },
   ];
   return (
-    <div className="m-auto grid grid-cols-1 place-items-center px-10 lg:px-20 gap-10 max-w-[75rem]">
+    <div className="m-auto grid grid-cols-1 place-items-center px-10 lg:px-20 py-10 lg:pt-20 gap-10 max-w-[75rem]">
       <span className="flex items-center justify-center gap-4 relative">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
@@ -191,7 +191,9 @@ export default function Features() {
               </section>
 
               <div className="flex w-full flex-col items-start gap-4">
-                <p className="text-lg font-semibold leading-5">{title}</p>
+                <p className="text-lg font-semibold text-white/80 leading-5">
+                  {title}
+                </p>
               </div>
             </div>
           ))}
