@@ -182,17 +182,18 @@ export default function Features() {
 
         <div className="relative ml-10 flex w-[calc(100%-40px)] flex-col items-start gap-5 divide-y divide-prime pb-5">
           {mentorsipPath.map(({ title, svg }, i) => (
-            <Reveal key={i}>
-              <div className="flex w-full items-start gap-3 pt-5 lg:gap-4">
-                <section className=" z-10 -ml-10 flex items-center justify-center rounded-full bg-prime p-1">
-                  {svg}
-                </section>
+            <div
+              key={i}
+              className="flex w-full items-start gap-3 pt-5 lg:gap-4"
+            >
+              <section className=" z-10 -ml-10 flex items-center justify-center rounded-full bg-prime p-1">
+                {svg}
+              </section>
 
-                <div className="flex w-full flex-col items-start gap-4">
-                  <p className="text-lg font-semibold leading-5">{title}</p>
-                </div>
+              <div className="flex w-full flex-col items-start gap-4">
+                <p className="text-lg font-semibold leading-5">{title}</p>
               </div>
-            </Reveal>
+            </div>
           ))}
           <div className="absolute -left-[26px] top-0 h-full w-px bg-prime/70"></div>
         </div>

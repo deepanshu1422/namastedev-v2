@@ -130,6 +130,7 @@ export default function CourseGallary() {
           imageUrl={image}
           videoId={embedId}
           linkedinUrl={link}
+          key={i}
         />
         // <div
         //   key={i}

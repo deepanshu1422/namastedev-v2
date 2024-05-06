@@ -33,7 +33,7 @@ export default function Hero({
             {desc}
           </p>
 
-          <div className="p-[.5rem_1.75rem_.5rem_1.00rem] rounded-[3.125rem] flex max-lg:flex-col max-lg:w-full lg:flex-wrap items-center gap-5 my-2 mb-1">
+          <div className="p-[.5rem_1.75rem_.5rem_1.00rem] rounded-[3.125rem] flex max-lg:flex-col max-lg:w-full lg:flex-wrap items-center justify-center max-w-xl gap-5 my-2 mb-1">
             <Link
               href={"https://courses.30dayscoding.com/s/store"}
               className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
@@ -60,18 +60,17 @@ export default function Hero({
             </Link>
 
             <Link
-                href={"https://pages.razorpay.com/pl_NeeE6CfmYyU7sH/view"}
-                className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
+              href={"https://pages.razorpay.com/pl_NeeE6CfmYyU7sH/view"}
+              className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
             >
               <span className="text-sm">Resume Review</span>
               <Star className="max-lg:hidden w-4 h-4" />
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>
 
-
             <Link
-                href={"https://30dayscoding.com/resources"}
-                className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
+              href={"https://30dayscoding.com/resources"}
+              className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
             >
               <span className="text-sm">Free Resources</span>
               <Star className="max-lg:hidden w-4 h-4" />
