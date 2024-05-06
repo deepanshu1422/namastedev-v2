@@ -16,6 +16,101 @@ export type TestimonialType = {
 
 export let testimonials: TestimonialType[] = [
   {
+    name: "Student",
+    review:
+      "  Really impressed with your humor and knowledge aap college k vo senior bhaiya ho Jo bkchode karta tha or saath he saath mai jab lage hote the tho best advice bhe deta tha jaisa jab internship nahi lag rahe the tho Oops strong Kar le chances badh jayenge practice file junior se likhva le",
+  },
+  {
+    name: "Student",
+    review:
+      "	I want to learn and build awesome projects to get internships as I'm at the end of my second year of b.tech.",
+  },
+  {
+    name: "Student",
+    review:
+      "	I recently got to know about the MERN stack courseon Instagram by 30day coding platform and I bought the course which as a huge bundle of knowledge and the team keep adding projects and content I am curious to learn all the concepts and I am thankful for the 30day coding team and Aryan Sign sir",
+  },
+  {
+    name: "Student",
+    review:
+      "	I have purchased your MERN Stack Course and it's very amazing and I also have to learn Nextjs,DSA and many more courses from you",
+  },
+  {
+    name: "Student",
+    review: "Is it possible can you give the courses to me please",
+  },
+  {
+    name: "Student",
+    review:
+      "	Talking about python and Mern stack course honestly they are pretty good and the way of explanation is so good.The best part about the course is the projects you get to do plenty of projects in which after learning you can add on extra features.",
+  },
+  { name: "Student", review: "	Mast hai bhaiya mujhe winner bana do" },
+  {
+    name: "Student",
+    review:
+      "	Bhai me aapke videos dekhta hu and mera bhi yahi Sapna h ki meri bhi ek bohat acchi jagah job lage . Me koi Jyada badi family se belong nahi karta me middle class hu but sapne bohat bade h bhaiya and bohat bada Aadmi bannna h aapki tarah course vagera lene ke paise to nahi h but ye course lena chahta hu . Bhai papa ki Umar ho rahi h ab Jyada time h nahi mere paas apne pairo pe khada hona h and unki help karna chahta hu",
+  },
+  {
+    name: "Student",
+    review:
+      "	I have purchased your course of mern bundle and blockchain the course is great as both the person are adding new material every day in the course just 1 suggestion is to add more video lecture in the blockchain course else the mern course is really good i am currently learning react js from that course. I just want my 800 rupees refund so that i can buy the bundel of whole course (10 course bundel ) because i want it really badly",
+  },
+  {
+    name: "Student",
+    review:
+      "	I believe the 30DC is more than a challenge. It’s a journey to learn to stay consistent, to self learn, interact in a community, be more aware and enjoy while I’m at it. I have thoroughly enjoyed the perks of working on my project every day for 30 days. The concept is so new and unbelievable coming from the top engineers of MAANGS like Aryan Singh. I enjoy watching people like him contribute to our education system in a practical manner. I am a beginner and even then the challenge was so inclusive. I believe we need such communities and challenges to make students enjoy engineering instead of just seeing it as a “dream package stream.” I truly believe in the power of the challenge! It was life changing for me.",
+  },
+  {
+    name: "Student",
+    review:
+      "	I have seen your every video on yt and following your road map trying to Crack faang interviews i i have just completed my btech course 23 batch from tier 3 college. By following you I got a job of 9lpa in a startup in banglore that to fully REMOTE .Thankyou somuch for your efforts for making this kind OF funny but very informative videos.",
+  },
+  {
+    name: "Student",
+    review:
+      "	i am an existing mern stack course student and i like the way you guys teach i was planning to get more courses from you guys. if i can get this bundle of 10 course it will be very easy on me financially",
+  },
+  {
+    name: "Student",
+    review:
+      "	Aryan bhai i have been following you for some time and i got my hands on ur mern stack and dsa revision course i m still grinding from those courses but as far as i studied till date i can say the topic wise distribution on the whole subject is really good no bullshit and all but and the other hand teacher to student interaction is not upto mark like we human minds are very different for me getting to see my teacher helps me concentrate on the topic so i can say you guys can improve in near future rest apart the content is more than enough to get skilled up in the domain if one got focused mind . thanks for the affordable price as well and least not last u r really doing a great job aryan bhai.",
+  },
+  {
+    name: "Student",
+    review:
+      "	Bhai is course ki grantee me le skta phle jb free me tha YouTube par meny yhi socha tha ye paid hona chahiye tha course institute me bhi esy smj nhi aata or iski price mere according bht km rkhi ye 9-10k ka course hai seriously meny mern wala course liya h or me kaafi sikh gya",
+  },
+  {
+    name: "Student",
+    review:
+      "	Initially I had troubles approaching dsa problems after taking up 30dc dsa course the sheet helped me a lot. It's great for quick revisions and quality problems.",
+  },
+  {
+    name: "Student",
+    review:
+      "Also I have taken up next js course and recently with its help within 5 days I could build a decent project for thr 30dc hakathon . This course is to the point and quick to understand over all any course is worth every penny Thanks to 30dc for such good content❤️",
+  },
+  {
+    name: "Student",
+    review:
+      "	Your Course is amazing and beginners friendly. The content is so awesome that it easy to grasp all the stuffs. Main thing about the course is there are alot of project discussed and assigned to make. We can learn better by making project and it is done in these courses.",
+  },
+  {
+    name: "Student",
+    review:
+      "	I took mern stack course from 30DC it's the best course I'm a developer but what i liked it was in hindi & not everything is done spoon feeded important things are taught rest have to google & most important for me it was in hindi & no rocket science just normal hindi & explained everything thankyou so much for it.",
+  },
+  {
+    name: "Student",
+    review:
+      "	I have bought the MERN STACK course and it's preety good I have also completed the javascript but while doing the TAILWIND CSS the video tutorial of the landing website hoster was also good but we didn't understand the process clearly of how to implement it in another project.",
+  },
+  {
+    name: "Student",
+    review:
+      "	After exploring the syllabus for the coding course, I am highly satisfied with the depth and range of topics discussed. The curriculum appears well-structured and comprehensive, with a strong basis in coding principles and practices. Considering the stuff provided, the pricing appears to be fairly affordable. Although I have not taken the course personally, based on my review of the syllabus, I would strongly suggest it to anyone wishing to learn coding effectively and economically.",
+  },
+  {
     time: "3/6/2024 22:49:19",
     name: "Abhisek De",
     email: "abhisekde96@gmail.com",

@@ -56,7 +56,7 @@ function Card({
   link: string;
 }) {
   return (
-    <div className="shadow-lg flex flex-col bg-second border border-prime">
+    <div className="shadow-lg flex flex-col bg-second border ">
       <Link
         href={link}
         className="group overflow-hidden bg-bg w-full h-60 shadow-lg relative"
