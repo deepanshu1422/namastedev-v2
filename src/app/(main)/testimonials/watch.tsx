@@ -17,11 +17,11 @@ function TestimonyImages({ imageUrl }: { imageUrl: string }) {
 
 export default function Watch() {
   const images = [
-    "https://i.ibb.co/F3PjZxG/review1.jpg",
-    "https://i.ibb.co/bdj2xq6/review2.jpg",
-    "https://i.ibb.co/SRB5r0S/review3.jpg",
-    "https://i.ibb.co/yXNwxWY/review4.jpg",
-    "https://i.ibb.co/bmbL8gk/review5.jpg",
+    "https://i.ibb.co/9HBX8KR/p5.webp",
+    "https://i.ibb.co/0XfP66P/p4.webp",
+    "https://i.ibb.co/mTLQfhJ/p3.webp",
+    "https://i.ibb.co/CBW9cBx/p2.webp",
+    "https://i.ibb.co/C0HM0LF/p1.webp",
   ];
   return (
     <div className="grid place-items-center gap-8 max-md:px-10">

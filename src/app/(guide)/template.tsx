@@ -1,20 +1,8 @@
-import Link from "next/link";
-import {
-  Bell,
-  Bookmark,
-  CircleUser,
-  Home,
-  LineChart,
-  Menu,
-  Network,
-  Package,
-  Package2,
-  Search,
-  ShoppingCart,
-  Users,
-} from "lucide-react";
+"use client";
 
-import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
+import { Bookmark, Home, Menu, Network } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -24,29 +12,37 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Template({ children }: { children: React.ReactNode }) {
+  const pathName = usePathname();
+  const [path, setPath] = useState(pathName);
+
+  useEffect(() => {
+    setPath(pathName);
+  }, [pathName]);
+
   const navBar = [
     {
       title: "Home",
       icon: <Home className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/",
-      selected: false,
+      selected: path === "/",
     },
     {
       title: "Projects",
       icon: <Network className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/projects",
-      selected: true,
+      selected: path === "/projects",
     },
     {
       title: "Guides",
       icon: <Bookmark className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/guides",
-      selected: false,
+      selected: path === "/guides",
     },
   ];
 
@@ -137,7 +133,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                       href={href}
                       className={`mx-[-0.65rem] flex items-center gap-4 ${
                         selected ? "bg-muted" : "text-muted-foreground"
-                      } rounded-xl px-3 py-2 hover:text-foreground`}
+                      } rounded-xl px-3 py-2 hover:text-foreground transition-all`}
                     >
                       {icon}
                       {title}
