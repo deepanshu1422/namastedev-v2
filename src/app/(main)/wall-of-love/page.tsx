@@ -42,6 +42,11 @@ function TestimonyImages({ imageUrl }: { imageUrl: string }) {
 }
 
 const reviews = [
+  "https://i.ibb.co/9HBX8KR/p5.webp",
+  "https://i.ibb.co/0XfP66P/p4.webp",
+  "https://i.ibb.co/mTLQfhJ/p3.webp",
+  "https://i.ibb.co/CBW9cBx/p2.webp",
+  "https://i.ibb.co/C0HM0LF/p1.webp",
   "https://i.ibb.co/xs9dX78/29.webp",
   "https://i.ibb.co/J3y2DmR/30.webp",
   "https://i.ibb.co/tXr3gFc/26.webp",

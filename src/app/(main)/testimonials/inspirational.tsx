@@ -351,38 +351,48 @@ function Testimonial({ name, review }: TestimonialType) {
 }
 
 export default function Inspirational() {
+  const [view, setView] = useState(false);
   return (
     <div className="grid place-items-center gap-8 px-10">
-      <Reveal>
-        <span className="flex items-center gap-4 relative">
-          <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
-          <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
-            Inspiring journeys and wins!
-          </h2>
-          <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
-        </span>
-      </Reveal>
+      <span className="flex items-center gap-4 relative">
+        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
+        <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
+          250+ Success Stories
+        </h2>
+        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
+      </span>
 
-      <Reveal>
-        <div className="relative flex items-start gap-8">
-          <div className="flex flex-col max-[800px]:[&>*:nth-child(n)]:flex max-xl:[&>*:nth-child(odd)]:flex xl:[&>*:nth-child(3n-2)]:flex gap-8 items-start">
-            {testimonials.map((e, i) => (
-              <Testimonial key={i} name={e.name} review={e.review} />
-            ))}
-          </div>
-          <div className="max-[800px]:hidden flex flex-col max-xl:[&>*:nth-child(even)]:flex xl:[&>*:nth-child(3n-1)]:flex gap-8 items-start">
-            {testimonials.map((e, i) => (
-              <Testimonial key={i} name={e.name} review={e.review} />
-            ))}
-          </div>
-          <div className="max-xl:hidden flex flex-col [&>*:nth-child(3n)]:flex gap-8 items-start">
-            {testimonials.map((e, i) => (
-              <Testimonial key={i} name={e.name} review={e.review} />
-            ))}
-          </div>
-          <div className="absolute bottom-0 h-20 w-full bg-gradient-to-b z-10 from-transparent from-0% via-50% via-transparent to-50% blur-md to-bg/70"></div>
+      <div
+        className={`relative flex items-start gap-8 ${
+          view ? "h-fit" : "h-[1200px] lg:h-[500px]"
+        } overflow-hidden`}
+      >
+        <div className="flex flex-col max-[800px]:[&>*:nth-child(n)]:flex max-xl:[&>*:nth-child(odd)]:flex xl:[&>*:nth-child(3n-2)]:flex gap-8 items-start">
+          {testimonials.map((e, i) => (
+            <Testimonial key={i} name={e.name} review={e.review} />
+          ))}
         </div>
-      </Reveal>
+        <div className="max-[800px]:hidden flex flex-col max-xl:[&>*:nth-child(even)]:flex xl:[&>*:nth-child(3n-1)]:flex gap-8 items-start">
+          {testimonials.map((e, i) => (
+            <Testimonial key={i} name={e.name} review={e.review} />
+          ))}
+        </div>
+        <div className="max-xl:hidden flex flex-col [&>*:nth-child(3n)]:flex gap-8 items-start">
+          {testimonials.map((e, i) => (
+            <Testimonial key={i} name={e.name} review={e.review} />
+          ))}
+        </div>
+        {!view && (
+          <div className="absolute -bottom-5 h-20 w-full bg-gradient-to-b z-10 from-transparent from-0% to-50% backdrop-blur-[2px] to-bg/70"></div>
+        )}
+      </div>
+
+      <button
+        onClick={() => setView(!view)}
+        className="px-3 py-2 rounded-md border border-white"
+      >
+        {view ? "View Less" : "View More"}
+      </button>
     </div>
   );
 }

@@ -63,15 +63,18 @@ export default function Hero() {
       <div className="w-full relative">
         <div className="flex max-lg:flex-col items-start max-lg:items-center justify-between px-10 pt-5 gap-10">
           <div className="flex flex-col gap-8 m-auto w-full">
-            <h1 className="font-jakarta max-phone:text-[2rem] text-[2.5rem] font-extrabold text-balance">
+            <h1 className="font-jakarta max-phone:text-[2rem] text-center text-[2.5rem] font-extrabold text-balance">
               What do our learners have to say?
             </h1>
             <CourseGallary />
-          </div>
-          <div className="flex-col items-center gap-5 hidden">
-            <AnimatedButton link="https://courses.30dayscoding.com/s/store">
-              <span className="flex gap-2 px-10 items-center">Try Courses</span>
-            </AnimatedButton>
+            <div className="max-sm:flex-col items-center gap-5 flex mx-auto">
+              <AnimatedButton link="https://courses.30dayscoding.com/s/store">
+                <span className="flex gap-2 px-2 items-center">
+                  Try Courses
+                </span>
+              </AnimatedButton>
+              <Button>Join 1:1 Mentorship</Button>
+            </div>
           </div>
         </div>
       </div>
