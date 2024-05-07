@@ -2079,3 +2079,90 @@ export const projectsData = [
         projectURL: "https://www.youtube.com/watch?v=lauywdXKEXI",
     },
 ];
+
+export const guidesData = [
+    {
+        title: "Codedex - start your coding adventure", description: "Gamify your learning experience and have fun learning how to code!", image: "", url: "https://www.codedex.io"
+    },
+    {
+        title: "freeCodeCamp", description: "Learn to code and build projects for nonprofits. Build your full stack web development portfolio today", image: "", url: "https://www.freecodecamp.com"
+    },
+    {
+        title: "Blackbird School", description: "Learn to code online with our beginner-friendly platform.", image: "", url: "https://blackbird.school"
+    },
+    {
+        title: "Glitch", description: "Great place to play around with code in an easy-to-set-up environment.", image: "", url: "https://glitch.com/"
+    },
+    {
+        title: "Reddit.com/r/dailyprogrammer", description: "interesting programming challenges where you can learn from looking at other's code, even if you are not able to solve code you can look at how others solved.", image: "", url: "https://www.reddit.com/r/dailyprogrammer/"
+    },
+    {
+        title: "Programming by Doing", description: "very good site for those who want to start with absolute basics", image: "", url: "http://programmingbydoing.com"
+    },
+    {
+        title: "CodeAbbey - a place where everyone can master programming", description: "Best place to begin with problems that start at the easiest and gradually increase difficulty with each problem.", image: "", url: "http://www.codeabbey.com"
+    },
+    {
+        title: "Exercism.io", description: "download and solve practice problems in over 50 different languages, and share your solution with others.", image: "", url: "http://exercism.io"
+    },
+    {
+        title: "InterviewBit/Coding Interview Questions", description: "Gamifies the experience of practicing for your interview and includes lots of sample problems to solve.", image: "", url: "https://www.interviewbit.com"
+    },
+    {
+        title: "karan/Projects-Solutions", description: "Solutions to most of the problems in the link above", image: "", url: "https://github.com/karan/Projects-Solutions"
+    },
+    {
+        title: "Lod - Cloud", description: "The Linking Open Data cloud diagram", image: "", url: "http://lod-cloud.net"
+    },
+    {
+        title: "Cave of programming", description: "Learn to program, Upgrade your skills.", image: "", url: "https://caveofprogramming.com"
+    },
+    {
+        title: "Vim adventures", description: "Learn VIM by playing", image: "", url: "https://vim-adventures.com/"
+    },
+    {
+        title: "Learn Vimscript the Hard Way", description: "Learn Vim Script from beginning to expert.", image: "", url: "http://learnvimscriptthehardway.stevelosh.com"
+    },
+    {
+        title: "Programming Tasks", description: "large collection of small programs", image: "", url: "http://rosettacode.org/wiki/Category:Programming_Tasks"
+    },
+    {
+        title: "Pramp", description: "It's your turn to be the interviewer. when done, click on the swap roles button on the left", image: "", url: "https://www.pramp.com"
+    },
+    {
+        title: "Paqmind", description: "Guides and challenges to learn programming", image: "", url: "http://paqmind.com"
+    },
+    {
+        title: "Codecademy", description: "Learn to code interactively, for free.", image: "", url: "https://www.codecademy.com"
+    },
+    {
+        title: "Codegym", description: "It contains a Java tutorial with 1200 Java practise tasks.", image: "", url: "https://codegym.cc/"
+    },
+    {
+        title: "treehouse", description: "The fast, easy, and affordable way to build your skills.", image: "", url: "https://teamtreehouse.com"
+    },
+    {
+        title: "GeeksforGeeks", description: "Learn to code, Study for placement, Do competitive coding.", image: "", url: "https://practice.geeksforgeeks.org"
+    },
+    {
+        title: "edabit", description: "Practice coding via various small challenges.", image: "", url: "https://edabit.com/challenges"
+    },
+    {
+        title: "Learn Git Branching", description: "Learn and practice git commands in an interactive way", image: "", url: "https://learngitbranching.js.org"
+    },
+    {
+        title: "Oh Shit, Git!?!", description: "Cheat sheet to get yourself out of bad git situations", image: "", url: "https://ohshitgit.com/"
+    },
+    {
+        title: "The Odin Project", description: "The Odin Project provides a free open source coding curriculum that can be taken entirely online.", image: "", url: "https://www.theodinproject.com/home"
+    },
+    {
+        title: "Udemy", description: "Whether you want to learn or to share what you know, you’ve come to the right place. As a global destination for online learning, we connect people through knowledge.", image: "", url: "https://www.udemy.com/"
+    },
+    {
+        title: "Scaler", description: "A curated interactive space for aspiring programmers to learn and master their coding skills. Also help in job interview.", image: "", url: "https://www.scaler.com/topics/"
+    },
+    {
+        title: "SQL Zoo", description: "Learn SQL interactively in stages, from basic queries to complex operations.", image: "", url: "https://sqlzoo.net/"
+    }
+]

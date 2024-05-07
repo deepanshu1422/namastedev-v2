@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { projectsData } from "@/util/globals";
+import { guidesData } from "@/util/globals";
 import { Search } from "lucide-react";
 
 export default function Hero({
@@ -33,13 +33,12 @@ export default function Hero({
                 placeholder="Search guides..."
                 onChange={(txt) => {
                   filter(
-                    projectsData.filter(
+                    guidesData.filter(
                       (e) =>
                         e.title
                           .toLocaleLowerCase()
                           .includes(txt.target.value.toLocaleLowerCase()) ||
-                        e.category
-                          .join()
+                        e.description
                           .toLocaleLowerCase()
                           .includes(txt.target.value.toLocaleLowerCase())
                     )
