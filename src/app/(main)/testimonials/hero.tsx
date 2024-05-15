@@ -73,7 +73,9 @@ export default function Hero() {
                   Try Courses
                 </span>
               </AnimatedButton>
-              <Button>Join 1:1 Mentorship</Button>
+              <Link href={"/mentorship"}>
+                <Button>Join 1:1 Mentorship</Button>
+              </Link>
             </div>
           </div>
         </div>

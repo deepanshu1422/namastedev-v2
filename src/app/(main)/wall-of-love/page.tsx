@@ -3,6 +3,7 @@ import Reveal from "@/components/framer/reveal";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import Floating from "../resources/floating";
 
 export const metadata: Metadata = {
   title: "Wall of Love | 30DaysCoding",
@@ -184,6 +185,7 @@ export default function Testimonial() {
           {/* </Reveal> */}
         </div>
       </div>
+      <Floating />
     </main>
   );
 }

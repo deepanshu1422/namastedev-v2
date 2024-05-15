@@ -9,7 +9,7 @@ export default function Store() {
       <Reveal>
         <span className="text-prime font-semibold uppercase">Courses</span>
       </Reveal>
-      <div className="flex w-full max-lg:flex-col lg:gap-6 max-lg:items-center max-lg:gap-10 max-lg:max-w-[550px] max-lg:px-10 lg:max-w-[925px]">
+      <div className="flex w-full max-lg:flex-col lg:gap-6 max-lg:items-center max-lg:gap-10 max-lg:max-w-[550px] max-lg:px-0 lg:max-w-[925px]">
         <CourseTabMenu
           data={[
             {

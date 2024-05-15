@@ -80,7 +80,7 @@ export default function MentorshipGallary() {
   ];
 
   return (
-    <div className="flex flex-col gap-8 m-auto w-full max-w-[75rem] py-10">
+    <div className="flex flex-col gap-8 m-auto w-full max-w-[80rem] p-10">
       <span className="flex items-center justify-center gap-4 relative">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
@@ -88,7 +88,7 @@ export default function MentorshipGallary() {
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
-      <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 justify-center items-center gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2 justify-center items-center gap-8">
         {courses.map(({ embedId, designation, image, link, name }, i) => (
           <VideoTestimony
             name={name}

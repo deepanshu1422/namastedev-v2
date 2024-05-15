@@ -8,6 +8,7 @@ import type { Metadata } from "next";
 import Store from "@/components/home-components/store";
 import Faqs from "@/components/mentorship-comp/faq";
 import Program from "@/components/program";
+import Floating from "./resources/floating";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),
@@ -76,6 +77,7 @@ export default function Home() {
       <Highlights />
       <Testimonials />
       <Faqs faq={faq} />
+      <Floating />
     </main>
   );
 }

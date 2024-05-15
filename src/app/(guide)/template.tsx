@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Bookmark, Home, Menu, Network } from "lucide-react";
+import { Bookmark, CircleUser, Earth, Home, Menu, Network } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -16,6 +16,14 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
@@ -43,6 +51,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
       icon: <Bookmark className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/guides",
       selected: path === "/guides",
+    },
+    {
+      title: "Jobs",
+      icon: <Earth className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/jobs",
+      selected: path === "/jobs",
     },
   ];
 
@@ -75,30 +89,37 @@ export default function Template({ children }: { children: React.ReactNode }) {
               ))}
             </nav>
           </div>
-          <div className="mt-auto p-4">
-            <Card x-chunk="dashboard-02-chunk-0">
+          <div className="relative mt-auto p-4">
+            <Card>
               <CardHeader className="p-2 pt-0 md:p-4">
-                <CardTitle>Join Community</CardTitle>
+                <CardTitle>Win ₹ 50,000</CardTitle>
                 <CardDescription>
-                  Unlock all features and get unlimited access to our community
-                  group.
+                  Find exciting opportunities like Rs.50,000 cash prize
+                  challenges.
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-                <Link href={"https://nas.io/30dayscoding"}>
+                <Link href={"https://nas.io/30dc-challenges-n-hackathons/home"}>
                   <Button
                     size="sm"
                     className="bg-prime hover:bg-prime/80 text-white w-full"
                   >
-                    Join Now
+                    Enroll Now
                   </Button>
                 </Link>
               </CardContent>
+              <Image
+                alt="30DayCoding New Challenge"
+                src={"/NEW2.gif"}
+                height={120}
+                width={120}
+                className="absolute top-0 -translate-y-5 translate-x-3 right-0"
+              />
             </Card>
           </div>
         </div>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col overflow-hidden">
         <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
           <Sheet>
             <SheetTrigger asChild>
@@ -140,32 +161,43 @@ export default function Template({ children }: { children: React.ReactNode }) {
                     </Link>
                   ))}
                 </nav>
-                <div className="mt-auto">
+                <div className="relative mt-auto">
                   <Card>
                     <CardHeader>
-                      <CardTitle>Join Community</CardTitle>
+                      <CardTitle>Win ₹ 50,000</CardTitle>
                       <CardDescription>
-                        Unlock all features and get unlimited access to our
-                        community group.
+                        Find exciting opportunities like Rs.50,000 cash prize
+                        challenges.
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Link href={"https://nas.io/30dayscoding"}>
+                      <Link
+                        href={
+                          "https://nas.io/30dc-challenges-n-hackathons/home"
+                        }
+                      >
                         <Button
                           size="sm"
                           className="bg-prime hover:bg-prime/80 text-white w-full"
                         >
-                          Join Now
+                          Enroll Now
                         </Button>
                       </Link>
                     </CardContent>
                   </Card>
+                  <Image
+                    alt="30DayCoding New Challenge"
+                    src={"/NEW2.gif"}
+                    height={120}
+                    width={120}
+                    className="absolute top-0 -translate-y-10 translate-x-10 right-0"
+                  />
                 </div>
               </>
             </SheetContent>
           </Sheet>
           <div className="w-full flex-1"></div>
-          {/* <DropdownMenu>
+          <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
                 <CircleUser className="h-5 w-5" />
@@ -180,7 +212,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
               <DropdownMenuSeparator />
               <DropdownMenuItem>Logout</DropdownMenuItem>
             </DropdownMenuContent>
-          </DropdownMenu> */}
+          </DropdownMenu>
         </header>
         {children}
       </div>

@@ -111,7 +111,7 @@ export default function Course() {
 
       <span className="text-prime font-semibold uppercase">Our Community</span>
 
-      <div className="relative overflow-hidden flex flex-col items-start m-3 p-[2rem_1.5rem_2.5rem] shadow-[0_2px_40px_0_rgba(0,0,0,.2)] gap-8 rounded-xl bg-second h-fit max-lg:scale-90 max-w-[70rem] w-full">
+      <div className="relative overflow-hidden flex flex-col items-start p-[2rem_1.5rem_1.5rem] shadow-[0_2px_40px_0_rgba(0,0,0,.2)] gap-8 rounded-xl bg-second h-fit max-lg:scale-90 max-w-[70rem] w-full">
         <section className="flex flex-col gap-2 relative">
           <span className="bg-gradient-to-t from-bg to-second/80 rounded-lg p-4 w-fit">
             <IndianRupee className="h-10 w-10 stroke-prime" />
@@ -119,7 +119,7 @@ export default function Course() {
           <span className="text-lg md:text-2xl font-semibold">
             Join Our community
           </span>
-          <p className="max-sm:text-sm max-w-3xl">
+          <p className="max-sm:text-sm max-w-3xl font-semibold line-clamp-3">
             Welcome to our vibrant community! Here, you will find exciting
             opportunities like Rs.50,000 cash prize challenges, the latest job
             updates, and valuable resources to help you land high-paying jobs.
@@ -135,7 +135,7 @@ export default function Course() {
             </section>
           </AnimatedButton>
         </span>
-        <div className="h-96 w-[600px] absolute max-md:-z-10 -right-1/4 top-10 -rotate-45 pointer-events-none opacity-40 rounded-lg bg-second">
+        <div className="h-96 w-[600px] absolute max-md:-z-10 -right-1/4 top-10 -rotate-45 pointer-events-none opacity-20 rounded-lg bg-second">
           <Image
             className="object-cover select-none"
             fill
@@ -154,7 +154,7 @@ export default function Course() {
           <span key={i} className="text-prime font-semibold uppercase">
             {title}
           </span>
-          <div className="flex max-w-[65rem] w-full flex-col lg:gap-6 justify-center max-lg:items-center max-lg:gap-10 px-10 mx-auto">
+          <div className="flex max-w-[65rem] w-full flex-col gap-6 justify-center max-lg:items-center px-3 mx-auto">
             {resources.map(({ title, imageSrc, href }, index) => (
               <Link
                 key={index}

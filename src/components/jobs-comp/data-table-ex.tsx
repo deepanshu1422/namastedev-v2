@@ -15,8 +15,10 @@ import {
 } from "@tanstack/react-table";
 import {
   ArrowUpDown,
+  CalendarDays,
   ChevronDown,
   Globe,
+  GraduationCap,
   Link as Lnk,
   MapPin,
   MoreHorizontal,
@@ -44,10 +46,12 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
+import { Jobs } from "@/app/(guide)/jobs/page";
+import Image from "next/image";
+import { Modal } from "@/app/(guide)/jobs/modal";
 
 export type Payment = {
   id: string;
-  status: "pending" | "applied" | "failed";
   company: string;
   location: string;
   title: string;
@@ -55,7 +59,7 @@ export type Payment = {
   link: string;
 };
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Jobs>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -79,13 +83,6 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
-    ),
-  },
-  {
     accessorKey: "title",
     header: ({ column }) => {
       return (
@@ -100,17 +97,45 @@ export const columns: ColumnDef<Payment>[] = [
       );
     },
     cell: ({ row }) => (
-      <span>{row.getValue("title")}</span>
+      <div className="flex items-center gap-2">
+        <Image
+          src={
+            row.original?.logoURL ||
+            "https://play-lh.googleusercontent.com/y4bswMT02OROjzOPa5zDGsnXX5-cBABjF93j26seJH2cEHD4PuBW1d5VvwfYleeKf4_X"
+          }
+          loader={() =>
+            row.original?.logoURL ||
+            "https://play-lh.googleusercontent.com/y4bswMT02OROjzOPa5zDGsnXX5-cBABjF93j26seJH2cEHD4PuBW1d5VvwfYleeKf4_X"
+          }
+          alt={row.original?.company || "Upwork"}
+          height={40}
+          width={40}
+        />
+        <span>{row.getValue("title")}</span>
+      </div>
       // <div className="lowercase">{row.getValue("location") || "dsadsa"}</div>
     ),
   },
   {
-    accessorKey: "category",
-    header: "Category",
+    accessorKey: "job_type",
+    header: "Job Type",
     cell: ({ row }) => (
-      <Badge variant={"secondary"} className="bg-prime/30 hover:bg-prime/50">
-        {row.getValue("category")}
+      <Badge
+        variant={"secondary"}
+        className="bg-prime/30 hover:bg-prime/50 capitalize"
+      >
+        {row.getValue("job_type")}
       </Badge>
+    ),
+  },
+  {
+    accessorKey: "skill_level",
+    header: "Job Level",
+    cell: ({ row }) => (
+      <div className="flex gap-1 capitalize">
+        <GraduationCap className="h-4 w-4" />
+        {row.getValue("skill_level")}
+      </div>
     ),
   },
   {
@@ -130,14 +155,14 @@ export const columns: ColumnDef<Payment>[] = [
     },
     cell: ({ row }) => (
       <div className="flex gap-1 items-center">
-        <Globe className="-ml-4 h-4 w-4" />
-        <div className="capitalize">{row.getValue("company")}</div>
+        <Globe className=" h-4 w-4" />
+        <div className="capitalize">{row.getValue("company") ?? "Upwork"}</div>
       </div>
     ),
   },
   {
-    accessorKey: "location",
-    header: () => <div className="text-left">Location</div>,
+    accessorKey: "created_at",
+    header: () => <div className="text-left">Date</div>,
     // ({ column }) => {
     //   return (
     //     <Button
@@ -151,8 +176,8 @@ export const columns: ColumnDef<Payment>[] = [
     // },
     cell: ({ row }) => (
       <div className="flex gap-1 items-center">
-        <MapPin className="-ml-4 h-4 w-4" />
-        {row.getValue("location")}
+        <CalendarDays className="-ml-4 h-4 w-4" />
+        {new Date(row.getValue("created_at")).toLocaleDateString()}
       </div>
       // <div className="lowercase">{row.getValue("location") || "dsadsa"}</div>
     ),
@@ -208,7 +233,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
 ];
 
-export function DataTableDemo({ data }: { data: Payment[] }) {
+export function DataTableDemo({ data }: { data: Jobs[] }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -223,7 +248,7 @@ export function DataTableDemo({ data }: { data: Payment[] }) {
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    // getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
@@ -237,47 +262,8 @@ export function DataTableDemo({ data }: { data: Payment[] }) {
   });
 
   return (
-    <div className="w-full pb-10">
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter designation..."
-          value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("title")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm ring-prime"
-        />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline"
-              className="ml-auto bg-prime/50 hover:bg-prime/70"
-            >
-              Columns <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value: any) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-      <div className="rounded-md border border-prime/40">
+    <div className="w-full">
+      <div className="rounded-md border m-4 mx-5 md:mx-6">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -304,14 +290,18 @@ export function DataTableDemo({ data }: { data: Payment[] }) {
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
+                  <Modal>
+                    <>
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      ))}
+                    </>
+                  </Modal>
                 </TableRow>
               ))
             ) : (
@@ -326,30 +316,6 @@ export function DataTableDemo({ data }: { data: Payment[] }) {
             )}
           </TableBody>
         </Table>
-      </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
-        <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
-        </div>
       </div>
     </div>
   );

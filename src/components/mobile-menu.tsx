@@ -265,23 +265,30 @@ export default function MobileMenu() {
                 );
             })}
           </nav>
-          <div className="mt-auto">
+          <div className="relative mt-auto">
             <Card>
               <CardHeader>
-                <CardTitle>Join Community</CardTitle>
+                <CardTitle>Win ₹ 50,000</CardTitle>
                 <CardDescription>
-                  Unlock all features and get lifetime access to our coummunity
-                  group.
+                  Find exciting opportunities like Rs.50,000 cash prize
+                  challenges.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Link href={"https://nas.io/30dayscoding"}>
+                <Link href={"https://nas.io/30dc-challenges-n-hackathons/home"}>
                   <Button size="sm" className="text-white bg-prime w-full">
-                    Join Now
+                    Enroll Now
                   </Button>
                 </Link>
               </CardContent>
             </Card>
+            <Image
+              alt="30DayCoding New Challenge"
+              src={"/NEW2.gif"}
+              height={120}
+              width={120}
+              className="absolute top-0 -translate-y-10 translate-x-10 right-0"
+            />
           </div>
         </>
       </SheetContent>

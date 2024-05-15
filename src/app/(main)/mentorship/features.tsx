@@ -186,12 +186,12 @@ export default function Features() {
               key={i}
               className="flex w-full items-start gap-3 pt-5 lg:gap-4"
             >
-              <section className=" z-10 -ml-10 flex items-center justify-center rounded-full bg-prime p-1">
+              <section className="z-10 -ml-10 -translate-y-1 flex items-center justify-center rounded-full bg-prime p-1">
                 {svg}
               </section>
 
               <div className="flex w-full flex-col items-start gap-4">
-                <p className="text-lg font-semibold text-white/80 leading-5">
+                <p className="text-lg font-medium text-white/70 leading-5">
                   {title}
                 </p>
               </div>

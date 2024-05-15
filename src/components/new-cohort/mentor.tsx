@@ -71,9 +71,9 @@ function Profile({
 
 export default function Mentor() {
   return (
-    <div className="m-auto flex flex-col items-center justify-center lg:pt-0 p-10 lg:p-20 gap-10 max-w-[90rem]">
+    <div className="m-auto flex flex-col items-center justify-center lg:pt-0 p-6 lg:p-10 gap-10 max-w-[90rem]">
       {/* Heading */}
-      <div className="lg:hidden flex flex-col gap-5 text-center max-w-2xl mx-auto">
+      <div className="lg:hidden flex flex-col gap-5 text-center max-w-2xl mx-auto px-5">
         <Reveal>
           <span className="text-4xl font-bold text-center">
             Faculty and Experts from <span className="text-prime">FAANG</span>{" "}

@@ -109,7 +109,7 @@ export default function Faqs({
   ];
 
   return (
-    <div className="gap-5 lg:gap-7 m-auto grid grid-cols-1 place-items-center p-10 lg:p-20 max-w-[75rem]">
+    <div className="gap-5 lg:gap-7 m-auto grid grid-cols-1 place-items-center p-6 lg:p-10 max-w-[75rem]">
       <Reveal>
         <span className="flex items-center justify-center gap-4 relative">
           <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />

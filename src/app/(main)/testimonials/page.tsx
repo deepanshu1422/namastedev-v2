@@ -4,6 +4,7 @@ import Hero from "./hero";
 import Inspirational from "./inspirational";
 import Watch from "./watch";
 import Public from "./public";
+import Floating from "../resources/floating";
 
 export const metadata: Metadata = {
   title: "Testimonial | 30DaysCoding",
@@ -39,6 +40,7 @@ export default function Testimonial() {
         <Watch />
         <Public />
       </div>
+      <Floating />
     </main>
   );
 }
