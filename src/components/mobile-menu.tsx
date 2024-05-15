@@ -224,7 +224,7 @@ export default function MobileMenu() {
           <span className="sr-only">Toggle navigation menu</span>
         </button>
       </SheetTrigger>
-      <SheetContent side="right" className="flex flex-col overflow-auto">
+      <SheetContent side="right" className="flex flex-col overflow-hidden">
         <>
           <nav className="grid gap-2 text-lg font-medium">
             <Link

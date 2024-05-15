@@ -9,6 +9,7 @@ import {
   MapIcon,
 } from "lucide-react";
 import AnimatedButton from "@/components/animated-button";
+import { community } from "@/util/globals";
 
 export default function Course() {
   let products = [
@@ -126,7 +127,7 @@ export default function Course() {
           </p>
         </section>
         <span>
-          <AnimatedButton link="https://nas.io/jobs-placements-help">
+          <AnimatedButton link={community.link}>
             <section className="flex gap-1 items-center">
               <BadgeIndianRupee className="h-5 w-5" />
               <span className="tracking-wide line-clamp-1">

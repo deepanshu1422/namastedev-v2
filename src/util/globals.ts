@@ -13,10 +13,10 @@ export const dsa = {
 }
 
 export const community = {
-    price: 999,
-    ogPrice: 2999,
-    discount: 40,
-    link: "https://nas.io/jobs-placements-help"
+    price: 149,
+    ogPrice: 599,
+    discount: 70,
+    link: "https://nas.io/30dc-challenges-n-hackathons/home"
 }
 
 export const projectsData = [
