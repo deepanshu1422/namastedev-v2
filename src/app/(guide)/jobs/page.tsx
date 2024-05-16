@@ -68,7 +68,7 @@ export type Jobs = {
 
 async function fetchJobs(): Promise<Jobs[]> {
   const res = await fetch(
-    "https://ymvrvflqdntrjzeartqh.supabase.co/rest/v1/jobs?select=id%2Ctitle%2Ccreated_at%2ClogoURL%2Ccompany%2Clink%2Cmax_payout_usd%2Csticky%2Ccountry_iso%2Cviews%2Cjob_type%2Cskill_level%2Ctechnologies%2Cprimary_technology%2Cpayout_type%2Ccollected_from%2Cdescription%2Cslug&order=created_at.desc&title=neq.test&offset=0&limit=20&remote=eq.true&published=eq.true",
+    "https://ymvrvflqdntrjzeartqh.supabase.co/rest/v1/jobs?select=id%2Ctitle%2Ccreated_at%2ClogoURL%2Ccompany%2Clink%2Cmax_payout_usd%2Csticky%2Ccountry_iso%2Cviews%2Cjob_type%2Cskill_level%2Ctechnologies%2Cprimary_technology%2Cpayout_type%2Ccollected_from%2Cdescription%2Cslug&order=created_at.desc&title=neq.test&offset=0&limit=100&remote=eq.true&published=eq.true",
     {
       headers: {
         "accept-profile": "public",

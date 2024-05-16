@@ -2166,3 +2166,54 @@ export const guidesData = [
         title: "SQL Zoo", description: "Learn SQL interactively in stages, from basic queries to complex operations.", image: "", url: "https://sqlzoo.net/"
     }
 ]
+
+export const roadmapsData = [
+    {
+        "name": "Web Development",
+        "description": "Learn the essentials of building websites and web applications using various tools and frameworks."
+    },
+    {
+        "name": "Blockchain Development",
+        "description": "Explore the technology behind decentralized systems and cryptocurrencies, and learn to develop decentralized applications (DApps) and smart contracts."
+    },
+    {
+        "name": "Data Science",
+        "description": "Discover the techniques and tools used to analyze and interpret complex data sets, extract meaningful insights, and make data-driven decisions."
+    },
+    {
+        "name": "Backend Development",
+        "description": "Master the skills required to develop the server-side logic and databases that power web applications, focusing on languages like Python, Node.js, or Java."
+    },
+    {
+        "name": "Internships, Jobs",
+        "description": "Gain practical work experience in your field of interest through internships or secure full-time employment opportunities to apply your skills in real-world scenarios."
+    },
+    {
+        "name": "Freelancing",
+        "description": "Explore the flexibility and independence of working as a freelance developer, designer, or consultant, and learn how to find clients and manage projects independently."
+    },
+    {
+        "name": "Flutter",
+        "description": "Master Google's UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase."
+    },
+    {
+        "name": "React",
+        "description": "Dive into the world of React, a JavaScript library for building user interfaces, and learn to create interactive and dynamic web applications efficiently."
+    },
+    {
+        "name": "CSS - Styling",
+        "description": "Learn the fundamentals and advanced techniques of CSS to style and design captivating and responsive web interfaces."
+    },
+    {
+        "name": "Angular",
+        "description": "Explore Google's open-source framework for building web applications, and learn to create scalable and efficient single-page applications (SPAs)."
+    },
+    {
+        "name": "Frontend Development",
+        "description": "Focus on building engaging user interfaces and experiences using a combination of HTML, CSS, and JavaScript, along with popular libraries and frameworks."
+    },
+    {
+        "name": "Prompt Engineer",
+        "description": "Develop skills in leveraging prompt engineering techniques to enhance creativity, productivity, and problem-solving abilities in various domains."
+    }
+]

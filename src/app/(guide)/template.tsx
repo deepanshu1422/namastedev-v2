@@ -1,7 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { Bookmark, CircleUser, Earth, Home, Menu, Network } from "lucide-react";
+import {
+  Bookmark,
+  CircleUser,
+  Earth,
+  Home,
+  Map,
+  Menu,
+  Network,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -57,6 +65,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
       icon: <Earth className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/jobs",
       selected: path === "/jobs",
+    },
+    {
+      title: "Roadmaps",
+      icon: <Map className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/roadmaps",
+      selected: path === "/roadmaps",
     },
   ];
 

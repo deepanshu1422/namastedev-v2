@@ -71,7 +71,7 @@ export default function Home() {
   return (
     <main className="bg-background bg-bg min-h-svh transition-all">
       <Hero
-        title="30DC Mentorship Group: Get All Courses + 1:1 Help"
+        title="Lifetime 1:1 Mentorship + 10 Course Access"
         desc="Learn from Aryan, Deepanshu, and the 30DC team to get placed this season."
         heroImage="/main/hero_section_mentor.png"
       />

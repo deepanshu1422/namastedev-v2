@@ -15,6 +15,7 @@ import {
 } from "@tanstack/react-table";
 import {
   ArrowUpDown,
+  ArrowUpRightSquare,
   CalendarDays,
   ChevronDown,
   Globe,
@@ -118,21 +119,21 @@ export const columns: ColumnDef<Jobs>[] = [
   },
   {
     accessorKey: "job_type",
-    header: "Job Type",
+    header: () => <span className="hidden sm:table-cell">Job Type</span>,
     cell: ({ row }) => (
       <Badge
         variant={"secondary"}
-        className="bg-prime/30 hover:bg-prime/50 capitalize"
+        className="hidden sm:table-cell bg-prime/30 hover:bg-prime/50 capitalize"
       >
-        {row.getValue("job_type")}
+        {row.getValue("job_type") ?? "Unknow"}
       </Badge>
     ),
   },
   {
     accessorKey: "skill_level",
-    header: "Job Level",
+    header: () => <span className="hidden sm:table-cell">Job Level</span>,
     cell: ({ row }) => (
-      <div className="flex gap-1 capitalize">
+      <div className="hidden sm:flex gap-1 capitalize">
         <GraduationCap className="h-4 w-4" />
         {row.getValue("skill_level")}
       </div>
@@ -144,7 +145,7 @@ export const columns: ColumnDef<Jobs>[] = [
     header: ({ column }) => {
       return (
         <Button
-          // className="px-0"
+          className="hidden sm:flex"
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
@@ -154,7 +155,7 @@ export const columns: ColumnDef<Jobs>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="flex gap-1 items-center">
+      <div className="hidden sm:flex gap-1 items-center">
         <Globe className=" h-4 w-4" />
         <div className="capitalize">{row.getValue("company") ?? "Upwork"}</div>
       </div>
@@ -162,7 +163,7 @@ export const columns: ColumnDef<Jobs>[] = [
   },
   {
     accessorKey: "created_at",
-    header: () => <div className="text-left">Date</div>,
+    header: () => <div className="text-left hidden sm:table-cell">Date</div>,
     // ({ column }) => {
     //   return (
     //     <Button
@@ -175,8 +176,8 @@ export const columns: ColumnDef<Jobs>[] = [
     //   );
     // },
     cell: ({ row }) => (
-      <div className="flex gap-1 items-center">
-        <CalendarDays className="-ml-4 h-4 w-4" />
+      <div className="hidden sm:flex gap-1 items-center">
+        <CalendarDays className="-translate-y-0.5 h-4 w-4" />
         {new Date(row.getValue("created_at")).toLocaleDateString()}
       </div>
       // <div className="lowercase">{row.getValue("location") || "dsadsa"}</div>
@@ -210,7 +211,7 @@ export const columns: ColumnDef<Jobs>[] = [
             className="h-8 w-8 p-0 rounded-full bg-head/20 hover:scale-105 transition-all"
           >
             {/* <span className="sr-only">Open menu</span> */}
-            <Lnk className="h-4 w-4" />
+            <ArrowUpRightSquare className="h-5 w-5" />
           </Button>
         </Link>
         // <DropdownMenu>
@@ -262,8 +263,47 @@ export function DataTableDemo({ data }: { data: Jobs[] }) {
   });
 
   return (
-    <div className="w-full">
-      <div className="rounded-md border m-4 mx-5 md:mx-6">
+    <div className="w-full pb-10 shrink">
+      <div className="flex items-center py-4">
+        <Input
+          placeholder="Filter designation..."
+          value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn("title")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm ring-prime"
+        />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="outline"
+              className="ml-auto bg-prime/50 hover:bg-prime/70"
+            >
+              Columns <ChevronDown className="ml-2 h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())
+              .map((column) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value: any) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                );
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+      <div className="rounded-md border border-prime/40">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -290,18 +330,14 @@ export function DataTableDemo({ data }: { data: Jobs[] }) {
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
-                  <Modal>
-                    <>
-                      {row.getVisibleCells().map((cell) => (
-                        <TableCell key={cell.id}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </TableCell>
-                      ))}
-                    </>
-                  </Modal>
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
                 </TableRow>
               ))
             ) : (
@@ -316,6 +352,30 @@ export function DataTableDemo({ data }: { data: Jobs[] }) {
             )}
           </TableBody>
         </Table>
+      </div>
+      <div className="flex items-center justify-end space-x-2 py-4">
+        <div className="flex-1 text-sm text-muted-foreground">
+          {table.getFilteredSelectedRowModel().rows.length} of{" "}
+          {table.getFilteredRowModel().rows.length} row(s) selected.
+        </div>
+        {/* <div className="space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            Previous
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            Next
+          </Button>
+        </div> */}
       </div>
     </div>
   );
