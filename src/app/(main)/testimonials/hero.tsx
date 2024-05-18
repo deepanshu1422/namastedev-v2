@@ -63,9 +63,9 @@ export default function Hero() {
       <div className="w-full relative">
         <div className="flex max-lg:flex-col items-start max-lg:items-center justify-between px-10 pt-5 gap-10">
           <div className="flex flex-col gap-8 m-auto w-full">
-            <h1 className="font-jakarta max-phone:text-[2rem] text-center text-[2.5rem] font-extrabold text-balance">
+            <h2 className="font-jakarta max-phone:text-[2rem] text-center text-[2.5rem] font-extrabold text-balance">
               What do our learners have to say?
-            </h1>
+            </h2>
             <CourseGallary />
             <div className="max-sm:flex-col items-center gap-5 flex mx-auto">
               <AnimatedButton link="https://courses.30dayscoding.com/s/store">

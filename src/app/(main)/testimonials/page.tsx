@@ -5,6 +5,7 @@ import Inspirational from "./inspirational";
 import Watch from "./watch";
 import Public from "./public";
 import Floating from "../resources/floating";
+import NewHero from "./new-hero";
 
 export const metadata: Metadata = {
   title: "Testimonial | 30DaysCoding",
@@ -31,10 +32,13 @@ export const metadata: Metadata = {
 
 export default function Testimonial() {
   return (
-    <main
-      className={`font-jakarta bg-bg min-h-svh text-white p-[3.75rem_0_6.5rem] overflow-hidden`}
-    >
-      <div className="mx-auto w-full max-w-[90rem] max-phone:p-[0_0_3.5rem] p-[0_min(6rem,_6.66%)] flex flex-col gap-20">
+    <main className={`font-jakarta bg-bg min-h-svh text-white overflow-hidden`}>
+      <NewHero
+        title="Find our best reviews and experiences."
+        desc="Stay tuned for more such informational videos and latest content with lots of learning and experiences."
+        heroImage="https://images.unsplash.com/photo-1512314889357-e157c22f938d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      />
+      <div className="mx-auto w-full max-w-[90rem] max-phone:p-[0_0_3.5rem] flex flex-col gap-20 p-[1.75rem_0_6.5rem]">
         <Hero />
         <Inspirational />
         <Watch />
