@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { guidesData } from "@/util/globals";
+import { roadmapsData } from "@/util/globals";
 import { Search } from "lucide-react";
 
 export default function Hero({
@@ -33,9 +33,9 @@ export default function Hero({
                 placeholder="Search roadmaps..."
                 onChange={(txt) => {
                   filter(
-                    guidesData.filter(
+                    roadmapsData.filter(
                       (e) =>
-                        e.title
+                        e.name
                           .toLocaleLowerCase()
                           .includes(txt.target.value.toLocaleLowerCase()) ||
                         e.description

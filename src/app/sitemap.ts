@@ -1,4 +1,5 @@
 import { BASE_URL } from '@/util/constants'
+import { roadmapsData } from '@/util/globals'
 import prisma from '@/util/prismaClient'
 import { MetadataRoute } from 'next'
 import { cache } from 'react'
@@ -48,6 +49,18 @@ const staticMaps: MetadataRoute.Sitemap = [
     },
     {
         url: 'https://30dayscoding.com/projects',
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.8,
+    },
+    {
+        url: 'https://30dayscoding.com/roadmaps',
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.8,
+    },
+    {
+        url: 'https://30dayscoding.com/guides',
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.8,
@@ -116,6 +129,8 @@ const staticMaps: MetadataRoute.Sitemap = [
 
 export const revalidate = 3600
 
+export const dynamic = 'auto'
+
 export const getItem = cache(async () => {
     const item = await prisma.blog.findMany({
         select: {
@@ -137,7 +152,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.5,
     }))
 
-    return [...staticMaps, ...dynamicMaps]
+    const dynamicRoadmaps: MetadataRoute.Sitemap = roadmapsData.map((maps) => ({
+        url: `${BASE_URL}/roadmaps/${maps.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.5,
+    }))
+
+    return [...staticMaps, ...dynamicRoadmaps, ...dynamicMaps]
 }
 
 

@@ -2170,50 +2170,63 @@ export const guidesData = [
 export const roadmapsData = [
     {
         "name": "Web Development",
-        "description": "Learn the essentials of building websites and web applications using various tools and frameworks."
+        "description": "Learn the essentials of building websites and web applications using various tools and frameworks.",
+        "slug": "web-development"
     },
     {
         "name": "Blockchain Development",
-        "description": "Explore the technology behind decentralized systems and cryptocurrencies, and learn to develop decentralized applications (DApps) and smart contracts."
+        "description": "Explore the technology behind decentralized systems and cryptocurrencies, and learn to develop decentralized applications (DApps) and smart contracts.",
+        "slug": "blockchain-development"
     },
     {
         "name": "Data Science",
-        "description": "Discover the techniques and tools used to analyze and interpret complex data sets, extract meaningful insights, and make data-driven decisions."
+        "description": "Discover the techniques and tools used to analyze and interpret complex data sets, extract meaningful insights, and make data-driven decisions.",
+        "slug": "data-science"
     },
     {
         "name": "Backend Development",
-        "description": "Master the skills required to develop the server-side logic and databases that power web applications, focusing on languages like Python, Node.js, or Java."
+        "description": "Master the skills required to develop the server-side logic and databases that power web applications, focusing on languages like Python, Node.js, or Java.",
+        "slug": "backend-development"
     },
     {
         "name": "Internships, Jobs",
-        "description": "Gain practical work experience in your field of interest through internships or secure full-time employment opportunities to apply your skills in real-world scenarios."
+        "description": "Gain practical work experience in your field of interest through internships or secure full-time employment opportunities to apply your skills in real-world scenarios.",
+        "slug": "internships-jobs"
     },
     {
         "name": "Freelancing",
-        "description": "Explore the flexibility and independence of working as a freelance developer, designer, or consultant, and learn how to find clients and manage projects independently."
+        "description": "Explore the flexibility and independence of working as a freelance developer, designer, or consultant, and learn how to find clients and manage projects independently.",
+        "slug": "freelancing"
     },
     {
         "name": "Flutter",
-        "description": "Master Google's UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase."
+        "description": "Master Google's UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase.",
+        "slug": "flutter"
     },
     {
         "name": "React",
-        "description": "Dive into the world of React, a JavaScript library for building user interfaces, and learn to create interactive and dynamic web applications efficiently."
+        "description": "Dive into the world of React, a JavaScript library for building user interfaces, and learn to create interactive and dynamic web applications efficiently.",
+        "slug": "react"
     },
     {
         "name": "CSS - Styling",
-        "description": "Learn the fundamentals and advanced techniques of CSS to style and design captivating and responsive web interfaces."
+        "description": "Learn the fundamentals and advanced techniques of CSS to style and design captivating and responsive web interfaces.",
+        "slug": "css-styling"
     },
     {
         "name": "Angular",
-        "description": "Explore Google's open-source framework for building web applications, and learn to create scalable and efficient single-page applications (SPAs)."
+        "description": "Explore Google's open-source framework for building web applications, and learn to create scalable and efficient single-page applications (SPAs).",
+        "slug": "angular"
     },
     {
         "name": "Frontend Development",
-        "description": "Focus on building engaging user interfaces and experiences using a combination of HTML, CSS, and JavaScript, along with popular libraries and frameworks."
+        "description": "Focus on building engaging user interfaces and experiences using a combination of HTML, CSS, and JavaScript, along with popular libraries and frameworks.",
+        "slug": "frontend-development"
     },
     {
         "name": "Prompt Engineer",
-        "description": "Develop skills in leveraging prompt engineering techniques to enhance creativity, productivity, and problem-solving abilities in various domains."
+        "description": "Develop skills in leveraging prompt engineering techniques to enhance creativity, productivity, and problem-solving abilities in various domains.",
+        "slug": "prompt-engineer"
     }
 ]
+
