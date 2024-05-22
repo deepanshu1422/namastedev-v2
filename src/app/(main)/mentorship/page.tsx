@@ -8,7 +8,7 @@ import Mentorship from "./mentorship";
 import JoinUs from "./joinus";
 import Features from "./features";
 import MentorshipGallary from "./mentorship-gallery";
-import Floating from "../resources/floating";
+import Floating from "./floating";
 
 export const metadata: Metadata = {
   title: "Mentorship | 30dayscoding",
