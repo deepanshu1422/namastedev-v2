@@ -5,10 +5,13 @@ import {
   Bookmark,
   CircleUser,
   Earth,
+  GraduationCap,
   Home,
+  Library,
   Map,
   Menu,
   Network,
+  Star,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -55,12 +58,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
       href: "/projects",
       selected: path === "/projects",
     },
-    {
-      title: "Guides",
-      icon: <Bookmark className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/guides",
-      selected: path === "/guides",
-    },
+    // {
+    //   title: "Guides",
+    //   icon: <Bookmark className="h-4 w-4 md:h-5 md:w-5" />,
+    //   href: "/guides",
+    //   selected: path === "/guides",
+    // },
     {
       title: "Jobs",
       icon: <Earth className="h-4 w-4 md:h-5 md:w-5" />,
@@ -73,6 +76,21 @@ export default function Template({ children }: { children: React.ReactNode }) {
       href: "/roadmaps",
       selected: path === "/roadmaps",
     },
+    {
+      title: "Testimonials",
+      icon: <Star className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/testimonials",
+    },
+    {
+      title: "Courses",
+      icon: <Library className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "https://courses.30dayscoding.com/s/store",
+    },
+    {
+      title: "1:1 Mentorship",
+      icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/mentorship",
+    }
   ];
 
   return (

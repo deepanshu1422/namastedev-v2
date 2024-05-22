@@ -55,8 +55,8 @@ export default function Resources() {
   return (
     <main className={`font-jakarta bg-bg min-h-svh`}>
       <Hero
-        title="Free Resources by the 30 Days Coding"
-        desc="Update every single day"
+        title="Free Resources by the 30DaysCoding team!"
+        desc="Update every week with new resources"
         heroImage="bg-[url('https://i.ibb.co/85mmMDk/dsa-cover.png')]"
         subTitle="Explore Coding Resources and Join Our Community!"
         subDesc="Welcome to our coding resources page! Here, you'll find a wealth of resources to enhance your coding skills and expand your knowledge in various programming languages, frameworks, and tools."
