@@ -102,6 +102,7 @@ export default function Home() {
           
           .
         </p> */}
+        <h3 className="text-2xl font-bold text-second">POWERED BY NIGHT LIGHT PROJECTS</h3>
       </div>
     </main>
   );

@@ -151,19 +151,19 @@ export default function Footer() {
                   Resources
                 </span>
                 <Link
-                  className="lg:hover:text-head transition-all"
+                  className="lg:hover:text-prime transition-all"
                   href={"https://dsa.30dayscoding.com/"}
                 >
                   DSA Sheets
                 </Link>
                 <Link
-                  className="lg:hover:text-head transition-all"
+                  className="lg:hover:text-prime transition-all"
                   href={"https://resumebldr.vercel.app/app/personal-detail"}
                 >
                   Resume Builder
                 </Link>
                 <Link
-                  className="lg:hover:text-head transition-all"
+                  className="lg:hover:text-prime transition-all"
                   href={"https://courses.30dayscoding.com/products"}
                 >
                   Premium Guides
@@ -173,26 +173,37 @@ export default function Footer() {
             <Reveal>
               <div className="flex text-sm gap-4 flex-col max-w-64">
                 <span className="text-muted-foreground uppercase">
-                  About Us
+                  Our Info
                 </span>
-
                 <Link
-                  className="lg:hover:text-head transition-all"
+                  className="lg:hover:text-prime transition-all"
+                  href={"/refundpolicy"}
+                >
+                  Refund Policy
+                </Link>
+                <Link
+                  className="lg:hover:text-prime transition-all"
                   href={"/privacy-policy"}
                 >
                   Privacy Policy
                 </Link>
                 <Link
-                  className="lg:hover:text-head transition-all"
+                  className="lg:hover:text-prime transition-all"
                   href={"/terms-conditions"}
                 >
                   Term & Conditions
                 </Link>
                 <Link
-                  className="lg:hover:text-head transition-all"
+                  className="lg:hover:text-prime transition-all"
                   href={"/support"}
                 >
                   Support
+                </Link>
+                <Link
+                  className="lg:hover:text-prime transition-all"
+                  href={"/aboutus"}
+                >
+                  About Us
                 </Link>
               </div>
             </Reveal>

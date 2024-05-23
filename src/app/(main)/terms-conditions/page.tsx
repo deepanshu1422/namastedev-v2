@@ -106,6 +106,7 @@ export default function Home() {
           information when you use our website. By accessing or using our
           website, you agree to the terms of this Privacy Policy.
         </p>
+        <h3 className="text-2xl font-bold text-second">POWERED BY NIGHT LIGHT PROJECTS</h3>
       </div>
     </main>
   );
