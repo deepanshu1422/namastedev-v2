@@ -28,19 +28,15 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { signOut, useSession } from "next-auth/react"
 import { AuthDialog } from "./auth";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
   const [path, setPath] = useState(pathName);
+
+  const { data: userData, status } = useSession()
 
   useEffect(() => {
     setPath(pathName);
@@ -93,6 +89,8 @@ export default function Template({ children }: { children: React.ReactNode }) {
       href: "/mentorship",
     }
   ];
+
+
 
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[60px_1fr] lg:grid-cols-[280px_1fr]">
@@ -228,28 +226,27 @@ export default function Template({ children }: { children: React.ReactNode }) {
             </SheetContent>
           </Sheet>
           <div className="w-full flex-1"></div>
-          <AuthDialog>
-            <Button variant="secondary" size="icon" className="rounded-full">
-              <CircleUser className="h-5 w-5" />
-              <span className="sr-only">Toggle user menu</span>
-            </Button>
-          </AuthDialog>
-          {/* <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleUser className="h-5 w-5" />
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu> */}
+          {status === "authenticated" ? <Button variant="secondary" size="icon" className="rounded-full">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="secondary" size="icon" className="rounded-full">
+                  <CircleUser className="h-5 w-5" />
+                  <span className="sr-only">Toggle user menu</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Settings</DropdownMenuItem>
+                <DropdownMenuItem>Support</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => signOut()}>Logout</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </Button> : (status === "loading" ? <Button variant={"secondary"} className="px-8 text-white" size="icon" >Loading</Button> : <AuthDialog>
+            <Button className="bg-prime px-8 text-white" size="icon" >Login</Button>
+          </AuthDialog>)}
+
         </header>
         {children}
       </div>

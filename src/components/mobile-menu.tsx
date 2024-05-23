@@ -91,7 +91,7 @@ export default function MobileMenu() {
 
   useEffect(() => {
     setState(false);
-    console.log(pathName[0]);
+    // console.log(pathName[0]);
   }, [pathName]);
 
   const navTitle = [

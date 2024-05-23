@@ -4,6 +4,8 @@ import Footer from "@/components/new-cohort/footer";
 import Clarity from "@/util/clarity";
 import Pixel from "@/util/pixel";
 import GoogleAnalytics from "@/util/ga";
+import { Toaster } from "@/components/ui/sonner"
+import NextProvider from "@/util/next-auth";
 
 export default function RootLayout({
   children,
@@ -12,12 +14,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
-      >
-        {children}
-        <Footer />
-      </body>
+      <NextProvider>
+        <body
+          className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
+        >
+          {children}
+          <Footer />
+          <Toaster />
+        </body>
+      </NextProvider>
       <Pixel />
       <Clarity />
       <GoogleAnalytics gaId={"G-BCTWV4GBCY"} />
