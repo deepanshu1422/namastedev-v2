@@ -16,7 +16,7 @@ export const authOptions: AuthOptions = {
             },
             async authorize(credentials) {
                 if (!credentials?.email || !credentials?.password) {
-                    return null
+                    return { error: 'Missing Credentials!' };
                 }
 
                 const user = await prisma.user.findUnique({
@@ -25,16 +25,24 @@ export const authOptions: AuthOptions = {
                     }
                 })
 
-                if (!user) return null
+                if (!user) return { error: "User doesn't exists!" };
 
-                const passwordMatch = await bcrypt.compare(credentials.password, user.password) 
-                
-                if (!passwordMatch) return null
+                const passwordMatch = await bcrypt.compare(credentials.password, user.password)
+
+                if (!passwordMatch) return { error: 'Wrong Password' };
 
                 return user
             }
         })
     ],
+    callbacks: {
+        async signIn({ account, user, credentials, email, profile }) {
+            if(user?.error) {
+                throw new Error(user?.error)
+            }
+            return true
+        },
+    },
     session: {
         strategy: "jwt"
     },

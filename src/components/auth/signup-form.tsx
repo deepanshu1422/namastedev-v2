@@ -150,7 +150,7 @@ export default function SignupForm({ setVal, setOpen }: { setVal: Dispatch<SetSt
                     <p>Already have an account?</p>
                     <span onClick={() => setVal("login")} className="text-prime font-semibold cursor-pointer">Login</span>
                 </span>
-                <Button disabled={!state} type="submit" >{state ? "Create Account" : "Creating..."}</Button>
+                <Button className="bg-prime/80 hover:bg-prime text-white font-semibold" disabled={!state} type="submit" >{state ? "Create Account" : "Creating..."}</Button>
             </form>
         </Form>
     )

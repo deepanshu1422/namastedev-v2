@@ -235,7 +235,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuLabel>Welocme, {userData.user?.name} </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Settings</DropdownMenuItem>
                 <DropdownMenuItem>Support</DropdownMenuItem>
@@ -244,7 +244,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
               </DropdownMenuContent>
             </DropdownMenu>
           </Button> : (status === "loading" ? <Button variant={"secondary"} className="px-8 text-white" size="icon" >Loading</Button> : <AuthDialog>
-            <Button className="bg-prime px-8 text-white" size="icon" >Login</Button>
+            <Button className="bg-prime/80 hover:bg-prime px-8 text-white" size="icon" >Login</Button>
           </AuthDialog>)}
 
         </header>

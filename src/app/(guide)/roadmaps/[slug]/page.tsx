@@ -51,7 +51,7 @@ export default function Home({ params: { slug } }: PageProps) {
   return (
     <main className="w-full flex flex-col min-h-svh">
       <Hero title={map.name} description={map.description} />
-      <Flow />
+      <Flow cover={map.cover} url={map.url} courses={map.course} />
     </main>
   );
 }

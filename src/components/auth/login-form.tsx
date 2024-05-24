@@ -14,9 +14,9 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Phone } from "lucide-react"
 import { Dispatch, SetStateAction, useState } from "react"
 import { signIn } from "next-auth/react"
+import { toast } from "sonner"
 const FormSchema = z.object({
     email: z.string().email(),
     password: z.string().min(8)
@@ -25,7 +25,6 @@ const FormSchema = z.object({
 export default function LoginForm({ setVal, setOpen }: { setVal: Dispatch<SetStateAction<string>>, setOpen: Dispatch<SetStateAction<boolean>> }) {
 
     const [state, setState] = useState(true)
-
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         // defaultValues: {
@@ -43,12 +42,19 @@ export default function LoginForm({ setVal, setOpen }: { setVal: Dispatch<SetSta
             redirect: false
         })
 
-        if (res?.ok) {
+        // console.log(res)
+
+        if (res?.error) {
+            setState(true)
+            toast("Login Error", {
+                description: res.error
+            })
+        } else {
             setState(true)
             setOpen(false)
-        }else{
-            console.log(res?.error)
-            setState(true)
+            toast("Successfully LoggedIn", {
+                description: `Welcome back!`
+            })
         }
 
     }
@@ -86,7 +92,7 @@ export default function LoginForm({ setVal, setOpen }: { setVal: Dispatch<SetSta
                     <p>Don&apos;t have an account?</p>
                     <span onClick={() => setVal("signup")} className="text-prime font-semibold cursor-pointer">SignUp</span>
                 </span>
-                <Button disabled={!state} type="submit" >{state ? "Login" : "Logging..."}</Button>
+                <Button className="bg-prime/80 hover:bg-prime text-white font-semibold" disabled={!state} type="submit" >{state ? "Login" : "Logging..."}</Button>
             </form>
         </Form>
     )
