@@ -383,7 +383,7 @@ export default function Inspirational() {
           ))}
         </div>
         {!view && (
-          <div className="absolute -bottom-5 h-20 w-full bg-gradient-to-b z-10 from-transparent from-0% to-50% backdrop-blur-[2px] to-bg/70"></div>
+          <div className="absolute -bottom-5 h-20 w-full bg-gradient-to-b z-10 from-transparent from-0% to-50% to-bg"></div>
         )}
       </div>
 

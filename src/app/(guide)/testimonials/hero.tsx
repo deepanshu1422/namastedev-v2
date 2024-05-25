@@ -22,7 +22,7 @@ export function VideoTestimony({
   linkedinUrl,
 }: VideoTestimony) {
   return (
-    <div className="w-full p-6 bg-second rounded-lg min-h-72 relative grid gap-4">
+    <div className="w-full p-6 bg-second rounded-lg min-h-60 relative grid gap-4">
       <YoutubeEmbed embedId={videoId!} />
       <section className="flex justify-between">
         <div className="flex gap-3">

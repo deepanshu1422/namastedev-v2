@@ -124,16 +124,12 @@ export const navTitles: {
     href: "/blog",
   },
   {
-    title: "Resources",
-    href: "/resources",
-  },
-  {
     title: "Jobs",
     href: "/jobs",
   },
   {
-    title: "Projects",
-    href: "/projects",
+    title: "Roadmaps",
+    href: "/roadmaps",
   },
 ];
 

@@ -10,13 +10,13 @@ import Link from "next/link";
 export default function Cards({ data }: { data: typeof roadmapsData }) {
   return data.length > 0 ? (
     <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-10 w-full max-w-[84rem] mx-auto  px-4 lg:px-8 py-8">
-      {data.map(({ name, description, slug }, i) => (
+      {data.map(({ name, description, slug, image }, i) => (
         <Card
           key={i}
           title={name}
           description={description}
           link={`/roadmaps/${slug}`}
-          image={
+          image={image ?? 
             "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           }
         />
@@ -53,7 +53,7 @@ function Card({
       href={link}
       className="shadow-lg flex flex-col bg-second border relative group"
     >
-      <div className="overflow-hidden bg-bg w-full h-60 shadow-lg relative">
+      <div className="overflow-hidden bg-bg w-full h-56 shadow-lg relative">
         <Image
           className="absolute object-cover group-hover:scale-105 transition-transform duration-200"
           fill

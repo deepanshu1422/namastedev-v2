@@ -3,13 +3,13 @@ import Image from "next/image";
 
 function TestimonyImages({ imageUrl }: { imageUrl: string }) {
   return (
-    <div className="max-w-[23.75rem] w-full p-6 bg-second rounded-lg lg:min-h-72 relative grid gap-4">
+    <div className="max-w-[23.75rem] w-full p-2 bg-second rounded-lg lg:min-h-72 relative">
       <Image
         src={imageUrl}
         alt="instrutor"
         width={600}
         height={600}
-        className="object-cover h-full w-full"
+        className="object-cover h-full w-full rounded-md shadow-md"
       />
     </div>
   );
@@ -30,7 +30,7 @@ export default function Watch() {
           Highlights
         </h1>
       </Reveal>
-      <div className="relative flex flex-wrap gap-8 justify-center md:p-3">
+      <div className="relative flex flex-wrap gap-4 justify-center md:p-3">
         {images.map((e, i) => (
           <Reveal key={i}>
             <TestimonyImages imageUrl={e} />

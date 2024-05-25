@@ -12,6 +12,7 @@ import {
   Map,
   Menu,
   Network,
+  Shapes,
   Star,
 } from "lucide-react";
 
@@ -77,6 +78,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
       title: "Testimonials",
       icon: <Star className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/testimonials",
+      selected: path === "/testimonials"
     },
     {
       title: "Courses",
@@ -87,6 +89,11 @@ export default function Template({ children }: { children: React.ReactNode }) {
       title: "1:1 Mentorship",
       icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/mentorship",
+    },
+    {
+      title: "Resources",
+      icon: <Shapes className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/resources",
     }
   ];
 

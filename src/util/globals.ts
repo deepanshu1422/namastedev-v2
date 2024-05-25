@@ -2169,10 +2169,11 @@ export const guidesData = [
 
 export const roadmapsData = [
     {
-        "name": "Mern React",
+        "name": "Mern FullStack",
         "description": "Dive into the world of React, a JavaScript library for building user interfaces, and learn to create interactive and dynamic web applications efficiently.",
         "slug": "mern-react",
         cover: "/courses/mern.jpg",
+        image: "/roadmaps/1.webp",
         url: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
         course: [
             "Introduction to our MERN Stack course ",
@@ -2217,6 +2218,7 @@ export const roadmapsData = [
         "slug": "blockchain-development",
         url: "https://courses.30dayscoding.com/courses/Blockchain-developer-course-64eec408e4b002b964b568be",
         cover: "/courses/blockchain.jpg",
+        image: "/roadmaps/2.webp",
         course: [
             "[New] - Welcome to the blockchain world!",
             "Overview of Blockchain concepts - part 1",
@@ -2237,6 +2239,7 @@ export const roadmapsData = [
         "description": "Discover the techniques and tools used to analyze and interpret complex data sets, extract meaningful insights algoeithms, and make data-driven decisions.",
         "slug": "data-structures-algorithm",
         cover: "/courses/dsa.jpg",
+        image: "/roadmaps/3.webp",
         url: "https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312",
         course: [
             "Introduction to DSA course - Welcome! ",
@@ -2266,6 +2269,7 @@ export const roadmapsData = [
         "description": "Explore Next JS framework for building web applications, and learn to create scalable and efficient single-page applications (SPAs).",
         "slug": "next-js",
         cover: "/courses/nextjs.jpg",
+        image: "/roadmaps/4.webp",
         url: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
         course: [
             "Introduction to NEXT JS",
@@ -2303,6 +2307,7 @@ export const roadmapsData = [
         "name": "Prompt Engineer",
         "description": "Develop skills in leveraging prompt engineering techniques to enhance creativity, productivity, and problem-solving abilities in various domains.",
         "slug": "prompt-engineer",
+        image: "/roadmaps/5.webp",
         cover: "/courses/ai.jpg",
         url: "https://courses.30dayscoding.com/courses/AI-full-stack-project-development-course-64eebe76e4b002b964b5645d",
         course: [
@@ -2322,6 +2327,7 @@ export const roadmapsData = [
         "name": "FullStack Development",
         "description": "Focus on building engaging user interfaces and experiences using a combination of frontend and backend technologies, along with popular libraries and frameworks.",
         "slug": "fullstack-development",
+        image: "/roadmaps/6.webp",
         cover: "/courses/cohort.jpg",
         url: "https://courses.30dayscoding.com/courses/Idea-to-MVP-full-stack-project-course-6525cb14e4b07ef99d14b75b",
         course: [
@@ -2356,6 +2362,7 @@ export const roadmapsData = [
         "name": "Java",
         "description": "Master Java for building natively compiled applications for mobile, web, and desktop from a single codebase.",
         "slug": "java-roadmap",
+        image: "/roadmaps/7.webp",
         cover: "/courses/java.jpg",
         url: "https://courses.30dayscoding.com/courses/Complete-Java-course-659ef388e4b0f601f93531b8",
         course: [
@@ -2377,6 +2384,7 @@ export const roadmapsData = [
         "name": "Python",
         "description": "Master the skills required to develop the server-side logic and databases that power web applications, focusing on languages like Python",
         "slug": "python-roadmap",
+        image: "/roadmaps/8.webp",
         cover: "/courses/python.jpg",
         url: "https://courses.30dayscoding.com/courses/Complete-Python-course-for-developers-652da4c5e4b010a575e0254b",
         course: [
@@ -2421,6 +2429,7 @@ export const roadmapsData = [
         "name": "JavaScript",
         "description": "Learn the fundamentals and advanced techniques of JavaScript to craete new web based applications and logics.",
         "slug": "javascript-roadmap",
+        image: "/roadmaps/9.webp",
         cover: "/courses/javascript.jpg",
         url: "https://courses.30dayscoding.com/courses/Complete-Javascript-course-for-developers-652da487e4b0dce56ddde296",
         course: [

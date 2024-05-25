@@ -1,4 +1,4 @@
-import YoutubeEmbed from "@/app/(main)/testimonials/youtube-embed";
+import YoutubeEmbed from "@/app/(guide)/testimonials/youtube-embed";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

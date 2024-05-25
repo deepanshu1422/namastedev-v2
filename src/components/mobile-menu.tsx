@@ -172,12 +172,6 @@ export default function MobileMenu() {
       selected: false,
     },
     {
-      icon: <Shapes className="h-5 w-5" />,
-      title: "Resources",
-      href: "/resources",
-      selected: false,
-    },
-    {
       icon: <Earth className="h-5 w-5" />,
       title: "Jobs",
       href: "/jobs",
@@ -185,8 +179,8 @@ export default function MobileMenu() {
     },
     {
       icon: <Network className="h-5 w-5" />,
-      title: "Projects",
-      href: "/projects",
+      title: "Roadmaps",
+      href: "/roadmaps",
       selected: false,
     },
   ];

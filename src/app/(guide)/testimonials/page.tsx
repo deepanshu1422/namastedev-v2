@@ -4,7 +4,7 @@ import Hero from "./hero";
 import Inspirational from "./inspirational";
 import Watch from "./watch";
 import Public from "./public";
-import Floating from "../resources/floating";
+// import Floating from "../resources/floating";
 import NewHero from "./new-hero";
 
 export const metadata: Metadata = {
@@ -44,7 +44,7 @@ export default function Testimonial() {
         <Watch />
         <Public />
       </div>
-      <Floating />
+      {/* <Floating /> */}
     </main>
   );
 }

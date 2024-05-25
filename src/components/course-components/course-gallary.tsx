@@ -1,4 +1,4 @@
-import YoutubeEmbed from "@/app/(main)/testimonials/youtube-embed";
+import YoutubeEmbed from "@/app/(guide)/testimonials/youtube-embed";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -19,9 +19,11 @@ function VideoTestimony({
   linkedinUrl,
 }: VideoTestimony) {
   return (
-    <div className="w-full bg-second rounded-lg min-h-72 relative grid overflow-hidden">
-      <YoutubeEmbed embedId={videoId!} />
-      <section className="flex justify-between items-center p-5 px-3">
+    <div className="w-full bg-second rounded-lg min-h-60 relative grid overflow-hidden">
+      <div className="shadow-xl">
+        <YoutubeEmbed embedId={videoId!} />
+      </div>
+      <section className="flex justify-between items-center p-2">
         <div className="flex gap-3">
           <Image
             src={imageUrl!}
@@ -40,7 +42,7 @@ function VideoTestimony({
           </div>
         </div>
 
-        <Link href={linkedinUrl} className="h-fit">
+        <Link href={linkedinUrl} className="h-fit px-3">
           <svg
             className="h-6 w-6 fill-white hover:fill-emerald-400 transition-all"
             xmlns="http://www.w3.org/2000/svg"
