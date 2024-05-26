@@ -35,6 +35,7 @@ export const revalidate = 3600;
 
 const fetchBlogs = cache(async () => {
   const item = await prisma.blog.findMany({
+    orderBy: { createdAt: "desc" },
     select: {
       title: true,
       description: true,
@@ -136,11 +137,11 @@ export default async function Home() {
         title="Discover Success with Our Blogs"
         desc="Explore insightful and engaging blog posts covering a range of topics to empower your career journey."
         heroImage="https://p0.pxfuel.com/preview/728/375/731/aerial-analog-background-blog.jpg"
-        blogs={blogs.slice(3, 13)}
+        blogs={blogs.slice(0, 10)}
       />
       <Mid blogs={blogs} />
-      <Latest blogs={[blogs[10], blogs[1], blogs[2]]} />
-      <Blog blog={blogs[26]} />
+      <Latest blogs={[blogs[0], blogs[1], blogs[2]]} />
+      <Blog blog={blogs[4]} />
       <Gallery blogs={blogs} />
       {/* <Faqs faq={faq} /> */}
     </main>

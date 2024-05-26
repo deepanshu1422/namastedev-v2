@@ -8,6 +8,7 @@ import {
   Earth,
   GitCommitHorizontalIcon,
   Layers,
+  Menu,
   Network,
   Rss,
   Shapes,
@@ -213,10 +214,18 @@ export default function MobileMenu() {
 
     <Sheet open={state} onOpenChange={setState}>
       <SheetTrigger asChild>
-        <button className="hover:bg-prime/30 rounded-lg p-1 transition-all">
+        {/* <button className="hover:bg-prime/30 rounded-lg p-1 transition-all">
           <AlignJustify className="tab:hidden max-tab:h-5 max-tab:w-5 h-6 w-6 stroke-[1.5]" />
           <span className="sr-only">Toggle navigation menu</span>
-        </button>
+        </button> */}
+        <Button
+                variant="outline"
+                size={"icon"}
+                className="shrink-0 md:hidden"
+              >
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle navigation menu</span>
+              </Button>
       </SheetTrigger>
       <SheetContent side="right" className="flex flex-col overflow-hidden">
         <>

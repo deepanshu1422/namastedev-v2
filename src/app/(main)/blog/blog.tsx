@@ -53,7 +53,7 @@ export default function Blog({
           className="lg:min-h-[450px] min-h-20 min-w-60 lg:w-5/12 flex max-md:flex-col lg:flex-col gap-2 lg:gap-3 px-6 p-12 max-md:pb-5 rounded-md overflow-hidden"
         >
           <Image
-            src={
+            src={blog.heroImage?.url ||
               "https://ik.imagekit.io/as9xzqjpc/30dcblog/Default_Create_a_digital_art_illustration_of_a_JavaScript_code_0.jpg"
             }
             alt="laptop with typing hands"

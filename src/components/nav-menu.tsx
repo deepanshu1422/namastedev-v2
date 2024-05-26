@@ -131,6 +131,10 @@ export const navTitles: {
     title: "Roadmaps",
     href: "/roadmaps",
   },
+  {
+    title: "Webinar",
+    href: "/webinar",
+  },
 ];
 
 export function NavMenu() {

@@ -39,9 +39,9 @@ export default function Latest({
             className="relative group lg:min-h-96 lg:w-7/12 rounded-md overflow-hidden"
           >
             <Image
-              alt="a laptop"
+              alt={blogs[0].heroImage?.alt ?? "a laptop"}
               fill
-              src={
+              src={ blogs[0].heroImage?.url ??
                 "https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg"
               }
               className="object-cover object-center group-hover:scale-110 transition-all duration-200"
@@ -84,10 +84,10 @@ export default function Latest({
             >
               <div className="relative overflow-hidden w-2/5 object-cover max-phone:hidden shrink-0 bg-slate-200">
                 <Image
-                  src={
+                  src={blogs[1].heroImage?.url ??
                     "https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg"
                   }
-                  alt=""
+                  alt={blogs[1].heroImage?.alt ?? ""}
                   fill
                   className="group-hover:scale-110 transition-all duration-200 object-cover object-center"
                 />
@@ -127,10 +127,10 @@ export default function Latest({
             >
               <div className="relative overflow-hidden w-2/5 object-cover max-phone:hidden shrink-0 bg-slate-200">
                 <Image
-                  src={
+                  src={blogs[2].heroImage?.url ??
                     "https://images.ctfassets.net/f7l5sefbt57k/5qtjdCxnDwJ1drPVMkwBpf/410b1e7193b8f488d0d3fe2e5b65a0ce/Default_A_pair_of_hands_their_fingers_dancing_skillfully_acro_1.jpg"
                   }
-                  alt=""
+                  alt={blogs[2].heroImage?.alt ?? ""}
                   fill
                   className="group-hover:scale-110 transition-all duration-200 object-cover object-center"
                 />

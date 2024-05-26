@@ -129,7 +129,7 @@ const staticMaps: MetadataRoute.Sitemap = [
 
 export const revalidate = 3600
 
-export const dynamic = 'auto'
+export const dynamic = 'force-dynamic'
 
 export const getItem = cache(async () => {
     const item = await prisma.blog.findMany({

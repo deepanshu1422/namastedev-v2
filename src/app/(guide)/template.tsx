@@ -169,7 +169,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="flex flex-col">
+            <SheetContent side="left" className="flex flex-col overflow-hidden overflow-y-auto">
               <>
                 <nav className="grid gap-2 text-lg font-medium">
                   <Link
