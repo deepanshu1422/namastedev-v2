@@ -120,11 +120,11 @@ export const columns: ColumnDef<Jobs>[] = [
   },
   {
     accessorKey: "job_type",
-    header: () => <span className="hidden sm:table-cell">Job Type</span>,
+    header: () => <span className="table-cell">Job Type</span>,
     cell: ({ row }) => (
       <Badge
         variant={"secondary"}
-        className="hidden sm:table-cell bg-prime/30 hover:bg-prime/50 capitalize"
+        className="table-cell bg-prime/30 hover:bg-prime/50 capitalize"
       >
         {row.getValue("job_type") ?? "Unknow"}
       </Badge>
@@ -132,9 +132,9 @@ export const columns: ColumnDef<Jobs>[] = [
   },
   {
     accessorKey: "skill_level",
-    header: () => <span className="hidden sm:table-cell">Job Level</span>,
+    header: () => <span className="table-cell">Job Level</span>,
     cell: ({ row }) => (
-      <div className="hidden sm:flex gap-1 capitalize">
+      <div className="flex gap-1 capitalize">
         <GraduationCap className="h-4 w-4" />
         {row.getValue("skill_level")}
       </div>
@@ -146,7 +146,7 @@ export const columns: ColumnDef<Jobs>[] = [
     header: ({ column }) => {
       return (
         <Button
-          className="hidden sm:flex"
+          className="flex"
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
@@ -156,7 +156,7 @@ export const columns: ColumnDef<Jobs>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="hidden sm:flex gap-1 items-center">
+      <div className="flex gap-1 items-center">
         <Globe className=" h-4 w-4" />
         <div className="capitalize">{row.getValue("company") ?? "Upwork"}</div>
       </div>
@@ -164,7 +164,7 @@ export const columns: ColumnDef<Jobs>[] = [
   },
   {
     accessorKey: "created_at",
-    header: () => <div className="text-left hidden sm:table-cell">Date</div>,
+    header: () => <div className="text-left table-cell">Date</div>,
     // ({ column }) => {
     //   return (
     //     <Button
@@ -177,7 +177,7 @@ export const columns: ColumnDef<Jobs>[] = [
     //   );
     // },
     cell: ({ row }) => (
-      <div className="hidden sm:flex gap-1 items-center">
+      <div className="flex gap-1 items-center">
         <CalendarDays className="-translate-y-0.5 h-4 w-4" />
         {new Date(row.getValue("created_at")).toLocaleDateString()}
       </div>
