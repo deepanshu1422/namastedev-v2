@@ -50,6 +50,7 @@ import Link from "next/link";
 import { Jobs } from "@/app/(guide)/jobs/page";
 import Image from "next/image";
 import { Modal } from "@/app/(guide)/jobs/modal";
+import AnimatedButton from "../animated-button";
 
 export type Payment = {
   id: string;
@@ -264,16 +265,26 @@ export function DataTableDemo({ data }: { data: Jobs[] }) {
 
   return (
     <div className="w-full pb-10 shrink">
-      <div className="flex items-center py-4">
+      <div className="flex items-center justify-between max-sm:flex-col max-sm:gap-2 py-4">
         <Input
           placeholder="Filter designation..."
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("title")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm ring-prime"
+          className="sm:max-w-sm ring-prime"
         />
-        <DropdownMenu>
+        <Link href={"https://forms.gle/5cZuNb8yhxVg9BQr6"} target={"_blank"} className="max-sm:w-full">
+          <div className="group relative w-full">
+            <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
+            <Button
+              variant={"outline"}
+              className={`font-semibold text-foreground/80 hover:text-foreground relative w-full text-sm px-3 py-2`}
+            >Add New
+            </Button>
+          </div>
+        </Link>
+        {/* <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="outline"
@@ -301,7 +312,7 @@ export function DataTableDemo({ data }: { data: Jobs[] }) {
                 );
               })}
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
       </div>
       <div className="rounded-md border border-prime/40">
         <Table>
@@ -314,9 +325,9 @@ export function DataTableDemo({ data }: { data: Jobs[] }) {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   );
                 })}
