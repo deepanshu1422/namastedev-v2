@@ -3,6 +3,7 @@
 import {
   AlignJustify,
   ChevronDown,
+  Clapperboard,
   CornerDownRight,
   CornerRightDown,
   Earth,
@@ -184,6 +185,12 @@ export default function MobileMenu() {
       href: "/roadmaps",
       selected: false,
     },
+    {
+      icon: <Clapperboard className="h-5 w-5" />,
+      title: "Webinar",
+      href: "/webinar",
+      selected: false,
+    },
   ];
 
   return (
@@ -227,7 +234,7 @@ export default function MobileMenu() {
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="flex flex-col overflow-hidden">
+      <SheetContent side="right" className="flex flex-col overflow-y-auto overflow-x-hidden">
         <>
           <nav className="grid gap-2 text-lg font-medium">
             <Link

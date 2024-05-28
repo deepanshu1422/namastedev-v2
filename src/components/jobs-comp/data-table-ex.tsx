@@ -280,7 +280,7 @@ export function DataTableDemo({ data }: { data: Jobs[] }) {
             <Button
               variant={"outline"}
               className={`font-semibold text-foreground/80 hover:text-foreground relative w-full text-sm px-3 py-2`}
-            >Add New
+            >Grt Hired with US
             </Button>
           </div>
         </Link>
