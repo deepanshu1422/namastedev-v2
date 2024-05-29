@@ -1,9 +1,12 @@
 // import { DataTableDemo, Payment } from "@/components/jobs-comp/data-table-ex";
-import prisma from "@/util/prismaClient";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { Metadata } from "next";
-import { unstable_cache } from "next/cache";
-import Projects from "./projects";
+import Hero from "./hero";
+import Achieve from "./achieve";
+import Learning from "./learning";
+import Instructor from "./instructor";
+import Challenge from "./challenges";
+import Interview from "./interview";
+import Banner from "./banner";
 
 export const metadata: Metadata = {
   title: "Explore | 30dayscoding",
@@ -28,6 +31,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Home() {
-  return <Projects />;
+export default function Home() {
+  
+  return (
+    <main className="w-full flex flex-col min-h-svh pb-10">
+      <Hero />
+      <Achieve />
+      <Learning />
+      <Instructor />
+      <Challenge />
+      <Interview />
+      <Banner />
+    </main>
+  );
 }

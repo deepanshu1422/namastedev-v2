@@ -13,18 +13,20 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import Link from "next/link";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import Image from "next/image";
 
-export default function Hero() {
+export default function Learning() {
   return (
     <div className="w-full text-white bg-bg flex flex-col px-4 pt-8 pb-10 lg:py-8 lg:px-8">
-      <section className="flex flex-col gap-1.5 max-w-7xl w-full mx-auto ">
-        <h1 className="text-2xl md:text-3xl font-semibold">Popular Learning Paths</h1>
+      <section className="flex flex-col gap-1.5 max-w-7xl w-full mx-auto">
+        <h2 className="text-2xl md:text-3xl font-semibold">What people are learning today</h2>
         <p className="text-sm text-muted-foreground">Learning paths are structured roadmaps to achieve a broader skillset.</p>
         <Slider />
         <Link href={"/mentorship"}
           className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 rounded-md w-fit self-end"
         >
-          <span className="text-sm">Explore all Learning Paths</span>
+          <span className="text-sm">See Full Courses</span>
           {/* <ArrowRight className="max-md:hidden h-4 w-4" /> */}
         </Link>
       </section>
@@ -36,30 +38,33 @@ export function Slider() {
   return (
     <Carousel opts={{
       loop: true
-    }} className="py-3">
+    }} className="w-full py-3">
       <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem className="basis-full md:basis-1/2 xl:basis-1/3" key={index}>
-            <div className="p-1">
-              <Card className="select-none bg-card/50">
-                <CardHeader>
+        {Array.from({ length: 10 }).map((_, index) => (
+          <CarouselItem className="max-sm:basis-4/5 sm:basis-1/2 md:basis-1/3  xl:basis-1/4" key={index}>
+            <Link href={"https://courses.30dayscoding.com/courses/AI-full-stack-project-development-course-64eebe76e4b002b964b5645d"} className="p-1 group">
+              <Card className="select-none flex flex-col gap-4 bg-transparent border-none">
+                <div className="relative bg-card/50 max-sm:min-h-44 min-h-40 rounded-md overflow-hidden">
+                    <Image src={"/courses/ai.jpg"} alt="" fill className="object-cover group-hover:scale-105 transition-all" />
+                </div>
+                {/* <CardHeader>
                   <CardTitle>Head {index + 1}</CardTitle>
                   <CardDescription>Get started with our interactive Dev Ops learning path, that teaches you all the necessary tools and skills you need to become a proficient dev ops engineer</CardDescription>
-                </CardHeader>
-                <CardContent className="max-md:hidden flex items-center justify-center p-10">
-                  {/* <span className="text-4xl font-semibold">{index + 1}</span> */}
-                </CardContent>
-                <CardFooter className="flex-col items-start text-sm text-muted-foreground">
-                  <span>4.8k Students Enrolled</span>
+                </CardHeader> */}
+                {/* <CardContent className="flex items-center justify-center p-6">
+                  <span className="text-4xl font-semibold">{index + 1}</span>
+                </CardContent> */}
+                <CardFooter className="px-0 flex-col items-start text-sm text-muted-foreground">
+                  <span>AUthor Name</span>
                   <section className="flex gap-1 items-center">
                     <span className="text-yellow-500/80 font-semibold">1.6</span>
                     <Star className="fill-yellow-500/60 stroke-yellow-500/60 h-4 w-4" />
                     <StarHalf className="fill-yellow-500/60 stroke-yellow-500/60 h-4 w-4" />
-                    <span className="text-muted-foreground">21.5k reviews</span>
+                    <span className="text-muted-foreground">21.5k Enrolled</span>
                   </section>
                 </CardFooter>
               </Card>
-            </div>
+            </Link>
           </CarouselItem>
         ))}
       </CarouselContent>

@@ -66,6 +66,12 @@ const staticMaps: MetadataRoute.Sitemap = [
         priority: 0.8,
     },
     {
+        url: 'https://30dayscoding.com/explore',
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.8,
+    },
+    {
         url: 'https://30dayscoding.com/privacy-policy',
         lastModified: new Date(),
         changeFrequency: 'monthly',
