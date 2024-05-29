@@ -24,8 +24,8 @@ export default function Instructor() {
     return (
         <div className="w-full text-white bg-card/50 flex flex-col px-4 pt-8 pb-10 lg:py-8 lg:px-8">
             <section className="flex flex-col gap-1.5 max-w-7xl w-full mx-auto">
-                <h2 className="text-2xl md:text-3xl font-semibold">Rising Instructors</h2>
-                <p className="text-sm text-muted-foreground">Learn from best instructors around the world, any time you want</p>
+                <h2 className="text-2xl md:text-3xl font-semibold">Our Instructors</h2>
+                <p className="text-sm text-muted-foreground">Learn from best FAANG instructors, any time you want</p>
                 <Slider />
             </section>
         </div>
@@ -33,36 +33,47 @@ export default function Instructor() {
 }
 
 export function Slider() {
+
+    const info = [
+        {
+            name: "Aryan Singh",
+            image: "/instructor.jpg"
+        },
+        {
+            name: "Deepanshu Udhwani",
+            image: "/instructor2.jfif"
+        },
+        {
+            name: "Abhinav Awasthi",
+            image: "/instructor3.jfif"
+        },
+    ]
     return (
         <Carousel opts={{
             loop: true,
             align: "start"
         }} className="w-full py-3">
             <CarouselContent>
-                {Array.from({ length: 5 }).map((_, index) => (
+                {info.map(({ name, image }, index) => (
                     <CarouselItem className="basis-full md:basis-1/2 xl:basis-1/3" key={index}>
                         <div className="p-1">
                             <Card className="select-none bg-second/50 border-prime/40">
                                 <div className="flex items-start gap-3 text-muted-foreground p-6">
-                                    <div className="flex w-full justify-between">
+                                    <div className="flex w-full justify-between items-center">
                                         <div className="flex items-center gap-2">
-                                            <StudentAvatar />
+                                            <StudentAvatar image={image} />
                                             <section className="flex flex-col max-md:text-sm">
-                                                <span>Aryan Singh</span>
+                                                <span>{name}</span>
                                                 <span>4.4k Students</span>
-                                                <span>1 course</span>
+                                                {/* <span>1 course</span> */}
                                             </section>
                                         </div>
                                     </div>
                                     <section className="flex flex-col items-center max-md:text-xs">
                                         <section className="flex gap-1.5 items-center">
                                             <Star className="fill-yellow-500/60 stroke-yellow-500/60 h-4 w-4" />
-                                            <Star className="fill-yellow-500/60 stroke-yellow-500/60 h-4 w-4" />
-                                            <Star className="fill-yellow-500/60 stroke-yellow-500/60 h-4 w-4" />
-                                            <Star className="fill-yellow-500/60 stroke-yellow-500/60 h-4 w-4" />
-                                            <Star className="fill-yellow-500/60 stroke-yellow-500/60 h-4 w-4" />
-                                        </section>
                                         <span>4.65</span>
+                                        </section>
                                         <span>Rating</span>
                                     </section>
                                 </div>
@@ -79,10 +90,10 @@ export function Slider() {
 
 
 
-export function StudentAvatar() {
+export function StudentAvatar({ image }: { image: string }) {
     return (
         <Avatar className="h-16 w-16">
-            <AvatarImage src="/instructor.jpg" alt="@shadcn" />
+            <AvatarImage src={image || "/instructor.jpg"} alt="@shadcn" />
             <AvatarFallback>CN</AvatarFallback>
         </Avatar>
     )

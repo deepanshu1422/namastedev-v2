@@ -19,8 +19,8 @@ export default function Interview() {
     return (
         <div className="w-full text-white bg-bg flex flex-col px-4 pt-8 pb-10 lg:py-8 lg:px-8">
             <section className="flex flex-col gap-1.5 max-w-7xl w-full mx-auto">
-                <h2 className="text-2xl md:text-3xl font-semibold">Prepare for your upcoming interview</h2>
-                <p className="text-sm text-muted-foreground">Use interview kits to simulate real-world interview situations and help you get ready for the big day</p>
+                <h2 className="text-2xl md:text-3xl font-semibold">Make yourself ready for a better future</h2>
+                <p className="text-sm text-muted-foreground">Get our guidence direfctly from our mentors for preparation of real-world interview.</p>
                 <Slider />
                 {/* <Link href={"/mentorship"}
                     className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 rounded-md w-fit self-end"

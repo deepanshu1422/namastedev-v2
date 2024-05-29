@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { projectsData } from "@/util/globals";
+import { projectsData, roadmapsData } from "@/util/globals";
 import { Search, Star, StarHalf } from "lucide-react";
 
 import * as React from "react"
@@ -18,13 +18,13 @@ export default function Hero() {
   return (
     <div className="w-full text-white bg-bg flex flex-col px-4 pt-8 pb-10 lg:py-8 lg:px-8">
       <section className="flex flex-col gap-1.5 max-w-7xl w-full mx-auto ">
-        <h1 className="text-2xl md:text-3xl font-semibold">Popular Learning Paths</h1>
-        <p className="text-sm text-muted-foreground">Learning paths are structured roadmaps to achieve a broader skillset.</p>
+        <h1 className="text-2xl md:text-3xl font-semibold">Explore Roadmaps</h1>
+        <p className="text-sm text-muted-foreground">These paths are structured roadmaps to achieve a broader skillset.</p>
         <Slider />
-        <Link href={"/mentorship"}
+        <Link href={"https://courses.30dayscoding.com/s/store"}
           className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 rounded-md w-fit self-end"
         >
-          <span className="text-sm">Explore all Learning Paths</span>
+          <span className="text-sm">Explore all Roadmaps</span>
           {/* <ArrowRight className="max-md:hidden h-4 w-4" /> */}
         </Link>
       </section>
@@ -38,13 +38,13 @@ export function Slider() {
       loop: true
     }} className="py-3">
       <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
+        {roadmapsData.map(({ name, description, slug }, index) => (
           <CarouselItem className="basis-full md:basis-1/2 xl:basis-1/3" key={index}>
-            <div className="p-1">
+            <Link href={`/roadmaps/${slug}`} className="p-1">
               <Card className="select-none bg-card/50">
                 <CardHeader>
-                  <CardTitle>Head {index + 1}</CardTitle>
-                  <CardDescription>Get started with our interactive Dev Ops learning path, that teaches you all the necessary tools and skills you need to become a proficient dev ops engineer</CardDescription>
+                  <CardTitle>{name}</CardTitle>
+                  <CardDescription className="line-clamp-3">{description}</CardDescription>
                 </CardHeader>
                 <CardContent className="max-md:hidden flex items-center justify-center p-10">
                   {/* <span className="text-4xl font-semibold">{index + 1}</span> */}
@@ -52,14 +52,13 @@ export function Slider() {
                 <CardFooter className="flex-col items-start text-sm text-muted-foreground">
                   <span>4.8k Students Enrolled</span>
                   <section className="flex gap-1 items-center">
-                    <span className="text-yellow-500/80 font-semibold">1.6</span>
+                    <span className="text-yellow-500/80 font-semibold">5</span>
                     <Star className="fill-yellow-500/60 stroke-yellow-500/60 h-4 w-4" />
-                    <StarHalf className="fill-yellow-500/60 stroke-yellow-500/60 h-4 w-4" />
                     <span className="text-muted-foreground">21.5k reviews</span>
                   </section>
                 </CardFooter>
               </Card>
-            </div>
+            </Link>
           </CarouselItem>
         ))}
       </CarouselContent>
