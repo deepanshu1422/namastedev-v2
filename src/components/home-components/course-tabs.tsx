@@ -20,6 +20,7 @@ export function CourseTabMenu({
       title: string;
       imgSrc: string;
       link: string;
+      alt: string
     }[];
   }[];
 }) {

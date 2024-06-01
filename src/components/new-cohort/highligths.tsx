@@ -2,12 +2,12 @@ import Reveal from "@/components/framer/reveal";
 import Image from "next/image";
 import Link from "next/link";
 
-function TestimonyImages({ imageUrl }: { imageUrl: string }) {
+function TestimonyImages({ imageUrl, alt }: { imageUrl: string, alt: string }) {
   return (
     <div className="max-w-[23.75rem] p-2 bg-second rounded-lg lg:min-h-72 h-full relative grid gap-4 max-phone:scale-90 transition-all">
       <Image
         src={imageUrl}
-        alt="instrutor"
+        alt={alt}
         width={600}
         height={600}
         className="object-cover h-80 w-80 rounded-md object-center"
@@ -18,16 +18,11 @@ function TestimonyImages({ imageUrl }: { imageUrl: string }) {
 
 export default function Highlights() {
   const images = [
-    // "https://i.ibb.co/F3PjZxG/review1.jpg",
-    // "https://i.ibb.co/bdj2xq6/review2.jpg",
-    // "https://i.ibb.co/SRB5r0S/review3.jpg",
-    // "https://i.ibb.co/yXNwxWY/review4.jpg",
-    // "https://i.ibb.co/bmbL8gk/review5.jpg",
-    "https://i.ibb.co/wrfhr1m/IMG-7687.png",
-    "https://i.ibb.co/0rNJjfr/IMG-7689.png",
-    "https://i.ibb.co/fXZqDvj/IMG-7690.png",
-    "https://i.ibb.co/jHNQVQL/IMG-7691.png",
-    "https://i.ibb.co/3dYxTMz/IMG-7692.png",
+    { src: "https://i.ibb.co/wrfhr1m/IMG-7687.png", alt: "30dc courses review"},
+    { src: "https://i.ibb.co/0rNJjfr/IMG-7689.png", alt: "30dc mern stack course review"},
+    { src: "https://i.ibb.co/fXZqDvj/IMG-7690.png", alt: "30dayscoding dsa course review"},
+    { src: "https://i.ibb.co/jHNQVQL/IMG-7691.png", alt: "30dayscoding mern course review"},
+    { src: "https://i.ibb.co/3dYxTMz/IMG-7692.png", alt: "30dayscoding next js course review"},
   ];
   return (
     <div className="grid place-items-center gap-6 max-w-[80rem] m-auto py-8">
@@ -41,9 +36,9 @@ export default function Highlights() {
         </span>
       </Reveal>
       <div className="relative flex flex-wrap items-start justify-center phone:gap-8">
-        {images.map((e, i) => (
+        {images.map(({src, alt}, i) => (
           <Reveal key={i}>
-            <TestimonyImages imageUrl={e} />
+            <TestimonyImages imageUrl={src} alt={alt} />
           </Reveal>
         ))}
         <div className="absolute bottom-0 h-20 w-full bg-gradient-to-b z-10 from-transparent from-0% via-50% via-transparent to-50% blur-md to-bg/70 translate-y-6"></div>

@@ -36,27 +36,82 @@ export const metadata: Metadata = {
 
 export default function Home() {
   let faq = [
-    {
-      question: "What is the validity of the Course?",
-      answer:
-        "The validity of the Course typically depends on the specific nature of the Course itself. Most Courses come with a predetermined duration or validity period, which can range from a few weeks to several years, or certainly for lifetime. It's important for participants to carefully review the terms and conditions outlined by the provider to understand the duration for which the Course materials, access to resources, and any certifications or credentials awarded upon completion remain valid.",
-    },
-    {
-      question: "What's the refund policy?",
-      answer:
-        "Our refund policy is designed to provide peace of mind to our participants. We offer a hassle-free refund process, ensuring complete satisfaction with your experience. If for any reason you're not satisfied with the Course, you can request a refund without encountering any problems. We value your trust and aim to make the refund process as straightforward as possible, prioritizing customer satisfaction above all else.",
-    },
-
-    {
-      question: "How do I contact you?",
-      answer:
-        "Please email us at projectsnightlight@gmail.com. You all can directly DM us on our social media links provided below.",
-    },
-
-    {
-      question: "Would there be any kind of certificate?",
-      answer: "Yes, you will get a certificate after completion.",
-    },
+      {
+      question: "I'm facing issues with the HTML and CSS section of the MERN stack course. The videos are not playing properly.",
+      answer: "Report any video playback issues in specific course sections to the course provider's support team. They can investigate the problem and provide assistance to resolve the issue."
+      },
+      {
+      question: "I want to know if the courses cover the latest technologies and frameworks.",
+      answer: "Course providers strive to keep their content up-to-date with the latest technologies and frameworks. However, it's advisable to check the course curriculum or reach out to the provider for specific information on the technologies covered."
+      },
+      {
+      question: "I'm facing issues with the HTML and CSS section of the MERN stack course. The videos are not playing properly.",
+      answer: "Report any video playback issues in specific course sections to the course provider's support team. They can investigate the problem and provide assistance to resolve the issue."
+      },
+      {
+      question: "I want to know if the courses provide career guidance and job assistance.",
+      answer: "Some course providers offer career guidance and job assistance services. Check the course details or reach out to the provider to inquire about the availability of such support."
+      },
+      {
+      question: "I'm facing issues with the HTML and CSS section of the MERN stack course. The videos are not playing properly.",
+      answer: "Report any video playback issues in specific course sections to the course provider's support team. They can investigate the problem and provide assistance to resolve the issue."
+      },
+      {
+      question: "I want to know if the courses have a structured learning path or if they are self-paced.",
+      answer: "Course formats can vary between structured learning paths and self-paced options. Review the course details or contact the provider to understand the learning approach for the specific course you are interested in."
+      },
+      {
+      question: "I'm facing issues with the HTML and CSS section of the MERN stack course. The videos are not playing properly.",
+      answer: "Report any video playback issues in specific course sections to the course provider's support team. They can investigate the problem and provide assistance to resolve the issue."
+      },
+      {
+      question: "I want to know if the courses provide lifetime access or have a limited duration.",
+      answer: "Course access durations can differ among providers. Check the course details or reach out to the specific course provider for information on the access period for the course you are interested in."
+      },
+      {
+      question: "I'm facing issues with the HTML and CSS section of the MERN stack course. The videos are not playing properly.",
+      answer: "Report any video playback issues in specific course sections to the course provider's support team. They can investigate the problem and provide assistance to resolve the issue."
+      },
+      {
+      question: "I want to know if the courses have interactive quizzes and assessments to test my learning.",
+      answer: "Many courses include quizzes, assessments, and coding challenges to evaluate and reinforce learning. Review the course details or contact the provider for specifics on the types of assessments included."
+      },
+      {
+      question: "I'm facing issues with the HTML and CSS section of the MERN stack course. The videos are not playing properly.",
+      answer: "Report any video playback issues in specific course sections to the course provider's support team. They can investigate the problem and provide assistance to resolve the issue."
+      },
+      {
+      question: "I want to know if the courses provide a certificate of completion upon successful course completion.",
+      answer: "Most course providers offer certificates of completion to students who successfully finish the course requirements. Check the course details or contact the provider for information on their certificate issuance process."
+      },
+      {
+      question: "I'm facing issues with the HTML and CSS section of the MERN stack course. The videos are not playing properly.",
+      answer: "Report any video playback issues in specific course sections to the course provider's support team. They can investigate the problem and provide assistance to resolve the issue."
+      },
+      {
+      question: "I want to know if the courses have a community forum or support channels for students.",
+      answer: "Many course providers have student communities, forums, or support channels to facilitate discussions and provide assistance. Check the course details or reach out to the provider for information on the available student support resources."
+      },
+      {
+      question: "I'm facing issues with the HTML and CSS section of the MERN stack course. The videos are not playing properly.",
+      answer: "Report any video playback issues in specific course sections to the course provider's support team. They can investigate the problem and provide assistance to resolve the issue."
+      },
+      {
+      question: "I want to know if the courses have regular updates and new content additions.",
+      answer: "Course providers often update their content regularly to keep it current. However, the frequency of updates can vary. Check the course details or contact the provider for information on their content update schedule."
+      },
+      {
+      question: "I'm facing issues with the HTML and CSS section of the MERN stack course. The videos are not playing properly.",
+      answer: "Report any video playback issues in specific course sections to the course provider's support team. They can investigate the problem and provide assistance to resolve the issue."
+      },
+      {
+      question: "I want to know if the courses have a mobile app for on-the-go learning.",
+      answer: "Some course providers offer mobile apps for their courses, allowing students to learn on the go. Check the course details or contact the provider to inquire about the availability of a mobile app for the specific course you are interested in."
+      },
+      {
+      question: "I'm facing issues with the HTML and CSS section of the MERN stack course. The videos are not playing properly.",
+      answer: "Report any video playback issues in specific course sections to the course provider's support team. They can investigate the problem and provide assistance to resolve the issue."
+      },
   ];
 
   return (

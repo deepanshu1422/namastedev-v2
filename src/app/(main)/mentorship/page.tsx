@@ -67,6 +67,82 @@ export default function Home() {
       answer:
         "Your mentors can accurately pinpoint your skill gaps and correct them. They encourage and empower you to do better in your career. You can define your career goals clearly with their astute guidance. Moreover, you can build your network, learn the industry nitty-gritty, and also win referrals and recommendations from your mentors who will be truly rooting for your success",
     },
+    {
+      question: "I'm facing issues with the HTML and CSS section of the MERN stack course. The videos are not playing properly.",
+      answer: "Report any video playback issues in specific course sections to the course provider's support team. They can investigate the problem and provide assistance to resolve the issue."
+      },
+      {
+      question: "I want to know how I will receive the certificate for the MERN full stack development course I purchased.",
+      answer: "The process for receiving course completion certificates varies among providers. Contact the specific course provider to inquire about their certificate issuance procedure upon successful course completion."
+      },
+      {
+      question: "I want to build a resume. Can you provide me with a resume builder?",
+      answer: "Some course providers offer resume building tools or templates as part of their course materials. Check with the specific course provider if they provide such resources."
+      },
+      {
+      question: "I have already purchased a MERN stack course and want to purchase all 10 courses. Can I get a discounted price?",
+      answer: "If you have previously purchased a course and want to upgrade to the 10-course bundle, contact the course provider's support team. They may be able to offer a discounted price based on your existing purchase."
+      },
+      {
+      question: "I want to take the MERN stack course instead of Next.js. Can you please exchange the course for me?",
+      answer: "If you have mistakenly purchased the Next.js course but prefer the MERN stack course, contact the course provider's support team. They can assist you with exchanging the course."
+      },
+      {
+      question: "Are the courses in Hindi or English?",
+      answer: "The language of instruction for the courses can vary. It's best to confirm the course language with the specific course provider before enrolling."
+      },
+      {
+      question: "I purchased the MERN stack course, but I'm still unable to access it. The money has been deducted from my account.",
+      answer: "If you face issues accessing a course after successful payment, report the problem to the course provider's support team. They can investigate the payment and access status to resolve the issue."
+      },
+      {
+      question: "I requested to delete my account a few weeks ago, but it hasn't been deleted yet. Can you please delete it or confirm that it won't be deleted?",
+      answer: "Account deletion requests are typically processed within a specific timeframe. If you have concerns, contact the course provider's support team for an update on the status of your account deletion request."
+      },
+      {
+      question: "The HTML section in the course is badly ordered, and the CSS section on Grid and Flexbox starts abruptly without any introduction.",
+      answer: "Provide constructive feedback to the course provider regarding the organization and flow of the course content. They can consider your suggestions for potential improvements in future course updates."
+      },
+      {
+      question: "I want to know if the courses are taught by experienced instructors.",
+      answer: "The qualifications and experience of course instructors can vary. It's advisable to research the instructor profiles or reach out to the course provider for information on their teaching staff's background and expertise."
+      },
+      {
+      question: "Can I get a demo of the course before purchasing?",
+      answer: "Some course providers offer demo videos or free previews of their courses. Contact the specific course provider to inquire about the availability of demo content for the course you are interested in."
+      },
+      {
+      question: "I'm facing issues with the MERN stack course project that uses HTML and CSS. The zip file for the e-commerce website project is missing.",
+      answer: "If you encounter missing project files or assets, report the issue to the course provider's support team. They can investigate and provide the necessary files to help you complete the project."
+      },
+      {
+      question: "I purchased the MERN stack course, but after resetting my phone, it's not downloading. Can you please fix this?",
+      answer: "If you face difficulties re-downloading course content after a device reset, contact the course provider's support team. They can assist you in regaining access to the course materials."
+      },
+      {
+      question: "I don't find the course useful. Can I get a refund?",
+      answer: "If you are dissatisfied with the course and want a refund, follow the course provider's refund policy and process. Provide your order details and reasons for the refund request to the support team."
+      },
+      {
+      question: "I can't download videos to watch offline. It's showing a login limit on multiple devices, but I'm only logged in on one device.",
+      answer: "If you encounter issues with offline video downloads due to a device login limit, report the problem to the course provider's support team. They can investigate the login status and provide assistance."
+      },
+      {
+      question: "I can't pay using my Visa debit card on Razorpay. I have sufficient balance in my account.",
+      answer: "If you face payment issues with a specific payment gateway like Razorpay, contact the course provider's support team. They can assist you in troubleshooting the payment process or provide alternative payment options."
+      },
+      {
+      question: "I want to know if the courses are suitable for beginners with no prior coding experience.",
+      answer: "The suitability of courses for beginners can vary. It's best to review the course prerequisites and target audience information provided by the course provider. If unsure, reach out to them for guidance on the most suitable courses for your skill level."
+      },
+      {
+      question: "I'm facing issues with the HTML and CSS section of the MERN stack course. The videos are not playing properly.",
+      answer: "Report any video playback issues in specific course sections to the course provider's support team. They can investigate the problem and provide assistance to resolve the issue."
+      },
+      {
+      question: "I want to know if the courses cover real-world projects and case studies.",
+      answer: "Many courses include practical projects and case studies to provide hands-on experience. Check the course curriculum or reach out to the course provider for details on the types of projects covered."
+      },
   ];
   return (
     <main className="bg-background bg-bg min-h-svh transition-all">
