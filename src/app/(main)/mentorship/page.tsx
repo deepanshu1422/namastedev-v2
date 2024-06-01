@@ -9,6 +9,7 @@ import JoinUs from "./joinus";
 import Features from "./features";
 import MentorshipGallary from "./mentorship-gallery";
 import Floating from "./floating";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Mentorship | 30dayscoding",
@@ -146,6 +147,20 @@ export default function Home() {
   ];
   return (
     <main className="bg-background bg-bg min-h-svh transition-all">
+      <Script id="mentorship-faq" type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: `{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": ${faq.map(({ answer, question }) => ({
+          "@type": "Question",
+          "name": question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `<p>${answer}</p>`
+          }
+        }))}
+        }`
+      }} />
       <Hero
         title="Lifetime 1:1 Mentorship + 10 Course Access"
         desc="Learn from Aryan, Deepanshu, and the 30DC team to get placed this season."

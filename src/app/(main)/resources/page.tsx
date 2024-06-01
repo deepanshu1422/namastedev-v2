@@ -4,6 +4,7 @@ import Testimonials from "@/components/mentorship-comp/testimonials";
 import type { Metadata } from "next";
 import Store from "@/components/home-components/store";
 import Faqs from "@/components/mentorship-comp/faq";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Resources | 30dayscoding",
@@ -89,6 +90,20 @@ export default function Resources() {
   ];
   return (
     <main className={`font-jakarta bg-bg min-h-svh`}>
+      <Script id="resource-faq" type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: `{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": ${faq.map(({ answer, question }) => ({
+          "@type": "Question",
+          "name": question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `<p>${answer}</p>`
+          }
+        }))}
+        }`
+      }} />
       <Hero
         title="Free Resources by the 30DaysCoding team!"
         desc="Update every week with new resources"
