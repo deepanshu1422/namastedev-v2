@@ -121,14 +121,14 @@ export default function Home() {
         __html: `{
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          "mainEntity": ${faq.map(({ answer, question }) => JSON.stringify({
+          "mainEntity": [${faq.map(({ answer, question }) => JSON.stringify({
           "@type": "Question",
           "name": question,
           "acceptedAnswer": {
             "@type": "Answer",
             "text": `<p>${answer}</p>`
           }
-        }))}
+        }))}]
         }`
       }} />
       <Hero
