@@ -11,14 +11,13 @@ type Faq = { index: number; question: string; answer: string };
 
 function Faq({ index, question, answer }: Faq) {
   return (
-    <div className="flex flex-col w-full items-start justify-center gap-5 rounded-xl border-head bg-second p-3 px-5">
+    <div itemScope itemProp="mainEntity" itemType="https://schema.org/Question" className="flex flex-col w-full items-start justify-center gap-5 rounded-xl border-head bg-second p-3 px-5">
       <AccordionItem
-        itemScope itemProp="mainEntity" itemType="https://schema.org/Question"
         className="flex flex-col items-start gap-4 self-stretch w-full"
         value={`item-${index}`}
       >
-        <AccordionTrigger itemProp="name" className="flex items-center gap-4 text-base text-start font-semibold leading-6 text-white w-full">
-          {question}
+        <AccordionTrigger  className="flex items-center gap-4 text-base text-start font-semibold leading-6 text-white w-full">
+          <span itemProp="name">{question}</span>
         </AccordionTrigger>
         <AccordionContent itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer" className="flex bg-second flex-col gap-4">
           <hr className="h-px w-full border-prime" />
