@@ -96,7 +96,7 @@ export function Slider({
   );
 }
 
-function YTModal({
+export function YTModal({
   url,
   open,
   setOpen,

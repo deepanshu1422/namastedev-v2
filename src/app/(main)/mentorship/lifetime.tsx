@@ -1,16 +1,23 @@
+'use client'
+
+import { YTModal } from '@/app/(guide)/testimonials/slider'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { mentorship } from '@/util/globals'
-import { Check, CreditCard, Star } from 'lucide-react'
+import { Check, CreditCard, Play, Star } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 export default function Lifetime() {
-
+    const [open, setOpen] = React.useState(false);
     const benefits = [
-        <p key={1}>Join any of the <em><strong>live events</strong></em> and interact with the experts.</p>,
-        <p key={2}>Access all past and future <em><strong>recordings</strong></em> of any live events you missed.</p>,
-        <p key={3}>Get feedback and support on your projects in our <em><strong>Campfire</strong></em> chat.</p>,
-        <p key={4}>Let other members find you in the <em><strong>community directory</strong></em>.</p>,
-        <p key={5}><em><strong>Pay once</strong></em>, member forever. 100% satisfication or your money back. No questions asked.</p>,
+        <p key={1} ><em><strong>1:1 calls</strong></em> for personalized guidance</p>,
+        <p key={2} ><em><strong>Access to all 10 courses</strong></em> - MERN, Next JS, DSA, AI, Blockchain, JavaScript, Java, Python.</p>,
+        <p key={3} ><em><strong>24/7 WhatsApp</strong></em> - chat access and QnA sessions with mentors.</p>,
+        <p key={4} ><em><strong>Full stack projects</strong></em>, SaaS tools, MVPs.</p>,
+        <p key={5} ><em><strong>Resume</strong></em>, cold emails, applying, etc.</p>,
+        <p key={6} ><em><strong>Interview</strong></em> guides, resources, etc.</p>,
+        <p key={7} ><em><strong>Jobs</strong></em>, internships, co-ops, etc.</p>,
     ]
     return (
         <div className='m-auto flex flex-col px-5 lg:px-20 py-10 lg:pt-20 max-w-[75rem]'>
@@ -35,6 +42,21 @@ export default function Lifetime() {
                     </div>4.93 <Link href={"/testimonials"} className='text-prime font-bold underline-offset-2 underline'>(200+ reviews)</Link></span>
             </section>
 
+            <div className='mx-auto max-w-xl w-full py-3'>
+                <AspectRatio ratio={16 / 9} className="bg-muted">
+                    <Image
+                        src="/mentorship.jpeg"
+                        alt="30 days coding mentorship"
+                        fill
+                        className="rounded-md object-cover shadow-xl"
+                    />
+                    <button onClick={() => setOpen(true)} className='h-20 w-20 rounded-full bg-white border-2 border-prime shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+                    <Play className='h-10 w-10 fill-prime text-prime m-auto drop-shadow-xl shadow-prime translate-x-0.5' />
+                    </button>
+                </AspectRatio>
+                <YTModal url={"pvUJr1-ePvU"} open={open} setOpen={setOpen} />
+            </div>
+
             <div className='flex flex-col gap-2 py-4 mx-auto'>
                 {benefits.map((e, i) => (<span key={i} className='flex gap-2'>
                     <Check className='shrink-0 w-5 h-5 stroke-prime' />
@@ -42,10 +64,10 @@ export default function Lifetime() {
                 </span>))}
             </div>
 
-            <h3 className='font-jakarta font-extrabold text-4xl sm:text-5xl mx-auto sm:pt-6 text-center'>₹{mentorship.price}/<span className='line-through italic text-muted-foreground'>₹{mentorship.ogPrice}</span> once.Member forever.</h3>
-            <p className='m-auto py-2 pb-6 text-center text-sm max-w-3xl text-foreground/90'>And if you&apos;re not 100% satisfied with the purchase, or it&apos;s not what you were expecting, just reply to the email receipt within 30 days, and you&apos;ll get a full refund. No questions asked.</p>
-            
-            <Link href={"https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view"} target='_blank' className='bg-prime rounded-full px-4 text-center py-3 max-w-6xl w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200'><CreditCard className="h-10 w-10" />Join Now</Link>
+            <h3 className='font-jakarta font-extrabold text-4xl sm:text-5xl mx-auto sm:pt-6 text-center'>₹{mentorship.price}/<span className='line-through italic text-muted-foreground'>₹{mentorship.ogPrice}</span>.LifeLong Mentorship.</h3>
+            <p className='m-auto py-2 pb-6 text-center text-sm max-w-3xl text-foreground/90'>If you&apos;re not completely satisfied with your purchase, or if it doesn&apos;t meet your expectations, simply respond to the email receipt within 30 days to receive a full refund. No questions asked.</p>
+
+            <Link href={"https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view"} target='_blank' className='bg-prime rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase'><CreditCard className="h-10 w-10" />Join Now</Link>
         </div>
     )
 }
