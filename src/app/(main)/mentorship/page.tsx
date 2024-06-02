@@ -10,6 +10,7 @@ import Features from "./features";
 import MentorshipGallary from "./mentorship-gallery";
 import Floating from "./floating";
 import Script from "next/script";
+import Lifetime from "./lifetime";
 
 export const metadata: Metadata = {
   title: "Mentorship | 30dayscoding",
@@ -166,6 +167,7 @@ export default function Home() {
         desc="Learn from Aryan, Deepanshu, and the 30DC team to get placed this season."
         heroImage="/main/hero_section_mentor.png"
       />
+      <Lifetime />
       <Features />
       <MentorshipGallary />
       <Video

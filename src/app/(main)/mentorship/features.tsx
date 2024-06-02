@@ -1,4 +1,5 @@
 import Reveal from "@/components/framer/reveal";
+import { Shapes } from "lucide-react";
 
 export default function Features() {
   let mentorsipPath = [
@@ -171,7 +172,7 @@ export default function Features() {
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
-      <div className="relative flex flex-col items-start gap-5 rounded-xl border border-prime bg-second p-5 lg:p-8">
+      <div className="relative flex flex-col items-start gap-5 rounded-xl border border-prime bg-second p-5 lg:p-8 overflow-hidden">
         <div className="flex flex-col items-start gap-3 self-stretch">
           <Reveal>
             <span className="self-stretch text-xl font-semibold leading-[30px]">
@@ -199,6 +200,7 @@ export default function Features() {
           ))}
           <div className="absolute -left-[26px] top-0 h-full w-px bg-prime/70"></div>
         </div>
+          <Shapes className="h-40 w-40 rotate-12 absolute -top-10 -right-10 opacity-60 stroke-prime" />
       </div>
     </div>
   );
