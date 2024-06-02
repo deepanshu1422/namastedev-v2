@@ -197,7 +197,7 @@ export default function Home() {
       <Faqs faq={faq} />
       {/* <Highlights /> */}
       {/* <Testimonials /> */}
-      <Floating />
+      {/* <Floating /> */}
     </main>
   );
 }
