@@ -147,7 +147,7 @@ export default function Home() {
       <Highlights />
       <Testimonials />
       <Faqs faq={faq} />
-      <Floating />
+      {/* <Floating /> */}
     </main>
   );
 }
