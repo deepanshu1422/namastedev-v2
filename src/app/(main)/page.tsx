@@ -132,8 +132,8 @@ export default function Home() {
         }`
       }} />
       <Hero
-        title="Premium MERN, Next JS, DSA, Blockchain, AI courses for less than your dinner!"
-        desc="The most affordable premium courses. Projects, Guides, and Certificates included."
+        title="Job Ready Premium Coding Courses"
+        desc="500+ Videos • 45+ Projects • 20+ Interview Guides • 25k+ Students • Beginner Friendly • Certificates included. Checkout the reviews"
         heroImage="bg-[url('https://i.ibb.co/nn0YJDY/code-1.png')]"
         subTitle="Lifetime Validity Courses + Certificates"
         subDesc="Whether you're a beginner looking to dive into programming or an experienced developer seeking skill enhancement, our mentors' guidance and courses are well-designed for all levels of proficiency."
