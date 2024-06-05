@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Explore our DSA code platform for mastering Data Structures and Algorithms. Access a wide range of DSA tutorials, practice problems, and coding challenges to enhance your programming skills and ace your technical interviews.",
   openGraph: {
-    images: "https://i.ibb.co/f2v6nCj/job.webp",
+    images: "https://i.ibb.co/7KP3CJp/dsa-1.webp",
     title: "30DC Code Platform | 30dayscoding",
     description:
       "Explore our DSA code platform for mastering Data Structures and Algorithms. Access a wide range of DSA tutorials, practice problems, and coding challenges to enhance your programming skills and ace your technical interviews.",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   keywords: ["30 days coding, coding, coding challenges"],
   twitter: {
     card: "summary_large_image",
-    images: "https://i.ibb.co/f2v6nCj/job.webp",
+    images: "https://i.ibb.co/7KP3CJp/dsa-1.webp",
     title: "30DC Code Platform | 30dayscoding",
     description:
       "Explore our DSA code platform for mastering Data Structures and Algorithms. Access a wide range of DSA tutorials, practice problems, and coding challenges to enhance your programming skills and ace your technical interviews.",

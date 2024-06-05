@@ -4,6 +4,7 @@ import prisma from "@/util/prismaClient";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { Metadata } from "next";
 import { unstable_cache } from "next/cache";
+import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Job Platform | 30dayscoding",
@@ -58,10 +59,12 @@ export default async function Home() {
 
   const newData = data.map((e) => ({ ...e, status: "applied", id: e.jobId }));
 
+  return notFound()
+
   return (
     <main className="mx-auto max-w-[90rem] px-5 md:px-10 lg:px-20 flex flex-col min-h-svh">
       <Hero />
-      <DataTableDemo data={newData} />
+      {/* <DataTableDemo data={newData} /> */}
     </main>
   );
 }

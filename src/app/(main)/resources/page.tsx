@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import Store from "@/components/home-components/store";
 import Faqs from "@/components/mentorship-comp/faq";
 import Script from "next/script";
+import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Resources | 30dayscoding",
@@ -88,6 +89,9 @@ export default function Resources() {
       answer: "If you have already purchased a course and want to upgrade to the 10-course bundle, contact the course provider's support team. They may be able to provide a discounted price based on your previous purchase."
       },
   ];
+
+  return notFound()
+
   return (
     <main className={`font-jakarta bg-bg min-h-svh`}>
       <Script id="resource-faq" type="application/ld+json" dangerouslySetInnerHTML={{

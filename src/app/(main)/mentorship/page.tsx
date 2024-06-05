@@ -162,11 +162,11 @@ export default function Home() {
         }))}]
         }`
       }} />
-      <Hero
+      {/* <Hero
         title="Lifetime 1:1 Mentorship + 10 Course Access"
         desc="Learn from Aryan, Deepanshu, and the 30DC team to get placed this season."
         heroImage="/main/hero_section_mentor.png"
-      />
+      /> */}
       <Lifetime />
       <Features />
       <MentorshipGallary />

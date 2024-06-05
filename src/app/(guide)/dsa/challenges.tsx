@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -22,11 +24,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-
-// "use client"
-
-// import * as React from "react"
-
 import { Progress } from "@/components/ui/progress"
 
 // export function ProgressDemo() {
@@ -52,46 +49,25 @@ import {
 } from "@/components/ui/table"
 import Link from "next/link"
 import { Checkbox } from "@/components/ui/checkbox"
+import { Dispatch, SetStateAction, useState } from "react"
 
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Problem Statement",
-    paymentMethod: "Easy",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Problem Statement",
-    paymentMethod: "Easy"
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Problem Statement",
-    paymentMethod: "Easy",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Problem Statement",
-    paymentMethod: "Easy",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Problem Statement",
-    paymentMethod: "Easy"
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Problem Statement",
-    paymentMethod: "Easy",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Problem Statement",
-    paymentMethod: "Easy",
-  },
-]
+type Props = {
+  state: {
+    invoice: string;
+    paymentStatus: string;
+    paymentMethod: string;
+    select: boolean;
+  }[],
+  setState: Dispatch<SetStateAction<{
+    invoice: string;
+    paymentStatus: string;
+    paymentMethod: string;
+    select: boolean;
+  }[]>>
+}
 
-export function TableDemo() {
+export function TableDemo({ state, setState }: Props) {
+
   return (
     <Table>
       {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
@@ -104,26 +80,20 @@ export function TableDemo() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow className="hover:bg-slate-600/30 border-slate-600" key={invoice.invoice}>
-            <TableCell className="font-medium flex items-center justify-center w-[50px]"><Checkbox /></TableCell>
+        {state.map((invoice, index) => (
+          <TableRow data-state={invoice.select && "selected"} className="hover:bg-slate-600/30 border-slate-600" key={invoice.invoice}>
+            <TableCell className="font-medium flex items-center justify-center w-[50px]"><Checkbox checked={invoice.select} onCheckedChange={(e) => { setState(state.map((ele, i) => index === i ? { ...ele, select: Boolean(e) } : ele)) }} /></TableCell>
             <TableCell>{invoice.paymentStatus}</TableCell>
             <TableCell className="text-right">{invoice.paymentMethod}</TableCell>
             <TableCell className="text-right w-[120px] text-primary"><Link href={"#"}>View Code</Link></TableCell>
           </TableRow>
         ))}
       </TableBody>
-      {/* <TableFooter>
-        <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow>
-      </TableFooter> */}
     </Table>
   )
 }
 
-export function AccordionDemo() {
+export function AccordionDemo({ state, setState }: Props) {
   return (
     <Accordion type="single" collapsible className="w-full pt-5">
       <AccordionItem className="bg-muted/50" value="item-1">
@@ -135,31 +105,7 @@ export function AccordionDemo() {
           </div>
         </AccordionTrigger>
         <AccordionContent className="p-4">
-          <TableDemo />
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem className="bg-muted/50" value="item-2">
-        <AccordionTrigger className="bg-card px-4 flex justify-between w-full">
-          <span className="flex-1 shrink-0 text-nowrap font-extrabold font-bric">Two Pointers</span>
-          <div className="flex gap-2 items-center justify-end w-full">
-            <span>12/20</span>
-            <Progress value={60} className="w-[40%]" />
-          </div>
-        </AccordionTrigger>
-        <AccordionContent className="p-4">
-          <TableDemo />
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem className="bg-muted/50" value="item-3">
-        <AccordionTrigger className="bg-card px-4 flex justify-between w-full">
-          <span className="flex-1 shrink-0 text-nowrap font-extrabold font-bric">Slider Window</span>
-          <div className="flex gap-2 items-center justify-end w-full">
-            <span>6/10</span>
-            <Progress value={60} className="w-[40%]" />
-          </div>
-        </AccordionTrigger>
-        <AccordionContent className="p-4">
-          <TableDemo />
+          <TableDemo state={state} setState={setState} />
         </AccordionContent>
       </AccordionItem>
     </Accordion>
@@ -167,6 +113,52 @@ export function AccordionDemo() {
 }
 
 export default function ChallengesTabs() {
+
+  const [invoices, setInvoices] = useState([
+    {
+      invoice: "INV001",
+      paymentStatus: "Problem Statement",
+      paymentMethod: "Easy",
+      select: false
+    },
+    {
+      invoice: "INV002",
+      paymentStatus: "Problem Statement",
+      paymentMethod: "Easy",
+      select: false
+    },
+    {
+      invoice: "INV003",
+      paymentStatus: "Problem Statement",
+      paymentMethod: "Easy",
+      select: false
+    },
+    {
+      invoice: "INV004",
+      paymentStatus: "Problem Statement",
+      paymentMethod: "Easy",
+      select: false
+    },
+    {
+      invoice: "INV005",
+      paymentStatus: "Problem Statement",
+      paymentMethod: "Easy",
+      select: false
+    },
+    {
+      invoice: "INV006",
+      paymentStatus: "Problem Statement",
+      paymentMethod: "Easy",
+      select: false
+    },
+    {
+      invoice: "INV007",
+      paymentStatus: "Problem Statement",
+      paymentMethod: "Easy",
+      select: false
+    },
+  ])
+
   return (
     <Tabs defaultValue="blind" className="pt-10">
       <TabsList className="flex gap-2 w-full max-w-3xl mx-auto bg-card">
@@ -175,14 +167,14 @@ export default function ChallengesTabs() {
         <TabsTrigger className="flex-1" value="all">🌍 30DC All</TabsTrigger>
       </TabsList>
       <TabsContent value="blind">
-        <AccordionDemo />
+        <AccordionDemo state={invoices} setState={setInvoices} />
       </TabsContent>
-      <TabsContent value="150">
+      {/* <TabsContent value="150">
         <AccordionDemo />
       </TabsContent>
       <TabsContent value="all">
         <AccordionDemo />
-      </TabsContent>
+      </TabsContent> */}
     </Tabs>
   )
 }
