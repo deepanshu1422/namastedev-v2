@@ -132,8 +132,8 @@ export const navTitles: {
     href: "/roadmaps",
   },
   {
-    title: "Webinar",
-    href: "/webinar",
+    title: "DSA",
+    href: "/dsa",
   },
 ];
 

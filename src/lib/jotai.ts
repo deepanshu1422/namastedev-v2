@@ -1,0 +1,7302 @@
+import { atom } from "jotai"
+import { atomWithStorage, loadable } from 'jotai/utils'
+
+export const solved = atomWithStorage<string[]>("dsa-solved", [])
+
+export const dsaProblems = atom([
+    {
+        "title": "Arrays & Hashing",
+        "problems": [
+            {
+                "title": "Contains Duplicate",
+
+                "difficulty": "easy",
+                "code": "0217-contains-duplicate",
+                "link": "contains-duplicate",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "scala",
+                    "dart"
+                ]
+            },
+            {
+                "title": "Valid Anagram",
+
+                "difficulty": "easy",
+                "code": "0242-valid-anagram",
+                "link": "valid-anagram",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "scala",
+                    "dart"
+                ]
+            },
+            {
+                "title": "Concatenation of Array",
+
+                "difficulty": "easy",
+                "code": "1929-concatenation-of-array",
+                "link": "concatenation-of-array",
+                "lang": [
+                    "python",
+                    "cpp",
+                    "java",
+                    "javascript",
+                    "kotlin",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "rust",
+                    "scala",
+                    "dart"
+                ]
+            },
+            {
+                "title": "Replace Elements With Greatest Element On Right Side",
+
+                "difficulty": "easy",
+                "code": "1299-replace-elements-with-greatest-element-on-right-side",
+                "link": "replace-elements-with-greatest-element-on-right-side",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "csharp",
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "dart",
+                    "kotlin",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Is Subsequence",
+
+                "difficulty": "easy",
+                "code": "0392-is-subsequence",
+                "link": "is-subsequence",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "csharp",
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "dart",
+                    "kotlin",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Length of Last Word",
+
+                "difficulty": "easy",
+                "code": "0058-length-of-last-word",
+                "link": "length-of-last-word",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "csharp",
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "rust",
+                    "go",
+                    "swift",
+                    "dart",
+                    "ruby",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Two Sum",
+
+                "difficulty": "easy",
+                "code": "0001-two-sum",
+                "link": "two-sum",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "scala",
+                    "dart"
+                ]
+            },
+            {
+                "title": "Longest Common Prefix",
+
+                "difficulty": "easy",
+                "code": "0014-longest-common-prefix",
+                "link": "longest-common-prefix",
+                "lang": [
+                    "cpp",
+                    "python",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "java",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "dart",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Group Anagrams",
+
+                "difficulty": "medium",
+                "code": "0049-group-anagrams",
+                "link": "group-anagrams",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "dart",
+                    "c",
+                    "scala"
+                ]
+            },
+            {
+                "title": "Pascals Triangle",
+
+                "difficulty": "easy",
+                "code": "0118-pascals-triangle",
+                "link": "pascals-triangle",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "rust",
+                    "csharp",
+                    "go",
+                    "dart",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Remove Element",
+
+                "difficulty": "easy",
+                "code": "0027-remove-element",
+                "link": "remove-element",
+                "lang": [
+                    "c",
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "cpp",
+                    "csharp",
+                    "swift",
+                    "rust",
+                    "dart",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Unique Email Addresses",
+
+                "difficulty": "easy",
+                "code": "0929-unique-email-addresses",
+                "link": "unique-email-addresses",
+                "lang": [
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "swift",
+                    "cpp",
+                    "csharp",
+                    "go",
+                    "rust",
+                    "c",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Isomorphic Strings",
+
+                "difficulty": "easy",
+                "code": "0205-isomorphic-strings",
+                "link": "isomorphic-strings",
+                "lang": [
+                    "c",
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "swift",
+                    "cpp",
+                    "csharp",
+                    "go",
+                    "rust",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Can Place Flowers",
+
+                "difficulty": "easy",
+                "code": "0605-can-place-flowers",
+                "link": "can-place-flowers",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "csharp",
+                    "go",
+                    "rust",
+                    "java",
+                    "kotlin",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Majority Element",
+
+                "difficulty": "easy",
+                "code": "0169-majority-element",
+                "link": "majority-element",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "swift",
+                    "csharp",
+                    "java",
+                    "go",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Next Greater Element I",
+
+                "difficulty": "easy",
+                "code": "0496-next-greater-element-i",
+                "link": "next-greater-element-i",
+                "lang": [
+                    "java",
+                    "python",
+                    "typescript",
+                    "c",
+                    "cpp",
+                    "csharp",
+                    "javascript",
+                    "go",
+                    "rust",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Find Pivot Index",
+
+                "difficulty": "easy",
+                "code": "0724-find-pivot-index",
+                "link": "find-pivot-index",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "csharp",
+                    "kotlin",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Range Sum Query - Immutable",
+
+                "difficulty": "easy",
+                "code": "0303-range-sum-query-immutable",
+                "link": "range-sum-query-immutable",
+                "lang": [
+                    "python",
+                    "c",
+                    "cpp",
+                    "java",
+                    "kotlin",
+                    "csharp",
+                    "javascript",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Find All Numbers Disappeared in An Array",
+
+                "difficulty": "easy",
+                "code": "0448-find-all-numbers-disappeared-in-an-array",
+                "link": "find-all-numbers-disappeared-in-an-array",
+                "lang": [
+                    "cpp",
+                    "java",
+                    "python",
+                    "javascript",
+                    "c",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "csharp",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Maximum Number of Balloons",
+
+                "difficulty": "easy",
+                "code": "1189-maximum-number-of-balloons",
+                "link": "maximum-number-of-balloons",
+                "lang": [
+                    "c",
+                    "java",
+                    "python",
+                    "javascript",
+                    "cpp",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "csharp",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Word Pattern",
+
+                "difficulty": "easy",
+                "code": "0290-word-pattern",
+                "link": "word-pattern",
+                "lang": [
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "c",
+                    "cpp",
+                    "go",
+                    "rust",
+                    "csharp",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Design HashSet",
+
+                "difficulty": "easy",
+                "code": "0705-design-hashset",
+                "link": "design-hashset",
+                "lang": [
+                    "kotlin",
+                    "c",
+                    "cpp",
+                    "java",
+                    "python",
+                    "javascript",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Design HashMap",
+
+                "difficulty": "easy",
+                "code": "0706-design-hashmap",
+                "link": "design-hashmap",
+                "lang": [
+                    "python",
+                    "c",
+                    "cpp",
+                    "java",
+                    "javascript",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Sort an Array",
+
+                "difficulty": "medium",
+                "code": "0912-sort-an-array",
+                "link": "sort-an-array",
+                "lang": [
+                    "python",
+                    "java",
+                    "kotlin",
+                    "cpp",
+                    "csharp",
+                    "javascript",
+                    "go",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Top K Frequent Elements",
+
+                "difficulty": "medium",
+                "code": "0347-top-k-frequent-elements",
+                "link": "top-k-frequent-elements",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "c",
+                    "scala"
+                ]
+            },
+            {
+                "title": "Product of Array Except Self",
+
+                "difficulty": "medium",
+                "code": "0238-product-of-array-except-self",
+                "link": "product-of-array-except-self",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Valid Sudoku",
+
+                "difficulty": "medium",
+                "code": "0036-valid-sudoku",
+                "link": "valid-sudoku",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "kotlin",
+                    "rust",
+                    "dart",
+                    "scala"
+                ]
+            },
+            {
+                "title": "Encode and Decode Strings",
+
+                "difficulty": "medium",
+                "code": "0271-encode-and-decode-strings",
+                "link": "encode-and-decode-strings",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "premium",
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "rust",
+                    "typescript",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Longest Consecutive Sequence",
+
+                "difficulty": "medium",
+                "code": "0128-longest-consecutive-sequence",
+                "link": "longest-consecutive-sequence",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "c"
+                ]
+            },
+            {
+                "title": "Sort Colors",
+
+                "difficulty": "medium",
+                "code": "0075-sort-colors",
+                "link": "sort-colors",
+                "lang": [
+                    "c",
+                    "java",
+                    "javascript",
+                    "go",
+                    "kotlin",
+                    "cpp",
+                    "python",
+                    "typescript",
+                    "csharp",
+                    "rust",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Encode and Decode TinyURL",
+
+                "difficulty": "medium",
+                "code": "0535-encode-and-decode-tinyurl",
+                "link": "encode-and-decode-tinyurl",
+                "lang": [
+                    "javascript",
+                    "cpp",
+                    "python",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "swift",
+                    "kotlin",
+                    "c",
+                    "java"
+                ]
+            },
+            {
+                "title": "Brick Wall",
+
+                "difficulty": "medium",
+                "code": "0554-brick-wall",
+                "link": "brick-wall",
+                "lang": [
+                    "javascript",
+                    "typescript",
+                    "c",
+                    "cpp",
+                    "java",
+                    "python",
+                    "rust",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Best Time to Buy And Sell Stock II",
+
+                "difficulty": "medium",
+                "code": "0122-best-time-to-buy-and-sell-stock-ii",
+                "link": "best-time-to-buy-and-sell-stock-ii",
+                "lang": [
+                    "c",
+                    "javascript",
+                    "go",
+                    "cpp",
+                    "java",
+                    "python",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Subarray Sum Equals K",
+
+                "difficulty": "medium",
+                "code": "0560-subarray-sum-equals-k",
+                "link": "subarray-sum-equals-k",
+                "lang": [
+                    "java",
+                    "cpp",
+                    "go",
+                    "c",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "kotlin",
+                    "rust",
+                    "csharp"
+                ]
+            },
+            {
+                "title": "Unique Length 3 Palindromic Subsequences",
+
+                "difficulty": "medium",
+                "code": "1930-unique-length-3-palindromic-subsequences",
+                "link": "unique-length-3-palindromic-subsequences",
+                "lang": [
+                    "cpp",
+                    "java",
+                    "kotlin",
+                    "c",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Minimum Number of Swaps to Make The String Balanced",
+
+                "difficulty": "medium",
+                "code": "1963-minimum-number-of-swaps-to-make-the-string-balanced",
+                "link": "minimum-number-of-swaps-to-make-the-string-balanced",
+                "lang": [
+                    "javascript",
+                    "cpp",
+                    "c",
+                    "python",
+                    "kotlin",
+                    "java",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Number of Pairs of Interchangeable Rectangles",
+
+                "difficulty": "medium",
+                "code": "2001-number-of-pairs-of-interchangeable-rectangles",
+                "link": "number-of-pairs-of-interchangeable-rectangles",
+                "lang": [
+                    "javascript",
+                    "cpp",
+                    "python",
+                    "c",
+                    "java",
+                    "rust",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Maximum Product of The Length of Two Palindromic Subsequences",
+
+                "difficulty": "medium",
+                "code": "2002-maximum-product-of-the-length-of-two-palindromic-subsequences",
+                "link": "maximum-product-of-the-length-of-two-palindromic-subsequences",
+                "lang": [
+                    "cpp",
+                    "c",
+                    "csharp",
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Grid Game",
+
+                "difficulty": "medium",
+                "code": "2017-grid-game",
+                "link": "grid-game",
+                "lang": [
+                    "python",
+                    "cpp",
+                    "kotlin",
+                    "java",
+                    "javascript",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Find All Anagrams in a String",
+
+                "difficulty": "medium",
+                "code": "0438-find-all-anagrams-in-a-string",
+                "link": "find-all-anagrams-in-a-string",
+                "lang": [
+                    "cpp",
+                    "csharp",
+                    "python",
+                    "java",
+                    "javascript",
+                    "go",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Find The Index of The First Occurrence in a String",
+
+                "difficulty": "easy",
+                "code": "0028-find-the-index-of-the-first-occurrence-in-a-string",
+                "link": "find-the-index-of-the-first-occurrence-in-a-string",
+                "lang": [
+                    "python",
+                    "cpp",
+                    "go",
+                    "c",
+                    "java",
+                    "kotlin",
+                    "csharp",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Wiggle Sort",
+
+                "difficulty": "medium",
+                "code": "0280-wiggle-sort",
+                "link": "wiggle-sort",
+                "lang": [
+                    "premium",
+                    "cpp",
+                    "python",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Largest Number",
+
+                "difficulty": "medium",
+                "code": "0179-largest-number",
+                "link": "largest-number",
+                "lang": [
+                    "typescript",
+                    "cpp",
+                    "java",
+                    "kotlin",
+                    "c",
+                    "csharp",
+                    "python",
+                    "javascript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "rust",
+                    "scala"
+                ]
+            },
+            {
+                "title": "Continuous Subarray Sum",
+
+                "difficulty": "medium",
+                "code": "0523-continuous-subarray-sum",
+                "link": "continuous-subarray-sum",
+                "lang": [
+                    "java",
+                    "python",
+                    "cpp",
+                    "kotlin",
+                    "c",
+                    "javascript",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Push Dominoes",
+
+                "difficulty": "medium",
+                "code": "0838-push-dominoes",
+                "link": "push-dominoes",
+                "lang": [
+                    "typescript",
+                    "cpp",
+                    "python",
+                    "kotlin",
+                    "java"
+                ]
+            },
+            {
+                "title": "Repeated DNA Sequences",
+
+                "difficulty": "medium",
+                "code": "0187-repeated-dna-sequences",
+                "link": "repeated-dna-sequences",
+                "lang": [
+                    "java",
+                    "typescript",
+                    "cpp",
+                    "kotlin",
+                    "python",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Insert Delete Get Random O(1)",
+
+                "difficulty": "medium",
+                "code": "0380-insert-delete-getrandom-o1",
+                "link": "insert-delete-getrandom-o1",
+                "lang": [
+                    "java",
+                    "typescript",
+                    "javascript",
+                    "go",
+                    "cpp",
+                    "swift",
+                    "kotlin",
+                    "python"
+                ]
+            },
+            {
+                "title": "Check if a String Contains all Binary Codes of Size K",
+
+                "difficulty": "medium",
+                "code": "1461-check-if-a-string-contains-all-binary-codes-of-size-k",
+                "link": "check-if-a-string-contains-all-binary-codes-of-size-k",
+                "lang": [
+                    "cpp",
+                    "kotlin",
+                    "python",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Range Sum Query 2D Immutable",
+
+                "difficulty": "medium",
+                "code": "0304-range-sum-query-2d-immutable",
+                "link": "range-sum-query-2d-immutable",
+                "lang": [
+                    "cpp",
+                    "python",
+                    "kotlin",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Non Decreasing Array",
+
+                "difficulty": "medium",
+                "code": "0665-non-decreasing-array",
+                "link": "non-decreasing-array",
+                "lang": [
+                    "cpp",
+                    "java",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "scala",
+                    "kotlin",
+                    "python",
+                    "csharp"
+                ]
+            },
+            {
+                "title": "First Missing Positive",
+
+                "difficulty": "hard",
+                "code": "0041-first-missing-positive",
+                "link": "first-missing-positive",
+                "lang": [
+                    "python",
+                    "typescript",
+                    "cpp",
+                    "java",
+                    "go",
+                    "kotlin",
+                    "c",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Sign of An Array",
+
+                "difficulty": "easy",
+                "code": "1822-sign-of-the-product-of-an-array",
+                "link": "sign-of-the-product-of-an-array",
+                "lang": [
+                    "cpp",
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Find the Difference of Two Arrays",
+
+                "difficulty": "easy",
+                "code": "2215-find-the-difference-of-two-arrays",
+                "link": "find-the-difference-of-two-arrays",
+                "lang": [
+                    "kotlin",
+                    "cpp",
+                    "csharp",
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript"
+                ]
+            },
+            {
+                "title": "Design Parking System",
+
+                "difficulty": "easy",
+                "code": "1603-design-parking-system",
+                "link": "design-parking-system",
+                "lang": [
+                    "kotlin",
+                    "java",
+                    "python",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Number of Zero-Filled Subarrays",
+
+                "difficulty": "medium",
+                "code": "2348-number-of-zero-filled-subarrays",
+                "link": "number-of-zero-filled-subarrays",
+                "lang": [
+                    "kotlin",
+                    "cpp",
+                    "java",
+                    "python"
+                ]
+            },
+            {
+                "title": "Optimal Partition of String",
+
+                "difficulty": "medium",
+                "code": "2405-optimal-partition-of-string",
+                "link": "optimal-partition-of-string",
+                "lang": [
+                    "kotlin",
+                    "java"
+                ]
+            },
+            {
+                "title": "Design Underground System",
+
+                "difficulty": "medium",
+                "code": "1396-design-underground-system",
+                "link": "design-underground-system",
+                "lang": [
+                    "kotlin",
+                    "java",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Minimum Penalty for a Shop",
+
+                "difficulty": "medium",
+                "code": "2483-minimum-penalty-for-a-shop",
+                "link": "minimum-penalty-for-a-shop",
+                "lang": [
+                    "cpp",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Text Justification",
+
+                "difficulty": "hard",
+                "code": "0068-naming-a-company",
+                "link": "text-justification",
+                "lang": [
+                    "python",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Naming a Company",
+
+                "difficulty": "hard",
+                "code": "2306-naming-a-company",
+                "link": "naming-a-company",
+                "lang": [
+                    "kotlin",
+                    "java",
+                    "javascript"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Two Pointers",
+        "problems": [
+            {
+                "title": "Valid Palindrome",
+
+                "difficulty": "easy",
+                "code": "0125-valid-palindrome",
+                "link": "valid-palindrome",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "dart",
+                    "scala"
+                ]
+            },
+            {
+                "title": "Valid Palindrome II",
+
+                "difficulty": "easy",
+                "code": "0680-valid-palindrome-ii",
+                "link": "valid-palindrome-ii",
+                "lang": [
+                    "python",
+                    "cpp",
+                    "csharp",
+                    "java",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "c",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Minimum Difference Between Highest And Lowest of K Scores",
+
+                "difficulty": "easy",
+                "code": "1984-minimum-difference-between-highest-and-lowest-of-k-scores",
+                "link": "minimum-difference-between-highest-and-lowest-of-k-scores",
+                "lang": [
+                    "javascript",
+                    "cpp",
+                    "python",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Merge Strings Alternately",
+
+                "difficulty": "easy",
+                "code": "1768-merge-strings-alternately",
+                "link": "merge-strings-alternately",
+                "lang": [
+                    "kotlin",
+                    "cpp",
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript"
+                ]
+            },
+            {
+                "title": "Reverse String",
+
+                "difficulty": "easy",
+                "code": "0344-reverse-string",
+                "link": "reverse-string",
+                "lang": [
+                    "c",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "swift",
+                    "cpp",
+                    "java",
+                    "go",
+                    "rust",
+                    "kotlin",
+                    "dart"
+                ]
+            },
+            {
+                "title": "Merge Sorted Array",
+
+                "difficulty": "easy",
+                "code": "0088-merge-sorted-array",
+                "link": "merge-sorted-array",
+                "lang": [
+                    "c",
+                    "java",
+                    "javascript",
+                    "cpp",
+                    "python",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Move Zeroes",
+
+                "difficulty": "easy",
+                "code": "0283-move-zeroes",
+                "link": "move-zeroes",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "python",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "rust",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Remove Duplicates From Sorted Array",
+
+                "difficulty": "easy",
+                "code": "0026-remove-duplicates-from-sorted-array",
+                "link": "remove-duplicates-from-sorted-array",
+                "lang": [
+                    "python",
+                    "javascript",
+                    "go",
+                    "cpp",
+                    "typescript",
+                    "swift",
+                    "rust",
+                    "java",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Remove Duplicates From Sorted Array II",
+
+                "difficulty": "medium",
+                "code": "0080-remove-duplicates-from-sorted-array-ii",
+                "link": "remove-duplicates-from-sorted-array-ii",
+                "lang": [
+                    "python",
+                    "kotlin",
+                    "cpp",
+                    "csharp",
+                    "javascript",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Two Sum II Input Array Is Sorted",
+
+                "difficulty": "medium",
+                "code": "0167-two-sum-ii-input-array-is-sorted",
+                "link": "two-sum-ii-input-array-is-sorted",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "scala"
+                ]
+            },
+            {
+                "title": "3Sum",
+
+                "difficulty": "medium",
+                "code": "0015-3sum",
+                "link": "3sum",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "scala",
+                    "c"
+                ]
+            },
+            {
+                "title": "4Sum",
+
+                "difficulty": "medium",
+                "code": "0018-4sum",
+                "link": "4sum",
+                "lang": [
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "cpp",
+                    "kotlin",
+                    "java"
+                ]
+            },
+            {
+                "title": "Container With Most Water",
+
+                "difficulty": "medium",
+                "code": "0011-container-with-most-water",
+                "link": "container-with-most-water",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "scala",
+                    "dart"
+                ]
+            },
+            {
+                "title": "Number of Subsequences That Satisfy The Given Sum Condition",
+
+                "difficulty": "medium",
+                "code": "1498-number-of-subsequences-that-satisfy-the-given-sum-condition",
+                "link": "number-of-subsequences-that-satisfy-the-given-sum-condition",
+                "lang": [
+                    "cpp",
+                    "python",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Rotate Array",
+
+                "difficulty": "medium",
+                "code": "0189-rotate-array",
+                "link": "rotate-array",
+                "lang": [
+                    "cpp",
+                    "java",
+                    "python",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Array With Elements Not Equal to Average of Neighbors",
+
+                "difficulty": "medium",
+                "code": "1968-array-with-elements-not-equal-to-average-of-neighbors",
+                "link": "array-with-elements-not-equal-to-average-of-neighbors",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "kotlin",
+                    "python",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Boats to Save People",
+
+                "difficulty": "medium",
+                "code": "0881-boats-to-save-people",
+                "link": "boats-to-save-people",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "typescript",
+                    "javascript",
+                    "python",
+                    "kotlin",
+                    "java",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Trapping Rain Water",
+
+                "difficulty": "hard",
+                "code": "0042-trapping-rain-water",
+                "link": "trapping-rain-water",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Sliding Window",
+        "problems": [
+            {
+                "title": "Best Time to Buy And Sell Stock",
+
+                "difficulty": "easy",
+                "code": "0121-best-time-to-buy-and-sell-stock",
+                "link": "best-time-to-buy-and-sell-stock",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "scala"
+                ]
+            },
+            {
+                "title": "Contains Duplicate II",
+
+                "difficulty": "easy",
+                "code": "0219-contains-duplicate-ii",
+                "link": "contains-duplicate-ii",
+                "lang": [
+                    "python",
+                    "cpp",
+                    "java",
+                    "javascript",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Number of Sub Arrays of Size K and Avg Greater than or Equal to Threshold",
+
+                "difficulty": "medium",
+                "code": "1343-number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold",
+                "link": "number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold",
+                "lang": [
+                    "python",
+                    "cpp",
+                    "javascript",
+                    "kotlin",
+                    "java"
+                ]
+            },
+            {
+                "title": "Longest Substring Without Repeating Characters",
+
+                "difficulty": "medium",
+                "code": "0003-longest-substring-without-repeating-characters",
+                "link": "longest-substring-without-repeating-characters",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "scala"
+                ]
+            },
+            {
+                "title": "Longest Repeating Character Replacement",
+
+                "difficulty": "medium",
+                "code": "0424-longest-repeating-character-replacement",
+                "link": "longest-repeating-character-replacement",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "kotlin",
+                    "rust",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Permutation In String",
+
+                "difficulty": "medium",
+                "code": "0567-permutation-in-string",
+                "link": "permutation-in-string",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Frequency of The Most Frequent Element",
+
+                "difficulty": "medium",
+                "code": "1838-frequency-of-the-most-frequent-element",
+                "link": "frequency-of-the-most-frequent-element",
+                "lang": [
+                    "csharp",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "c",
+                    "cpp",
+                    "kotlin",
+                    "java",
+                    "python"
+                ]
+            },
+            {
+                "title": "Fruits into Basket",
+
+                "difficulty": "medium",
+                "code": "0904-fruit-into-baskets",
+                "link": "fruit-into-baskets",
+                "lang": [
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust",
+                    "python"
+                ]
+            },
+            {
+                "title": "Maximum Number of Vowels in a Substring of Given Length",
+
+                "difficulty": "medium",
+                "code": "1456-maximum-number-of-vowels-in-a-substring-of-given-length",
+                "link": "maximum-number-of-vowels-in-a-substring-of-given-length",
+                "lang": [
+                    "kotlin",
+                    "cpp",
+                    "java",
+                    "python"
+                ]
+            },
+            {
+                "title": "Minimum Number of Flips to Make The Binary String Alternating",
+
+                "difficulty": "medium",
+                "code": "1888-minimum-number-of-flips-to-make-the-binary-string-alternating",
+                "link": "minimum-number-of-flips-to-make-the-binary-string-alternating",
+                "lang": [
+                    "javascript",
+                    "typescript",
+                    "kotlin",
+                    "python"
+                ]
+            },
+            {
+                "title": "Minimum Size Subarray Sum",
+
+                "difficulty": "medium",
+                "code": "0209-minimum-size-subarray-sum",
+                "link": "minimum-size-subarray-sum",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "javascript",
+                    "go",
+                    "java",
+                    "kotlin",
+                    "python"
+                ]
+            },
+            {
+                "title": "Find K Closest Elements",
+
+                "difficulty": "medium",
+                "code": "0658-find-k-closest-elements",
+                "link": "find-k-closest-elements",
+                "lang": [
+                    "python",
+                    "typescript",
+                    "javascript",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Minimum Operations to Reduce X to Zero",
+
+                "difficulty": "medium",
+                "code": "1658-minimum-operations-to-reduce-x-to-zero",
+                "link": "minimum-operations-to-reduce-x-to-zero",
+                "lang": [
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Minimum Window Substring",
+
+                "difficulty": "hard",
+                "code": "0076-minimum-window-substring",
+                "link": "minimum-window-substring",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust",
+                    "ruby",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Sliding Window Maximum",
+
+                "difficulty": "hard",
+                "code": "0239-sliding-window-maximum",
+                "link": "sliding-window-maximum",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "go",
+                    "kotlin",
+                    "typescript",
+                    "ruby",
+                    "c",
+                    "rust"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Stack",
+        "problems": [
+            {
+                "title": "Valid Parentheses",
+
+                "difficulty": "easy",
+                "code": "0020-valid-parentheses",
+                "link": "valid-parentheses",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "dart"
+                ]
+            },
+            {
+                "title": "Baseball Game",
+
+                "difficulty": "easy",
+                "code": "0682-baseball-game",
+                "link": "baseball-game",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "python",
+                    "java",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "kotlin",
+                    "csharp",
+                    "javascript",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Implement Stack Using Queues",
+
+                "difficulty": "easy",
+                "code": "0225-implement-stack-using-queues",
+                "link": "implement-stack-using-queues",
+                "lang": [
+                    "cpp",
+                    "go",
+                    "c",
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "rust",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Min Stack",
+
+                "difficulty": "medium",
+                "code": "0155-min-stack",
+                "link": "min-stack",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "kotlin",
+                    "c",
+                    "rust",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Evaluate Reverse Polish Notation",
+
+                "difficulty": "medium",
+                "code": "0150-evaluate-reverse-polish-notation",
+                "link": "evaluate-reverse-polish-notation",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Removing Stars From a String",
+
+                "difficulty": "medium",
+                "code": "2390-removing-stars-from-a-string",
+                "link": "removing-stars-from-a-string",
+                "lang": [
+                    "kotlin",
+                    "java",
+                    "python",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Validate Stack Sequences",
+
+                "difficulty": "medium",
+                "code": "0946-validate-stack-sequences",
+                "link": "validate-stack-sequences",
+                "lang": [
+                    "kotlin",
+                    "python"
+                ]
+            },
+            {
+                "title": "Generate Parentheses",
+
+                "difficulty": "medium",
+                "code": "0022-generate-parentheses",
+                "link": "generate-parentheses",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "kotlin",
+                    "c",
+                    "rust",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Asteroid Collision",
+
+                "difficulty": "medium",
+                "code": "0735-asteroid-collision",
+                "link": "asteroid-collision",
+                "lang": [
+                    "java",
+                    "javascript",
+                    "typescript",
+                    "rust",
+                    "python",
+                    "cpp",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Daily Temperatures",
+
+                "difficulty": "medium",
+                "code": "0739-daily-temperatures",
+                "link": "daily-temperatures",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Online Stock Span",
+
+                "difficulty": "medium",
+                "code": "0901-online-stock-span",
+                "link": "online-stock-span",
+                "lang": [
+                    "python",
+                    "typescript",
+                    "rust",
+                    "cpp",
+                    "java",
+                    "javascript",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Car Fleet",
+
+                "difficulty": "medium",
+                "code": "0853-car-fleet",
+                "link": "car-fleet",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "kotlin",
+                    "rust",
+                    "c"
+                ]
+            },
+            {
+                "title": "Simplify Path",
+
+                "difficulty": "medium",
+                "code": "0071-simplify-path",
+                "link": "simplify-path",
+                "lang": [
+                    "python",
+                    "typescript",
+                    "rust",
+                    "java",
+                    "kotlin",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Decode String",
+
+                "difficulty": "medium",
+                "code": "0394-decode-string",
+                "link": "decode-string",
+                "lang": [
+                    "python",
+                    "typescript",
+                    "rust",
+                    "scala",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Remove K Digits",
+
+                "difficulty": "medium",
+                "code": "0402-remove-k-digits",
+                "link": "remove-k-digits",
+                "lang": [
+                    "cpp",
+                    "javascript",
+                    "typescript",
+                    "rust",
+                    "kotlin",
+                    "java",
+                    "python"
+                ]
+            },
+            {
+                "title": "Remove All Adjacent Duplicates In String II",
+
+                "difficulty": "medium",
+                "code": "1209-remove-all-adjacent-duplicates-in-string-ii",
+                "link": "remove-all-adjacent-duplicates-in-string-ii",
+                "lang": [
+                    "cpp",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "rust",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "132 Pattern",
+
+                "difficulty": "medium",
+                "code": "0456-132-pattern",
+                "link": "132-pattern",
+                "lang": [
+                    "python",
+                    "cpp",
+                    "java",
+                    "javascript",
+                    "typescript",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Maximum Frequency Stack",
+
+                "difficulty": "hard",
+                "code": "0895-maximum-frequency-stack",
+                "link": "maximum-frequency-stack",
+                "lang": [
+                    "javascript",
+                    "typescript",
+                    "rust",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Largest Rectangle In Histogram",
+
+                "difficulty": "hard",
+                "code": "0084-largest-rectangle-in-histogram",
+                "link": "largest-rectangle-in-histogram",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust",
+                    "c"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Binary Search",
+        "problems": [
+            {
+                "title": "Binary Search",
+
+                "difficulty": "easy",
+                "code": "0704-binary-search",
+                "link": "binary-search",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "dart"
+                ]
+            },
+            {
+                "title": "Search Insert Position",
+
+                "difficulty": "easy",
+                "code": "0035-search-insert-position",
+                "link": "search-insert-position",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "python",
+                    "javascript",
+                    "swift",
+                    "csharp",
+                    "java",
+                    "go",
+                    "kotlin",
+                    "typescript",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Guess Number Higher Or Lower",
+
+                "difficulty": "easy",
+                "code": "0374-guess-number-higher-or-lower",
+                "link": "guess-number-higher-or-lower",
+                "lang": [
+                    "c",
+                    "python",
+                    "cpp",
+                    "java",
+                    "javascript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Arranging Coins",
+
+                "difficulty": "easy",
+                "code": "0441-arranging-coins",
+                "link": "arranging-coins",
+                "lang": [
+                    "python",
+                    "cpp",
+                    "kotlin",
+                    "java",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Squares of a Sorted Array",
+
+                "difficulty": "easy",
+                "code": "0977-squares-of-a-sorted-array",
+                "link": "squares-of-a-sorted-array",
+                "lang": [
+                    "cpp",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "java",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Valid Perfect Square",
+
+                "difficulty": "easy",
+                "code": "0367-valid-perfect-square",
+                "link": "valid-perfect-square",
+                "lang": [
+                    "python",
+                    "javascript",
+                    "cpp",
+                    "swift",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Sqrt(x) ",
+
+                "difficulty": "easy",
+                "code": "0069-sqrtx",
+                "link": "sqrtx",
+                "lang": [
+                    "kotlin",
+                    "c",
+                    "cpp",
+                    "java",
+                    "python",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Single Element in a Sorted Array",
+
+                "difficulty": "medium",
+                "code": "0540-single-element-in-a-sorted-array",
+                "link": "single-element-in-a-sorted-array",
+                "lang": [
+                    "kotlin",
+                    "cpp",
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript"
+                ]
+            },
+            {
+                "title": "Capacity to Ship Packages",
+
+                "difficulty": "medium",
+                "code": "1011-capacity-to-ship-packages-within-d-days",
+                "link": "capacity-to-ship-packages-within-d-days",
+                "lang": [
+                    "kotlin",
+                    "java",
+                    "python"
+                ]
+            },
+            {
+                "title": "Find Peak Element",
+
+                "difficulty": "medium",
+                "code": "0162-find-peak-element",
+                "link": "find-peak-element",
+                "lang": [
+                    "kotlin",
+                    "cpp",
+                    "java",
+                    "python",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Successful Pairs of Spells and Potions",
+
+                "difficulty": "medium",
+                "code": "2300-successful-pairs-of-spells-and-potions",
+                "link": "successful-pairs-of-spells-and-potions",
+                "lang": [
+                    "kotlin",
+                    "cpp",
+                    "python"
+                ]
+            },
+            {
+                "title": "Search a 2D Matrix",
+
+                "difficulty": "medium",
+                "code": "0074-search-a-2d-matrix",
+                "link": "search-a-2d-matrix",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Koko Eating Bananas",
+
+                "difficulty": "medium",
+                "code": "0875-koko-eating-bananas",
+                "link": "koko-eating-bananas",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Minimize the Maximum Difference of Pairs",
+
+                "difficulty": "medium",
+                "code": "2616-minimize-the-maximum-difference-of-pairs",
+                "link": "minimize-the-maximum-difference-of-pairs",
+                "lang": [
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Find Minimum In Rotated Sorted Array",
+
+                "difficulty": "medium",
+                "code": "0153-find-minimum-in-rotated-sorted-array",
+                "link": "find-minimum-in-rotated-sorted-array",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "scala",
+                    "ruby"
+                ]
+            },
+            {
+                "title": "Search In Rotated Sorted Array",
+
+                "difficulty": "medium",
+                "code": "0033-search-in-rotated-sorted-array",
+                "link": "search-in-rotated-sorted-array",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "scala"
+                ]
+            },
+            {
+                "title": "Search In Rotated Sorted Array II",
+
+                "difficulty": "medium",
+                "code": "0081-search-in-rotated-sorted-array-ii",
+                "link": "search-in-rotated-sorted-array-ii",
+                "lang": [
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Time Based Key Value Store",
+
+                "difficulty": "medium",
+                "code": "0981-time-based-key-value-store",
+                "link": "time-based-key-value-store",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "ruby",
+                    "rust",
+                    "c"
+                ]
+            },
+            {
+                "title": "Find First And Last Position of Element In Sorted Array",
+
+                "difficulty": "medium",
+                "code": "0034-find-first-and-last-position-of-element-in-sorted-array",
+                "link": "find-first-and-last-position-of-element-in-sorted-array",
+                "lang": [
+                    "csharp",
+                    "python",
+                    "kotlin",
+                    "cpp",
+                    "java",
+                    "swift",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Maximum Number of Removable Characters",
+
+                "difficulty": "medium",
+                "code": "1898-maximum-number-of-removable-characters",
+                "link": "maximum-number-of-removable-characters",
+                "lang": [
+                    "javascript",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Populating Next Right Pointers In Each Node",
+
+                "difficulty": "medium",
+                "code": "0116-populating-next-right-pointers-in-each-node",
+                "link": "populating-next-right-pointers-in-each-node",
+                "lang": [
+                    "go",
+                    "cpp",
+                    "javascript",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Search Suggestions System",
+
+                "difficulty": "medium",
+                "code": "1268-search-suggestions-system",
+                "link": "search-suggestions-system",
+                "lang": [
+                    "java",
+                    "javascript",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Split Array Largest Sum",
+
+                "difficulty": "hard",
+                "code": "0410-split-array-largest-sum",
+                "link": "split-array-largest-sum",
+                "lang": [
+                    "python",
+                    "javascript",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Median of Two Sorted Arrays",
+
+                "difficulty": "hard",
+                "code": "0004-median-of-two-sorted-arrays",
+                "link": "median-of-two-sorted-arrays",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Linked List",
+        "problems": [
+            {
+                "title": "Reverse Linked List",
+
+                "difficulty": "easy",
+                "code": "0206-reverse-linked-list",
+                "link": "reverse-linked-list",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "cpp",
+                    "javascript",
+                    "java",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "scala",
+                    "rust",
+                    "dart"
+                ]
+            },
+            {
+                "title": "Merge Two Sorted Lists",
+
+                "difficulty": "easy",
+                "code": "0021-merge-two-sorted-lists",
+                "link": "merge-two-sorted-lists",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "scala",
+                    "dart",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Palindrome Linked List",
+
+                "difficulty": "easy",
+                "code": "0234-palindrome-linked-list",
+                "link": "palindrome-linked-list",
+                "lang": [
+                    "cpp",
+                    "javascript",
+                    "python",
+                    "go",
+                    "java",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Remove Linked List Elements",
+
+                "difficulty": "easy",
+                "code": "0203-remove-linked-list-elements",
+                "link": "remove-linked-list-elements",
+                "lang": [
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "cpp",
+                    "java",
+                    "python",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Remove Duplicates From Sorted List",
+
+                "difficulty": "easy",
+                "code": "0083-remove-duplicates-from-sorted-list",
+                "link": "remove-duplicates-from-sorted-list",
+                "lang": [
+                    "cpp",
+                    "python",
+                    "javascript",
+                    "go",
+                    "java",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Middle of the Linked List",
+
+                "difficulty": "easy",
+                "code": "0876-middle-of-the-linked-list",
+                "link": "middle-of-the-linked-list",
+                "lang": [
+                    "python",
+                    "c",
+                    "cpp",
+                    "csharp",
+                    "java",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Intersection of Two Linked Lists",
+
+                "difficulty": "easy",
+                "code": "0160-intersection-of-two-linked-lists",
+                "link": "intersection-of-two-linked-lists",
+                "lang": [
+                    "python",
+                    "javascript",
+                    "java",
+                    "go",
+                    "kotlin",
+                    "c",
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Reorder List",
+
+                "difficulty": "medium",
+                "code": "0143-reorder-list",
+                "link": "reorder-list",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Maximum Twin Sum Of A Linked List",
+
+                "difficulty": "medium",
+                "code": "2130-maximum-twin-sum-of-a-linked-list",
+                "link": "maximum-twin-sum-of-a-linked-list",
+                "lang": [
+                    "python",
+                    "java",
+                    "kotlin",
+                    "cpp",
+                    "javascript",
+                    "go"
+                ]
+            },
+            {
+                "title": "Remove Nth Node From End of List",
+
+                "difficulty": "medium",
+                "code": "0019-remove-nth-node-from-end-of-list",
+                "link": "remove-nth-node-from-end-of-list",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Swapping Nodes in a Linked List",
+
+                "difficulty": "medium",
+                "code": "1721-swapping-nodes-in-a-linked-list",
+                "link": "swapping-nodes-in-a-linked-list",
+                "lang": [
+                    "kotlin",
+                    "cpp",
+                    "java",
+                    "python",
+                    "go"
+                ]
+            },
+            {
+                "title": "LFU Cache",
+
+                "difficulty": "hard",
+                "code": "0460-lfu-cache",
+                "link": "lfu-cache",
+                "lang": [
+                    "javascript",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Copy List With Random Pointer",
+
+                "difficulty": "medium",
+                "code": "0138-copy-list-with-random-pointer",
+                "link": "copy-list-with-random-pointer",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "go"
+                ]
+            },
+            {
+                "title": "Design Linked List",
+
+                "difficulty": "medium",
+                "code": "0707-design-linked-list",
+                "link": "design-linked-list",
+                "lang": [
+                    "python",
+                    "go",
+                    "kotlin",
+                    "c",
+                    "java"
+                ]
+            },
+            {
+                "title": "Design Browser History",
+
+                "difficulty": "medium",
+                "code": "1472-design-browser-history",
+                "link": "design-browser-history",
+                "lang": [
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Add Two Numbers",
+
+                "difficulty": "medium",
+                "code": "0002-add-two-numbers",
+                "link": "add-two-numbers",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "scala",
+                    "go",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Linked List Cycle",
+
+                "difficulty": "easy",
+                "code": "0141-linked-list-cycle",
+                "link": "linked-list-cycle",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "cpp",
+                    "javascript",
+                    "java",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "scala"
+                ]
+            },
+            {
+                "title": "Find The Duplicate Number",
+
+                "difficulty": "medium",
+                "code": "0287-find-the-duplicate-number",
+                "link": "find-the-duplicate-number",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Swap Nodes In Pairs",
+
+                "difficulty": "medium",
+                "code": "0024-swap-nodes-in-pairs",
+                "link": "swap-nodes-in-pairs",
+                "lang": [
+                    "python",
+                    "go",
+                    "java",
+                    "kotlin",
+                    "c",
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Sort List",
+
+                "difficulty": "medium",
+                "code": "0148-sort-list",
+                "link": "sort-list",
+                "lang": [
+                    "java",
+                    "python",
+                    "c",
+                    "cpp",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Partition List",
+
+                "difficulty": "medium",
+                "code": "0086-partition-list",
+                "link": "partition-list",
+                "lang": [
+                    "python",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Rotate List",
+
+                "difficulty": "medium",
+                "code": "0061-rotate-list",
+                "link": "rotate-list",
+                "lang": [
+                    "python",
+                    "cpp",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Reverse Linked List II",
+
+                "difficulty": "medium",
+                "code": "0092-reverse-linked-list-ii",
+                "link": "reverse-linked-list-ii",
+                "lang": [
+                    "python",
+                    "javascript",
+                    "cpp",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Design Circular Queue",
+
+                "difficulty": "medium",
+                "code": "0622-design-circular-queue",
+                "link": "design-circular-queue",
+                "lang": [
+                    "python",
+                    "go",
+                    "kotlin",
+                    "java"
+                ]
+            },
+            {
+                "title": "Insertion Sort List",
+
+                "difficulty": "medium",
+                "code": "0147-insertion-sort-list",
+                "link": "insertion-sort-list",
+                "lang": [
+                    "python",
+                    "cpp",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Split Linked List in Parts",
+
+                "difficulty": "medium",
+                "code": "0725-split-linked-list-in-parts",
+                "link": "split-linked-list-in-parts",
+                "lang": [
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "LRU Cache",
+
+                "difficulty": "medium",
+                "code": "0146-lru-cache",
+                "link": "lru-cache",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "ruby",
+                    "kotlin",
+                    "go",
+                    "typescript",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Merge K Sorted Lists",
+
+                "difficulty": "hard",
+                "code": "0023-merge-k-sorted-lists",
+                "link": "merge-k-sorted-lists",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "kotlin",
+                    "go",
+                    "swift",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Reverse Nodes In K Group",
+
+                "difficulty": "hard",
+                "code": "0025-reverse-nodes-in-k-group",
+                "link": "reverse-nodes-in-k-group",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "kotlin",
+                    "go",
+                    "swift",
+                    "rust"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Trees",
+        "problems": [
+            {
+                "title": "Binary Tree Inorder Traversal",
+
+                "difficulty": "easy",
+                "code": "0094-binary-tree-inorder-traversal",
+                "link": "binary-tree-inorder-traversal",
+                "lang": [
+                    "c",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "ruby",
+                    "csharp",
+                    "java",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Binary Tree Preorder Traversal",
+
+                "difficulty": "easy",
+                "code": "0144-binary-tree-preorder-traversal",
+                "link": "binary-tree-preorder-traversal",
+                "lang": [
+                    "python",
+                    "cpp",
+                    "typescript",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Binary Tree Postorder Traversal",
+
+                "difficulty": "easy",
+                "code": "0145-binary-tree-postorder-traversal",
+                "link": "binary-tree-postorder-traversal",
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "typescript",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Invert Binary Tree",
+
+                "difficulty": "easy",
+                "code": "0226-invert-binary-tree",
+                "link": "invert-binary-tree",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Maximum Depth of Binary Tree",
+
+                "difficulty": "easy",
+                "code": "0104-maximum-depth-of-binary-tree",
+                "link": "maximum-depth-of-binary-tree",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Diameter of Binary Tree",
+
+                "difficulty": "easy",
+                "code": "0543-diameter-of-binary-tree",
+                "link": "diameter-of-binary-tree",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Balanced Binary Tree",
+
+                "difficulty": "easy",
+                "code": "0110-balanced-binary-tree",
+                "link": "balanced-binary-tree",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Same Tree",
+
+                "difficulty": "easy",
+                "code": "0100-same-tree",
+                "link": "same-tree",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Subtree of Another Tree",
+
+                "difficulty": "easy",
+                "code": "0572-subtree-of-another-tree",
+                "link": "subtree-of-another-tree",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "scala",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Convert Sorted Array to Binary Search Tree",
+
+                "difficulty": "easy",
+                "code": "0108-convert-sorted-array-to-binary-search-tree",
+                "link": "convert-sorted-array-to-binary-search-tree",
+                "lang": [
+                    "c",
+                    "javascript",
+                    "go",
+                    "kotlin",
+                    "java",
+                    "python"
+                ]
+            },
+            {
+                "title": "Merge Two Binary Trees",
+
+                "difficulty": "easy",
+                "code": "0617-merge-two-binary-trees",
+                "link": "merge-two-binary-trees",
+                "lang": [
+                    "c",
+                    "java",
+                    "python",
+                    "javascript",
+                    "go",
+                    "dart",
+                    "kotlin",
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Path Sum",
+
+                "difficulty": "easy",
+                "code": "0112-path-sum",
+                "link": "path-sum",
+                "lang": [
+                    "go",
+                    "c",
+                    "csharp",
+                    "javascript",
+                    "swift",
+                    "java",
+                    "python",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Construct String From Binary Tree",
+
+                "difficulty": "easy",
+                "code": "0606-construct-string-from-binary-tree",
+                "link": "construct-string-from-binary-tree",
+                "lang": [
+                    "java",
+                    "python",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Lowest Common Ancestor of a Binary Search Tree",
+
+                "difficulty": "medium",
+                "code": "0235-lowest-common-ancestor-of-a-binary-search-tree",
+                "link": "lowest-common-ancestor-of-a-binary-search-tree",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "scala",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Insert into a Binary Search Tree",
+
+                "difficulty": "medium",
+                "code": "0701-insert-into-a-binary-search-tree",
+                "link": "insert-into-a-binary-search-tree",
+                "lang": [
+                    "python",
+                    "kotlin",
+                    "cpp",
+                    "csharp",
+                    "java",
+                    "typescript"
+                ]
+            },
+            {
+                "title": "Delete Node in a BST",
+
+                "difficulty": "medium",
+                "code": "0450-delete-node-in-a-bst",
+                "link": "delete-node-in-a-bst",
+                "lang": [
+                    "python",
+                    "kotlin",
+                    "cpp",
+                    "java",
+                    "typescript",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Binary Tree Level Order Traversal",
+
+                "difficulty": "medium",
+                "code": "0102-binary-tree-level-order-traversal",
+                "link": "binary-tree-level-order-traversal",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Binary Tree Right Side View",
+
+                "difficulty": "medium",
+                "code": "0199-binary-tree-right-side-view",
+                "link": "binary-tree-right-side-view",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "swift",
+                    "kotlin",
+                    "go",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Minimum Distance between BST Nodes",
+
+                "difficulty": "easy",
+                "code": "0783-minimum-distance-between-bst-nodes",
+                "link": "minimum-distance-between-bst-nodes",
+                "lang": [
+                    "kotlin",
+                    "python"
+                ]
+            },
+            {
+                "title": "Symmetric Tree ",
+
+                "difficulty": "easy",
+                "code": "0101-symmetric-tree",
+                "link": "symmetric-tree",
+                "lang": [
+                    "kotlin",
+                    "python"
+                ]
+            },
+            {
+                "title": "Minimum Time to Collect All Apples in a Tree",
+
+                "difficulty": "medium",
+                "code": "1443-minimum-time-to-collect-all-apples-in-a-tree",
+                "link": "minimum-time-to-collect-all-apples-in-a-tree",
+                "lang": [
+                    "rust",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Binary Tree Zigzag Level Order Traversal",
+
+                "difficulty": "medium",
+                "code": "0103-binary-tree-zigzag-level-order-traversal",
+                "link": "binary-tree-zigzag-level-order-traversal",
+                "lang": [
+                    "kotlin",
+                    "cpp",
+                    "python"
+                ]
+            },
+            {
+                "title": "Construct Quad Tree",
+
+                "difficulty": "medium",
+                "code": "0427-construct-quad-tree",
+                "link": "construct-quad-tree",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Find Duplicate Subtrees",
+
+                "difficulty": "medium",
+                "code": "0652-find-duplicate-subtrees",
+                "link": "find-duplicate-subtrees",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Check Completeness of a Binary Tree",
+
+                "difficulty": "medium",
+                "code": "0958-check-completeness-of-a-binary-tree",
+                "link": "check-completeness-of-a-binary-tree",
+                "lang": [
+                    "kotlin",
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Construct Binary Tree from Inorder and Postorder Traversal",
+
+                "difficulty": "medium",
+                "code": "0106-construct-binary-tree-from-inorder-and-postorder-traversal",
+                "link": "construct-binary-tree-from-inorder-and-postorder-traversal",
+                "lang": [
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Maximum Width of Binary Tree ",
+
+                "difficulty": "medium",
+                "code": "0662-maximum-width-of-binary-tree",
+                "link": "maximum-width-of-binary-tree",
+                "lang": [
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Time Needed to Inform All Employees ",
+
+                "difficulty": "medium",
+                "code": "1376-time-needed-to-inform-all-employees",
+                "link": "time-needed-to-inform-all-employees",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Count Good Nodes In Binary Tree",
+
+                "difficulty": "medium",
+                "code": "1448-count-good-nodes-in-binary-tree",
+                "link": "count-good-nodes-in-binary-tree",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Validate Binary Search Tree",
+
+                "difficulty": "medium",
+                "code": "0098-validate-binary-search-tree",
+                "link": "validate-binary-search-tree",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Kth Smallest Element In a Bst",
+
+                "difficulty": "medium",
+                "code": "0230-kth-smallest-element-in-a-bst",
+                "link": "kth-smallest-element-in-a-bst",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "scala",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Construct Binary Tree From Preorder And Inorder Traversal",
+
+                "difficulty": "medium",
+                "code": "0105-construct-binary-tree-from-preorder-and-inorder-traversal",
+                "link": "construct-binary-tree-from-preorder-and-inorder-traversal",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "kotlin",
+                    "go"
+                ]
+            },
+            {
+                "title": "Unique Binary Search Trees",
+
+                "difficulty": "medium",
+                "code": "0096-unique-binary-search-trees",
+                "link": "unique-binary-search-trees",
+                "lang": [
+                    "c",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Unique Binary Search Trees II",
+
+                "difficulty": "medium",
+                "code": "0095-unique-binary-search-trees-ii",
+                "link": "unique-binary-search-trees-ii",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Sum Root to Leaf Numbers",
+
+                "difficulty": "medium",
+                "code": "0129-sum-root-to-leaf-numbers",
+                "link": "sum-root-to-leaf-numbers",
+                "lang": [
+                    "c",
+                    "java",
+                    "cpp",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "House Robber III",
+
+                "difficulty": "medium",
+                "code": "0337-house-robber-iii",
+                "link": "house-robber-iii",
+                "lang": [
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Flip Equivalent Binary Trees",
+
+                "difficulty": "medium",
+                "code": "0951-flip-equivalent-binary-trees",
+                "link": "flip-equivalent-binary-trees",
+                "lang": [
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Operations On Tree",
+
+                "difficulty": "medium",
+                "code": "1993-operations-on-tree",
+                "link": "operations-on-tree",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "All Possible Full Binary Trees",
+
+                "difficulty": "medium",
+                "code": "0894-all-possible-full-binary-trees",
+                "link": "all-possible-full-binary-trees",
+                "lang": [
+                    "python",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Find Bottom Left Tree Value",
+
+                "difficulty": "medium",
+                "code": "0513-find-bottom-left-tree-value",
+                "link": "find-bottom-left-tree-value",
+                "lang": [
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Trim a Binary Search Tree",
+
+                "difficulty": "medium",
+                "code": "0669-trim-a-binary-search-tree",
+                "link": "trim-a-binary-search-tree",
+                "lang": [
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Binary Search Tree Iterator",
+
+                "difficulty": "medium",
+                "code": "0173-binary-search-tree-iterator",
+                "link": "binary-search-tree-iterator",
+                "lang": [
+                    "java",
+                    "javascript",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Convert Bst to Greater Tree",
+
+                "difficulty": "medium",
+                "code": "0538-convert-bst-to-greater-tree",
+                "link": "convert-bst-to-greater-tree",
+                "lang": [
+                    "cpp",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Binary Tree Maximum Path Sum",
+
+                "difficulty": "hard",
+                "code": "0124-binary-tree-maximum-path-sum",
+                "link": "binary-tree-maximum-path-sum",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Serialize And Deserialize Binary Tree",
+
+                "difficulty": "hard",
+                "code": "0297-serialize-and-deserialize-binary-tree",
+                "link": "serialize-and-deserialize-binary-tree",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "kotlin",
+                    "go",
+                    "typescript",
+                    "swift"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Tries",
+        "problems": [
+            {
+                "title": "Implement Trie Prefix Tree",
+
+                "difficulty": "medium",
+                "code": "0208-implement-trie-prefix-tree",
+                "link": "implement-trie-prefix-tree",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "scala"
+                ]
+            },
+            {
+                "title": "Design Add And Search Words Data Structure",
+
+                "difficulty": "medium",
+                "code": "0211-design-add-and-search-words-data-structure",
+                "link": "design-add-and-search-words-data-structure",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "ruby",
+                    "kotlin",
+                    "rust",
+                    "go",
+                    "c",
+                    "scala"
+                ]
+            },
+            {
+                "title": "Extra Characters in a String",
+
+                "difficulty": "medium",
+                "code": "2707-extra-characters-in-a-string",
+                "link": "extra-characters-in-a-string",
+                "lang": [
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Word Search II",
+
+                "difficulty": "hard",
+                "code": "0212-word-search-ii",
+                "link": "word-search-ii",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "go",
+                    "c"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Heap / Priority Queue",
+        "problems": [
+            {
+                "title": "Kth Largest Element In a Stream",
+
+                "difficulty": "easy",
+                "code": "0703-kth-largest-element-in-a-stream",
+                "link": "kth-largest-element-in-a-stream",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "ruby",
+                    "swift",
+                    "go",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Last Stone Weight",
+
+                "difficulty": "easy",
+                "code": "1046-last-stone-weight",
+                "link": "last-stone-weight",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "ruby",
+                    "kotlin",
+                    "go",
+                    "rust",
+                    "c"
+                ]
+            },
+            {
+                "title": "K Closest Points to Origin",
+
+                "difficulty": "medium",
+                "code": "0973-k-closest-points-to-origin",
+                "link": "k-closest-points-to-origin",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "kotlin",
+                    "go",
+                    "rust",
+                    "c"
+                ]
+            },
+            {
+                "title": "Kth Largest Element In An Array",
+
+                "difficulty": "medium",
+                "code": "0215-kth-largest-element-in-an-array",
+                "link": "kth-largest-element-in-an-array",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "kotlin",
+                    "go",
+                    "scala",
+                    "c",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Task Scheduler",
+
+                "difficulty": "medium",
+                "code": "0621-task-scheduler",
+                "link": "task-scheduler",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "kotlin",
+                    "rust",
+                    "c"
+                ]
+            },
+            {
+                "title": "Design Twitter",
+
+                "difficulty": "medium",
+                "code": "0355-design-twitter",
+                "link": "design-twitter",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "go",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Minimize Deviation in Array",
+
+                "difficulty": "hard",
+                "code": "1675-minimize-deviation-in-array",
+                "link": "minimize-deviation-in-array",
+                "lang": [
+                    "kotlin",
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Maximum Subsequence Score",
+
+                "difficulty": "medium",
+                "code": "2542-maximum-subsequence-score",
+                "link": "maximum-subsequence-score",
+                "lang": [
+                    "kotlin",
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Single Threaded Cpu",
+
+                "difficulty": "medium",
+                "code": "1834-single-threaded-cpu",
+                "link": "single-threaded-cpu",
+                "lang": [
+                    "java",
+                    "python",
+                    "javascript",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Seat Reservation Manager",
+
+                "difficulty": "medium",
+                "code": "1845-seat-reservation-manager",
+                "link": "seat-reservation-manager",
+                "lang": [
+                    "python",
+                    "cpp",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Process Tasks Using Servers",
+
+                "difficulty": "medium",
+                "code": "1882-process-tasks-using-servers",
+                "link": "process-tasks-using-servers",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Find The Kth Largest Integer In The Array",
+
+                "difficulty": "medium",
+                "code": "1985-find-the-kth-largest-integer-in-the-array",
+                "link": "find-the-kth-largest-integer-in-the-array",
+                "lang": [
+                    "java",
+                    "python",
+                    "swift",
+                    "cpp",
+                    "go",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Reorganize String",
+
+                "difficulty": "medium",
+                "code": "0767-reorganize-string",
+                "link": "reorganize-string",
+                "lang": [
+                    "java",
+                    "python",
+                    "cpp",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Longest Happy String",
+
+                "difficulty": "medium",
+                "code": "1405-longest-happy-string",
+                "link": "longest-happy-string",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Car Pooling",
+
+                "difficulty": "medium",
+                "code": "1094-car-pooling",
+                "link": "car-pooling",
+                "lang": [
+                    "csharp",
+                    "cpp",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Find Median From Data Stream",
+
+                "difficulty": "hard",
+                "code": "0295-find-median-from-data-stream",
+                "link": "find-median-from-data-stream",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "kotlin",
+                    "go",
+                    "typescript"
+                ]
+            },
+            {
+                "title": "Maximum Performance of a Team",
+
+                "difficulty": "hard",
+                "code": "1383-maximum-performance-of-a-team",
+                "link": "maximum-performance-of-a-team",
+                "lang": [
+                    "csharp",
+                    "python",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "IPO",
+
+                "difficulty": "hard",
+                "code": "0502-ipo",
+                "link": "ipo",
+                "lang": [
+                    "python",
+                    "kotlin"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Backtracking",
+        "problems": [
+            {
+                "title": "Subsets",
+
+                "difficulty": "medium",
+                "code": "0078-subsets",
+                "link": "subsets",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Combination Sum",
+
+                "difficulty": "medium",
+                "code": "0039-combination-sum",
+                "link": "combination-sum",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "ruby",
+                    "rust",
+                    "c",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Combinations",
+
+                "difficulty": "medium",
+                "code": "0077-combinations",
+                "link": "combinations",
+                "lang": [
+                    "python",
+                    "go",
+                    "kotlin",
+                    "java"
+                ]
+            },
+            {
+                "title": "Permutations",
+
+                "difficulty": "medium",
+                "code": "0046-permutations",
+                "link": "permutations",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "ruby",
+                    "rust",
+                    "c"
+                ]
+            },
+            {
+                "title": "Subsets II",
+
+                "difficulty": "medium",
+                "code": "0090-subsets-ii",
+                "link": "subsets-ii",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "ruby",
+                    "rust",
+                    "c"
+                ]
+            },
+            {
+                "title": "Combination Sum II",
+
+                "difficulty": "medium",
+                "code": "0040-combination-sum-ii",
+                "link": "combination-sum-ii",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "ruby",
+                    "c"
+                ]
+            },
+            {
+                "title": "Permutations II",
+
+                "difficulty": "medium",
+                "code": "0047-permutations-ii",
+                "link": "permutations-ii",
+                "lang": [
+                    "python",
+                    "go",
+                    "kotlin",
+                    "java"
+                ]
+            },
+            {
+                "title": "Word Search",
+
+                "difficulty": "medium",
+                "code": "0079-word-search",
+                "link": "word-search",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "ruby"
+                ]
+            },
+            {
+                "title": "Palindrome Partitioning",
+
+                "difficulty": "medium",
+                "code": "0131-palindrome-partitioning",
+                "link": "palindrome-partitioning",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "rust",
+                    "swift",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Restore IP Addresses",
+
+                "difficulty": "medium",
+                "code": "0093-restore-ip-addresses",
+                "link": "restore-ip-addresses",
+                "lang": [
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Letter Combinations of a Phone Number",
+
+                "difficulty": "medium",
+                "code": "0017-letter-combinations-of-a-phone-number",
+                "link": "letter-combinations-of-a-phone-number",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "rust",
+                    "kotlin",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Matchsticks to Square",
+
+                "difficulty": "medium",
+                "code": "0473-matchsticks-to-square",
+                "link": "matchsticks-to-square",
+                "lang": [
+                    "cpp",
+                    "python",
+                    "javascript",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Splitting a String Into Descending Consecutive Values",
+
+                "difficulty": "medium",
+                "code": "1849-splitting-a-string-into-descending-consecutive-values",
+                "link": "splitting-a-string-into-descending-consecutive-values",
+                "lang": [
+                    "python",
+                    "cpp",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Find Unique Binary String",
+
+                "difficulty": "medium",
+                "code": "1980-find-unique-binary-string",
+                "link": "find-unique-binary-string",
+                "lang": [
+                    "python",
+                    "kotlin",
+                    "java"
+                ]
+            },
+            {
+                "title": "Maximum Length of a Concatenated String With Unique Characters",
+
+                "difficulty": "medium",
+                "code": "1239-maximum-length-of-a-concatenated-string-with-unique-characters",
+                "link": "maximum-length-of-a-concatenated-string-with-unique-characters",
+                "lang": [
+                    "python",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Partition to K Equal Sum Subsets",
+
+                "difficulty": "medium",
+                "code": "0698-partition-to-k-equal-sum-subsets",
+                "link": "partition-to-k-equal-sum-subsets",
+                "lang": [
+                    "kotlin",
+                    "python",
+                    "java"
+                ]
+            },
+            {
+                "title": "N Queens",
+
+                "difficulty": "hard",
+                "code": "0051-n-queens",
+                "link": "n-queens",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "c",
+                    "rust"
+                ]
+            },
+            {
+                "title": "N Queens II",
+
+                "difficulty": "hard",
+                "code": "0052-n-queens-ii",
+                "link": "n-queens-ii",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "javascript",
+                    "python",
+                    "kotlin"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Graphs",
+        "problems": [
+            {
+                "title": "Island Perimeter",
+
+                "difficulty": "easy",
+                "code": "0463-island-perimeter",
+                "link": "island-perimeter",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "csharp",
+                    "python",
+                    "java",
+                    "javascript",
+                    "go",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Verifying An Alien Dictionary",
+
+                "difficulty": "easy",
+                "code": "0953-verifying-an-alien-dictionary",
+                "link": "verifying-an-alien-dictionary",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "java",
+                    "python",
+                    "javascript",
+                    "go",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Number of Islands",
+
+                "difficulty": "medium",
+                "code": "0200-number-of-islands",
+                "link": "number-of-islands",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "go",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Clone Graph",
+
+                "difficulty": "medium",
+                "code": "0133-clone-graph",
+                "link": "clone-graph",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Max Area of Island",
+
+                "difficulty": "medium",
+                "code": "0695-max-area-of-island",
+                "link": "max-area-of-island",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Count Sub Islands",
+
+                "difficulty": "medium",
+                "code": "1905-count-sub-islands",
+                "link": "count-sub-islands",
+                "lang": [
+                    "c",
+                    "csharp",
+                    "python",
+                    "cpp",
+                    "java",
+                    "javascript",
+                    "go",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Pacific Atlantic Water Flow",
+
+                "difficulty": "medium",
+                "code": "0417-pacific-atlantic-water-flow",
+                "link": "pacific-atlantic-water-flow",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "kotlin",
+                    "typescript",
+                    "go",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Surrounded Regions",
+
+                "difficulty": "medium",
+                "code": "0130-surrounded-regions",
+                "link": "surrounded-regions",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Reorder Routes to Make All Paths Lead to The City Zero",
+
+                "difficulty": "medium",
+                "code": "1466-reorder-routes-to-make-all-paths-lead-to-the-city-zero",
+                "link": "reorder-routes-to-make-all-paths-lead-to-the-city-zero",
+                "lang": [
+                    "csharp",
+                    "cpp",
+                    "kotlin",
+                    "java"
+                ]
+            },
+            {
+                "title": "Rotting Oranges",
+
+                "difficulty": "medium",
+                "code": "0994-rotting-oranges",
+                "link": "rotting-oranges",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "kotlin",
+                    "go"
+                ]
+            },
+            {
+                "title": "Walls And Gates",
+
+                "difficulty": "medium",
+                "code": "0286-walls-and-gates",
+                "link": "walls-and-gates",
+                "neetcode150": true,
+                "lang": [
+                    "premium",
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp"
+                ]
+            },
+            {
+                "title": "Snakes And Ladders",
+
+                "difficulty": "medium",
+                "code": "0909-snakes-and-ladders",
+                "link": "snakes-and-ladders",
+                "lang": [
+                    "csharp",
+                    "python",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Open The Lock",
+
+                "difficulty": "medium",
+                "code": "0752-open-the-lock",
+                "link": "open-the-lock",
+                "lang": [
+                    "csharp",
+                    "java",
+                    "python",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Find Eventual Safe States",
+
+                "difficulty": "medium",
+                "code": "0802-find-eventual-safe-states",
+                "link": "find-eventual-safe-states",
+                "lang": [
+                    "kotlin",
+                    "java"
+                ]
+            },
+            {
+                "title": "Course Schedule",
+
+                "difficulty": "medium",
+                "code": "0207-course-schedule",
+                "link": "course-schedule",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Course Schedule II",
+
+                "difficulty": "medium",
+                "code": "0210-course-schedule-ii",
+                "link": "course-schedule-ii",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Course Schedule IV",
+
+                "difficulty": "medium",
+                "code": "1462-course-schedule-iv",
+                "link": "course-schedule-iv",
+                "lang": [
+                    "python",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Check if Move Is Legal",
+
+                "difficulty": "medium",
+                "code": "1958-check-if-move-is-legal",
+                "link": "check-if-move-is-legal",
+                "lang": [
+                    "cpp",
+                    "java",
+                    "python",
+                    "javascript",
+                    "go",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Shortest Bridge",
+
+                "difficulty": "medium",
+                "code": "0934-shortest-bridge",
+                "link": "shortest-bridge",
+                "lang": [
+                    "kotlin",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Shortest Path in Binary Matrix",
+
+                "difficulty": "medium",
+                "code": "1091-shortest-path-in-binary-matrix",
+                "link": "shortest-path-in-binary-matrix",
+                "lang": [
+                    "python",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Redundant Connection",
+
+                "difficulty": "medium",
+                "code": "0684-redundant-connection",
+                "link": "redundant-connection",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Number of Connected Components In An Undirected Graph",
+
+                "difficulty": "medium",
+                "code": "0323-number-of-connected-components-in-an-undirected-graph",
+                "link": "number-of-connected-components-in-an-undirected-graph",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "premium",
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "go",
+                    "swift",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Graph Valid Tree",
+
+                "difficulty": "medium",
+                "code": "0261-graph-valid-tree",
+                "link": "graph-valid-tree",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "premium",
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "swift"
+                ]
+            },
+            {
+                "title": "Accounts Merge",
+
+                "difficulty": "medium",
+                "code": "0721-accounts-merge",
+                "link": "accounts-merge",
+                "lang": [
+                    "python",
+                    "kotlin",
+                    "java"
+                ]
+            },
+            {
+                "title": "Find Closest Node to Given Two Nodes",
+
+                "difficulty": "medium",
+                "code": "2359-find-closest-node-to-given-two-nodes",
+                "link": "find-closest-node-to-given-two-nodes",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "As Far from Land as Possible",
+
+                "difficulty": "medium",
+                "code": "1162-as-far-from-land-as-possible",
+                "link": "as-far-from-land-as-possible",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Shortest Path with Alternating Colors",
+
+                "difficulty": "medium",
+                "code": "1129-shortest-path-with-alternating-colors",
+                "link": "shortest-path-with-alternating-colors",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Minimum Fuel Cost to Report to the Capital",
+
+                "difficulty": "medium",
+                "code": "2477-minimum-fuel-cost-to-report-to-the-capital",
+                "link": "minimum-fuel-cost-to-report-to-the-capital",
+                "lang": [
+                    "kotlin",
+                    "java"
+                ]
+            },
+            {
+                "title": "Minimum Score of a Path Between Two Cities",
+
+                "difficulty": "medium",
+                "code": "2492-minimum-score-of-a-path-between-two-cities",
+                "link": "minimum-score-of-a-path-between-two-cities",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Number of Closed Islands",
+
+                "difficulty": "medium",
+                "code": "1254-number-of-closed-islands",
+                "link": "number-of-closed-islands",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Number of Enclaves",
+
+                "difficulty": "medium",
+                "code": "1020-number-of-enclaves",
+                "link": "number-of-enclaves",
+                "lang": [
+                    "kotlin",
+                    "java"
+                ]
+            },
+            {
+                "title": "Minimum Number of Vertices to Reach all Nodes",
+
+                "difficulty": "medium",
+                "code": "1557-minimum-number-of-vertices-to-reach-all-nodes",
+                "link": "minimum-number-of-vertices-to-reach-all-nodes",
+                "lang": [
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Is Graph Bipartite?",
+
+                "difficulty": "medium",
+                "code": "0785-is-graph-bipartite",
+                "link": "is-graph-bipartite",
+                "lang": [
+                    "kotlin",
+                    "java"
+                ]
+            },
+            {
+                "title": "Evaluate Division",
+
+                "difficulty": "medium",
+                "code": "0399-evaluate-division",
+                "link": "evaluate-division",
+                "lang": [
+                    "kotlin",
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Detonate the Maximum Bombs",
+
+                "difficulty": "medium",
+                "code": "2101-detonate-the-maximum-bombs",
+                "link": "detonate-the-maximum-bombs",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Largest Color Value in a Directed Graph",
+
+                "difficulty": "hard",
+                "code": "1857-largest-color-value-in-a-directed-graph",
+                "link": "largest-color-value-in-a-directed-graph",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Minimum Number of Days to Eat N Oranges",
+
+                "difficulty": "hard",
+                "code": "1553-minimum-number-of-days-to-eat-n-oranges",
+                "link": "minimum-number-of-days-to-eat-n-oranges",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Word Ladder",
+
+                "difficulty": "hard",
+                "code": "0127-word-ladder",
+                "link": "word-ladder",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "kotlin",
+                    "go",
+                    "rust"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Advanced Graphs",
+        "problems": [
+            {
+                "title": "Path with Minimum Effort",
+
+                "difficulty": "medium",
+                "code": "1631-path-with-minimum-effort",
+                "link": "path-with-minimum-effort",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Reconstruct Itinerary",
+
+                "difficulty": "hard",
+                "code": "0332-reconstruct-itinerary",
+                "link": "reconstruct-itinerary",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "kotlin",
+                    "go",
+                    "c",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Min Cost to Connect All Points",
+
+                "difficulty": "medium",
+                "code": "1584-min-cost-to-connect-all-points",
+                "link": "min-cost-to-connect-all-points",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "ruby",
+                    "swift",
+                    "go",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Network Delay Time",
+
+                "difficulty": "medium",
+                "code": "0743-network-delay-time",
+                "link": "network-delay-time",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "go",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Path with Maximum Probability",
+
+                "difficulty": "medium",
+                "code": "1514-path-with-maximum-probability",
+                "link": "path-with-maximum-probability",
+                "lang": [
+                    "python",
+                    "java",
+                    "javascript",
+                    "kotlin",
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Swim In Rising Water",
+
+                "difficulty": "hard",
+                "code": "0778-swim-in-rising-water",
+                "link": "swim-in-rising-water",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "go",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Alien Dictionary",
+
+                "difficulty": "hard",
+                "code": "0269-alien-dictionary",
+                "link": "alien-dictionary",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "premium",
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp"
+                ]
+            },
+            {
+                "title": "Cheapest Flights Within K Stops",
+
+                "difficulty": "medium",
+                "code": "0787-cheapest-flights-within-k-stops",
+                "link": "cheapest-flights-within-k-stops",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Number of Good Paths",
+
+                "difficulty": "hard",
+                "code": "2421-number-of-good-paths",
+                "link": "number-of-good-paths",
+                "lang": [
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Remove Max Number of Edges to Keep Graph Fully Traversable",
+
+                "difficulty": "hard",
+                "code": "1579-remove-max-number-of-edges-to-keep-graph-fully-traversable",
+                "link": "remove-max-number-of-edges-to-keep-graph-fully-traversable",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Find Critical and Pseudo Critical Edges in Minimum Spanning Tree",
+
+                "difficulty": "hard",
+                "code": "1489-find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree",
+                "link": "find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree",
+                "lang": [
+                    "python",
+                    "kotlin"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "1-D Dynamic Programming",
+        "problems": [
+            {
+                "title": "Climbing Stairs",
+
+                "difficulty": "easy",
+                "code": "0070-climbing-stairs",
+                "link": "climbing-stairs",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "dart"
+                ]
+            },
+            {
+                "title": "Min Cost Climbing Stairs",
+
+                "difficulty": "easy",
+                "code": "0746-min-cost-climbing-stairs",
+                "link": "min-cost-climbing-stairs",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "scala"
+                ]
+            },
+            {
+                "title": "House Robber",
+
+                "difficulty": "medium",
+                "code": "0198-house-robber",
+                "link": "house-robber",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "scala"
+                ]
+            },
+            {
+                "title": "House Robber II",
+
+                "difficulty": "medium",
+                "code": "0213-house-robber-ii",
+                "link": "house-robber-ii",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "scala"
+                ]
+            },
+            {
+                "title": "Longest Palindromic Substring",
+
+                "difficulty": "medium",
+                "code": "0005-longest-palindromic-substring",
+                "link": "longest-palindromic-substring",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "rust",
+                    "go",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Palindromic Substrings",
+
+                "difficulty": "medium",
+                "code": "0647-palindromic-substrings",
+                "link": "palindromic-substrings",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "rust",
+                    "go",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Decode Ways",
+
+                "difficulty": "medium",
+                "code": "0091-decode-ways",
+                "link": "decode-ways",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "kotlin",
+                    "scala",
+                    "go"
+                ]
+            },
+            {
+                "title": "Coin Change",
+
+                "difficulty": "medium",
+                "code": "0322-coin-change",
+                "link": "coin-change",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "kotlin",
+                    "rust",
+                    "go",
+                    "scala"
+                ]
+            },
+            {
+                "title": "Maximum Product Subarray",
+
+                "difficulty": "medium",
+                "code": "0152-maximum-product-subarray",
+                "link": "maximum-product-subarray",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Word Break",
+
+                "difficulty": "medium",
+                "code": "0139-word-break",
+                "link": "word-break",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Longest Increasing Subsequence",
+
+                "difficulty": "medium",
+                "code": "0300-longest-increasing-subsequence",
+                "link": "longest-increasing-subsequence",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Partition Equal Subset Sum",
+
+                "difficulty": "medium",
+                "code": "0416-partition-equal-subset-sum",
+                "link": "partition-equal-subset-sum",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "go",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Triangle",
+
+                "difficulty": "medium",
+                "code": "0120-triangle",
+                "link": "triangle",
+                "lang": [
+                    "cpp",
+                    "java",
+                    "python",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Delete And Earn",
+
+                "difficulty": "medium",
+                "code": "0740-delete-and-earn",
+                "link": "delete-and-earn",
+                "lang": [
+                    "python",
+                    "go",
+                    "kotlin",
+                    "c",
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Paint House",
+
+                "difficulty": "medium",
+                "code": "0256-paint-house",
+                "link": "paint-house",
+                "lang": [
+                    "csharp"
+                ]
+            },
+            {
+                "title": "Combination Sum IV",
+
+                "difficulty": "medium",
+                "code": "0377-combination-sum-iv",
+                "link": "combination-sum-iv",
+                "lang": [
+                    "python",
+                    "cpp",
+                    "kotlin",
+                    "c",
+                    "java"
+                ]
+            },
+            {
+                "title": "Perfect Squares",
+
+                "difficulty": "medium",
+                "code": "0279-perfect-squares",
+                "link": "perfect-squares",
+                "lang": [
+                    "java",
+                    "go",
+                    "cpp",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Check if There is a Valid Partition For The Array",
+
+                "difficulty": "medium",
+                "code": "2369-check-if-there-is-a-valid-partition-for-the-array",
+                "link": "check-if-there-is-a-valid-partition-for-the-array",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Maximum Subarray Min Product",
+
+                "difficulty": "medium",
+                "code": "1856-maximum-subarray-min-product",
+                "link": "maximum-subarray-min-product",
+                "lang": [
+                    "kotlin",
+                    "c",
+                    "java"
+                ]
+            },
+            {
+                "title": "Minimum Cost For Tickets",
+
+                "difficulty": "medium",
+                "code": "0983-minimum-cost-for-tickets",
+                "link": "minimum-cost-for-tickets",
+                "lang": [
+                    "cpp",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Integer Break",
+
+                "difficulty": "medium",
+                "code": "0343-integer-break",
+                "link": "integer-break",
+                "lang": [
+                    "cpp",
+                    "kotlin",
+                    "c",
+                    "java"
+                ]
+            },
+            {
+                "title": "Number of Longest Increasing Subsequence",
+
+                "difficulty": "medium",
+                "code": "0673-number-of-longest-increasing-subsequence",
+                "link": "number-of-longest-increasing-subsequence",
+                "lang": [
+                    "python",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Stickers to Spell Word",
+
+                "difficulty": "hard",
+                "code": "0691-stickers-to-spell-word",
+                "link": "stickers-to-spell-word",
+                "lang": [
+                    "c",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "N-th Tribonacci Number",
+
+                "difficulty": "easy",
+                "code": "1137-n-th-tribonacci-number",
+                "link": "n-th-tribonacci-number",
+                "lang": [
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust",
+                    "c",
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Uncrossed Lines",
+
+                "difficulty": "medium",
+                "code": "1035-uncrossed-lines",
+                "link": "uncrossed-lines",
+                "lang": [
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Solving Questions With Brainpower",
+
+                "difficulty": "medium",
+                "code": "2140-solving-questions-with-brainpower",
+                "link": "solving-questions-with-brainpower",
+                "lang": [
+                    "kotlin",
+                    "c",
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Count Ways to Build Good Strings",
+
+                "difficulty": "medium",
+                "code": "2466-count-ways-to-build-good-strings",
+                "link": "count-ways-to-build-good-strings",
+                "lang": [
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "New 21 Game",
+
+                "difficulty": "medium",
+                "code": "0837-new-21-game",
+                "link": "new-21-game",
+                "lang": [
+                    "kotlin",
+                    "c",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Best Team with no Conflicts",
+
+                "difficulty": "medium",
+                "code": "1626-best-team-with-no-conflicts",
+                "link": "best-team-with-no-conflicts",
+                "lang": [
+                    "c",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Stone Game III",
+
+                "difficulty": "hard",
+                "code": "1406-stone-game-iii",
+                "link": "stone-game-iii",
+                "lang": [
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Concatenated Words",
+
+                "difficulty": "hard",
+                "code": "0472-concatenated-words",
+                "link": "concatenated-words",
+                "lang": [
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Maximize Score after N Operations",
+
+                "difficulty": "hard",
+                "code": "1799-maximize-score-after-n-operations",
+                "link": "maximize-score-after-n-operations",
+                "lang": [
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Find the Longest Valid Obstacle Course at Each Position",
+
+                "difficulty": "hard",
+                "code": "1964-find-the-longest-valid-obstacle-course-at-each-position",
+                "link": "find-the-longest-valid-obstacle-course-at-each-position",
+                "lang": [
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Count all Valid Pickup and Delivery Options",
+
+                "difficulty": "hard",
+                "code": "1359-count-all-valid-pickup-and-delivery-options",
+                "link": "count-all-valid-pickup-and-delivery-options",
+                "lang": [
+                    "java",
+                    "kotlin"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "2-D Dynamic Programming",
+        "problems": [
+            {
+                "title": "Unique Paths",
+
+                "difficulty": "medium",
+                "code": "0062-unique-paths",
+                "link": "unique-paths",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Unique Paths II",
+
+                "difficulty": "medium",
+                "code": "0063-unique-paths-ii",
+                "link": "unique-paths-ii",
+                "lang": [
+                    "python",
+                    "cpp",
+                    "java",
+                    "go",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Longest Common Subsequence",
+
+                "difficulty": "medium",
+                "code": "1143-longest-common-subsequence",
+                "link": "longest-common-subsequence",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "c"
+                ]
+            },
+            {
+                "title": "Longest Palindromic Subsequence",
+
+                "difficulty": "medium",
+                "code": "0516-longest-palindromic-subsequence",
+                "link": "longest-palindromic-subsequence",
+                "lang": [
+                    "python",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Last Stone Weight II",
+
+                "difficulty": "medium",
+                "code": "1049-last-stone-weight-ii",
+                "link": "last-stone-weight-ii",
+                "lang": [
+                    "python",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Best Time to Buy And Sell Stock With Cooldown",
+
+                "difficulty": "medium",
+                "code": "0309-best-time-to-buy-and-sell-stock-with-cooldown",
+                "link": "best-time-to-buy-and-sell-stock-with-cooldown",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Coin Change II",
+
+                "difficulty": "medium",
+                "code": "0518-coin-change-ii",
+                "link": "coin-change-ii",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Target Sum",
+
+                "difficulty": "medium",
+                "code": "0494-target-sum",
+                "link": "target-sum",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Interleaving String",
+
+                "difficulty": "medium",
+                "code": "0097-interleaving-string",
+                "link": "interleaving-string",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "scala",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Stone Game",
+
+                "difficulty": "medium",
+                "code": "0877-stone-game",
+                "link": "stone-game",
+                "lang": [
+                    "kotlin",
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Minimum Path Sum",
+
+                "difficulty": "medium",
+                "code": "0064-minimum-path-sum",
+                "link": "minimum-path-sum",
+                "lang": [
+                    "cpp",
+                    "java",
+                    "python",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Longest Increasing Path In a Matrix",
+
+                "difficulty": "hard",
+                "code": "0329-longest-increasing-path-in-a-matrix",
+                "link": "longest-increasing-path-in-a-matrix",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Maximal Square",
+
+                "difficulty": "medium",
+                "code": "0221-maximal-square",
+                "link": "maximal-square",
+                "lang": [
+                    "python",
+                    "java",
+                    "kotlin",
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Ones and Zeroes",
+
+                "difficulty": "medium",
+                "code": "0474-ones-and-zeroes",
+                "link": "ones-and-zeroes",
+                "lang": [
+                    "python",
+                    "kotlin",
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Maximum Alternating Subsequence Sum",
+
+                "difficulty": "medium",
+                "code": "5782-maximum-alternating-subsequence-sum",
+                "link": "maximum-alternating-subsequence-sum",
+                "lang": []
+            },
+            {
+                "title": "Distinct Subsequences",
+
+                "difficulty": "hard",
+                "code": "0115-distinct-subsequences",
+                "link": "distinct-subsequences",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Edit Distance",
+
+                "difficulty": "medium",
+                "code": "0072-edit-distance",
+                "link": "edit-distance",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "swift",
+                    "scala",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Count Vowels Permutation",
+
+                "difficulty": "hard",
+                "code": "1220-count-vowels-permutation",
+                "link": "count-vowels-permutation",
+                "lang": [
+                    "python",
+                    "java",
+                    "go",
+                    "cpp",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Burst Balloons",
+
+                "difficulty": "hard",
+                "code": "0312-burst-balloons",
+                "link": "burst-balloons",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Number of Ways to Rearrange Sticks With K Sticks Visible",
+
+                "difficulty": "hard",
+                "code": "1866-number-of-ways-to-rearrange-sticks-with-k-sticks-visible",
+                "link": "number-of-ways-to-rearrange-sticks-with-k-sticks-visible",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Regular Expression Matching",
+
+                "difficulty": "hard",
+                "code": "0010-regular-expression-matching",
+                "link": "regular-expression-matching",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "c",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Stone Game II",
+
+                "difficulty": "medium",
+                "code": "1140-stone-game-ii",
+                "link": "stone-game-ii",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Flip String to Monotone Increasing",
+
+                "difficulty": "medium",
+                "code": "0926-flip-string-to-monotone-increasing",
+                "link": "flip-string-to-monotone-increasing",
+                "lang": [
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Maximum Value of K Coins from Piles",
+
+                "difficulty": "hard",
+                "code": "2218-maximum-value-of-k-coins-from-piles",
+                "link": "maximum-value-of-k-coins-from-piles",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Number of Music Playlists",
+
+                "difficulty": "hard",
+                "code": "0920-number-of-music-playlists",
+                "link": "number-of-music-playlists",
+                "lang": [
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Number of Ways to Form a Target String Given a Dictionary",
+
+                "difficulty": "hard",
+                "code": "1639-number-of-ways-to-form-a-target-string-given-a-dictionary",
+                "link": "number-of-ways-to-form-a-target-string-given-a-dictionary",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Profitable Schemes",
+
+                "difficulty": "hard",
+                "code": "0879-profitable-schemes",
+                "link": "profitable-schemes",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Minimum Cost to Cut a Stick",
+
+                "difficulty": "hard",
+                "code": "1547-minimum-cost-to-cut-a-stick",
+                "link": "minimum-cost-to-cut-a-stick",
+                "lang": [
+                    "kotlin"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Greedy",
+        "problems": [
+            {
+                "title": "Maximum Subarray",
+
+                "difficulty": "medium",
+                "code": "0053-maximum-subarray",
+                "link": "maximum-subarray",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "ruby"
+                ]
+            },
+            {
+                "title": "Maximum Sum Circular Subarray",
+
+                "difficulty": "medium",
+                "code": "0918-maximum-sum-circular-subarray",
+                "link": "maximum-sum-circular-subarray",
+                "lang": [
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "kotlin",
+                    "java"
+                ]
+            },
+            {
+                "title": "Longest Turbulent Array",
+
+                "difficulty": "medium",
+                "code": "0978-longest-turbulent-subarray",
+                "link": "longest-turbulent-subarray",
+                "lang": [
+                    "python",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Jump Game",
+
+                "difficulty": "medium",
+                "code": "0055-jump-game",
+                "link": "jump-game",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Jump Game II",
+
+                "difficulty": "medium",
+                "code": "0045-jump-game-ii",
+                "link": "jump-game-ii",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "ruby"
+                ]
+            },
+            {
+                "title": "Jump Game VII",
+
+                "difficulty": "medium",
+                "code": "1871-jump-game-vii",
+                "link": "jump-game-vii",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Gas Station",
+
+                "difficulty": "medium",
+                "code": "0134-gas-station",
+                "link": "gas-station",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "ruby"
+                ]
+            },
+            {
+                "title": "Hand of Straights",
+
+                "difficulty": "medium",
+                "code": "0846-hand-of-straights",
+                "link": "hand-of-straights",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Minimize Maximum of Array",
+
+                "difficulty": "medium",
+                "code": "2439-minimize-maximum-of-array",
+                "link": "minimize-maximum-of-array",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Dota2 Senate",
+
+                "difficulty": "medium",
+                "code": "0649-dota2-senate",
+                "link": "dota2-senate",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Maximum Points You Can Obtain From Cards",
+
+                "difficulty": "medium",
+                "code": "1423-maximum-points-you-can-obtain-from-cards",
+                "link": "maximum-points-you-can-obtain-from-cards",
+                "lang": [
+                    "csharp",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Merge Triplets to Form Target Triplet",
+
+                "difficulty": "medium",
+                "code": "1899-merge-triplets-to-form-target-triplet",
+                "link": "merge-triplets-to-form-target-triplet",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Partition Labels",
+
+                "difficulty": "medium",
+                "code": "0763-partition-labels",
+                "link": "partition-labels",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "go",
+                    "ruby",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Valid Parenthesis String",
+
+                "difficulty": "medium",
+                "code": "0678-valid-parenthesis-string",
+                "link": "valid-parenthesis-string",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Eliminate Maximum Number of Monsters",
+
+                "difficulty": "medium",
+                "code": "1921-eliminate-maximum-number-of-monsters",
+                "link": "eliminate-maximum-number-of-monsters",
+                "lang": [
+                    "cpp",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Two City Scheduling",
+
+                "difficulty": "medium",
+                "code": "1029-two-city-scheduling",
+                "link": "two-city-scheduling",
+                "lang": [
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Maximum Length of Pair Chain",
+
+                "difficulty": "medium",
+                "code": "0646-maximum-length-of-pair-chain",
+                "link": "maximum-length-of-pair-chain",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Minimum Deletions to Make Character Frequencies Unique",
+
+                "difficulty": "medium",
+                "code": "1647-minimum-deletions-to-make-character-frequencies-unique",
+                "link": "minimum-deletions-to-make-character-frequencies-unique",
+                "lang": [
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Candy",
+
+                "difficulty": "medium",
+                "code": "135-candy",
+                "link": "candy",
+                "lang": []
+            }
+        ]
+    },
+    {
+        "title": "Intervals",
+        "problems": [
+            {
+                "title": "Insert Interval",
+
+                "difficulty": "medium",
+                "code": "0057-insert-interval",
+                "link": "insert-interval",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "swift",
+                    "rust",
+                    "go",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Merge Intervals",
+
+                "difficulty": "medium",
+                "code": "0056-merge-intervals",
+                "link": "merge-intervals",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "scala",
+                    "c",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Non Overlapping Intervals",
+
+                "difficulty": "medium",
+                "code": "0435-non-overlapping-intervals",
+                "link": "non-overlapping-intervals",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "scala",
+                    "c",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Meeting Rooms",
+
+                "difficulty": "easy",
+                "code": "0252-meeting-rooms",
+                "link": "meeting-rooms",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "premium",
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "rust",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Meeting Rooms II",
+
+                "difficulty": "medium",
+                "code": "0253-meeting-rooms-ii",
+                "link": "meeting-rooms-ii",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "premium",
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "rust",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Remove Covered Intervals",
+
+                "difficulty": "medium",
+                "code": "1288-remove-covered-intervals",
+                "link": "remove-covered-intervals",
+                "lang": [
+                    "c",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Minimum Interval to Include Each Query",
+
+                "difficulty": "hard",
+                "code": "1851-minimum-interval-to-include-each-query",
+                "link": "minimum-interval-to-include-each-query",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "csharp",
+                    "javascript",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Data Stream as Disjoint Intervals",
+
+                "difficulty": "hard",
+                "code": "0352-data-stream-as-disjoint-intervals",
+                "link": "data-stream-as-disjoint-intervals",
+                "lang": [
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "kotlin"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Math & Geometry",
+        "problems": [
+            {
+                "title": "Excel Sheet Column Title",
+
+                "difficulty": "easy",
+                "code": "0168-excel-sheet-column-title",
+                "link": "excel-sheet-column-title",
+                "lang": [
+                    "java",
+                    "python",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Greatest Common Divisor of Strings",
+
+                "difficulty": "easy",
+                "code": "1071-greatest-common-divisor-of-strings",
+                "link": "greatest-common-divisor-of-strings",
+                "lang": [
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust",
+                    "cpp"
+                ]
+            },
+            {
+                "title": "Count Odd Numbers in an Interval Range",
+
+                "difficulty": "easy",
+                "code": "1523-count-odd-numbers-in-an-interval-range",
+                "link": "count-odd-numbers-in-an-interval-range",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Matrix Diagonal Sum",
+
+                "difficulty": "easy",
+                "code": "1572-matrix-diagonal-sum",
+                "link": "matrix-diagonal-sum",
+                "lang": [
+                    "kotlin",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Maximum Points on a Line",
+
+                "difficulty": "hard",
+                "code": "0149-max-points-on-a-line",
+                "link": "max-points-on-a-line",
+                "lang": [
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "rust",
+                    "cpp",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Rotate Image",
+
+                "difficulty": "medium",
+                "code": "0048-rotate-image",
+                "link": "rotate-image",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "ruby",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Spiral Matrix",
+
+                "difficulty": "medium",
+                "code": "0054-spiral-matrix",
+                "link": "spiral-matrix",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "kotlin",
+                    "go",
+                    "ruby",
+                    "c"
+                ]
+            },
+            {
+                "title": "Spiral Matrix II ",
+
+                "difficulty": "medium",
+                "code": "0059-spiral-matrix-ii",
+                "link": "spiral-matrix-ii",
+                "lang": [
+                    "javascript",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Set Matrix Zeroes",
+
+                "difficulty": "medium",
+                "code": "0073-set-matrix-zeroes",
+                "link": "set-matrix-zeroes",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "ruby"
+                ]
+            },
+            {
+                "title": "Happy Number",
+
+                "difficulty": "easy",
+                "code": "0202-happy-number",
+                "link": "happy-number",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "ruby",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Plus One",
+
+                "difficulty": "easy",
+                "code": "0066-plus-one",
+                "link": "plus-one",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "swift",
+                    "kotlin",
+                    "ruby",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Palindrome Number",
+
+                "difficulty": "easy",
+                "code": "0009-palindrome-number",
+                "link": "palindrome-number",
+                "lang": [
+                    "javascript",
+                    "typescript",
+                    "cpp",
+                    "java",
+                    "python",
+                    "go",
+                    "rust",
+                    "swift",
+                    "c",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Ugly Number",
+
+                "difficulty": "easy",
+                "code": "0263-ugly-number",
+                "link": "ugly-number",
+                "lang": [
+                    "c",
+                    "cpp",
+                    "java",
+                    "python",
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "swift",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Shift 2D Grid",
+
+                "difficulty": "easy",
+                "code": "1260-shift-2d-grid",
+                "link": "shift-2d-grid",
+                "lang": [
+                    "cpp",
+                    "java",
+                    "python",
+                    "javascript",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Roman to Integer",
+
+                "difficulty": "easy",
+                "code": "0013-roman-to-integer",
+                "link": "roman-to-integer",
+                "lang": [
+                    "python",
+                    "javascript",
+                    "go",
+                    "typescript",
+                    "rust",
+                    "java",
+                    "cpp",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Integer to Roman",
+
+                "difficulty": "medium",
+                "code": "0012-integer-to-roman",
+                "link": "integer-to-roman",
+                "lang": [
+                    "python",
+                    "typescript",
+                    "go",
+                    "rust",
+                    "javascript",
+                    "cpp",
+                    "java",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Pow(x, n)",
+
+                "difficulty": "medium",
+                "code": "0050-powx-n",
+                "link": "powx-n",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "javascript",
+                    "cpp",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "swift",
+                    "ruby",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Multiply Strings",
+
+                "difficulty": "medium",
+                "code": "0043-multiply-strings",
+                "link": "multiply-strings",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "typescript",
+                    "swift",
+                    "ruby",
+                    "kotlin",
+                    "c"
+                ]
+            },
+            {
+                "title": "Detect Squares",
+
+                "difficulty": "medium",
+                "code": "2013-detect-squares",
+                "link": "detect-squares",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "csharp",
+                    "kotlin",
+                    "ruby",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Robot Bounded In Circle",
+
+                "difficulty": "medium",
+                "code": "1041-robot-bounded-in-circle",
+                "link": "robot-bounded-in-circle",
+                "lang": [
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Zigzag Conversion",
+
+                "difficulty": "medium",
+                "code": "0006-zigzag-conversion",
+                "link": "zigzag-conversion",
+                "lang": [
+                    "java",
+                    "cpp",
+                    "go",
+                    "kotlin"
+                ]
+            },
+            {
+                "title": "Find Missing Observations",
+
+                "difficulty": "medium",
+                "code": "2028-find-missing-observations",
+                "link": "find-missing-observations",
+                "lang": [
+                    "kotlin"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Bit Manipulation",
+        "problems": [
+            {
+                "title": "Single Number",
+
+                "difficulty": "easy",
+                "code": "0136-single-number",
+                "link": "single-number",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust",
+                    "dart"
+                ]
+            },
+            {
+                "title": "Number of 1 Bits",
+
+                "difficulty": "easy",
+                "code": "0191-number-of-1-bits",
+                "link": "number-of-1-bits",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Counting Bits",
+
+                "difficulty": "easy",
+                "code": "0338-counting-bits",
+                "link": "counting-bits",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Reverse Bits",
+
+                "difficulty": "easy",
+                "code": "0190-reverse-bits",
+                "link": "reverse-bits",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Missing Number",
+
+                "difficulty": "easy",
+                "code": "0268-missing-number",
+                "link": "missing-number",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Shuffle the Array",
+
+                "difficulty": "easy",
+                "code": "1470-shuffle-the-array",
+                "link": "shuffle-the-array",
+                "lang": [
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust",
+                    "c"
+                ]
+            },
+            {
+                "title": "Add to Array-Form of Integer",
+
+                "difficulty": "easy",
+                "code": "0989-add-to-array-form-of-integer",
+                "link": "add-to-array-form-of-integer",
+                "lang": [
+                    "javascript",
+                    "typescript",
+                    "go",
+                    "kotlin",
+                    "rust",
+                    "c"
+                ]
+            },
+            {
+                "title": "Sum of Two Integers",
+
+                "difficulty": "medium",
+                "code": "0371-sum-of-two-integers",
+                "link": "sum-of-two-integers",
+                "neetcode150": true,
+                "blind75": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Reverse Integer",
+
+                "difficulty": "medium",
+                "code": "0007-reverse-integer",
+                "link": "reverse-integer",
+                "neetcode150": true,
+                "lang": [
+                    "python",
+                    "java",
+                    "cpp",
+                    "javascript",
+                    "c",
+                    "csharp",
+                    "typescript",
+                    "go",
+                    "ruby",
+                    "swift",
+                    "kotlin",
+                    "scala",
+                    "rust"
+                ]
+            },
+            {
+                "title": "Add Binary",
+
+                "difficulty": "easy",
+                "code": "0067-add-binary",
+                "link": "add-binary",
+                "lang": [
+                    "cpp",
+                    "java",
+                    "python",
+                    "kotlin",
+                    "rust",
+                    "c"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "JavaScript",
+        "problems": [
+            {
+                "title": "Create Hello World Function",
+
+                "difficulty": "easy",
+                "code": "2667-create-hello-world-function",
+                "link": "create-hello-world-function",
+                "lang": [
+                    "javascript",
+                    "typescript"
+                ]
+            },
+            {
+                "title": "Counter",
+
+                "difficulty": "easy",
+                "code": "2620-counter",
+                "link": "counter",
+                "lang": [
+                    "javascript",
+                    "typescript"
+                ]
+            },
+            {
+                "title": "Counter II",
+
+                "difficulty": "easy",
+                "code": "2665-counter-ii",
+                "link": "counter-ii",
+                "lang": [
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Apply Transform over each Element in Array",
+
+                "difficulty": "easy",
+                "code": "2635-apply-transform-over-each-element-in-array",
+                "link": "apply-transform-over-each-element-in-array",
+                "lang": []
+            },
+            {
+                "title": "Filter Elements from Array",
+
+                "difficulty": "easy",
+                "code": "2634-filter-elements-from-array",
+                "link": "filter-elements-from-array",
+                "lang": []
+            },
+            {
+                "title": "Array Reduce Transformation",
+
+                "difficulty": "easy",
+                "code": "2626-array-reduce-transformation",
+                "link": "array-reduce-transformation",
+                "lang": []
+            },
+            {
+                "title": "Function Composition",
+
+                "difficulty": "easy",
+                "code": "2629-function-composition",
+                "link": "function-composition",
+                "lang": []
+            },
+            {
+                "title": "Allow One Function Call",
+
+                "difficulty": "easy",
+                "code": "2666-allow-one-function-call",
+                "link": "allow-one-function-call",
+                "lang": []
+            },
+            {
+                "title": "Memoize",
+
+                "difficulty": "medium",
+                "code": "2623-memoize",
+                "link": "memoize",
+                "lang": []
+            },
+            {
+                "title": "Curry",
+
+                "difficulty": "medium",
+                "code": "2632-curry",
+                "link": "curry",
+                "lang": []
+            },
+            {
+                "title": "Sleep",
+
+                "difficulty": "easy",
+                "code": "2621-sleep",
+                "link": "sleep",
+                "lang": []
+            },
+            {
+                "title": "Promise Time Limit",
+
+                "difficulty": "easy",
+                "code": "2637-promise-time-limit",
+                "link": "promise-time-limit",
+                "lang": []
+            },
+            {
+                "title": "Promise Pool",
+
+                "difficulty": "medium",
+                "code": "2636-promise-pool",
+                "link": "promise-pool",
+                "lang": []
+            },
+            {
+                "title": "Cache With Time Limit",
+
+                "difficulty": "medium",
+                "code": "2622-cache-with-time-limit",
+                "link": "cache-with-time-limit",
+                "lang": []
+            },
+            {
+                "title": "Debounce",
+
+                "difficulty": "medium",
+                "code": "2627-debounce",
+                "link": "debounce",
+                "lang": []
+            },
+            {
+                "title": "Throttle",
+
+                "difficulty": "medium",
+                "code": "2676-throttle",
+                "link": "throttle",
+                "lang": []
+            },
+            {
+                "title": "JSON Deep Equal",
+
+                "difficulty": "medium",
+                "code": "2628-json-deep-equal",
+                "link": "json-deep-equal",
+                "lang": [
+                    "javascript"
+                ]
+            },
+            {
+                "title": "Convert Object to JSON String",
+
+                "difficulty": "medium",
+                "code": "2633-convert-object-to-json-string",
+                "link": "convert-object-to-json-string",
+                "lang": []
+            },
+            {
+                "title": "Array of Objects to Matrix",
+
+                "difficulty": "medium",
+                "code": "2675-array-of-objects-to-matrix",
+                "link": "array-of-objects-to-matrix",
+                "lang": []
+            },
+            {
+                "title": "Difference Between Two Objects",
+
+                "difficulty": "medium",
+                "code": "2700-differences-between-two-objects",
+                "link": "differences-between-two-objects",
+                "lang": []
+            },
+            {
+                "title": "Chunk Array",
+
+                "difficulty": "easy",
+                "code": "2677-chunk-array",
+                "link": "chunk-array",
+                "lang": []
+            },
+            {
+                "title": "Flatten Deeply Nested Array",
+
+                "difficulty": "medium",
+                "code": "2625-flatten-deeply-nested-array",
+                "link": "flatten-deeply-nested-array",
+                "lang": []
+            },
+            {
+                "title": "Array Prototype Last",
+
+                "difficulty": "easy",
+                "code": "2619-array-prototype-last",
+                "link": "array-prototype-last",
+                "lang": []
+            },
+            {
+                "title": "Group By",
+
+                "difficulty": "medium",
+                "code": "2631-group-by",
+                "link": "group-by",
+                "lang": []
+            },
+            {
+                "title": "Check if Object Instance of Class",
+
+                "difficulty": "medium",
+                "code": "2618-check-if-object-instance-of-class",
+                "link": "check-if-object-instance-of-class",
+                "lang": []
+            },
+            {
+                "title": "Call Function with Custom Context",
+
+                "difficulty": "medium",
+                "code": "2693-call-function-with-custom-context",
+                "link": "call-function-with-custom-context",
+                "lang": []
+            },
+            {
+                "title": "Event Emitter",
+
+                "difficulty": "medium",
+                "code": "2694-event-emitter",
+                "link": "event-emitter",
+                "lang": []
+            },
+            {
+                "title": "Array Wrapper",
+
+                "difficulty": "easy",
+                "code": "2695-array-wrapper",
+                "link": "array-wrapper",
+                "lang": []
+            },
+            {
+                "title": "Generate Fibonacci Sequence",
+
+                "difficulty": "easy",
+                "code": "2648-generate-fibonacci-sequence",
+                "link": "generate-fibonacci-sequence",
+                "lang": []
+            },
+            {
+                "title": "Nested Array Generator",
+
+                "difficulty": "medium",
+                "code": "2649-nested-array-generator",
+                "link": "nested-array-generator",
+                "lang": []
+            }
+        ]
+    }
+])
+
+export const modalState = atom(false)
+
+
+export const requestCode = async (code: string) => fetch(`https://raw.githubusercontent.com/neetcode-gh/leetcode/main/python/${code}.py`).then((res) => res.json())
+
+const baseCode = atom<string | null>(null)
+
+export const loadableAtom = loadable(baseCode)

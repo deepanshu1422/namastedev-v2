@@ -2,6 +2,7 @@
 
 import {
   AlignJustify,
+  Braces,
   ChevronDown,
   Clapperboard,
   CornerDownRight,
@@ -186,9 +187,9 @@ export default function MobileMenu() {
       selected: false,
     },
     {
-      icon: <Clapperboard className="h-5 w-5" />,
-      title: "Webinar",
-      href: "/webinar",
+      icon: <Braces className="h-5 w-5" />,
+      title: "DSA",
+      href: "/dsa",
       selected: false,
     },
   ];

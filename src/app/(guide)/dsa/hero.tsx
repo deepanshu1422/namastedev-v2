@@ -1,21 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { guidesData } from "@/util/globals";
+import { RESET } from "jotai/utils";
 import { Search, Trash } from "lucide-react";
 
 export default function Hero() {
   return (
     <div className="w-full bg-bg bg-dot-white/[0.3] relative flex items-center px-4 pt-14 pb-5 lg:px-8">
-      {/* Radial gradient for the container to give a faded look */}
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-bg [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
 
       <div className="flex flex-col items-center gap-3 relative z-10 w-full max-w-6xl mx-auto text-center">
-        {/* <p className="text-4xl sm:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500 py-8">
-          Backgrounds
-        </p> */}
-
         <h1 className="font-bric text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-lime-300 to-green-800 max-w-2xl">
-          Enhance Your Coding Skills with Challenges!
+          Enhance Your Coding Skills Challenges!
         </h1>
         <div className="flex flex-col gap-5 items-center justify-center w-full">
           <p className="max-w-xl md:max-w-3xl max-sm:text-sm sm:text-lg text-muted-foreground">
@@ -27,19 +22,6 @@ export default function Hero() {
               <Input
                 type="search"
                 placeholder="Search problems..."
-                // onChange={(txt) => {
-                //   filter(
-                //     guidesData.filter(
-                //       (e) =>
-                //         e.title
-                //           .toLocaleLowerCase()
-                //           .includes(txt.target.value.toLocaleLowerCase()) ||
-                //         e.description
-                //           .toLocaleLowerCase()
-                //           .includes(txt.target.value.toLocaleLowerCase())
-                //     )
-                //   );
-                // }}
                 className="w-full appearance-none bg-background pl-8 shadow-none"
               />
             </div>

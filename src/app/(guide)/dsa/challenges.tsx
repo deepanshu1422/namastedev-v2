@@ -1,23 +1,5 @@
 'use client'
 
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
-
 import {
   Accordion,
   AccordionContent,
@@ -26,47 +8,69 @@ import {
 } from "@/components/ui/accordion"
 import { Progress } from "@/components/ui/progress"
 
-// export function ProgressDemo() {
-//   const [progress, setProgress] = React.useState(13)
-
-//   React.useEffect(() => {
-//     const timer = setTimeout(() => setProgress(66), 500)
-//     return () => clearTimeout(timer)
-//   }, [])
-
-//   return <Progress value={progress} className="w-[60%]" />
-// }
-
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
 import Link from "next/link"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Dispatch, SetStateAction, useState } from "react"
+import { useState } from "react"
+import { useAtom } from "jotai"
+import { dsaProblems, modalState, solved } from "@/lib/jotai"
+import { Badge } from "@/components/ui/badge"
 
 type Props = {
   state: {
-    invoice: string;
-    paymentStatus: string;
-    paymentMethod: string;
-    select: boolean;
+    title: string;
+    problems: ({
+      title: string;
+      // select: boolean;
+      difficulty: string;
+      code: string;
+      link: string;
+      neetcode150?: boolean;
+      blind75?: boolean;
+      lang: string[];
+    })[];
   }[],
-  setState: Dispatch<SetStateAction<{
-    invoice: string;
-    paymentStatus: string;
-    paymentMethod: string;
-    select: boolean;
-  }[]>>
+  mode: number,
+  // setState: any
 }
 
-export function TableDemo({ state, setState }: Props) {
+export function ProblemTable({ problems, state, index, mode }: {
+  problems: {
+    title: string;
+    // select: boolean;
+    difficulty: string;
+    code: string;
+    link: string;
+    neetcode150?: boolean;
+    blind75?: boolean;
+    lang: string[];
+  }[],
+  state: {
+    title: string;
+    problems: ({
+      title: string;
+      // select: boolean;
+      difficulty: string;
+      code: string;
+      link: string;
+      neetcode150?: boolean;
+      blind75?: boolean;
+      lang: string[];
+    })[];
+  }[],
+  index: number
+  mode: number
+}) {
+
+  const [data, setData] = useAtom(solved)
+  const [open, setOpen] = useAtom(modalState)
 
   return (
     <Table>
@@ -74,18 +78,25 @@ export function TableDemo({ state, setState }: Props) {
       <TableHeader>
         <TableRow className="hover:bg-slate-600/30 border-slate-600">
           <TableHead className="w-[40px]">Done</TableHead>
-          <TableHead>Problem</TableHead>
+          <TableHead>Problems</TableHead>
           <TableHead className="text-right">Difficulty</TableHead>
           <TableHead className="text-right w-[120px]">View Code</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {state.map((invoice, index) => (
-          <TableRow data-state={invoice.select && "selected"} className="hover:bg-slate-600/30 border-slate-600" key={invoice.invoice}>
-            <TableCell className="font-medium flex items-center justify-center w-[50px]"><Checkbox checked={invoice.select} onCheckedChange={(e) => { setState(state.map((ele, i) => index === i ? { ...ele, select: Boolean(e) } : ele)) }} /></TableCell>
-            <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell className="text-right">{invoice.paymentMethod}</TableCell>
-            <TableCell className="text-right w-[120px] text-primary"><Link href={"#"}>View Code</Link></TableCell>
+        {problems.filter(e => (mode > 1 ? true : e?.neetcode150 === true) && (mode > 0 ? true : e.blind75 === true)).map(({ difficulty, title, link, code }, i) => (
+          <TableRow data-state={data.includes(code) && "selected"} className="hover:bg-slate-600/30 border-slate-600" key={i}>
+            <TableCell className="font-medium flex items-center justify-center w-[50px]"><Checkbox checked={data.includes(code)} onCheckedChange={(e) => {
+              if (data.includes(code)) return setData(data.filter((e) => e !== code))
+              setData([...data, code])
+            }} /></TableCell>
+            <TableCell><Link className="hover:text-primary hover:underline" target="_blank" href={"https://leetcode.com/problems/" + link}>{title}</Link></TableCell>
+            <TableCell className="text-right"><Badge className={`uppercase rounded ${difficulty === "easy" && "bg-green-600/50"} ${difficulty === "medium" && "bg-yellow-600/50"} ${difficulty === "hard" && "bg-red-600/50"} `} variant={"secondary"}>{difficulty}</Badge></TableCell>
+            <TableCell className="text-right w-[80px]">
+              <span className="cursor-pointer text-primary/80 hover:text-primary" onClick={() => setOpen(true)}>
+                View Code
+              </span>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
@@ -93,88 +104,59 @@ export function TableDemo({ state, setState }: Props) {
   )
 }
 
-export function AccordionDemo({ state, setState }: Props) {
+export function Problem({ state, mode }: Props) {
+
+  const [data] = useAtom(solved)
+
   return (
     <Accordion type="single" collapsible className="w-full pt-5">
-      <AccordionItem className="bg-muted/50" value="item-1">
+      {state.map(({ problems, title }, i) => (<AccordionItem key={i} className="bg-card/70" value={`item-${i}`}>
         <AccordionTrigger className="bg-card px-4 flex justify-between w-full">
-          <span className="flex-1 shrink-0 text-nowrap font-extrabold font-bric">Arrays & Hashing</span>
+          <span className="flex-1 shrink-0 text-nowrap font-extrabold font-bric">{title}</span>
           <div className="flex gap-2 items-center justify-end w-full">
-            <span>60/100</span>
-            <Progress value={60} className="w-[40%]" />
+            <span>{problems.map((e) => e.code).filter(element => data.includes(element)).length}/{problems.filter(e => (mode > 1 ? true : e?.neetcode150 === true) && (mode > 0 ? true : e.blind75 === true)).length}</span>
+            <Progress value={((problems.map((e) => e.code).filter(element => data.includes(element)).length) / problems.filter(e => (mode > 1 ? true : e?.neetcode150 === true) && (mode > 0 ? true : e.blind75 === true)).length) * 100} className="w-[40%] max-sm:hidden" />
           </div>
         </AccordionTrigger>
-        <AccordionContent className="p-4">
-          <TableDemo state={state} setState={setState} />
+        <AccordionContent className="">
+          <ProblemTable problems={problems} state={state} index={i} mode={mode} />
         </AccordionContent>
-      </AccordionItem>
+      </AccordionItem>))}
     </Accordion>
   )
 }
 
 export default function ChallengesTabs() {
 
-  const [invoices, setInvoices] = useState([
-    {
-      invoice: "INV001",
-      paymentStatus: "Problem Statement",
-      paymentMethod: "Easy",
-      select: false
-    },
-    {
-      invoice: "INV002",
-      paymentStatus: "Problem Statement",
-      paymentMethod: "Easy",
-      select: false
-    },
-    {
-      invoice: "INV003",
-      paymentStatus: "Problem Statement",
-      paymentMethod: "Easy",
-      select: false
-    },
-    {
-      invoice: "INV004",
-      paymentStatus: "Problem Statement",
-      paymentMethod: "Easy",
-      select: false
-    },
-    {
-      invoice: "INV005",
-      paymentStatus: "Problem Statement",
-      paymentMethod: "Easy",
-      select: false
-    },
-    {
-      invoice: "INV006",
-      paymentStatus: "Problem Statement",
-      paymentMethod: "Easy",
-      select: false
-    },
-    {
-      invoice: "INV007",
-      paymentStatus: "Problem Statement",
-      paymentMethod: "Easy",
-      select: false
-    },
-  ])
+  const [dsa, setDsa] = useAtom(dsaProblems)
+  const [tab, setTab] = useState(0)
 
   return (
-    <Tabs defaultValue="blind" className="pt-10">
-      <TabsList className="flex gap-2 w-full max-w-3xl mx-auto bg-card">
-        <TabsTrigger className="flex-1" value="blind">🧠 Blind 75</TabsTrigger>
-        <TabsTrigger className="flex-1" value="150">🚀 30DC 150</TabsTrigger>
-        <TabsTrigger className="flex-1" value="all">🌍 30DC All</TabsTrigger>
-      </TabsList>
-      <TabsContent value="blind">
-        <AccordionDemo state={invoices} setState={setInvoices} />
-      </TabsContent>
-      {/* <TabsContent value="150">
-        <AccordionDemo />
-      </TabsContent>
-      <TabsContent value="all">
-        <AccordionDemo />
-      </TabsContent> */}
-    </Tabs>
+    <div className="flex flex-col py-2">
+      <ul className="flex gap-1 mx-auto bg-muted p-1 rounded-md">
+        <li>
+          <label onClick={() => setTab(0)} htmlFor="hosting-small" className={`inline-flex items-center justify-between w-fit p-2 max-sm:text-xs sm:px-7 rounded cursor-pointer bg-card transition-all duration-200 ${tab === 0 ? "bg-second text-white" : "text-gray-500"}`}>
+            <div className="block">
+              <div className="w-full md:text-lg font-semibold">🧠 Blind 75</div>
+            </div>
+          </label>
+        </li>
+        <li>
+          <label onClick={() => setTab(1)} htmlFor="hosting" className={`inline-flex items-center justify-between w-fit p-2 max-sm:text-xs sm:px-7 rounded cursor-pointer bg-card transition-all duration-200 ${tab === 1 ? "bg-second text-white" : "text-gray-500"}`}>
+            <div className="block">
+              <div className="w-full md:text-lg font-semibold">🚀 30DC 150</div>
+            </div>
+          </label>
+        </li>
+        <li>
+          <label onClick={() => setTab(2)} htmlFor="hosting-big" className={`inline-flex items-center justify-between w-fit p-2 max-sm:text-xs sm:px-7 rounded cursor-pointer bg-card transition-all duration-200 ${tab === 2 ? "bg-second text-white" : "text-gray-500"}`}>
+            <div className="block">
+              <div className="w-full md:text-lg font-semibold">🌍 30DC All</div>
+            </div>
+          </label>
+        </li>
+      </ul>
+      <Problem state={dsa} mode={tab} />
+    </div>
   )
 }

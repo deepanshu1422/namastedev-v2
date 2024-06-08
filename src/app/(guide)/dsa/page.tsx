@@ -1,8 +1,8 @@
 import { Metadata } from "next";
-import { DataTableDemo } from "@/components/jobs-comp/data-table-ex";
 import Hero from "./hero";
 import Cards from "./cards";
 import ChallengesTabs from "./challenges";
+import Modal from "./modal";
 
 export const metadata: Metadata = {
   title: "30DC Code Platform | 30dayscoding",
@@ -32,7 +32,9 @@ export default async function Home() {
     <main className="w-full flex flex-col">
       <Hero />
       <div className="mx-auto w-full max-w-[90rem] px-4 lg:px-8 pb-8 flex flex-col gap-2">
-        <h2 className="m-auto text-2xl font-bold py-2">Special Courses just for Prepared for You</h2>
+        <ChallengesTabs />
+        <Modal />
+        <h2 className="m-auto text-2xl font-bold text-center">Special Courses just for Prepared for You</h2>
         <Cards data={[
           {
             title: "DSA Complete Placement Course",
@@ -56,7 +58,6 @@ export default async function Home() {
             description: "Master the Next.js framework with our Next JS FullStack Web Development course. Build scalable and high-performance web applications with ease. This course covers everything from basics to advanced techniques, tailored for developers aiming to enhance their skills in modern web development."
           },
         ]} />
-        <ChallengesTabs />
       </div>
     </main>
   );
