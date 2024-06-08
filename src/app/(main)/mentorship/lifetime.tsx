@@ -54,7 +54,7 @@ export default function Lifetime() {
                     <Play className='h-10 w-10 fill-prime text-prime m-auto drop-shadow-xl shadow-prime translate-x-0.5' />
                     </button>
                 </AspectRatio>
-                <YTModal url={"TXdIttK4018"} open={open} setOpen={setOpen} />
+                <YTModal url={"xjyfuYXGmMs"} open={open} setOpen={setOpen} />
             </div>
 
             <div className='flex flex-col gap-2 py-4 mx-auto'>

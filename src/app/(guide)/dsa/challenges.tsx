@@ -20,7 +20,7 @@ import Link from "next/link"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useState } from "react"
 import { useAtom } from "jotai"
-import { dsaProblems, modalState, solved } from "@/lib/jotai"
+import { dsaProblems, modalSchema, modalState, requestCode, solved, urlAtom } from "@/lib/jotai"
 import { Badge } from "@/components/ui/badge"
 
 type Props = {
@@ -71,6 +71,8 @@ export function ProblemTable({ problems, state, index, mode }: {
 
   const [data, setData] = useAtom(solved)
   const [open, setOpen] = useAtom(modalState)
+  const [code, setCode] = useAtom(modalSchema)
+  const [url, setUrl] = useAtom(urlAtom)
 
   return (
     <Table>
@@ -84,7 +86,7 @@ export function ProblemTable({ problems, state, index, mode }: {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {problems.filter(e => (mode > 1 ? true : e?.neetcode150 === true) && (mode > 0 ? true : e.blind75 === true)).map(({ difficulty, title, link, code }, i) => (
+        {problems.filter(e => (mode > 1 ? true : e?.neetcode150 === true) && (mode > 0 ? true : e.blind75 === true)).map(({ difficulty, title, link, code, lang }, i) => (
           <TableRow data-state={data.includes(code) && "selected"} className="hover:bg-slate-600/30 border-slate-600" key={i}>
             <TableCell className="font-medium flex items-center justify-center w-[50px]"><Checkbox checked={data.includes(code)} onCheckedChange={(e) => {
               if (data.includes(code)) return setData(data.filter((e) => e !== code))
@@ -93,7 +95,15 @@ export function ProblemTable({ problems, state, index, mode }: {
             <TableCell><Link className="hover:text-primary hover:underline" target="_blank" href={"https://leetcode.com/problems/" + link}>{title}</Link></TableCell>
             <TableCell className="text-right"><Badge className={`uppercase rounded ${difficulty === "easy" && "bg-green-600/50"} ${difficulty === "medium" && "bg-yellow-600/50"} ${difficulty === "hard" && "bg-red-600/50"} `} variant={"secondary"}>{difficulty}</Badge></TableCell>
             <TableCell className="text-right w-[80px]">
-              <span className="cursor-pointer text-primary/80 hover:text-primary" onClick={() => setOpen(true)}>
+              <span className="cursor-pointer text-primary/80 hover:text-primary" onClick={() => {
+                setOpen(true)
+                setCode({ question: title, languageArray: lang })
+                setUrl({
+                  code,
+                  language: "python",
+                  ext: "py"
+                })
+              }}>
                 View Code
               </span>
             </TableCell>
@@ -109,13 +119,13 @@ export function Problem({ state, mode }: Props) {
   const [data] = useAtom(solved)
 
   return (
-    <Accordion type="single" collapsible className="w-full pt-5">
+    <Accordion type="single" collapsible className="w-full pt-5 gap-1 flex flex-col">
       {state.map(({ problems, title }, i) => (<AccordionItem key={i} className="bg-card/70" value={`item-${i}`}>
-        <AccordionTrigger className="bg-card px-4 flex justify-between w-full">
-          <span className="flex-1 shrink-0 text-nowrap font-extrabold font-bric">{title}</span>
-          <div className="flex gap-2 items-center justify-end w-full">
-            <span>{problems.map((e) => e.code).filter(element => data.includes(element)).length}/{problems.filter(e => (mode > 1 ? true : e?.neetcode150 === true) && (mode > 0 ? true : e.blind75 === true)).length}</span>
-            <Progress value={((problems.map((e) => e.code).filter(element => data.includes(element)).length) / problems.filter(e => (mode > 1 ? true : e?.neetcode150 === true) && (mode > 0 ? true : e.blind75 === true)).length) * 100} className="w-[40%] max-sm:hidden" />
+        <AccordionTrigger className="bg-card px-4 flex justify-between w-full rounded-md">
+          <span className="flex-1 shrink-0 text-nowrap font-bold">{title}</span>
+          <div className="flex gap-2 items-center justify-end w-full mr-2">
+            <span>{problems.filter(e => (mode > 1 ? true : e?.neetcode150 === true) && (mode > 0 ? true : e.blind75 === true)).map((e) => e.code).filter(element => data.includes(element)).length}/{problems.filter(e => (mode > 1 ? true : e?.neetcode150 === true) && (mode > 0 ? true : e.blind75 === true)).length}</span>
+            <Progress value={((problems.filter(e => (mode > 1 ? true : e?.neetcode150 === true) && (mode > 0 ? true : e.blind75 === true)).map((e) => e.code).filter(element => data.includes(element)).length) / problems.filter(e => (mode > 1 ? true : e?.neetcode150 === true) && (mode > 0 ? true : e.blind75 === true)).length) * 100} className="w-[40%] max-sm:hidden" />
           </div>
         </AccordionTrigger>
         <AccordionContent className="">

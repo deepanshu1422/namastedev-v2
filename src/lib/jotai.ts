@@ -1,4 +1,4 @@
-import { atom } from "jotai"
+import { atom, useAtom } from "jotai"
 import { atomWithStorage, loadable } from 'jotai/utils'
 
 export const solved = atomWithStorage<string[]>("dsa-solved", [])
@@ -7035,268 +7035,358 @@ export const dsaProblems = atom([
             }
         ]
     },
-    {
-        "title": "JavaScript",
-        "problems": [
-            {
-                "title": "Create Hello World Function",
+    // {
+    //     "title": "JavaScript",
+    //     "problems": [
+    //         {
+    //             "title": "Create Hello World Function",
 
-                "difficulty": "easy",
-                "code": "2667-create-hello-world-function",
-                "link": "create-hello-world-function",
-                "lang": [
-                    "javascript",
-                    "typescript"
-                ]
-            },
-            {
-                "title": "Counter",
+    //             "difficulty": "easy",
+    //             "code": "2667-create-hello-world-function",
+    //             "link": "create-hello-world-function",
+    //             "lang": [
+    //                 "javascript",
+    //                 "typescript"
+    //             ]
+    //         },
+    //         {
+    //             "title": "Counter",
 
-                "difficulty": "easy",
-                "code": "2620-counter",
-                "link": "counter",
-                "lang": [
-                    "javascript",
-                    "typescript"
-                ]
-            },
-            {
-                "title": "Counter II",
+    //             "difficulty": "easy",
+    //             "code": "2620-counter",
+    //             "link": "counter",
+    //             "lang": [
+    //                 "javascript",
+    //                 "typescript"
+    //             ]
+    //         },
+    //         {
+    //             "title": "Counter II",
 
-                "difficulty": "easy",
-                "code": "2665-counter-ii",
-                "link": "counter-ii",
-                "lang": [
-                    "javascript"
-                ]
-            },
-            {
-                "title": "Apply Transform over each Element in Array",
+    //             "difficulty": "easy",
+    //             "code": "2665-counter-ii",
+    //             "link": "counter-ii",
+    //             "lang": [
+    //                 "javascript"
+    //             ]
+    //         },
+    //         {
+    //             "title": "Apply Transform over each Element in Array",
 
-                "difficulty": "easy",
-                "code": "2635-apply-transform-over-each-element-in-array",
-                "link": "apply-transform-over-each-element-in-array",
-                "lang": []
-            },
-            {
-                "title": "Filter Elements from Array",
+    //             "difficulty": "easy",
+    //             "code": "2635-apply-transform-over-each-element-in-array",
+    //             "link": "apply-transform-over-each-element-in-array",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Filter Elements from Array",
 
-                "difficulty": "easy",
-                "code": "2634-filter-elements-from-array",
-                "link": "filter-elements-from-array",
-                "lang": []
-            },
-            {
-                "title": "Array Reduce Transformation",
+    //             "difficulty": "easy",
+    //             "code": "2634-filter-elements-from-array",
+    //             "link": "filter-elements-from-array",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Array Reduce Transformation",
 
-                "difficulty": "easy",
-                "code": "2626-array-reduce-transformation",
-                "link": "array-reduce-transformation",
-                "lang": []
-            },
-            {
-                "title": "Function Composition",
+    //             "difficulty": "easy",
+    //             "code": "2626-array-reduce-transformation",
+    //             "link": "array-reduce-transformation",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Function Composition",
 
-                "difficulty": "easy",
-                "code": "2629-function-composition",
-                "link": "function-composition",
-                "lang": []
-            },
-            {
-                "title": "Allow One Function Call",
+    //             "difficulty": "easy",
+    //             "code": "2629-function-composition",
+    //             "link": "function-composition",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Allow One Function Call",
 
-                "difficulty": "easy",
-                "code": "2666-allow-one-function-call",
-                "link": "allow-one-function-call",
-                "lang": []
-            },
-            {
-                "title": "Memoize",
+    //             "difficulty": "easy",
+    //             "code": "2666-allow-one-function-call",
+    //             "link": "allow-one-function-call",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Memoize",
 
-                "difficulty": "medium",
-                "code": "2623-memoize",
-                "link": "memoize",
-                "lang": []
-            },
-            {
-                "title": "Curry",
+    //             "difficulty": "medium",
+    //             "code": "2623-memoize",
+    //             "link": "memoize",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Curry",
 
-                "difficulty": "medium",
-                "code": "2632-curry",
-                "link": "curry",
-                "lang": []
-            },
-            {
-                "title": "Sleep",
+    //             "difficulty": "medium",
+    //             "code": "2632-curry",
+    //             "link": "curry",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Sleep",
 
-                "difficulty": "easy",
-                "code": "2621-sleep",
-                "link": "sleep",
-                "lang": []
-            },
-            {
-                "title": "Promise Time Limit",
+    //             "difficulty": "easy",
+    //             "code": "2621-sleep",
+    //             "link": "sleep",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Promise Time Limit",
 
-                "difficulty": "easy",
-                "code": "2637-promise-time-limit",
-                "link": "promise-time-limit",
-                "lang": []
-            },
-            {
-                "title": "Promise Pool",
+    //             "difficulty": "easy",
+    //             "code": "2637-promise-time-limit",
+    //             "link": "promise-time-limit",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Promise Pool",
 
-                "difficulty": "medium",
-                "code": "2636-promise-pool",
-                "link": "promise-pool",
-                "lang": []
-            },
-            {
-                "title": "Cache With Time Limit",
+    //             "difficulty": "medium",
+    //             "code": "2636-promise-pool",
+    //             "link": "promise-pool",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Cache With Time Limit",
 
-                "difficulty": "medium",
-                "code": "2622-cache-with-time-limit",
-                "link": "cache-with-time-limit",
-                "lang": []
-            },
-            {
-                "title": "Debounce",
+    //             "difficulty": "medium",
+    //             "code": "2622-cache-with-time-limit",
+    //             "link": "cache-with-time-limit",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Debounce",
 
-                "difficulty": "medium",
-                "code": "2627-debounce",
-                "link": "debounce",
-                "lang": []
-            },
-            {
-                "title": "Throttle",
+    //             "difficulty": "medium",
+    //             "code": "2627-debounce",
+    //             "link": "debounce",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Throttle",
 
-                "difficulty": "medium",
-                "code": "2676-throttle",
-                "link": "throttle",
-                "lang": []
-            },
-            {
-                "title": "JSON Deep Equal",
+    //             "difficulty": "medium",
+    //             "code": "2676-throttle",
+    //             "link": "throttle",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "JSON Deep Equal",
 
-                "difficulty": "medium",
-                "code": "2628-json-deep-equal",
-                "link": "json-deep-equal",
-                "lang": [
-                    "javascript"
-                ]
-            },
-            {
-                "title": "Convert Object to JSON String",
+    //             "difficulty": "medium",
+    //             "code": "2628-json-deep-equal",
+    //             "link": "json-deep-equal",
+    //             "lang": [
+    //                 "javascript"
+    //             ]
+    //         },
+    //         {
+    //             "title": "Convert Object to JSON String",
 
-                "difficulty": "medium",
-                "code": "2633-convert-object-to-json-string",
-                "link": "convert-object-to-json-string",
-                "lang": []
-            },
-            {
-                "title": "Array of Objects to Matrix",
+    //             "difficulty": "medium",
+    //             "code": "2633-convert-object-to-json-string",
+    //             "link": "convert-object-to-json-string",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Array of Objects to Matrix",
 
-                "difficulty": "medium",
-                "code": "2675-array-of-objects-to-matrix",
-                "link": "array-of-objects-to-matrix",
-                "lang": []
-            },
-            {
-                "title": "Difference Between Two Objects",
+    //             "difficulty": "medium",
+    //             "code": "2675-array-of-objects-to-matrix",
+    //             "link": "array-of-objects-to-matrix",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Difference Between Two Objects",
 
-                "difficulty": "medium",
-                "code": "2700-differences-between-two-objects",
-                "link": "differences-between-two-objects",
-                "lang": []
-            },
-            {
-                "title": "Chunk Array",
+    //             "difficulty": "medium",
+    //             "code": "2700-differences-between-two-objects",
+    //             "link": "differences-between-two-objects",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Chunk Array",
 
-                "difficulty": "easy",
-                "code": "2677-chunk-array",
-                "link": "chunk-array",
-                "lang": []
-            },
-            {
-                "title": "Flatten Deeply Nested Array",
+    //             "difficulty": "easy",
+    //             "code": "2677-chunk-array",
+    //             "link": "chunk-array",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Flatten Deeply Nested Array",
 
-                "difficulty": "medium",
-                "code": "2625-flatten-deeply-nested-array",
-                "link": "flatten-deeply-nested-array",
-                "lang": []
-            },
-            {
-                "title": "Array Prototype Last",
+    //             "difficulty": "medium",
+    //             "code": "2625-flatten-deeply-nested-array",
+    //             "link": "flatten-deeply-nested-array",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Array Prototype Last",
 
-                "difficulty": "easy",
-                "code": "2619-array-prototype-last",
-                "link": "array-prototype-last",
-                "lang": []
-            },
-            {
-                "title": "Group By",
+    //             "difficulty": "easy",
+    //             "code": "2619-array-prototype-last",
+    //             "link": "array-prototype-last",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Group By",
 
-                "difficulty": "medium",
-                "code": "2631-group-by",
-                "link": "group-by",
-                "lang": []
-            },
-            {
-                "title": "Check if Object Instance of Class",
+    //             "difficulty": "medium",
+    //             "code": "2631-group-by",
+    //             "link": "group-by",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Check if Object Instance of Class",
 
-                "difficulty": "medium",
-                "code": "2618-check-if-object-instance-of-class",
-                "link": "check-if-object-instance-of-class",
-                "lang": []
-            },
-            {
-                "title": "Call Function with Custom Context",
+    //             "difficulty": "medium",
+    //             "code": "2618-check-if-object-instance-of-class",
+    //             "link": "check-if-object-instance-of-class",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Call Function with Custom Context",
 
-                "difficulty": "medium",
-                "code": "2693-call-function-with-custom-context",
-                "link": "call-function-with-custom-context",
-                "lang": []
-            },
-            {
-                "title": "Event Emitter",
+    //             "difficulty": "medium",
+    //             "code": "2693-call-function-with-custom-context",
+    //             "link": "call-function-with-custom-context",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Event Emitter",
 
-                "difficulty": "medium",
-                "code": "2694-event-emitter",
-                "link": "event-emitter",
-                "lang": []
-            },
-            {
-                "title": "Array Wrapper",
+    //             "difficulty": "medium",
+    //             "code": "2694-event-emitter",
+    //             "link": "event-emitter",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Array Wrapper",
 
-                "difficulty": "easy",
-                "code": "2695-array-wrapper",
-                "link": "array-wrapper",
-                "lang": []
-            },
-            {
-                "title": "Generate Fibonacci Sequence",
+    //             "difficulty": "easy",
+    //             "code": "2695-array-wrapper",
+    //             "link": "array-wrapper",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Generate Fibonacci Sequence",
 
-                "difficulty": "easy",
-                "code": "2648-generate-fibonacci-sequence",
-                "link": "generate-fibonacci-sequence",
-                "lang": []
-            },
-            {
-                "title": "Nested Array Generator",
+    //             "difficulty": "easy",
+    //             "code": "2648-generate-fibonacci-sequence",
+    //             "link": "generate-fibonacci-sequence",
+    //             "lang": []
+    //         },
+    //         {
+    //             "title": "Nested Array Generator",
 
-                "difficulty": "medium",
-                "code": "2649-nested-array-generator",
-                "link": "nested-array-generator",
-                "lang": []
-            }
-        ]
-    }
+    //             "difficulty": "medium",
+    //             "code": "2649-nested-array-generator",
+    //             "link": "nested-array-generator",
+    //             "lang": []
+    //         }
+    //     ]
+    // }
 ])
 
 export const modalState = atom(false)
 
+export const languageMap = [
+    {
+        name: "c",
+        title: "C",
+        extension: "c"
+    },
+    {
+        name: "cpp",
+        title: "C++",
+        extension: "cpp"
+    },
+    {
+        name: "csharp",
+        title: "C#",
+        extension: "cs"
+    },
+    {
+        name: "java",
+        title: "Java",
+        extension: "java"
+    },
+    {
+        name: "python",
+        title: "Python",
+        extension: "py"
+    },
+    {
+        name: "javascript",
+        title: "JavaScript",
+        extension: "js"
+    },
+    {
+        name: "typescript",
+        title: "TypeScript",
+        extension: "ts"
+    },
+    {
+        name: "go",
+        title: "Go",
+        extension: "go"
+    },
+    {
+        name: "ruby",
+        title: "Ruby",
+        extension: "rb"
+    },
+    {
+        name: "swift",
+        title: "Swift",
+        extension: "swift"
+    },
+    {
+        name: "kotlin",
+        title: "Kotlin",
+        extension: "kt"
+    },
+    {
+        name: "rust",
+        title: "Rust",
+        extension: "rs"
+    },
+    {
+        name: "scala",
+        title: "Scala",
+        extension: "scala"
+    },
+    {
+        name: "dart",
+        title: "Dart",
+        extension: "dart"
+    }
+]
 
-export const requestCode = async (code: string) => fetch(`https://raw.githubusercontent.com/neetcode-gh/leetcode/main/python/${code}.py`).then((res) => res.json())
+export const requestCode = async (code: string) => fetch(`https://raw.githubusercontent.com/neetcode-gh/leetcode/main/python/0217-contains-duplicate.py`).then((res) => res.text())
 
-const baseCode = atom<string | null>(null)
+export const urlAtom = atom({
+    language: "python",
+    code: "0217-contains-duplicate",
+    ext: "py"
+})
 
-export const loadableAtom = loadable(baseCode)
+const asyncAtom = atom(
+    async get => {
+        const { code, language, ext } = get(urlAtom)
+        console.log(code);
+        const response = await fetch(`https://raw.githubusercontent.com/neetcode-gh/leetcode/main/${language}/${code}.${ext}`)
+        return await response.text()
+    }
+)
+
+export const loadableAtom = loadable(asyncAtom)
+
+export const modalSchema = atom({
+    question: "",
+    languageArray: ["python"]
+})

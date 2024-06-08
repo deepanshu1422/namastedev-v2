@@ -1,7 +1,48 @@
+'use client'
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RESET } from "jotai/utils";
 import { Search, Trash } from "lucide-react";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { solved } from "@/lib/jotai";
+import { useAtom } from "jotai";
+
+export function ClearAll({ children }: { children: React.ReactNode }) {
+
+  const [sol, setSol] = useAtom(solved)
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        {children}
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Really, you wanna do this?</AlertDialogTitle>
+          <AlertDialogDescription>
+            There is no turning back from this, if you proceed furthur then you will for sure losse your progress track.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={() => setSol(RESET)} className="bg-red-600 text-white hover:bg-red-700">Continue</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}
+
 
 export default function Hero() {
   return (
@@ -25,7 +66,9 @@ export default function Hero() {
                 className="w-full appearance-none bg-background pl-8 shadow-none"
               />
             </div>
-            <Button variant={"destructive"} className="px-2" ><Trash className="h-4 w-4 mr-2" />Clear Progress</Button>
+            <ClearAll>
+              <Button variant={"destructive"} className="px-2" ><Trash className="h-4 w-4 mr-2" />Clear Progress</Button>
+            </ClearAll>
           </div>
         </div>
       </div>
