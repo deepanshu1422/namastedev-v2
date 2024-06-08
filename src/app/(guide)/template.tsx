@@ -3,6 +3,7 @@
 import Link from "next/link";
 import {
   Bookmark,
+  Braces,
   CircleUser,
   Compass,
   Earth,
@@ -56,12 +57,6 @@ export default function Template({ children }: { children: React.ReactNode }) {
       href: "/projects",
       selected: path === "/projects",
     },
-    // {
-    //   title: "Guides",
-    //   icon: <Bookmark className="h-4 w-4 md:h-5 md:w-5" />,
-    //   href: "/guides",
-    //   selected: path === "/guides",
-    // },
     {
       title: "Jobs",
       icon: <Earth className="h-4 w-4 md:h-5 md:w-5" />,
@@ -81,6 +76,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
       selected: path === "/testimonials"
     },
     {
+      title: "DSA",
+      icon: <Braces className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/dsa",
+      selected: path === "/dsa"
+    },
+    {
       title: "Courses",
       icon: <Library className="h-4 w-4 md:h-5 md:w-5" />,
       href: "https://courses.30dayscoding.com/s/store",
@@ -90,11 +91,6 @@ export default function Template({ children }: { children: React.ReactNode }) {
       icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/mentorship",
     },
-    {
-      title: "Resources",
-      icon: <Shapes className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/resources",
-    }
   ];
 
 
@@ -242,7 +238,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>Welocme, {userData.user?.name} </DropdownMenuLabel>
+                <DropdownMenuLabel>Welocme, {userData.user?.name} </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Settings</DropdownMenuItem>
                 <DropdownMenuItem>Support</DropdownMenuItem>
