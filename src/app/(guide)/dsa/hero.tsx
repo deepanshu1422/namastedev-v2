@@ -51,7 +51,7 @@ export default function Hero() {
 
       <div className="flex flex-col items-center gap-3 relative z-10 w-full max-w-6xl mx-auto text-center">
         <h1 className="font-bric text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-lime-300 to-green-800 max-w-2xl">
-          Enhance Your Coding Skills Challenges!
+          The only DSA tracking sheet you NEED!
         </h1>
         <div className="flex flex-col gap-5 items-center justify-center w-full">
           <p className="max-w-xl md:max-w-3xl max-sm:text-sm sm:text-lg text-muted-foreground">

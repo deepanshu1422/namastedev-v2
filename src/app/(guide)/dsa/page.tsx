@@ -5,12 +5,12 @@ import ChallengesTabs from "./challenges";
 import Modal from "./modal";
 
 export const metadata: Metadata = {
-  title: "30DC Code Platform | 30dayscoding",
+  title: "The only DSA tracking sheet you NEED | 30dayscoding",
   description:
     "Explore our DSA code platform for mastering Data Structures and Algorithms. Access a wide range of DSA tutorials, practice problems, and coding challenges to enhance your programming skills and ace your technical interviews.",
   openGraph: {
     images: "https://i.ibb.co/7KP3CJp/dsa-1.webp",
-    title: "30DC Code Platform | 30dayscoding",
+    title: "The only DSA tracking sheet you NEED | 30dayscoding",
     description:
       "Explore our DSA code platform for mastering Data Structures and Algorithms. Access a wide range of DSA tutorials, practice problems, and coding challenges to enhance your programming skills and ace your technical interviews.",
     url: "https://30dayscoding.com",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     images: "https://i.ibb.co/7KP3CJp/dsa-1.webp",
-    title: "30DC Code Platform | 30dayscoding",
+    title: "The only DSA tracking sheet you NEED | 30dayscoding",
     description:
       "Explore our DSA code platform for mastering Data Structures and Algorithms. Access a wide range of DSA tutorials, practice problems, and coding challenges to enhance your programming skills and ace your technical interviews.",
     site: "https://30dayscoding.com",
@@ -34,7 +34,7 @@ export default async function Home() {
       <div className="mx-auto w-full max-w-[90rem] px-4 lg:px-8 pb-8 flex flex-col gap-2">
         <ChallengesTabs />
         <Modal />
-        <h2 className="m-auto text-2xl font-bold text-center">Special Courses just for Prepared for You</h2>
+        <h2 className="m-auto text-2xl font-bold text-center py-3 text-pretty">Special Courses just for Prepared for You</h2>
         <Cards data={[
           {
             title: "DSA Complete Placement Course",
