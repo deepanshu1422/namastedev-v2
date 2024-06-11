@@ -142,7 +142,7 @@ export default function ChallengesTabs() {
   const [tab, setTab] = useState(0)
 
   return (
-    <div className="flex flex-col py-2">
+    <div className="flex flex-col">
       <ul className="flex gap-1 mx-auto bg-muted p-1 rounded-md">
         <li>
           <label onClick={() => setTab(0)} htmlFor="hosting-small" className={`inline-flex items-center justify-between w-fit p-2 max-sm:text-xs sm:px-7 rounded cursor-pointer bg-card transition-all duration-200 ${tab === 0 ? "bg-second text-white" : "text-gray-500"}`}>

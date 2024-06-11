@@ -79,7 +79,7 @@ export default function Hero() {
             {search && <div className="max-w-[41rem] w-full min-h-10 absolute top-11 bg-background rounded-md flex flex-col gap-1.5 p-2">{searchProblems.filter(problem =>
               problem.title.toLocaleLowerCase()
                 .includes(search.toLocaleLowerCase())
-            ).slice(0, 5).map(({ title, problemType, difficulty, link, code, langs }, i) => <div key={i} className="flex justify-between bg-muted/40 rounded-md">
+            ).slice(0, 5).map(({ title, problemType, link, code, langs }, i) => <div key={i} className="flex justify-between bg-muted/40 rounded-md">
               <Link target="_blank" href={"https://leetcode.com/problems/" + link} className="flex flex-1 flex-col items-start text-start group p-2">
                 <span className="text-muted-foreground font-bold text-xs">{problemType}</span>
                 <span className="text-foreground font-semibold text-sm group-hover:text-primary transition-all duration-300">{title}</span>

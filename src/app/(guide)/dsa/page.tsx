@@ -3,6 +3,7 @@ import Hero from "./hero";
 import Cards from "./cards";
 import ChallengesTabs from "./challenges";
 import Modal from "./modal";
+import Courses from "./courses";
 
 export const metadata: Metadata = {
   title: "The only DSA Tracking Sheet You NEED | 30dayscoding",
@@ -32,9 +33,10 @@ export default async function Home() {
     <main className="w-full flex flex-col">
       <Hero />
       <div className="mx-auto w-full max-w-[90rem] px-4 lg:px-8 pb-8 flex flex-col gap-2">
+        <Courses />
         <ChallengesTabs />
         <Modal />
-        <h2 className="m-auto text-2xl font-bold text-center py-3 text-pretty ">Special Courses just for Prepared for You</h2>
+        {/* <h2 className="m-auto text-2xl font-bold text-center py-3 text-pretty ">Special Courses just for Prepared for You</h2>
         <Cards data={[
           {
             title: "DSA Complete Placement Course",
@@ -57,7 +59,7 @@ export default async function Home() {
             alt: "30 days coding nextjs fullstack web dev courses",
             description: "Master the Next.js framework with our Next JS FullStack Web Development course. Build scalable and high-performance web applications with ease. This course covers everything from basics to advanced techniques, tailored for developers aiming to enhance their skills in modern web development."
           },
-        ]} />
+        ]} /> */}
       </div>
     </main>
   );
