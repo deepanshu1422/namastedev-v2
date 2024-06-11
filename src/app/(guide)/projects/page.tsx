@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Discover a world of practical learning with our projects page! Explore a diverse range of projects designed by 30 days of coding team to enhance your skills and enrich your portfolio. From beginner-friendly to advanced, our projects cater to all levels, ensuring an immersive learning experience.",
   openGraph: {
-    images: "https://i.ibb.co/f2v6nCj/job.webp",
+    images: "https://i.ibb.co/JF6FCv8/image-60job.webp",
     title: "30DC Projects | 30dayscoding",
     description:
       "Discover a world of practical learning with our projects page! Explore a diverse range of projects designed 30 days of coding team enhance your skills and enrich your portfolio. From beginner-friendly to advanced, our projects cater to all levels, ensuring an immersive learning experience.",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   keywords: ["30 days coding, coding, coding challenges"],
   twitter: {
     card: "summary_large_image",
-    images: "https://i.ibb.co/f2v6nCj/job.webp",
+    images: "https://i.ibb.co/JF6FCv8/image-60job.webp",
     title: "30DC Projects | 30dayscoding",
     description:
       "Discover a world of practical learning with our projects page! Explore a diverse range of projects designed 30 days of coding team  enhance your skills and enrich your portfolio. From beginner-friendly to advanced, our projects cater to all levels, ensuring an immersive learning experience.",

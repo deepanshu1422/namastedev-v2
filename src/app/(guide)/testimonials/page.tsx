@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description:
     "A testimonial page for our development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
   openGraph: {
-    images: "https://i.ibb.co/CV3DDbV/30dc3.webp",
+    images: "https://i.ibb.co/qyW3Xbw/testimonials.webp",
     title: "Testimonial | 30DaysCoding",
     description:
       "A testimonial page for our development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   keywords: ["30 days coding, coding, coding challenges"],
   twitter: {
     card: "summary_large_image",
-    images: "https://i.ibb.co/CV3DDbV/30dc3.webp",
+    images: "https://i.ibb.co/qyW3Xbw/testimonials.webp",
     title: "Testimonial | 30DaysCoding",
     description:
       "A testimonial page for our development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
