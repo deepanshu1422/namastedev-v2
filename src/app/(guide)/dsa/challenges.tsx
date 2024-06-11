@@ -138,7 +138,7 @@ export function Problem({ state, mode }: Props) {
 
 export default function ChallengesTabs() {
 
-  const [dsa, setDsa] = useAtom(dsaProblems)
+  const dsa = dsaProblems
   const [tab, setTab] = useState(0)
 
   return (
