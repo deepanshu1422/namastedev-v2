@@ -207,13 +207,3 @@ export default function Mentorship() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-

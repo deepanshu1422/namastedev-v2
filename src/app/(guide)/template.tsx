@@ -125,14 +125,13 @@ export default function Template({ children }: { children: React.ReactNode }) {
           <div className="max-lg:hidden relative mt-auto p-4">
             <Card>
               <CardHeader className="p-2 pt-0 md:p-4">
-                <CardTitle>Win ₹ 50,000</CardTitle>
+                <CardTitle>New Courses</CardTitle>
                 <CardDescription>
-                  Find exciting opportunities like Rs.50,000 cash prize
-                  challenges.
+                  Upskill yourself with pocket friendly courses — Enroll Now
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-                <Link href={"https://nas.io/30dc-challenges-n-hackathons/home"}>
+                <Link href={"https://courses.30dayscoding.com/s/store"}>
                   <Button
                     size="sm"
                     className="bg-prime hover:bg-prime/80 text-white w-full"
@@ -143,7 +142,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
               </CardContent>
               <Image
                 alt="30DayCoding New Challenge"
-                src={"/NEW2.gif"}
+                src={"/NEW.gif"}
                 height={120}
                 width={120}
                 className="absolute top-0 -translate-y-5 translate-x-3 right-0"
@@ -196,16 +195,15 @@ export default function Template({ children }: { children: React.ReactNode }) {
                 <div className="relative mt-auto">
                   <Card>
                     <CardHeader>
-                      <CardTitle>Win ₹ 50,000</CardTitle>
+                      <CardTitle>New Courses</CardTitle>
                       <CardDescription>
-                        Find exciting opportunities like Rs.50,000 cash prize
-                        challenges.
+                        Upskill yourself with pocket friendly courses — Enroll Now
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
                       <Link
                         href={
-                          "https://nas.io/30dc-challenges-n-hackathons/home"
+                          "https://courses.30dayscoding.com/s/store"
                         }
                       >
                         <Button
@@ -219,7 +217,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                   </Card>
                   <Image
                     alt="30DayCoding New Challenge"
-                    src={"/NEW2.gif"}
+                    src={"/NEW.gif"}
                     height={120}
                     width={120}
                     className="absolute top-0 -translate-y-10 translate-x-10 right-0"

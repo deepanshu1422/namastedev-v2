@@ -279,14 +279,13 @@ export default function MobileMenu() {
           <div className="relative mt-auto">
             <Card>
               <CardHeader>
-                <CardTitle>Win ₹ 50,000</CardTitle>
+                <CardTitle>New Courses</CardTitle>
                 <CardDescription>
-                  Find exciting opportunities like Rs.50,000 cash prize
-                  challenges.
+                Upskill yourself with pocket friendly courses — enroll now
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Link href={"https://nas.io/30dc-challenges-n-hackathons/home"}>
+                <Link href={"https://courses.30dayscoding.com/s/store"}>
                   <Button size="sm" className="text-white bg-prime w-full">
                     Enroll Now
                   </Button>
@@ -295,7 +294,7 @@ export default function MobileMenu() {
             </Card>
             <Image
               alt="30DayCoding New Challenge"
-              src={"/NEW2.gif"}
+              src={"/NEW.gif"}
               height={120}
               width={120}
               className="absolute top-0 -translate-y-10 translate-x-10 right-0"
