@@ -1,7 +1,12 @@
+'use client'
+
+import { YTModal } from "@/app/(guide)/testimonials/slider";
 import YoutubeEmbed from "@/app/(guide)/testimonials/youtube-embed";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Play } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 
 type VideoTestimony = {
   name?: string;
@@ -54,28 +59,49 @@ function VideoTestimony({
   );
 }
 
+function NewVideo({ src, videoId, setOpen, setUrl }: { src: string; videoId: string; setOpen: Dispatch<SetStateAction<boolean>>; setUrl: Dispatch<SetStateAction<string>> }) {
+  return <div className='w-full'>
+    <AspectRatio onClick={() => {setOpen(true), setUrl(videoId)}} ratio={16 / 9} className="cursor-pointer bg-muted overflow-hidden rounded-lg">
+      <Image
+        src={src}
+        alt="30 days coding youtube video"
+        fill
+        className="rounded-md object-cover shadow-xl"
+      />
+      <button className='h-20 w-20 rounded-full bg-white border-4 border-prime shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+        <Play className='h-10 w-10 fill-prime text-prime m-auto drop-shadow-xl shadow-prime translate-x-0.5' />
+      </button>
+    </AspectRatio>
+  </div>
+}
+
 export default function MentorshipGallary() {
+  const [open, setOpen] = useState(false)
+  const [url, setUrl] = useState("nTyg09pcOss")
   const courses = [
     {
-      name: "Deepanshu Udhwani",
-      designation: "Founder",
-      image: "https://i.ibb.co/8mFwp1C/instructor2.jpg",
+      image: "/thumbs/7.jpg",
+      embedId: "izIyB107f6o",
+    },
+    {
+      image: "/thumbs/1.jpg",
+      embedId: "Z4gQbG4oR4k",
+    },
+    {
+      image: "/thumbs/3.jpg",
+      embedId: "N7AN5lcXljc",
+    },
+    {
+      image: "/thumbs/4.jpg",
       embedId: "nTyg09pcOss",
-      link: "https://www.instagram.com/itsudhwani/",
     },
     {
-      name: "Deepanshu Udhwani",
-      designation: "Founder",
-      image: "https://i.ibb.co/8mFwp1C/instructor2.jpg",
+      image: "/thumbs/5.jpg",
       embedId: "Dm799lE6Geo",
-      link: "https://www.instagram.com/itsudhwani/",
     },
     {
-      name: "Deepanshu Udhwani",
-      designation: "Founder",
-      image: "https://i.ibb.co/8mFwp1C/instructor2.jpg",
+      image: "/thumbs/6.jpg",
       embedId: "eOedBqAA0qM",
-      link: "https://www.instagram.com/itsudhwani/",
     },
   ];
 
@@ -84,21 +110,23 @@ export default function MentorshipGallary() {
       <span className="flex items-center justify-center gap-4 relative">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
-          Video Testimonials
+          Excluisve Content
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
-      <div className="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2 justify-center items-center gap-8">
-        {courses.map(({ embedId, designation, image, link, name }, i) => (
-          <VideoTestimony
-            name={name}
-            designation={designation}
-            imageUrl={image}
-            videoId={embedId}
-            linkedinUrl={link}
-            key={i}
-          />
+      <div className="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2 justify-center items-center gap-4 drop-shadow-[5px_6px_70px_#07928153]">
+        {courses.map(({ embedId, image }, i) => (
+          // <VideoTestimony
+          //   name={name}
+          //   designation={designation}
+          //   imageUrl={image}
+          //   videoId={embedId}
+          //   linkedinUrl={link}
+          //   key={i}
+          // />
+          <NewVideo key={i} setUrl={setUrl} src={image} videoId={embedId} setOpen={setOpen} />
         ))}
+        <YTModal url={url} open={open} setOpen={setOpen} />
       </div>
     </div>
   );

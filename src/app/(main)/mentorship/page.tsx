@@ -11,6 +11,7 @@ import MentorshipGallary from "./mentorship-gallery";
 import Floating from "./floating";
 import Script from "next/script";
 import Lifetime from "./lifetime";
+import NewHero from "./new-hero";
 
 export const metadata: Metadata = {
   title: "Join 1:1 Mentorship | 30dayscoding",
@@ -162,6 +163,7 @@ export default function Home() {
         }))}]
         }`
       }} />
+      <NewHero />
       {/* <Hero
         title="Lifetime 1:1 Mentorship + 10 Course Access"
         desc="Learn from Aryan, Deepanshu, and the 30DC team to get placed this season."
