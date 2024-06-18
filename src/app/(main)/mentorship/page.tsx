@@ -163,7 +163,7 @@ export default function Home() {
         }))}]
         }`
       }} />
-      <NewHero />
+      {/* <NewHero /> */}
       {/* <Hero
         title="Lifetime 1:1 Mentorship + 10 Course Access"
         desc="Learn from Aryan, Deepanshu, and the 30DC team to get placed this season."
