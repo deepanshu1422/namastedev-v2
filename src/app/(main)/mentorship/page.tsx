@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
 import Testimonials from "@/components/mentorship-comp/testimonials";
 import Video from "@/components/new-cohort/video";
-import Hero from "./hero";
-import Profile from "./profile";
 import Faqs from "@/components/mentorship-comp/faq";
-import Mentorship from "./mentorship";
 import JoinUs from "./joinus";
 import Features from "./features";
 import MentorshipGallary from "./mentorship-gallery";
-import Floating from "./floating";
 import Script from "next/script";
 import Lifetime from "./lifetime";
-import NewHero from "./new-hero";
+import Mentors from "./mentors";
+import Success from "@/components/mentorship-comp/success";
 
 export const metadata: Metadata = {
   title: "Join 1:1 Mentorship | 30dayscoding",
@@ -191,6 +188,7 @@ export default function Home() {
       /> */}
       <Lifetime />
       <Features />
+      <Success />
       <MentorshipGallary />
       <Video
         title={"1:1 Live Query Sessions"}
@@ -199,7 +197,7 @@ export default function Home() {
         }
         youtubeId={"ylUk7kImBeE"}
       />
-      <Profile />
+      <Mentors />
       <Video
         title={"Best Practices for Developers by Our Mentors"}
         desc={
@@ -215,7 +213,6 @@ export default function Home() {
         }
         youtubeId={"gIx8D2pyXVI"}
       />
-      <Testimonials />
       <Faqs faq={faq} />
       {/* <Highlights /> */}
       {/* <Testimonials /> */}

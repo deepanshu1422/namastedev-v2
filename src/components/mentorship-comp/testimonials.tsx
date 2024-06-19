@@ -1,6 +1,6 @@
 "use client";
 
-import { TestimonialType } from "@/app/testimonials/inspirational";
+import { TestimonialType } from "@/app/(guide)/testimonials/inspirational";
 import Reveal from "@/components/framer/reveal";
 import Link from "next/link";
 

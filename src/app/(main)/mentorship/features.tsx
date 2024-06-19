@@ -1,5 +1,4 @@
-import Reveal from "@/components/framer/reveal";
-import { Shapes } from "lucide-react";
+import { Check, CheckCircle2, Shapes, Star, XCircle } from "lucide-react";
 
 export default function Features() {
   let mentorsipPath = [
@@ -141,7 +140,7 @@ export default function Features() {
       ),
     },
     {
-      title: "Jobs, internships, co-ops, etc.",
+      title: "Jobs, internships, co-ops, etc.",
       svg: (
         <svg
           width="21"
@@ -163,8 +162,22 @@ export default function Features() {
       ),
     },
   ];
+
+  let features = [
+    { title: "live classes", other: true, free: true },
+    { title: "1:1 mentorship calls", other: true, free: false },
+    { title: "15 courses access", other: false, free: false },
+    { title: "interview preparation", other: false, free: false },
+    { title: "25+ guides access", other: false, free: false },
+    { title: "24/7 WhatsApp access", other: false, free: false },
+    { title: "live doubt support", other: false, free: false },
+    { title: "regular QnAs", other: false, free: false },
+    { title: "personalized roadmap", other: false, free: false },
+    { title: "resume and profile review", other: false, free: false },
+  ]
+
   return (
-    <div className="m-auto grid grid-cols-1 place-items-center px-10 lg:px-20 py-10 lg:pt-20 gap-10 max-w-[75rem]">
+    <div className="m-auto grid grid-cols-1 place-items-center px-5 lg:px-10 py-10 lg:pt-20 gap-10 max-w-[75rem]">
       <span className="flex items-center justify-center gap-4 relative">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
@@ -172,35 +185,32 @@ export default function Features() {
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
-      <div className="relative flex flex-col items-start gap-5 rounded-xl border border-prime bg-second p-5 lg:p-8 overflow-hidden">
-        <div className="flex flex-col items-start gap-3 self-stretch">
-          <Reveal>
-            <span className="self-stretch text-xl font-semibold leading-[30px]">
-              One-on-One Mentorship Program Benefits
-            </span>
-          </Reveal>
+      <div className="relative flex flex-col items-start gap-5 rounded-xl border border-prime bg-second lg:p-8 overflow-hidden w-full">
+        <div className="flex flex-col items-start gap-3 self-stretch px-5 pt-5 relative z-10">
+          <span className="self-stretch text-xl font-semibold leading-[30px] text-pretty">
+            One-on-One Mentorship Program Benefits
+          </span>
         </div>
 
-        <div className="relative ml-10 flex w-[calc(100%-40px)] flex-col items-start gap-5 divide-y divide-prime pb-5">
-          {mentorsipPath.map(({ title, svg }, i) => (
-            <div
-              key={i}
-              className="flex w-full items-start gap-3 pt-5 lg:gap-4"
-            >
-              <section className="z-10 -ml-10 -translate-y-1 flex items-center justify-center rounded-full bg-prime p-1">
-                {svg}
-              </section>
+        <div className="flex flex-col pb-1 w-full [&>*:nth-child(odd)]:bg-prime/20">
 
-              <div className="flex w-full flex-col items-start gap-4">
-                <p className="text-lg font-medium text-white/70 leading-5">
-                  {title}
-                </p>
-              </div>
+          <div className="flex items-center px-3 py-5 font-extrabold text-white/70 text-sm uppercase max-sm:text-xs">
+            <span className="flex-[2]">Feature</span>
+            <span className="flex-1 text-center">30DC Courses</span>
+            <span className="flex-1 text-center">Other Courses</span>
+            <span className="flex-1 text-center">Free Courses</span>
+          </div>
+
+          {features.map(({ title, free, other }, i) => (
+            <div key={i} className="flex items-center px-3 py-5 font-extrabold text-white/70 capitalize max-sm:text-sm">
+              <span className="flex-[2]">{title}</span>
+              <span className="flex-1 text-center"><CheckCircle2 className="mx-auto h-6 w-6 text-primary" /></span>
+              <span className="flex-1 text-center">{other ? <CheckCircle2 className="mx-auto h-6 w-6 text-primary" /> : <XCircle className="mx-auto h-6 w-6 text-white/30" />}</span>
+              <span className="flex-1 text-center">{free ? <CheckCircle2 className="mx-auto h-6 w-6 text-primary" /> : <XCircle className="mx-auto h-6 w-6 text-white/30" />}</span>
             </div>
           ))}
-          <div className="absolute -left-[26px] top-0 h-full w-px bg-prime/70"></div>
         </div>
-          <Shapes className="h-40 w-40 rotate-12 absolute -top-10 -right-10 opacity-60 stroke-prime" />
+        <Star className="h-40 w-40 rotate-12 absolute -top-10 -right-10 opacity-60 stroke-prime" />
       </div>
     </div>
   );
