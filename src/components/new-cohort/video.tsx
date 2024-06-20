@@ -1,5 +1,3 @@
-import Reveal from "../framer/reveal";
-
 export default function Video({
   title,
   desc,

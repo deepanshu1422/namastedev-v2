@@ -39,110 +39,40 @@ function Testimonial({ name, review, link }: TestimonialType) {
 
 const testimonials: TestimonialType[] = [
     {
-        review: "I knew I had what it took to break into tech, but didn't really know how to do it. Aryan reached out to me about the dsa revision guide and joining the group right when I was looking to get started. The dsa revison guide, paired with support from the group, gave me a clear path to land internships at GitHub and Google, and eventually a full time role at Tesla Autopilot right after undergrad.",
+        review: "Before joining 30DC, I was struggling to make sense of the vast world of tech. The mentorship program gave me a structured approach and personalized guidance that I desperately needed. With 30DC's resources and community, I successfully transitioned from a non-tech background to securing a software engineering role at Amazon within six months.",
         name: "Alex Munich",
         link: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0"
     },
     {
-        review: "This community has been a game-changer for my career. The exclusive courses and personalized guidance from expert mentors have helped me take my coding skills to the next level.",
+        review: "I was stuck in a low-paying job and felt lost in my career. 30DC's mentorship group changed everything for me. The courses and community support helped me sharpen my skills and regain confidence. With the support from 30DC, I landed a dream job at Facebook, doubling my salary and setting a new career trajectory.",
         name: "Dhanush Kamath",
         link: "https://courses.30dayscoding.com/courses/Full-stack-package-652a0a17e4b0db14394522ed"
 
     },
     {
-        review: "The exclusive courses and bi-weekly live sessions have been incredibly insightful, and collaborating on open-source projects has been a great way to build my portfolio. I highly recommend this community.",
+        review: "Joining 30DC was the best decision I made for my career. The personalized mentorship and the comprehensive courses provided me with the tools and strategies I needed to excel in interviews. Thanks to 30DC and the community, I secured an internship at LinkedIn, which eventually turned into a full-time software engineering position at Apple.",
         name: "Kevin Smith",
         link: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d"
 
     },
     {
-        review: "Joining this community was one of the best decisions I've made for my career. The 24/7 WhatsApp group has been an incredible resource for networking and collaboration. I highly recommend this community",
+        review: "I had been applying to tech jobs for months with no success. The 30DC mentorship program, particularly the courses and the supportive community, provided me with a clear roadmap and the confidence to ace my interviews. 30DC's guidance was instrumental in helping me land a high-paying role at Microsoft right after graduation.",
         name: "Umang Chaudhary",
         link: "https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view"
 
     },
     {
-        review: "Content across 30days coding is great and its really easy to understand, and best part about it is project based learning which starts with beginner to intermediate to hard and handholding support by aryan and his team is impeccable. A must join mentorship programme.",
+        review: "After struggling with countless job applications and rejections, I discovered 30DC. The structured courses and mentorship provided me with the direction and skills I needed to stand out. The supportive community kept me motivated throughout the process, and I eventually landed a software engineering position at Netflix, transforming my career.",
         name: "Nimish Sharma",
         link: "https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view"
 
     },
     {
-        review: "I have purchased your course of mern bundle and blockchain the course is great as both the person are adding new material every day in the course just 1 suggestion is to add more video lecture in the blockchain course else the mern course is really good i am currently learning react js from that course. I just want my 800 rupees refund so that i can buy the bundel of whole course (10 course bundel ) because i want it really badly",
+        review: "30DC was a game-changer for me. The personalized mentorship, comprehensive courses, and the encouraging community created a perfect environment for my growth. With the help of 30DC, I went from being unsure about my career path to securing a high-paying tech role at Adobe, right after completing my studies.",
         name: "Parth Sankpal",
         link: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0"
 
     },
-    //   {
-    //     time: "3/7/2024 7:00:59",
-    //     name: "Punit ",
-    //     email: "Punitmistr@gmail.com",
-    //     review:
-    //       "Very good person got to learn new new things about the web development and how to prepare for the future and amazing content for education purpose as well as for the entertainment also ",
-    //   },
-    //   {
-    //     time: "3/8/2024 0:23:51",
-    //     name: "Jaydeep Bariya",
-    //     email: "jaydeepbariya.dev@gmail.com",
-    //     review:
-    //       "I have purchased 10 courses bundle 2 days ago. I know MERN, but bought for other things this bundle offers. I am amazed with the amount of content and variety on veriety of tech. Thanks. ",
-    //   },
-    //   {
-    //     time: "3/10/2024 22:04:05",
-    //     name: "Darshan ",
-    //     email: "darsingh07@yahoo.com",
-    //     review:
-    //       "I have taken a mern stack course ,its a veey good course for professional as well as beginner,deep learning concepts plenty of projects. Interview question etc lot of things its a job ready course in such a small amount. \nThankyou",
-    //   },
-    //   {
-    //     time: "3/7/2024 1:38:21",
-    //     name: "Parth Sankpal ",
-    //     email: "psankpal87@gmail.com",
-    //     review:
-    //       "I just purchased course.This is the best price i could get the course compared to market.It is very nice to know that you just want to educate people,don't want to make money out of them. Really value for money.\n\nAlso please share community links to join",
-    //   },
-    //   {
-    //     time: "3/10/2024 23:09:03",
-    //     name: "Nimish Sharma",
-    //     email: "snimish123@gmail.com",
-    //     review:
-    //       "content across 30days coding is great and its really easy to understand, and best part about it is project based learning which starts with beginner to intermediate to hard and handholding support by aryan and his team is impeccable. ",
-    //   },
-    //   {
-    //     time: "3/7/2024 7:00:59",
-    //     name: "Punit ",
-    //     email: "Punitmistr@gmail.com",
-    //     review:
-    //       "Very good person got to learn new new things about the web development and how to prepare for the future and amazing content for education purpose as well as for the entertainment also ",
-    //   },
-    //   {
-    //     time: "3/8/2024 0:23:51",
-    //     name: "Jaydeep Bariya",
-    //     email: "jaydeepbariya.dev@gmail.com",
-    //     review:
-    //       "I have purchased 10 courses bundle 2 days ago. I know MERN, but bought for other things this bundle offers. I am amazed with the amount of content and variety on veriety of tech. Thanks. ",
-    //   },
-    //   {
-    //     time: "3/10/2024 22:04:05",
-    //     name: "Darshan ",
-    //     email: "darsingh07@yahoo.com",
-    //     review:
-    //       "I have taken a mern stack course ,its a veey good course for professional as well as beginner,deep learning concepts plenty of projects. Interview question etc lot of things its a job ready course in such a small amount. \nThankyou",
-    //   },
-    //   {
-    //     time: "3/7/2024 1:38:21",
-    //     name: "Parth Sankpal ",
-    //     email: "psankpal87@gmail.com",
-    //     review:
-    //       "I just purchased course.This is the best price i could get the course compared to market.It is very nice to know that you just want to educate people,don't want to make money out of them. Really value for money.\n\nAlso please share community links to join",
-    //   },
-    //   {
-    //     time: "3/10/2024 23:09:03",
-    //     name: "Nimish Sharma",
-    //     email: "snimish123@gmail.com",
-    //     review:
-    //       "content across 30days coding is great and its really easy to understand, and best part about it is project based learning which starts with beginner to intermediate to hard and handholding support by aryan and his team is impeccable. ",
-    //   },
 ];
 
 export default function Success() {

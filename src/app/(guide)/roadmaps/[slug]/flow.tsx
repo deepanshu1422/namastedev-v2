@@ -28,13 +28,13 @@ export default function Flow({ courses, cover = "/courses/course1.jpg" ,url = "h
   }
 
   return (
-    <div className="min-h-screen max-w-7xl mx-auto w-full flex gap-2 p-5">
+    <div className="min-h-screen max-w-7xl mx-auto w-full flex gap-2 p-5 relative">
       <div className="relative flex-1 flex flex-col items-center gap-10 p-2">
         {courses && courses.map((e, i) => (<Tile key={i} title={e} href={url} index={i+1} />))}
         <div className="absolute top-0 -z-10 w-px h-full border border-white/60 border-dashed" />
       </div>
-      <div className="relative max-lg:hidden overflow-hidden w-80">
-        <div className="fixed -z-30 top-20 right-4 p-3 flex flex-col gap-3 shadow-lg bg-second rounded-lg h-fit">
+      <div className="max-lg:hidden relative h-[1000px] w-80">
+        <div className="sticky z-30 top-0 p-3 flex flex-col gap-3 shadow-lg bg-second rounded-lg h-fit">
           <Image
             className="h-44 rounded shadow-md hover:scale-105 transition-transform object-cover"
             alt="course"
@@ -69,17 +69,14 @@ export default function Flow({ courses, cover = "/courses/course1.jpg" ,url = "h
               <Video className="h-5 w-5" />
             </CoursePerks>
 
-            <CoursePerks title={"Machine Coding round tips"}>
-              <Bookmark className="h-5 w-5" />
-            </CoursePerks>
-
-            <CoursePerks title={"3 Major project"}>
+            <CoursePerks title={"Major projects"}>
               <Briefcase className="h-5 w-5" />
             </CoursePerks>
 
             <CoursePerks title={"Resume building sessions"}>
               <Code2 className="h-5 w-5" />
             </CoursePerks>
+
             <CoursePerks title={"Interviews Questions covered"}>
               <HelpCircle className="h-5 w-5" />
             </CoursePerks>
@@ -88,7 +85,7 @@ export default function Flow({ courses, cover = "/courses/course1.jpg" ,url = "h
               <Atom className="h-5 w-5" />
             </CoursePerks>
 
-            <CoursePerks title={"3 years of access"}>
+            <CoursePerks title={"Lifetime Access"}>
               <Clock7 className="h-5 w-5" />
             </CoursePerks>
 

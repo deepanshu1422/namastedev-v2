@@ -10,6 +10,7 @@ import Faqs from "@/components/mentorship-comp/faq";
 import Program from "@/components/program";
 import Floating from "./resources/floating";
 import Script from "next/script";
+import Success from "@/components/mentorship-comp/success";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),
@@ -208,13 +209,14 @@ export default function Home() {
         }`
       }} />
       <Hero
-        title="Job Ready Premium Coding Courses"
+        title="Land a High Paying Tech Job in the Next 30 Days!"
         desc="500+ Videos • 45+ Projects • 20+ Interview Guides • 25k+ Students • Beginner Friendly • Certificates included. Checkout the reviews."
         heroImage="bg-[url('https://i.ibb.co/nn0YJDY/code-1.png')]"
         subTitle="Lifetime Validity Courses + Certificates"
         subDesc="Whether you're a beginner looking to dive into programming or an experienced developer seeking skill enhancement, our mentors' guidance and courses are well-designed for all levels of proficiency."
-        ytId="1fPHHiluoDs"
+        ytId="enw3DVa1r5k"
       />
+      <Success />
       <Course />
       <Store />
       <Mentor />
