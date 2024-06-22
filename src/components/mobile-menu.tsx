@@ -14,6 +14,7 @@ import {
   Network,
   Rss,
   Shapes,
+  Wrench,
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -123,8 +124,8 @@ export default function MobileMenu() {
       ],
     },
     {
-      icon: <Package className="h-5 w-5" />,
-      title: "Products",
+      icon: <Wrench className="h-5 w-5" />,
+      title: "Services",
       // href: "/products",
       selected: false,
       sources: [
@@ -181,9 +182,9 @@ export default function MobileMenu() {
       selected: false,
     },
     {
-      icon: <Network className="h-5 w-5" />,
-      title: "Roadmaps",
-      href: "/roadmaps",
+      icon: <Package className="h-5 w-5" />,
+      title: "Products",
+      href: "/products",
       selected: false,
     },
     {

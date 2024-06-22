@@ -41,11 +41,11 @@ export async function generateMetadata(
     }
 
     return {
-        title: item?.title,
+        title: `${item?.title} | 30DC Templates`,
         description: item?.description,
         openGraph: {
             type: "article",
-            title: item?.title,
+            title: `${item?.title} | 30DC Templates`,
             description: item?.description,
             images: {
                 url: item?.cover ?? "",

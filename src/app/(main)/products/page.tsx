@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     description:
         "Discover top-notch web design services and premium pre-built Next.js templates. Elevate your online presence with our affordable, customizable solutions designed to meet your unique needs.",
     openGraph: {
-        images: "https://i.ibb.co/ZSkm4HH/30dc1.webp",
+        images: "https://i.ibb.co/wSY7bDZ/products.webp",
         title: "Affordable Pre-built Next.js Web Templates",
         description:
             "Discover top-notch web design services and premium pre-built Next.js templates. Elevate your online presence with our affordable, customizable solutions designed to meet your unique needs.",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     keywords: ["30 days coding, coding, coding challenges"],
     twitter: {
         card: "summary_large_image",
-        images: "https://i.ibb.co/ZSkm4HH/30dc1.webp",
+        images: "https://i.ibb.co/wSY7bDZ/products.webp",
         title: "Affordable Pre-built Next.js Web Templates",
         description:
             "Discover top-notch web design services and premium pre-built Next.js templates. Elevate your online presence with our affordable, customizable solutions designed to meet your unique needs.",
