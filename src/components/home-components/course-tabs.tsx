@@ -20,7 +20,6 @@ export function CourseTabMenu({
       title: string;
       imgSrc: string;
       link: string;
-      alt: string
     }[];
   }[];
 }) {
@@ -48,7 +47,7 @@ export function CourseTabMenu({
             value={`chapter${i + 1}`}
           >
             <Reveal>
-              <div className="grid lg:grid-rows-2 lg:grid-flow-col max-lg:grid-cols-1 gap-4 max-lg:gap-8 max-lg:place-items-center lg:w-[640px] overflow-x-scroll horizontal-scroll p-2">
+              <div className="grid lg:grid-rows-3 lg:grid-flow-col max-lg:grid-cols-1 gap-4 max-lg:gap-8 max-lg:place-items-center lg:w-[640px] overflow-x-scroll horizontal-scroll p-2">
                 {courses.map(({ title, imgSrc, link }, index) => (
                   <Link
                     key={index}
@@ -58,10 +57,11 @@ export function CourseTabMenu({
                     <div className="max-lg:m-auto flex flex-col max-lg:justify-center gap-2 rounded-xl bg-second p-2 h-fit shadow-[0_2px_40px_0_rgba(0,0,0,.2)]">
                       <Image
                         className="rounded-lg w-96 h-48"
+                        loader={() => imgSrc}
                         src={imgSrc}
                         width={280}
                         height={280}
-                        alt="fullstack"
+                        alt={`30 days coding ${title}`}
                       />
                       <span className="text-sm font-semibold inline">
                         {title}

@@ -1,4 +1,4 @@
-import { BASE_URL } from '@/util/constants'
+import { BASE_URL, templates } from '@/util/constants'
 import { roadmapsData } from '@/util/globals'
 import prisma from '@/util/prismaClient'
 import { MetadataRoute } from 'next'
@@ -73,6 +73,12 @@ const staticMaps: MetadataRoute.Sitemap = [
     },
     {
         url: 'https://30dayscoding.com/dsa',
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.8,
+    },
+    {
+        url: 'https://30dayscoding.com/products',
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.8,
@@ -171,7 +177,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.5,
     }))
 
-    return [...staticMaps, ...dynamicRoadmaps, ...dynamicMaps]
+    const dynamicTemplates: MetadataRoute.Sitemap = templates.map((template) => ({
+        url: `${BASE_URL}/products/${template.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.5,
+    }))
+
+    return [...staticMaps, ...dynamicRoadmaps, ...dynamicMaps, ...dynamicTemplates]
 }
 
 

@@ -53,8 +53,8 @@ export default function Course() {
           </Reveal>
         </Link>
 
-        {/* <Link
-          href={"/course/dsa-live-placement-ready-course"}
+        <Link
+          href={"/products"}
           className="flex-1 max-lg:w-full lg:max-w-[450px] hover:opacity-90"
         >
           <Reveal>
@@ -63,19 +63,19 @@ export default function Course() {
                 <Image src={"/data.webp"} width={35} height={35} alt="dsa" />
               </span>
               <span className="text-xl font-semibold line-clamp-2">
-                DSA Live Classes
+                Products - Template & Projects
               </span>
             </div>
             <div className="max-lg:m-auto flex items-center justify-between p-2 px-4 shadow-[0_2px_40px_0_rgba(0,0,0,.2)] gap-4 rounded-b-xl bg-second h-fit text-xs">
               <span className="rounded-full p-2 bg-prime/50">
-                12 weeks - Everything from A-Z
+                Everything from A-Z
               </span>
               <span className="p-2 flex items-center">
                 See More <ChevronRight className="h-3 w-3" />
               </span>
             </div>
           </Reveal>
-        </Link> */}
+        </Link>
       </div>
 
       {/* <Link
