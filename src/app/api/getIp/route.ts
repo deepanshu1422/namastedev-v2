@@ -3,9 +3,7 @@
 import { geolocation, ipAddress } from "@vercel/edge";
 import { NextRequest } from "next/server";
 
-export const config = {
-	runtime: "edge",
-};
+export const runtime = "edge"
 
 export default function (request: NextRequest) {
 	// The geolocation helper pulls out the geoIP headers from the
