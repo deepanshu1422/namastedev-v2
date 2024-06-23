@@ -1,6 +1,5 @@
 import MobileMenu from "@/components/mobile-menu";
 import Navbar from "@/components/home-components/navbar";
-import { Toaster } from "sonner";
 
 export default function MainLayout({
   children,
@@ -10,7 +9,6 @@ export default function MainLayout({
   return (
     <>
       {/* <MobileMenu /> */}
-      <Toaster richColors />
       <Navbar />
       {children}
     </>
