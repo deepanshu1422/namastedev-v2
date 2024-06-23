@@ -1,12 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import Reveal from "../framer/reveal";
 import { ChevronRight } from "lucide-react";
 
 export default function Course() {
   return (
     <div className="grid place-items-center gap-8 max-w-[90rem] m-auto pt-8 pb-4">
-      <Reveal>
         <span className="flex items-center gap-4 relative">
           <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
           <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
@@ -14,20 +12,16 @@ export default function Course() {
           </h2>
           <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
         </span>
-      </Reveal>
 
-      <Reveal>
         <span className="text-prime font-semibold uppercase">
           Our Offerings
         </span>
-      </Reveal>
 
       <div className="flex w-full max-lg:flex-col lg:gap-6 justify-center max-lg:items-center max-lg:gap-10 max-lg:max-w-[550px] px-10">
         <Link
           href={"/mentorship"}
           className="flex-1 max-lg:w-full lg:max-w-[450px] hover:opacity-90"
         >
-          <Reveal>
             <div className="max-lg:m-auto flex items-center lg:p-[2rem_1.5rem_2.5rem] p-4 shadow-[0_2px_40px_0_rgba(0,0,0,.2)] gap-4 rounded-t-xl bg-second h-fit">
               <span className="rounded-full shrink-0 p-4 w-fit">
                 {/* <MapIcon className="h-10 w-10 stroke-prime" /> */}
@@ -50,14 +44,12 @@ export default function Course() {
                 See More <ChevronRight className="h-3 w-3" />
               </span>
             </div>
-          </Reveal>
         </Link>
 
         <Link
           href={"/products"}
           className="flex-1 max-lg:w-full lg:max-w-[450px] hover:opacity-90"
         >
-          <Reveal>
             <div className="max-lg:m-auto flex items-center lg:p-[2rem_1.5rem_2.5rem] p-4 shadow-[0_2px_40px_0_rgba(0,0,0,.2)] gap-4 rounded-t-xl bg-second h-fit">
               <span className="rounded-full shrink-0 p-4 w-fit">
                 <Image src={"/data.webp"} width={35} height={35} alt="dsa" />
@@ -74,7 +66,6 @@ export default function Course() {
                 See More <ChevronRight className="h-3 w-3" />
               </span>
             </div>
-          </Reveal>
         </Link>
       </div>
 

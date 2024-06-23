@@ -8,14 +8,10 @@ export default function Hero({
   title,
   desc,
   heroImage,
-  search,
-  setSearch
 }: {
   title: string;
   desc: string;
   heroImage: string;
-  search: string;
-  setSearch: Dispatch<SetStateAction<string>>
 }) {
 
   return (
@@ -42,10 +38,6 @@ export default function Hero({
               {desc}
             </p>
 
-            <span className="flex my-5 w-full">
-              <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search templates" className="rounded-e-none border-e-0 focus-visible:ring-0 focus-visible:ring-offset-0" />
-              <Button className="text-white bg-prime/70 rounded-s-none px-7 hover:bg-prime/90" >Search</Button>
-            </span>
           </section>
           <div className="flex-1 max-tab:hidden flex max-tab:pt-10 drop-shadow-[5px_6px_10px_#07928190] max-tab:pb-20">
             <div className="relative mx-auto tab:-translate-y-10">

@@ -47,7 +47,7 @@ export function CourseTabMenu({
             value={`chapter${i + 1}`}
           >
             <Reveal>
-              <div className="grid lg:grid-rows-3 lg:grid-flow-col max-lg:grid-cols-1 gap-4 max-lg:gap-8 max-lg:place-items-center lg:w-[640px] overflow-x-scroll horizontal-scroll p-2">
+              <div className="grid lg:grid-rows-2 lg:grid-flow-col max-lg:grid-cols-1 gap-4 max-lg:gap-8 max-lg:place-items-center lg:w-[640px] overflow-x-scroll horizontal-scroll p-2">
                 {courses.map(({ title, imgSrc, link }, index) => (
                   <Link
                     key={index}

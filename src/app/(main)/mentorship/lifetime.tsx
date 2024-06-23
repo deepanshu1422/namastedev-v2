@@ -7,6 +7,7 @@ import { Check, CreditCard, Play, Star } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { toast } from 'sonner'
 
 export default function Lifetime() {
     const [open, setOpen] = React.useState(false);
@@ -19,6 +20,16 @@ export default function Lifetime() {
         <p key={6} ><em><strong>Interview</strong></em> guides, resources, etc.</p>,
         <p key={7} ><em><strong>Jobs</strong></em>, internships, co-ops, etc.</p>,
     ]
+
+    async function getLoc(){
+        const res = await fetch("/api/getIp")  
+        const json = await res.json()  
+        toast("Incoming IP",{
+            description: JSON.stringify(json),
+        })
+        console.log(json);
+    }
+
     return (
         <div className='m-auto flex flex-col px-5 lg:px-20 pt-10 max-w-[75rem]'>
             <span className="flex items-center justify-center gap-4 relative pb-4">
@@ -67,7 +78,9 @@ export default function Lifetime() {
             <h3 className='font-jakarta font-extrabold text-4xl sm:text-5xl mx-auto sm:pt-6 text-center max-w-[90vw] overflow-hidden text-wrap'>₹{mentorship.price}/<span className='line-through italic text-muted-foreground'>₹{mentorship.ogPrice}</span>.LifeLong Mentorship.</h3>
             <p className='m-auto py-2 pb-6 text-center text-sm max-w-3xl text-foreground/90'>If you&apos;re not completely satisfied with your purchase, or if it doesn&apos;t meet your expectations, simply respond to the email receipt within 30 days to receive a full refund. No questions asked.</p>
 
-            <Link href={"https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view"} target='_blank' className='bg-prime rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase'><CreditCard className="h-10 w-10" />Join Now</Link>
+            {/* <Link href={"https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view"} target='_blank' className='bg-prime rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase'><CreditCard className="h-10 w-10" />Join Now</Link> */}
+
+            <button onClick={() => getLoc()} className='bg-prime rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase'><CreditCard className="h-10 w-10" />Join Now</button>
         </div>
     )
 }

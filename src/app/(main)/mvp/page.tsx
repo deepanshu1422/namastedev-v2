@@ -1,6 +1,6 @@
-import React from 'react'
 import { Metadata } from 'next';
-import Main from './main';
+import React from 'react'
+import Hero from './hero';
 
 export const metadata: Metadata = {
     title: "Products | 30dayscoding",
@@ -25,8 +25,14 @@ export const metadata: Metadata = {
     },
 };
 
-
 export default function Home() {
-
-    return <Main />
+    return (
+        <main className="bg-background bg-bg min-h-svh transition-all">
+            <Hero
+                title="Affordable Pre-built Next.js Web Templates"
+                desc="Discover top-notch web design services and premium pre-built Next.js templates. Elevate your online presence with our customizable solutions."
+                heroImage="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            />
+        </main>
+    )
 }
