@@ -1,15 +1,13 @@
-'use client'
-
-import { YTModal } from '@/app/(guide)/testimonials/slider'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { mentorship } from '@/util/globals'
 import { Check, CreditCard, Play, Star } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { Suspense } from 'react'
+import Render from './render'
+import Btn from './btn'
 
 export default function Lifetime() {
-    const [open, setOpen] = React.useState(false);
     const benefits = [
         <p key={1} ><em><strong>1:1 calls</strong></em> for personalized guidance</p>,
         <p key={2} ><em><strong>Access to all 10 courses</strong></em> - MERN, Next JS, DSA, AI, Blockchain, JavaScript, Java, Python.</p>,
@@ -51,11 +49,8 @@ export default function Lifetime() {
                         fill
                         className="rounded-md object-cover shadow-xl"
                     />
-                    <button onClick={() => setOpen(true)} className='h-20 w-20 rounded-full bg-white border-4 border-prime shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
-                        <Play className='h-10 w-10 fill-prime text-prime m-auto drop-shadow-xl shadow-prime translate-x-0.5' />
-                    </button>
+                   <Btn />
                 </AspectRatio>
-                <YTModal url={"xjyfuYXGmMs"} open={open} setOpen={setOpen} />
             </div>
 
             <div className='flex flex-col gap-2 py-4 mx-auto'>
@@ -68,9 +63,9 @@ export default function Lifetime() {
             <h3 className='font-jakarta font-extrabold text-4xl sm:text-5xl mx-auto sm:pt-6 text-center max-w-[90vw] overflow-hidden text-wrap'>₹{mentorship.price}/<span className='line-through italic text-muted-foreground'>₹{mentorship.ogPrice}</span>.LifeLong Mentorship.</h3>
             <p className='m-auto py-2 pb-6 text-center text-sm max-w-3xl text-foreground/90'>If you&apos;re not completely satisfied with your purchase, or if it doesn&apos;t meet your expectations, simply respond to the email receipt within 30 days to receive a full refund. No questions asked.</p>
 
-            <Link href={"https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view"} target='_blank' className='bg-prime rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase'><CreditCard className="h-10 w-10" />Join Now</Link>
-
-            {/* <button onClick={() => getLoc()} className='bg-prime rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase'><CreditCard className="h-10 w-10" />Join Now</button> */}
+            <Suspense fallback={<Link href={"#"} className='bg-prime opacity-30 rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase'><CreditCard className="h-10 w-10" />Generating Link</Link>}>
+                <Render />
+            </Suspense>
         </div>
     )
 }
