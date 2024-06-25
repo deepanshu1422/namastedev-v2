@@ -44,19 +44,19 @@ export default function Home() {
 
   {
     question: "Do I get access to all courses ?",
-  answer: "Yes, absolutely! When you purchase the mentorship, you gain access to all the courses available in our library.This means you can explore a wide range of topics and learn at your own pace.Our comprehensive course catalog is designed to cover various aspects of web development, data structures, AI, and much more.You can revisit any course as often as you like, ensuring that you have all the resources you need to achieve your learning goals."
+    answer: "Yes, absolutely! When you purchase the mentorship, you gain access to all the courses available in our library.This means you can explore a wide range of topics and learn at your own pace.Our comprehensive course catalog is designed to cover various aspects of web development, data structures, AI, and much more.You can revisit any course as often as you like, ensuring that you have all the resources you need to achieve your learning goals."
   },
 
   {
     question: "How long is the mentorship ?",
-  answer: "Our mentorship program is designed to provide you with lifetime support.Once you enroll in our courses, you will have access to mentors who are industry experts and experienced professionals.They will guide you throughout your learning journey, offering valuable insights, feedback, and personalized advice.Whether you have questions about course material, need career guidance, or seek project - specific advice, our mentors are here to help you succeed, long after you have completed your courses."
+    answer: "Our mentorship program is designed to provide you with lifetime support.Once you enroll in our courses, you will have access to mentors who are industry experts and experienced professionals.They will guide you throughout your learning journey, offering valuable insights, feedback, and personalized advice.Whether you have questions about course material, need career guidance, or seek project - specific advice, our mentors are here to help you succeed, long after you have completed your courses."
   },
 
   {
     question: "Any more questions?",
     answer: "If you have any additional questions or need further assistance, we are here to help! Please feel free to reach out to us at projectsnightlight@gmail.com. Our dedicated support team is always ready to provide you with the information and support you need. Whether you have inquiries about course content, technical issues, or any other concerns, don’t hesitate to contact us. We aim to respond to all queries promptly and ensure that your experience with Projects Nightlight is as smooth and enjoyable as possible."
   }]
-  
+
   // [
   //   {
   //     question: "I'm facing issues with the HTML and CSS section of the MERN stack course. The videos are not playing properly.",
@@ -209,10 +209,10 @@ export default function Home() {
         }`
       }} />
       <Hero
-        title="Land a High Paying Tech Job in the Next 30 Days!"
-        desc="500+ Videos • 45+ Projects • 20+ Interview Guides • 25k+ Students • Beginner Friendly • Certificates included. Checkout the reviews."
+        title="Become an Advanced, Job-Ready Developer!"
+        desc="Join 10,000+ successful students who have transformed their lives with us."
         heroImage="bg-[url('https://i.ibb.co/nn0YJDY/code-1.png')]"
-        subTitle="Lifetime Validity Courses + Certificates"
+        subTitle="Pocket Friendly Courses with Certificates!"
         subDesc="Whether you're a beginner looking to dive into programming or an experienced developer seeking skill enhancement, our mentors' guidance and courses are well-designed for all levels of proficiency."
         ytId="enw3DVa1r5k"
       />

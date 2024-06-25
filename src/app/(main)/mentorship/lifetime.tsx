@@ -41,17 +41,7 @@ export default function Lifetime() {
                     </div>4.93 <Link href={"/testimonials"} className='text-prime font-bold underline-offset-2 underline'>(200+ reviews)</Link></span>
             </section>
 
-            <div className='mx-auto max-w-xl w-full py-3'>
-                <AspectRatio ratio={16 / 9} className="bg-muted">
-                    <Image
-                        src="/mentorship.jpeg"
-                        alt="30 days coding mentorship"
-                        fill
-                        className="rounded-md object-cover shadow-xl"
-                    />
-                   <Btn />
-                </AspectRatio>
-            </div>
+            <Btn cover='/new-mentorship.jpg' yt='9Lokc1bQixc' />
 
             <div className='flex flex-col gap-2 py-4 mx-auto'>
                 {benefits.map((e, i) => (<span key={i} className='flex gap-2'>
