@@ -4,12 +4,12 @@ export async function GET(req: NextRequest) {
     try {
 
         const ip = req.ip
-
-        console.log(ip)
-
         const countryCode = await fetch(`https://api.iplocation.net/?cmd=ip-country&ip=${ip}`)
+        const json = await countryCode.json()
 
-        return NextResponse.json(countryCode, { status: 201 });
+        if (json.country_code2 === "IN") return NextResponse.redirect(new URL('https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view'))
+
+        return NextResponse.redirect(new URL('https://hotshotpanda.myshopify.com/cart/46100616151210:1?channel=buy_button'))
 
     } catch (err: any) {
         console.log(err);
