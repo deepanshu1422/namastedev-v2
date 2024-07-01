@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, X } from "lucide-react";
+import { Filter, Search, X } from "lucide-react";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
 
@@ -63,7 +63,7 @@ export default function Hero({
             </span>
 
             <div className="flex flex-col gap-2 max-w-2xl">
-              <span className="uppercase text-muted-foreground">Filter</span>
+              <span className="text-muted-foreground flex gap-1 font-bold items-center"><Filter className="w-4 h-4" />Filter</span>
               <div className="flex flex-wrap gap-2 max-phone:text-[13px]">
                 {select.map((e, i) => (<button key={i} className="rounded border-prime text-prime px-2 py-1 text-muted-foreground transition-all duration-300">{e} <X className="h-4 w-4" /></button>))}
                 {filter.map((e, i) => (<button key={i} className="rounded bg-second/40 hover:bg-second/70 hover:text-white px-2 py-1 text-muted-foreground transition-all duration-300">{e}</button>))}

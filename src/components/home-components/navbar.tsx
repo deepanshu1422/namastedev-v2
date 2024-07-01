@@ -39,11 +39,11 @@ export default function Navbar() {
               </div>
             </section>
 
-            <section className="flex items-center gap-3">
+            <section className="flex items-center gap-2">
 
               <Link
                 href={"/mentorship"}
-                className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 rounded-md"
+                className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md"
               >
                 <span className="text-sm">Join Mentorship</span>
 
@@ -51,7 +51,7 @@ export default function Navbar() {
 
               <Link
                   href={"https://courses.30dayscoding.com"}
-                  className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 rounded-md"
+                  className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md"
               >
                 <span className="text-sm">Login</span>
 

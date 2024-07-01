@@ -4,6 +4,7 @@ export const templates = [
     {
         title: "AI SaaS",
         description: "Explore our cutting-edge AI SaaS NextJS Template designed for optimal performance and scalability. Perfect for showcasing your AI-powered services with a modern, responsive design.",
+
         cover: "/templates/ai-saas.png",
         slug: "ai-saas",
         live: "https://30dc-ai-saas.vercel.app/",
@@ -24,6 +25,7 @@ export const templates = [
     {
         title: "Blog Template",
         description: "Discover our collection of Blog Templates built with NextJS. Featuring modern designs, SEO optimization, and responsive layouts to enhance your blogging experience.",
+
         cover: "/templates/blog.png",
         slug: "blog-template",
         live: "https://30dc-blog-template.vercel.app/",
@@ -43,6 +45,7 @@ export const templates = [
     {
         title: "Developer's Portfolio",
         description: "Showcase your projects with our Developer's Portfolio NextJS Template. Sleek, customizable, and fully responsive, it's ideal for highlighting your skills and experience.",
+
         cover: "/templates/dev-port.png",
         slug: "developer-portfolio",
         live: "https://30dc-developer-profolio.vercel.app/",
@@ -62,6 +65,7 @@ export const templates = [
     {
         title: "Job Board",
         description: "Create a professional job listing platform with our Job Board NextJS Template. Features advanced search, user profiles, and easy customization for a seamless experience.",
+
         cover: "/templates/job-board.png",
         slug: "job-board",
         live: "https://30dc-job-board-pearl.vercel.app/",
@@ -81,6 +85,7 @@ export const templates = [
     {
         title: "Creator's Page",
         description: "Highlight your creative work with our Creator's Portfolio NextJS Template. Elegant design, interactive features, and seamless social media integration for maximum impact.",
+
         cover: "/templates/creator.png",
         slug: "creator-page",
         live: "https://30dc-creator-page.vercel.app/",
@@ -108,6 +113,7 @@ export const courses = [
     {
         title: "All 15 Courses Package -  (Certificate + Lifetime)",
         description: "Get access to all 15 developer courses with lifetime validity and certification. Perfect for a comprehensive learning experience across various tech stacks.",
+        slug: "all-15-courses-package-certificate-lifetime",
         imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/652a1994e4b05a145bae5cd0/652a1994e4b05a145bae5cd0_scaled_cover.jpg?v=10",
         link: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0",
         category: ["fullstack", "package", "job"]
@@ -115,6 +121,7 @@ export const courses = [
     {
         title: "Job Ready - MERN  Full Stack Web Dev Course (lifetime valid)",
         description: "Master MERN Full Stack Web Development with our job-ready course. Lifetime access and industry-recognized certification included.",
+        slug: "job-ready-mern-full-stack-web-dev-course-lifetime",
         imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/64eebdb8e4b0a14befedc15d/64eebdb8e4b0a14befedc15d_scaled_cover.jpg?v=5",
         link: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
         category: ["courses", "fullstack", "job"]
@@ -122,6 +129,7 @@ export const courses = [
     {
         title: "Tech job roadmap mastery (beginner to advanced)",
         description: "Navigate your tech career from beginner to advanced with our comprehensive job roadmap mastery course.",
+        slug: "tech-job-roadmap-mastery-beginner-to-advanced",
         imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/64ff7f1be4b0607f6f9001f6/64ff7f1be4b0607f6f9001f6_scaled_cover.jpg?v=2",
         link: "https://courses.30dayscoding.com/courses/FAANG-and-Startup-Tech-job-detailed-roadmap-64ff7f1be4b0607f6f9001f6",
         category: ["courses", "job"]
@@ -129,6 +137,7 @@ export const courses = [
     {
         title: "Backend mastery course -  (beginner to advanced)",
         description: "Gain expertise in backend development with our complete course, from beginner to advanced levels.",
+        slug: "backend-mastery-course-beginner-to-advanced",
         imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/6652967ada4224461d9ece76/6652967ada4224461d9ece76_scaled_cover.jpg?v=1",
         link: "https://courses.30dayscoding.com/courses/Complete-Backend-development-course-lifetime-6652967ada4224461d9ece76",
         category: ["backend", "courses"]
@@ -136,6 +145,7 @@ export const courses = [
     {
         title: "Job ready DSA course  (Certificate + Lifetime)",
         description: "Become job-ready with our Data Structures and Algorithms course, offering lifetime access and certification.",
+        slug: "job-ready-dsa-course-certificate-lifetime",
         imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/64f93394e4b0e75ce98af312/64f93394e4b0e75ce98af312_scaled_cover.jpg?v=8",
         link: "https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312",
         category: ["courses", "job"]
@@ -143,6 +153,7 @@ export const courses = [
     {
         title: "Job ready - NEXT JS full stack web dev course (lifetime valid)",
         description: "Learn Next.js Full Stack Web Development with our lifetime valid, job-ready course.",
+        slug: "job-ready-next-js-full-stack-web-dev-course-lifetime",
         imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/64eebe15e4b06aa775217381/64eebe15e4b06aa775217381_scaled_cover.jpg?v=6",
         link: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
         category: ["courses", "fullstack"]
@@ -150,6 +161,7 @@ export const courses = [
     {
         title: "Chat GPT AI prompt engineering course (lifetime)",
         description: "Delve into AI prompt engineering with our Chat GPT course, offering lifetime access.",
+        slug: "chat-gpt-ai-prompt-engineering-course-lifetime",
         imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/6527591fe4b06a00b8c751a5/6527591fe4b06a00b8c751a5_scaled_cover.jpg?v=2",
         link: "https://courses.30dayscoding.com/courses/Chat-GPT-AI-prompt-engineering-course-6527591fe4b06a00b8c751a5",
         category: ["nocode"]
@@ -157,6 +169,7 @@ export const courses = [
     {
         title: "15 Full stack Projects, MVP, SaaS tools, Ideas, tools (lifetime valid)",
         description: "Work on 15 full stack projects, from MVP to SaaS tools, with lifetime access and expert guidance.",
+        slug: "15-full-stack-projects-mvp-saas-tools-ideas-lifetime",
         imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/6525cb14e4b07ef99d14b75b/6525cb14e4b07ef99d14b75b_scaled_cover.jpg?v=4",
         link: "https://courses.30dayscoding.com/courses/Idea-to-MVP-full-stack-project-course-6525cb14e4b07ef99d14b75b",
         category: ["courses", "fullstack", "project"]
@@ -164,6 +177,7 @@ export const courses = [
     {
         title: "AI full stack dev, Tools, Chat GPT, and prompting course (lifetime valid)",
         description: "Explore AI full stack development, including tools, Chat GPT, and prompting with our lifetime valid course.",
+        slug: "ai-full-stack-dev-tools-chat-gpt-prompting-course-lifetime",
         imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/64eebe76e4b002b964b5645d/64eebe76e4b002b964b5645d_scaled_cover.jpg?v=7",
         link: "https://courses.30dayscoding.com/courses/AI-full-stack-project-development-course-64eebe76e4b002b964b5645d",
         category: ["ai", "courses"]
@@ -171,6 +185,7 @@ export const courses = [
     {
         title: "Complete Blockchain and Web3 course",
         description: "Master Blockchain and Web3 technologies with our comprehensive course.",
+        slug: "complete-blockchain-web3-course",
         imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/64eec408e4b002b964b568be/64eec408e4b002b964b568be_scaled_cover.jpg?v=4",
         link: "https://courses.30dayscoding.com/courses/Blockchain-developer-course-64eec408e4b002b964b568be",
         category: ["ai", "courses"]
@@ -178,6 +193,7 @@ export const courses = [
     {
         title: "React JS Mastery Course",
         description: "Achieve React JS mastery with our job-ready course, featuring lifetime access and certificates.",
+        slug: "react-js-mastery-course",
         imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/667097fa0c06f41233aa32d9/667097fa0c06f41233aa32d9_scaled_cover.jpg?v=1",
         link: "https://courses.30dayscoding.com/courses/Job-ready-React-JS-course-lifetime-valid--certificates-667097fa0c06f41233aa32d9",
         category: ["tech"]
@@ -185,6 +201,7 @@ export const courses = [
     {
         title: "Full stack INTERVIEW course and projects",
         description: "Prepare for full stack interviews with our dedicated course and project work, ensuring job readiness.",
+        slug: "full-stack-interview-course-projects",
         imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/66590ad5d293ec24604764bb/66590ad5d293ec24604764bb_scaled_cover.jpg?v=1",
         link: "https://courses.30dayscoding.com/courses/Full-stack-Interview-Preparation-Job-ready-course-lifetime--66590ad5d293ec24604764bb",
         category: ["tech"]
@@ -192,6 +209,7 @@ export const courses = [
     {
         title: "Complete Java course (lifetime)",
         description: "Complete your Java learning journey with our comprehensive course, offering lifetime access.",
+        slug: "complete-java-course-lifetime",
         imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/659ef388e4b0f601f93531b8/659ef388e4b0f601f93531b8_scaled_cover.jpg?v=2",
         link: "https://courses.30dayscoding.com/courses/Complete-Java-course-659ef388e4b0f601f93531b8",
         category: ["courses", "language"]
@@ -199,6 +217,7 @@ export const courses = [
     {
         title: "Complete Python course (lifetime)",
         description: "Learn Python from scratch to advanced levels with our complete course, featuring lifetime access.",
+        slug: "complete-python-course-lifetime",
         imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/652da4c5e4b010a575e0254b/652da4c5e4b010a575e0254b_scaled_cover.jpg?v=2",
         link: "https://courses.30dayscoding.com/courses/Complete-Python-course-for-developers-652da4c5e4b010a575e0254b",
         category: ["courses", "language"]
@@ -206,8 +225,11 @@ export const courses = [
     {
         title: "Complete JavaScript course (lifetime)",
         description: "Master JavaScript with our complete course designed for developers, offering lifetime access.",
+        slug: "complete-javascript-course-lifetime",
         imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/652da487e4b0dce56ddde296/652da487e4b0dce56ddde296_scaled_cover.jpg?v=2}",
         link: "https://courses.30dayscoding.com/courses/Complete-Javascript-course-for-developers-652da487e4b0dce56ddde296",
         category: ["courses", "language"]
     }
 ]
+
+
