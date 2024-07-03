@@ -1,3 +1,5 @@
+'use client'
+
 import {
     Accordion,
     AccordionContent,
@@ -7,6 +9,7 @@ import {
 import { Dot, Video } from "lucide-react"
 import Checkout from "./checkout"
 import Reviews from "./reviews"
+import Player from "./player"
 
 type Module = {
     total: number;
@@ -61,7 +64,10 @@ export default function Details({ description, image, amount, currency, module }
 
                 <section className="tab:max-w-2xl flex flex-col gap-4">
                     <h2 className="text-3xl font-bold text-white/80">Course&apos;s Content</h2>
-                    <span className="flex items-center">{lessons} Lessons <Dot className="h-7 w-7" /> 8h 16m 13s </span>
+                    <div className="flex justify-between">
+                        <span className="flex items-center">{lessons} Lessons <Dot className="h-7 w-7" /> 8h 16m 13s </span>
+                        <Player />
+                    </div>
                     <Chapters module={module} />
                 </section>
 
@@ -75,73 +81,26 @@ export default function Details({ description, image, amount, currency, module }
 
 export function Chapters({ module }: { module: Module }) {
 
-    let chapters = [
-        {
-            title: "Introduction",
-            lessons: 4,
-            duration: "15m 39s",
-            subs: [
-                {
-                    title: "Introduction",
-                    duration: "4m 39s"
-                },
-                {
-                    title: "How to do this",
-                    duration: "4m 39s"
-                },
-            ]
-        },
-        {
-            title: "Raycasting",
-            lessons: 4,
-            duration: "15m 39s",
-            subs: [
-                {
-                    title: "Introduction",
-                    duration: "4m 39s"
-                },
-                {
-                    title: "How to do this",
-                    duration: "4m 39s"
-                },
-            ]
-        },
-        {
-            title: "Multiple Inheritance",
-            lessons: 4,
-            duration: "15m 39s",
-            subs: [
-                {
-                    title: "Introduction",
-                    duration: "4m 39s"
-                },
-                {
-                    title: "How to do this",
-                    duration: "4m 39s"
-                },
-            ]
-        },
-    ]
-
-
     return (
         <Accordion type="single" collapsible className="w-full border border-prime/30">
             {module.items.map(({ title, duration, chaptersCollection }, i) => (
                 <AccordionItem key={i} className="border-t border-prime/40" value={`item-${i + 1}`}>
-                    <AccordionTrigger className="bg-second/40 px-5 font-bold flex text-sm">
-                        <span>{title}</span>
-                        <span className="flex ml-auto text-white/70 items-center pr-2">
-                            <span>{chaptersCollection.total} Lessons</span>
-                            <span className="flex items-center"><Dot className="h-7 w-7" />{duration}</span>
-                        </span>
+                    <AccordionTrigger className="bg-second/40 px-5 font-bold text-sm">
+                        <div className="flex max-sm:flex-col text-start items-start">
+                            <span>{title}</span>
+                            <span className="flex sm:ml-auto text-white/70 items-center pr-2">
+                                <span>{chaptersCollection.total} Lessons</span>
+                                <span className="flex items-center"><Dot className="h-7 w-7" />{duration}</span>
+                            </span>
+                        </div>
                     </AccordionTrigger>
                     <AccordionContent className="px-5 py-8 flex flex-col gap-6">
-                        {chaptersCollection.items.map(({ duration, title }, i) => <div key={i} className="flex justify-between">
-                            <span className="flex gap-2 items-center">
-                                <Video className="h-5 w-5" />
+                        {chaptersCollection.items.map(({ duration, title }, i) => <div key={i} className="flex max-sm:flex-col gap-2 justify-between">
+                            <span className="flex gap-2 sm:items-center">
+                                <Video className="h-6 w-6" />
                                 {title}
                             </span>
-                            <span>{duration}</span>
+                            <span className="font-semibold text-muted-foreground">{duration}</span>
                         </div>)}
                     </AccordionContent>
                 </AccordionItem>
