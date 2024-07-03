@@ -1,5 +1,6 @@
-import { Button } from "@/components/ui/button"
+'use client'
 
+import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
@@ -10,9 +11,11 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 
-import Plyr from "plyr-react";
+import dynamic from 'next/dynamic'
 import "plyr-react/plyr.css";
 
+const Plyr = dynamic(() => import("plyr-react"), { ssr: false });
+// const VideoPlayer = dynamic(<Plyr />, { ssr: false })
 
 export default function Player() {
     return (

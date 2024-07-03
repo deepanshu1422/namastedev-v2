@@ -1,15 +1,24 @@
-import crypto from 'crypto';
-import { ReadonlyHeaders } from 'next/dist/server/web/spec-extension/adapters/headers';
+// import crypto from 'crypto';
+// import { ReadonlyHeaders } from 'next/dist/server/web/spec-extension/adapters/headers';
+// import { Webhook } from 'svix'
 
-export function verifySignatureRazorpay(body: string, signature: string, secret: string) {
-    const shasum = crypto.createHmac('sha256', secret);
-    shasum.update(JSON.stringify(body));
-    const digest = shasum.digest('hex');
+// type WebhookPayload = {
+//     id?: number;
+//     status?: string;
+//     data: Record<string, string> | null,
+//     error: any,
 
-    return (digest === signature)
-}
+// }
 
-// export function verifySignatureSvix(body: string, headerPayload: ReadonlyHeaders) {
+// export function verifySignatureRazorpay(body: string, signature: string, secret: string) {
+//     const shasum = crypto.createHmac('sha256', secret);
+//     shasum.update(JSON.stringify(body));
+//     const digest = shasum.digest('hex');
+
+//     return (digest === signature)
+// }
+
+// export function verifySignatureSvix(body: string, headerPayload: ReadonlyHeaders): WebhookPayload {
 //     const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET
 
 //     if (!WEBHOOK_SECRET) {
@@ -39,14 +48,15 @@ export function verifySignatureRazorpay(body: string, signature: string, secret:
 //             "svix-timestamp": svix_timestamp,
 //             "svix-signature": svix_signature,
 //         })
+
+//         const { id } = evt.data;
+//         const eventType = evt.type;
+
+//         return { data: { id, eventType }, error: false }
+
 //     } catch (err) {
 //         console.error('Error verifying webhook:', err);
 //         return { data: null, error: true }
 //     }
-
-//     const { id } = evt.data;
-//     const eventType = evt.type;
-
-//     return { data: { id, eventType }, error: false }
 
 // }
