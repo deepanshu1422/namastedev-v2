@@ -1,26 +1,26 @@
 export const BASE_URL = "https://30dayscoding.com"
 
 export const templates = [
-    {
-        title: "AI SaaS",
-        description: "Explore our cutting-edge AI SaaS NextJS Template designed for optimal performance and scalability. Perfect for showcasing your AI-powered services with a modern, responsive design.",
-        cover: "/templates/ai-saas.png",
-        slug: "ai-saas",
-        live: "https://30dc-ai-saas.vercel.app/",
-        checkout: "https://hotshotpanda.myshopify.com/cart/46101225144490:1?channel=buy_button",
-        images: ["ai-saas.png", "ai-1.png", "ai-2.png"],
-        details: [
-            "Cutting-Edge Design: Modern, sleek, and professional design ideal for AI and SaaS platforms.",
-            "Fully Responsive: Ensures a seamless experience on all devices, from desktops to mobile phones.",
-            "SEO Optimized: Built with SEO best practices to improve visibility and search engine rankings.",
-            "High Performance: Utilizes NextJS for fast load times and superior performance.",
-            "Easy Customization: Easily customizable with minimal coding to suit your brand’s look and feel.",
-            "API Integration: Seamless integration with various APIs to extend functionality.",
-            "Secure & Scalable: Robust security features and scalable architecture to support growing user bases.",
-            "Multi-Language Support: Built-in support for multiple languages to cater to a global audience.",
-            "Comprehensive Documentation: Detailed documentation to assist with setup and customization.",
-        ]
-    },
+    // {
+    //     title: "AI SaaS",
+    //     description: "Explore our cutting-edge AI SaaS NextJS Template designed for optimal performance and scalability. Perfect for showcasing your AI-powered services with a modern, responsive design.",
+    //     cover: "/templates/ai-saas.png",
+    //     slug: "ai-saas",
+    //     live: "https://30dc-ai-saas.vercel.app/",
+    //     checkout: "https://hotshotpanda.myshopify.com/cart/46101225144490:1?channel=buy_button",
+    //     images: ["ai-saas.png", "ai-1.png", "ai-2.png"],
+    //     details: [
+    //         "Cutting-Edge Design: Modern, sleek, and professional design ideal for AI and SaaS platforms.",
+    //         "Fully Responsive: Ensures a seamless experience on all devices, from desktops to mobile phones.",
+    //         "SEO Optimized: Built with SEO best practices to improve visibility and search engine rankings.",
+    //         "High Performance: Utilizes NextJS for fast load times and superior performance.",
+    //         "Easy Customization: Easily customizable with minimal coding to suit your brand’s look and feel.",
+    //         "API Integration: Seamless integration with various APIs to extend functionality.",
+    //         "Secure & Scalable: Robust security features and scalable architecture to support growing user bases.",
+    //         "Multi-Language Support: Built-in support for multiple languages to cater to a global audience.",
+    //         "Comprehensive Documentation: Detailed documentation to assist with setup and customization.",
+    //     ]
+    // },
     {
         title: "Blog Template",
         description: "Discover our collection of Blog Templates built with NextJS. Featuring modern designs, SEO optimization, and responsive layouts to enhance your blogging experience.",
