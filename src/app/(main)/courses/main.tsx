@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import Hero from "./hero"
-import Courses from "./courses"
+import Courses, { CourseSkeleton } from "./courses"
+import type { CoursesType } from "./page"
 
-export default function Main() {
+export default function Main({ courses }: { courses: CoursesType }) {
 
     const [state, setState] = useState("")
 
@@ -17,7 +18,9 @@ export default function Main() {
                 search={state}
                 setSearch={setState}
             />
-            <Courses state={state} />
+            <Suspense fallback={<CourseSkeleton />}>
+                <Courses state={state} courses={courses} />
+            </Suspense>
         </main>
     )
 }

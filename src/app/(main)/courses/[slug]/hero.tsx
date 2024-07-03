@@ -7,20 +7,20 @@ import Link from "next/link";
 
 export default function Hero({
     title,
-    desc,
-    heroImage,
-    details,
     image,
-    checkout,
-    live
+    width,
+    height,
+    author,
+    amount,
+    currency
 }: {
     title: string;
-    desc: string;
-    heroImage: string;
-    details: string[],
     image: string
-    checkout: string,
-    live: string
+    width: number,
+    height: number,
+    author: string,
+    amount: number
+    currency: string
 }) {
     return (
         <div
@@ -36,8 +36,8 @@ export default function Hero({
                     <div className="tab:hidden max-tab:px-11 max-phone:px-6 flex flex-col gap-4 relative max-tab:mx-auto">
                         <Image alt="30DayCoding New Challenge"
                             src={image}
-                            height={800}
-                            width={1200}
+                            height={height}
+                            width={width * 2}
                             className="bg-prime/20" />
                     </div>
 
@@ -62,12 +62,12 @@ export default function Hero({
                         <span></span>
                     </div>
 
-                    <div className="text-white/70 max-tab:px-11 max-phone:px-6">Author: <span className="text-white font-bold px-1 underline">Aryan Singh</span></div>
+                    <div className="text-white/70 max-tab:px-11 max-phone:px-6">Author: <span className="text-white font-bold px-1 underline">{author}</span></div>
 
                     <div className="text-sm text-white/40 max-tab:px-11 max-phone:px-6">Updated 4 months ago</div>
 
                     <div className="tab:hidden  flex flex-col gap-4 max-tab:px-11 max-phone:px-6">
-                        <span className="uppercase text-white text-3xl sm:text-4xl font-bold flex gap-2 items-center">₹1,900<span className="text-muted-foreground/70 italic text-2xl sm:text-3xl line-through">2,500</span></span>
+                        <span className="uppercase text-white text-3xl sm:text-4xl font-bold flex gap-2 items-center">{currency} {amount}<span className="text-muted-foreground/70 italic text-2xl sm:text-3xl line-through">{amount * 4}</span></span>
                         <Button size={"lg"} className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Buy Now</Button>
                         <span className="flex gap-2 max-sm:text-sm items-center"><TicketPercent className="sm:w-6 sm:h-6 h-5 w-5" />Get Access to all Resources Now.</span>
                     </div>

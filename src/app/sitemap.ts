@@ -1,3 +1,4 @@
+import { getContentfulData } from '@/lib/cotentful'
 import { BASE_URL, templates } from '@/util/constants'
 import { roadmapsData } from '@/util/globals'
 import prisma from '@/util/prismaClient'
@@ -159,9 +160,24 @@ export const getItem = cache(async () => {
     return item
 })
 
+export const getCourses = async (): Promise<Record<string, string>[]> => {
+    const data = await getContentfulData(`query {
+        courseCollection{
+        items{
+            slug
+            }
+        }
+    }`)
+
+    return data.data.courseCollection.items
+
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const blogSlugs = await getItem()
+
+    const courseSlugs = await getCourses()
 
     const dynamicMaps: MetadataRoute.Sitemap = blogSlugs.map((blog) => ({
         url: `${BASE_URL}/blog/${blog.slug}`,
@@ -183,8 +199,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: 'monthly',
         priority: 0.5,
     }))
+    
+    const dynamicCourses: MetadataRoute.Sitemap = courseSlugs.map((courses) => ({
+        url: `${BASE_URL}/courses/${courses.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.5,
+    }))
 
-    return [...staticMaps, ...dynamicRoadmaps, ...dynamicMaps, ...dynamicTemplates]
+    return [...staticMaps, ...dynamicCourses, ...dynamicRoadmaps, ...dynamicMaps, ...dynamicTemplates]
 }
 
 

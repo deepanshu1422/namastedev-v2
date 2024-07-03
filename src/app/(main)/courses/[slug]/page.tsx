@@ -4,7 +4,52 @@ import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
 import Hero from './hero';
 import Details from './details';
-import Checkout from './checkout';
+import { getContentfulData } from '@/lib/cotentful';
+
+export type Courses = {
+    courseCollection: {
+        items: {
+            title: string,
+            shortDescription: string,
+            longDescription: string,
+            slug: string,
+            courseImage: {
+                description: string,
+                url: string,
+                width: number,
+                height: number
+            },
+            courseCreator: {
+                name: string
+            },
+            pricingsCollection: {
+                items: {
+                    title: string,
+                    amount: number,
+                    countryCode: string
+                    currencyCode: string
+                }[]
+            },
+            modulesCollection: {
+                total: number,
+                items: {
+                    title: string,
+                    duration: string,
+                    chaptersCollection: {
+                        total: number,
+                        items: [
+                            {
+                                title: string,
+                                duration: string,
+                            },
+
+                        ]
+                    }
+                }[]
+            }
+        }[]
+    }
+}
 
 export const dynamicParams = true;
 
@@ -21,9 +66,17 @@ type Props = {
 
 export async function generateStaticParams() {
 
-    return courses.map(({ slug }) => {
-        if (!slug) return;
-        slug: slug.toString();
+    const data = await getContentfulData(`query {
+        courseCollection{
+        items{
+            slug
+            }
+        }
+    }`)
+
+    return data.data.courseCollection.items.map((e: Record<string, string>) => {
+        if (!e.slug) return;
+        slug: e.slug.toString();
     });
 }
 
@@ -35,7 +88,20 @@ export async function generateMetadata(
     let item = null;
 
     try {
-        item = courses.find(e => e.slug === params.slug)
+        const data = await getContentfulData(`query {
+            courseCollection{
+            items{
+                slug,
+                title,
+                shortDescription,
+                courseImage{
+                    url
+                    }
+                }
+            }
+        }`)
+
+        item = data.data.courseCollection.items.find((e: Record<string, string>) => e.slug === params.slug)
     } catch (err) {
         item = {
             title: "Not Found",
@@ -55,33 +121,102 @@ export async function generateMetadata(
     };
 }
 
-const getCourses = cache(
-    async (slug: string) => {
-        const item = courses.find(e => e.slug === slug)
-        return item;
-    }
-);
+// const getCourses = cache(
+//     async (slug: string) => {
+//         const item = courses.find(e => e.slug === slug)
+//         return item;
+//     }
+// );
+
+async function getCourses({ slug }: { slug: string }): Promise<Courses> {
+
+    const query = `query {
+    courseCollection(where: {slug: "${slug}"},limit:1){
+        items{
+        title,
+        longDescription,
+        courseImage{   
+            description,
+            url,
+            width,
+            height,
+        },
+        slug,
+        courseCreator{
+            name,
+        },
+        pricingsCollection{
+            items{
+            title,
+            amount,
+            countryCode,
+            currencyCode
+            }
+        },
+        modulesCollection{
+            total,
+            items{
+                title,
+                duration,
+                chaptersCollection{
+                total,
+                items{
+                title,
+                duration,
+                youtubeId,
+                videoLink
+                    }
+                }
+                    }
+                }
+            }
+        }
+    }`
+
+    const fetchedData = await fetch(`https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+        },
+        body: JSON.stringify({ query }),
+        next: {
+            revalidate: 3600,
+        },
+    })
+
+    const data = await fetchedData.json()
+
+    return data.data
+}
 
 export default async function Home({ params: { slug } }: PageProps) {
 
-    const item = await getCourses(slug)
+    const data = await getCourses({ slug })
 
-    if (!item) return notFound();
+    if (!data.courseCollection.items.length) return notFound();
 
-    const { description, title, category, imgSrc, link } = item
+    const { courseCollection: { items } } = data
+
+    const { courseCreator, courseImage, longDescription, modulesCollection, pricingsCollection, title } = items[0]
 
     return (
         <main className='min-h-svh overflow-clip'>
             <Hero
                 title={title}
-                desc={description}
-                heroImage={imgSrc}
-                details={["details"]}
-                image={imgSrc}
-                checkout={"800"}
-                live={"live"}
+                image={courseImage.url}
+                width={courseImage.width}
+                height={courseImage.height}
+                author={courseCreator.name}
+                amount={pricingsCollection.items.find(e => e.countryCode == "IN")?.amount || 500}
+                currency={pricingsCollection.items.find(e => e.countryCode == "IN")?.currencyCode || "INR"}
             />
-            <Details image={imgSrc} />
+            <Details
+                description={longDescription}
+                image={items[0].courseImage.url}
+                amount={pricingsCollection.items.find(e => e.countryCode == "IN")?.amount || 500}
+                currency={pricingsCollection.items.find(e => e.countryCode == "IN")?.currencyCode || "INR"}
+                module={modulesCollection} />
         </main>
     )
 }

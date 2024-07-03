@@ -26,7 +26,60 @@ export const metadata: Metadata = {
 };
 
 
-export default function Home() {
+export type CoursesType = {
+    courseCollection: {
+        items: {
+            title: string,
+            shortDescription: string,
+            slug: string,
+            tags: string[],
+            courseImage: {
+                url: string
+                width: number,
+                height: number
+            }
+        }[]
+    }
+}
 
-    return <Main />
+async function getCourses(): Promise<CoursesType> {
+
+    const query = `query {
+        courseCollection{
+            items{
+                title,
+                shortDescription,
+                slug,
+                tags,
+                courseImage{
+                    url,
+                    width,
+                    height
+                    },
+                }
+            }
+        }`
+
+    const fetchedData = await fetch(`https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+        },
+        body: JSON.stringify({ query }),
+        next: {
+            revalidate: 3600,
+        },
+    })
+
+    const data = await fetchedData.json()
+
+    return data.data
+}
+
+export default async function Home() {
+
+    const courses = await getCourses()
+
+    return <Main courses={courses} />
 }

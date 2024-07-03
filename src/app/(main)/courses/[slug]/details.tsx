@@ -8,14 +8,31 @@ import { Dot, Video } from "lucide-react"
 import Checkout from "./checkout"
 import Reviews from "./reviews"
 
-export default function Details({ image }: { image: string }) {
+type Module = {
+    total: number;
+    items: {
+        title: string;
+        duration: string;
+        chaptersCollection: {
+            total: number;
+            items: [{
+                title: string;
+                duration: string;
+            }];
+        };
+    }[];
+}
+
+export default function Details({ description, image, amount, currency, module }: { description: string, image: string, amount: number; currency: string; module: Module }) {
+
+    const lessons = module.items.reduce((accumulator, currentValue) => accumulator + currentValue.chaptersCollection.total, 0);
+
     return (
         <div className="tab:p-[2.5rem_5.5rem_3.75rem] max-tab:pt-[2rem] max-tab:pb-[2.5rem] max-tab:px-11 max-phone:px-6 m-auto max-w-[90rem] flex w-full gap-10">
             <div className="flex flex-col w-full gap-10">
                 <section className="tab:max-w-2xl flex flex-col gap-3">
                     <h2 className="text-3xl font-bold text-white/80">Course&apos;s Details</h2>
-                    <p className="text-white/80">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique, saepe odio. Aspernatur vero ut repudiandae architecto placeat nisi debitis, id perspiciatis itaque magni, aliquam illum omnis suscipit. Obcaecati, sed nam?</p>
-                    <p className="text-white/80">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique, saepe odio. Aspernatur vero ut repudiandae architecto placeat nisi debitis, id perspiciatis itaque magni, aliquam illum omnis suscipit. Obcaecati, sed nam?</p>
+                    <p className="text-white/80">{description}</p>
                 </section>
                 <section className="tab:max-w-2xl flex flex-col gap-1">
                     <h2 className="text-3xl font-bold text-white/80">Tech Stack</h2>
@@ -44,21 +61,19 @@ export default function Details({ image }: { image: string }) {
 
                 <section className="tab:max-w-2xl flex flex-col gap-4">
                     <h2 className="text-3xl font-bold text-white/80">Course&apos;s Content</h2>
-                    <span className="flex items-center">35 Lessons <Dot className="h-7 w-7" /> 8h 16m 13s </span>
-                    <Chapters />
+                    <span className="flex items-center">{lessons} Lessons <Dot className="h-7 w-7" /> 8h 16m 13s </span>
+                    <Chapters module={module} />
                 </section>
 
                 <Reviews />
             </div>
 
-            <Checkout image={image} checkout='909' />
-
-
+            <Checkout amount={amount} currency={currency} image={image} />
         </div>
     )
 }
 
-export function Chapters() {
+export function Chapters({ module }: { module: Module }) {
 
     let chapters = [
         {
@@ -111,30 +126,23 @@ export function Chapters() {
 
     return (
         <Accordion type="single" collapsible className="w-full border border-prime/30">
-            {chapters.map(({ duration, lessons, subs, title }, i) => (
+            {module.items.map(({ title, duration, chaptersCollection }, i) => (
                 <AccordionItem key={i} className="border-t border-prime/40" value={`item-${i + 1}`}>
                     <AccordionTrigger className="bg-second/40 px-5 font-bold flex text-sm">
                         <span>{title}</span>
                         <span className="flex ml-auto text-white/70 items-center pr-2">
-                            {lessons && <span>{lessons} Lessons</span>}
-                            {duration && <span className="flex items-center"><Dot className="h-7 w-7" />{duration}</span>}
+                            <span>{chaptersCollection.total} Lessons</span>
+                            <span className="flex items-center"><Dot className="h-7 w-7" />{duration}</span>
                         </span>
                     </AccordionTrigger>
                     <AccordionContent className="px-5 py-8 flex flex-col gap-6">
-                        <div className="flex justify-between">
+                        {chaptersCollection.items.map(({ duration, title }, i) => <div key={i} className="flex justify-between">
                             <span className="flex gap-2 items-center">
                                 <Video className="h-5 w-5" />
-                                Intruduction
+                                {title}
                             </span>
-                            <span>4m 29s</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="flex gap-2 items-center">
-                                <Video className="h-5 w-5" />
-                                Intruduction
-                            </span>
-                            <span>4m 29s</span>
-                        </div>
+                            <span>{duration}</span>
+                        </div>)}
                     </AccordionContent>
                 </AccordionItem>
             ))}
