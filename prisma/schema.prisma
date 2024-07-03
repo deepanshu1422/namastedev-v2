@@ -63,52 +63,32 @@ type heroImage {
   alt String
 }
 
-
 model user {
-  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String
-  email         String         @unique
+  email         String    @unique
   password      String
   phone         String
   year          Int
   emailVerified DateTime?
   image         String?
-  accounts      account[]
-  sessions      session[]
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
- 
-model account {
-  id                String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String  @db.ObjectId
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.String
-  access_token      String? @db.String
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.String
-  session_state     String?
- 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
- 
-  user user @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
-  @@unique([provider, providerAccountId])
-}
- 
-model session {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  sessionToken String   @unique
-  userId       String   @db.ObjectId
-  expires      DateTime
-  user         user     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
+model clerkUser {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  name              String
+  email             String   @unique
+  phone             String?
+  image             String?
+  isMember          Boolean  @default(false)
+  memberType        String?  @default("basic")
+  purchasedCourseId String[]
+  membershipExpiry  DateTime?
+  completedLessons  String[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

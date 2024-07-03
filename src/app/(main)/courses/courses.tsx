@@ -1,3 +1,4 @@
+import { Badge } from '@/components/ui/badge';
 import { courses, templates } from '@/util/constants';
 import { HelpCircle } from 'lucide-react';
 import Image from 'next/image'
@@ -10,26 +11,38 @@ export default function COurses({ state }: {
 
     return (<>
         <section className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-[85rem] gap-5 mx-auto max-phone:px-6 phone:px-10 max-tab:py-5 tab:pb-14'>
-            {state ? courses.filter((e) => e.title.toLowerCase().includes(state.toLowerCase())).map(({ imgSrc, description, title, link, category, slug }, i) => (
-                <Link key={i} href={`/courses/${slug}`} className='rounded-xl bg-second/40 flex flex-col group transition-all duration-200 hover:bg-second/60 hover:shadow-xl shadow-black overflow-hidden'>
-                <Image className='rounded-t-lg shadow-lg' src={imgSrc} alt={`30DC ${title} Course`} height={512} width={512} />
-                <div className='flex flex-col items-start gap-2 p-4'>
-                    <span className='text-xl font-bold'>{title}</span>
-                    <p className='text-xs text-white/80 leading-relaxed'>{description}</p>
-                </div>
-                <div className='flex flex-wrap gap-1.5 p-4 mt-auto'>
-                    {category.map((e, i) => (<button key={i} className="rounded hover:bg-second bg-second/70 hover:text-white px-2 py-1 text-white/60 transition-all duration-300 sm:text-sm text-xs capitalize">#{e}</button>))}
-                </div>
-            </Link>
-            )) : courses.map(({ imgSrc, description, title, link, category, slug }, i) => (
-                <Link key={i} href={`/courses/${slug}`} className='rounded-xl bg-second/40 flex flex-col group transition-all duration-200 hover:bg-second/60 hover:shadow-xl shadow-black overflow-hidden'>
+            {state ? courses.filter((e) => e.title.toLowerCase().includes(state.toLowerCase())).map(({ imgSrc, description, title, category, slug }, i) => (
+                <Link key={i} href={`/courses/${slug}`} className='rounded-xl bg-second/40 flex flex-col group transition-all duration-200 hover:bg-second/60 hover:shadow-xl shadow-black overflow-hidden sm:mb-3'>
                     <Image className='rounded-t-lg shadow-lg' src={imgSrc} alt={`30DC ${title} Course`} height={512} width={512} />
                     <div className='flex flex-col items-start gap-2 p-4'>
                         <span className='text-xl font-bold'>{title}</span>
-                        <p className='text-xs text-white/80 leading-relaxed'>{description}</p>
+                        {/* <p className='text-xs text-white/80 leading-relaxed'>{description}</p> */}
                     </div>
-                    <div className='flex flex-wrap gap-1.5 p-4 mt-auto'>
-                        {category.map((e, i) => (<button key={i} className="rounded hover:bg-second bg-second/70 hover:text-white px-2 py-1 text-white/60 transition-all duration-300 sm:text-sm text-xs capitalize">#{e}</button>))}
+                    <div className='flex flex-wrap gap-1 p-4 mt-auto'>
+                        {category.map((e, i) => (<Badge
+                            className="rounded bg-muted text-sm"
+                            variant={"secondary"}
+                            key={i}
+                        >
+                            #{e}
+                        </Badge>))}
+                    </div>
+                </Link>
+            )) : courses.map(({ imgSrc, description, title, category, slug }, i) => (
+                <Link key={i} href={`/courses/${slug}`} className='rounded-xl bg-second/40 flex flex-col group transition-all duration-200 hover:bg-second/60 hover:shadow-xl shadow-black overflow-hidden sm:mb-3'>
+                    <Image className='rounded-t-lg shadow-lg' src={imgSrc} alt={`30DC ${title} Course`} height={512} width={512} />
+                    <div className='flex flex-col items-start gap-2 p-4'>
+                        <span className='text-xl font-bold'>{title}</span>
+                        {/* <p className='text-xs text-white/80 leading-relaxed'>{description}</p> */}
+                    </div>
+                    <div className='flex flex-wrap gap-1 p-4 mt-auto'>
+                        {category.map((e, i) => (<Badge
+                            className="rounded bg-muted text-sm"
+                            variant={"secondary"}
+                            key={i}
+                        >
+                            #{e}
+                        </Badge>))}
                     </div>
                 </Link>
             ))}

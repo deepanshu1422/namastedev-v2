@@ -1,4 +1,5 @@
 "use client";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Filter, Search, X } from "lucide-react";
@@ -57,16 +58,31 @@ export default function Hero({
               {desc}
             </p>
 
-            <span className="flex mt-3 w-full max-w-2xl">
-              <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search for courses" className="rounded-none outline-none border-e-0 focus-visible:ring-0 focus-visible:ring-offset-0 border-none bg-second/50 focus:bg-second/70 transition-all p-6 tab:p-7" />
-              <Button className="text-white bg-prime/70 rounded-none p-6 tab:p-7 px-5 hover:bg-prime/90" ><Search className="tab:h-6 h-5 tab:w-6 w-5" /></Button>
+            <span className="relative flex mt-3 w-full max-w-2xl">
+              <Search className="absolute left-2.5 top-[30%] h-5 w-5 text-muted-foreground" />
+              <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search for courses" className="p-6 w-full appearance-none bg-background pl-9 shadow-none" />
+              {/* <Button className="text-white bg-prime/70 rounded-none p-6 tab:p-7 px-5 hover:bg-prime/90" ><Search className="tab:h-6 h-5 tab:w-6 w-5" /></Button> */}
             </span>
 
             <div className="flex flex-col gap-2 max-w-2xl">
               <span className="text-muted-foreground flex gap-1 font-bold items-center"><Filter className="w-4 h-4" />Filter</span>
-              <div className="flex flex-wrap gap-2 max-phone:text-[13px]">
-                {select.map((e, i) => (<button key={i} className="rounded border-prime text-prime px-2 py-1 text-muted-foreground transition-all duration-300">{e} <X className="h-4 w-4" /></button>))}
-                {filter.map((e, i) => (<button key={i} className="rounded bg-second/40 hover:bg-second/70 hover:text-white px-2 py-1 text-muted-foreground transition-all duration-300">{e}</button>))}
+              <div className="flex flex-wrap gap-2">
+                {select.map((e, i) => (
+                  <Badge
+                    className="rounded bg-muted hover:scale-105 transition-all duration-100 cursor-pointer phone:text-sm max-phone:text-[13px]"
+                    variant={"secondary"}
+                    key={i}
+                  >
+                    {e}
+                  </Badge>
+                ))}
+                {filter.map((e, i) => (<Badge
+                  className="rounded bg-muted hover:scale-105 transition-all duration-100 cursor-pointer phone:text-sm max-phone:text-[13px]"
+                  variant={"secondary"}
+                  key={i}
+                >
+                  {e}
+                </Badge>))}
               </div>
             </div>
 

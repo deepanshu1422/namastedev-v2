@@ -60,16 +60,16 @@ export default function Hero({
       <div className={`w-full grid ${heroImage} min-h-96 bg-cover`}>
         <div className="tab:p-[6.5rem_2.5rem_6.75rem] max-tab:pt-[5rem] max-tab:pb-[4.5rem] m-auto max-w-4xl grid gap-5 place-items-center max-phone:place-items-start phone:text-center text-white">
           <h1
-            className={`font-jakarta phone:text-[3.5rem] text-[2.5rem] font-extrabold bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight px-2 max-phone:px-6 max-w-2xl`}
+            className={`font-jakarta phone:text-[3.7rem] text-[2.5rem] font-extrabold bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight px-2 max-phone:px-6 max-w-3xl`}
           >
             {title}
           </h1>
 
-          <p className="tab:max-w-xl max-tab:px-11 max-phone:px-6 text-lg max-tab:text-[1.05rem] max-tab:leading-6 tracking-wider">
+          <p className="tab:max-w-2xl max-tab:px-11 max-phone:px-6 text-xl max-tab:text-[1.05rem] max-tab:leading-6 tracking-wider">
             {desc}
           </p>
 
-          <ul className="grid gap-2 tab:grid-cols-2 list-inside list-disc max-tab:px-11 max-phone:px-6">
+          <ul className="grid gap-2 tab:grid-cols-2 list-inside list-disc max-tab:px-11 max-phone:px-6 text-lg">
             <li className="list-item">1,500+ Engaging Video Lessons</li>
             <li className="list-item">250+ Real Interview Questions</li>
             <li className="list-item">25+ Comprehensive Guides</li>

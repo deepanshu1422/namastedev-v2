@@ -50,7 +50,7 @@ export default function Lifetime() {
                 </span>))}
             </div>
 
-            <h3 className='font-jakarta font-extrabold text-4xl sm:text-5xl mx-auto sm:pt-6 text-center max-w-[90vw] overflow-hidden text-wrap'>₹{mentorship.price}/<span className='line-through italic text-muted-foreground'>₹{mentorship.ogPrice}</span>.LifeLong Mentorship.</h3>
+            <h3 className='font-jakarta font-extrabold text-4xl sm:text-5xl mx-auto sm:pt-6 text-center max-w-[90vw] text-wrap'>₹{mentorship.price}/<span className='line-through italic text-muted-foreground'>₹{mentorship.ogPrice}</span>.LifeLong Mentorship.</h3>
             <p className='m-auto py-2 pb-6 text-center text-sm max-w-3xl text-foreground/90'>If you&apos;re not completely satisfied with your purchase, or if it doesn&apos;t meet your expectations, simply respond to the email receipt within 30 days to receive a full refund. No questions asked.</p>
 
             <Suspense fallback={<Link href={"#"} className='bg-prime opacity-30 rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase'><CreditCard className="h-10 w-10" />Generating Link</Link>}>
