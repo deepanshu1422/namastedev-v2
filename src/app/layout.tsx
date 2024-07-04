@@ -7,6 +7,7 @@ import GoogleAnalytics from "@/util/ga";
 import { Toaster } from "@/components/ui/sonner"
 import NextProvider from "@/util/next-auth";
 import PageSense from "@/util/pagesense";
+import { ClerkProvider } from '@clerk/nextjs'
 
 export default function RootLayout({
   children,
@@ -16,13 +17,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <NextProvider>
-        <body
-          className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
-        >
-          {children}
-          <Footer />
-          <Toaster />
-        </body>
+        <ClerkProvider>
+          <body
+            className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
+          >
+            {children}
+            <Footer />
+            <Toaster />
+          </body>
+        </ClerkProvider>
       </NextProvider>
       <Pixel />
       <Clarity />
