@@ -13,6 +13,8 @@ export async function POST(req: NextRequest) {
         return new Response('invalid signature', { status: 200 })
     }
 
+    // console.log(data);
+
     if (data?.eventType === "user.created") {
         try {
 

@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <NextProvider>
+      {/* <NextProvider> */}
         <ClerkProvider>
           <body
             className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
@@ -26,7 +26,7 @@ export default function RootLayout({
             <Toaster />
           </body>
         </ClerkProvider>
-      </NextProvider>
+      {/* </NextProvider> */}
       <Pixel />
       <Clarity />
       <PageSense />

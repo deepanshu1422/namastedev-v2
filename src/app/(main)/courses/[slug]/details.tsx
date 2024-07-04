@@ -84,7 +84,7 @@ export function Chapters({ module }: { module: Module }) {
             {module.items.map(({ title, duration, chaptersCollection }, i) => (
                 <AccordionItem key={i} className="border-t border-prime/40" value={`item-${i + 1}`}>
                     <AccordionTrigger className="bg-second/40 px-5 font-bold text-sm">
-                        <div className="flex max-sm:flex-col text-start items-start">
+                        <div className="flex max-sm:flex-col justify-between w-full items-start sm:items-center">
                             <span>{title}</span>
                             <span className="flex sm:ml-auto text-white/70 items-center pr-2">
                                 <span>{chaptersCollection.total} Lessons</span>
