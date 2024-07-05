@@ -51,7 +51,7 @@ export type Courses = {
     }
 }
 
-export const dynamicParams = true;
+export const dynamic = "force-dynamic";
 
 type PageProps = {
     params: {
