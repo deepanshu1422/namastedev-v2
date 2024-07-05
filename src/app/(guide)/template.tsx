@@ -30,15 +30,13 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { signOut, useSession } from "next-auth/react"
-import { AuthDialog } from "./auth";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
   const [path, setPath] = useState(pathName);
 
-  const { data: userData, status } = useSession()
+  const { isLoaded, isSignedIn } = useUser()
 
   useEffect(() => {
     setPath(pathName);
@@ -227,27 +225,17 @@ export default function Template({ children }: { children: React.ReactNode }) {
             </SheetContent>
           </Sheet>
           <div className="w-full flex-1"></div>
-          {status === "authenticated" ? <Button variant="secondary" size="icon" className="rounded-full">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="secondary" size="icon" className="rounded-full">
-                  <CircleUser className="h-5 w-5" />
-                  <span className="sr-only">Toggle user menu</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Welocme, {userData.user?.name} </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Support</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => signOut()}>Logout</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </Button> : (status === "loading" ? <Button variant={"secondary"} className="px-8 text-white" size="icon" >Loading</Button> : <AuthDialog>
-            <Button className="bg-prime/80 hover:bg-prime px-8 text-white" size="icon" >Login</Button>
-          </AuthDialog>)}
-
+          {
+            !isLoaded ? <button className="font-jakarta flex items-center font-semibold gap-2 bg-prime/20 transition-all p-2 rounded-md text-sm"
+            ><svg width="32px" height="32px" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" color="#878787"><defs><linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="tail-spin_svg__a_19"><stop stop-color="currentColor" stop-opacity="0" offset="0%"></stop><stop stop-color="currentColor" stop-opacity=".631" offset="63.146%"></stop><stop stop-color="currentColor" offset="100%"></stop></linearGradient></defs><g transform="translate(1 1)" fill="none" fill-rule="evenodd"><path d="M36 18c0-9.94-8.06-18-18-18" stroke="url(#tail-spin_svg__a_19)" stroke-width="2"><animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"></animateTransform></path><circle fill="#fff" cx="36" cy="18" r="1"><animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"></animateTransform></circle></g></svg></button> : isSignedIn ? <UserButton appearance={{
+              elements: {
+                userButtonAvatarBox: "sm:w-11 sm:h-11 w-9 h-9"
+              }
+            }} /> : <SignInButton>
+              <button className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md text-sm"
+              >Login</button>
+            </SignInButton>
+          }
         </header>
         {children}
       </div>
