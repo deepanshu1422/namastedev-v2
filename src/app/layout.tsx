@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/sonner"
 import NextProvider from "@/util/next-auth";
 import PageSense from "@/util/pagesense";
 import { ClerkProvider } from '@clerk/nextjs'
+import Script from "next/script";
 
 export default function RootLayout({
   children,
@@ -31,6 +32,7 @@ export default function RootLayout({
       <Clarity />
       <PageSense />
       <GoogleAnalytics gaId={"G-BCTWV4GBCY"} />
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" />
     </html>
   );
 }

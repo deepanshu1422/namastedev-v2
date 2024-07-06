@@ -82,6 +82,24 @@ model clerkUser {
   userId            String    @unique
   name              String
   email             String    @unique
+  contact           String?
+  profileImageUrl   String?
+  isMember          Boolean   @default(false)
+  memberType        String?   @default("basic")
+  purchasedCourseId String[]
+  membershipExpiry  DateTime?
+  completedLessons  String[]
+
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  payments  new_payments[]
+}
+
+model deletedUser {
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String
+  name              String
+  email             String
   phone             String?
   image             String?
   isMember          Boolean   @default(false)
@@ -94,20 +112,43 @@ model clerkUser {
   updatedAt DateTime @updatedAt
 }
 
-
-model deletedUser {
-  id                String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String   
-  name              String
-  email             String   
-  phone             String?
-  image             String?
-  isMember          Boolean   @default(false)
-  memberType        String?   @default("basic")
-  purchasedCourseId String[]
-  membershipExpiry  DateTime?
-  completedLessons  String[]
+model new_payments {
+  id                String        @id @default(auto()) @map("_id") @db.ObjectId
+  user              clerkUser     @relation(fields: [userId], references: [userId])
+  userId            String
+  email             String
+  paymentId         String?
+  amount            Int
+  currency          String        @default("INR")
+  paymentGateway    payment       @default(razorpay)
+  paymentMethod     String?
+  paymentStatus     paymentStatus @default(created)
+  stripePaymentId   String?
+  razorpayPaymentId String?
+  razorpayOrderId   String?
+  purchaseType      purchaseType
+  courseId          String?
+  bundleId          String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum payment {
+  stripe
+  razorpay
+}
+
+enum paymentStatus {
+  created
+  completed
+  failed
+  refunded
+  init_refund
+  failed_refund
+}
+
+enum purchaseType {
+  course
+  bundle
 }

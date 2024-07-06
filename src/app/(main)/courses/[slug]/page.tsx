@@ -9,6 +9,7 @@ import { getContentfulData } from '@/lib/cotentful';
 export type Courses = {
     courseCollection: {
         items: {
+            courseId: string,
             title: string,
             shortDescription: string,
             longDescription: string,
@@ -133,6 +134,7 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
     const query = `query {
     courseCollection(where: {slug: "${slug}"},limit:1){
         items{
+        courseId,
         title,
         longDescription,
         courseImage{   
@@ -198,7 +200,7 @@ export default async function Home({ params: { slug } }: PageProps) {
 
     const { courseCollection: { items } } = data
 
-    const { courseCreator, courseImage, longDescription, modulesCollection, pricingsCollection, title } = items[0]
+    const { courseCreator, courseImage, longDescription, modulesCollection, pricingsCollection, title, courseId } = items[0]
 
     return (
         <main className='min-h-svh overflow-clip'>
@@ -216,7 +218,8 @@ export default async function Home({ params: { slug } }: PageProps) {
                 image={items[0].courseImage.url}
                 amount={pricingsCollection.items.find(e => e.countryCode == "IN")?.amount || 500}
                 currency={pricingsCollection.items.find(e => e.countryCode == "IN")?.currencyCode || "INR"}
-                module={modulesCollection} />
+                module={modulesCollection}
+                courseId={courseId} />
         </main>
     )
 }
