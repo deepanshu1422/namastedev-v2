@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
                     userId: data.id,
                     email: body?.data?.email_addresses[0]?.email_address,
                     name: body?.data?.first_name,
-                    image: body?.data?.profile_image_url,
+                    profileImageUrl: body?.data?.profile_image_url,
                 },
             })
 
