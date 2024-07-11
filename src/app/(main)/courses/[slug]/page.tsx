@@ -214,6 +214,7 @@ export default async function Home({ params: { slug } }: PageProps) {
                 currency={pricingsCollection.items.find(e => e.countryCode == "IN")?.currencyCode || "INR"}
             />
             <Details
+                title={title}
                 description={longDescription}
                 image={items[0].courseImage.url}
                 amount={pricingsCollection.items.find(e => e.countryCode == "IN")?.amount || 500}

@@ -4,12 +4,13 @@ import Image from "next/image";
 import { NavMenu } from "../nav-menu";
 import Link from "next/link";
 import MobileMenu from "../mobile-menu";
-import { SignInButton, useAuth, UserButton, useUser } from "@clerk/nextjs";
+import { useSession } from "next-auth/react";
+import { AuthDialog } from "@/app/(guide)/auth";
 
 export default function Navbar() {
 
   // const { isSignedIn } = useAuth()
-  const { isLoaded, isSignedIn } = useUser()
+  const { data: session, status } = useSession()
 
   return (
     <div className={`relative font-jakarta tab:min-h-9`}>
@@ -45,19 +46,17 @@ export default function Navbar() {
               className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md"
             >
               <span className="text-sm">Join Mentorship</span>
-
             </Link>
 
             {
-              !isLoaded ? <button className="font-jakarta flex items-center font-semibold gap-2 bg-prime/20 transition-all p-2 rounded-md text-sm"
-              ><svg width="32px" height="32px" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" color="#878787"><defs><linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="tail-spin_svg__a_19"><stop stop-color="currentColor" stop-opacity="0" offset="0%"></stop><stop stop-color="currentColor" stop-opacity=".631" offset="63.146%"></stop><stop stop-color="currentColor" offset="100%"></stop></linearGradient></defs><g transform="translate(1 1)" fill="none" fill-rule="evenodd"><path d="M36 18c0-9.94-8.06-18-18-18" stroke="url(#tail-spin_svg__a_19)" stroke-width="2"><animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"></animateTransform></path><circle fill="#fff" cx="36" cy="18" r="1"><animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"></animateTransform></circle></g></svg></button> : isSignedIn ? <UserButton appearance={{
-                elements: {
-                  userButtonAvatarBox: "sm:w-11 sm:h-11 w-9 h-9"
-                }
-              }} /> : <SignInButton>
-                <button className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md text-sm"
-                >Login</button>
-              </SignInButton>
+              status === "loading" ? <button className="font-jakarta flex items-center font-semibold gap-2 bg-prime/20 transition-all p-2 rounded-md text-sm"
+              ><svg width="32px" height="32px" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" color="#878787"><defs><linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="tail-spin_svg__a_19"><stop stop-color="currentColor" stop-opacity="0" offset="0%"></stop><stop stop-color="currentColor" stop-opacity=".631" offset="63.146%"></stop><stop stop-color="currentColor" offset="100%"></stop></linearGradient></defs><g transform="translate(1 1)" fill="none" fill-rule="evenodd"><path d="M36 18c0-9.94-8.06-18-18-18" stroke="url(#tail-spin_svg__a_19)" stroke-width="2"><animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"></animateTransform></path><circle fill="#fff" cx="36" cy="18" r="1"><animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"></animateTransform></circle></g></svg></button> : status === "authenticated" ? <Link
+                href={"/dashboard"}
+                className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md"
+              >
+                <span className="text-sm">Dashboard</span>
+              </Link> : <AuthDialog><button className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md text-sm"
+              >Login</button></AuthDialog>
             }
 
             <MobileMenu />

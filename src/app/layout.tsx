@@ -7,27 +7,29 @@ import GoogleAnalytics from "@/util/ga";
 import { Toaster } from "@/components/ui/sonner"
 import NextProvider from "@/util/next-auth";
 import PageSense from "@/util/pagesense";
-import { ClerkProvider } from '@clerk/nextjs'
+import SessionProvider from '@/util/next-auth'
 import Script from "next/script";
+import { auth } from "@/auth";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const session = await auth()
+
   return (
     <html lang="en">
-      {/* <NextProvider> */}
-        <ClerkProvider>
-          <body
-            className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
-          >
-            {children}
-            <Footer />
-            <Toaster />
-          </body>
-        </ClerkProvider>
-      {/* </NextProvider> */}
+      <SessionProvider session={session}>
+        <body
+          className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
+        >
+          {children}
+          <Footer />
+          <Toaster />
+        </body>
+      </SessionProvider>
       <Pixel />
       <Clarity />
       <PageSense />

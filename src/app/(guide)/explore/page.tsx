@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 export default function Home() {
   
   return (
-    <main className="w-full flex flex-col min-h-svh pb-10">
+    <main className="flex flex-col w-full min-h-svh">
       <Hero />
       <Achieve />
       <Learning />

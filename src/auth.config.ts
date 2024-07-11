@@ -1,0 +1,11 @@
+import Resend from "next-auth/providers/resend"
+import Github from "next-auth/providers/github"
+
+import type { NextAuthConfig } from "next-auth"
+
+export default {
+    // debug: true,
+    providers: [Github, Resend({
+        from: "no-reply@mail.thequotesgram.com"
+    })]
+} as NextAuthConfig;

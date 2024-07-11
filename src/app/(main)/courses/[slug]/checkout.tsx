@@ -18,7 +18,6 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import { useAuth } from "@clerk/nextjs";
 
 import {
     Select,
@@ -29,64 +28,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { toast } from "sonner";
+// import managePayment from "../../../../../actions/payment";
 
-export default function Checkout({ image, amount, currency, courseId }: { image: string; amount: number; currency: string, courseId: string }) {
-
-    const { userId } = useAuth()
-    const [isLoading, setIsLoading] = useState(false)
-
-    const makePayment = async () => {
-        try {
-            setIsLoading(true);
-
-            let email = "dhanushkamath@gmail.com"
-            console.log("ddd")
-            let res;
-            if (courseId) {
-                console.log("course")
-                res = await fetch(`/api/razorpay/order/create?courseId=${courseId}`);
-            }
-            else {
-                return;
-            }
-            // make an endpoint to get this key
-            const key = "rzp_test_tVOEQJx5p7XYeW";
-
-            const data = await res?.json();
-            if (data.error) {
-                console.log(data.message);
-                return;
-            }
-            console.log(data.order)
-            const options = {
-                key: key,
-                name: email,
-                currency: data.order.currency,
-                amount: data.order.amount,
-                order_id: data.order.id,
-                callback_url: '/alpha',
-            };
-
-            // @ts-ignore
-            const paymentObject = new window.Razorpay(options);
-            paymentObject.open();
-
-            paymentObject.on("payment.failed", function (response: any) {
-                alert("Payment failed. Please try again.");
-                setIsLoading(false);
-            });
-            paymentObject.on("payment.captured", function (response: any) {
-                alert("Payment successful");
-                setIsLoading(false);
-            });
-
-            setIsLoading(false);
-
-        } catch (error) {
-            console.log(error);
-        }
-        // setIsLoading(true);
-    };
+export default function Checkout({ title, image, amount, currency, courseId }: { title: string, image: string; amount: number; currency: string, courseId: string }) {
 
     return (
         <div className="max-tab:hidden w-full h-fit sticky -translate-y-72 top-[26rem]">
@@ -98,7 +43,7 @@ export default function Checkout({ image, amount, currency, courseId }: { image:
                     className="bg-prime/20" />
                 <div className="flex flex-col gap-4 px-4 py-5">
                     <span className="uppercase text-white text-3xl sm:text-4xl font-bold flex gap-2 items-center">{currency} {amount}<span className="text-muted-foreground/70 italic text-2xl sm:text-3xl line-through">{amount * 4}</span></span>
-                    {!userId ? <SheetDemo /> : <Button disabled={isLoading} onClick={makePayment} size={"lg"} className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >{isLoading ? <svg width="32px" height="32px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" color="#ffffff"><g><path d="M10.998 22a.846.846 0 010-1.692 9.308 9.308 0 000-18.616 9.286 9.286 0 00-7.205 3.416.846.846 0 11-1.31-1.072A10.978 10.978 0 0110.998 0c6.075 0 11 4.925 11 11s-4.925 11-11 11z"></path><animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 11 11" to="360 11 11" dur=".6s" calcMode="linear" repeatCount="indefinite"></animateTransform></g></svg> : "Buy Now"}</Button>}
+                    <PaymentSheet courseId={courseId} title={title} cover={image} amount={amount} curreny={currency} />
                     <span className="flex gap-2 max-sm:text-sm items-center"><TicketPercent className="sm:w-6 sm:h-6 h-5 w-5" />Get Access to all Resources Now.</span>
                 </div>
             </div>
@@ -106,7 +51,7 @@ export default function Checkout({ image, amount, currency, courseId }: { image:
     )
 }
 
-export function SheetDemo() {
+export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cover: string, title: string, amount: number, curreny: string, courseId: string }) {
 
     const states = [
         "andhra_pradesh",
@@ -139,54 +84,116 @@ export function SheetDemo() {
         "west_bengal"
     ]
 
-    const formData = {
+    const [formData, setFormData] = useState({
         name: "",
         email: "",
         phone: "",
         state: ""
+    })
+
+    const [open, setOpen] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+
+    function validationError({ message }: { message: string }) {
+        toast.error("Error Occured", { description: message, position: "bottom-center", })
     }
+
+    const makePayment = async () => {
+
+        if (formData.name.length < 2) return validationError({ message: "Name too short" })
+        if (formData.email.split("@").length !== 2) return validationError({ message: "Invalid Email" })
+        if (formData.phone.length !== 10) return validationError({ message: "Invalid Phone Number" })
+        if (!states.includes(formData.state)) return validationError({ message: "Select a State" })
+
+        try {
+            setIsLoading(true);
+
+            console.log(formData)
+
+            let res;
+
+            if (courseId) {
+                console.log("course")
+                res = await fetch(`/api/razorpay/order/create?courseId=${courseId}`, { method: "POST", body: JSON.stringify(formData) });
+            }
+            else {
+                return;
+            }
+            // make an endpoint to get this key
+            const key = "rzp_test_tVOEQJx5p7XYeW";
+
+            const data = await res?.json();
+            if (data.error) {
+                console.log(data.message);
+                return;
+            }
+
+            console.log(data.order)
+
+            setFormState(0)
+            setOpen(false)
+            setFormData({
+                name: "",
+                email: "",
+                phone: "",
+                state: ""
+            })
+
+            const options = {
+                key: key,
+                name: formData.email,
+                currency: data.order.currency,
+                amount: data.order.amount,
+                order_id: data.order.id,
+                handler: async function (response: any) {
+                    // await managePayment({ email: formData.email, name: formData.name.split(" ")[0], phone: formData.phone, pid: response.razorpay_payment_id, rpid: response.razorpay_order_id, status: "completed" })
+
+                    
+                },
+            };
+
+            // @ts-ignore
+            const paymentObject = new window.Razorpay(options);
+            paymentObject.open();
+
+            paymentObject.on("payment.failed", function (response: any) {
+                console.log(response.error);
+                setIsLoading(false);
+            });
+
+            paymentObject.on("payment.captured", function (response: any) {
+                alert("Payment successful");
+                setIsLoading(false);
+            });
+
+            setIsLoading(false);
+
+        } catch (error) {
+            setIsLoading(false);
+            console.log(error);
+        }
+        // setIsLoading(true);
+    };
 
     const [formState, setFormState] = useState(0)
 
     const order = [
         {
             title: "Order Details",
-            body: <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-5 items-center gap-4">
-                    <Label htmlFor="name" className="text-left">
-                        Name
-                    </Label>
-                    <Input max={50} id="name" placeholder="Max Turn" className="col-span-4" />
+            body: <div className="flex flex-col gap-5">
+                <div className="grid grid-cols-3 gap-2 py-4">
+                    <Image className="col-span-1 rounded-md" src={cover} alt={title} width={280} height={180} />
+                    <div className="col-span-2 flex flex-col gap-1">
+                        <p className="text-lg">{title}</p>
+                        <span className="font-extrabold text-prime">{curreny} {amount}</span>
+                    </div>
                 </div>
-                <div className="grid grid-cols-5 items-center gap-4">
-                    <Label htmlFor="email" className="text-left">
-                        Email
-                    </Label>
-                    <Input max={50} id="email" type="email" placeholder="youremail@gmail.com" className="col-span-4" />
-                </div>
-                <div className="grid grid-cols-5 items-center gap-4">
-                    <Label htmlFor="phone" className="text-left">
-                        Phone
-                    </Label>
-                    <span className="absolute left-[6.5rem] text-muted-foreground">+91</span>
-                    <Input id="phone" type="number" className="col-span-4 pl-9" max={10} />
-                </div>
-                <div className="grid grid-cols-5 items-center gap-4">
-                    <Label htmlFor="username" className="text-left">
-                        State
-                    </Label>
-                    <Select>
-                        <SelectTrigger className="border-prime/40 bg-bg w-full col-span-4 capitalize">
-                            <SelectValue placeholder="Select State" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                <SelectLabel>States</SelectLabel>
-                                {states.map((e, i) => (<SelectItem className="capitalize" key={i} value={e}>{e.split("_").join(" ")}</SelectItem>))}
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
-                </div>
+                <section className="flex flex-col gap-3">
+                    <div className="flex justify-between">
+                        <span>Course Price</span>
+                        <span className="font-extrabold">{curreny} {amount}</span>
+                    </div>
+                </section>
             </div>,
             footer: <Button onClick={() => setFormState(1)} className="w-full mt-auto hover:bg-prime/80 bg-prime/60 text-white" type="submit">Proceed</Button>
         },
@@ -197,26 +204,26 @@ export function SheetDemo() {
                     <Label htmlFor="name" className="text-left">
                         Name
                     </Label>
-                    <Input id="name" placeholder="Max Turn" className="col-span-4" />
+                    <Input value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} maxLength={30} id="name" placeholder="Max Turn" className="col-span-4" />
                 </div>
                 <div className="grid grid-cols-5 items-center gap-4">
                     <Label htmlFor="email" className="text-left">
                         Email
                     </Label>
-                    <Input id="email" type="email" placeholder="youremail@gmail.com" className="col-span-4" />
+                    <Input value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} id="email" maxLength={40} type="email" placeholder="youremail@gmail.com" className="col-span-4" />
                 </div>
                 <div className="grid grid-cols-5 items-center gap-4">
                     <Label htmlFor="phone" className="text-left">
                         Phone
                     </Label>
-                    <span className="absolute left-[6.5rem]">+91</span>
-                    <Input id="phone" type="number" className="col-span-4 pl-9" max={10} />
+                    <span className="absolute left-[6.5rem] text-muted-foreground">+91</span>
+                    <Input value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} type="number" id="phone" className="col-span-4 pl-9" maxLength={10} />
                 </div>
                 <div className="grid grid-cols-5 items-center gap-4">
                     <Label htmlFor="username" className="text-left">
                         State
                     </Label>
-                    <Select>
+                    <Select value={formData.state} onValueChange={(e) => setFormData({ ...formData, state: e })}>
                         <SelectTrigger className="border-prime/40 bg-bg w-full col-span-4 capitalize">
                             <SelectValue placeholder="Select State" />
                         </SelectTrigger>
@@ -229,13 +236,16 @@ export function SheetDemo() {
                     </Select>
                 </div>
             </div>,
-            footer: <Button onClick={() => setFormState(1)} className="w-full mt-auto hover:bg-prime/80 bg-prime/60 text-white" type="submit">Proceed</Button>
+            footer: <div className="w-full mt-auto flex flex-col gap-2">
+                <Button disabled={isLoading} onClick={makePayment} className="disabled:animate-pulse w-full hover:bg-prime/80 bg-prime/60 text-white" type="submit">Buy</Button>
+                <Button variant={"outline"} onClick={() => setFormState(0)} className="w-full" type="submit">Back</Button>
+            </div>
         },
 
     ]
 
     return (
-        <Sheet>
+        <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
                 <Button size={"lg"} className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Buy Now</Button>
             </SheetTrigger>

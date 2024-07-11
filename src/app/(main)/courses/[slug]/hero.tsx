@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Star, TicketPercent } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { PaymentSheet } from "./checkout";
 
 export default function Hero({
+    courseId,
     title,
     image,
     width,
@@ -14,6 +16,7 @@ export default function Hero({
     amount,
     currency
 }: {
+    courseId: string;
     title: string;
     image: string
     width: number,
@@ -68,7 +71,7 @@ export default function Hero({
 
                     <div className="tab:hidden  flex flex-col gap-4 max-tab:px-11 max-phone:px-6">
                         <span className="uppercase text-white text-3xl sm:text-4xl font-bold flex gap-2 items-center">{currency} {amount}<span className="text-muted-foreground/70 italic text-2xl sm:text-3xl line-through">{amount * 4}</span></span>
-                        <Button size={"lg"} className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Buy Now</Button>
+                        <PaymentSheet courseId={courseId} title={title} cover={image} amount={amount} curreny={currency} />
                         <span className="flex gap-2 max-sm:text-sm items-center"><TicketPercent className="sm:w-6 sm:h-6 h-5 w-5" />Get Access to all Resources Now.</span>
                     </div>
                 </section>
