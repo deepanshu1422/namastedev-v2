@@ -295,7 +295,7 @@ export default function MobileMenu() {
             </Card>
             <Image
               alt="30DayCoding New Challenge"
-              src={"/NEW.gif"}
+              src={"/best.gif"}
               height={120}
               width={120}
               className="absolute top-0 -translate-y-10 translate-x-10 right-0"

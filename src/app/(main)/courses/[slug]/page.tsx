@@ -152,7 +152,6 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
             title,
             amount,
             countryCode,
-            currencyCode
             }
         },
         modulesCollection{
@@ -205,20 +204,21 @@ export default async function Home({ params: { slug } }: PageProps) {
     return (
         <main className='min-h-svh overflow-clip'>
             <Hero
+                courseId={courseId}
                 title={title}
                 image={courseImage.url}
                 width={courseImage.width}
                 height={courseImage.height}
                 author={courseCreator.name}
                 amount={pricingsCollection.items.find(e => e.countryCode == "IN")?.amount || 500}
-                currency={pricingsCollection.items.find(e => e.countryCode == "IN")?.currencyCode || "INR"}
+                currency={"INR"}
             />
             <Details
                 title={title}
                 description={longDescription}
                 image={items[0].courseImage.url}
                 amount={pricingsCollection.items.find(e => e.countryCode == "IN")?.amount || 500}
-                currency={pricingsCollection.items.find(e => e.countryCode == "IN")?.currencyCode || "INR"}
+                currency={"INR"}
                 module={modulesCollection}
                 courseId={courseId} />
         </main>

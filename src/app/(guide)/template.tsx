@@ -106,6 +106,165 @@ export default function Template({ children }: { children: React.ReactNode }) {
     },
   ];
 
+  // return (
+  //   <div className="grid min-h-screen w-full md:grid-cols-[60px_1fr] lg:grid-cols-[280px_1fr]">
+  //     <div className="hidden border-r bg-muted/40 md:block">
+  //       <div className="flex h-full max-h-screen flex-col gap-2 sticky top-0">
+  //         <div className="flex h-14 items-center border-b px-4 py-2 lg:h-[60px] lg:px-6">
+  //           <Link href="/" className="flex items-center gap-2 font-semibold">
+  //             <Image src={"/logo.png"} alt="logo" width={35} height={35} />
+  //             <span className="max-lg:hidden">30DC</span>
+  //           </Link>
+  //         </div>
+  //         <div className="flex-1">
+  //           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+  //             {navBar.map(({ href, icon, selected, title }, i) => (
+  //               <Link
+  //                 key={i}
+  //                 href={href}
+  //                 className={`flex items-center gap-3 ${selected && "bg-second/20 text-prime"
+  //                   } rounded-lg px-3 max-lg:py-3 lg:py-2 text-muted-foreground transition-all hover:text-prime`}
+  //               >
+  //                 {icon}
+  //                 <span className="hidden lg:block">
+  //                   {title}
+  //                 </span>
+  //               </Link>
+  //             ))}
+  //           </nav>
+  //         </div>
+  //         <div className="max-lg:hidden relative mt-auto p-4">
+  //           <Card>
+  //             <CardHeader className="p-2 pt-0 md:p-4">
+  //               <CardTitle>New Courses</CardTitle>
+  //               <CardDescription>
+  //                 Upskill yourself with pocket friendly courses — Enroll Now
+  //               </CardDescription>
+  //             </CardHeader>
+  //             <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
+  //               <Link href={"https://courses.30dayscoding.com/s/store"}>
+  //                 <Button
+  //                   size="sm"
+  //                   className="bg-prime hover:bg-prime/80 text-white w-full"
+  //                 >
+  //                   Enroll Now
+  //                 </Button>
+  //               </Link>
+  //             </CardContent>
+  //             <Image
+  //               alt="30DayCoding New Challenge"
+  //               src={"/NEW.gif"}
+  //               height={120}
+  //               width={120}
+  //               className="absolute top-0 -translate-y-5 translate-x-3 right-0"
+  //             />
+  //           </Card>
+  //         </div>
+  //       </div>
+  //     </div>
+  //     <div className="flex flex-col overflow-hidden">
+  //       <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+  //         <Sheet>
+  //           <SheetTrigger asChild>
+  //             <Button
+  //               variant="outline"
+  //               size="icon"
+  //               className="shrink-0 md:hidden"
+  //             >
+  //               <Menu className="h-5 w-5" />
+  //               <span className="sr-only">Toggle navigation menu</span>
+  //             </Button>
+  //           </SheetTrigger>
+  //           <SheetContent side="left" className="flex flex-col overflow-hidden overflow-y-auto">
+  //             <>
+  //               <nav className="grid gap-2 text-lg font-medium">
+  //                 <Link
+  //                   href="#"
+  //                   className="flex items-center gap-2 text-lg font-semibold"
+  //                 >
+  //                   <Image
+  //                     src={"/logo.png"}
+  //                     alt="logo"
+  //                     width={30}
+  //                     height={30}
+  //                   />
+  //                   <span className="sr-only">30DC</span>
+  //                 </Link>
+
+  //                 {navBar.map(({ href, icon, selected, title }, i) => (
+  //                   <Link
+  //                     key={i}
+  //                     href={href}
+  //                     className={`mx-[-0.65rem] flex items-center gap-4 ${selected ? "bg-muted" : "text-muted-foreground"
+  //                       } rounded-xl px-3 py-2 hover:text-foreground transition-all`}
+  //                   >
+  //                     {icon}
+  //                     {title}
+  //                   </Link>
+  //                 ))}
+  //               </nav>
+  //               <div className="relative mt-auto">
+  //                 <Card>
+  //                   <CardHeader>
+  //                     <CardTitle>New Courses</CardTitle>
+  //                     <CardDescription>
+  //                       Upskill yourself with pocket friendly courses — Enroll Now
+  //                     </CardDescription>
+  //                   </CardHeader>
+  //                   <CardContent>
+  //                     <Link
+  //                       href={
+  //                         "https://courses.30dayscoding.com/s/store"
+  //                       }
+  //                     >
+  //                       <Button
+  //                         size="sm"
+  //                         className="bg-prime hover:bg-prime/80 text-white w-full"
+  //                       >
+  //                         Enroll Now
+  //                       </Button>
+  //                     </Link>
+  //                   </CardContent>
+  //                 </Card>
+  //                 <Image
+  //                   alt="30DayCoding New Challenge"
+  //                   src={"/NEW.gif"}
+  //                   height={120}
+  //                   width={120}
+  //                   className="absolute top-0 -translate-y-10 translate-x-10 right-0"
+  //                 />
+  //               </div>
+  //             </>
+  //           </SheetContent>
+  //         </Sheet>
+  //         <div className="w-full flex-1"></div>
+  //         {status === "authenticated" ? <Button variant="secondary" size="icon" className="rounded-full">
+  //           {/* <DropdownMenu>
+  //             <DropdownMenuTrigger asChild>
+  //               <Button variant="secondary" size="icon" className="rounded-full">
+  //                 <CircleUser className="h-5 w-5" />
+  //                 <span className="sr-only">Toggle user menu</span>
+  //               </Button>
+  //             </DropdownMenuTrigger>
+  //             <DropdownMenuContent align="end">
+  //               <DropdownMenuLabel>Welocme, {userData.user?.name} </DropdownMenuLabel>
+  //               <DropdownMenuSeparator />
+  //               <DropdownMenuItem>Settings</DropdownMenuItem>
+  //               <DropdownMenuItem>Support</DropdownMenuItem>
+  //               <DropdownMenuSeparator />
+  //               <DropdownMenuItem onClick={() => signOut()}>Logout</DropdownMenuItem>
+  //             </DropdownMenuContent>
+  //           </DropdownMenu> */}
+  //         </Button> : (status === "loading" ? <Button variant={"secondary"} className="px-8 text-white" size="icon" >Loading</Button> : <AuthDialog>
+  //           <Button className="bg-prime/80 hover:bg-prime px-8 text-white" size="icon" >Login</Button>
+  //         </AuthDialog>)}
+
+  //       </header>
+  //       {children}
+  //     </div>
+  //   </div>
+  // )
+
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[60px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -173,7 +332,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
               </CardContent>
               <Image
                 alt="30DayCoding New Challenge"
-                src={"/NEW.gif"}
+                src={"/best.gif"}
                 height={120}
                 width={120}
                 className="absolute top-0 -translate-y-5 translate-x-3 right-0"
@@ -182,17 +341,17 @@ export default function Template({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </div>
-      <div className="flex flex-col">
+
+      <div className="flex flex-col overflow-hidden">
         {/* <div className="h-20" ></div> */}
         <header className="bg-bg">
-
           <div className="bg-muted/40 flex items-center gap-4 border-b px-4 lg:px-6 h-14 lg:h-[60px]">
             <Sheet>
               <SheetTrigger asChild>
                 <Button
                   variant="outline"
                   size="icon"
-                  className="shrink-0 md:hidden"
+                  className="md:hidden"
                 >
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Toggle navigation menu</span>
@@ -251,7 +410,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                     </Card>
                     <Image
                       alt="30DayCoding New Challenge"
-                      src={"/NEW.gif"}
+                      src={"/best.gif"}
                       height={120}
                       width={120}
                       className="absolute top-0 -translate-y-10 translate-x-10 right-0"
@@ -268,7 +427,6 @@ export default function Template({ children }: { children: React.ReactNode }) {
               }
             </div>
           </div>
-
         </header>
         {children}
       </div>

@@ -35,29 +35,17 @@ type heroImage {
   alt String
 }
 
-model user {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  name          String
-  email         String    @unique
-  password      String
-  phone         String
-  year          Int
-  emailVerified DateTime?
-  image         String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
 model User {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
-  email         String   @unique
+  email         String    @unique
   emailVerified DateTime?
   image         String?
   contact       String?
   state         String?
   country       String?
+  courseId      String[]  @default([])
+  bundleId      String[]  @default([])
   accounts      Account[]
   sessions      Session[]
 
@@ -105,4 +93,53 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Payments {
+  id             String         @id @default(auto()) @map("_id") @db.ObjectId
+  paymentId      String         @unique
+  email          String
+  amount         Int
+  state          String
+  contact        String
+  country        String
+  currency       Currency       @default(INR)
+  paymentGateway PaymentGateway
+  paymentMethod  String?
+  paymentStatus  PaymentStatus  @default(created)
+  purchaseType   PurchaseType
+
+  stripePaymentId   String?
+  razorpayPaymentId String?
+  razorpayOrderId   String?
+
+  courseId String?
+  bundleId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Currency {
+  INR
+  USD
+}
+
+enum PaymentGateway {
+  stripe
+  razorpay
+}
+
+enum PaymentStatus {
+  created
+  completed
+  failed
+  refunded
+  init_refund
+  failed_refund
+}
+
+enum PurchaseType {
+  course
+  bundle
 }

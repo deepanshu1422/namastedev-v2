@@ -29,6 +29,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { toast } from "sonner";
+import { useSession } from "next-auth/react";
 // import managePayment from "../../../../../actions/payment";
 
 export default function Checkout({ title, image, amount, currency, courseId }: { title: string, image: string; amount: number; currency: string, courseId: string }) {
@@ -52,6 +53,8 @@ export default function Checkout({ title, image, amount, currency, courseId }: {
 }
 
 export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cover: string, title: string, amount: number, curreny: string, courseId: string }) {
+
+    const { data: session, update } = useSession()
 
     const states = [
         "andhra_pradesh",
@@ -85,8 +88,8 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
     ]
 
     const [formData, setFormData] = useState({
-        name: "",
-        email: "",
+        name: session?.user?.name ?? "",
+        email: session?.user?.email ?? "",
         phone: "",
         state: ""
     })
@@ -114,7 +117,19 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
 
             if (courseId) {
                 console.log("course")
-                res = await fetch(`/api/razorpay/order/create?courseId=${courseId}`, { method: "POST", body: JSON.stringify(formData) });
+                res = await fetch(`https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/purchase/course`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-30dc-signature": "ZBzCzxadsqAXrS3vexgjFu1zOjeZYn+sV/NR4EMRb/8="
+                    }, 
+                    body: JSON.stringify({
+                        email: formData.email,
+                        gateway: "razorpay",
+                        courseId: "ASDFDAE",
+                        couponCode: "dhan25"
+                    })
+                });
             }
             else {
                 return;
@@ -125,6 +140,7 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
             const data = await res?.json();
             if (data.error) {
                 console.log(data.message);
+                setIsLoading(false)
                 return;
             }
 
@@ -133,8 +149,8 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
             setFormState(0)
             setOpen(false)
             setFormData({
-                name: "",
-                email: "",
+                name: session?.user?.name ?? "",
+                email: session?.user?.email ?? "",
                 phone: "",
                 state: ""
             })
@@ -145,11 +161,6 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
                 currency: data.order.currency,
                 amount: data.order.amount,
                 order_id: data.order.id,
-                handler: async function (response: any) {
-                    // await managePayment({ email: formData.email, name: formData.name.split(" ")[0], phone: formData.phone, pid: response.razorpay_payment_id, rpid: response.razorpay_order_id, status: "completed" })
-
-                    
-                },
             };
 
             // @ts-ignore
@@ -181,17 +192,26 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
         {
             title: "Order Details",
             body: <div className="flex flex-col gap-5">
-                <div className="grid grid-cols-3 gap-2 py-4">
-                    <Image className="col-span-1 rounded-md" src={cover} alt={title} width={280} height={180} />
-                    <div className="col-span-2 flex flex-col gap-1">
-                        <p className="text-lg">{title}</p>
+                <div className="grid sm:grid-cols-3 gap-2 pt-4">
+                    <Image className="rounded-md max-sm:w-full max-h-40 object-cover" src={cover} alt={title} width={280} height={180} />
+                    <div className="sm:col-span-2 flex flex-col gap-1">
+                        <p className="sm:text-lg">{title}</p>
                         <span className="font-extrabold text-prime">{curreny} {amount}</span>
                     </div>
                 </div>
-                <section className="flex flex-col gap-3">
+                <section className="flex flex-col gap-1 max-sm:text-sm">
                     <div className="flex justify-between">
                         <span>Course Price</span>
                         <span className="font-extrabold">{curreny} {amount}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                        <span>Promo Code</span>
+                        <span className="font-extrabold text-prime">Apply Code</span>
+                    </div>
+                    <hr className="my-5" />
+                    <div className="flex justify-between">
+                        <span>Total Pay</span>
+                        <span className="font-extrabold text-prime">{curreny} {amount}</span>
                     </div>
                 </section>
             </div>,
@@ -204,20 +224,22 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
                     <Label htmlFor="name" className="text-left">
                         Name
                     </Label>
-                    <Input value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} maxLength={30} id="name" placeholder="Max Turn" className="col-span-4" />
+                    <Input disabled={!!session?.user?.name} value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} maxLength={30} id="name" placeholder="Max Turn" className="col-span-4" />
                 </div>
                 <div className="grid grid-cols-5 items-center gap-4">
                     <Label htmlFor="email" className="text-left">
                         Email
                     </Label>
-                    <Input value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} id="email" maxLength={40} type="email" placeholder="youremail@gmail.com" className="col-span-4" />
+                    <Input disabled={!!session?.user?.email} value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} id="email" maxLength={40} type="email" placeholder="youremail@gmail.com" className="col-span-4" />
                 </div>
                 <div className="grid grid-cols-5 items-center gap-4">
                     <Label htmlFor="phone" className="text-left">
                         Phone
                     </Label>
-                    <span className="absolute left-[6.5rem] text-muted-foreground">+91</span>
-                    <Input value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} type="number" id="phone" className="col-span-4 pl-9" maxLength={10} />
+                    <div className="relative col-span-4">
+                        <span className="absolute left-2 top-2 text-muted-foreground">+91</span>
+                        <Input value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} type="number" id="phone" className="pl-9" maxLength={10} />
+                    </div>
                 </div>
                 <div className="grid grid-cols-5 items-center gap-4">
                     <Label htmlFor="username" className="text-left">
@@ -249,7 +271,7 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
             <SheetTrigger asChild>
                 <Button size={"lg"} className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Buy Now</Button>
             </SheetTrigger>
-            <SheetContent className="h-full flex flex-col">
+            <SheetContent className="h-full w-full flex flex-col">
                 <SheetHeader>
                     <SheetTitle>{order[formState].title}</SheetTitle>
                     <SheetDescription>
