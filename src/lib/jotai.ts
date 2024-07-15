@@ -14322,7 +14322,7 @@ export const urlAtom = atom({
 const asyncAtom = atom(
     async get => {
         const { code, language, ext } = get(urlAtom)
-        console.log(code);
+        // console.log(code);
         const response = await fetch(`https://raw.githubusercontent.com/neetcode-gh/leetcode/main/${language}/${code}.${ext}`)
         return await response.text()
     }

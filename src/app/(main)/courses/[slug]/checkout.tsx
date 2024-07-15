@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/select"
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
+import createPayments from "../../../../../actions/createPayments";
 // import managePayment from "../../../../../actions/payment";
 
 export default function Checkout({ title, image, amount, currency, courseId }: { title: string, image: string; amount: number; currency: string, courseId: string }) {
@@ -111,25 +112,15 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
         try {
             setIsLoading(true);
 
-            console.log(formData)
+            // console.log(courseId)
 
             let res;
 
             if (courseId) {
-                console.log("course")
-                res = await fetch(`https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/purchase/course`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "x-30dc-signature": "ZBzCzxadsqAXrS3vexgjFu1zOjeZYn+sV/NR4EMRb/8="
-                    }, 
-                    body: JSON.stringify({
-                        email: formData.email,
-                        gateway: "razorpay",
-                        courseId: "ASDFDAE",
-                        couponCode: "dhan25"
-                    })
-                });
+                res = await createPayments({
+                    courseId: courseId,
+                    email: formData.email
+                })
             }
             else {
                 return;
@@ -137,14 +128,14 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
             // make an endpoint to get this key
             const key = "rzp_test_tVOEQJx5p7XYeW";
 
-            const data = await res?.json();
-            if (data.error) {
-                console.log(data.message);
+            // const data = await res?.json();
+            if (res.error) {
+                // console.log(res?.message);
                 setIsLoading(false)
                 return;
             }
 
-            console.log(data.order)
+            // console.log(res.data.orderId)
 
             setFormState(0)
             setOpen(false)
@@ -158,9 +149,10 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
             const options = {
                 key: key,
                 name: formData.email,
-                currency: data.order.currency,
-                amount: data.order.amount,
-                order_id: data.order.id,
+                currency: res.data.currency,
+                amount: res.data.amount,
+                order_id: res.data.orderId,
+                callback_url: '/dashboard',
             };
 
             // @ts-ignore
@@ -168,7 +160,7 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
             paymentObject.open();
 
             paymentObject.on("payment.failed", function (response: any) {
-                console.log(response.error);
+                // console.log(response.error);
                 setIsLoading(false);
             });
 
@@ -181,7 +173,7 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
 
         } catch (error) {
             setIsLoading(false);
-            console.log(error);
+            // console.log(error);
         }
         // setIsLoading(true);
     };

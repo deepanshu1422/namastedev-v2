@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
         return NextResponse.redirect(new URL('https://hotshotpanda.myshopify.com/cart/46100616151210:1?channel=buy_button'))
 
     } catch (err: any) {
-        console.log(err);
+        // console.log(err);
         return NextResponse.json(err.message || err || "Error", { status: err.status || 500 });
     }
 }
