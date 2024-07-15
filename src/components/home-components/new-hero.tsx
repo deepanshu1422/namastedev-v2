@@ -1,6 +1,7 @@
 import Btn from "@/app/(main)/mentorship/btn";
 import Button from "@/components/home-components/button";
 import { ArrowRight, GraduationCap, School, Star } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 function Video({
@@ -57,8 +58,9 @@ export default function Hero({
 }) {
   return (
     <>
-      <div className={`w-full grid ${heroImage} min-h-96 bg-cover`}>
-        <div className="tab:p-[6.5rem_2.5rem_6.75rem] max-tab:pt-[5rem] max-tab:pb-[4.5rem] m-auto max-w-4xl grid gap-5 place-items-center max-phone:place-items-start phone:text-center text-white">
+      <div className={`w-full grid min-h-96 relative`}>
+        <Image src={heroImage ?? ""} alt="30dc homepage" fill className="opacity-40" />
+        <div className="relative tab:p-[6.5rem_2.5rem_6.75rem] max-tab:pt-[5rem] max-tab:pb-[4.5rem] m-auto max-w-4xl grid gap-5 place-items-center max-phone:place-items-start phone:text-center text-white">
           <h1
             className={`font-jakarta phone:text-[3.5rem] text-[2.5rem] font-extrabold bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight px-2 max-phone:px-6 max-w-2xl`}
           >
