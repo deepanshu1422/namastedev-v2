@@ -49,7 +49,6 @@ export function AuthDialog({ children }: { children: React.ReactNode }) {
 function LoginForm() {
   const [email, setEmail] = useState<string>()
   return <div className="flex flex-col gap-2 py-3">
-    <Button onClick={() => signIn("github", { callbackUrl: "/dashboard" })} className="gap-1.5" size={"lg"} variant={"outline"}><Image src={"/github.png"} alt={"github logo"} height={20} width={20} />Github</Button>
     <Button onClick={() => signIn("google", { callbackUrl: "/dashboard" })} className="gap-1.5" size={"lg"} variant={"outline"}><Image src={"/company3.png"} alt={"google logo"} height={20} width={20} />Google</Button>
     <div className="flex items-center gap-2 py-2 text-white/50 text-sm">
       <hr className="border w-full" />

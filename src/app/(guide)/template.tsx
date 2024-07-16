@@ -41,7 +41,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { AuthDialog } from "./auth";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
@@ -428,7 +427,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </header>
-        {children}
+        <div className="flex-1">{children}</div>
       </div>
     </div>
   );
@@ -452,7 +451,7 @@ export function UserButton({ src, name }: { src: string; name: string }) {
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel>Cancel</AlertDialogCancel>
-        <AlertDialogAction className="bg-prime/70 hover:bg-prime/90 text-white" onClick={() => signOut({callbackUrl: "/"})}>Sign Out</AlertDialogAction>
+        <AlertDialogAction className="bg-prime/70 hover:bg-prime/90 text-white" onClick={() => signOut({ callbackUrl: "/" })}>Sign Out</AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>

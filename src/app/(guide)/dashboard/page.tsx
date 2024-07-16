@@ -7,6 +7,8 @@ import Courses from './courses';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import Purchased from './purchased';
+import Notifications from './notifications';
+import { UserDialog } from './new-user';
 
 export const metadata: Metadata = {
   title: "Dashboard | 30dayscoding",
@@ -34,16 +36,19 @@ export const metadata: Metadata = {
 export default function Dashboard() {
 
   return (
-    <div className='flex flex-col gap-2 px-4 py-5 lg:px-8'>
-      <span>Dashboard</span>
-      {/* <h2 className='text-4xl font-bold'>Welcome, {session?.user?.name ?? "No Name"}</h2> */}
-      <Suspense fallback={<CoursesFallback />}>
-        <Courses />
-      </Suspense>
-      <span className='text-xl text-white/70 font-bold'>Purchased Courses</span>
-      <Suspense fallback={<PurchasedFallback />}>
-        <Purchased />
-      </Suspense>
+    <div className='flex h-full'>
+      <div className='flex-1 flex flex-col gap-2 px-4 py-5 lg:px-8'>
+        <span>Dashboard</span>
+        <Suspense fallback={<CoursesFallback />}>
+          <Courses />
+        </Suspense>
+        <span className='text-xl text-white/70 font-bold'>Purchased Courses</span>
+        <Suspense fallback={<PurchasedFallback />}>
+          <Purchased />
+        </Suspense>
+      </div>
+      <Notifications />
+      <UserDialog />
     </div>
   )
 }
@@ -55,5 +60,9 @@ function CoursesFallback() {
 }
 
 function PurchasedFallback() {
-  return <div className='min-h-60 w-full flex'><Badge className="text-white gap-1 bg-second/60 hover:bg-second/80 rounded m-auto text-base">No Purchased Courses</Badge></div>
+  return <div className='min-h-52 w-full grid grid-cols-3 gap-4'>
+    <Skeleton className='min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60' />
+    <Skeleton className='min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60' />
+    <Skeleton className='min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60' />
+  </div>
 }

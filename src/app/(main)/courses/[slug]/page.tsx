@@ -122,13 +122,6 @@ export async function generateMetadata(
     };
 }
 
-// const getCourses = cache(
-//     async (slug: string) => {
-//         const item = courses.find(e => e.slug === slug)
-//         return item;
-//     }
-// );
-
 async function getCourses({ slug }: { slug: string }): Promise<Courses> {
 
     const query = `query {

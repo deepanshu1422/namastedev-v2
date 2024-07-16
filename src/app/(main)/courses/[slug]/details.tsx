@@ -8,6 +8,7 @@ import { Dot, Video } from "lucide-react"
 import Checkout from "./checkout"
 import Reviews from "./reviews"
 import Player from "./player"
+import { MDXRemote } from "next-mdx-remote/rsc";
 
 type Module = {
     total: number;
@@ -33,7 +34,7 @@ export default function Details({ title, description, image, amount, currency, m
             <div className="flex flex-col w-full gap-10">
                 <section className="tab:max-w-2xl flex flex-col gap-3">
                     <h2 className="text-3xl font-bold text-white/80">Course&apos;s Details</h2>
-                    <p className="text-white/80">{description}</p>
+                    <MDXRemote source={description} />
                 </section>
                 <section className="tab:max-w-2xl flex flex-col gap-1">
                     <h2 className="text-3xl font-bold text-white/80">Tech Stack</h2>

@@ -24,18 +24,16 @@ export default async function Purchased() {
 
     const { data: { courseCollection: { items } } } = data
 
-    return (
-        <div className='min-h-52 w-full grid grid-cols-3 gap-4'>
-            {/* <p className='break-all'>{JSON.stringify(items)}</p> */}
-            {items.map((e: any, i: number) => <CourseCard key={i} e={e} />)}
-        </div>
-
+    return (items.length > 0 ? <div className='min-h-52 w-full grid grid-cols-3 gap-4'>
+        {/* <p className='break-all'>{JSON.stringify(items)}</p> */}
+        {items.map((e: any, i: number) => <CourseCard key={i} e={e} />)}
+    </div> : <div className='min-h-60 w-full flex'><Badge className="text-white gap-1 bg-second/60 hover:bg-second/80 rounded m-auto text-base">No Purchased Courses</Badge></div>
     )
 }
 
 function CourseCard({ e }: { e: any }) {
     return (
-        <Link href={"#"} className='flex flex-col gap-3 py-2 px-3 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60 transition-all duration-300'>
+        <Link href={`/dashboard/course/${e?.courseId}` || ""} className='flex flex-col gap-3 py-2 px-3 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60 transition-all duration-300'>
             <div className='flex justify-between'>
                 <Image src={"/logo.png"} alt={"30DC Logo"} height={40} width={40} />
                 {/* <Image src={"/logo.png"} alt={"30DC Logo"} height={40} width={40} /> */}

@@ -17,7 +17,7 @@ import {
 
 import { useState } from "react";
 import Image from "next/image";
-import { Mail, Save } from "lucide-react";
+import { Save } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useSession } from "next-auth/react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
