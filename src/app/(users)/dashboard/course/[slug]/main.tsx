@@ -71,8 +71,9 @@ export default function Main({ title, modulesCollection }: {
 
     function nextVideo() {
         if (vidIndex.chapterIndex ===
-            modulesCollection.items[modulesCollection.items.length - 1].chaptersCollection.items.length - 1 && vidIndex.modIndex === modulesCollection.items.length - 1) return 0
-        if (vidIndex.chapterIndex === 0 && vidIndex.modIndex !== 0) {
+            modulesCollection.items[modulesCollection.items.length - 1].chaptersCollection.items.length - 1 && vidIndex.modIndex !== modulesCollection.total - 1) return 0
+
+        if (vidIndex.chapterIndex === modulesCollection.items[vidIndex.modIndex].chaptersCollection.total && vidIndex.modIndex !== 0) {
             setVidIndex({
                 modIndex: vidIndex.modIndex - 1,
                 chapterIndex: modulesCollection.items[vidIndex.modIndex - 1].chaptersCollection.items.length - 1
@@ -236,10 +237,10 @@ export default function Main({ title, modulesCollection }: {
                 </header>
                 <div className="flex-1 flex flex-col gap-1 items-center p-6 md:pt-10 lg:pt-6 max-md:pt-20 pb-10">
                     <span className="text-xl md:text-2xl lg:text-3xl p-2 rounded-md bg-prime/30 mb-3">{modulesCollection.items[vidIndex.modIndex].chaptersCollection.items[vidIndex.chapterIndex].title}</span>
-                    <div className="max-w-[1000px] w-full">
+                    <div className="max-w-[800px] w-full">
                         <NewPlayer ytId={modulesCollection.items[vidIndex.modIndex].chaptersCollection.items[vidIndex.chapterIndex].youtubeId} title={modulesCollection.items[vidIndex.modIndex].chaptersCollection.items[vidIndex.chapterIndex].title} />
                     </div>
-                    <div className='flex justify-between w-full max-w-[1000px]'>
+                    <div className='flex justify-between w-full max-w-[800px]'>
                         <Button onClick={() => prevVideo()} disabled={(vidIndex.modIndex == 0) && (vidIndex.chapterIndex == 0)} variant={"outline"}><ChevronLeft className='h-4 w-4' /> Prev</Button>
                         <Button disabled={vidIndex.chapterIndex ===
                             modulesCollection.items[modulesCollection.items.length - 1].chaptersCollection.items.length - 1 && vidIndex.modIndex === modulesCollection.items.length - 1} variant={"outline"}>Next <ChevronRight className='h-4 w-4' /></Button>

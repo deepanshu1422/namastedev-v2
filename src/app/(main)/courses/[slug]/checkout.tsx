@@ -35,6 +35,8 @@ import createPayments from "../../../../../actions/createPayments";
 
 export default function Checkout({ title, image, amount, currency, courseId }: { title: string, image: string; amount: number; currency: string, courseId: string }) {
 
+    const { data: session } = useSession()
+
     return (
         <div className="max-tab:hidden w-full h-fit sticky -translate-y-72 top-[26rem]">
             <div className="max-w-sm bg-gradient-to-b from-head to-second/20 rounded-2xl flex flex-col gap-4 relative max-tab:mx-auto ml-auto shadow-lg backdrop-blur-sm shadow-black/40 overflow-hidden">
@@ -45,7 +47,7 @@ export default function Checkout({ title, image, amount, currency, courseId }: {
                     className="bg-prime/20" />
                 <div className="flex flex-col gap-4 px-4 py-5">
                     <span className="uppercase text-white text-3xl sm:text-4xl font-bold flex gap-2 items-center">{currency} {amount}<span className="text-muted-foreground/70 italic text-2xl sm:text-3xl line-through">{amount * 4}</span></span>
-                    <PaymentSheet courseId={courseId} title={title} cover={image} amount={amount} curreny={currency} />
+                    {session?.user?.courseId.includes(courseId) ? <Link href={`/dashboard/course/${courseId}`}><Button size={"lg"} className="w-full font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Watch Now</Button></Link> : <PaymentSheet courseId={courseId} title={title} cover={image} amount={amount} curreny={currency} />}
                     <span className="flex gap-2 max-sm:text-sm items-center"><TicketPercent className="sm:w-6 sm:h-6 h-5 w-5" />Get Access to all Resources Now.</span>
                 </div>
             </div>

@@ -63,7 +63,7 @@ function CoursesFallback() {
 }
 
 function PurchasedFallback() {
-  return <div className='min-h-52 w-full md:grid-cols-2 lg:grid grid-cols-3 gap-4'>
+  return <div className='min-h-52 w-full sm:grid-cols-2 lg:grid grid-cols-3 gap-4'>
     <Skeleton className='min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60' />
     <Skeleton className='min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60' />
     <Skeleton className='min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60' />

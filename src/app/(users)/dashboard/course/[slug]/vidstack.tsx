@@ -17,6 +17,7 @@ export default function NewPlayer({ title, ytId }: { title: string, ytId: string
             viewType='video'
             streamType='on-demand'
             logLevel='warn'
+            autoPlay
             crossOrigin
             playsInline
             title={title}
@@ -24,12 +25,8 @@ export default function NewPlayer({ title, ytId }: { title: string, ytId: string
         >
             <MediaProvider>
                 <Poster className="vds-poster" />
-                {/* {textTracks.map(track => (
-            <Track {...track} key={track.src} />
-        ))} */}
             </MediaProvider>
             <DefaultVideoLayout
-                // thumbnails='https://files.vidstack.io/sprite-fight/thumbnails.vtt'
                 icons={defaultLayoutIcons}
             />
         </MediaPlayer>
