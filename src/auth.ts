@@ -42,10 +42,10 @@ export const {
             }
 
             // console.log(token);
-            
+
 
             if (trigger == "update" && token.newUser) {
-                // console.log("newUser");
+                console.log("newUser");
                 const updatedUser = await prisma.user.update({ where: { id: token?.id as string }, data: { name: session.name, contact: session.phone!, state: session.state! } })
                 return {
                     ...token,
@@ -60,11 +60,8 @@ export const {
                 }
             }
 
-            // After the payment is succesfull, will send a updateSession request from the user
-            // which will query the db, any revalidate the jwt token for the newly added
-            // courses and bundles to the user in the db
-
             if (trigger == "update") {
+                console.log("HIT2");
 
                 const user = await prisma.user.findUnique({ where: { email: token.email! } })
 
@@ -74,6 +71,11 @@ export const {
                     bundleId: user?.bundleId
                 }
             }
+
+            // After the payment is succesfull, will send a updateSession request from the user
+            // which will query the db, any revalidate the jwt token for the newly added
+            // courses and bundles to the user in the db
+            // console.log("HIT");
 
             return token
         },

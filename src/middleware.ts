@@ -7,6 +7,9 @@ export default auth((req) => {
     const AuthRoute = ["dashboard"].includes(nextUrl.pathname.split("/")[1])
     const isLogged = !!req.auth
 
+    // console.log(req.auth);
+    
+
         // console.log("NextUrl", nextUrl);
 
     if (AuthRoute) {

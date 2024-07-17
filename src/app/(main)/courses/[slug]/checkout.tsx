@@ -128,36 +128,38 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
             // make an endpoint to get this key
             const key = "rzp_test_tVOEQJx5p7XYeW";
 
-            // const data = await res?.json();
             if (res.error) {
-                // console.log(res?.message);
                 setIsLoading(false)
                 return;
             }
 
-            // console.log(res.data.orderId)
-
             setFormState(0)
-            setOpen(false)
-            setFormData({
-                name: session?.user?.name ?? "",
-                email: session?.user?.email ?? "",
-                phone: "",
-                state: ""
-            })
 
             const options = {
                 key: key,
-                name: formData.email,
+                description: "Test Transaction",
+                image: "/icon.png",
+                name: "30DaysCoding",
                 currency: res.data.currency,
                 amount: res.data.amount,
                 order_id: res.data.orderId,
                 callback_url: '/dashboard',
+
+                prefill: {
+                    name: formData.name,
+                    email: formData.email,
+                    contact: formData.phone
+                },
+                notes: {
+                    "address": "30DC Corporate Office"
+                },
+                theme: {
+                    "color": "#134543"
+                }
             };
 
             // @ts-ignore
             const paymentObject = new window.Razorpay(options);
-            paymentObject.open();
 
             paymentObject.on("payment.failed", function (response: any) {
                 // console.log(response.error);
@@ -169,7 +171,17 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
                 setIsLoading(false);
             });
 
+            paymentObject.open();
+
+
             setIsLoading(false);
+            setOpen(false)
+            setFormData({
+                name: session?.user?.name ?? "",
+                email: session?.user?.email ?? "",
+                phone: "",
+                state: ""
+            })
 
         } catch (error) {
             setIsLoading(false);

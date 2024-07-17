@@ -9,9 +9,16 @@ import React from 'react'
 export default async function Purchased() {
 
     const session = await auth()
-    const courses = await prisma.user.findUnique({ where: { email: session?.user?.email ?? "" }, select: { courseId: true } })
 
-    const query = `query { courseCollection(where: {courseId: \"${courses?.courseId}\"},limit:1){ items{ courseId, title, longDescription, courseImage{ description, url, width, height, }, } } }`
+    const courseCollection = JSON.stringify(session?.user?.courseId.map((e: string) => ({ courseId: e })))
+
+    const json = courseCollection.replace(/"([^"]+)":/g, '$1:')
+
+    // const courseCollection =session?.user?.courseId?.map((e) => ({courseId: e}))
+
+    const query = `query { courseCollection(where: {OR: ${json}}){ items{ courseId, title, longDescription, courseImage{ description, url, width, height, }, } } }`
+
+    console.log(query)
 
     const data = await (await fetch(`https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`, {
         method: "POST",
@@ -24,7 +31,7 @@ export default async function Purchased() {
 
     const { data: { courseCollection: { items } } } = data
 
-    return (items.length > 0 ? <div className='min-h-52 w-full grid grid-cols-3 gap-4'>
+    return (items.length > 0 ? <div className='min-h-52 w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4'>
         {/* <p className='break-all'>{JSON.stringify(items)}</p> */}
         {items.map((e: any, i: number) => <CourseCard key={i} e={e} />)}
     </div> : <div className='min-h-60 w-full flex'><Badge className="text-white gap-1 bg-second/60 hover:bg-second/80 rounded m-auto text-base">No Purchased Courses</Badge></div>
@@ -39,9 +46,11 @@ function CourseCard({ e }: { e: any }) {
                 {/* <Image src={"/logo.png"} alt={"30DC Logo"} height={40} width={40} /> */}
             </div>
             <h3 className='font-semibold text-lg'>{e.title}</h3>
-            <Badge className='text-white w-fit bg-prime/40 hover:bg-prime/60 rounded'>Progress</Badge>
-            <Progress value={30} className='h-1 bg-bg' />
-            <span className='text-xs text-muted-foreground pt-3'>Last Updated: {(new Date()).toLocaleDateString()}</span>
+            <div className='flex flex-col gap-3 mt-auto'>
+                <Badge className='text-white w-fit bg-prime/40 hover:bg-prime/60 rounded'>Progress</Badge>
+                <Progress value={30} className='h-1 bg-bg' />
+                <span className='text-xs text-muted-foreground pt-3'>Last Updated: {(new Date()).toLocaleDateString()}</span>
+            </div>
         </Link>
     )
 }

@@ -2,7 +2,7 @@ import { auth } from '@/auth';
 import { Button } from '@/components/ui/button';
 import { Metadata } from 'next';
 import React, { Suspense } from 'react'
-import Session from './session';
+import Session, { UpdateCourses } from './session';
 import Courses from './courses';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
@@ -42,7 +42,10 @@ export default function Dashboard() {
         <Suspense fallback={<CoursesFallback />}>
           <Courses />
         </Suspense>
-        <span className='text-xl text-white/70 font-bold'>Purchased Courses</span>
+        <div className='flex justify-between py-3'>
+          <span className='text-xl text-white/70 font-bold'>Purchased Courses</span>
+          <UpdateCourses />
+        </div>
         <Suspense fallback={<PurchasedFallback />}>
           <Purchased />
         </Suspense>
@@ -60,7 +63,7 @@ function CoursesFallback() {
 }
 
 function PurchasedFallback() {
-  return <div className='min-h-52 w-full grid grid-cols-3 gap-4'>
+  return <div className='min-h-52 w-full md:grid-cols-2 lg:grid grid-cols-3 gap-4'>
     <Skeleton className='min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60' />
     <Skeleton className='min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60' />
     <Skeleton className='min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60' />

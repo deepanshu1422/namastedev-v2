@@ -17,3 +17,9 @@ export default function Session() {
         </div>
     )
 }
+
+export function UpdateCourses() {
+    const { update } = useSession()
+
+    return (<Button onClick={() => update({helo: true})} size={"sm"} className='bg-prime/70 hover:bg-prime/70 text-white' >Revalidate</Button>)
+}

@@ -35,3 +35,12 @@ export function verifyHeaderSignatureClerk(body: string, receivedSignature: stri
         Buffer.from(receivedSignature)
     );
 }
+
+export function createSignedHeader(body: Record<string, string | number>, secretKey: string) {
+    const bodyString = JSON.stringify(body);
+    const hash = crypto.createHmac('sha256', secretKey)
+        .update(bodyString)
+        .digest('hex');
+
+    return hash;
+}
