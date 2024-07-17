@@ -4,7 +4,7 @@ import { headers } from "next/headers"
 
 export default async function createPayments({ courseId, email }: { courseId: string, email: string }) {
     // console.log(courseId, email);
-    
+
     const data: Response = await (await fetch("https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/purchase/course", {
         method: "POST",
         headers: {
@@ -19,6 +19,7 @@ export default async function createPayments({ courseId, email }: { courseId: st
         },)
     })).json()
 
+    console.log(data);
     return data
 }
 

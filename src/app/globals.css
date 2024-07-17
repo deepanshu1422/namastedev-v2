@@ -169,3 +169,6 @@
 .blob{
   border-radius: 60% 40% 10% 90% / 50% 82% 18% 50% ;
 }
+.ypt-button{
+  display: none;
+}
