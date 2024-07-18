@@ -34,7 +34,7 @@ export default function Hero({
                             <div className="bg-red-700/40 p-1 rounded-full animate-pulse" >
                                 <div className="bg-red-500 h-2.5 w-2.5 rounded-full"></div>
                             </div>
-                            <span className="uppercase font-semibold tracking-wide">Live Webinar</span>
+                            <span className="uppercase font-semibold tracking-wide">Live Cohort</span>
                         </div>
                         <h1
                             className={`tab:max-w-xl max-tab:max-w-2xl font-jakarta phone:text-[3.5rem] text-[2.5rem] font-extrabold bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight max-tab:px-11 max-phone:px-6`}
@@ -59,7 +59,7 @@ function AspectRatioDemo() {
             <Link href={"https://nas.io/30dc-challenges-n-hackathons"} target="_blank" className="p-9 py-12 max-w-lg bg-gradient-to-b from-head to-second/20 rounded-md flex flex-col gap-4 sm:gap-7 relative max-tab:mx-auto ml-auto shadow-lg">
                 <section className="flex justify-between">
                     <div className="flex flex-col">
-                        <span className="uppercase text-white/60 sm:text-lg font-semibold">webinar price</span>
+                        <span className="uppercase text-white/60 sm:text-lg font-semibold">live cohort price</span>
                         <span className="uppercase text-white text-3xl sm:text-5xl font-bold flex gap-2 items-center">$799<span className="text-muted-foreground/70 italic text-2xl sm:text-3xl line-through">$1,500</span></span>
                     </div>
                     <Image alt="30DayCoding New Challenge"

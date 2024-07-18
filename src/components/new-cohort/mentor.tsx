@@ -1,8 +1,6 @@
 import Image from "next/image";
-import Reveal from "../framer/reveal";
 import Link from "next/link";
 import HoverInfo from "../hover-info";
-import AnimatedButton from "../animated-button";
 
 function Profile({
   name,
@@ -13,15 +11,15 @@ function Profile({
   desc,
 }: {
   name: string;
-  company: { name: string; path: string }[];
+  company?: { name: string; path: string }[];
   link: string;
   profile: string;
   position: string;
-  desc: string;
+  desc?: string;
 }) {
   return (
-    <div className="mx-auto flex flex-col rounded-2xl text-center justify-between bg-second relative z-[1] phone:h-[700px] w-72 max-sm:w-full max-sm:max-w-96">
-      <div className="top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[2] absolute p-2 bg-gradient-to-t from-prime/80 to-second/80 rounded-full">
+    <div className="shrink-0 flex flex-col rounded-2xl text-center justify-between bg-second relative z-[1] w-72">
+      <div className="top-8 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[2] absolute p-2 bg-gradient-to-t from-prime/80 to-second/80 rounded-full">
         <div className="h-36 w-36 overflow-hidden rounded-full flex items-center justify-center">
           <Image
             src={profile}
@@ -31,7 +29,7 @@ function Profile({
           />
         </div>
       </div>
-      <div className="flex flex-col items-center justify-between pt-24 h-full">
+      <div className="flex flex-col items-center justify-between pt-36 h-full">
         <div className="flex flex-1 flex-col">
           <div className="flex flex-col items-center gap-2">
             <span className="font-semibold text-xl">{name}</span>
@@ -39,7 +37,7 @@ function Profile({
               {position}
             </span>
             <div className="flex gap-3 py-2">
-              {company.map(({ name, path }, i) => (
+              {company?.length && company.map(({ name, path }, i) => (
                 <HoverInfo key={i} info={name}>
                   <Image
                     className="rounded-md"
@@ -53,10 +51,10 @@ function Profile({
             </div>
           </div>
 
-          <p className="text-base p-6 max-lg:text-left">{desc}</p>
+          {/* <p className="text-base p-6 max-lg:text-left">{desc}</p> */}
         </div>
       </div>
-      <Link className="mx-auto mb-6" href={link}>
+      <Link className="mx-auto p-2 pb-5" href={link}>
         <svg
           className="h-6 w-6 fill-white stroke-white my-3"
           xmlns="http://www.w3.org/2000/svg"
@@ -70,114 +68,124 @@ function Profile({
 }
 
 export default function Mentor() {
+
+  const mentors: {
+    name: string;
+    company?: { name: string; path: string }[];
+    link: string;
+    profile: string;
+    position: string;
+    desc?: string;
+  }[] = [
+      {
+        name: "Deepanshu Udhwani",
+        profile: "https://i.ibb.co/8mFwp1C/instructor2.jpg",
+        position: "Founder",
+        link: "https://www.linkedin.com/in/deepanshu-udhwani/",
+        company:
+          [
+            { name: "MakeMyTrip", path: "/makemytrip_logo.jfif" },
+            { name: "Alibaba Cloud", path: "/alibaba.jfif" },
+            { name: "Thapar Institute of Engineering", path: "/thapar.jfif" },
+          ]
+      },
+      {
+        name: "Aryan Singh",
+        profile: "https://i.ibb.co/YRBGz7v/instructor.jpg",
+        position: "SDE @Google",
+        link: "https://www.linkedin.com/in/singh1aryan/",
+        company:
+          [
+            { name: "Google", path: "/company3.png" },
+            { name: "Arrow Electronics", path: "/arrow_logo.jfif" },
+            {
+              name: "Massachusetts Amherst",
+              path: "/umassamherst_logo.jfif",
+            },
+          ]
+      }, {
+        name: "Abhinav Awasthi",
+        profile: "https://i.ibb.co/GHMvNkm/instructor3.jpg",
+        position: "SDE @Zeta",
+        link: "https://www.linkedin.com/in/abhinavawasthi1/",
+        company: [
+          { name: "Zeta", path: "/zetasuite_logo.jfif" },
+          { name: "Linedin", path: "/linkedin_logo.jfif" },
+          {
+            name: "Harcourt Butler Technology University",
+            path: "/harcourt_butler_tech_uni.jfif",
+          },
+        ]
+      },
+      {
+        name: "Anand Singh",
+        profile: "https://i.ibb.co/gRbb7Zq/mentor3.jpg",
+        position: "SDE@Walmart",
+        link: "https://www.linkedin.com/in/anand-singh2410/",
+        company:
+          [
+            { name: "DBS", path: "/dbs.jpg" },
+            { name: "Walmart Global IN", path: "/walmart.jpg" },
+            { name: "Thapar Institute of Engineering", path: "/thapar.jfif" },
+          ]
+      },
+      {
+        name: "Kshitiz Khosla",
+        profile: "https://i.ibb.co/sW80P1p/mentor4.jpg",
+        position: "SDE@Arcesium",
+        link: "https://www.linkedin.com/in/kshitizkhosla/",
+        company:
+          [
+            { name: "Arcesium", path: "/arcesium.jpg" },
+            { name: "Amazon", path: "/amazon.jpg" },
+            { name: "Birla Institute of Technology and Science, Pilani", path: "/bits.jpg" },
+          ]
+      },
+      {
+        name: "Dhanush Kamath",
+        profile: "https://i.ibb.co/zPbLFjd/mentor5.jpg",
+        position: "SDE",
+        link: "https://www.linkedin.com/in/dhanushkamaths/",
+      },
+      {
+        name: "Rakshit Raj",
+        profile: "https://i.ibb.co/12yjQqS/mentor6.jpg",
+        position: "SDE",
+        link: "https://www.linkedin.com/in/rakshit-raj/",
+      }
+    ]
   return (
-    <div className="m-auto flex flex-col items-center justify-center lg:pt-0 p-6 lg:p-10 gap-10 max-w-[90rem]">
+    <div className="m-auto flex flex-col items-center justify-center p-6 lg:p-10 gap-10 max-w-[80rem]">
       {/* Heading */}
-      <div className="lg:hidden flex flex-col gap-5 text-center max-w-2xl mx-auto px-5">
-        <Reveal>
-          <span className="text-4xl font-bold text-center">
-            Faculty and Experts from <span className="text-prime">FAANG</span>{" "}
-            and Big tech
+      <div className="flex flex-col gap-5 text-center max-w-2xl mx-auto px-5">
+
+        <span className="text-4xl font-bold text-center">
+          Faculty and Experts from <span className="text-prime">FAANG</span>{" "}
+          and Big tech
+        </span>
+
+        <p className="text-lg text-center">
+          From the Software Engineers of{" "}
+          <span className="font-semibold text-prime px-1 text-xl">
+            Google
+          </span>{" "}
+          and
+          <span className="font-semibold text-prime px-1 text-xl">
+            Alibaba Cloud
           </span>
-        </Reveal>
-        <Reveal>
-          <p className="text-lg text-center">
-            From the Software Engineers of{" "}
-            <span className="font-semibold text-prime px-1 text-xl">
-              Google
-            </span>{" "}
-            and
-            <span className="font-semibold text-prime px-1 text-xl">
-              Alibaba Cloud
-            </span>
-          </p>
-        </Reveal>
+        </p>
       </div>
 
-      <div className="flex max-sm:flex-col items-center max-sm:gap-28 max-lg:gap-20 sm:h-full gap-7 justify-evenly pt-24">
-        <Reveal>
-          <Profile
-            name="Aryan Singh"
-            profile="https://i.ibb.co/YRBGz7v/instructor.jpg"
-            position="SDE @Google"
-            link="https://www.linkedin.com/in/singh1aryan/"
-            company={[
-              { name: "Google", path: "/company3.png" },
-              { name: "Arrow Electronics", path: "/arrow_logo.jfif" },
-              {
-                name: "Massachusetts Amherst",
-                path: "/umassamherst_logo.jfif",
-              },
-            ]}
-            desc="Our lead mentor Aryan Singh, a visionary software engineer at Google, leads 30 Days Coding with a resilience hardly seen before. With roles in tech giants and projects like Blocktrain and DSA Revision, Aryan combines professional expertise with a passion for mentoring. His zeal to impart guidance to people stuck in the 'How do I brush my technical skills for this job?' phase, has led to him joining hands with Deepanshu Udhwani, resulting in the birth of 30 Days Coding."
-          />
-        </Reveal>
-        {/* <Reveal>
-          <Profile
-            name="Abhinav Awasthi"
-            profile="https://i.ibb.co/GHMvNkm/instructor3.jpg"
-            position="SDE @Zeta"
-            link="https://www.linkedin.com/in/abhinavawasthi1/"
-            company={[
-              { name: "Zeta", path: "/zetasuite_logo.jfif" },
-              { name: "Linedin", path: "/linkedin_logo.jfif" },
-              {
-                name: "Harcourt Butler Technology University",
-                path: "/harcourt_butler_tech_uni.jfif",
-              },
-            ]}
-            desc="One of our valuable Abhinav Awasthi, uprising software engineer currently at Zeta, contributing to 30 Days Coding expecially DSA. Having professional expertise with a passion for mentoring keeps him driven."
-          />
-        </Reveal> */}
-        <div className="max-lg:hidden flex flex-col gap-5 items-center text-center max-w-xl px-6">
-          <Reveal>
-            <span className="text-4xl font-bold">
-              Faculty and Experts from <span className="text-prime">FAANG</span>{" "}
-              and Big tech
-            </span>
-          </Reveal>
-          <Reveal>
-            <p className="text-lg">
-              From the Software Engineers of{" "}
-              <span className="font-semibold text-prime px-1 text-xl">
-                Google
-              </span>{" "}
-              and
-              <span className="font-semibold text-prime px-1 text-xl">
-                Alibaba Cloud
-              </span>
-            </p>
-          </Reveal>
-          {/* <div className="py-2" />
-          <Reveal>
-            <AnimatedButton link="/mentorship">
-              Join 1:1 Mentorship
-            </AnimatedButton>
-          </Reveal> */}
-        </div>
-        <Reveal>
-          <Profile
-            name="Deepanshu Udhwani"
-            profile="https://i.ibb.co/8mFwp1C/instructor2.jpg"
-            position="Founder"
-            link="https://www.linkedin.com/in/deepanshu-udhwani/"
-            company={[
-              { name: "MakeMyTrip", path: "/makemytrip_logo.jfif" },
-              { name: "Alibaba Cloud", path: "/alibaba.jfif" },
-              { name: "Thapar Institute of Engineering", path: "/thapar.jfif" },
-            ]}
-            desc="Deepanshu Udhwani, drawing from experience at MakeMyTrip, Alibaba Cloud, and various startups, founded 30 Days Coding to solve a simple problem faced by engineers across the globe - 'How do I prepare for this interview?' With a background in Computer Science and Marketing, he knows the exact composition of techical and non-technical aspects required for getting to your dream job."
-          />
-        </Reveal>
+      <div className="flex flex-wrap justify-center h-full w-full gap-3 max-sm:gap-7 pt-12">
+        {mentors.map(({ company, link, name, position, profile }, i) => (<Profile
+          key={i}
+          name={name}
+          profile={profile}
+          position={position}
+          link={link}
+          company={company}
+        />))}
       </div>
-
-      {/* <div className="lg:hidden">
-        <Reveal>
-          <AnimatedButton type="ext" link="/mentorship">
-            Join 1:1 Mentorship
-          </AnimatedButton>
-        </Reveal>
-      </div> */}
     </div>
   );
 }

@@ -100,7 +100,7 @@ export default function Store() {
   return (
     <div className="grid place-items-center gap-8 max-w-[90rem] m-auto py-8">
         <span className="text-prime font-semibold uppercase">Courses</span>
-      <div className="flex w-full max-lg:flex-col lg:gap-6 max-lg:items-center max-lg:gap-10 max-lg:max-w-[550px] max-lg:px-0 lg:max-w-[925px]">
+      <div className="flex w-full max-lg:flex-col lg:gap-6 max-lg:items-center max-lg:gap-10 max-lg:px-0 lg:max-w-[925px]">
         <CourseTabMenu
           data={[
             {

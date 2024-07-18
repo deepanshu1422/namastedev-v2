@@ -28,7 +28,7 @@ export function CourseTabMenu({
       defaultValue="chapter1"
       className="flex shrink-0 max-lg:flex-col gap-2"
     >
-      <TabsList className="text-muted-foreground lg:grid lg:place-items-start flex flex-wrap justify-center gap-3 h-fit">
+      <TabsList className="max-lg:max-w-[550px] mx-auto text-muted-foreground lg:grid lg:place-items-start flex flex-wrap justify-center gap-3 h-fit">
         {data.map(({ title }, i) => (
           <Reveal key={i}>
             <NewTabsTrigger key={i} value={`chapter${i + 1}`}>
@@ -43,11 +43,11 @@ export function CourseTabMenu({
         {data.map(({ courses }, i) => (
           <TabsContent
             key={i}
-            className="max-w-96 w-full px-4"
+            className="max-w-[700px] lg:max-w-96 w-full px-4"
             value={`chapter${i + 1}`}
           >
             <Reveal>
-              <div className="grid lg:grid-rows-2 lg:grid-flow-col max-lg:grid-cols-1 gap-4 max-lg:gap-8 max-lg:place-items-center lg:w-[640px] overflow-x-scroll horizontal-scroll p-2">
+              <div className="grid lg:grid-rows-2 lg:grid-flow-col max-lg:grid-cols-2 max-phone:grid-cols-1 gap-4 max-lg:gap-8 max-lg:place-items-center lg:w-[640px] overflow-x-scroll horizontal-scroll p-2">
                 {courses.map(({ title, imgSrc, link }, index) => (
                   <Link
                     key={index}
