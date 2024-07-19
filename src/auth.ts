@@ -45,7 +45,7 @@ export const {
 
 
             if (trigger == "update" && token.newUser) {
-                console.log("newUser");
+                // console.log("newUser");
                 const updatedUser = await prisma.user.update({ where: { id: token?.id as string }, data: { name: session.name, contact: session.phone!, state: session.state! } })
                 return {
                     ...token,
@@ -61,7 +61,7 @@ export const {
             }
 
             if (trigger == "update") {
-                console.log("HIT2");
+                // console.log("HIT2");
 
                 const user = await prisma.user.findUnique({ where: { email: token.email! } })
 

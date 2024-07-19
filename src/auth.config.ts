@@ -7,6 +7,6 @@ import type { NextAuthConfig } from "next-auth"
 export default {
     // debug: true,
     providers: [Google({ allowDangerousEmailAccountLinking: true }), Resend({
-        from: "no-reply@mail.thequotesgram.com"
+        from: "no-reply@30dayscoding.com"
     })]
 } as NextAuthConfig;

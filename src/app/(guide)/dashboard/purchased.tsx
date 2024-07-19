@@ -6,19 +6,20 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
+const dynamic = 'force-dynamic'
+
 export default async function Purchased() {
 
     const session = await auth()
 
-    const courseCollection = JSON.stringify(session?.user?.courseId.map((e: string) => ({ courseId: e })))
+    if (session?.user?.courseId?.length == 0 || session?.user?.courseId?.length == undefined) return <div className='min-h-60 w-full flex'><Badge className="text-white gap-1 bg-second/60 hover:bg-second/80 rounded m-auto text-base">No Purchased Courses</Badge></div>
 
-    const json = courseCollection.replace(/"([^"]+)":/g, '$1:')
+    // @ts-ignore
+    const json = JSON.stringify(session?.user?.courseId.map((e: string) => ({ courseId: e }))).replace(/"([^"]+)":/g, '$1:')
 
     // const courseCollection =session?.user?.courseId?.map((e) => ({courseId: e}))
 
     const query = `query { courseCollection(where: {OR: ${json}}){ items{ courseId, title, longDescription, courseImage{ description, url, width, height, }, } } }`
-
-    console.log(query)
 
     const data = await (await fetch(`https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`, {
         method: "POST",
@@ -26,15 +27,16 @@ export default async function Purchased() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
         },
+        cache:  "no-cache",
+        next: {tags: ["courses"]},
         body: JSON.stringify({ query }),
     })).json()
 
     const { data: { courseCollection: { items } } } = data
 
-    return (items.length > 0 ? <div className='min-h-52 w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4'>
-        {/* <p className='break-all'>{JSON.stringify(items)}</p> */}
+    return (<div className='min-h-52 w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4'>
         {items.map((e: any, i: number) => <CourseCard key={i} e={e} />)}
-    </div> : <div className='min-h-60 w-full flex'><Badge className="text-white gap-1 bg-second/60 hover:bg-second/80 rounded m-auto text-base">No Purchased Courses</Badge></div>
+    </div>
     )
 }
 

@@ -14238,6 +14238,8 @@ export const searchProblems = [
 
 export const modalState = atom(false)
 
+export const authModalState = atom(false)
+
 export const languageMap = [
     {
         name: "c",

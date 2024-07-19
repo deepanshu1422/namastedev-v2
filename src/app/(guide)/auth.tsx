@@ -22,9 +22,11 @@ import Image from "next/image";
 import { Mail } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { signIn } from "next-auth/react";
+import { useAtom } from "jotai";
+import { authModalState } from "@/lib/jotai";
 
 export function AuthDialog({ children }: { children: React.ReactNode }) {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useAtom(authModalState)
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>

@@ -1,10 +1,11 @@
 import React, { cache } from 'react'
 import { courses } from '@/util/constants'
 import { Metadata, ResolvingMetadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Hero from './hero';
 import Details from './details';
 import { getContentfulData } from '@/lib/cotentful';
+import { revalidateTag } from 'next/cache';
 
 export type Courses = {
     courseCollection: {
@@ -174,9 +175,7 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
             Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
         },
         body: JSON.stringify({ query }),
-        next: {
-            revalidate: 3600,
-        },
+        cache: "force-cache",
     })
 
     const data = await fetchedData.json()
@@ -194,6 +193,12 @@ export default async function Home({ params: { slug } }: PageProps) {
 
     const { courseCreator, courseImage, longDescription, modulesCollection, pricingsCollection, title, courseId } = items[0]
 
+    async function refreshCourses() {
+        'use server'
+        revalidateTag('courses') // Update cached posts
+        redirect(`/dashboard`)
+    }
+
     return (
         <main className='min-h-svh overflow-clip'>
             <Hero
@@ -207,6 +212,7 @@ export default async function Home({ params: { slug } }: PageProps) {
                 currency={"INR"}
             />
             <Details
+                refreshCourses={refreshCourses}
                 title={title}
                 description={longDescription}
                 image={items[0].courseImage.url}

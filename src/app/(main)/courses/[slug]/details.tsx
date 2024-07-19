@@ -25,7 +25,7 @@ type Module = {
     }[];
 }
 
-export default function Details({ title, description, image, amount, currency, module, courseId }: { title: string, description: string, image: string, amount: number; currency: string; module: Module, courseId: string }) {
+export default function Details({ title, description, image, amount, currency, module, courseId, refreshCourses }: { title: string, description: string, image: string, amount: number; currency: string; module: Module, courseId: string; refreshCourses: () => void }) {
 
     const lessons = module.items.reduce((accumulator, currentValue) => accumulator + currentValue.chaptersCollection.total, 0);
 
@@ -73,7 +73,7 @@ export default function Details({ title, description, image, amount, currency, m
                 <Reviews />
             </div>
 
-            <Checkout title={title} courseId={courseId} amount={amount} currency={currency} image={image} />
+            <Checkout refreshCourses={refreshCourses} title={title} courseId={courseId} amount={amount} currency={currency} image={image} />
         </div>
     )
 }

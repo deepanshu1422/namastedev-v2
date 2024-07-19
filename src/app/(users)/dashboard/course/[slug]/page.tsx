@@ -17,6 +17,12 @@ export type Courses = {
       courseCreator: {
         name: string
       },
+      courseImage:{
+        url: string,
+        width: number,
+        height: number,
+        description: string
+    }
       modulesCollection: {
         total: number,
         items: {
@@ -26,6 +32,7 @@ export type Courses = {
             total: number,
             items: [
               {
+                public: boolean,
                 title: string,
                 duration: string,
                 youtubeId: string
@@ -115,8 +122,15 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
         items{
         courseId,
         title,
+        slug,
         courseCreator{
             name,
+        },
+        courseImage{
+            url,
+            width,
+            height,
+            description
         },
         modulesCollection{
             total,
@@ -126,12 +140,13 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
                 chaptersCollection{
                 total,
                 items{
-                title,
-                duration,
-                youtubeId,
-                videoLink
-                    }
-                }
+                  title,
+                  duration,
+                  youtubeId,
+                  videoLink
+                  public
+                  }
+                  }
                     }
                 }
             }
@@ -145,9 +160,7 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
       Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
     },
     body: JSON.stringify({ query }),
-    next: {
-      revalidate: 3600,
-    },
+    cache: "no-cache"
   })
 
   const data = await fetchedData.json()
@@ -163,12 +176,12 @@ export default async function Home({ params: { slug } }: PageProps) {
 
   const { courseCollection: { items } } = data
 
-  const { modulesCollection, title, courseId } = items[0]
+  const { modulesCollection, title, slug: courseSlug, courseId, courseImage } = items[0]
 
   return (
     <main className='min-h-svh overflow-clip'>
       <div className="grid min-h-screen w-full md:grid-cols-[180px_1fr] lg:grid-cols-[280px_1fr]">
-        <Main modulesCollection={modulesCollection} title={title} />
+        <Main modulesCollection={modulesCollection} slug={courseSlug} courseId={courseId} courseImage={courseImage} title={title} />
       </div>
     </main>
   )

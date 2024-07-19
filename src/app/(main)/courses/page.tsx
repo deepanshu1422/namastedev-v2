@@ -67,8 +67,9 @@ async function getCourses(): Promise<CoursesType> {
             Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
         },
         body: JSON.stringify({ query }),
+        cache: "force-cache",
         next: {
-            revalidate: 3600,
+            revalidate: 3600 * 60,
         },
     })
 

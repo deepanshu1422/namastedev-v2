@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { TicketPercent } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -31,9 +31,24 @@ import {
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import createPayments from "../../../../../actions/createPayments";
-// import managePayment from "../../../../../actions/payment";
+import { authModalState } from "@/lib/jotai";
+import { useAtom } from "jotai";
 
-export default function Checkout({ title, image, amount, currency, courseId }: { title: string, image: string; amount: number; currency: string, courseId: string }) {
+import {
+    Dialog,
+    DialogContent,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
+
+export default function Checkout({ title, image, amount, currency, courseId, refreshCourses }: { title: string, image: string; amount: number; currency: string, courseId: string; refreshCourses: () => void }) {
 
     const { data: session } = useSession()
 
@@ -47,7 +62,7 @@ export default function Checkout({ title, image, amount, currency, courseId }: {
                     className="bg-prime/20" />
                 <div className="flex flex-col gap-4 px-4 py-5">
                     <span className="uppercase text-white text-3xl sm:text-4xl font-bold flex gap-2 items-center">{currency} {amount}<span className="text-muted-foreground/70 italic text-2xl sm:text-3xl line-through">{amount * 4}</span></span>
-                    {session?.user?.courseId.includes(courseId) ? <Link href={`/dashboard/course/${courseId}`}><Button size={"lg"} className="w-full font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Watch Now</Button></Link> : <PaymentSheet courseId={courseId} title={title} cover={image} amount={amount} curreny={currency} />}
+                    {session?.user?.courseId?.includes(courseId) ? <Link href={`/dashboard/course/${courseId}`}><Button size={"lg"} className="w-full font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Watch Now</Button></Link> : <PaymentSheet refreshCourses={refreshCourses} courseId={courseId} title={title} cover={image} amount={amount} curreny={currency} />}
                     <span className="flex gap-2 max-sm:text-sm items-center"><TicketPercent className="sm:w-6 sm:h-6 h-5 w-5" />Get Access to all Resources Now.</span>
                 </div>
             </div>
@@ -55,7 +70,7 @@ export default function Checkout({ title, image, amount, currency, courseId }: {
     )
 }
 
-export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cover: string, title: string, amount: number, curreny: string, courseId: string }) {
+export function PaymentSheet({ cover, title, amount, curreny, courseId, refreshCourses }: { cover: string, title: string, amount: number, curreny: string, courseId: string; refreshCourses: () => void }) {
 
     const { data: session, update } = useSession()
 
@@ -93,11 +108,16 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
     const [formData, setFormData] = useState({
         name: session?.user?.name ?? "",
         email: session?.user?.email ?? "",
-        phone: "",
-        state: ""
+        // @ts-ignore
+        phone: session?.user?.phone ?? "",
+        // @ts-ignore
+        state: session?.user?.state ?? ""
     })
 
     const [open, setOpen] = useState(false)
+    const [openAuth, setOpenAuth] = useAtom(authModalState)
+    const [openPay, setOpenPay] = useState(false)
+
     const [isLoading, setIsLoading] = useState(false)
 
     function validationError({ message }: { message: string }) {
@@ -114,14 +134,15 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
         try {
             setIsLoading(true);
 
-            // console.log(courseId)
-
             let res;
 
             if (courseId) {
                 res = await createPayments({
                     courseId: courseId,
-                    email: formData.email
+                    email: session?.user?.email ?? formData.email,
+                    contact: formData.phone,
+                    name: session?.user?.name ?? formData.name,
+                    state: formData.state
                 })
             }
             else {
@@ -131,7 +152,12 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
             const key = "rzp_test_tVOEQJx5p7XYeW";
 
             if (res.error) {
+                toast("Error Occured", {
+                    position: "bottom-center",
+                    description: res.message ?? JSON.stringify(res.error),
+                })
                 setIsLoading(false)
+                setOpen(false)
                 return;
             }
 
@@ -145,8 +171,11 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
                 currency: res.data.currency,
                 amount: res.data.amount,
                 order_id: res.data.orderId,
-                callback_url: '/dashboard',
-
+                handler: async function (response: any) {
+                    setOpenPay(true)
+                    await update({ courses: true })
+                    if (session?.user?.id) await refreshCourses()
+                },
                 prefill: {
                     name: formData.name,
                     email: formData.email,
@@ -163,10 +192,15 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
             // @ts-ignore
             const paymentObject = new window.Razorpay(options);
 
-            paymentObject.on("payment.failed", function (response: any) {
-                // console.log(response.error);
-                setIsLoading(false);
-            });
+            paymentObject.on('payment.failed', function (response: any) {
+                console.log(response.error.code)
+                console.log(response.error.description)
+                console.log(response.error.source)
+                console.log(response.error.step)
+                console.log(response.error.reason)
+                console.log(response.error.metadata.order_id)
+                console.log(response.error.metadata.payment_id)
+            })
 
             paymentObject.on("payment.captured", function (response: any) {
                 alert("Payment successful");
@@ -174,7 +208,6 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
             });
 
             paymentObject.open();
-
 
             setIsLoading(false);
             setOpen(false)
@@ -187,14 +220,12 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
 
         } catch (error) {
             setIsLoading(false);
-            // console.log(error);
         }
-        // setIsLoading(true);
     };
 
     const [formState, setFormState] = useState(0)
 
-    const order = [
+    const orderPage = [
         {
             title: "Order Details",
             body: <div className="flex flex-col gap-5">
@@ -273,24 +304,40 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId }: { cove
     ]
 
     return (
-        <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-                <Button size={"lg"} className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Buy Now</Button>
-            </SheetTrigger>
-            <SheetContent className="h-full w-full flex flex-col">
-                <SheetHeader>
-                    <SheetTitle>{order[formState].title}</SheetTitle>
-                    <SheetDescription>
-                        {/* Make changes to your profile here. Click save when you're done. */}
-                    </SheetDescription>
-                </SheetHeader>
-                {order[formState].body}
-                {order[formState].footer}
-                {/* <SheetFooter className="mt-auto">
-                    <SheetClose asChild>
-                    </SheetClose>
-                </SheetFooter> */}
-            </SheetContent>
-        </Sheet>
+        <>
+            <Sheet open={open} onOpenChange={setOpen}>
+                <SheetTrigger asChild>
+                    <Button size={"lg"} className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Buy Now</Button>
+                </SheetTrigger>
+                <SheetContent className="h-full w-full flex flex-col">
+                    <SheetHeader>
+                        <SheetTitle>{orderPage[formState].title}</SheetTitle>
+                    </SheetHeader>
+                    {orderPage[formState].body}
+                    {orderPage[formState].footer}
+                </SheetContent>
+            </Sheet>
+            <PaymentModal payModal={openPay} />
+        </>
     )
+}
+
+function PaymentModal({ payModal }: { payModal: boolean }) {
+    const { data, status } = useSession()
+    return <Dialog open={payModal} >
+        <DialogContent className="sm:max-w-[425px]">
+            <Card className="bg-background border-none flex flex-col">
+                <CardHeader className="p-1 items-center">
+                    <span className="flex items-center gap-2">
+                        <Image src={"/icon.png"} alt="30dc icon" height={40} width={40} />
+                        <CardTitle>30DC</CardTitle>
+                    </span>
+                    <CardDescription className="text-center">Thank you for trusting in us. Team 30DC</CardDescription>
+                </CardHeader>
+                <CardContent className="pt-3 pb-0 mx-auto w-full">
+                    <Link href={"/dashboard"}><Button disabled={status === "loading"} className="w-full bg-prime/70 text-white hover:bg-prime">{status === "loading" ? "Adding Course..." : "Visit Dashboard"}</Button></Link>
+                </CardContent>
+            </Card>
+        </DialogContent>
+    </Dialog>
 }
