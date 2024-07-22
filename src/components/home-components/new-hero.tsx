@@ -69,11 +69,11 @@ export default function Hero({
             {desc}
           </p>
 
-          <ul className="grid gap-2 tab:grid-cols-2 list-inside list-disc max-tab:px-11 max-phone:px-6 text-lg">
+          <ul className="grid gap-2 tab:grid-cols-2 list-inside list-disc max-tab:px-11 max-phone:px-6 lg:text-lg">
             <li className="list-item">1,500+ Engaging Video Lessons</li>
             <li className="list-item">250+ Real Interview Questions</li>
             <li className="list-item">25+ Comprehensive Guides</li>
-            <li className="list-item">Lifetime Access & Certifications</li>
+            <li className="list-item">Lifetime Access & Certifications</li>
           </ul>
 
           <div className="p-[.5rem_1.00rem_.5rem_1.00rem] rounded-[3.125rem] flex max-lg:flex-col max-lg:w-full lg:flex-wrap items-center justify-center max-w-xl gap-5 my-2 mb-1">

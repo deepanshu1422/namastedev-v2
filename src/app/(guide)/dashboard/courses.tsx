@@ -1,3 +1,6 @@
+import { Card, CardFooter } from '@/components/ui/card'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import { Star } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -43,13 +46,47 @@ export default async function Courses() {
     const { courseCollection: { items } } = data
 
     return (
-        <section className='flex max-md:flex-col rounded-lg gap-2 overflow-hidden w-full py-2'>
-            {items.map((e: any, i: number) => <Link href={`/courses/${e.slug}`} key={i} className='overflow-hidden group flex-1 relative min-h-16 md:h-48'>
+        <section className='flex max-md:flex-col rounded-lg gap-2 overflow-hidden w-full'>
+            <Slider course={items} />
+            {/* {items.map((e: any, i: number) => <Link href={`/courses/${e.slug}`} key={i} className='overflow-hidden group flex-1 relative min-h-16 md:h-48'>
                 <Image alt={e?.title} fill className='object-cover opacity-45 group-hover:scale-105 transition-all duration-200' src={e?.courseImage?.url ?? ""} />
                 <div className='relative h-full w-full bg-gradient-to-b from-50% from-second/40 to-transparent'>
                     <p className='font-semibold md:text-lg p-1 md:p-3 mt-auto'>{e.title}</p>
                 </div>
-            </Link>)}
+            </Link>)} */}
         </section>
+    )
+}
+
+export function Slider({ course }: { course: any }) {
+
+    return (
+        <Carousel opts={{
+            loop: true
+        }} className="w-full">
+            <CarouselContent>
+                {course.map((e: any, i: any) => (
+                    <CarouselItem className="max-sm:basis-4/5 sm:basis-1/2 md:basis-1/3" key={i}>
+                        <Link href={`/courses/${e?.slug}`} className="p-1 h-fit group">
+                            <Card className="select-none flex flex-col gap-2 bg-transparent border-none">
+                                <div className="relative bg-card/50 max-sm:min-h-44 min-h-40 rounded-md overflow-hidden">
+                                    <Image src={e?.courseImage?.url ?? ""} alt={e?.title} fill className="object-cover group-hover:scale-105 transition-all" />
+                                </div>
+                                <CardFooter className="px-0 py-0 flex-col items-start text-sm text-muted-foreground">
+                                    <span className="text-lg text-foreground font-semibold">{e?.title}</span>
+                                    <span>Aryan Singh</span>
+                                    <section className="flex gap-1 items-center">
+                                        <span className="text-yellow-500/80 font-semibold">4.7</span>
+                                        <Star className="fill-yellow-500/60 stroke-yellow-500/60 h-4 w-4" />
+                                    </section>
+                                </CardFooter>
+                            </Card>
+                        </Link>
+                    </CarouselItem>
+                ))}
+            </CarouselContent>
+            <CarouselPrevious className="-left-4 h-12 w-12 top-1/3" />
+            <CarouselNext className="-right-4 h-12 w-12 top-1/3" />
+        </Carousel>
     )
 }

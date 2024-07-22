@@ -10,25 +10,31 @@ export default async function createPayments({ courseId, email, name, contact, s
 
     let body = {};
 
-    body = user?.user?.email && {
-        email,
-        courseId,
-        gateway: "razorpay",
-        couponCode: "dhan25",
-        countryCode: "IN"
-    } || {}
+    if (user?.user?.email) {
+        body = {
+            email,
+            courseId,
+            gateway: "razorpay",
+            couponCode: "dhan25",
+            countryCode: "IN"
+        }
+    } else {
+        body = {
+            name,
+            courseId,
+            contact,
+            state,
+            email,
+            country: "India",
+            gateway: "razorpay",
+            couponCode: "dhan25",
+            countryCode: "IN"
+        } 
+    }
 
-    body = !user?.user?.email ? {
-        name,
-        courseId,
-        contact,
-        state,
-        email,
-        country: "India",
-        gateway: "razorpay",
-        couponCode: "dhan25",
-        countryCode: "IN"
-    } : body
+    // console.log(body);
+
+    // return body
 
     const signature = createSignedHeader(body, "password")
 

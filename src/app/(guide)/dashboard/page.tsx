@@ -1,10 +1,7 @@
-import { auth } from '@/auth';
-import { Button } from '@/components/ui/button';
 import { Metadata } from 'next';
 import React, { Suspense } from 'react'
 import Courses from './courses';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Badge } from '@/components/ui/badge';
 import Purchased from './purchased';
 import Notifications from './notifications';
 import { UserDialog } from './new-user';
@@ -55,8 +52,8 @@ export default function Dashboard() {
 }
 
 function CoursesFallback() {
-  return <section className='flex max-md:flex-col rounded-lg gap-2 overflow-hidden w-full py-2 bg-bg'>
-    {Array.from({ length: 3 }).map((e: any, i: number) => <Skeleton key={i} className='bg-second/30 flex-1 h-20 md:h-48' />)}
+  return <section className='flex rounded-lg gap-2 overflow-hidden w-full py-2 bg-bg'>
+    {Array.from({ length: 3 }).map((e: any, i: number) => <Skeleton key={i} className='max-sm:basis-4/5 sm:basis-1/2 md:basis-1/3 bg-second/30 aspect-video' />)}
   </section>
 }
 

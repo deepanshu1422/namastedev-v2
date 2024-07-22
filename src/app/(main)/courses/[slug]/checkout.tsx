@@ -47,10 +47,12 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import refreshCourses from "../../../../../actions/refreshCourses";
 
-export default function Checkout({ title, image, amount, currency, courseId, refreshCourses }: { title: string, image: string; amount: number; currency: string, courseId: string; refreshCourses: () => void }) {
+export default function Checkout({ title, image, amount, currency, courseId }: { title: string, image: string; amount: number; currency: string, courseId: string; }) {
 
     const { data: session } = useSession()
+    const [openPay, setOpenPay] = useState(false)
 
     return (
         <div className="max-tab:hidden w-full h-fit sticky -translate-y-72 top-[26rem]">
@@ -62,15 +64,16 @@ export default function Checkout({ title, image, amount, currency, courseId, ref
                     className="bg-prime/20" />
                 <div className="flex flex-col gap-4 px-4 py-5">
                     <span className="uppercase text-white text-3xl sm:text-4xl font-bold flex gap-2 items-center">{currency} {amount}<span className="text-muted-foreground/70 italic text-2xl sm:text-3xl line-through">{amount * 4}</span></span>
-                    {session?.user?.courseId?.includes(courseId) ? <Link href={`/dashboard/course/${courseId}`}><Button size={"lg"} className="w-full font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Watch Now</Button></Link> : <PaymentSheet refreshCourses={refreshCourses} courseId={courseId} title={title} cover={image} amount={amount} curreny={currency} />}
+                    {session?.user?.courseId?.includes(courseId) ? <Link href={`/dashboard/course/${courseId}`}><Button size={"lg"} className="w-full font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Watch Now</Button></Link> : <PaymentSheet courseId={courseId} title={title} cover={image} amount={amount} curreny={currency} setOpenPay={setOpenPay} />}
                     <span className="flex gap-2 max-sm:text-sm items-center"><TicketPercent className="sm:w-6 sm:h-6 h-5 w-5" />Get Access to all Resources Now.</span>
                 </div>
             </div>
+            <PaymentModal payModal={openPay} />
         </div>
     )
 }
 
-export function PaymentSheet({ cover, title, amount, curreny, courseId, refreshCourses }: { cover: string, title: string, amount: number, curreny: string, courseId: string; refreshCourses: () => void }) {
+export function PaymentSheet({ cover, title, amount, curreny, courseId, setOpenPay }: { cover: string, title: string, amount: number, curreny: string, courseId: string; setOpenPay: Dispatch<SetStateAction<boolean>> }) {
 
     const { data: session, update } = useSession()
 
@@ -116,7 +119,6 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId, refreshC
 
     const [open, setOpen] = useState(false)
     const [openAuth, setOpenAuth] = useAtom(authModalState)
-    const [openPay, setOpenPay] = useState(false)
 
     const [isLoading, setIsLoading] = useState(false)
 
@@ -174,7 +176,7 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId, refreshC
                 handler: async function (response: any) {
                     setOpenPay(true)
                     await update({ courses: true })
-                    if (session?.user?.id) await refreshCourses()
+                    if(session?.user?.id) refreshCourses()
                 },
                 prefill: {
                     name: formData.name,
@@ -317,7 +319,6 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId, refreshC
                     {orderPage[formState].footer}
                 </SheetContent>
             </Sheet>
-            <PaymentModal payModal={openPay} />
         </>
     )
 }

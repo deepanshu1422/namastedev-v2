@@ -17,3 +17,8 @@
 //         </div>
 //     )
 // }
+
+// export function UpdateSession() {
+//     const { data, update } = useSession()
+//     return <Button size={"sm"} onClick={() => update({ course: true })} className='bg-prime/70 hover:bg-prime/90 text-white w-fit my-3'>Revalidate</Button>
+// }

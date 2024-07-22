@@ -3,11 +3,8 @@ import { format, parseISO } from "date-fns";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-    const payments = await prisma.payments.groupBy({
+    const payments = await prisma.user.groupBy({
         by: ['createdAt'],
-        _sum: {
-            amount: true, // count the number of posts for each date
-        },
     });
 
     const groupedPayments = payments.reduce((acc, curr) => {
@@ -22,7 +19,7 @@ export async function GET() {
     // Transform the grouped data into an array with counts
     const result = Object.keys(groupedPayments).map(day => ({
         day,
-        count: groupedPayments[day],
+        count: groupedPayments[day].length,
     }));
 
     return NextResponse.json(result);

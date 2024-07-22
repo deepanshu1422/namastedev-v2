@@ -1,11 +1,9 @@
-import React, { cache } from 'react'
-import { courses } from '@/util/constants'
+import React from 'react'
 import { Metadata, ResolvingMetadata } from 'next';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import Hero from './hero';
 import Details from './details';
 import { getContentfulData } from '@/lib/cotentful';
-import { revalidateTag } from 'next/cache';
 
 export type Courses = {
     courseCollection: {
@@ -14,6 +12,7 @@ export type Courses = {
             title: string,
             shortDescription: string,
             longDescription: string,
+            techStack: string,
             slug: string,
             courseImage: {
                 description: string,
@@ -24,6 +23,15 @@ export type Courses = {
             courseCreator: {
                 name: string
             },
+            reviewsCollection: {
+                total: number;
+                items: {
+                    name: string;
+                    star: number
+                    description: string;
+                    publishedDate: string;
+                }[]
+            }
             pricingsCollection: {
                 items: {
                     title: string,
@@ -53,7 +61,7 @@ export type Courses = {
     }
 }
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 type PageProps = {
     params: {
@@ -131,6 +139,7 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
         courseId,
         title,
         longDescription,
+        techStack,
         courseImage{   
             description,
             url,
@@ -141,6 +150,15 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
         courseCreator{
             name,
         },
+         reviewsCollection(limit: 5){
+            total
+            items{
+              name
+              star
+              description
+              publishedDate
+            }
+          },
         pricingsCollection{
             items{
             title,
@@ -191,13 +209,7 @@ export default async function Home({ params: { slug } }: PageProps) {
 
     const { courseCollection: { items } } = data
 
-    const { courseCreator, courseImage, longDescription, modulesCollection, pricingsCollection, title, courseId } = items[0]
-
-    async function refreshCourses() {
-        'use server'
-        revalidateTag('courses') // Update cached posts
-        redirect(`/dashboard`)
-    }
+    const { courseCreator, courseImage, longDescription, modulesCollection, pricingsCollection, title, courseId, reviewsCollection, techStack } = items[0]
 
     return (
         <main className='min-h-svh overflow-clip'>
@@ -212,14 +224,15 @@ export default async function Home({ params: { slug } }: PageProps) {
                 currency={"INR"}
             />
             <Details
-                refreshCourses={refreshCourses}
                 title={title}
                 description={longDescription}
+                techStack={techStack}
                 image={items[0].courseImage.url}
                 amount={pricingsCollection.items.find(e => e.countryCode == "IN")?.amount || 500}
                 currency={"INR"}
                 module={modulesCollection}
-                courseId={courseId} />
+                courseId={courseId}
+                reviews={{ ...reviewsCollection, courseId }} />
         </main>
     )
 }
