@@ -10,7 +10,6 @@ export default function MainLayout({
   return (
     <>
       {/* <MobileMenu /> */}
-      <Toaster richColors />
       <Navbar />
       {children}
     </>

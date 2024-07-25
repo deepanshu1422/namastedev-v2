@@ -13,18 +13,18 @@ const getPayments = async () => {
     const payments = await prisma.payments.findMany({
         take: 10,
         select: {
-            amount: true,
+            basePrice: true,
             createdAt: true,
             email: true,
-            user: {
+            User: {
                 select: {
                     name: true
                 }
             }
         },
-         orderBy: {
-            updatedAt: "desc" 
-         }
+        orderBy: {
+            updatedAt: "desc"
+        }
     })
 
     return payments
@@ -36,7 +36,7 @@ export default async function Transaction() {
 
     return (
         <TableBody>
-            {payments.map(({ email, createdAt, amount, user: { name } }, i) => (<TableRow key={i}>
+            {payments.map(({ email, createdAt, basePrice, User: { name } }, i) => (<TableRow key={i}>
                 <TableCell>
                     <div className="font-medium">{name}</div>
                     <div className="hidden text-sm text-muted-foreground md:inline">
@@ -51,10 +51,10 @@ export default async function Transaction() {
                         Approved
                     </Badge>
                 </TableCell>
-                <TableCell className="max-lg:hidden">
+                <TableCell className="">
                     {createdAt.toLocaleDateString()}
                 </TableCell>
-                <TableCell className="text-right">₹ {(amount / 100).toFixed(2)}</TableCell>
+                <TableCell className="text-right">₹ {(basePrice / 100).toFixed(2)}</TableCell>
             </TableRow>))}
         </TableBody>
 

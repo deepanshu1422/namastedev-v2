@@ -12,7 +12,7 @@ async function getUsers() {
             email: true,
             Payments: {
                 select: {
-                    amount: true,
+                    basePrice: true,
                 },
                 where: {
                     paymentStatus: "completed"
@@ -34,7 +34,7 @@ export default async function RecentUsers() {
     return (
         <CardContent className="grid gap-8">
             {recentUsers.map(({ name, image, email, Payments }, i) => {
-                const totalPayment = Payments.reduce((acc, cur) => acc += cur.amount, 0)
+                const totalPayment = Payments.reduce((acc, cur) => acc += cur.basePrice, 0)
                 return (<div key={i} className="flex items-center gap-4">
                     <Avatar className="hidden h-9 w-9 sm:flex">
                         <AvatarImage src={image ?? ""} alt="Avatar" />

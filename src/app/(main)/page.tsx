@@ -12,6 +12,8 @@ import Floating from "./resources/floating";
 import Script from "next/script";
 import Success from "@/components/mentorship-comp/success";
 
+export const dynamic = "force-static"
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),
   title: "30 Days Coding - Learn Live",

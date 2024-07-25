@@ -2,7 +2,7 @@
 
 import { Suspense, useState } from "react"
 import Hero from "./hero"
-import Courses, { CourseSkeleton } from "./courses"
+import Courses from "./courses"
 import type { CoursesType } from "./page"
 
 export default function Main({ courses }: { courses: CoursesType }) {
@@ -18,9 +18,7 @@ export default function Main({ courses }: { courses: CoursesType }) {
                 search={state}
                 setSearch={setState}
             />
-            <Suspense fallback={<CourseSkeleton />}>
-                <Courses state={state} courses={courses} />
-            </Suspense>
+            <Courses state={state} courses={courses} />
         </main>
     )
 }

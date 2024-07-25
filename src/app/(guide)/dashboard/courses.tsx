@@ -41,8 +41,6 @@ export default async function Courses() {
 
     const data = await getCourses()
 
-    await new Promise((res) => setTimeout(res, 3000))
-
     const { courseCollection: { items } } = data
 
     return (

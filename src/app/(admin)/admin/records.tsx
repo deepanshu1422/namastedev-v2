@@ -26,7 +26,7 @@ async function getPaymentSums() {
 
     const sumLast7Days = await prisma.payments.aggregate({
         _sum: {
-            amount: true,
+            basePrice: true,
         },
         where: {
             createdAt: {
@@ -37,7 +37,7 @@ async function getPaymentSums() {
 
     const sumLast30Days = await prisma.payments.aggregate({
         _sum: {
-            amount: true,
+            basePrice: true,
         },
         where: {
             createdAt: {
@@ -48,7 +48,7 @@ async function getPaymentSums() {
 
     const sumLast90Days = await prisma.payments.aggregate({
         _sum: {
-            amount: true,
+            basePrice: true,
         },
         where: {
             createdAt: {
@@ -59,7 +59,7 @@ async function getPaymentSums() {
     
     const sumLastYear = await prisma.payments.aggregate({
         _sum: {
-            amount: true,
+            basePrice: true,
         },
         where: {
             createdAt: {
@@ -69,10 +69,10 @@ async function getPaymentSums() {
     });
 
     return {
-        sum_last_7_days: sumLast7Days._sum.amount || 0,
-        sum_last_30_days: sumLast30Days._sum.amount || 0,
-        sum_last_90_days: sumLast90Days._sum.amount || 0,
-        sum_last_year: sumLastYear._sum.amount || 0
+        sum_last_7_days: sumLast7Days._sum.basePrice || 0,
+        sum_last_30_days: sumLast30Days._sum.basePrice || 0,
+        sum_last_90_days: sumLast90Days._sum.basePrice || 0,
+        sum_last_year: sumLastYear._sum.basePrice || 0
     };
 }
 

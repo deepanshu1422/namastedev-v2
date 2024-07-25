@@ -17,10 +17,8 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
-import prisma from "@/util/prismaClient"
 import { Metadata } from "next"
 import { Suspense } from "react"
-import Records, { RecordsFallback } from "./records"
 import Transaction, { TransactionFallback } from "./transctions"
 import RecentUsers, { UsersFallback } from "./recent-users"
 import { TransactionChart } from "./chart"
@@ -28,16 +26,13 @@ import DatePicker from "./date-picker"
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://30dayscoding.com"),
-    title: "Admin",
+    title: "Admin | 30dayscoding",
     description: "This is a about page for our admin.",
 };
 
 export default function Dashboard() {
 
     return (<>
-        {/* <Suspense fallback={<RecordsFallback />}>
-            <Records />
-        </Suspense> */}
         <section className="flex max-sm:flex-col justify-between gap-4 pt-16">
             <h2 className="text-3xl md:text-4xl font-semibold"><span className="text-muted-foreground text-2xl">#</span>Overview</h2>
             <div className="flex gap-2 max-sm:w-full">
@@ -55,7 +50,7 @@ export default function Dashboard() {
                         </CardDescription>
                     </div>
                     <Button asChild size="sm" className="bg-prime/70 text-white hover:bg-prime ml-auto gap-1">
-                        <Link href="#">
+                        <Link href="/transactions">
                             View All
                             <ArrowUpRight className="h-4 w-4" />
                         </Link>

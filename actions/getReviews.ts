@@ -44,7 +44,6 @@ export default async function getReviews({ courseId, skip }: { courseId: string,
             Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
         },
         body: JSON.stringify({ query }),
-        cache: "force-cache",
     })
 
     const data: Res = await fetchedData.json()

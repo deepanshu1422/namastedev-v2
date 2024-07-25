@@ -1,10 +1,10 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { TicketPercent } from "lucide-react";
+import { MinusCircle, TicketPercent } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -48,6 +48,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import refreshCourses from "../../../../../actions/refreshCourses";
+import getCoupons from "../../../../../actions/getCoupon";
 
 export default function Checkout({ title, image, amount, currency, courseId }: { title: string, image: string; amount: number; currency: string, courseId: string; }) {
 
@@ -64,7 +65,8 @@ export default function Checkout({ title, image, amount, currency, courseId }: {
                     className="bg-prime/20" />
                 <div className="flex flex-col gap-4 px-4 py-5">
                     <span className="uppercase text-white text-3xl sm:text-4xl font-bold flex gap-2 items-center">{currency} {amount}<span className="text-muted-foreground/70 italic text-2xl sm:text-3xl line-through">{amount * 4}</span></span>
-                    {session?.user?.courseId?.includes(courseId) ? <Link href={`/dashboard/course/${courseId}`}><Button size={"lg"} className="w-full font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Watch Now</Button></Link> : <PaymentSheet courseId={courseId} title={title} cover={image} amount={amount} curreny={currency} setOpenPay={setOpenPay} />}
+                    {/* @ts-ignore */}
+                    {session?.user?.courseId?.includes(courseId) ? <Link href={`/course/${courseId}`}><Button size={"lg"} className="w-full font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Watch Now</Button></Link> : <PaymentSheet courseId={courseId} title={title} cover={image} amount={amount} curreny={currency} setOpenPay={setOpenPay} />}
                     <span className="flex gap-2 max-sm:text-sm items-center"><TicketPercent className="sm:w-6 sm:h-6 h-5 w-5" />Get Access to all Resources Now.</span>
                 </div>
             </div>
@@ -76,6 +78,30 @@ export default function Checkout({ title, image, amount, currency, courseId }: {
 export function PaymentSheet({ cover, title, amount, curreny, courseId, setOpenPay }: { cover: string, title: string, amount: number, curreny: string, courseId: string; setOpenPay: Dispatch<SetStateAction<boolean>> }) {
 
     const { data: session, update } = useSession()
+
+    const [formData, setFormData] = useState({
+        name: session?.user?.name ?? "",
+        email: session?.user?.email ?? "",
+        // @ts-ignore
+        phone: session?.user?.phone ?? "",
+        // @ts-ignore
+        state: session?.user?.state ?? ""
+    })
+
+    const [open, setOpen] = useState(false)
+
+    const [formState, setFormState] = useState(0)
+    const [promo, setPromo] = useState<{
+        apply: boolean,
+        code: string | null,
+        discount: number
+    }>({
+        apply: false,
+        code: null,
+        discount: 0
+    })
+    const [isLoading, setIsLoading] = useState(false)
+    const [submitting, setSubmitting] = useState(false)
 
     const states = [
         "andhra_pradesh",
@@ -108,20 +134,6 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId, setOpenP
         "west_bengal"
     ]
 
-    const [formData, setFormData] = useState({
-        name: session?.user?.name ?? "",
-        email: session?.user?.email ?? "",
-        // @ts-ignore
-        phone: session?.user?.phone ?? "",
-        // @ts-ignore
-        state: session?.user?.state ?? ""
-    })
-
-    const [open, setOpen] = useState(false)
-    const [openAuth, setOpenAuth] = useAtom(authModalState)
-
-    const [isLoading, setIsLoading] = useState(false)
-
     function validationError({ message }: { message: string }) {
         toast.error("Error Occured", { description: message, position: "bottom-center", })
     }
@@ -144,7 +156,8 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId, setOpenP
                     email: session?.user?.email ?? formData.email,
                     contact: formData.phone,
                     name: session?.user?.name ?? formData.name,
-                    state: formData.state
+                    state: formData.state,
+                    couponCode: promo.code
                 })
             }
             else {
@@ -176,7 +189,7 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId, setOpenP
                 handler: async function (response: any) {
                     setOpenPay(true)
                     await update({ courses: true })
-                    if(session?.user?.id) refreshCourses()
+                    if (session?.user?.id) refreshCourses()
                 },
                 prefill: {
                     name: formData.name,
@@ -216,8 +229,10 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId, setOpenP
             setFormData({
                 name: session?.user?.name ?? "",
                 email: session?.user?.email ?? "",
-                phone: "",
-                state: ""
+                // @ts-ignore
+                phone: session?.user?.phone ?? "",
+                // @ts-ignore
+                state: session?.user?.state ?? ""
             })
 
         } catch (error) {
@@ -225,7 +240,44 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId, setOpenP
         }
     };
 
-    const [formState, setFormState] = useState(0)
+    async function applyCoupon(e: FormEvent<HTMLFormElement>) {
+        setSubmitting(true)
+
+        e.preventDefault()
+        const coupon = new FormData(e.currentTarget).get("coupon") as string
+
+        if (!coupon) {
+            setSubmitting(false)
+            setPromo({
+                ...promo,
+                apply: false
+            })
+            return null
+        }
+
+        const { data, error, message } = await getCoupons({ couponCode: coupon })
+
+        setSubmitting(false)
+
+        if (error || !data) toast.error("Coupon Invalid", {
+            description: JSON.stringify(message)
+        })
+
+        if (!data) return null
+
+        toast.info("Coupon Applied", {
+            description: JSON.stringify(message)
+        })
+
+        const discount = (amount * (data?.value / 100))
+
+        setPromo({
+            apply: false,
+            code: data?.couponCode ?? "",
+            discount: discount > data?.maxAmount ? data.maxAmount : discount
+        })
+
+    }
 
     const orderPage = [
         {
@@ -238,19 +290,25 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId, setOpenP
                         <span className="font-extrabold text-prime">{curreny} {amount}</span>
                     </div>
                 </div>
-                <section className="flex flex-col gap-1 max-sm:text-sm">
+                <section className="flex flex-col gap-3 max-sm:text-sm">
                     <div className="flex justify-between">
                         <span>Course Price</span>
                         <span className="font-extrabold">{curreny} {amount}</span>
                     </div>
-                    <div className="flex justify-between text-sm">
-                        <span>Promo Code</span>
-                        <span className="font-extrabold text-prime">Apply Code</span>
-                    </div>
+                    {promo.apply ? <div className="flex flex-col gap-2"><form className="flex gap-3 justify-between text-sm" onSubmit={applyCoupon}><Input disabled={submitting} name="coupon" required placeholder="Enter a promo code" /><Button disabled={submitting} className="text-prime" variant={"link"} size={"sm"}>Apply</Button></form>
+                        <Button disabled={submitting} className="text-prime" onClick={() => setPromo({ ...promo, apply: false })} variant={"link"} size={"sm"}>Cancel</Button>
+                    </div> : promo.code ? <div className="flex gap-3 justify-between text-sm" >
+                        <span className="uppercase">{promo.code}</span>
+                        <div className="flex gap-2">
+                            <span className="font-bold">-{promo.discount}</span>
+                            <MinusCircle onClick={() => setPromo({ apply: false, code: null, discount: 0 })} className="h-5 w-5 cursor-pointer" />
+                        </div>
+                    </div> : <div className="flex gap-3 justify-between text-sm"><span>Promo Code</span>
+                        <span onClick={() => setPromo({ ...promo, apply: true })} className="font-extrabold text-prime hover:underline cursor-pointer">Apply Code</span></div>}
                     <hr className="my-5" />
                     <div className="flex justify-between">
                         <span>Total Pay</span>
-                        <span className="font-extrabold text-prime">{curreny} {amount}</span>
+                        <span className="font-extrabold text-prime">{curreny} {promo.discount ? amount - promo.discount : amount}</span>
                     </div>
                 </section>
             </div>,
@@ -263,7 +321,7 @@ export function PaymentSheet({ cover, title, amount, curreny, courseId, setOpenP
                     <Label htmlFor="name" className="text-left">
                         Name
                     </Label>
-                    <Input disabled={!!session?.user?.name} value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} maxLength={30} id="name" placeholder="Max Turn" className="col-span-4" />
+                    <Input disabled={!!session?.user?.name} value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} maxLength={30} id="name" placeholder="John Doe" className="col-span-4" />
                 </div>
                 <div className="grid grid-cols-5 items-center gap-4">
                     <Label htmlFor="email" className="text-left">

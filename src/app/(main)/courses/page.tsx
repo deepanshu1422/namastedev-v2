@@ -25,7 +25,6 @@ export const metadata: Metadata = {
     },
 };
 
-
 export type CoursesType = {
     courseCollection: {
         items: {

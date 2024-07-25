@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PaymentSheet } from "./checkout";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 export default function Hero({
     courseId,
@@ -28,6 +29,7 @@ export default function Hero({
 }) {
 
     const { data: session } = useSession()
+    const [open, setOpen] = useState(false)
 
     return (
         <div
@@ -44,7 +46,7 @@ export default function Hero({
                         <Image alt="30DayCoding New Challenge"
                             src={image}
                             height={height}
-                            width={width * 2}
+                            width={width}
                             className="bg-prime/20" />
                     </div>
 
@@ -75,7 +77,8 @@ export default function Hero({
 
                     <div className="tab:hidden  flex flex-col gap-4 max-tab:px-11 max-phone:px-6">
                         <span className="uppercase text-white text-3xl sm:text-4xl font-bold flex gap-2 items-center">{currency} {amount}<span className="text-muted-foreground/70 italic text-2xl sm:text-3xl line-through">{amount * 4}</span></span>
-                        {session?.user?.courseId?.includes(courseId) ? <Link href={`/dashboard/course/${courseId}`}><Button size={"lg"} className="w-full font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Watch Now</Button></Link> : <PaymentSheet courseId={courseId} title={title} cover={image} amount={amount} curreny={currency} />}
+                        {/* @ts-ignore */}
+                        {session?.user?.courseId?.includes(courseId) ? <Link href={`/course/${courseId}`}><Button size={"lg"} className="w-full font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Watch Now</Button></Link> : <PaymentSheet setOpenPay={setOpen} courseId={courseId} title={title} cover={image} amount={amount} curreny={currency} />}
                         <span className="flex gap-2 max-sm:text-sm items-center"><TicketPercent className="sm:w-6 sm:h-6 h-5 w-5" />Get Access to all Resources Now.</span>
                     </div>
                 </section>

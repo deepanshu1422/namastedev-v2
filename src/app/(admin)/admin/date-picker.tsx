@@ -18,14 +18,21 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 export default function DatePickerWithRange({
     className,
 }: React.HTMLAttributes<HTMLDivElement>) {
+
     const [date, setDate] = React.useState<DateRange | undefined>({
         from: new Date(),
         to: addDays(new Date(), 5),
     })
+    const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
+        from: undefined,
+        to: undefined
+    })
+
+    const [open, setOpen] = React.useState(false)
 
     return (
         <div className={cn("grid gap-2 w-full", className)}>
-            <Popover>
+            <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger className="w-full" asChild>
                     <Button
                         id="date"
@@ -36,14 +43,14 @@ export default function DatePickerWithRange({
                         )}
                     >
                         <CalendarIcon className="mr-2 h-4 w-4" />
-                        {date?.from ? (
-                            date.to ? (
+                        {dateRange?.from ? (
+                            dateRange.to ? (
                                 <>
-                                    {format(date.from, "LLL dd, y")} -{" "}
-                                    {format(date.to, "LLL dd, y")}
+                                    {format(dateRange.from, "LLL dd, y")} -{" "}
+                                    {format(dateRange.to, "LLL dd, y")}
                                 </>
                             ) : (
-                                format(date.from, "LLL dd, y")
+                                format(dateRange.from, "LLL dd, y")
                             )
                         ) : (
                             <span>Pick a date</span>
@@ -81,6 +88,14 @@ export default function DatePickerWithRange({
                             numberOfMonths={1}
                         />
                     </div>
+                    <Button onClick={() => {
+                        setDateRange({
+                            from: date?.from,
+                            to: date?.to
+                        })
+                        setOpen(false)
+                    }
+                    } size={"sm"} variant={"outline"}>Apply Dates</Button>
                 </PopoverContent>
             </Popover>
         </div>

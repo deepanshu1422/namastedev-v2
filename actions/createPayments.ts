@@ -3,20 +3,19 @@
 import { auth } from "@/auth";
 import { createSignedHeader } from "@/util/userUtils";
 
-export default async function createPayments({ courseId, email, name, contact, state }: { courseId: string, email: string; name: string; contact: string; state: string; }) {
+export default async function createPayments({ courseId, email, name, contact, state, couponCode }: { courseId: string, email: string; name: string; contact: string; state: string; couponCode?: string | null }) {
     // console.log(courseId, email);
 
     const user = await auth()
 
-    let body = {};
+    let body: Record<string, string> = {};
 
     if (user?.user?.email) {
         body = {
             email,
             courseId,
             gateway: "razorpay",
-            couponCode: "dhan25",
-            countryCode: "IN"
+            countryCode: "IN",
         }
     } else {
         body = {
@@ -27,14 +26,11 @@ export default async function createPayments({ courseId, email, name, contact, s
             email,
             country: "India",
             gateway: "razorpay",
-            couponCode: "dhan25",
-            countryCode: "IN"
-        } 
+            countryCode: "IN",
+        }
     }
 
-    // console.log(body);
-
-    // return body
+    if (couponCode) body.couponCode = couponCode
 
     const signature = createSignedHeader(body, "password")
 
@@ -46,7 +42,7 @@ export default async function createPayments({ courseId, email, name, contact, s
 
     const paymentUrl = user?.user?.email ? "https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/purchase/course" : "https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/unregistered/purchase/course"
 
-    console.log(paymentUrl);
+    // console.log(paymentUrl);
 
     const data: Response = await (await fetch(paymentUrl, {
         method: "POST",
@@ -54,7 +50,7 @@ export default async function createPayments({ courseId, email, name, contact, s
         body: JSON.stringify(body)
     })).json()
 
-    console.log(data);
+    // console.log(data);
     return data
 }
 

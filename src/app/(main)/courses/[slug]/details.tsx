@@ -57,7 +57,7 @@ export default function Details({ title, techStack, description, image, amount, 
                     <h2 className="text-3xl font-bold text-white/80">Course&apos;s Content</h2>
                     <div className="flex justify-between">
                         <span className="flex items-center">{lessons} Lessons <Dot className="h-7 w-7" /> 8h 16m 13s </span>
-                        <Link href={`/dashboard/course/${courseId}`}><Button className="text-white bg-prime/70 hover:bg-prime/90 text-xs h-8" size={"sm"}>Demo</Button></Link>
+                        <Link href={`/course/${courseId}`}><Button className="text-white bg-prime/70 hover:bg-prime/90 text-xs h-8" size={"sm"}>Demo</Button></Link>
                     </div>
                     <Chapters module={module} />
                 </section>

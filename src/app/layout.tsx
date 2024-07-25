@@ -27,7 +27,7 @@ export default async function RootLayout({
         >
           {children}
           <Footer />
-          <Toaster />
+          <Toaster richColors />
         </body>
       </SessionProvider>
       <Pixel />
