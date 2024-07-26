@@ -6,7 +6,7 @@ export async function GET() {
     const payments = await prisma.payments.groupBy({
         by: ['createdAt'],
         _sum: {
-            amount: true, // count the number of posts for each date
+            basePrice: true, // count the number of posts for each date
         },
     });
 
