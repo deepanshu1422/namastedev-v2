@@ -60,7 +60,10 @@ export default async function getPaymets(queryParams: {
         },
         where,
         take: 10,
-        skip
+        skip,
+        orderBy: {
+            createdAt: "desc"
+        }
     })
 
     return { data, totalCount }
