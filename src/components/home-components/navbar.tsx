@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Image from "next/image";
 import { NavMenu } from "../nav-menu";
@@ -9,9 +9,8 @@ import { AuthDialog } from "@/app/(guide)/auth";
 import { LayoutDashboard } from "lucide-react";
 
 export default function Navbar() {
-
   // const { isSignedIn } = useAuth()
-  const { data: session, status } = useSession()
+  const { data: session, status } = useSession();
 
   return (
     <div className={`relative font-jakarta tab:min-h-9`}>
@@ -19,7 +18,7 @@ export default function Navbar() {
 
       <div className="flex bg-bg items-center justify-center text-lg text-white h-20 fixed top-0 w-full z-20 pt-2">
         <div
-          className={`sm:p-[.875rem_4.25rem] p-[0.5rem_1rem] text-white flex gap-6 justify-between items-center w-full max-w-[90rem]`}
+          className={`sm:p-[.875rem_2.25rem] p-[0.5rem_1rem] text-white flex gap-6 justify-between items-center w-full max-w-[90rem]`}
         >
           <section className="flex gap-12">
             <Link href={"/"} className="flex items-center gap-1">
@@ -41,7 +40,6 @@ export default function Navbar() {
           </section>
 
           <section className="flex items-center gap-2">
-
             <Link
               href={"/mentorship"}
               className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md"
@@ -49,24 +47,33 @@ export default function Navbar() {
               <span className="text-sm line-clamp-1">Join Mentorship</span>
             </Link>
 
-            {
-              status === "loading" ? <button disabled={true} className="disabled:opacity-40 font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md text-sm"
-              >Loading...</button> : status === "authenticated" ? <Link
+            {status === "loading" ? (
+              <button
+                disabled={true}
+                className="disabled:opacity-40 font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md text-sm"
+              >
+                Loading...
+              </button>
+            ) : status === "authenticated" ? (
+              <Link
                 href={"/dashboard"}
                 className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:p-2 rounded-md"
               >
                 <span className="text-sm max-sm:hidden">Dashboard</span>
                 <LayoutDashboard className="h-5 w-5 sm:hidden" />
-              </Link> : <AuthDialog><button className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md text-sm"
-              >Login</button></AuthDialog>
-            }
+              </Link>
+            ) : (
+              <AuthDialog>
+                <button className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md text-sm">
+                  Login
+                </button>
+              </AuthDialog>
+            )}
 
             <MobileMenu />
-
           </section>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
-

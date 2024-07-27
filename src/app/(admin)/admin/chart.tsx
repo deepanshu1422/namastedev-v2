@@ -24,11 +24,11 @@ const chartConfig = {
     label: "Amount Views",
   },
   desktop: {
-    label: "Desktop",
+    label: "Transactions",
     color: "hsl(var(--chart-1))",
   },
   mobile: {
-    label: "Mobile",
+    label: "New Users",
     color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig;
@@ -62,7 +62,7 @@ export function TransactionChart() {
       desktop: chartData.reduce((acc, curr) => acc + curr.desktop, 0),
       mobile: chartData.reduce((acc, curr) => acc + curr.mobile, 0),
     }),
-    []
+    [chartData]
   );
 
   function generateDataArray(num: number) {
@@ -100,9 +100,10 @@ export function TransactionChart() {
       <Card>
         <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
           <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-            <CardTitle>Line Chart - Interactive</CardTitle>
+            <CardTitle>{chartConfig[activeChart].label} Chart</CardTitle>
             <CardDescription>
-              Showing total visitors for the last 3 months
+              Showing total {chartConfig[activeChart].label.toLocaleLowerCase()}{" "}
+              for the last {chartData.length} days
             </CardDescription>
           </div>
           <div className="flex">
