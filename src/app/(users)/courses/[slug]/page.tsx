@@ -5,6 +5,9 @@ import Hero from "./hero";
 import Details from "./details";
 import { getContentfulData } from "@/lib/cotentful";
 
+export const dynamicParams = true;
+export const dynamic = "force-dynamic";
+
 export type Courses = {
   courseCollection: {
     items: {
@@ -59,8 +62,6 @@ export type Courses = {
     }[];
   };
 };
-
-// export const dynamic = "force-static";
 
 type PageProps = {
   params: {
