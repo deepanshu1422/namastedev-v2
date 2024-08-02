@@ -43,10 +43,9 @@ export async function generateStaticParams() {
     },
   });
 
-  return blogs.map(({ slug }) => {
-    if (!slug) return;
-    slug: slug.toString();
-  });
+  return blogs.map(({ slug }) => ({
+    slug,
+  }));
 }
 
 export async function generateMetadata(
@@ -102,7 +101,7 @@ export async function generateMetadata(
   };
 }
 
-const getBlog = cache(async (slug: string) => {
+const getBlog = async (slug: string) => {
   const item = await prisma.blog.findFirst({
     where: {
       slug: slug,
@@ -122,9 +121,9 @@ const getBlog = cache(async (slug: string) => {
     },
   });
   return item;
-});
+};
 
-const getRecents = cache(async () => {
+const getRecents = async () => {
   const item = await prisma.blog.findMany({
     take: 5,
     select: {
@@ -140,7 +139,7 @@ const getRecents = cache(async () => {
     },
   });
   return item;
-});
+};
 
 export default async function Home({ params: { slug } }: PageProps) {
   const item = await getBlog(slug);

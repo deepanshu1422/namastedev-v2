@@ -1,8 +1,12 @@
 import React from "react";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import Main from "./main";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import Hero from "./hero";
+import Details from "./details";
+import { getContentfulData } from "@/lib/cotentful";
+
+export const dynamicParams = true;
+export const dynamic = "force-dynamic";
 
 export type Courses = {
   courseCollection: {
@@ -48,10 +52,8 @@ export type Courses = {
             total: number;
             items: [
               {
-                public: boolean;
                 title: string;
                 duration: string;
-                youtubeId: string;
               }
             ];
           };
@@ -73,31 +75,18 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const query = `query {
+  const data = await getContentfulData(`query {
         courseCollection{
         items{
             slug
             }
         }
-    }`;
+    }`);
 
-  const fetchedData = await fetch(
-    `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-      },
-      body: JSON.stringify({ query }),
-    }
-  );
-
-  const data = await fetchedData.json();
-
-  return data.data.courseCollection.items.map((e: Record<string, string>) => ({
-    slug: e.slug,
-  }));
+  return data.data.courseCollection.items.map((e: Record<string, string>) => {
+    if (!e.slug) return;
+    slug: e.slug.toString();
+  });
 }
 
 export async function generateMetadata(
@@ -107,7 +96,7 @@ export async function generateMetadata(
   let item = null;
 
   try {
-    const query = `query {
+    const data = await getContentfulData(`query {
             courseCollection{
             items{
                 slug,
@@ -118,21 +107,7 @@ export async function generateMetadata(
                     }
                 }
             }
-        }`;
-
-    const fetchedData = await fetch(
-      `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-        },
-        body: JSON.stringify({ query }),
-      }
-    );
-
-    const data = await fetchedData.json();
+        }`);
 
     item = data.data.courseCollection.items.find(
       (e: Record<string, string>) => e.slug === params.slug
@@ -201,8 +176,7 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
                 title,
                 duration,
                 youtubeId,
-                videoLink,
-                public
+                videoLink
                     }
                 }
                     }
@@ -220,6 +194,10 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
         Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
       },
       body: JSON.stringify({ query }),
+      cache: "force-cache",
+      next: {
+        revalidate: 3600 * 24 * 2,
+      },
     }
   );
 
@@ -249,7 +227,35 @@ export default async function Home({ params: { slug } }: PageProps) {
     techStack,
   } = items[0];
 
-  const mdx = <MDXRemote source={longDescription} />;
-
-  return <Main mdx={mdx} item={items[0]} />;
+  return (
+    <main className="min-h-svh overflow-clip">
+      <Hero
+        courseId={courseId}
+        title={title}
+        image={courseImage.url}
+        width={courseImage.width}
+        height={courseImage.height}
+        author={courseCreator.name}
+        amount={
+          pricingsCollection.items.find((e) => e.countryCode == "IN")?.amount ||
+          500
+        }
+        currency={"INR"}
+      />
+      <Details
+        title={title}
+        description={longDescription}
+        techStack={techStack}
+        image={items[0].courseImage.url}
+        amount={
+          pricingsCollection.items.find((e) => e.countryCode == "IN")?.amount ||
+          500
+        }
+        currency={"INR"}
+        module={modulesCollection}
+        courseId={courseId}
+        reviews={{ ...reviewsCollection, courseId }}
+      />
+    </main>
+  );
 }

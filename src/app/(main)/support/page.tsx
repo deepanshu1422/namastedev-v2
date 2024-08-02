@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import Link from "next/link";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),
   title: "Support | 30DaysCoding",
@@ -102,7 +104,9 @@ export default function Home() {
           
           .
         </p> */}
-        <h3 className="text-2xl font-bold text-second">POWERED BY NIGHT LIGHT PROJECTS</h3>
+        <h3 className="text-2xl font-bold text-second">
+          POWERED BY NIGHT LIGHT PROJECTS
+        </h3>
       </div>
     </main>
   );

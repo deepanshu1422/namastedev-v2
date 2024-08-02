@@ -7,6 +7,8 @@ import Public from "./public";
 // import Floating from "../resources/floating";
 import NewHero from "./new-hero";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: "Testimonial | 30DaysCoding",
   description:

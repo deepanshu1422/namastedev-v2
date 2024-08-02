@@ -1,594 +1,224 @@
 "use client";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MinusCircle, TicketPercent } from "lucide-react";
+import {
+  Circle,
+  Folder,
+  NotebookText,
+  Play,
+  PlayCircle,
+  Phone,
+  Smartphone,
+  Star,
+  BadgeCheck,
+  UsersRound,
+  PlaySquare,
+} from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import { Dispatch, FormEvent, SetStateAction, useState } from "react";
-
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { toast } from "sonner";
+import React, { Dispatch, SetStateAction } from "react";
+import { FAQ } from "./details";
 import { useSession } from "next-auth/react";
-import createPayments from "../../../../../actions/createPayments";
-import { authModalState } from "@/lib/jotai";
-import { useAtom } from "jotai";
-
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import refreshCourses from "../../../../../actions/refreshCourses";
-import getCoupons from "../../../../../actions/getCoupon";
 
 export default function Checkout({
-  title,
-  image,
-  amount,
-  currency,
   courseId,
+  open,
+  setOpen,
 }: {
-  title: string;
-  image: string;
-  amount: number;
-  currency: string;
   courseId: string;
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
   const { data: session } = useSession();
-  const [openPay, setOpenPay] = useState(false);
-
   return (
-    <div className="max-tab:hidden w-full h-fit sticky -translate-y-72 top-[26rem]">
-      <div className="max-w-xs bg-gradient-to-b from-head to-second/20 flex flex-col relative max-tab:mx-auto ml-auto shadow-lg backdrop-blur-sm shadow-black/40 overflow-hidden p-0.5">
-        <Image
-          alt="30DayCoding New Challenge"
-          src={image}
-          height={600}
-          width={1000}
-          className="bg-prime/20"
-        />
-        <div className="flex flex-col gap-4 px-2 py-5">
-          <span className="uppercase text-white text-2xl font-bold flex gap-2 items-center">
-            ₹{amount}
-            <span className="text-muted-foreground/70 italic text-base line-through">
-              {amount * 4}
-            </span>
-            <span className="text-sm">75% off</span>
+    <section className="flex flex-col gap-6 md:gap-3 min-w-[25%] shrink-0">
+      {/* @ts-ignore */}
+      {!session?.user?.courseId.includes(courseId) && (
+        <div className="bg-gradient-to-b from-head/30 to-second/20 flex flex-col gap-1 rounded-md min-h-60 shadow-lg backdrop-blur-sm shadow-black/40 p-3">
+          <span className="text-xs text-white/80">Complete Course</span>
+          <div className="flex justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-xl font-bold">₹1000</span>
+              <span className="text-sm line-through text-muted-foreground">
+                4000
+              </span>
+            </div>
+            <Badge className="bg-prime/50 hover:bg-prime/60 text-white">
+              75% off
+            </Badge>
+          </div>
+
+          <span className="text-white/80 text-sm font-semibold py-2">
+            Course Includes:
           </span>
-          {/* @ts-ignore */}
-          {session?.user?.courseId?.includes(courseId) ? (
-            <Link href={`/course/${courseId}`}>
-              <Button
-                size={"lg"}
-                className="w-full font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
-              >
-                Watch Now
-              </Button>
-            </Link>
-          ) : (
-            <PaymentSheet
-              courseId={courseId}
-              title={title}
-              cover={image}
-              amount={amount}
-              curreny={currency}
-              setOpenPay={setOpenPay}
-            />
-          )}
-          <span className="flex gap-2 max-sm:text-sm items-center">
-            <TicketPercent className="sm:w-6 sm:h-6 h-5 w-5" />
-            Get Access to all Resources Now.
-          </span>
-        </div>
-      </div>
-      <PaymentModal payModal={openPay} />
-    </div>
-  );
-}
-
-export function PaymentSheet({
-  cover,
-  title,
-  amount,
-  curreny,
-  courseId,
-  setOpenPay,
-}: {
-  cover: string;
-  title: string;
-  amount: number;
-  curreny: string;
-  courseId: string;
-  setOpenPay: Dispatch<SetStateAction<boolean>>;
-}) {
-  const { data: session, update } = useSession();
-
-  const [formData, setFormData] = useState({
-    name: session?.user?.name ?? "",
-    email: session?.user?.email ?? "",
-    // @ts-ignore
-    phone: session?.user?.phone ?? "",
-    // @ts-ignore
-    state: session?.user?.state ?? "",
-  });
-
-  const [open, setOpen] = useState(false);
-
-  const [formState, setFormState] = useState(0);
-  const [promo, setPromo] = useState<{
-    apply: boolean;
-    code: string | null;
-    discount: number;
-  }>({
-    apply: false,
-    code: null,
-    discount: 0,
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-
-  const states = [
-    "andhra_pradesh",
-    "arunachal_pradesh",
-    "assam",
-    "bihar",
-    "chhattisgarh",
-    "goa",
-    "gujarat",
-    "haryana",
-    "himachal_pradesh",
-    "jharkhand",
-    "karnataka",
-    "kerala",
-    "madhya_pradesh",
-    "maharashtra",
-    "manipur",
-    "meghalaya",
-    "mizoram",
-    "nagaland",
-    "odisha",
-    "punjab",
-    "rajasthan",
-    "sikkim",
-    "tamil_nadu",
-    "telangana",
-    "tripura",
-    "uttar_pradesh",
-    "uttarakhand",
-    "west_bengal",
-  ];
-
-  function validationError({ message }: { message: string }) {
-    toast.error("Error Occured", {
-      description: message,
-      position: "bottom-center",
-    });
-  }
-
-  const makePayment = async () => {
-    if (formData.name.length < 2)
-      return validationError({ message: "Name too short" });
-    if (formData.email.split("@").length !== 2)
-      return validationError({ message: "Invalid Email" });
-    if (formData.phone.length !== 10)
-      return validationError({ message: "Invalid Phone Number" });
-    if (!states.includes(formData.state))
-      return validationError({ message: "Select a State" });
-
-    try {
-      setIsLoading(true);
-
-      let res;
-
-      if (courseId) {
-        res = await createPayments({
-          courseId: courseId,
-          email: session?.user?.email ?? formData.email,
-          contact: formData.phone,
-          name: session?.user?.name ?? formData.name,
-          state: formData.state,
-          couponCode: promo.code,
-        });
-      } else {
-        return;
-      }
-      // make an endpoint to get this key
-      const key = "rzp_test_tVOEQJx5p7XYeW";
-
-      if (res.error) {
-        toast("Error Occured", {
-          position: "bottom-center",
-          description: res.message ?? JSON.stringify(res.error),
-        });
-        setIsLoading(false);
-        setOpen(false);
-        return;
-      }
-
-      setFormState(0);
-
-      const options = {
-        key: key,
-        description: "Test Transaction",
-        image: "/icon.png",
-        name: "30DaysCoding",
-        currency: res.data.currency,
-        amount: res.data.amount,
-        order_id: res.data.orderId,
-        handler: async function (response: any) {
-          setOpenPay(true);
-          await update({ courses: true });
-          if (session?.user?.id) refreshCourses();
-        },
-        prefill: {
-          name: formData.name,
-          email: formData.email,
-          contact: formData.phone,
-        },
-        notes: {
-          address: "30DC Corporate Office",
-        },
-        theme: {
-          color: "#134543",
-        },
-      };
-
-      // @ts-ignore
-      const paymentObject = new window.Razorpay(options);
-
-      paymentObject.on("payment.failed", function (response: any) {
-        console.log(response.error.code);
-        console.log(response.error.description);
-        console.log(response.error.source);
-        console.log(response.error.step);
-        console.log(response.error.reason);
-        console.log(response.error.metadata.order_id);
-        console.log(response.error.metadata.payment_id);
-      });
-
-      paymentObject.on("payment.captured", function (response: any) {
-        alert("Payment successful");
-        setIsLoading(false);
-      });
-
-      paymentObject.open();
-
-      setIsLoading(false);
-      setOpen(false);
-      setFormData({
-        name: session?.user?.name ?? "",
-        email: session?.user?.email ?? "",
-        // @ts-ignore
-        phone: session?.user?.phone ?? "",
-        // @ts-ignore
-        state: session?.user?.state ?? "",
-      });
-    } catch (error) {
-      setIsLoading(false);
-    }
-  };
-
-  async function applyCoupon(e: FormEvent<HTMLFormElement>) {
-    setSubmitting(true);
-
-    e.preventDefault();
-    const coupon = new FormData(e.currentTarget).get("coupon") as string;
-
-    if (!coupon) {
-      setSubmitting(false);
-      setPromo({
-        ...promo,
-        apply: false,
-      });
-      return null;
-    }
-
-    const { data, error, message } = await getCoupons({ couponCode: coupon });
-
-    setSubmitting(false);
-
-    if (error || !data)
-      toast.error("Coupon Invalid", {
-        description: JSON.stringify(message),
-      });
-
-    if (!data) return null;
-
-    toast.info("Coupon Applied", {
-      description: JSON.stringify(message),
-    });
-
-    const discount = amount * (data?.value / 100);
-
-    setPromo({
-      apply: false,
-      code: data?.couponCode ?? "",
-      discount: discount > data?.maxAmount ? data.maxAmount : discount,
-    });
-  }
-
-  const orderPage = [
-    {
-      title: "Order Details",
-      body: (
-        <div className="flex flex-col gap-5">
-          <div className="grid sm:grid-cols-3 gap-2 pt-4">
-            <Image
-              className="rounded-md max-sm:w-full max-h-40 object-cover"
-              src={cover}
-              alt={title}
-              width={280}
-              height={180}
-            />
-            <div className="sm:col-span-2 flex flex-col gap-1">
-              <p className="sm:text-lg">{title}</p>
-              <span className="font-extrabold text-prime">
-                {curreny} {amount}
+          <div className="flex flex-col gap-2 text-white/60 font-semibold">
+            <p className="flex items-center gap-1 text-xs">
+              <span className="bg-prime/40 h-6 w-6 grid place-items-center rounded-full text-white/80 font-bold">
+                56
               </span>
-            </div>
-          </div>
-          <section className="flex flex-col gap-3 max-sm:text-sm">
-            <div className="flex justify-between">
-              <span>Course Price</span>
-              <span className="font-extrabold">
-                {curreny} {amount}
+              hours on demand videos
+            </p>
+            <p className="flex items-center gap-1 text-xs">
+              <span className="bg-prime/40 h-6 w-6 grid place-items-center rounded-full text-white/80 font-bold">
+                6
               </span>
-            </div>
-            {promo.apply ? (
-              <div className="flex flex-col gap-2">
-                <form
-                  className="flex gap-3 justify-between text-sm"
-                  onSubmit={applyCoupon}
-                >
-                  <Input
-                    disabled={submitting}
-                    name="coupon"
-                    required
-                    placeholder="Enter a promo code"
-                  />
-                  <Button
-                    disabled={submitting}
-                    className="text-prime"
-                    variant={"link"}
-                    size={"sm"}
-                  >
-                    Apply
-                  </Button>
-                </form>
-                <Button
-                  disabled={submitting}
-                  className="text-prime"
-                  onClick={() => setPromo({ ...promo, apply: false })}
-                  variant={"link"}
-                  size={"sm"}
-                >
-                  Cancel
-                </Button>
-              </div>
-            ) : promo.code ? (
-              <div className="flex gap-3 justify-between text-sm">
-                <span className="uppercase">{promo.code}</span>
-                <div className="flex gap-2">
-                  <span className="font-bold">-{promo.discount}</span>
-                  <MinusCircle
-                    onClick={() =>
-                      setPromo({ apply: false, code: null, discount: 0 })
-                    }
-                    className="h-5 w-5 cursor-pointer"
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="flex gap-3 justify-between text-sm">
-                <span>Promo Code</span>
-                <span
-                  onClick={() => setPromo({ ...promo, apply: true })}
-                  className="font-extrabold text-prime hover:underline cursor-pointer"
-                >
-                  Apply Code
-                </span>
-              </div>
-            )}
-            <hr className="my-5" />
-            <div className="flex justify-between">
-              <span>Total Pay</span>
-              <span className="font-extrabold text-prime">
-                {curreny} {promo.discount ? amount - promo.discount : amount}
+              Downloadable Resourses
+            </p>
+            <p className="flex items-center gap-1 text-xs">
+              <span className="bg-prime/40 h-6 w-6 grid place-items-center rounded-full text-white/80 font-bold">
+                10
               </span>
-            </div>
-          </section>
-        </div>
-      ),
-      footer: (
-        <Button
-          onClick={() => setFormState(1)}
-          className="w-full mt-auto hover:bg-prime/80 bg-prime/60 text-white"
-          type="submit"
-        >
-          Proceed
-        </Button>
-      ),
-    },
-    {
-      title: "Payments Details",
-      body: (
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-5 items-center gap-4">
-            <Label htmlFor="name" className="text-left">
-              Name
-            </Label>
-            <Input
-              disabled={!!session?.user?.name}
-              value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-              maxLength={30}
-              id="name"
-              placeholder="John Doe"
-              className="col-span-4"
-            />
-          </div>
-          <div className="grid grid-cols-5 items-center gap-4">
-            <Label htmlFor="email" className="text-left">
-              Email
-            </Label>
-            <Input
-              disabled={!!session?.user?.email}
-              value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
-              id="email"
-              maxLength={40}
-              type="email"
-              placeholder="youremail@gmail.com"
-              className="col-span-4"
-            />
-          </div>
-          <div className="grid grid-cols-5 items-center gap-4">
-            <Label htmlFor="phone" className="text-left">
-              Phone
-            </Label>
-            <div className="relative col-span-4">
-              <span className="absolute left-2 top-2 text-muted-foreground">
-                +91
+              Articles
+            </p>
+            <p className="flex items-center gap-1 text-xs">
+              <span className="bg-prime/40 h-6 w-6 grid place-items-center rounded-full text-white/80 font-bold">
+                <Smartphone className="w-3 h-3" />
               </span>
-              <Input
-                value={formData.phone}
-                onChange={(e) =>
-                  setFormData({ ...formData, phone: e.target.value })
-                }
-                type="number"
-                id="phone"
-                className="pl-9"
-                maxLength={10}
-              />
-            </div>
+              Mobile Friendly
+            </p>
           </div>
-          <div className="grid grid-cols-5 items-center gap-4">
-            <Label htmlFor="username" className="text-left">
-              State
-            </Label>
-            <Select
-              value={formData.state}
-              onValueChange={(e) => setFormData({ ...formData, state: e })}
-            >
-              <SelectTrigger className="border-prime/40 bg-bg w-full col-span-4 capitalize">
-                <SelectValue placeholder="Select State" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>States</SelectLabel>
-                  {states.map((e, i) => (
-                    <SelectItem className="capitalize" key={i} value={e}>
-                      {e.split("_").join(" ")}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-      ),
-      footer: (
-        <div className="w-full mt-auto flex flex-col gap-2">
           <Button
-            disabled={isLoading}
-            onClick={makePayment}
-            className="disabled:animate-pulse w-full hover:bg-prime/80 bg-prime/60 text-white"
-            type="submit"
-          >
-            Buy
-          </Button>
-          <Button
-            variant={"outline"}
-            onClick={() => setFormState(0)}
-            className="w-full"
-            type="submit"
-          >
-            Back
-          </Button>
-        </div>
-      ),
-    },
-  ];
-
-  return (
-    <>
-      <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger asChild>
-          <Button
+            onClick={() => setOpen(true)}
             size={"lg"}
-            className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
+            className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg mt-3"
           >
             Buy Now
           </Button>
-        </SheetTrigger>
-        <SheetContent className="h-full w-full flex flex-col">
-          <SheetHeader>
-            <SheetTitle>{orderPage[formState].title}</SheetTitle>
-          </SheetHeader>
-          {orderPage[formState].body}
-          {orderPage[formState].footer}
-        </SheetContent>
-      </Sheet>
-    </>
-  );
-}
+        </div>
+      )}
 
-function PaymentModal({ payModal }: { payModal: boolean }) {
-  const { data, status } = useSession();
-  return (
-    <Dialog open={payModal}>
-      <DialogContent className="sm:max-w-[425px]">
-        <Card className="bg-background border-none flex flex-col">
-          <CardHeader className="p-1 items-center">
-            <span className="flex items-center gap-2">
-              <Image src={"/icon.png"} alt="30dc icon" height={40} width={40} />
-              <CardTitle>30DC</CardTitle>
+      <div className="bg-gradient-to-b from-head/30 to-second/20 flex justify-between rounded-md shadow-lg backdrop-blur-sm shadow-black/40 p-4 px-2">
+        <div className="flex items-center gap-1 w-full">
+          <span className="text-5xl">🌟</span>
+          <div className="flex flex-col gap-1 flex-1">
+            <div className="flex w-full justify-between">
+              <span className="text-sm font-bold">Rating</span>
+              <div className="flex gap-0.5">
+                <Star className="fill-prime/80 stroke-prime/80 h-4 w-4" />
+                <Star className="fill-prime/80 stroke-prime/80 h-4 w-4" />
+                <Star className="fill-prime/80 stroke-prime/80 h-4 w-4" />
+                <Star className="fill-prime/80 stroke-prime/80 h-4 w-4" />
+                <Star className="fill-prime/80 stroke-prime/80 h-4 w-4" />
+              </div>
+            </div>
+            <div className="flex text-xs w-full justify-between">
+              <span className="text-white/80">120 Reviews</span>
+              <span className="text-prime font-bold">4.78</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-gradient-to-b from-head/30 to-second/20 flex flex-col gap-4 rounded-md shadow-lg backdrop-blur-sm shadow-black/40 p-4 px-3">
+        <span className="font-bold">Publisher</span>
+        <div className="flex items-center gap-2">
+          <Avatar>
+            <AvatarImage src={"/instructor.jpg"} alt="Instructor" />
+            <AvatarFallback>AS</AvatarFallback>
+          </Avatar>
+          <span className="flex flex-col gap-1">
+            <span className="font-bold leading-4 text-sm">Aryan Singh</span>
+            <span className="font-semibold text-white/60 text-xs">
+              SDE@Goolge
             </span>
-            <CardDescription className="text-center">
-              Thank you for trusting in us. Team 30DC
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="pt-3 pb-0 mx-auto w-full">
-            <Link href={"/dashboard"}>
-              <Button
-                disabled={status === "loading"}
-                className="w-full bg-prime/70 text-white hover:bg-prime"
-              >
-                {status === "loading" ? "Adding Course..." : "Visit Dashboard"}
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-      </DialogContent>
-    </Dialog>
+          </span>
+        </div>
+
+        <div className="flex flex-col gap-3">
+          <div className="flex gap-1.5 items-center text-xs font-medium">
+            <Star className="w-5 h-5 text-prime/80" />
+            4.5 Mentor Rating
+          </div>
+          <div className="flex gap-1.5 items-center text-xs font-medium">
+            <BadgeCheck className="w-5 h-5 text-prime/80" />
+            408 Reviews
+          </div>
+          <div className="flex gap-1.5 items-center text-xs font-medium">
+            <UsersRound className="w-5 h-5 text-prime/80" />
+            1,200 Students
+          </div>
+          <div className="flex gap-1.5 items-center text-xs font-medium">
+            <PlaySquare className="w-5 h-5 text-prime/80" />8 Courses
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-gradient-to-b from-head/30 to-second/20 flex flex-col gap-4 rounded-md shadow-lg backdrop-blur-sm shadow-black/40 p-4 px-3">
+        <span className="font-bold">Recommanded Courses</span>
+
+        <div className="grid gap-2">
+          <div className="grid grid-cols-3 gap-2 md:gap-5 md:max-w-60 w-full">
+            <Image
+              className="rounded-md max-sm:w-full md:max-w-20 max-h-40 object-cover"
+              src={"/mern.jpg"}
+              alt={"mern course"}
+              width={280}
+              height={180}
+            />
+            <div className="col-span-2 flex flex-col gap-1">
+              <p className="text-xs font-bold line-clamp-1">
+                Lorem ipsum dolor, sit amet consectetur adipisicing
+              </p>
+              <span className="text-xs text-muted-foreground">
+                By Aryan Singh
+              </span>
+              <span className="flex gap-1 text-sm text-prime font-extrabold items-center">
+                <Star className="w-5 h-4 fill-prime stroke-prime" />
+                4.7
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-2 md:gap-5 md:max-w-60 w-full">
+            <Image
+              className="rounded-md max-sm:w-full md:max-w-20 max-h-40 object-cover"
+              src={"/mern.jpg"}
+              alt={"mern course"}
+              width={280}
+              height={180}
+            />
+            <div className="col-span-2 flex flex-col gap-1">
+              <p className="text-xs font-bold line-clamp-1">
+                Lorem ipsum dolor, sit amet consectetur adipisicing
+              </p>
+              <span className="text-xs text-muted-foreground">
+                By Aryan Singh
+              </span>
+              <span className="flex gap-1 text-sm text-prime font-extrabold items-center">
+                <Star className="w-5 h-4 fill-prime stroke-prime" />
+                4.7
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-2 md:gap-5 md:max-w-60 w-full">
+            <Image
+              className="rounded-md max-sm:w-full md:max-w-20 max-h-40 object-cover"
+              src={"/mern.jpg"}
+              alt={"mern course"}
+              width={280}
+              height={180}
+            />
+            <div className="col-span-2 flex flex-col gap-1">
+              <p className="text-xs font-bold line-clamp-1">
+                Lorem ipsum dolor, sit amet consectetur adipisicing
+              </p>
+              <span className="text-xs text-muted-foreground">
+                By Aryan Singh
+              </span>
+              <span className="flex gap-1 text-sm text-prime font-extrabold items-center">
+                <Star className="w-5 h-4 fill-prime stroke-prime" />
+                4.7
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="md:hidden block">
+        <FAQ />
+      </div>
+    </section>
   );
 }

@@ -59,12 +59,16 @@
 
 /* Track */
 .horizontal-scroll::-webkit-scrollbar-track {
-  background: transparent;
+  background: #ffffff20;
+  height: 10px;
 }
 
 /* Handle */
 .horizontal-scroll::-webkit-scrollbar-thumb {
   background: #ffffff60;
+  height: 50px;
+  width: 10px;
+  cursor: pointer;
 }
 
 .container {
@@ -168,26 +172,26 @@
   border-radius: 4px;
 }
 
-.blob{
-  border-radius: 60% 40% 10% 90% / 50% 82% 18% 50% ;
+.blob {
+  border-radius: 60% 40% 10% 90% / 50% 82% 18% 50%;
 }
-.ypt-button{
+.ypt-button {
   display: none;
 }
 
-.techStack ol{
+.techStack ol {
   @apply flex flex-col gap-2 list-inside list-decimal text-white/80 py-5;
 }
 
-.techStack ul{
+.techStack ul {
   @apply flex flex-col gap-2 list-inside list-disc text-white/80 py-5;
 }
 
-.techStack li > strong{
+.techStack li > strong {
   @apply font-bold;
 }
 
-.techStack p{
+.techStack p {
   @apply text-white/80;
 }
 

@@ -1,101 +1,479 @@
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Dot, Video } from "lucide-react"
-import Checkout from "./checkout"
-import Reviews from "./reviews"
-import { MDXRemote } from "next-mdx-remote/rsc";
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+"use client";
 
-type Module = {
+import {
+  ChevronLeft,
+  ChevronRight,
+  Clock2,
+  Eye,
+  Play,
+  PlaySquare,
+  Share2,
+  SignalMedium,
+} from "lucide-react";
+
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+
+import Image from "next/image";
+import React, { Dispatch, SetStateAction } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import CourseList from "./courses";
+import VideoPlayer from "./player";
+import { usePathname, useRouter } from "next/navigation";
+import { Badge } from "@/components/ui/badge";
+
+export default function Details({
+  title,
+  courseId,
+  modulesCollection,
+  courseImage,
+  module,
+  chapter,
+  longDescription,
+  open,
+  setOpen,
+}: {
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  title: string;
+  slug?: string;
+  courseId: string;
+  module: number;
+  chapter: number;
+  longDescription: React.JSX.Element;
+  courseImage: {
+    url: string;
+    width: number;
+    height: number;
+    description: string;
+  };
+  modulesCollection: {
     total: number;
     items: {
-        title: string;
-        duration: string;
-        chaptersCollection: {
-            total: number;
-            items: [{
-                title: string;
-                duration: string;
-            }];
-        };
+      title: string;
+      duration: string;
+      chaptersCollection: {
+        total: number;
+        items: [
+          {
+            public: boolean;
+            title: string;
+            duration: string;
+            youtubeId: string;
+          }
+        ];
+      };
     }[];
-}
+  };
+}) {
+  const router = useRouter();
+  const pathName = usePathname();
 
-export type Review = {
-    courseId: string
-    total: number
-    items: {
-        name: string;
-        star: number
-        description: string;
-        publishedDate: string;
-    }[]
-}
+  let disabledPrev = module == 0 && chapter == 0;
+  let disabledNext =
+    chapter ===
+      modulesCollection.items[modulesCollection.total - 1].chaptersCollection
+        .total -
+        1 && module === modulesCollection.total - 1;
 
-export default function Details({ title, techStack, description, image, amount, currency, module, courseId, reviews }: { title: string, techStack: string, description: string, image: string, amount: number; currency: string; module: Module, courseId: string; reviews: Review }) {
+  function prevVideo() {
+    console.log("PREV");
 
-    const lessons = module.items.reduce((accumulator, currentValue) => accumulator + currentValue.chaptersCollection.total, 0);
+    if (chapter === 0 && module === 0) return 0;
+    if (chapter === 0 && module !== 0) {
+      router.push(
+        pathName +
+          "?" +
+          "mod=" +
+          String(module - 1) +
+          "&" +
+          "chap=" +
+          String(
+            modulesCollection.items[module - 1].chaptersCollection.total - 1
+          )
+      );
+    }
+    if (chapter !== 0) {
+      router.push(
+        pathName +
+          "?" +
+          "mod=" +
+          String(module) +
+          "&" +
+          "chap=" +
+          String(chapter - 1)
+      );
+    }
+  }
 
-    return (
-        <div className="tab:p-[2.5rem_5.5rem_3.75rem] max-tab:pt-[2rem] max-tab:pb-[2.5rem] max-tab:px-11 max-phone:px-6 m-auto max-w-[90rem] flex w-full gap-10">
-            <div className="flex flex-col w-full gap-10">
-                <section className="tab:max-w-2xl flex flex-col gap-3">
-                    <h2 className="text-3xl font-bold text-white/80">Course&apos;s Details</h2>
-                    <MDXRemote source={description} />
-                </section>
-                <section className="tab:max-w-2xl flex flex-col gap-1 techStack">
-                    <h2 className="text-3xl font-bold text-white/80">Tech Stack</h2>
-                    <MDXRemote source={techStack} />
-                </section>
+  function nextVideo() {
+    if (
+      chapter ===
+        modulesCollection.items[modulesCollection.total - 1].chaptersCollection
+          .total -
+          1 &&
+      module === modulesCollection.total - 1
+    )
+      return 0;
 
-                <section className="tab:max-w-2xl flex flex-col gap-4">
-                    <h2 className="text-3xl font-bold text-white/80">Course&apos;s Content</h2>
-                    <div className="flex justify-between">
-                        <span className="flex items-center">{lessons} Lessons <Dot className="h-7 w-7" /> 8h 16m 13s </span>
-                        <Link href={`/course/${courseId}`}><Button className="text-white bg-prime/70 hover:bg-prime/90 text-xs h-8" size={"sm"}>Demo</Button></Link>
-                    </div>
-                    <Chapters module={module} />
-                </section>
+    if (
+      chapter ===
+        modulesCollection.items[module].chaptersCollection.total - 1 &&
+      module !== modulesCollection.total - 1
+    ) {
+      router.push(
+        pathName + "?" + "mod=" + String(module + 1) + "&" + "chap=" + String(0)
+      );
+    }
+    if (
+      chapter !==
+      modulesCollection.items[module].chaptersCollection.total - 1
+    ) {
+      router.push(
+        pathName +
+          "?" +
+          "mod=" +
+          String(module) +
+          "&" +
+          "chap=" +
+          String(chapter + 1)
+      );
+    }
+  }
 
-                <Reviews courseId={courseId} total={reviews.total} items={reviews.items} />
-            </div>
-
-            <Checkout title={title} courseId={courseId} amount={amount} currency={currency} image={image} />
+  return (
+    <div className="flex flex-col gap-6 tab:w-3/4 w-full">
+      <section className="flex flex-col gap-2">
+        <VideoPlayer
+          setOpen={setOpen}
+          courseId={courseId}
+          free={
+            modulesCollection.items[module]?.chaptersCollection.items[chapter]
+              ?.public
+          }
+          thumbnail={courseImage.url}
+          title={
+            modulesCollection.items[module]?.chaptersCollection.items[chapter]
+              ?.title
+          }
+          ytId={
+            modulesCollection.items[module]?.chaptersCollection.items[chapter]
+              ?.youtubeId
+          }
+        />
+        <div className="lg:hidden flex gap-0.5">
+          <Button
+            onClick={() => prevVideo()}
+            disabled={disabledPrev}
+            variant={"outline"}
+            size={"icon"}
+            className="rounded-xl"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+          <CourseDrawer
+            module={module}
+            chapter={chapter}
+            modules={modulesCollection}
+          />
+          <Button
+            onClick={() => nextVideo()}
+            disabled={disabledNext}
+            variant={"outline"}
+            size={"icon"}
+            className="rounded-xl"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </Button>
         </div>
-    )
+        <Publisher
+          disabledNext={disabledNext}
+          disabledPrev={disabledPrev}
+          nextVideo={nextVideo}
+          prevVideo={prevVideo}
+          name={"Aryan Singh"}
+          src="/instructor.jpg"
+        />
+      </section>
+
+      <Description
+        title={title}
+        chapterTitle={
+          modulesCollection.items[module]?.chaptersCollection.items[chapter]
+            ?.title
+        }
+        module={module}
+        chapter={chapter}
+        longDescription={longDescription}
+      />
+      <CourseInfo />
+      <div className="hidden md:block">
+        <FAQ />
+      </div>
+    </div>
+  );
 }
 
-export function Chapters({ module }: { module: Module }) {
+export function Publisher({
+  name,
+  src,
+  disabledPrev,
+  disabledNext,
+  nextVideo,
+  prevVideo,
+}: {
+  name: string;
+  src: string;
+  disabledPrev: boolean;
+  disabledNext: boolean;
+  nextVideo(): 0 | undefined;
+  prevVideo(): 0 | undefined;
+}) {
+  return (
+    <section className="flex justify-between">
+      <div className="flex items-center gap-2">
+        <Avatar>
+          <AvatarImage src={src} alt={`${name} Instructor`} />
+          <AvatarFallback>
+            {name
+              .split(" ")
+              .map((e) => e[0])
+              .join("")
+              .toUpperCase()}
+          </AvatarFallback>
+        </Avatar>
+        <span className="flex flex-col gap-1">
+          <span className="font-bold leading-4 text-sm">{name}</span>
+          <span className="text-white/60 text-xs">Publisher</span>
+        </span>
+      </div>
 
-    return (
-        <Accordion type="single" collapsible className="w-full border border-prime/30">
-            {module.items.map(({ title, duration, chaptersCollection }, i) => (
-                <AccordionItem key={i} className="border-t border-prime/40" value={`item-${i + 1}`}>
-                    <AccordionTrigger className="bg-second/40 px-5 font-bold text-sm">
-                        <div className="flex max-sm:flex-col justify-between w-full items-start sm:items-center">
-                            <span>{title}</span>
-                            <span className="flex sm:ml-auto text-white/70 items-center pr-2">
-                                <span>{chaptersCollection.total} Lessons</span>
-                                <span className="flex items-center"><Dot className="h-7 w-7" />{duration}</span>
-                            </span>
-                        </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="px-5 py-8 flex flex-col gap-6">
-                        {chaptersCollection.items.map(({ duration, title }, i) => <div key={i} className="flex max-sm:flex-col gap-2 justify-between">
-                            <span className="flex gap-2 sm:items-center">
-                                <Video className="h-6 w-6" />
-                                {title}
-                            </span>
-                            <span className="font-semibold text-muted-foreground">{duration}</span>
-                        </div>)}
-                    </AccordionContent>
-                </AccordionItem>
-            ))}
+      <div className="lg:flex hidden gap-0.5">
+        <Button
+          onClick={() => prevVideo()}
+          disabled={disabledPrev}
+          variant={"outline"}
+          size={"sm"}
+          className="rounded-md"
+        >
+          <ChevronLeft className="h-4 w-4 translate-y-0.5" />
+          Prev
+        </Button>
+        <Button
+          onClick={() => nextVideo()}
+          disabled={disabledNext}
+          variant={"outline"}
+          size={"sm"}
+          className="rounded-md"
+        >
+          Next
+          <ChevronRight className="h-4 w-4 translate-y-0.5" />
+        </Button>
+      </div>
+
+      <Button variant={"ghost"} size={"sm"} className="rounded-full gap-1">
+        <Share2 className="w-4 h-4" />
+        Share
+      </Button>
+    </section>
+  );
+}
+
+function Description({
+  title,
+  module,
+  chapter,
+  chapterTitle,
+  longDescription,
+}: {
+  title: string;
+  module: number;
+  chapter: number;
+  chapterTitle: string;
+  longDescription: React.JSX.Element;
+}) {
+  return (
+    <section className="flex flex-col gap-2">
+      <div className="flex flex-col gap-1">
+        <span className="flex text-muted-foreground gap-1 font-semibold text-sm">
+          <Badge className="rounded-md bg-prime/40 hover:bg-prime/40 text-white">
+            {module + 1}.{chapter + 1}
+          </Badge>
+          <h2>{chapterTitle}</h2>
+        </span>
+        <h1 className="font-bold text-xl">{title}</h1>
+      </div>
+      <span className="font-bold text-lg">Description</span>
+      <div className="text-sm text-white/80 leading-6">{longDescription}</div>
+      {/* <p className="text-sm text-white/80 leading-6">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus non
+        veritatis magni minima accusamus quibusdam excepturi tenetur velit iusto
+        vel modi fugit dolorum ea dolor dolore ad, ipsa aut? At. Lorem ipsum
+        dolor sit amet consectetur adipisicing elit. Aliquid corrupti odio quod
+        pariatur nam necessitatibus obcaecati deleniti illum praesentium ut
+        rerum voluptate, aperiam nihil accusantium hic architecto autem
+        quibusdam id.
+      </p> */}
+    </section>
+  );
+}
+
+function CourseInfo() {
+  return (
+    <section className="flex flex-col gap-4">
+      <span className="font-bold text-lg">Course Info</span>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+        <div className="flex flex-col gap-1 p-5 rounded-xl bg-second/80 font-semibold">
+          <span className="text-xs text-white/70">Lessons</span>
+          <span className="text-sm flex gap-1">
+            <PlaySquare className="h-5 w-5" />
+            128
+          </span>
+        </div>
+
+        <div className="flex flex-col gap-1 p-5 rounded-xl bg-second/80 font-semibold">
+          <span className="text-xs text-white/70">Duration</span>
+          <span className="text-sm flex gap-1">
+            <Clock2 className="h-5 w-5" />
+            20h 32m
+          </span>
+        </div>
+
+        <div className="flex flex-col gap-1 p-5 rounded-xl bg-second/80 font-semibold">
+          <span className="text-xs text-white/70">Skill Level</span>
+          <span className="text-sm flex gap-1">
+            <SignalMedium className="h-5 w-5" />
+            Beginner
+          </span>
+        </div>
+
+        <div className="flex flex-col gap-1 p-5 rounded-xl bg-second/80 font-semibold">
+          <span className="text-xs text-white/70">Views</span>
+          <span className="text-sm flex gap-1">
+            <Eye className="h-5 w-5" />
+            80,930
+          </span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CourseDrawer({
+  module,
+  chapter,
+  modules,
+}: {
+  module: number;
+  chapter: number;
+  modules: {
+    total: number;
+    items: {
+      title: string;
+      duration: string;
+      chaptersCollection: {
+        total: number;
+        items: [
+          {
+            public: boolean;
+            title: string;
+            duration: string;
+            youtubeId: string;
+          }
+        ];
+      };
+    }[];
+  };
+}) {
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant={"outline"} className="flex-1 rounded-xl">
+          Chapters
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Course List</DrawerTitle>
+          <DrawerDescription>
+            This is a list of current course.
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="px-6 py-1">
+          <CourseList
+            chapter={Number(chapter)}
+            module={Number(modules)}
+            modules={modules}
+          />
+        </div>
+        <DrawerFooter>
+          <DrawerClose>
+            <Button className="w-full" variant="outline">
+              Close
+            </Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
+}
+
+export function FAQ() {
+  const qna = [
+    {
+      title: "How the course will help me in future ?",
+      answer:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere esse dolor, dolores enim, architecto saepe impedit vitae quam earum doloribus, voluptate sit delectus reprehenderit mollitia non placeat. Ullam, quisquam facere!",
+    },
+    {
+      title: "Why the course will help me in future 2 ?",
+      answer:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere esse dolor, dolores enim, architecto saepe impedit vitae quam earum doloribus, voluptate sit delectus reprehenderit mollitia non placeat. Ullam, quisquam facere!",
+    },
+    {
+      title: "What the course about can you mail me the info ?",
+      answer:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere esse dolor, dolores enim, architecto saepe impedit vitae quam earum doloribus, voluptate sit delectus reprehenderit mollitia non placeat. Ullam, quisquam facere!",
+    },
+    {
+      title: "Why thing are bad in my life ?",
+      answer:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere esse dolor, dolores enim, architecto saepe impedit vitae quam earum doloribus, voluptate sit delectus reprehenderit mollitia non placeat. Ullam, quisquam facere!",
+    },
+  ];
+
+  return (
+    <section className="flex flex-col gap-4">
+      <span className="font-bold text-lg">Frequently Asked Questions</span>
+      <div className="grid gap-2">
+        <Accordion className="flex flex-col gap-3" type="single" collapsible>
+          {qna.map(({ answer, title }, i) => (
+            <AccordionItem key={i} value={`item-${i}`}>
+              <AccordionTrigger className="text-sm bg-second/80 rounded-xl p-4 font-semibold text-start text-white/90">
+                {title}
+              </AccordionTrigger>
+              <AccordionContent className="text-xs bg-second/30 rounded-b-xl p-4 items-start text-foreground/70">
+                {answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
         </Accordion>
-    )
+      </div>
+    </section>
+  );
 }

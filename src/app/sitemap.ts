@@ -146,8 +146,6 @@ const staticMaps: MetadataRoute.Sitemap = [
     },
 ]
 
-export const revalidate = 3600
-
 export const dynamic = 'force-dynamic'
 
 export const getItem = cache(async () => {
@@ -199,7 +197,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: 'monthly',
         priority: 0.5,
     }))
-    
+
     const dynamicCourses: MetadataRoute.Sitemap = courseSlugs.map((courses) => ({
         url: `${BASE_URL}/courses/${courses.slug}`,
         lastModified: new Date(),
@@ -209,16 +207,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return [...staticMaps, ...dynamicCourses, ...dynamicRoadmaps, ...dynamicMaps, ...dynamicTemplates]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

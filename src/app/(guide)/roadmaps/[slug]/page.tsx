@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import Hero from "./hero";
 import Flow from "./flow";
 
+export const dynamic = "force-static";
+
 type PageProps = {
   params: {
     slug: string;
@@ -36,7 +38,7 @@ export async function generateMetadata(
     openGraph: {
       title: item?.name,
       description: item?.description,
-      images: item?.image
+      images: item?.image,
     },
   };
 
