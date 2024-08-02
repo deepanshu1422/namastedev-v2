@@ -1,58 +1,90 @@
-import { auth } from '@/auth'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import prisma from '@/util/prismaClient'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import { auth } from "@/auth";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import prisma from "@/util/prismaClient";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
-const dynamic = 'force-dynamic'
+const dynamic = "force-dynamic";
 
 export default async function Purchased() {
+  const session = await auth();
 
-    const session = await auth()
-
-    if (session?.user?.courseId?.length == 0 || session?.user?.courseId?.length == undefined) return <div className='min-h-60 w-full flex'><Badge className="text-white gap-1 bg-second/60 hover:bg-second/80 rounded m-auto text-base">No Purchased Courses</Badge></div>
-
+  if (
     // @ts-ignore
-    const json = JSON.stringify(session?.user?.courseId.map((e: string) => ({ courseId: e }))).replace(/"([^"]+)":/g, '$1:')
+    session?.user?.courseId?.length == 0 ||
+    // @ts-ignore
+    session?.user?.courseId?.length == undefined
+  )
+    return (
+      <div className="min-h-60 w-full flex">
+        <Badge className="text-white gap-1 bg-second/60 hover:bg-second/80 rounded m-auto text-base">
+          No Purchased Courses
+        </Badge>
+      </div>
+    );
 
-    // const courseCollection =session?.user?.courseId?.map((e) => ({courseId: e}))
+  const json = JSON.stringify(
+    // @ts-ignore
+    session?.user?.courseId.map((e: string) => ({ courseId: e }))
+  ).replace(/"([^"]+)":/g, "$1:");
 
-    const query = `query { courseCollection(where: {OR: ${json}}){ items{ courseId, title, longDescription, courseImage{ description, url, width, height, }, } } }`
+  // const courseCollection =session?.user?.courseId?.map((e) => ({courseId: e}))
 
-    const data = await (await fetch(`https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`, {
+  const query = `query { courseCollection(where: {OR: ${json}}){ items{ slug, courseId, title, longDescription, courseImage{ description, url, width, height, }, } } }`;
+
+  const data = await (
+    await fetch(
+      `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
+      {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
         },
-        cache:  "no-cache",
-        next: {tags: ["courses"]},
+        cache: "no-cache",
+        next: { tags: ["courses"] },
         body: JSON.stringify({ query }),
-    })).json()
-
-    const { data: { courseCollection: { items } } } = data
-
-    return (<div className='min-h-52 w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4'>
-        {items.map((e: any, i: number) => <CourseCard key={i} e={e} />)}
-    </div>
+      }
     )
+  ).json();
+
+  const {
+    data: {
+      courseCollection: { items },
+    },
+  } = data;
+
+  return (
+    <div className="min-h-52 w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {items.map((e: any, i: number) => (
+        <CourseCard key={i} e={e} />
+      ))}
+    </div>
+  );
 }
 
 function CourseCard({ e }: { e: any }) {
-    return (
-        <Link href={`/course/${e?.courseId}` || ""} className='flex flex-col gap-3 py-2 px-3 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60 transition-all duration-300'>
-            <div className='flex justify-between'>
-                <Image src={"/logo.png"} alt={"30DC Logo"} height={40} width={40} />
-                {/* <Image src={"/logo.png"} alt={"30DC Logo"} height={40} width={40} /> */}
-            </div>
-            <h3 className='font-semibold text-lg'>{e.title}</h3>
-            <div className='flex flex-col gap-3 mt-auto'>
-                <Badge className='text-white w-fit bg-prime/40 hover:bg-prime/60 rounded'>Progress</Badge>
-                <Progress value={30} className='h-1 bg-bg' />
-                <span className='text-xs text-muted-foreground pt-3'>Last Updated: {(new Date()).toLocaleDateString()}</span>
-            </div>
-        </Link>
-    )
+  return (
+    <Link
+      href={`/courses/${e?.slug}` || ""}
+      className="flex flex-col gap-3 py-2 px-3 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60 transition-all duration-300"
+    >
+      <div className="flex justify-between">
+        <Image src={"/logo.png"} alt={"30DC Logo"} height={40} width={40} />
+        {/* <Image src={"/logo.png"} alt={"30DC Logo"} height={40} width={40} /> */}
+      </div>
+      <h3 className="font-semibold text-lg">{e.title}</h3>
+      <div className="flex flex-col gap-3 mt-auto">
+        <Badge className="text-white w-fit bg-prime/40 hover:bg-prime/60 rounded">
+          Progress
+        </Badge>
+        <Progress value={30} className="h-1 bg-bg" />
+        <span className="text-xs text-muted-foreground pt-3">
+          Last Updated: {new Date().toLocaleDateString()}
+        </span>
+      </div>
+    </Link>
+  );
 }

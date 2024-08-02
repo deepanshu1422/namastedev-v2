@@ -9,15 +9,22 @@ import {
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
+import { Dispatch, SetStateAction, useCallback } from "react";
 
 export default function CourseList({
   modules,
   module,
   chapter,
+  setVidIndex,
 }: {
   module: number;
   chapter: number;
+  setVidIndex: Dispatch<
+    SetStateAction<{
+      modIndex: number;
+      chapterIndex: number;
+    }>
+  >;
   modules: {
     total: number;
     items: {
@@ -37,7 +44,6 @@ export default function CourseList({
     }[];
   };
 }) {
-  const pathName = usePathname();
   return (
     <Accordion
       defaultValue={`module-${module}`}
@@ -56,17 +62,9 @@ export default function CourseList({
           </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-3 text-xs py-2">
             {chaptersCollection.items.map(
-              ({ title, youtubeId, public: free }, chapterIndex) => (
-                <Link
-                  href={
-                    pathName +
-                    "?" +
-                    "mod=" +
-                    String(i) +
-                    "&" +
-                    "chap=" +
-                    String(chapterIndex)
-                  }
+              ({ title, public: free }, chapterIndex) => (
+                <button
+                  onClick={() => setVidIndex({ modIndex: i, chapterIndex })}
                   key={chapterIndex}
                   className={`flex gap-2 items-center justify-between hover:text-white/90 text-white/70`}
                 >
@@ -89,7 +87,7 @@ export default function CourseList({
                       Free
                     </Badge>
                   )}
-                </Link>
+                </button>
               )
             )}
           </AccordionContent>

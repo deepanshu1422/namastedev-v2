@@ -1,10 +1,10 @@
-import { Metadata } from 'next';
-import React, { Suspense } from 'react'
-import Courses from './courses';
-import { Skeleton } from '@/components/ui/skeleton';
-import Purchased from './purchased';
-import Notifications from './notifications';
-import { UserDialog } from './new-user';
+import { Metadata } from "next";
+import React, { Suspense } from "react";
+import Courses from "./courses";
+import { Skeleton } from "@/components/ui/skeleton";
+import Purchased from "./purchased";
+import Notifications from "./notifications";
+import { UserDialog } from "./new-user";
 
 export const metadata: Metadata = {
   title: "Dashboard | 30dayscoding",
@@ -30,16 +30,17 @@ export const metadata: Metadata = {
 };
 
 export default async function Dashboard() {
-
   return (
-    <div className='flex h-full'>
-      <div className='flex-1 flex flex-col gap-2 px-4 py-5 lg:px-8'>
+    <div className="flex h-full">
+      <div className="flex-1 flex flex-col gap-2 px-6 py-5 lg:px-8">
         <span>Dashboard</span>
         <Suspense fallback={<CoursesFallback />}>
           <Courses />
         </Suspense>
-        <div className='flex justify-between py-3'>
-          <span className='text-xl text-white/70 font-bold'>Purchased Courses</span>
+        <div className="flex justify-between py-3">
+          <span className="text-xl text-white/70 font-bold">
+            Purchased Courses
+          </span>
         </div>
         <Suspense fallback={<PurchasedFallback />}>
           <Purchased />
@@ -48,19 +49,28 @@ export default async function Dashboard() {
       <Notifications />
       <UserDialog />
     </div>
-  )
+  );
 }
 
 function CoursesFallback() {
-  return <section className='flex rounded-lg gap-2 overflow-hidden w-full py-2 bg-bg'>
-    {Array.from({ length: 3 }).map((e: any, i: number) => <Skeleton key={i} className='max-sm:basis-4/5 sm:basis-1/2 md:basis-1/3 bg-second/30 aspect-video' />)}
-  </section>
+  return (
+    <section className="flex rounded-lg gap-2 overflow-hidden w-full py-2 bg-bg">
+      {Array.from({ length: 3 }).map((e: any, i: number) => (
+        <Skeleton
+          key={i}
+          className="max-sm:basis-4/5 sm:basis-1/2 md:basis-1/3 bg-second/30 aspect-video"
+        />
+      ))}
+    </section>
+  );
 }
 
 function PurchasedFallback() {
-  return <div className='min-h-52 w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4'>
-    <Skeleton className='min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60' />
-    <Skeleton className='min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60' />
-    <Skeleton className='min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60' />
-  </div>
+  return (
+    <div className="min-h-52 w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <Skeleton className="min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60" />
+      <Skeleton className="min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60" />
+      <Skeleton className="min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60" />
+    </div>
+  );
 }

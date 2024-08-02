@@ -522,6 +522,7 @@ export function PaymentModal({
           </CardHeader>
           <CardContent className="pt-3 pb-0 mx-auto w-full flex flex-col items-center gap-2">
             <Button
+              onClick={() => setOpenPay(false)}
               disabled={status === "loading"}
               className="w-full bg-prime/70 text-white hover:bg-prime"
             >

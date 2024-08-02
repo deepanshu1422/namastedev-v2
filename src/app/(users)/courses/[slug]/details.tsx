@@ -47,7 +47,16 @@ export default function Details({
   longDescription,
   open,
   setOpen,
+  vidIndex,
+  setVidIndex,
 }: {
+  vidIndex: { modIndex: number; chapterIndex: number };
+  setVidIndex: Dispatch<
+    SetStateAction<{
+      modIndex: number;
+      chapterIndex: number;
+    }>
+  >;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   title: string;
@@ -92,67 +101,46 @@ export default function Details({
         1 && module === modulesCollection.total - 1;
 
   function prevVideo() {
-    console.log("PREV");
-
-    if (chapter === 0 && module === 0) return 0;
-    if (chapter === 0 && module !== 0) {
-      router.push(
-        pathName +
-          "?" +
-          "mod=" +
-          String(module - 1) +
-          "&" +
-          "chap=" +
-          String(
-            modulesCollection.items[module - 1].chaptersCollection.total - 1
-          )
-      );
+    if (vidIndex.chapterIndex === 0 && vidIndex.modIndex === 0) return 0;
+    if (vidIndex.chapterIndex === 0 && vidIndex.modIndex !== 0) {
+      setVidIndex({
+        modIndex: vidIndex.modIndex - 1,
+        chapterIndex:
+          modulesCollection.items[vidIndex.modIndex - 1].chaptersCollection
+            .items.length - 1,
+      });
     }
-    if (chapter !== 0) {
-      router.push(
-        pathName +
-          "?" +
-          "mod=" +
-          String(module) +
-          "&" +
-          "chap=" +
-          String(chapter - 1)
-      );
+    if (vidIndex.chapterIndex !== 0) {
+      setVidIndex({ ...vidIndex, chapterIndex: (vidIndex.chapterIndex -= 1) });
     }
   }
 
   function nextVideo() {
     if (
-      chapter ===
-        modulesCollection.items[modulesCollection.total - 1].chaptersCollection
-          .total -
+      vidIndex.chapterIndex ===
+        modulesCollection.items[modulesCollection.items.length - 1]
+          .chaptersCollection.items.length -
           1 &&
-      module === modulesCollection.total - 1
+      vidIndex.modIndex === modulesCollection.total - 1
     )
       return 0;
 
     if (
-      chapter ===
-        modulesCollection.items[module].chaptersCollection.total - 1 &&
-      module !== modulesCollection.total - 1
+      vidIndex.chapterIndex ===
+        modulesCollection.items[vidIndex.modIndex].chaptersCollection.total -
+          1 &&
+      vidIndex.modIndex !== modulesCollection.total - 1
     ) {
-      router.push(
-        pathName + "?" + "mod=" + String(module + 1) + "&" + "chap=" + String(0)
-      );
+      setVidIndex({
+        modIndex: vidIndex.modIndex + 1,
+        chapterIndex: 0,
+      });
     }
     if (
-      chapter !==
-      modulesCollection.items[module].chaptersCollection.total - 1
+      vidIndex.chapterIndex !==
+      modulesCollection.items[vidIndex.modIndex].chaptersCollection.total - 1
     ) {
-      router.push(
-        pathName +
-          "?" +
-          "mod=" +
-          String(module) +
-          "&" +
-          "chap=" +
-          String(chapter + 1)
-      );
+      setVidIndex({ ...vidIndex, chapterIndex: (vidIndex.chapterIndex += 1) });
     }
   }
 
@@ -187,6 +175,7 @@ export default function Details({
             <ChevronLeft className="h-4 w-4" />
           </Button>
           <CourseDrawer
+            setVidIndex={setVidIndex}
             module={module}
             chapter={chapter}
             modules={modulesCollection}
@@ -378,9 +367,16 @@ function CourseDrawer({
   module,
   chapter,
   modules,
+  setVidIndex,
 }: {
   module: number;
   chapter: number;
+  setVidIndex: Dispatch<
+    SetStateAction<{
+      modIndex: number;
+      chapterIndex: number;
+    }>
+  >;
   modules: {
     total: number;
     items: {
@@ -416,6 +412,7 @@ function CourseDrawer({
         </DrawerHeader>
         <div className="px-6 py-1">
           <CourseList
+            setVidIndex={setVidIndex}
             chapter={Number(chapter)}
             module={Number(modules)}
             modules={modules}

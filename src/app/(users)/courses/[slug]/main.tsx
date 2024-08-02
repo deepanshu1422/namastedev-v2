@@ -71,8 +71,13 @@ export default function Main({
 }: CourseItem) {
   const searchParams = useSearchParams();
 
-  const module = searchParams.get("mod");
-  const chapter = searchParams.get("chap");
+  const [vidIndex, setVidIndex] = useState<{
+    modIndex: number;
+    chapterIndex: number;
+  }>({
+    modIndex: 0,
+    chapterIndex: 0,
+  });
 
   const [open, setOpen] = useState(false);
   const [openPay, setOpenPay] = useState(false);
@@ -95,14 +100,16 @@ export default function Main({
           </div>
 
           <CourseList
-            chapter={Number(chapter) ?? 0}
-            module={Number(module) ?? 0}
+            chapter={vidIndex.chapterIndex}
+            module={vidIndex.modIndex}
             modules={modulesCollection}
+            setVidIndex={setVidIndex}
           />
         </div>
         <div className="bg-bg lg:rounded-s-3xl min-h-dvh py-6 max-tab:pt-[1rem] max-tab:pb-[2.5rem] px-4 md:px-6 m-auto w-full flex">
           <section className="flex max-md:flex-col gap-6 p-1 max-w-6xl w-full mx-auto">
             <Details
+              vidIndex={vidIndex}
               open={open}
               setOpen={setOpen}
               longDescription={mdx}
@@ -110,8 +117,9 @@ export default function Main({
               title={title}
               courseId={courseId}
               courseImage={courseImage}
-              module={Number(module) ?? 0}
-              chapter={Number(chapter) ?? 0}
+              chapter={vidIndex.chapterIndex}
+              module={vidIndex.modIndex}
+              setVidIndex={setVidIndex}
             />
             <Checkout courseId={courseId} open={open} setOpen={setOpen} />
           </section>
