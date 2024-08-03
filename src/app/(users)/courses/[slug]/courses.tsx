@@ -16,9 +16,11 @@ export default function CourseList({
   module,
   chapter,
   setVidIndex,
+  setOpen,
 }: {
   module: number;
   chapter: number;
+  setOpen?: Dispatch<SetStateAction<boolean>>;
   setVidIndex: Dispatch<
     SetStateAction<{
       modIndex: number;
@@ -64,7 +66,10 @@ export default function CourseList({
             {chaptersCollection.items.map(
               ({ title, public: free }, chapterIndex) => (
                 <button
-                  onClick={() => setVidIndex({ modIndex: i, chapterIndex })}
+                  onClick={() => {
+                    if (setOpen) setOpen(false);
+                    setVidIndex({ modIndex: i, chapterIndex });
+                  }}
                   key={chapterIndex}
                   className={`flex gap-2 items-center justify-between hover:text-white/90 text-white/70`}
                 >

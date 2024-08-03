@@ -22,13 +22,22 @@ import { FAQ } from "./details";
 import { useSession } from "next-auth/react";
 
 export default function Checkout({
+  amount,
   courseId,
   open,
   setOpen,
+  faqCollection,
 }: {
+  amount: number;
   courseId: string;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  faqCollection: {
+    items: {
+      question: string;
+      answer: string;
+    }[];
+  };
 }) {
   const { data: session } = useSession();
   return (
@@ -39,9 +48,9 @@ export default function Checkout({
           <span className="text-xs text-white/80">Complete Course</span>
           <div className="flex justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-xl font-bold">₹1000</span>
+              <span className="text-xl font-bold">₹{amount}</span>
               <span className="text-sm line-through text-muted-foreground">
-                4000
+                ₹{amount * 4}
               </span>
             </div>
             <Badge className="bg-prime/50 hover:bg-prime/60 text-white">
@@ -217,7 +226,7 @@ export default function Checkout({
       </div>
 
       <div className="md:hidden block">
-        <FAQ />
+        <FAQ faqs={faqCollection.items} />
       </div>
     </section>
   );

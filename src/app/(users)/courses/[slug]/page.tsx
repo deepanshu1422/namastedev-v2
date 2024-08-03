@@ -39,6 +39,12 @@ export type Courses = {
           currencyCode: string;
         }[];
       };
+      faqCollection: {
+        items: {
+          question: string;
+          answer: string;
+        }[];
+      };
       modulesCollection: {
         total: number;
         items: {
@@ -145,12 +151,12 @@ export async function generateMetadata(
 
   return {
     title: `${item?.title} | 30DC Courses`,
-    description: item?.description,
+    description: item?.shortDescription,
     openGraph: {
       title: `${item?.title} | 30DC Courses`,
-      description: item?.description,
+      description: item?.shortDescription,
       images: {
-        url: item?.imgSrc ?? "",
+        url: item?.courseImage.url ?? "",
       },
     },
   };
@@ -189,6 +195,12 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
             amount,
             countryCode,
             }
+        },
+        faqCollection{
+          items{
+          question,
+          answer
+          }
         },
         modulesCollection{
             total,
@@ -237,17 +249,7 @@ export default async function Home({ params: { slug } }: PageProps) {
     courseCollection: { items },
   } = data;
 
-  const {
-    courseCreator,
-    courseImage,
-    longDescription,
-    modulesCollection,
-    pricingsCollection,
-    title,
-    courseId,
-    reviewsCollection,
-    techStack,
-  } = items[0];
+  const { longDescription } = items[0];
 
   const mdx = <MDXRemote source={longDescription} />;
 

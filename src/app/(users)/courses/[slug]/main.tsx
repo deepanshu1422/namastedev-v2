@@ -44,6 +44,12 @@ type CourseItem = {
         currencyCode: string;
       }[];
     };
+    faqCollection: {
+      items: {
+        question: string;
+        answer: string;
+      }[];
+    };
     modulesCollection: {
       total: number;
       items: {
@@ -67,10 +73,15 @@ type CourseItem = {
 
 export default function Main({
   mdx,
-  item: { title, courseId, courseImage, modulesCollection, pricingsCollection },
+  item: {
+    title,
+    courseId,
+    courseImage,
+    modulesCollection,
+    pricingsCollection,
+    faqCollection,
+  },
 }: CourseItem) {
-  const searchParams = useSearchParams();
-
   const [vidIndex, setVidIndex] = useState<{
     modIndex: number;
     chapterIndex: number;
@@ -109,6 +120,7 @@ export default function Main({
         <div className="bg-bg lg:rounded-s-3xl min-h-dvh py-6 max-tab:pt-[1rem] max-tab:pb-[2.5rem] px-4 md:px-6 m-auto w-full flex">
           <section className="flex max-md:flex-col gap-6 p-1 max-w-6xl w-full mx-auto">
             <Details
+              faqCollection={faqCollection}
               vidIndex={vidIndex}
               open={open}
               setOpen={setOpen}
@@ -121,7 +133,13 @@ export default function Main({
               module={vidIndex.modIndex}
               setVidIndex={setVidIndex}
             />
-            <Checkout courseId={courseId} open={open} setOpen={setOpen} />
+            <Checkout
+              faqCollection={faqCollection}
+              amount={pricingsCollection.items[0].amount}
+              courseId={courseId}
+              open={open}
+              setOpen={setOpen}
+            />
           </section>
         </div>
       </section>

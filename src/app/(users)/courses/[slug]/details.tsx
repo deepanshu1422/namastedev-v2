@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/drawer";
 
 import Image from "next/image";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -41,6 +41,7 @@ export default function Details({
   title,
   courseId,
   modulesCollection,
+  faqCollection,
   courseImage,
   module,
   chapter,
@@ -70,6 +71,12 @@ export default function Details({
     width: number;
     height: number;
     description: string;
+  };
+  faqCollection: {
+    items: {
+      question: string;
+      answer: string;
+    }[];
   };
   modulesCollection: {
     total: number;
@@ -212,7 +219,7 @@ export default function Details({
       />
       <CourseInfo />
       <div className="hidden md:block">
-        <FAQ />
+        <FAQ faqs={faqCollection.items} />
       </div>
     </div>
   );
@@ -308,7 +315,9 @@ function Description({
         <h1 className="font-bold text-xl">{title}</h1>
       </div>
       <span className="font-bold text-lg">Description</span>
-      <div className="text-sm text-white/80 leading-6">{longDescription}</div>
+      <div className="text-sm text-white/80 leading-6 techStack">
+        {longDescription}
+      </div>
       {/* <p className="text-sm text-white/80 leading-6">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus non
         veritatis magni minima accusamus quibusdam excepturi tenetur velit iusto
@@ -396,8 +405,9 @@ function CourseDrawer({
     }[];
   };
 }) {
+  const [open, setOpen] = useState(false);
   return (
-    <Drawer>
+    <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button variant={"outline"} className="flex-1 rounded-xl">
           Chapters
@@ -412,6 +422,7 @@ function CourseDrawer({
         </DrawerHeader>
         <div className="px-6 py-1">
           <CourseList
+            setOpen={setOpen}
             setVidIndex={setVidIndex}
             chapter={Number(chapter)}
             module={Number(modules)}
@@ -430,39 +441,23 @@ function CourseDrawer({
   );
 }
 
-export function FAQ() {
-  const qna = [
-    {
-      title: "How the course will help me in future ?",
-      answer:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere esse dolor, dolores enim, architecto saepe impedit vitae quam earum doloribus, voluptate sit delectus reprehenderit mollitia non placeat. Ullam, quisquam facere!",
-    },
-    {
-      title: "Why the course will help me in future 2 ?",
-      answer:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere esse dolor, dolores enim, architecto saepe impedit vitae quam earum doloribus, voluptate sit delectus reprehenderit mollitia non placeat. Ullam, quisquam facere!",
-    },
-    {
-      title: "What the course about can you mail me the info ?",
-      answer:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere esse dolor, dolores enim, architecto saepe impedit vitae quam earum doloribus, voluptate sit delectus reprehenderit mollitia non placeat. Ullam, quisquam facere!",
-    },
-    {
-      title: "Why thing are bad in my life ?",
-      answer:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere esse dolor, dolores enim, architecto saepe impedit vitae quam earum doloribus, voluptate sit delectus reprehenderit mollitia non placeat. Ullam, quisquam facere!",
-    },
-  ];
-
+export function FAQ({
+  faqs,
+}: {
+  faqs: {
+    question: string;
+    answer: string;
+  }[];
+}) {
   return (
     <section className="flex flex-col gap-4">
       <span className="font-bold text-lg">Frequently Asked Questions</span>
       <div className="grid gap-2">
         <Accordion className="flex flex-col gap-3" type="single" collapsible>
-          {qna.map(({ answer, title }, i) => (
+          {faqs.map(({ answer, question }, i) => (
             <AccordionItem key={i} value={`item-${i}`}>
               <AccordionTrigger className="text-sm bg-second/80 rounded-xl p-4 font-semibold text-start text-white/90">
-                {title}
+                {question}
               </AccordionTrigger>
               <AccordionContent className="text-xs bg-second/30 rounded-b-xl p-4 items-start text-foreground/70">
                 {answer}
