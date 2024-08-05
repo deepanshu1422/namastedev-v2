@@ -4,31 +4,32 @@ import Footer from "@/components/new-cohort/footer";
 import Clarity from "@/util/clarity";
 import Pixel from "@/util/pixel";
 import GoogleAnalytics from "@/util/ga";
-import { Toaster } from "@/components/ui/sonner"
-import NextProvider from "@/util/next-auth";
+import { Toaster } from "@/components/ui/sonner";
 import PageSense from "@/util/pagesense";
-import SessionProvider from '@/util/next-auth'
+import SessionProvider from "@/util/next-auth";
 import Script from "next/script";
 import { auth } from "@/auth";
+import QueryProvider from "@/lib/queryProvider";
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const session = await auth()
+  const session = await auth();
 
   return (
     <html lang="en">
       <SessionProvider session={session}>
-        <body
-          className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
-        >
-          {children}
-          <Footer />
-          <Toaster richColors />
-        </body>
+        <QueryProvider>
+          <body
+            className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
+          >
+            {children}
+            <Footer />
+            <Toaster richColors />
+          </body>
+        </QueryProvider>
       </SessionProvider>
       <Pixel />
       <Clarity />

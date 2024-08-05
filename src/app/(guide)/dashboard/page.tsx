@@ -32,8 +32,7 @@ export const metadata: Metadata = {
 export default async function Dashboard() {
   return (
     <div className="flex h-full">
-      <div className="flex-1 flex flex-col gap-2 px-6 py-5 lg:px-8">
-        <span>Dashboard</span>
+      <div className="flex-1 flex flex-col gap-2 px-6 py-5 lg:px-8 w-full">
         <Suspense fallback={<CoursesFallback />}>
           <Courses />
         </Suspense>
@@ -42,9 +41,7 @@ export default async function Dashboard() {
             Purchased Courses
           </span>
         </div>
-        <Suspense fallback={<PurchasedFallback />}>
-          <Purchased />
-        </Suspense>
+        <Purchased />
       </div>
       <Notifications />
       <UserDialog />
@@ -62,15 +59,5 @@ function CoursesFallback() {
         />
       ))}
     </section>
-  );
-}
-
-function PurchasedFallback() {
-  return (
-    <div className="min-h-52 w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <Skeleton className="min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60" />
-      <Skeleton className="min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60" />
-      <Skeleton className="min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60" />
-    </div>
   );
 }

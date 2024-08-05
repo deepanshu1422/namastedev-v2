@@ -68,9 +68,6 @@ async function getCourses(): Promise<CoursesType> {
       },
       body: JSON.stringify({ query }),
       cache: "force-cache",
-      next: {
-        revalidate: 3600 * 24,
-      },
     }
   );
 

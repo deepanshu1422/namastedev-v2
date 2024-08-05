@@ -1,66 +1,48 @@
-import { auth } from "@/auth";
+"use client";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import prisma from "@/util/prismaClient";
+import { useQuery } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import refreshCourses from "../../../../actions/refreshCourses";
+import { Skeleton } from "@/components/ui/skeleton";
+import { MessageCircleQuestion } from "lucide-react";
 
-const dynamic = "force-dynamic";
+export default function Purchased() {
+  const { data: session } = useSession();
 
-export default async function Purchased() {
-  const session = await auth();
-
-  if (
-    // @ts-ignore
-    session?.user?.courseId?.length == 0 ||
-    // @ts-ignore
-    session?.user?.courseId?.length == undefined
-  )
-    return (
-      <div className="min-h-60 w-full flex">
-        <Badge className="text-white gap-1 bg-second/60 hover:bg-second/80 rounded m-auto text-base">
-          No Purchased Courses
-        </Badge>
-      </div>
-    );
-
-  const json = JSON.stringify(
-    // @ts-ignore
-    session?.user?.courseId.map((e: string) => ({ courseId: e }))
-  ).replace(/"([^"]+)":/g, "$1:");
-
-  // const courseCollection =session?.user?.courseId?.map((e) => ({courseId: e}))
-
-  const query = `query { courseCollection(where: {OR: ${json}}){ items{ slug, courseId, title, longDescription, courseImage{ description, url, width, height, }, } } }`;
-
-  const data = await (
-    await fetch(
-      `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-        },
-        cache: "no-cache",
-        next: { tags: ["courses"] },
-        body: JSON.stringify({ query }),
-      }
-    )
-  ).json();
+  console.log(session?.user);
 
   const {
-    data: {
-      courseCollection: { items },
+    isPending,
+    isError,
+    error,
+    data: items,
+  } = useQuery({
+    // @ts-ignore
+    queryKey: [session?.user?.courseId ?? []],
+    queryFn: async ({ queryKey }) => {
+      return await refreshCourses(queryKey[0]);
     },
-  } = data;
+    staleTime: 1000 * 60 * 10,
+  });
 
-  return (
+  if (isPending) return <PurchasedFallback />;
+
+  return items.length ? (
     <div className="min-h-52 w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {items.map((e: any, i: number) => (
         <CourseCard key={i} e={e} />
       ))}
+    </div>
+  ) : (
+    <div className="flex w-full h-52">
+      <Badge className="text-white gap-1 hover:bg-second/60 bg-second/40 rounded m-auto">
+        <MessageCircleQuestion className="h-4 w-4" />
+        Not Purchased Yet
+      </Badge>
     </div>
   );
 }
@@ -86,5 +68,15 @@ function CourseCard({ e }: { e: any }) {
         </span>
       </div>
     </Link>
+  );
+}
+
+function PurchasedFallback() {
+  return (
+    <div className="min-h-52 w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <Skeleton className="min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60" />
+      <Skeleton className="min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60" />
+      <Skeleton className="min-h-40 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60" />
+    </div>
   );
 }

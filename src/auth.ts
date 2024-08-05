@@ -33,7 +33,8 @@ export const {
                     courseId: user?.courseId,
                     //@ts-ignore
                     bundleId: user?.bundleId,
-                    newUser: trigger === "signUp",
+                    //@ts-ignore
+                    newUser: !!user?.contact || !!user?.state || !!user.name,
                     //@ts-ignore
                     phone: user?.contact,
                     //@ts-ignore
@@ -47,13 +48,10 @@ export const {
             if (trigger == "update" && token.newUser) {
                 // console.log("newUser");
                 const updatedUser = await prisma.user.update({ where: { id: token?.id as string }, data: { name: session.name, contact: session.phone!, state: session.state! } })
+
                 return {
                     ...token,
                     name: updatedUser.name,
-                    //@ts-ignore
-                    courseId: user?.courseId,
-                    //@ts-ignore
-                    bundleId: user?.bundleId,
                     newUser: false,
                     phone: updatedUser.contact,
                     state: updatedUser.state,
@@ -62,7 +60,6 @@ export const {
 
             if (trigger == "update") {
                 // console.log("HIT2");
-
                 const user = await prisma.user.findUnique({ where: { email: token.email! } })
 
                 return {

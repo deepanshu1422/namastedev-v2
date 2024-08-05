@@ -135,7 +135,10 @@ export default function Main({
             />
             <Checkout
               faqCollection={faqCollection}
-              amount={pricingsCollection.items[0].amount}
+              amount={
+                pricingsCollection.items.find((e) => e.countryCode == "IN")
+                  ?.amount ?? 0
+              }
               courseId={courseId}
               open={open}
               setOpen={setOpen}
@@ -150,12 +153,18 @@ export default function Main({
         courseId={courseId}
         title={title}
         cover={courseImage.url}
-        amount={pricingsCollection.items[0].amount}
+        amount={
+          pricingsCollection.items.find((e) => e.countryCode == "IN")?.amount ??
+          0
+        }
         curreny={"INR"}
         setOpenPay={setOpenPay}
       />
       <Floating
-        amount={pricingsCollection.items[0].amount}
+        amount={
+          pricingsCollection.items.find((e) => e.countryCode == "IN")?.amount ??
+          0
+        }
         open={open}
         setOpen={setOpen}
         courseId={courseId}

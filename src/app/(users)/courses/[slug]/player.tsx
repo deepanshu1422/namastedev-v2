@@ -37,7 +37,7 @@ export default function VideoPlayer({
   return (
     <div className="relative aspect-video rounded-xl overflow-hidden w-full bg-background/90">
       {/* @ts-ignore */}
-      {session?.user?.courseId.includes(courseId) || free ? (
+      {session?.user?.courseId?.includes(courseId) || free ? (
         <MediaPlayer
           src={`youtube/${ytId}`}
           viewType="video"

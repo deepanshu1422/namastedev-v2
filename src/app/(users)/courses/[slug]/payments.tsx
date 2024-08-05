@@ -1,16 +1,9 @@
 "use client";
 
-import {
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-  useCallback,
-  useState,
-} from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import createPayments from "../../../../../actions/createPayments";
-import refreshCourses from "../../../../../actions/refreshCourses";
 import getCoupons from "../../../../../actions/getCoupon";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
@@ -180,7 +173,6 @@ export function PaymentSheet({
         handler: async function (response: any) {
           setOpenPay(true);
           await update({ courses: true });
-          if (session?.user?.id) refreshCourses();
         },
         prefill: {
           name: formData.name,
@@ -563,7 +555,7 @@ export function Floating({
 
   const { data: session } = useSession();
   // @ts-ignore
-  if (!session?.user?.courseId.includes(courseId))
+  if (!session?.user?.courseId?.includes(courseId))
     return (
       <div className="md:hidden fixed bottom-0 z-20 bg-background/40 w-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30">
         <div className="flex justify-between items-center gap-2 p-4 lg:max-w-[80rem] mx-auto">
