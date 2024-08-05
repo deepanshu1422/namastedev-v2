@@ -9,10 +9,10 @@ export default function Header() {
   const { data: session, status } = useSession();
   return (
     <section className="px-3 py-2 flex justify-between sticky top-0 bg-footer z-50">
-      <div className="flex gap-2 items-center">
+      <Link href={"/"} className="flex gap-2 items-center">
         <Image src={"/logo.png"} alt="30DC Logo" height={35} width={35} />
         <span className="text-lg font-semibold">30DC</span>
-      </div>
+      </Link>
 
       <div className="flex gap-1 items-center">
         <Link href="/mentorship">

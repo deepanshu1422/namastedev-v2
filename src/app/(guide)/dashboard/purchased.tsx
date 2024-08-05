@@ -13,7 +13,7 @@ import { MessageCircleQuestion } from "lucide-react";
 export default function Purchased() {
   const { data: session } = useSession();
 
-  console.log(session?.user);
+  // console.log(session?.user);
 
   const {
     isPending,

@@ -26,6 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export function UserDialog() {
   const [open, setOpen] = useState(false);
@@ -57,8 +58,10 @@ function UserForm() {
   const { data, update } = useSession();
   const [formData, setFormData] = useState({
     name: data?.user?.name ?? "",
-    phone: "",
-    state: "",
+    // @ts-ignore
+    phone: data?.user?.phone ?? "",
+    // @ts-ignore
+    state: data?.user?.state ?? "",
   });
 
   const router = useRouter();
@@ -96,11 +99,26 @@ function UserForm() {
     "west_bengal",
   ];
 
+  function onError({ message }: { message: string }) {
+    toast.error("Error Occured", {
+      description: message,
+      position: "bottom-center",
+    });
+  }
+
   return (
     <div className="flex flex-col gap-2 py-3">
       <form
         onSubmit={async (e) => {
           e.preventDefault();
+
+          if (formData.name.length < 2)
+            return onError({ message: "Name too short" });
+          if (formData.phone.length !== 10)
+            return onError({ message: "Invalid Phone Number" });
+          if (!states.includes(formData.state))
+            return onError({ message: "Select a State" });
+
           setUpdating(true);
           await update({
             name: formData.name,
