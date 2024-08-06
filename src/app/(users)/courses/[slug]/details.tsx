@@ -97,15 +97,17 @@ export default function Details({
     }[];
   };
 }) {
-  const router = useRouter();
-  const pathName = usePathname();
-
   let disabledPrev = module == 0 && chapter == 0;
   let disabledNext =
     chapter ===
       modulesCollection.items[modulesCollection.total - 1].chaptersCollection
         .total -
         1 && module === modulesCollection.total - 1;
+
+  let chapterCount = modulesCollection.items.reduce(
+    (acc, cur) => (acc += cur.chaptersCollection.total),
+    0
+  );
 
   function prevVideo() {
     if (vidIndex.chapterIndex === 0 && vidIndex.modIndex === 0) return 0;
@@ -217,7 +219,7 @@ export default function Details({
         chapter={chapter}
         longDescription={longDescription}
       />
-      <CourseInfo />
+      <CourseInfo chapterCount={chapterCount} />
       <div className="hidden md:block">
         <FAQ faqs={faqCollection.items} />
       </div>
@@ -331,7 +333,7 @@ function Description({
   );
 }
 
-function CourseInfo() {
+function CourseInfo({ chapterCount }: { chapterCount: number }) {
   return (
     <section className="flex flex-col gap-4">
       <span className="font-bold text-lg">Course Info</span>
@@ -340,7 +342,7 @@ function CourseInfo() {
           <span className="text-xs text-white/70">Lessons</span>
           <span className="text-sm flex gap-1">
             <PlaySquare className="h-5 w-5" />
-            128
+            {chapterCount}
           </span>
         </div>
 

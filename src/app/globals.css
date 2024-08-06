@@ -180,11 +180,11 @@
 }
 
 .techStack ol {
-  @apply flex flex-col gap-2 list-inside list-decimal text-white/80 py-5;
+  @apply flex flex-col gap-2 list-inside list-decimal text-white/80 pt-5;
 }
 
 .techStack ul {
-  @apply flex flex-col gap-2 list-inside list-disc text-white/80 py-5;
+  @apply flex flex-col gap-2 list-inside list-disc text-white/80 pb-5;
 }
 
 .techStack li > strong {
@@ -197,4 +197,16 @@
 
 .techStack a {
   @apply font-semibold text-prime underline underline-offset-2;
+}
+
+.techStack h2 {
+  @apply text-xl font-bold py-3 break-words;
+}
+
+.techStack h3 {
+  @apply text-lg font-bold py-3 break-words;
+}
+
+.techStack h4 {
+  @apply text-lg font-bold py-3 break-words;
 }

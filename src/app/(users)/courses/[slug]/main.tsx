@@ -118,7 +118,7 @@ export default function Main({
           />
         </div>
         <div className="bg-bg lg:rounded-s-3xl min-h-dvh py-6 max-tab:pt-[1rem] max-tab:pb-[2.5rem] px-4 md:px-6 m-auto w-full flex">
-          <section className="flex max-md:flex-col gap-6 p-1 max-w-6xl w-full mx-auto">
+          <section className="relative flex max-md:flex-col gap-6 p-1 max-w-6xl w-full mx-auto">
             <Details
               faqCollection={faqCollection}
               vidIndex={vidIndex}
