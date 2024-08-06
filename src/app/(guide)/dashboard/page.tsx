@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Dashboard() {
+export default function Dashboard() {
   return (
     <div className="flex h-full">
       <div className="flex-1 flex flex-col gap-2 px-6 py-5 lg:px-8 w-full">

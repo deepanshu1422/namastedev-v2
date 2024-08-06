@@ -18,7 +18,7 @@ export default function Courses({
   if (courses.courseCollection?.items.length == 0)
     return (
       <div className="mx-auto max-w-[90rem] w-full text-center py-10 pb-40">
-        <span className="font-semibold rounded-full p-2 px-4 border-4 border-double w-fit mx-auto items-center border-prime shadow-2xl text-white/60 flex gap-1">
+        <span className="font-semibold rounded-full p-2 px-4 border-4 border-double w-fit mx-auto items-center border-prime shadow-2xl text-sm text-white/60 flex gap-1">
           {" "}
           <HelpCircle className="h-5 w-5" /> No Such Course Found
         </span>
@@ -100,7 +100,7 @@ export default function Courses({
           e.title.toLowerCase().includes(state.toLowerCase())
         ).length && (
           <div className="mx-auto max-w-[90rem] w-full text-center py-10 pb-40">
-            <span className="font-semibold rounded-full p-2 px-4 border-4 border-double w-fit mx-auto items-center border-prime shadow-2xl text-white/60 flex gap-1">
+            <span className="font-semibold rounded-full p-2 px-4 border-4 border-double w-fit mx-auto items-center border-prime shadow-2xl text-sm text-white/60 flex gap-1">
               {" "}
               <HelpCircle className="h-5 w-5" /> No Such Course Found
             </span>

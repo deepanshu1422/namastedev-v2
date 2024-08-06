@@ -34,7 +34,7 @@ export const {
                     //@ts-ignore
                     bundleId: user?.bundleId,
                     //@ts-ignore
-                    newUser: !!user?.contact || !!user?.state || !!user.name,
+                    newUser: !user?.contact || !user?.state || !user.name,
                     //@ts-ignore
                     phone: user?.contact,
                     //@ts-ignore
