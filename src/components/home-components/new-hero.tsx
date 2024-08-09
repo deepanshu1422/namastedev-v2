@@ -119,14 +119,18 @@ export default function Hero({
           <span className='px-1 md:px-4'>25,000+ Members</span>
           <span className='md:hidden text-prime font-bold'>&</span>
           <span className='px-1 md:px-4'>213 joined this month</span>
-          <span className='px-1 md:px-4 flex gap-2'>
+          <span className='px-1 md:px-4 flex flex-wrap justify-center max-sm:pt-1 gap-2'>
             <div className='flex gap-2 items-center'>
               <Star className='h-5 w-5 fill-prime stroke-prime' />
               <Star className='h-5 w-5 fill-prime stroke-prime' />
               <Star className='h-5 w-5 fill-prime stroke-prime' />
               <Star className='h-5 w-5 fill-prime stroke-prime' />
               <Star className='h-5 w-5 fill-prime stroke-prime' />
-            </div>4.93 <Link href={"/testimonials"} className='text-prime font-bold underline-offset-2 underline'>(200+ reviews)</Link></span>
+            </div>
+            <div className="flex gap-1">4.93
+              <Link href={"/testimonials"} className='text-prime font-bold underline-offset-2 underline'>(200+ reviews)</Link>
+            </div>
+          </span>
         </section>
 
         <Btn cover="/welcome.jpg" yt="nTAHWER3K-0" />
