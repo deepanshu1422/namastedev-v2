@@ -15,7 +15,7 @@ export default function Program() {
   ];
   return (
     <div className="w-full relative">
-      <div className="m-auto flex max-lg:flex-col items-start max-lg:items-center justify-between p-10 lg:p-20 gap-10 max-w-[90rem]">
+      <div className="m-auto flex max-lg:flex-col items-start max-lg:items-center justify-between p-6 lg:p-20 gap-10 max-w-[90rem]">
         <div className="lg:w-2/5 grid gap-5 shrink">
           <Reveal>
             <span className="text-4xl max-tab:text-3xl font-bold">

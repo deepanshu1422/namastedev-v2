@@ -1,156 +1,44 @@
-"use client";
-import Image from "next/image";
-
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  type CarouselApi,
-} from "@/components/ui/carousel";
-
-import Autoplay from "embla-carousel-autoplay";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { EmblaCarouselType } from "embla-carousel";
-import { Slider } from "./slider";
+import { mentorship } from "@/util/globals";
+import { Check, CreditCard, Play, Star } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import React, { Suspense } from "react";
+import Btn from "../mentorship/btn";
 
-export default function NewHero({
-  title,
-  desc,
-  heroImage,
-}: {
-  title: string;
-  desc: string;
-  heroImage: string;
-}) {
-  const slides = [
-    {
-      image: "/thumbs/link1.jpg",
-      href: "Kowl-SSE_Pk",
-    },
-    {
-      image: "/thumbs/link2.jpg",
-      href: "rDDCqk6Gdzk",
-    },
-    {
-      image: "/thumbs/link3.jpg",
-      href: "8LRVXsRn1Tk",
-    },
-  ];
-
-  const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!api) {
-      return;
-    }
-
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap() + 1);
-
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1);
-    });
-  }, [api]);
-
+export default function Lifetime() {
   return (
-    <div
-      className={`w-full grid relative overflow-hidden min-h-[400px] bg-zinc-950`}
-    >
-      {slides.map(({ image, href }, i) => (
-        <Image
-          key={i}
-          alt="yt thumbnail image"
-          fill
-          src={image ?? "/thumbs/1.jpg  "}
-          className={`object-cover ${
-            current === i + 1 ? "opacity-10" : "opacity-0"
-          } opacity-0 pointer-events-none transition-all duration-300`}
-        />
-      ))}
-      <div className="relative bg-gradient-to-t from-bg from-0% to-transparent to-50%">
-        <div className="tab:p-[10.5rem_5.5rem_3.75rem] max-tab:pt-[8rem] max-tab:pb-[2.5rem] m-auto max-w-[90rem] flex max-md:flex-col max-md:gap-10 justify-between items-center text-white">
-          <section className="grid gap-4 place-items-start flex-1 h-fit">
-            <h1
-              className={`max-w-2xl font-jakarta phone:text-[3.5rem] text-[2.5rem] font-extrabold bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-[50px] max-tab:px-11 max-phone:px-6`}
-            >
-              {title}
-            </h1>
-            <p className="max-w-[35rem] max-tab:px-11 max-phone:px-6 text-lg max-tab:text-[1.05rem] max-tab:leading-6">
-              {desc}
-            </p>
-          </section>
-          <Slider
-            slides={slides}
-            setApi={setApi}
-            current={current}
-            count={count}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
+    <div className="m-auto flex flex-col px-5 lg:px-20 pt-10 max-w-[75rem]">
+      <span className="flex items-center justify-center gap-4 relative pb-4">
+        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
+        <h1 className="font-jakarta bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight text-[2rem] sm:text-6xl font-extrabold text-center">
+          Master Tech Skills & Land Your Dream Job
+        </h1>
+        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
+      </span>
+      <section className="flex mx-auto flex-wrap w-full items-center justify-center md:divide-x-2 divide-white py-2">
+        <span className="px-1 md:px-4">25,000+ Members</span>
+        <span className="md:hidden text-prime font-bold">&</span>
+        <span className="px-1 md:px-4">300+ joined this month</span>
+        <span className="px-1 md:px-4 flex gap-2">
+          <div className="flex gap-2 items-center">
+            <Star className="h-5 w-5 fill-prime stroke-prime" />
+            <Star className="h-5 w-5 fill-prime stroke-prime" />
+            <Star className="h-5 w-5 fill-prime stroke-prime" />
+            <Star className="h-5 w-5 fill-prime stroke-prime" />
+            <Star className="h-5 w-5 fill-prime stroke-prime" />
+          </div>
+          4.93{" "}
+          <Link
+            href={"/testimonials"}
+            className="text-prime font-bold underline-offset-2 underline"
+          >
+            (200+ reviews)
+          </Link>
+        </span>
+      </section>
 
-function YTCarousel({
-  setApi,
-}: {
-  setApi: Dispatch<SetStateAction<EmblaCarouselType | undefined>>;
-}) {
-  const slides = [
-    {
-      image: "/thumbs/1.jpg",
-      href: "https://www.youtube.com/watch?v=Z4gQbG4oR4k",
-    },
-    {
-      image: "/thumbs/2.jpg",
-      href: "https://www.youtube.com/watch?v=U-dc8t9jS64",
-    },
-    {
-      image: "/thumbs/3.jpg",
-      href: "https://www.youtube.com/watch?v=N7AN5lcXljc",
-    },
-  ];
-
-  return (
-    <div className="mx-auto w-full max-w-xl gap-6 p-2">
-      {/* Slider */}
-      <Carousel
-        setApi={setApi}
-        plugins={[
-          Autoplay({
-            delay: 5000,
-            stopOnFocusIn: false,
-            stopOnMouseEnter: true,
-            stopOnInteraction: false,
-          }),
-        ]}
-        opts={{
-          align: "center",
-          loop: true,
-        }}
-        className="w-full mx-auto"
-      >
-        <CarouselContent>
-          {slides.map(({ image, href }, index) => (
-            <CarouselItem
-              key={index}
-              className="basis-4/5 md:basis-full h-full"
-            >
-              <AspectRatio className="relative" ratio={16 / 9}>
-                <Image
-                  src={image}
-                  alt="Image"
-                  className="rounded-lg object-cover"
-                  fill
-                />
-              </AspectRatio>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
+      <Btn cover="/welcome.jpg" yt="nTAHWER3K-0" />
     </div>
   );
 }
