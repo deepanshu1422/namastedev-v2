@@ -30,70 +30,17 @@ export default function Courses({
       <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-[85rem] gap-7 mx-auto max-phone:px-6 phone:px-10 max-tab:py-5 tab:pb-14">
         {state
           ? courses.courseCollection.items
-              .filter((e) =>
-                e.title.toLowerCase().includes(state.toLowerCase())
-              )
-              .map(({ courseImage, tags, slug, title }, i) => (
-                <Link
-                  key={i}
-                  href={`/courses/${slug}`}
-                  className="rounded bg-second/40 flex flex-col group transition-all duration-200 hover:bg-second/60 hover:shadow-xl shadow-black overflow-hidden sm:mb-3 max-w-xs w-[90%] sm:max-w-xs mx-auto"
-                >
-                  <Image
-                    className="rounded-t-lg shadow-lg"
-                    src={courseImage.url}
-                    alt={`30DC ${title} Course`}
-                    height={courseImage.height}
-                    width={courseImage.width}
-                  />
-                  <div className="flex flex-col items-start gap-2 p-3">
-                    <span className="text-lg font-bold">{title}</span>
-                    {/* <p className='text-xs text-white/80 leading-relaxed'>{description}</p> */}
-                  </div>
-                  <div className="flex flex-wrap gap-1 p-4 pt-0 px-3 mt-auto">
-                    {tags?.map((e, i) => (
-                      <Badge
-                        className="rounded bg-background text-sm"
-                        variant={"secondary"}
-                        key={i}
-                      >
-                        #{e}
-                      </Badge>
-                    ))}
-                  </div>
-                </Link>
-              ))
+            .filter((e) =>
+              e.title.toLowerCase().includes(state.toLowerCase())
+            )
+            .map(({ courseImage, tags, slug, title }, i) => (
+              <Course key={i} courseImage={courseImage} tags={tags} slug={slug} title={title} />
+            ))
           : courses.courseCollection.items.map(
-              ({ courseImage, tags, slug, title }, i) => (
-                <Link
-                  key={i}
-                  href={`/courses/${slug}`}
-                  className="rounded bg-second/40 flex flex-col group transition-all duration-200 hover:bg-second/60 hover:shadow-xl shadow-black overflow-hidden sm:mb-3 max-w-xs w-[90%] sm:max-w-xs mx-auto"
-                >
-                  <Image
-                    className="rounded-t-lg shadow-lg max-h-44 h-full"
-                    src={courseImage.url}
-                    alt={`30DC ${title} Course`}
-                    height={courseImage.height}
-                    width={courseImage.width}
-                  />
-                  <div className="flex flex-col items-start gap-2 p-3">
-                    <span className="text-lg font-bold">{title}</span>
-                  </div>
-                  <div className="flex flex-wrap gap-1 p-4 pt-0 px-3 mt-auto">
-                    {tags?.map((e, i) => (
-                      <Badge
-                        className="rounded bg-background text-sm"
-                        variant={"secondary"}
-                        key={i}
-                      >
-                        #{e}
-                      </Badge>
-                    ))}
-                  </div>
-                </Link>
-              )
-            )}
+            ({ courseImage, tags, slug, title }, i) => (
+              <Course key={i} courseImage={courseImage} tags={tags} slug={slug} title={title} />
+            )
+          )}
       </section>
       {state &&
         !courses.courseCollection.items.filter((e) =>
@@ -108,4 +55,33 @@ export default function Courses({
         )}
     </>
   );
+}
+
+function Course({ courseImage, tags, slug, title }: { courseImage: { url: string, height: number, width: number }, tags: string[], slug: string, title: string }) {
+  return <Link
+    href={`/courses/${slug}`}
+    className="rounded bg-second/40 flex flex-col group transition-all duration-200 hover:bg-second/60 hover:shadow-xl shadow-black overflow-hidden sm:mb-3 max-w-xs w-[90%] sm:max-w-xs mx-auto"
+  >
+    <Image
+      className="rounded-t-lg shadow-lg max-h-40 h-full object-cover"
+      src={courseImage.url}
+      alt={`30DC ${title} Course`}
+      height={courseImage.height}
+      width={courseImage.width}
+    />
+    <div className="flex flex-col items-start gap-2 p-3">
+      <span className="text-lg font-bold">{title}</span>
+    </div>
+    <div className="flex flex-wrap gap-1 p-4 pt-0 px-3 mt-auto">
+      {tags?.map((e, i) => (
+        <Badge
+          className="rounded bg-background text-sm"
+          variant={"secondary"}
+          key={i}
+        >
+          #{e}
+        </Badge>
+      ))}
+    </div>
+  </Link>
 }
