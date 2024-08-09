@@ -10,6 +10,7 @@ import getPaymets from "../../../../actions/admin";
 import { $Enums } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Records from "./records";
 
 // export const metadata: Metadata = {
 //     metadataBase: new URL("https://30dayscoding.com"),
@@ -116,6 +117,8 @@ export default function Page() {
           <DatePicker createQueryString={createQueryString} />
         </div>
       </section>
+
+      <Records />
 
       <DataTable
         clearQueryString={clearQueryString}

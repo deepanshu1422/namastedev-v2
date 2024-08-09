@@ -29,16 +29,17 @@ export async function GET() {
         return acc;
     }, {} as Record<string, typeof payments>);
 
-    // Transform the grouped data into an array with counts
-    let resultUsers = Object.keys(groupedUsers).map(day => ({
-        date: day,
-        users: groupedUsers[day].length,
-    }));
+    let resultUsers: Record<string, number> = {}
 
-    let resultPayments = Object.keys(groupedPayments).map(day => ({
-        date: day,
-        transaction: groupedPayments[day].length,
-    }));
+    Object.keys(groupedUsers).forEach(day => {
+        resultUsers[day] = groupedUsers[day].length
+    });
 
-    return NextResponse.json({ groupedUsers, groupedPayments });
+    let resultPayments: Record<string, number> = {}
+
+    Object.keys(groupedPayments).forEach(day => {
+        resultPayments[day] = groupedPayments[day].length
+    });
+
+    return NextResponse.json({ resultUsers, resultPayments });
 }

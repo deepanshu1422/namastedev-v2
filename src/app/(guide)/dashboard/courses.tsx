@@ -52,7 +52,7 @@ export default async function Courses() {
   } = data;
 
   return (
-    <section className="flex max-md:flex-col rounded-lg gap-2 h-80">
+    <section className="flex max-md:flex-col rounded-lg gap-2">
       <Slider course={items} />
       {/* {items.map((e: any, i: number) => <Link href={`/courses/${e.slug}`} key={i} className='overflow-hidden group flex-1 relative min-h-16 md:h-48'>
                 <Image alt={e?.title} fill className='object-cover opacity-45 group-hover:scale-105 transition-all duration-200' src={e?.courseImage?.url ?? ""} />
@@ -70,16 +70,19 @@ export function Slider({ course }: { course: any }) {
       opts={{
         loop: true,
       }}
-      className="w-full mx-auto"
+      className="w-full mx-auto h-fit"
     >
       <CarouselContent>
         {course.map((e: any, i: any) => (
           <CarouselItem
-            className="max-sm:basis-4/5 sm:basis-1/2 md:basis-1/3 w-full"
+            className="max-sm:basis-4/5 sm:basis-1/2 md:basis-1/3 w-full h-fit"
             key={i}
           >
-            <Link href={`/courses/${e?.slug}`} className="p-1 h-fit group">
-              <Card className="select-none flex flex-col gap-2 bg-transparent border-none">
+            <Card className="select-none flex flex-col gap-2 bg-transparent border-none">
+              <Link
+                href={`/courses/${e?.slug}`}
+                className="flex flex-col gap-2 h-fit group"
+              >
                 <div className="relative bg-card/50 max-sm:min-h-44 min-h-40 rounded-md overflow-hidden">
                   <Image
                     src={e?.courseImage?.url ?? ""}
@@ -89,7 +92,7 @@ export function Slider({ course }: { course: any }) {
                   />
                 </div>
                 <CardFooter className="px-0 py-0 flex-col items-start text-sm text-muted-foreground">
-                  <span className="text-lg text-foreground font-semibold">
+                  <span className="text-foreground font-semibold line-clamp-1">
                     {e?.title}
                   </span>
                   <span>Aryan Singh</span>
@@ -100,8 +103,8 @@ export function Slider({ course }: { course: any }) {
                     <Star className="fill-yellow-500/60 stroke-yellow-500/60 h-4 w-4" />
                   </section>
                 </CardFooter>
-              </Card>
-            </Link>
+              </Link>
+            </Card>
           </CarouselItem>
         ))}
       </CarouselContent>

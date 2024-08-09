@@ -66,7 +66,7 @@ export default function VideoPlayer({
             {status === "authenticated" ? (
               <>
                 <p className="text-center">
-                  You haven&apos;t pusrchased the course, but you can.
+                  You haven&apos;t purchased the course, but you can.
                 </p>
                 <Button
                   onClick={() => setOpen(true)}

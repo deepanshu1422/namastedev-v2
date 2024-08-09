@@ -17,75 +17,109 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import DatePickerWithRange from "./date-picker";
-import { addDays } from "date-fns";
+import { addDays, format, subDays } from "date-fns";
+import { useQuery } from "@tanstack/react-query";
 
 const chartConfig = {
   views: {
     label: "Amount Views",
   },
-  desktop: {
+  transactions: {
     label: "Transactions",
     color: "hsl(var(--chart-1))",
   },
-  mobile: {
+  users: {
     label: "New Users",
     color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig;
 
 export function TransactionChart() {
+  const { data, isPending } = useQuery({
+    queryKey: ["chart"],
+    queryFn: async () => {
+      const data = await (await fetch("/api/payments")).json();
+      return data;
+    },
+  });
+
   const [chartData, setChartData] = React.useState<
     {
       date: string | Date;
-      desktop: number;
-      mobile: number;
+      transactions: number;
+      users: number;
     }[]
   >([
-    { date: "2024-04-01", desktop: 222, mobile: 150 },
-    { date: "2024-04-02", desktop: 97, mobile: 180 },
-    { date: "2024-04-03", desktop: 167, mobile: 120 },
-    { date: "2024-04-04", desktop: 242, mobile: 260 },
-    { date: "2024-04-05", desktop: 373, mobile: 290 },
-    { date: "2024-04-06", desktop: 301, mobile: 340 },
-    { date: "2024-04-07", desktop: 245, mobile: 180 },
-    { date: "2024-04-08", desktop: 409, mobile: 320 },
-    { date: "2024-04-09", desktop: 59, mobile: 110 },
-    { date: "2024-04-10", desktop: 261, mobile: 190 },
-    { date: "2024-04-11", desktop: 327, mobile: 350 },
+    { date: "2024-07-01", transactions: 0, users: 0 },
+    { date: "2024-07-02", transactions: 0, users: 0 },
+    { date: "2024-07-03", transactions: 0, users: 0 },
+    { date: "2024-07-04", transactions: 0, users: 0 },
+    { date: "2024-07-05", transactions: 0, users: 0 },
+    { date: "2024-07-06", transactions: 0, users: 0 },
+    { date: "2024-07-07", transactions: 0, users: 0 },
+    { date: "2024-07-08", transactions: 0, users: 0 },
+    { date: "2024-07-09", transactions: 0, users: 0 },
+    { date: "2024-07-10", transactions: 0, users: 0 },
+    { date: "2024-07-11", transactions: 0, users: 0 },
   ]);
 
   const [activeChart, setActiveChart] =
-    React.useState<keyof typeof chartConfig>("desktop");
+    React.useState<keyof typeof chartConfig>("transactions");
 
   const total = React.useMemo(
     () => ({
-      desktop: chartData.reduce((acc, curr) => acc + curr.desktop, 0),
-      mobile: chartData.reduce((acc, curr) => acc + curr.mobile, 0),
+      transactions: chartData.reduce((acc, curr) => acc + curr.transactions, 0),
+      users: chartData.reduce((acc, curr) => acc + curr.users, 0),
     }),
     [chartData]
   );
 
-  function generateDataArray(num: number) {
-    // Get current date
-    const currentDate = new Date();
+  React.useEffect(() => {
+    if (!isPending) {
+      const currentDate = new Date();
 
-    // Generate array of objects
-    const dataArray: {
-      date: Date;
-      desktop: number; // Random number for desktop
-      mobile: number;
-    }[] = [];
+      const dataArray: {
+        date: string | Date;
+        transactions: number;
+        users: number;
+      }[] = [];
 
-    for (let i = 0; i < num; i++) {
-      dataArray.push({
-        date: addDays(currentDate, i),
-        desktop: Math.floor(Math.random() * 500), // Random number for desktop
-        mobile: Math.floor(Math.random() * 500), // Random number for mobile
-      });
+      console.log(data);
+
+      for (let i = 30; i > 0; i--) {
+        let formattedDate = format(subDays(currentDate, i), "yyyy-MM-dd");
+        dataArray.push({
+          date: formattedDate,
+          transactions: data.resultPayments[formattedDate] ?? 0, // Random number for transactions
+          users: data.resultUsers[formattedDate] ?? 0, // Random number for users
+        });
+      }
+
+      setChartData(dataArray);
     }
+  }, [data]);
 
-    setChartData(dataArray);
-  }
+  // function generateDataArray(num: number) {
+  //   // Get current date
+  //   const currentDate = new Date();
+
+  //   // Generate array of objects
+  //   const dataArray: {
+  //     date: Date;
+  //     transactions: number; // Random number for transactions
+  //     users: number;
+  //   }[] = [];
+
+  //   for (let i = 0; i < num; i++) {
+  //     dataArray.push({
+  //       date: addDays(currentDate, i),
+  //       transactions: Math.floor(Math.random() * 500), // Random number for transactions
+  //       users: Math.floor(Math.random() * 500), // Random number for users
+  //     });
+  //   }
+
+  //   setChartData(dataArray);
+  // }
 
   return (
     <div className="flex flex-col gap-4 sm:gap-8">
@@ -94,7 +128,7 @@ export function TransactionChart() {
           <span className="text-muted-foreground text-2xl">#</span>Overview
         </h2>
         <div className="flex gap-2 max-sm:w-full">
-          <DatePickerWithRange generateDataArray={generateDataArray} />
+          {/* <DatePickerWithRange generateDataArray={generateDataArray} /> */}
         </div>
       </section>
       <Card>
@@ -107,7 +141,7 @@ export function TransactionChart() {
             </CardDescription>
           </div>
           <div className="flex">
-            {["desktop", "mobile"].map((key) => {
+            {["transactions", "users"].map((key) => {
               const chart = key as keyof typeof chartConfig;
               return (
                 <button

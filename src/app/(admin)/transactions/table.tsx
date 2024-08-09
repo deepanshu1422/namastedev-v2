@@ -161,8 +161,11 @@ export default function TableDemo({
         </Link>
       </div>
       <div className="flex justify-between">
-        <Badge className="rounded w-fit bg-prime/70 hover:bg-prime/90 text-white">
-          Total Results: {data?.totalCount}
+        <Badge
+          variant={"outline"}
+          className="rounded w-fit border-none text-muted-foreground"
+        >
+          {data?.totalCount} Transactions
         </Badge>
         <Link href={pathName + clearQueryString()}>
           <Button className="sm:hidden block" variant={"destructive"}>

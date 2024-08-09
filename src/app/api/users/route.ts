@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
         },
         where: {
             createdAt: {
-                lte: new Date("2024-07-25"),
+                lte: new Date("2024-08-25"),
                 gte: new Date("2024-07-19"),
             }
         },
