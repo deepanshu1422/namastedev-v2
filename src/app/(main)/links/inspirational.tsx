@@ -35,16 +35,16 @@ export let testimonials: TestimonialType[] = [
     review:
       "	I have purchased your MERN Stack Course and it's very amazing and I also have to learn Nextjs,DSA and many more courses from you",
   },
-  {
-    name: "Student",
-    review: "Is it possible can you give the courses to me please",
-  },
+  // {
+  //   name: "Student",
+  //   review: "Is it possible can you give the courses to me please",
+  // },
   {
     name: "Student",
     review:
       "	Talking about python and Mern stack course honestly they are pretty good and the way of explanation is so good.The best part about the course is the projects you get to do plenty of projects in which after learning you can add on extra features.",
   },
-  { name: "Student", review: "	Mast hai bhaiya mujhe winner bana do" },
+  // { name: "Student", review: "	Mast hai bhaiya mujhe winner bana do" },
   {
     name: "Student",
     review:

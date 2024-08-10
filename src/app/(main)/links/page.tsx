@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Hero from "./hero";
 import NewHero from "./new-hero";
 import Program from "@/components/program";
-import Testimonials from "@/components/mentorship-comp/testimonials";
+import Success from "@/components/mentorship-comp/success";
 
 export const metadata: Metadata = {
   title: "Links | 30DaysCoding",
@@ -38,7 +38,7 @@ export default function Testimonial() {
       <NewHero />
       <div className="mx-auto w-full max-w-[90rem] max-phone:p-[0_0_3.5rem] flex flex-col gap-10 p-[1.75rem_0_6.5rem]">
         <Hero />
-        <Testimonials />
+        <Success />
         <Program />
       </div>
       {/* <Floating /> */}
