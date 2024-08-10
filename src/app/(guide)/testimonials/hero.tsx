@@ -5,6 +5,7 @@ import Button from "@/components/home-components/button";
 import AnimatedButton from "@/components/animated-button";
 import { CourseScroll } from "@/components/course-components/course-scroll";
 import CourseGallary from "@/components/course-components/course-gallary";
+import Success from "@/components/mentorship-comp/success";
 
 type VideoTestimony = {
   name?: string;
@@ -80,6 +81,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
+      <Success />
     </div>
   );
 }

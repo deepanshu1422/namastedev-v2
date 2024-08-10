@@ -1,4 +1,5 @@
-import Reveal from "@/components/framer/reveal";
+'use client'
+
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Link from "next/link";
@@ -11,6 +12,7 @@ export default function Hero({
   heroImage,
   slug,
   createdAt,
+  tag,
 }: {
   title: string;
   desc: string;
@@ -20,6 +22,7 @@ export default function Hero({
   };
   slug: string;
   createdAt: Date;
+  tag?: string;
 }) {
   const longDate = new Date(createdAt).toLocaleDateString("en-US", {
     // weekday: "long",
@@ -31,22 +34,15 @@ export default function Hero({
   return (
     <div className={`w-full grid relative overflow-hidden`}>
       <div className="tab:p-[4.5rem_5.5rem_2.75rem] max-tab:pt-[4rem] max-tab:pb-[2rem] m-auto max-w-lg md:max-w-[75rem] grid gap-5 md:gap-7 place-items-center text-white text-center">
-        <Reveal>
           <span className="text-sm font-bold uppercase text-prime">
-            Javascript &#183; {longDate ?? "26 April 2024"}
+            {tag ?? "Javascript"} &#183; {longDate ?? "26 April 2024"}
           </span>
-        </Reveal>
-        <Reveal>
-          <h1 className="text-5xl max-md:text-4xl font-bold max-w-3xl max-sm:px-8 px-5">
+          <h1 className="text-5xl max-md:text-2xl font-bold max-w-3xl max-sm:px-8 px-5">
             {title}
           </h1>
-        </Reveal>
-        <Reveal>
-          <p className="max-w-3xl px-8 font-medium max-md:text-sm max-md:w-11/12 m-auto md:text-lg">
+          <p className="lg:max-w-3xl font-medium max-md:text-sm max-md:w-11/12 w-full m-auto md:text-lg">
             {desc}
           </p>
-        </Reveal>
-        <Reveal>
           <section className="md:py-2 flex gap-4">
             <Link
               target="_blank"
@@ -91,14 +87,13 @@ export default function Hero({
               </svg>
             </Link>
           </section>
-        </Reveal>
       </div>
       {/* Cover Image */}
       <div className="grid gap-2">
-        <Reveal>
           <div className="relative w-full max-md:max-w-lg max-w-3xl lg:max-w-5xl m-auto h-full bg-slate-500">
             <AspectRatio ratio={16 / 9} className="bg-muted">
               <Image
+                loader={() => heroImage.url}
                 src={heroImage.url}
                 alt={heroImage.description}
                 fill
@@ -106,8 +101,6 @@ export default function Hero({
               />
             </AspectRatio>
           </div>
-        </Reveal>
-        <Reveal>
           <section className="flex gap-4 justify-between max-w-lg md:max-w-3xl m-auto md:py-2 px-6">
             <p className="text-muted-foreground md:text-sm max-md:text-xs">
               {heroImage.description}
@@ -116,7 +109,6 @@ export default function Hero({
               <Save className="h-4 w-4" />
             </div> */}
           </section>
-        </Reveal>
       </div>
     </div>
   );

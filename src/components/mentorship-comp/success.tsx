@@ -80,8 +80,8 @@ const testimonials: TestimonialType[] = [
           The mentorship program gave me a structured approach and personalized
           guidance that I desperately needed.
         </span>{" "}
-        With 30DC&apos;s resources and community, I successfully transitioned from a
-        non-tech background to securing a software engineering role.
+        With 30DC&apos;s resources and community, I successfully transitioned
+        from a non-tech background to securing a software engineering role.
       </p>
     ),
     name: "Rojal Sapkota",
@@ -137,15 +137,15 @@ const testimonials: TestimonialType[] = [
           supportive community, provided me with a clear roadmap and the
           confidence to ace my interviews.
         </span>{" "}
-        30DC&apos;s guidance was instrumental in helping me land a high-paying role
-        at Microsoft right after graduation.
+        30DC&apos;s guidance was instrumental in helping me land a high-paying
+        role at Microsoft right after graduation.
       </p>
     ),
-    name: "Raj Kothari",
+    name: "Kevin",
     link: "https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view",
-    linkedin: "https://www.linkedin.com/in/rajk3770/",
-    pos: "SDE@Google",
-    profile: "/raj-in.jpg",
+    linkedin: "https://www.linkedin.com/in/kevinmsmith131/",
+    pos: "SDE@Tesla",
+    profile: "",
   },
   {
     review: (
@@ -170,21 +170,21 @@ const testimonials: TestimonialType[] = [
   {
     review: (
       <p className="leading-6 text-sm font-normal">
-        30DC was a game-changer for me.{" "}
+        I&apos;m happy to share that I&apos;m starting a new position as Software Engineer
+        1-B at Bank of America! I&apos;m grateful to Vellore Institute of Technology
+        for providing this amazing opportunity.
         <span className="bg-lime-500/40">
-          The personalized mentorship, comprehensive courses, and the
-          encouraging community created a perfect environment for my growth.
-        </span>{" "}
-        With the help of 30DC, I went from being unsure about my career path to
-        securing a high-paying tech role at Adobe, right after completing my
-        studies.
+          I&apos;d also like to thank Aryan Singh and Deepanshu Udhwani, who
+          continuously guided me with placements with their community (30 Days
+          Coding).
+        </span>
       </p>
     ),
-    name: "Shubham Arora",
+    name: "Sneha Michelle V.",
     link: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0",
-    linkedin: "https://www.linkedin.com/in/shubham1arora/",
-    pos: "Analytics",
-    profile: "/shubham-in.jpg",
+    linkedin: "https://www.linkedin.com/in/sneha-michelle-v-1b73b0213/",
+    pos: "SDE@Bank of America",
+    profile: "/sneha-in.jpg",
   },
 ];
 

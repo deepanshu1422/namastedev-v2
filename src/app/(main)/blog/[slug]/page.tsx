@@ -10,6 +10,7 @@ import { unstable_cache } from "next/cache";
 import { BASE_URL } from "@/util/constants";
 import CopyBtn from "./copyBtn";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import YoutubeEmbed from "@/components/yotube-embed";
 
 export const dynamicParams = true;
 
@@ -43,10 +44,7 @@ export async function generateStaticParams() {
     },
   });
 
-  return blogs.map(({ slug }) => {
-    if (!slug) return;
-    slug: slug.toString();
-  });
+  return blogs.map(({ slug }) => ({ slug: slug.toString() }));
 }
 
 export async function generateMetadata(
@@ -118,6 +116,8 @@ const getBlog = unstable_cache(
             alt: true,
           },
         },
+        tags: true,
+        focusKeyword: true,
         relatedBlogs: true,
         createdAt: true,
       },
@@ -180,10 +180,11 @@ export default async function Home({ params: { slug } }: PageProps) {
         }}
         slug={slug}
         createdAt={item.createdAt}
+        tag={item.tags[0] ?? item.focusKeyword[0]}
       />
 
       <div className="max-w-lg md:max-w-3xl m-auto px-8 lg:px-5 body">
-        <MDXRemote source={item.body ?? ""} />
+        <MDXRemote source={item.body ?? ""} components={{ YoutubeEmbed }} />
       </div>
 
       <div className="py-10 m-auto px-8 lg:px-5 grid gap-4 max-w-lg md:max-w-3xl">

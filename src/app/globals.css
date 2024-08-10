@@ -116,7 +116,7 @@
 }
 
 .body p {
-  @apply md:text-lg lg:text-xl pt-4;
+  @apply pt-4;
 }
 
 .body a {
@@ -136,11 +136,11 @@
 }
 
 .body ul {
-  @apply list-disc py-4 pl-4;
+  @apply flex flex-col gap-2 list-disc py-4 pl-4;
 }
 
 .body ol {
-  @apply list-decimal py-4 pl-4;
+  @apply flex flex-col gap-2 list-decimal py-4 pl-4;
 }
 
 .body li > p {
