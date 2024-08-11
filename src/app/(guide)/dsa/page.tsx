@@ -33,7 +33,7 @@ export default async function Home() {
     <main className="w-full flex flex-col">
       <Hero />
       <div className="mx-auto w-full max-w-[90rem] px-4 lg:px-8 pb-8 flex flex-col gap-2">
-        <Courses />
+        {/* <Courses /> */}
         <ChallengesTabs />
         <Modal />
         {/* <h2 className="m-auto text-2xl font-bold text-center py-3 text-pretty ">Special Courses just for Prepared for You</h2>

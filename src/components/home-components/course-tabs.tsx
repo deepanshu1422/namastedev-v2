@@ -54,7 +54,7 @@ export function CourseTabMenu({
                     href={link}
                     className="flex-1 w-[300px] lg:hover:-translate-y-1 transition-all"
                   >
-                    <div className="max-lg:m-auto flex flex-col max-lg:justify-center gap-2 rounded-xl bg-second p-2 h-fit shadow-[0_2px_40px_0_rgba(0,0,0,.2)]">
+                    <div className="max-lg:m-auto flex flex-col max-lg:justify-center rounded-xl bg-second p-1 h-fit">
                       <Image
                         className="rounded-lg w-96 h-48"
                         loader={() => imgSrc}
@@ -63,7 +63,7 @@ export function CourseTabMenu({
                         height={280}
                         alt={`30 days coding ${title}`}
                       />
-                      <span className="text-sm font-semibold inline">
+                      <span className="text-sm font-semibold inline p-1">
                         {title}
                       </span>
                     </div>

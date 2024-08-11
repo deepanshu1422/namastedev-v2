@@ -190,7 +190,7 @@ const testimonials: TestimonialType[] = [
 
 export default function Success() {
   return (
-    <div className={"grid grid-cols-1 gap-1 pt-10 max-w-[75rem] m-auto"}>
+    <div className={"grid grid-cols-1 gap-1 py-10 max-w-[75rem] m-auto"}>
       <span className="flex items-center justify-center gap-4 relative">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
@@ -198,7 +198,7 @@ export default function Success() {
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
-      <p className="max-w-2xl text-center mx-auto text-sm text-white/70 px-10">
+      <p className="max-w-2xl text-center mx-auto text-sm text-white/70 px-10 line-clamp-2">
         A collection of inspiring narratives highlighting the journeys of
         individuals who have overcome significant challenges to achieve
         remarkable accomplishments.

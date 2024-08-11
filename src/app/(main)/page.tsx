@@ -216,14 +216,14 @@ export default function Home() {
         subDesc="Whether you're a beginner looking to dive into programming or an experienced developer seeking skill enhancement, our mentors' guidance and courses are well-designed for all levels of proficiency."
         ytId="enw3DVa1r5k"
       />
-      <Success />
-      <Course />
-      <Store />
-      <Mentor />
       <Companies />
+      <Store />
+      <Success />
+      {/* <Course /> */}
       <Program />
-      <Highlights />
-      <Testimonials />
+      <Mentor />
+      {/* <Highlights />
+      <Testimonials /> */}
       <Faqs faq={faq} />
       {/* <Floating /> */}
     </main>

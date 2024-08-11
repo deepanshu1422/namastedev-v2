@@ -7,8 +7,9 @@ import Features from "./features";
 import MentorshipGallary from "./mentorship-gallery";
 import Script from "next/script";
 import Lifetime from "./lifetime";
-import Mentors from "./mentors";
 import Success from "@/components/mentorship-comp/success";
+import Floating from "./floating";
+import Mentor from "@/components/new-cohort/mentor";
 
 export const metadata: Metadata = {
   title: "Join 1:1 Mentorship | 30dayscoding",
@@ -197,26 +198,26 @@ export default function Home() {
         }
         youtubeId={"ylUk7kImBeE"}
       />
-      <Mentors />
-      <Video
+      <Mentor />
+      {/* <Video
         title={"Best Practices for Developers by Our Mentors"}
         desc={
           "Explore the latest technologies wit the help of our experts with live interactions and doubt clearing sessions."
         }
         youtubeId={"KMufzzSF6SE"}
-      />
+      /> */}
       <JoinUs />
-      <Video
+      {/* <Video
         title={"1:1 Live Session with our Mentors"}
         desc={
           "Explore the latest technologies with the help of our experts with live interactions and doubt clearing sessions."
         }
         youtubeId={"gIx8D2pyXVI"}
-      />
+      /> */}
       <Faqs faq={faq} />
       {/* <Highlights /> */}
       {/* <Testimonials /> */}
-      {/* <Floating /> */}
+      <Floating />
     </main>
   );
 }

@@ -18,6 +18,18 @@ export default function Store() {
       category: ["courses", "fullstack", "job"]
     },
     {
+      title: "Job ready DSA course  (Certificate + Lifetime)",
+      imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/64f93394e4b0e75ce98af312/64f93394e4b0e75ce98af312_scaled_cover.jpg?v=8",
+      link: "https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312",
+      category: ["courses", "job"]
+    },
+    {
+      title: "AI full stack dev, Tools, Chat GPT, and prompting course (lifetime valid)",
+      imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/64eebe76e4b002b964b5645d/64eebe76e4b002b964b5645d_scaled_cover.jpg?v=7",
+      link: "https://courses.30dayscoding.com/courses/AI-full-stack-project-development-course-64eebe76e4b002b964b5645d",
+      category: ["ai", "courses"]
+    },
+    {
       title: "Tech job roadmap mastery (beginner to advanced)",
       imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/64ff7f1be4b0607f6f9001f6/64ff7f1be4b0607f6f9001f6_scaled_cover.jpg?v=2",
       link: "https://courses.30dayscoding.com/courses/FAANG-and-Startup-Tech-job-detailed-roadmap-64ff7f1be4b0607f6f9001f6",
@@ -28,12 +40,6 @@ export default function Store() {
       imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/6652967ada4224461d9ece76/6652967ada4224461d9ece76_scaled_cover.jpg?v=1",
       link: "https://courses.30dayscoding.com/courses/Complete-Backend-development-course-lifetime-6652967ada4224461d9ece76",
       category: ["backend", "courses"]
-    },
-    {
-      title: "Job ready DSA course  (Certificate + Lifetime)",
-      imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/64f93394e4b0e75ce98af312/64f93394e4b0e75ce98af312_scaled_cover.jpg?v=8",
-      link: "https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312",
-      category: ["courses", "job"]
     },
     {
       title: "Job ready - NEXT JS full stack web dev course (lifetime valid)",
@@ -52,12 +58,6 @@ export default function Store() {
       imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/6525cb14e4b07ef99d14b75b/6525cb14e4b07ef99d14b75b_scaled_cover.jpg?v=4",
       link: "https://courses.30dayscoding.com/courses/Idea-to-MVP-full-stack-project-course-6525cb14e4b07ef99d14b75b",
       category: ["courses", "fullstack", "project"]
-    },
-    {
-      title: "AI full stack dev, Tools, Chat GPT, and prompting course (lifetime valid)",
-      imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/64eebe76e4b002b964b5645d/64eebe76e4b002b964b5645d_scaled_cover.jpg?v=7",
-      link: "https://courses.30dayscoding.com/courses/AI-full-stack-project-development-course-64eebe76e4b002b964b5645d",
-      category: ["ai", "courses"]
     },
     {
       title: "Complete Blockchain and Web3 course",

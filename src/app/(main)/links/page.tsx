@@ -35,7 +35,7 @@ export default function Testimonial() {
         desc="Job ready premium courses for less than a PIZZA! All courses are lifetime valid."
         heroImage="https://images.unsplash.com/photo-1512314889357-e157c22f938d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       /> */}
-      <NewHero />
+      {/* <NewHero /> */}
       <div className="mx-auto w-full max-w-[90rem] max-phone:p-[0_0_3.5rem] flex flex-col gap-10 p-[1.75rem_0_6.5rem]">
         <Hero />
         <Success />

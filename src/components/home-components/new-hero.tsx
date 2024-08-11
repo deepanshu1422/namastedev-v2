@@ -107,7 +107,7 @@ export default function Hero({
         </div>
       </div>
 
-      <div className='m-auto flex flex-col px-10 lg:px-20 pt-10 max-w-[75rem] lg:pt-20'>
+      {/* <div className='m-auto flex flex-col px-10 lg:px-20 pt-10 max-w-[75rem] lg:pt-20'>
         <span className="flex items-center justify-center relative pb-4">
           <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
           <h1 className="font-jakarta bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight text-[2rem] sm:text-6xl font-extrabold text-center">
@@ -136,7 +136,7 @@ export default function Hero({
         <Btn cover="/welcome.jpg" yt="nTAHWER3K-0" />
       </div>
 
-      <Video title={subTitle} desc={subDesc} youtubeId={ytId} />
+      <Video title={subTitle} desc={subDesc} youtubeId={ytId} /> */}
     </>
   );
 }

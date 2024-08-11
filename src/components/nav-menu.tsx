@@ -21,103 +21,107 @@ export const navTitles: {
   title: string;
   href: string | href[];
 }[] = [
+  // {
+  //   title: "Courses",
+  //   href: [
+  //     // {
+  //     //   title: "Mern FullStack Course",
+  //     //   href: "/course/mern-full-stack-developer-course",
+  //     //   description:
+  //     //     "A complete mern full stack development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
+  //     // },
+  //     // {
+  //     //   title: "Live Mern Cohort",
+  //     //   href: "/course/mern-cohort",
+  //     //   description:
+  //     //     "A live mern stack development cohort from 30 days coding. Checkout on www.courses.30dayscoding.com",
+  //     // },
+  //     // {
+  //     //   title: "DSA Live Course",
+  //     //   href: "/course/dsa-live-placement-ready-course",
+  //     //   description:
+  //     //     "A live dsa placement ready course from 30 days coding. Checkout on www.courses.30dayscoding.com",
+  //     // },
+  //     {
+  //       title: "Recorded DSA Mastery Course",
+  //       href: "https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312",
+  //       description:
+  //         "A full dsa mastery course from 30 days coding. Checkout on www.courses.30dayscoding.com",
+  //     },
+  //     {
+  //       title: "MERN FullStack Course",
+  //       href: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
+  //       description:
+  //         "A complete mern full stack development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
+  //     },
+  //     {
+  //       title: "Next JS FullStack",
+  //       href: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
+  //       description:
+  //         "A live next js fullstack development cohort from 30 days coding. Checkout on www.courses.30dayscoding.com",
+  //     },
+  //     {
+  //       title: "All Courses Package",
+  //       href: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0",
+  //       description:
+  //         "Get a course from 30 days coding. Checkout on www.courses.30dayscoding.com",
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: "Services",
+  //   href: [
+  //     {
+  //       title: "AI Mock Interview",
+  //       href: "https://talktohire.com/",
+  //       description: "",
+  //     },
+  //     {
+  //       title: "Blogs",
+  //       href: "https://blogs.30dayscoding.com/",
+  //       description: "",
+  //     },
+
+  //     {
+  //       title: "DSA Sheets",
+  //       href: "https://dsa.30dayscoding.com/",
+  //       description:
+  //         "Explore our comprehensive Data Structures and Algorithms (DSA) sheet, meticulously curated to aid your journey through our DSA courses.",
+  //     },
+  //     {
+  //       title: "Resume Builder",
+  //       href: "https://resumebldr.vercel.app/app/personal-detail",
+  //       description:
+  //         "Create your best resume ever with our All-in-one AI Builder, Reviewer, and Optimizer.",
+  //     },
+  //     {
+  //       title: "Premium Guides",
+  //       href: "https://courses.30dayscoding.com/products",
+  //       description:
+  //         "Elevate your coding skills with our premium guide, meticulously crafted to propel you towards mastery in programming. Dive deep into advanced concepts, best practices, and insider tips curated by industry experts.",
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: "Reviews",
+  //   href: [
+  //     {
+  //       title: "Testimonials",
+  //       href: "/testimonials",
+  //       description:
+  //         "Work reviews and words of people how they felt working with us.",
+  //     },
+  //     {
+  //       title: "Wall of Love",
+  //       href: "/wall-of-love",
+  //       description:
+  //         "A whole page dedicated for the kind of love we recieves from the people.",
+  //     },
+  //   ],
+  // },
   {
     title: "Courses",
-    href: [
-      // {
-      //   title: "Mern FullStack Course",
-      //   href: "/course/mern-full-stack-developer-course",
-      //   description:
-      //     "A complete mern full stack development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
-      // },
-      // {
-      //   title: "Live Mern Cohort",
-      //   href: "/course/mern-cohort",
-      //   description:
-      //     "A live mern stack development cohort from 30 days coding. Checkout on www.courses.30dayscoding.com",
-      // },
-      // {
-      //   title: "DSA Live Course",
-      //   href: "/course/dsa-live-placement-ready-course",
-      //   description:
-      //     "A live dsa placement ready course from 30 days coding. Checkout on www.courses.30dayscoding.com",
-      // },
-      {
-        title: "Recorded DSA Mastery Course",
-        href: "https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312",
-        description:
-          "A full dsa mastery course from 30 days coding. Checkout on www.courses.30dayscoding.com",
-      },
-      {
-        title: "MERN FullStack Course",
-        href: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
-        description:
-          "A complete mern full stack development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
-      },
-      {
-        title: "Next JS FullStack",
-        href: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
-        description:
-          "A live next js fullstack development cohort from 30 days coding. Checkout on www.courses.30dayscoding.com",
-      },
-      {
-        title: "All Courses Package",
-        href: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0",
-        description:
-          "Get a course from 30 days coding. Checkout on www.courses.30dayscoding.com",
-      },
-    ],
-  },
-  {
-    title: "Services",
-    href: [
-      {
-        title: "AI Mock Interview",
-        href: "https://talktohire.com/",
-        description: "",
-      },
-      {
-        title: "Blogs",
-        href: "https://blogs.30dayscoding.com/",
-        description: "",
-      },
-
-      {
-        title: "DSA Sheets",
-        href: "https://dsa.30dayscoding.com/",
-        description:
-          "Explore our comprehensive Data Structures and Algorithms (DSA) sheet, meticulously curated to aid your journey through our DSA courses.",
-      },
-      {
-        title: "Resume Builder",
-        href: "https://resumebldr.vercel.app/app/personal-detail",
-        description:
-          "Create your best resume ever with our All-in-one AI Builder, Reviewer, and Optimizer.",
-      },
-      {
-        title: "Premium Guides",
-        href: "https://courses.30dayscoding.com/products",
-        description:
-          "Elevate your coding skills with our premium guide, meticulously crafted to propel you towards mastery in programming. Dive deep into advanced concepts, best practices, and insider tips curated by industry experts.",
-      },
-    ],
-  },
-  {
-    title: "Reviews",
-    href: [
-      {
-        title: "Testimonials",
-        href: "/testimonials",
-        description:
-          "Work reviews and words of people how they felt working with us.",
-      },
-      {
-        title: "Wall of Love",
-        href: "/wall-of-love",
-        description:
-          "A whole page dedicated for the kind of love we recieves from the people.",
-      },
-    ],
+    href: "https://courses.30dayscoding.com/s/store"
   },
   {
     title: "Blog",
@@ -126,10 +130,6 @@ export const navTitles: {
   {
     title: "Jobs",
     href: "/jobs",
-  },
-  {
-    title: "Products",
-    href: "/products",
   },
   {
     title: "DSA",

@@ -6,7 +6,6 @@ import Image from "next/image";
 import prisma from "@/util/prismaClient";
 import { blog } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { unstable_cache } from "next/cache";
 import { BASE_URL } from "@/util/constants";
 import CopyBtn from "./copyBtn";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -25,18 +24,6 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-type BlogData = {
-  title: string;
-  description: string;
-  slug: string;
-  focusKeywords: string[];
-  heroImage: {
-    aiPrompt: string;
-  };
-  body: string;
-  relatedBlogs: string[];
-};
-
 export async function generateStaticParams() {
   const blogs: Pick<blog, "slug">[] = await prisma.blog.findMany({
     select: {
@@ -44,7 +31,10 @@ export async function generateStaticParams() {
     },
   });
 
-  return blogs.map(({ slug }) => ({ slug: slug.toString() }));
+  return blogs.map(({ slug }) => {
+    if (!slug) return;
+    slug: slug.toString();
+  });
 }
 
 export async function generateMetadata(
@@ -100,59 +90,48 @@ export async function generateMetadata(
   };
 }
 
-const getBlog = unstable_cache(
-  async (slug: string) => {
-    const item = await prisma.blog.findFirst({
-      where: {
-        slug: slug,
-      },
-      select: {
-        title: true,
-        description: true,
-        body: true,
-        heroImage: {
-          select: {
-            url: true,
-            alt: true,
-          },
+const getBlog = async (slug: string) => {
+  const item = await prisma.blog.findFirst({
+    where: {
+      slug: slug,
+    },
+    select: {
+      title: true,
+      description: true,
+      body: true,
+      heroImage: {
+        select: {
+          url: true,
+          alt: true,
         },
-        tags: true,
-        focusKeyword: true,
-        relatedBlogs: true,
-        createdAt: true,
       },
-    });
-    return item;
-  },
-  ["my-blogs"],
-  {
-    revalidate: 3600,
-  }
-);
+      tags: true,
+      focusKeyword: true,
+      relatedBlogs: true,
+      createdAt: true,
+    },
+  });
+  return item;
+};
 
-const getRecents = unstable_cache(
-  async () => {
-    const item = await prisma.blog.findMany({
-      take: 5,
-      select: {
-        title: true,
-        heroImage: {
-          select: {
-            url: true,
-            alt: true,
-          },
+const getRecents = async () => {
+  const item = await prisma.blog.findMany({
+    take: 5,
+    orderBy: { createdAt: "desc" },
+    select: {
+      title: true,
+      heroImage: {
+        select: {
+          url: true,
+          alt: true,
         },
-        createdAt: true,
-        slug: true,
       },
-    });
-    return item;
-  },
-  ["recent-blogs"],
-  {
-    revalidate: 3600,
-  }
-);
+      createdAt: true,
+      slug: true,
+    },
+  });
+  return item;
+};
 
 export default async function Home({ params: { slug } }: PageProps) {
   const item = await getBlog(slug);
