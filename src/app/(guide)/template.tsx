@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import {
+  Book,
   Bookmark,
   Braces,
   CircleUser,
@@ -50,6 +51,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
       icon: <Compass className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/explore",
       selected: path === "/explore",
+    },
+    {
+      title: "Guides",
+      icon: <Book className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/guides",
+      selected: path === "/guides",
     },
     {
       title: "Projects",

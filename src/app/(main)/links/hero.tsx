@@ -91,15 +91,14 @@ export default function Hero() {
     <div className={"grid grid-cols-1 gap-1 pt-5 w-full max-w-[65rem] m-auto"}>
       <span className="flex items-center justify-center gap-4 relative">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
-        <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
-          Valuable Resources
+        <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center text-pretty">
+          Resources to get you JOB-READY
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
-      <p className="max-w-3xl text-center mx-auto max-lg:text-sm line-clamp-2 text-white/70 px-10">
-        A collection of exclusive resources highlighting the journeys of
-        individuals who have overcome significant challenges to achieve
-        remarkable accomplishments.
+      <p className="max-w-3xl text-center mx-auto max-lg:text-sm line-clamp-2 text-white/90 px-10">
+        Premium resources for less than your dinner! Lifetime valid and
+        money-back guarantee
       </p>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 px-5 lg:px-10 pt-5 lg:pt-10 w-full">
@@ -109,7 +108,9 @@ export default function Hero() {
       </div>
 
       <div className="flex flex-col items-center mt-3 gap-3 mx-auto">
-        <span className="text-muted-foreground text-sm font-semibold">Follow Us:</span>
+        <span className="text-muted-foreground text-sm font-semibold">
+          Follow Us:
+        </span>
         <section className="flex gap-4">
           <Link href={"https://www.linkedin.com/company/30dc/"}>
             <svg

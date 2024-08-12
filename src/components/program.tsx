@@ -7,7 +7,7 @@ import { benefits } from "@/app/(main)/mentorship/lifetime";
 
 export default function Program() {
   return (
-    <div className="w-full relative">
+    <div className="w-full py-5 relative">
       <span className="flex items-center justify-center gap-4 relative">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h2 className="font-jakarta text-pretty text-[2rem] font-extrabold text-center">
