@@ -96,26 +96,30 @@ export default function Main({
   return (
     <>
       <section className="relative grid lg:grid-cols-[260px_1fr]">
-        <div className="hidden lg:flex flex-col gap-6 p-7 sticky top-0 h-fit">
-          <Link
-            href={"/courses"}
-            className="flex text-white/70 items-center gap-1 w-fit hover:text-white transition-all hover:underline -translate-x-1"
-          >
-            <ChevronLeft className="h-4 w-4" />
-            <span className="tracking-wide text-xs">Other Courses</span>
-          </Link>
+        <div className="hidden lg:flex flex-col sticky top-0 h-fit">
+          <div className="flex flex-col gap-4 p-7 h-full">
+            <Link
+              href={"/courses"}
+              className="flex text-white/70 items-center gap-1 w-fit hover:text-white transition-all hover:underline -translate-x-1"
+            >
+              <ChevronLeft className="h-4 w-4" />
+              <span className="tracking-wide text-xs">Other Courses</span>
+            </Link>
 
-          <div className="flex flex-col">
-            <span className="text-[11px] text-white/70">Course</span>
-            <span className="text-sm font-semibold">{title}</span>
+            <div className="flex flex-col">
+              <span className="text-[11px] text-white/70">Course</span>
+              <span className="text-sm font-semibold">{title}</span>
+            </div>
           </div>
 
-          <CourseList
-            chapter={vidIndex.chapterIndex}
-            module={vidIndex.modIndex}
-            modules={modulesCollection}
-            setVidIndex={setVidIndex}
-          />
+          <div className="px-7 max-h-[65dvh] overflow-hidden overflow-y-auto horizontal-scroll">
+            <CourseList
+              chapter={vidIndex.chapterIndex}
+              module={vidIndex.modIndex}
+              modules={modulesCollection}
+              setVidIndex={setVidIndex}
+            />
+          </div>
         </div>
         <div className="bg-bg lg:rounded-s-3xl min-h-dvh py-6 max-tab:pt-[1rem] max-tab:pb-[2.5rem] px-4 md:px-6 m-auto w-full flex">
           <section className="relative flex max-md:flex-col gap-6 p-1 max-w-6xl w-full mx-auto">

@@ -10,6 +10,7 @@ import { BASE_URL } from "@/util/constants";
 import CopyBtn from "./copyBtn";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { cache } from "react";
+import YoutubeEmbed from "@/components/yotube-embed";
 
 export const dynamicParams = true;
 
@@ -170,7 +171,7 @@ export default async function Home({ params: { slug } }: PageProps) {
       />
 
       <div className="max-w-lg md:max-w-3xl m-auto px-8 lg:px-5 body">
-        <MDXRemote source={item.body ?? ""} />
+        <MDXRemote source={item.body ?? ""} components={{ YoutubeEmbed }}/>
       </div>
 
       <div className="py-10 m-auto px-8 lg:px-5 grid gap-4 max-w-lg md:max-w-3xl">

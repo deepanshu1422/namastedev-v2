@@ -51,7 +51,7 @@ export default function CourseList({
       defaultValue={`module-${module}`}
       type="single"
       collapsible
-      className="flex flex-col w-full gap-2 max-h-[50dvh] pr-1 overflow-hidden overflow-y-auto horizontal-scroll"
+      className="flex flex-col w-full gap-2 max-md:max-h-[50dvh] pr-1 max-md:overflow-hidden max-md:overflow-y-auto horizontal-scroll"
     >
       {modules.items.map(({ chaptersCollection, title }, i) => (
         <AccordionItem key={i} value={`module-${i}`}>

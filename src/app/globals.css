@@ -105,6 +105,7 @@
   background-image: url("https://i.ibb.co/NVFg8p6/hero-section-course.webp");
 }
 
+
 .body pre {
   @apply my-2 text-wrap p-4 rounded-md bg-zinc-800;
 }
@@ -122,7 +123,7 @@
 }
 
 .body p {
-  @apply md:text-lg lg:text-xl pt-4;
+  @apply pt-4;
 }
 
 .body a {
@@ -142,11 +143,11 @@
 }
 
 .body ul {
-  @apply list-disc py-4 pl-4;
+  @apply flex flex-col gap-2 list-disc py-4 pl-4;
 }
 
 .body ol {
-  @apply list-decimal py-4 pl-4;
+  @apply flex flex-col gap-2 list-decimal py-4 pl-4;
 }
 
 .body li > p {
@@ -180,7 +181,7 @@
 }
 
 .techStack ol {
-  @apply flex flex-col gap-2 list-inside list-decimal text-white/80 pt-5;
+  @apply gap-2 w-full list-item list-decimal text-white/80 pt-5 pl-5;
 }
 
 .techStack ul {
