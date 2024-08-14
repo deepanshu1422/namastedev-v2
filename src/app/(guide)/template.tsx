@@ -63,10 +63,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
   const navBar = [
     {
-      title: "Explore",
+      title: "Courses",
       icon: <Compass className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/explore",
-      selected: path === "/explore",
+      href: "/courses",
+      selected: path === "/courses",
     },
     {
       title: "Projects",

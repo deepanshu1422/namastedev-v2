@@ -15,9 +15,9 @@ export default function Header() {
       </Link>
 
       <div className="flex gap-1 items-center">
-        <Link href="/mentorship">
+        <Link href="/courses">
           <Button variant={"link"} size={"sm"} className="text-white">
-            Join Mentorship
+            More Courses
           </Button>
         </Link>
         {status === "loading" ? (

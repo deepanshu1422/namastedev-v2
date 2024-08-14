@@ -199,7 +199,7 @@ export default function Details({
               className="rounded-xl w-full"
             >
               <ChevronLeft className="h-4 w-4" />
-              Prev Video
+              Prev
             </Button>
             <Button
               onClick={() => nextVideo()}
@@ -208,7 +208,7 @@ export default function Details({
               // size={"sm"}
               className="rounded-xl w-full"
             >
-              Next Video
+              Next
               <ChevronRight className="h-4 w-4" />
             </Button>
           </span>
@@ -232,7 +232,6 @@ export default function Details({
       </section>
 
       <Description
-        chapterCount={chapterCount}
         title={title}
         chapterTitle={
           modulesCollection.items[module]?.chaptersCollection.items[chapter]
@@ -242,6 +241,7 @@ export default function Details({
         chapter={chapter}
         longDescription={longDescription}
       />
+      <CourseInfo chapterCount={chapterCount} />
       <div className="hidden md:block">
         <FAQ faqs={faqCollection.items} />
       </div>
@@ -267,8 +267,8 @@ export function Publisher({
   prevVideo(): 0 | undefined;
 }) {
   return (
-    <section className="flex justify-between mx-auto">
-      {/* <div className="flex items-center gap-2">
+    <section className="flex justify-between">
+      <div className="flex items-center gap-2">
         <Avatar>
           <AvatarImage src={src} alt={`${name} Instructor`} />
           <AvatarFallback>
@@ -283,7 +283,7 @@ export function Publisher({
           <span className="font-bold leading-4 text-sm">{name}</span>
           <span className="text-white/60 text-xs">Publisher</span>
         </span>
-      </div> */}
+      </div>
 
       <div className="lg:flex hidden gap-0.5">
         <Button
@@ -294,7 +294,7 @@ export function Publisher({
           className="rounded-md"
         >
           <ChevronLeft className="h-4 w-4 translate-y-0.5" />
-          Prev Video
+          Prev
         </Button>
         <Button
           onClick={() => nextVideo()}
@@ -303,7 +303,7 @@ export function Publisher({
           size={"sm"}
           className="rounded-md"
         >
-          Next Video
+          Next
           <ChevronRight className="h-4 w-4 translate-y-0.5" />
         </Button>
       </div>
@@ -317,12 +317,10 @@ function Description({
   chapter,
   chapterTitle,
   longDescription,
-  chapterCount,
 }: {
   title: string;
   module: number;
   chapter: number;
-  chapterCount: number;
   chapterTitle: string;
   longDescription: React.JSX.Element;
 }) {
@@ -336,7 +334,6 @@ function Description({
           <h2>{chapterTitle}</h2>
         </span>
       </div>
-      <CourseInfo chapterCount={chapterCount} />
       <span className="font-bold text-lg">Description</span>
       <ErrorBoundary
         errorComponent={({ error, reset }) => (

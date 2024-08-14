@@ -5,13 +5,17 @@ import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import refreshCourses from "../../../../actions/refreshCourses";
 import { Skeleton } from "@/components/ui/skeleton";
 import { MessageCircleQuestion } from "lucide-react";
 
 export default function Purchased() {
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
+
+  useEffect(() => {
+    update({ courses: true });
+  }, []);
 
   // console.log(session?.user);
 

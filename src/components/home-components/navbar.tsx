@@ -47,28 +47,13 @@ export default function Navbar() {
               <span className="text-sm line-clamp-1">Join Mentorship</span>
             </Link>
 
-            {status === "loading" ? (
-              <button
-                disabled={true}
-                className="disabled:opacity-40 font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md text-sm"
-              >
-                Loading...
-              </button>
-            ) : status === "authenticated" ? (
-              <Link
-                href={"/dashboard"}
-                className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:p-2 rounded-md"
-              >
-                <span className="text-sm max-sm:hidden">Dashboard</span>
-                <LayoutDashboard className="h-5 w-5 sm:hidden" />
-              </Link>
-            ) : (
-              <AuthDialog>
-                <button className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md text-sm">
-                  Login
-                </button>
-              </AuthDialog>
-            )}
+            <Link
+              href={"/dashboard"}
+              className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:p-2 rounded-md"
+            >
+              <span className="text-sm max-sm:hidden">Dashboard</span>
+              <LayoutDashboard className="h-5 w-5 sm:hidden" />
+            </Link>
 
             <MobileMenu />
           </section>

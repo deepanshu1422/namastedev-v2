@@ -181,7 +181,7 @@
 }
 
 .techStack ol {
-  @apply gap-2 w-full list-item list-decimal text-white/80 pt-5 pl-5;
+  @apply gap-2 w-full list-item text-white/80 pt-2;
 }
 
 .techStack ul {
