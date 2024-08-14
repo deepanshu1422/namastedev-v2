@@ -10,6 +10,7 @@ import SessionProvider from "@/util/next-auth";
 import Script from "next/script";
 import { auth } from "@/auth";
 import QueryProvider from "@/lib/queryProvider";
+import GoogleTagManager from "@/components/tracking/GoogletagManager";
 
 export default async function RootLayout({
   children,
@@ -20,6 +21,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <GoogleTagManager containerId="GTM-W4LNH7RV" />
+      </head>
       <SessionProvider session={session}>
         <QueryProvider>
           <body
@@ -31,10 +35,10 @@ export default async function RootLayout({
           </body>
         </QueryProvider>
       </SessionProvider>
-      <Pixel />
+      {/* <Pixel /> */}
       <Clarity />
       <PageSense />
-      <GoogleAnalytics gaId={"G-BCTWV4GBCY"} />
+      {/* <GoogleAnalytics gaId={"G-BCTWV4GBCY"} /> */}
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
     </html>
   );
