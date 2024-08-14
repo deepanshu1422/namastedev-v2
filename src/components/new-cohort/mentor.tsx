@@ -151,7 +151,7 @@ export default function Mentor() {
       name: "Zyan",
       profile: "/zyan.jpg",
       position: "SDE",
-      link: "https://www.linkedin.com/in/dhanushkamaths/",
+      link: "https://in.linkedin.com/in/noonesociedad",
     },
     {
       name: "Rakshit Raj",
