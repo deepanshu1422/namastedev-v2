@@ -1,7 +1,7 @@
 import Reveal from "@/components/framer/reveal";
 import Image from "next/image";
 
-let companyImg = [
+export let companyImg = [
   "https://assets-global.website-files.com/624629162e6c5c363b391aee/64197485c9609eca1327200a_LinkedIn%20svg.svg",
   "https://assets-global.website-files.com/624629162e6c5c363b391aee/6419f7a1a05ce52679a5d78f_Group%2048097659.svg",
   "https://assets-global.website-files.com/624629162e6c5c363b391aee/64148a3216f5ef8433b541a2_Meta_Platforms_Inc._logo%203.svg",
@@ -47,7 +47,7 @@ let companyImg2 = [
   "https://assets-global.website-files.com/624629162e6c5c363b391aee/641bfc2ac17bb1bfb438bd8f_Frame%201430102671%20(1).svg",
 ];
 
-function NewImage({ src = "/company1.png" }: { src?: string }) {
+export function NewImage({ src = "/company1.png" }: { src?: string }) {
   return (
     <Image
       className="invert-0"

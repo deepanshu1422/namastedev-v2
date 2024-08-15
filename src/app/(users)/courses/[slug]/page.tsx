@@ -19,6 +19,7 @@ export type Courses = {
       shortDescription: string;
       longDescription: string;
       techStack: string;
+      features: string[];
       slug: string;
       courseImage: {
         description: string;
@@ -177,6 +178,7 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
         title,
         longDescription,
         techStack,
+        features,
         courseImage{   
             description,
             url,

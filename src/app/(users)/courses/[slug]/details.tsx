@@ -13,16 +13,6 @@ import {
 } from "lucide-react";
 
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-
-import {
   Drawer,
   DrawerClose,
   DrawerContent,
@@ -169,9 +159,9 @@ export default function Details({
   }
 
   return (
-    <div className="flex flex-col gap-6 tab:w-3/4 w-full">
+    <div className="flex flex-col gap-4 tab:w-3/4 w-full">
       <section className="flex flex-col gap-2">
-        <h1 className="font-bold text-xl">{title}</h1>
+        <h1 className="font-bold sm:text-xl">{title}</h1>
         <VideoPlayer
           setOpen={setOpen}
           courseId={courseId}
@@ -189,7 +179,7 @@ export default function Details({
               ?.youtubeId
           }
         />
-        <div className="lg:hidden flex flex-col gap-1">
+        {/* <div className="lg:hidden flex flex-col gap-1">
           <span className="flex gap-0.5 w-full">
             <Button
               onClick={() => prevVideo()}
@@ -219,8 +209,8 @@ export default function Details({
             chapter={chapter}
             modules={modulesCollection}
           />
-        </div>
-        <Publisher
+        </div> */}
+        {/* <Publisher
           title={title}
           disabledNext={disabledNext}
           disabledPrev={disabledPrev}
@@ -228,7 +218,7 @@ export default function Details({
           prevVideo={prevVideo}
           name={"Aryan Singh"}
           src="/instructor.jpg"
-        />
+        /> */}
       </section>
 
       <Description
@@ -328,15 +318,6 @@ function Description({
 }) {
   return (
     <section className="flex flex-col gap-2">
-      <div className="flex flex-col gap-1">
-        <span className="flex text-muted-foreground gap-1 font-semibold text-sm">
-          <Badge className="rounded-md bg-prime/40 hover:bg-prime/40 text-white">
-            {module + 1}.{chapter + 1}
-          </Badge>
-          <h2>{chapterTitle}</h2>
-        </span>
-      </div>
-      <CourseInfo chapterCount={chapterCount} />
       <span className="font-bold text-lg">Description</span>
       <ErrorBoundary
         errorComponent={({ error, reset }) => (

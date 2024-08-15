@@ -36,10 +36,12 @@ export default function Checkout({
   open,
   setOpen,
   faqCollection,
+  features,
 }: {
   amount: number;
   courseId: string;
   open: boolean;
+  features: string[];
   setOpen: Dispatch<SetStateAction<boolean>>;
   faqCollection: {
     items: {
@@ -72,36 +74,14 @@ export default function Checkout({
               Course Includes:
             </span>
             <div className="flex flex-col gap-2 text-white/60 font-semibold">
-              <p className="flex items-center gap-1 text-xs">
-                <span className="bg-prime/40 h-6 w-6 grid place-items-center rounded-md text-white/80 font-bold">
-                  <Check className="w-4 h-4" />
-                </span>
-                45+ practical full-stack projects
-              </p>
-              <p className="flex items-center gap-1 text-xs">
-                <span className="bg-prime/40 h-6 w-6 grid place-items-center rounded-md text-white/80 font-bold">
-                  <Check className="w-4 h-4" />
-                </span>
-                15+ interview and placement tips
-              </p>
-              <p className="flex items-center gap-1 text-xs">
-                <span className="bg-prime/40 h-6 w-6 grid place-items-center rounded-md text-white/80 font-bold">
-                  <Check className="w-4 h-4" />
-                </span>
-                Taught by FAANG and Senior Software Engineers
-              </p>
-              <p className="flex items-center gap-1 text-xs">
-                <span className="bg-prime/40 h-6 w-6 grid place-items-center rounded-md text-white/80 font-bold">
-                  <Check className="w-4 h-4" />
-                </span>
-                Backed by 850+ five-star reviews and testimonials
-              </p>
-              <p className="flex items-center gap-1 text-xs">
-                <span className="bg-prime/40 h-6 w-6 grid place-items-center rounded-md text-white/80 font-bold">
-                  <Check className="w-4 h-4" />
-                </span>
-                100% money-back guarantee
-              </p>
+              {features.map((e, i) => (
+                <p key={i} className="flex items-center gap-1 text-xs">
+                  <span className="shrink-0 bg-prime/40 h-6 w-6 grid place-items-center rounded-md text-white/80 font-bold">
+                    <Check className="w-4 h-4" />
+                  </span>
+                  {e}
+                </p>
+              ))}
             </div>
             <div className="group relative mt-3">
               <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
@@ -167,7 +147,13 @@ export default function Checkout({
 
         <div className="bg-gradient-to-b from-head/30 to-second/20 flex flex-col gap-4 rounded-md shadow-lg backdrop-blur-sm shadow-black/40 p-4 px-3">
           <span className="font-bold">Completion Certificate</span>
-          <Image src={"/certificate.png"} width={500} height={500} alt="30DC Completion Certificate" className="aspect-[16/10] object-cover rounded-lg w-full" />
+          <Image
+            src={"/certificate.png"}
+            width={500}
+            height={500}
+            alt="30DC Completion Certificate"
+            className="aspect-[16/10] object-cover rounded-lg w-full"
+          />
         </div>
 
         <div className="bg-gradient-to-b from-head/30 to-second/20 flex flex-col gap-4 rounded-md shadow-lg backdrop-blur-sm shadow-black/40 p-4 px-3">
@@ -185,17 +171,16 @@ export default function Checkout({
                 width={300}
                 height={200}
               />
-              <div className="col-span-2 flex flex-col gap-1">
-                <p className="text-sm font-bold line-clamp-1">
-                  Join Mentorship
-                </p>
-                <span className="font-semibold text-xs text-muted-foreground">
-                  Lifetime Access
-                </span>
-                {/* <span className="flex gap-1 text-sm text-prime font-extrabold items-center">
-                  <Star className="w-5 h-4 fill-prime stroke-prime" />
-                  4.7
-                </span> */}
+              <div className="col-span-2 flex justify-between items-center gap-1">
+                <div className="flex flex-col justify-center gap-1">
+                  <p className="text-sm font-bold line-clamp-1">
+                    Join Mentorship
+                  </p>
+                  <span className="font-semibold text-xs text-muted-foreground">
+                    Lifetime Access
+                  </span>
+                </div>
+                <ChevronRight className="w-6 h-6  stroke-prime" />
               </div>
             </Link>
 
@@ -435,7 +420,7 @@ function Reviews() {
           <ChevronRight className="h-4 w-4" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-6xl">
         <DialogHeader>
           <DialogTitle>Course Review</DialogTitle>
           <DialogDescription>
@@ -443,41 +428,15 @@ function Reviews() {
             students.
           </DialogDescription>
         </DialogHeader>
-        <Carousel
-          opts={{
-            loop: true,
-          }}
-          plugins={[
-            Autoplay({
-              delay: 3000,
-              stopOnFocusIn: false,
-              stopOnMouseEnter: true,
-              stopOnInteraction: false,
-            }),
-          ]}
-          className="w-full max-w-xs mx-auto basis-4  "
-        >
-          <CarouselContent>
-            {testimonials.map(({ alt, src }, index) => (
-              <CarouselItem key={index}>
-                <div className="p-1">
-                  <Card>
-                    <CardContent className="flex relative aspect-square items-center justify-center p-6">
-                      <Image
-                        src={src}
-                        alt={alt}
-                        fill
-                        className="object-cover"
-                      />
-                    </CardContent>
-                  </Card>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+        <div className="flex gap-4 flex-wrap max-h-96 overflow-auto justify-center">
+          {testimonials.map(({ alt, src }, i) => (
+            <Card key={i}>
+              <CardContent className="flex relative aspect-square items-center justify-center h-60 sm:h-40">
+                <Image src={src} alt={alt} fill className="object-cover" />
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </DialogContent>
     </Dialog>
   );
