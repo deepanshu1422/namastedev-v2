@@ -9,6 +9,7 @@ import Script from "next/script";
 import Lifetime from "./lifetime";
 import Mentors from "./mentors";
 import Success from "@/components/mentorship-comp/success";
+import Freshdesk from "@/util/freshdesk";
 
 export const dynamic = "force-static";
 
@@ -200,6 +201,7 @@ export default function Home() {
         desc="Learn from Aryan, Deepanshu, and the 30DC team to get placed this season."
         heroImage="/main/hero_section_mentor.png"
       /> */}
+      <Freshdesk />
       <Lifetime />
       <Features />
       <Success />
@@ -228,9 +230,6 @@ export default function Home() {
         youtubeId={"gIx8D2pyXVI"}
       />
       <Faqs faq={faq} />
-      {/* <Highlights /> */}
-      {/* <Testimonials /> */}
-      {/* <Floating /> */}
     </main>
   );
 }
