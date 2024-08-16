@@ -12,6 +12,8 @@ import { auth } from "@/auth";
 import QueryProvider from "@/lib/queryProvider";
 import GoogleTagManager from "@/components/tracking/GoogletagManager";
 
+import Freshdesk from "@/util/freshdesk";
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -37,11 +39,10 @@ export default async function RootLayout({
       </SessionProvider>
       {/* <Pixel /> */}
       <Clarity />
+      <Freshdesk/>
       <PageSense />
       {/* <GoogleAnalytics gaId={"G-BCTWV4GBCY"} /> */}
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
     </html>
   );
 }
-
-
