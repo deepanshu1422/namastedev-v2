@@ -194,7 +194,7 @@ export default function Details({
           </div>
         </section>
 
-        {/* <Reviews /> */}
+        <Reviews />
       </div>
 
       <Checkout

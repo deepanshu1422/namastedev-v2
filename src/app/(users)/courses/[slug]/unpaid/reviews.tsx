@@ -58,7 +58,7 @@ function Testimonial({
         <Link
           target="_blank"
           href={linkedin}
-          className="flex gap-1 p-2 rounded-full bg-prime/90 hover:bg-prime/70 text-sm font-semibold shadow-[rgb(0,_0,_0)_6px_6px_0px_0px] border-2 hover:translate-x-1 hover:translate-y-1 transition-all duration-75 hover:shadow-[rgb(0,_0,_0)_3px_3px_0px_0px]"
+          className="flex gap-1 p-2 rounded-full bg-sky-600/90 hover:bg-sky-600/70 text-sm font-semibold shadow-[rgb(0,_0,_0)_6px_6px_0px_0px] border-2 hover:translate-x-1 hover:translate-y-1 transition-all duration-75 hover:shadow-[rgb(0,_0,_0)_3px_3px_0px_0px]"
         >
           <Linkedin className="h-5 w-5" />
           {/* Try Now */}
@@ -216,13 +216,12 @@ export function Slider() {
           delay: 3000,
         }),
       ]}
-      className="py-3"
     >
       <CarouselContent>
         {testimonials.map(
           ({ name, review, link, linkedin, pos, profile }, index) => (
             <CarouselItem className="basis-full md:basis-1/2" key={index}>
-              <div className="p-1">
+              {/* <div className="p-1"> */}
                 <Testimonial
                   name={name}
                   review={review}
@@ -231,7 +230,7 @@ export function Slider() {
                   pos={pos}
                   profile={profile}
                 />
-              </div>
+              {/* </div> */}
             </CarouselItem>
           )
         )}
