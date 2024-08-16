@@ -11,7 +11,8 @@ import Script from "next/script";
 import { auth } from "@/auth";
 import QueryProvider from "@/lib/queryProvider";
 import GoogleTagManager from "@/components/tracking/GoogletagManager";
-import Dialogflow from "@/util/Dialogflow";
+
+import Freshdesk from "@/util/freshdesk";
 
 export default async function RootLayout({
   children,
@@ -38,7 +39,7 @@ export default async function RootLayout({
       </SessionProvider>
       {/* <Pixel /> */}
       <Clarity />
-      {/* <Dialogflow/> */}
+      <Freshdesk/>
       <PageSense />
       {/* <GoogleAnalytics gaId={"G-BCTWV4GBCY"} /> */}
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
