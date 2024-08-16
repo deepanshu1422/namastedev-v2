@@ -15,13 +15,11 @@ export default function Dialogflow() {
     return (
         <>
             <Script
-                src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"
+
+                src='//in.fw-cdn.com/32051950/1092317.js'
+
             />
-            <df-messenger
-                chat-title="30DaysCoding-Whatsapp"
-                agent-id="9188433f-f330-4953-801d-893c5f83f68d"
-                language-code="en"
-            ></df-messenger>
+
         </>
     );
 }
