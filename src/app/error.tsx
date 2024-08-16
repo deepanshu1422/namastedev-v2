@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Error() {
   return (
-    <div className="flex flex-col gap-3 items-center justify-center w-full min-h-[85dvh]">
+    <div className="flex flex-col gap-3 items-center justify-center w-full min-h-[100dvh]">
       <title>Error</title>
       <Image
         src={"/fun-fact.jpg"}

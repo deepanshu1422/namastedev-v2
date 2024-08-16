@@ -10,10 +10,12 @@ import { useSearchParams } from "next/navigation";
 import { Floating, PaymentModal, PaymentSheet } from "./payments";
 import { useState } from "react";
 import Hero from "./unpaid/hero";
-import Projects from "./unpaid/projects";
+import Guides from "./unpaid/guides";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ShoppingBag } from "lucide-react";
 import FAQ from "./unpaid/faq";
+import { YTModal } from "@/app/(guide)/testimonials/slider";
+import { useSession } from "next-auth/react";
 
 type CourseItem = {
   mdx: React.JSX.Element;
@@ -101,100 +103,161 @@ export default function Main({
 
   const [open, setOpen] = useState(false);
   const [openPay, setOpenPay] = useState(false);
+  const [openYt, setOpenYt] = useState(false);
 
-  return (
-    <main className="min-h-svh overflow-clip">
-      <Hero title={title} image={courseImage.url} />
-      <Detail modulesCollection={modulesCollection} longDescription={mdx} image={courseImage.url} />
-      <Projects img={courseImage.url} />
-      <Success />
-      <FAQ faqs={faqCollection.items} />
-    </main>
-  );
+  const courseOffer = [
+    "Certificate of completion",
+    "Resume and Job guidance",
+    "100% Money Back Gurantee",
+    "Lifetime Access to resources",
+  ];
 
-  return (
-    <main className="bg-footer">
-      <section className="relative grid lg:grid-cols-[260px_1fr]">
-        <div className="hidden lg:flex flex-col sticky top-0 h-fit">
-          <div className="flex flex-col gap-4 p-7 h-full">
-            <Link
-              href={"/courses"}
-              className="flex gap-2 text-xs text-white/70 hover:text-white/90"
-            >
-              <ChevronLeft className="h-3 w-3" />
-              Other Courses
-            </Link>
+  function Paid() {
+    return (
+      <main className="bg-footer">
+        <section className="relative grid lg:grid-cols-[260px_1fr]">
+          <div className="hidden lg:flex flex-col sticky top-0 h-fit">
+            <div className="flex flex-col gap-4 p-7 h-full">
+              <Link
+                href={"/courses"}
+                className="flex gap-2 text-xs text-white/70 hover:text-white/90"
+              >
+                <ChevronLeft className="h-3 w-3" />
+                Other Courses
+              </Link>
 
-            <div className="flex flex-col">
-              <span className="text-[11px] text-white/70">Course</span>
-              <span className="text-sm font-semibold">{title}</span>
+              <div className="flex flex-col">
+                <span className="text-[11px] text-white/70">Course</span>
+                <span className="text-sm font-semibold">{title}</span>
+              </div>
+            </div>
+
+            <div className="px-7 max-h-[65dvh] overflow-hidden overflow-y-auto horizontal-scroll">
+              <CourseList
+                chapter={vidIndex.chapterIndex}
+                module={vidIndex.modIndex}
+                modules={modulesCollection}
+                setVidIndex={setVidIndex}
+              />
             </div>
           </div>
-
-          <div className="px-7 max-h-[65dvh] overflow-hidden overflow-y-auto horizontal-scroll">
-            <CourseList
-              chapter={vidIndex.chapterIndex}
-              module={vidIndex.modIndex}
-              modules={modulesCollection}
-              setVidIndex={setVidIndex}
-            />
+          <div className="bg-bg lg:rounded-s-3xl min-h-dvh py-6 max-tab:pt-[1rem] max-tab:pb-[2.5rem] px-4 md:px-6 m-auto w-full flex">
+            <section className="relative flex max-md:flex-col gap-6 p-1 max-w-6xl w-full mx-auto">
+              <Details
+                faqCollection={faqCollection}
+                vidIndex={vidIndex}
+                open={open}
+                setOpen={setOpen}
+                longDescription={mdx}
+                modulesCollection={modulesCollection}
+                title={title}
+                courseId={courseId}
+                courseImage={courseImage}
+                chapter={vidIndex.chapterIndex}
+                module={vidIndex.modIndex}
+                setVidIndex={setVidIndex}
+              />
+              <Checkout
+                features={features}
+                faqCollection={faqCollection}
+                amount={
+                  pricingsCollection.items.find((e) => e.countryCode == "IN")
+                    ?.amount ?? 0
+                }
+                courseId={courseId}
+                open={open}
+                setOpen={setOpen}
+              />
+            </section>
           </div>
-        </div>
-        <div className="bg-bg lg:rounded-s-3xl min-h-dvh py-6 max-tab:pt-[1rem] max-tab:pb-[2.5rem] px-4 md:px-6 m-auto w-full flex">
-          <section className="relative flex max-md:flex-col gap-6 p-1 max-w-6xl w-full mx-auto">
-            <Details
-              faqCollection={faqCollection}
-              vidIndex={vidIndex}
-              open={open}
-              setOpen={setOpen}
-              longDescription={mdx}
-              modulesCollection={modulesCollection}
-              title={title}
-              courseId={courseId}
-              courseImage={courseImage}
-              chapter={vidIndex.chapterIndex}
-              module={vidIndex.modIndex}
-              setVidIndex={setVidIndex}
-            />
-            <Checkout
-              features={features}
-              faqCollection={faqCollection}
-              amount={
-                pricingsCollection.items.find((e) => e.countryCode == "IN")
-                  ?.amount ?? 0
-              }
-              courseId={courseId}
-              open={open}
-              setOpen={setOpen}
-            />
-          </section>
-        </div>
-      </section>
-      <PaymentModal payModal={openPay} setOpenPay={setOpenPay} />
-      <PaymentSheet
-        open={open}
-        setOpen={setOpen}
-        courseId={courseId}
-        title={title}
-        cover={courseImage.url}
-        amount={
-          pricingsCollection.items.find((e) => e.countryCode == "IN")?.amount ??
-          0
-        }
-        curreny={"INR"}
-        setOpenPay={setOpenPay}
-      />
-      <Floating
-        amount={
-          pricingsCollection.items.find((e) => e.countryCode == "IN")?.amount ??
-          0
-        }
-        open={open}
-        setOpen={setOpen}
-        courseId={courseId}
-      />
-    </main>
-  );
+        </section>
+
+        <PaymentSheet
+          open={open}
+          setOpen={setOpen}
+          courseId={courseId}
+          title={title}
+          cover={courseImage.url}
+          amount={
+            pricingsCollection.items.find((e) => e.countryCode == "IN")
+              ?.amount ?? 0
+          }
+          curreny={"INR"}
+          setOpenPay={setOpenPay}
+        />
+        <Floating
+          amount={
+            pricingsCollection.items.find((e) => e.countryCode == "IN")
+              ?.amount ?? 0
+          }
+          open={open}
+          setOpen={setOpen}
+          courseId={courseId}
+        />
+      </main>
+    );
+  }
+
+  function Unpaid() {
+    return (
+      <main className="relative min-h-svh overflow-clip">
+        <Hero
+          title={title}
+          image={courseImage.url}
+          shortDescription={shortDescription}
+          amount={
+            pricingsCollection.items.find((e) => e.countryCode == "IN")
+              ?.amount ?? 0
+          }
+          courseOffer={courseOffer}
+          setOpen={setOpen}
+          setYtOpen={setOpenYt}
+          />
+        <Detail
+          modulesCollection={modulesCollection}
+          longDescription={mdx}
+          image={courseImage.url}
+          amount={
+            pricingsCollection.items.find((e) => e.countryCode == "IN")
+            ?.amount ?? 0
+          }
+          courseOffer={courseOffer}
+          setOpen={setOpen}
+          setYtOpen={setOpenYt}
+        />
+        <Guides img={courseImage.url} />
+        <FAQ faqs={faqCollection.items} />
+        <PaymentSheet
+          open={open}
+          setOpen={setOpen}
+          courseId={courseId}
+          title={title}
+          cover={courseImage.url}
+          amount={
+            pricingsCollection.items.find((e) => e.countryCode == "IN")
+              ?.amount ?? 0
+          }
+          curreny={"INR"}
+          setOpenPay={setOpenPay}
+        />
+        <YTModal open={openYt} setOpen={setOpenYt} url="nTAHWER3K-0" />
+        <Floating
+          amount={
+            pricingsCollection.items.find((e) => e.countryCode == "IN")
+              ?.amount ?? 0
+          }
+          open={open}
+          setOpen={setOpen}
+          courseId={courseId}
+        />
+      </main>
+    );
+  }
+
+  const { data: session } = useSession();
+
+  // @ts-ignore
+  return session?.user?.courseId?.includes(courseId) ? <Paid /> : <Unpaid />;
 }
 
 type TestimonialType = {
@@ -258,176 +321,6 @@ function Testimonial({
         </Link>
       </div>
       {review}
-    </div>
-  );
-}
-
-const testimonials: TestimonialType[] = [
-  {
-    review: (
-      <p className="leading-6 text-sm font-normal">
-        Before joining 30DC, I was struggling to make sense of the vast world of
-        tech.{" "}
-        <span className="bg-lime-500/40">
-          The mentorship program gave me a structured approach and personalized
-          guidance that I desperately needed.
-        </span>{" "}
-        With 30DC&apos;s resources and community, I successfully transitioned
-        from a non-tech background to securing a software engineering role.
-      </p>
-    ),
-    name: "Rojal Sapkota",
-    link: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0",
-    linkedin: "https://www.linkedin.com/in/rojal-sapkota-787130237/",
-    pos: "SDE@Google",
-    profile: "/rojal-in.jpg",
-  },
-  {
-    review: (
-      <p className="leading-6 text-sm font-normal">
-        I was stuck in a low-paying job and felt lost in my career. 30DC&apos;s
-        mentorship group changed everything for me.{" "}
-        <span className="bg-lime-500/40">
-          The courses and community support helped me sharpen my skills and
-          regain confidence.
-        </span>{" "}
-        With the support from 30DC, I landed a remote job, doubling my salary
-        and setting a new career trajectory.
-      </p>
-    ),
-    name: "Harsh",
-    link: "https://courses.30dayscoding.com/courses/Full-stack-package-652a0a17e4b0db14394522ed",
-    linkedin: "https://www.linkedin.com/in/harshpandey002/",
-    pos: "SDE (Remote) USA",
-    profile: "/harsh-in.jpg",
-  },
-  {
-    review: (
-      <p className="leading-6 text-sm font-normal">
-        Joining 30DC was the best decision I made for my career.{" "}
-        <span className="bg-lime-500/40">
-          The personalized mentorship and the comprehensive courses provided me
-          with the tools and strategies I needed to excel in interviews.
-        </span>{" "}
-        Thanks to 30DC and the community, I secured an internship at LinkedIn,
-        which eventually turned into a full-time software engineering position
-        at Apple.
-      </p>
-    ),
-    name: "Umang Chaudhary",
-    link: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
-    linkedin: "https://www.linkedin.com/in/umang18oct/",
-    pos: "SDE@Amazon",
-    profile: "/umang-in.jpg",
-  },
-  {
-    review: (
-      <p className="leading-6 text-sm font-normal">
-        I had been applying to tech jobs for months with no success.{" "}
-        <span className="bg-lime-500/40">
-          The 30DC mentorship program, particularly the courses and the
-          supportive community, provided me with a clear roadmap and the
-          confidence to ace my interviews.
-        </span>{" "}
-        30DC&apos;s guidance was instrumental in helping me land a high-paying
-        role at Microsoft right after graduation.
-      </p>
-    ),
-    name: "Kevin",
-    link: "https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view",
-    linkedin: "https://www.linkedin.com/in/kevinmsmith131/",
-    pos: "SDE@Tesla",
-    profile: "",
-  },
-  {
-    review: (
-      <p className="leading-6 text-sm font-normal">
-        After struggling with countless job applications and rejections, I
-        discovered 30DC.{" "}
-        <span className="bg-lime-500/40">
-          The structured courses and mentorship provided me with the direction
-          and skills I needed to stand out.
-        </span>{" "}
-        The supportive community kept me motivated throughout the process, and I
-        eventually landed a software engineering position at Netflix,
-        transforming my career.
-      </p>
-    ),
-    name: "Manan Patel",
-    link: "https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view",
-    linkedin: "https://www.linkedin.com/in/themananpatel/",
-    pos: "SDE@Nasdaq",
-    profile: "/manan-in.jpg",
-  },
-  {
-    review: (
-      <p className="leading-6 text-sm font-normal">
-        I&apos;m happy to share that I&apos;m starting a new position as
-        Software Engineer 1-B at Bank of America! I&apos;m grateful to Vellore
-        Institute of Technology for providing this amazing opportunity.
-        <span className="bg-lime-500/40">
-          I&apos;d also like to thank Aryan Singh and Deepanshu Udhwani, who
-          continuously guided me with placements with their community (30 Days
-          Coding).
-        </span>
-      </p>
-    ),
-    name: "Sneha Michelle V.",
-    link: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0",
-    linkedin: "https://www.linkedin.com/in/sneha-michelle-v-1b73b0213/",
-    pos: "SDE@Bank of America",
-    profile: "/sneha-in.jpg",
-  },
-];
-
-function Success() {
-  return (
-    <div className={"grid grid-cols-1 gap-1 py-10 max-w-[75rem] m-auto"}>
-      <span className="flex items-center justify-center gap-4 relative">
-        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
-        <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
-          Success Stories
-        </h2>
-        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
-      </span>
-      <p className="max-w-2xl text-center mx-auto text-sm text-white/70 px-10 line-clamp-2">
-        A collection of inspiring narratives highlighting the journeys of
-        individuals who have overcome significant challenges to achieve
-        remarkable accomplishments.
-      </p>
-
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 lg:px-10 py-5 lg:py-10">
-        {testimonials.map(
-          ({ name, review, link, linkedin, pos, profile }, i) => (
-            <Testimonial
-              key={i}
-              name={name}
-              review={review}
-              link={link}
-              linkedin={linkedin}
-              pos={pos}
-              profile={profile}
-            />
-          )
-        )}
-      </div>
-
-      {/* <div className="py-12 relative flex flex-col gap-7 overflow-hidden bg-gradient-to-tr">
-        <div className="relative flex gap-5 animate-[loop-scroll_40s_infinite_linear] hover:[animation-play-state:paused] w-fit">
-        </div>
-
-        <div className="pointer-events-none h-full w-full absolute z-10 bg-gradient-to-r from-bg max-lg:from-0% from-5% via-bg/10 via-50% to-bg max-lg:to-100% to-95%"></div>
-      </div> */}
-
-      <div className="m-auto">
-        <Link className="text-sm" href={"/testimonials"}>
-          <button
-            className={`font-jakarta flex items-center font-semibold gap-1 border-white border transition-all px-6 py-3 rounded-md`}
-          >
-            Show More
-          </button>
-        </Link>
-      </div>
     </div>
   );
 }

@@ -12,11 +12,11 @@ export default function Header() {
       <Link
         href={"/course/dsa-live-placement-ready-course"}
         //
-        className={`sticky top-0 bg-gradient-to-r from-yellow-600 via-yellow-400 to-yellow-600 animate-gradient bg-[length:200%_auto] font-bold flex items-center justify-center text-lg text-black min-h-8 w-full py-2`}
+        className={`sticky top-0 bg-yellow-400 font-bold flex items-center justify-center max-sm:text-xs text-sm text-black w-full p-2`}
       >
-        <p className="tracking-wide text-center">
-          DSA classes will start from April 20th , Limited Seats 🎁
-          <span className="underline mx-2">Apply now!</span>
+        <p className="tracking-wide text-center text-pretty">
+          Access all courses for 1229/- Lifetime Valid
+          <span className="underline mx-2">Claim now!</span>
         </p>
       </Link>
       <section className="px-3 py-2 flex justify-between bg-footer z-50">

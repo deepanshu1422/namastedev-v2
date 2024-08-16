@@ -38,7 +38,7 @@ export default async function RootLayout({
       </SessionProvider>
       {/* <Pixel /> */}
       <Clarity />
-      <Dialogflow/>
+      {/* <Dialogflow/> */}
       <PageSense />
       {/* <GoogleAnalytics gaId={"G-BCTWV4GBCY"} /> */}
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />

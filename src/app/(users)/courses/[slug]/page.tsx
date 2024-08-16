@@ -176,6 +176,7 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
         items{
         courseId,
         title,
+        shortDescription,
         longDescription,
         techStack,
         features,

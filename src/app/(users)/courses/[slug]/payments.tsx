@@ -38,6 +38,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
 export function PaymentSheet({
   cover,
@@ -244,14 +245,14 @@ export function PaymentSheet({
     if (error || !data)
       toast.error("Coupon Invalid", {
         description: JSON.stringify(message),
-        position: "bottom-center"
+        position: "bottom-center",
       });
 
     if (!data) return null;
 
     toast.info("Coupon Applied", {
       description: JSON.stringify(message),
-      position: "bottom-center"
+      position: "bottom-center",
     });
 
     const discount = amount * (data?.value / 100);
@@ -361,7 +362,10 @@ export function PaymentSheet({
             <div className="flex justify-between">
               <span>Total Pay</span>
               <span className="font-extrabold text-prime">
-                {curreny} {promo.discount ? amount + (amount * 0.18) + 12 - promo.discount : amount + (amount * 0.18) + 12}
+                {curreny}{" "}
+                {promo.discount
+                  ? amount + amount * 0.18 + 12 - promo.discount
+                  : amount + amount * 0.18 + 12}
               </span>
             </div>
           </section>
@@ -572,31 +576,18 @@ export function Floating({
   if (!session?.user?.courseId?.includes(courseId))
     return (
       <div className="md:hidden fixed bottom-0 z-20 bg-background/40 w-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30">
-        <div className="flex justify-between items-center gap-2 p-4 lg:max-w-[80rem] mx-auto">
-          <section className="flex flex-col gap-1">
-            <span className={`font-jakarta text-lg`}>
-              ₹<span className="text-lg">{course.price} for lifetime</span>
-            </span>
-
-            <div className="flex gap-2 text-sm font-semibold">
-              <span className="text-muted-foreground ml-1 line-through italic">
-                ₹{course.ogPrice}
-              </span>
-              <span
-                className={`font-jakarta text-secondary-foreground rounded py-0`}
-              >
-                {course.discount}% off
-              </span>
-            </div>
-          </section>
-          <div className="group relative">
+        <div className="flex flex-col gap-2 p-2">
+          <div className="flex-1 group relative">
             <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
             <Button
               onClick={() => setOpen(true)}
               variant={"outline"}
-              className={`font-semibold text-foreground/80 hover:text-foreground relative w-full p-3 text-sm`}
+              className={`font-semibold text-foreground/80 hover:text-foreground relative w-full p-6 text-sm gap-1`}
             >
-              Buy Now
+              Buy Now @ ₹{course.price}{" "}
+              <span className="text-muted-foreground line-through italic">
+                ₹{course.ogPrice}
+              </span>
             </Button>
           </div>
         </div>

@@ -10,7 +10,7 @@ export default function FAQ({
   }) {
     return (
       <section className="flex flex-col gap-6 mb-6 tab:mb-10 max-w-[75rem] px-24 max-tab:px-8 max-phone:px-4 mx-auto">
-        <span className="font-bold text-3xl text-center">Frequently Asked Questions</span>
+        <span className="font-bold text-xl tab:text-3xl text-center">Frequently Asked Questions</span>
         <div className="grid gap-2">
           <Accordion className="flex flex-col gap-3" type="single" collapsible>
             {faqs.map(({ answer, question }, i) => (
