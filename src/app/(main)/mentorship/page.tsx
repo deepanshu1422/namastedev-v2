@@ -10,6 +10,7 @@ import Lifetime from "./lifetime";
 import Success from "@/components/mentorship-comp/success";
 import Floating from "./floating";
 import Mentor from "@/components/new-cohort/mentor";
+import Zoho from "@/util/zoho";
 
 export const metadata: Metadata = {
   title: "Join 1:1 Mentorship | 30dayscoding",
@@ -199,6 +200,12 @@ export default function Home() {
         youtubeId={"ylUk7kImBeE"}
       />
       <Mentor />
+      <JoinUs />
+      <Faqs faq={faq} />
+        <Zoho />
+      <Floating />
+      {/* <Highlights /> */}
+      {/* <Testimonials /> */}
       {/* <Video
         title={"Best Practices for Developers by Our Mentors"}
         desc={
@@ -206,7 +213,6 @@ export default function Home() {
         }
         youtubeId={"KMufzzSF6SE"}
       /> */}
-      <JoinUs />
       {/* <Video
         title={"1:1 Live Session with our Mentors"}
         desc={
@@ -214,10 +220,6 @@ export default function Home() {
         }
         youtubeId={"gIx8D2pyXVI"}
       /> */}
-      <Faqs faq={faq} />
-      {/* <Highlights /> */}
-      {/* <Testimonials /> */}
-      <Floating />
     </main>
   );
 }
