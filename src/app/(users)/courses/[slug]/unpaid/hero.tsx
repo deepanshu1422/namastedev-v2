@@ -6,6 +6,7 @@ import Image from "next/image";
 
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
+import { Reviews } from "../checkout";
 
 export default function Hero({
   title,
@@ -59,29 +60,38 @@ export default function Hero({
               <h1
                 className={`text-white tab:max-w-4xl font-jakarta text-xl tab:text-3xl font-bold tab:leading-10 text-pretty tab:line-clamp-4`}
               >
-                {title}
+                Certified{" "}
+                <span className="bg-lime-400/40">
+                  Full Stack Web Development
+                </span>{" "}
+                Job ready Course with 50+ projects
               </h1>
 
-              <p className="tab:text-lg text-muted-foreground line-clamp-3">
+              <p className="max-tab:text-sm text-muted-foreground line-clamp-3">
                 {shortDescription}
               </p>
 
-              <div className="flex items-center gap-3">
-                <section className="flex gap-1.5 items-center">
+              <div className="flex items-center gap-3 max-tab:text-xs">
+                <section className="flex gap-1 items-center">
                   <span className="text-lime-500/70">5.0</span>
-                  <Star className="fill-lime-500/60 stroke-lime-500/60 h-4 w-4" />
-                  <Star className="fill-lime-500/60 stroke-lime-500/60 h-4 w-4" />
-                  <Star className="fill-lime-500/60 stroke-lime-500/60 h-4 w-4" />
-                  <Star className="fill-lime-500/60 stroke-lime-500/60 h-4 w-4" />
-                  <Star className="fill-lime-500/60 stroke-lime-500/60 h-4 w-4" />
+                  <Star className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4" />
+                  <Star className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4" />
+                  <Star className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4" />
+                  <Star className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4" />
+                  <Star className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4" />
                 </section>
                 {/* <span className="text-white/70 font-semibold text-sm">
                 (48 reviews)
               </span> */}
-                <span></span>
+                <Reviews>
+                  <button className="text-prime/80 underline hover:text-prime">
+                    (12,000 review)
+                  </button>
+                </Reviews>
+                30,000+ Students
               </div>
 
-              <div className="text-white/70">
+              <div className="text-white/70 max-tab:text-sm">
                 Author:{" "}
                 <span className="text-white font-semibold px-1 underline">
                   Aryan Singh
@@ -91,15 +101,15 @@ export default function Hero({
               {/* <div className="text-sm text-white/40">Updated 4 months ago</div> */}
 
               <div className="tab:hidden flex flex-col gap-4">
-                <span className="uppercase text-white text-3xl sm:text-4xl font-bold flex gap-2 items-end">
+                <span className="text-white text-2xl font-bold flex gap-2 items-end pt-1">
                   ₹{amount}
-                  <span className="text-muted-foreground/70 italic text-2xl sm:text-3xl line-through">
-                    ₹{amount * 4}
+                  <span className="text-muted-foreground/70 italic line-through">
+                    ₹{(amount + 1) * 4}
                   </span>
-                  <span className="text-sm">75% off</span>
+                  <span>75% off</span>
                 </span>
 
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 py-1">
                   <Button
                     onClick={() => setOpen(true)}
                     size={"lg"}

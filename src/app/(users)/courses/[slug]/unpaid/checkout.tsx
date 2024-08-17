@@ -41,13 +41,14 @@ export default function Checkout({
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-3 px-4 pb-5">
-          <span className="uppercase text-white text-3xl sm:text-4xl font-bold flex gap-2 items-start">
+        <div className="flex flex-col gap-3 px-4 py-5">
+          <span className="relative w-fit text-white sm:text-2xl font-bold flex gap-2 items-start">
             ₹{amount}
-            <span className="text-muted-foreground/70 italic text-2xl line-through">
-              ₹{amount * 4}
+            <span className="text-muted-foreground/70 italic line-through">
+              ₹{(amount + 1) * 4}
             </span>
-            <span className="text-sm">(75% off)</span>
+            {/* <Image className="absolute -top-14 -right-16" src={"/75off.png"} alt="30DC 70% off" height={100} width={100} /> */}
+            <span >(75% off)</span>
           </span>
 
           <div className="flex flex-col gap-2">

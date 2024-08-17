@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Star, Check, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Children, Dispatch, SetStateAction } from "react";
 import { FAQ } from "./details";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -94,12 +94,17 @@ export default function Checkout({
         )}
 
         <div className="bg-gradient-to-b from-head/30 to-second/20 flex justify-between rounded-md shadow-lg backdrop-blur-sm shadow-black/40 overflow-hidden">
-          <div className="flex items-center gap-1 w-full">
-            <span className="p-4 shadow-lg shadow-black">
-              <Star className="h-8 w-8 text-prime" />
-            </span>
-            <Reviews />
-          </div>
+          <Reviews>
+            <div className="flex items-center gap-1 w-full">
+              <span className="p-4 shadow-lg shadow-black">
+                <Star className="h-8 w-8 text-prime" />
+              </span>
+              <Button className="mx-auto" size={"sm"} variant={"link"}>
+                See Review
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </div>
+          </Reviews>
         </div>
 
         {/* <div className="bg-gradient-to-b from-head/30 to-second/20 flex flex-col gap-4 rounded-md shadow-lg backdrop-blur-sm shadow-black/40 p-4 px-3">
@@ -229,7 +234,7 @@ export default function Checkout({
   );
 }
 
-function Reviews() {
+export function Reviews({ children }: { children: React.ReactNode }) {
   const testimonials = [
     { src: "https://i.ibb.co/8KN7nys/16.webp", alt: "30dayscoding dsa course" },
     {
@@ -405,12 +410,7 @@ function Reviews() {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button className="mx-auto" size={"sm"} variant={"link"}>
-          See Review
-          <ChevronRight className="h-4 w-4" />
-        </Button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-6xl">
         <DialogHeader>
           <DialogTitle>Course Review</DialogTitle>

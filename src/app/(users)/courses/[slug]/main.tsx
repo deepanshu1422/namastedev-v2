@@ -107,9 +107,10 @@ export default function Main({
 
   const courseOffer = [
     "Certificate of completion",
-    "Resume and Job guidance",
-    "100% Money Back Gurantee",
     "Lifetime Access to resources",
+    "100% Money Back Guarantee",
+    "Revision notes and guides",
+    "Interview questions included",
   ];
 
   function Paid() {
@@ -212,21 +213,20 @@ export default function Main({
           courseOffer={courseOffer}
           setOpen={setOpen}
           setYtOpen={setOpenYt}
-          />
+        />
         <Detail
           modulesCollection={modulesCollection}
           longDescription={mdx}
           image={courseImage.url}
           amount={
             pricingsCollection.items.find((e) => e.countryCode == "IN")
-            ?.amount ?? 0
+              ?.amount ?? 0
           }
           courseOffer={courseOffer}
           setOpen={setOpen}
           setYtOpen={setOpenYt}
+          faqs={faqCollection.items}
         />
-        <Guides img={courseImage.url} />
-        <FAQ faqs={faqCollection.items} />
         <PaymentSheet
           open={open}
           setOpen={setOpen}
