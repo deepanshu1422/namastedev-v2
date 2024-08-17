@@ -148,8 +148,8 @@ export default function Mentor() {
       link: "https://www.linkedin.com/in/dhanushkamaths/",
     },
     {
-      name: "Zyan",
-      profile: "/zayn.jpg",
+      name: "Zayn",
+      profile: "/zyan.jpg",
       position: "SDE",
       link: "https://in.linkedin.com/in/noonesociedad",
     },

@@ -1,22 +1,28 @@
 import AnimatedButton from "@/components/animated-button";
 import { mentorship } from "@/util/globals";
 import NewRazorpay from "@/util/new-razorpay";
+import { GraduationCap } from "lucide-react";
 
 export default async function Floating() {
   return (
     <div className="fixed bottom-0 z-20 bg-background/40 w-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30">
-      <div className="flex justify-between items-center gap-2 p-4 px-6 lg:max-w-[80rem] mx-auto">
-        <section className="flex flex-col gap-1">
+      <div className="flex max-lg:flex-col justify-between items-center gap-2 p-4 py-2 lg:max-w-[80rem] mx-auto">
+        <section className="max-lg:hidden flex flex-col gap-1">
           <span className={`font-jakarta text-lg`}>
             <span className="lg:text-2xl">One Time Payment</span>
           </span>
 
           <div className="flex gap-2 text-sm font-semibold">
-            <span className="">
-              Lifetime Mentorship
-            </span>
+            <span className="">Lifetime Mentorship</span>
           </div>
         </section>
+
+        <p className="lg:hidden flex gap-1 items-center">
+          <GraduationCap className="h-5 w-5" />
+          <span className="line-clamp-1">
+            One Time Payment Lifetime Mentorship
+          </span>
+        </p>
 
         {/* <Link href={"https://courses.30dayscoding.com/s/store"} >
           <div className="group relative">
@@ -33,7 +39,9 @@ export default async function Floating() {
           </div>
         </Link> */}
 
-        <AnimatedButton link={mentorship.link}>Buy Now</AnimatedButton>
+        <div className="max-lg:w-full">
+          <AnimatedButton link={mentorship.link}>Buy Now</AnimatedButton>
+        </div>
         {/* <div
           className="razorpay-embed-btn"
           data-url="https://pages.razorpay.com/pl_NlXmnJkIOZFVcc/view"
@@ -47,5 +55,3 @@ export default async function Floating() {
     </div>
   );
 }
-
-
