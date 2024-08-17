@@ -28,7 +28,6 @@ export default function RootLayout({
       <Pixel />
       <Clarity />
       <PageSense />
-      <Interakt/>
       <GoogleAnalytics gaId={"G-BCTWV4GBCY"} />
     </html>
   );

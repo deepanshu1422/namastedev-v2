@@ -9,7 +9,7 @@ import Lifetime from "./lifetime";
 import Success from "@/components/mentorship-comp/success";
 import Floating from "./floating";
 import Mentor from "@/components/new-cohort/mentor";
-import Zoho from "@/util/zoho";
+import Interakt from "@/util/interakt";
 
 export const metadata: Metadata = {
   title: "Join 1:1 Mentorship | 30dayscoding",
@@ -213,7 +213,7 @@ export default function Home() {
       <Mentor />
       <JoinUs />
       <Faqs faq={faq} />
-      <Zoho />
+      <Interakt />
       <Floating />
       {/* <Highlights /> */}
       {/* <Testimonials /> */}
