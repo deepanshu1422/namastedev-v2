@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Check, Star, Slash, ChevronLeft, Play } from "lucide-react";
+import { ArrowLeft, Check, Star, Slash, ChevronLeft, Play, StarHalf } from "lucide-react";
 import Image from "next/image";
 
 import Link from "next/link";
@@ -58,10 +58,10 @@ export default function Hero({
 
             <div className="flex flex-col px-6 gap-3">
               <h1
-                className={`text-white tab:max-w-4xl font-jakarta text-xl tab:text-3xl font-bold tab:leading-10 text-pretty tab:line-clamp-4`}
+                className={`text-white tab:max-w-4xl font-jakarta text-2xl tab:text-3xl font-bold tab:leading-10 text-pretty tab:line-clamp-4`}
               >
                 Certified{" "}
-                <span className="bg-lime-400/40">
+                <span className="bg-prime/60">
                   Full Stack Web Development
                 </span>{" "}
                 Job ready Course with 50+ projects
@@ -73,22 +73,22 @@ export default function Hero({
 
               <div className="flex items-center gap-3 max-tab:text-xs">
                 <section className="flex gap-1 items-center">
-                  <span className="text-lime-500/70">5.0</span>
+                  <span className="text-lime-500/70">4.8</span>
                   <Star className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4" />
                   <Star className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4" />
                   <Star className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4" />
                   <Star className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4" />
-                  <Star className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4" />
+                  <StarHalf className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4" />
                 </section>
                 {/* <span className="text-white/70 font-semibold text-sm">
                 (48 reviews)
               </span> */}
                 <Reviews>
-                  <button className="text-prime/80 underline hover:text-prime">
+                  <button className="text-prime/90 underline hover:text-prime">
                     (12,000 review)
                   </button>
                 </Reviews>
-                30,000+ Students
+                20,000+ Students
               </div>
 
               <div className="text-white/70 max-tab:text-sm">

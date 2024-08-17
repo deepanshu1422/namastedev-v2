@@ -37,6 +37,14 @@ export type CoursesType = {
         width: number;
         height: number;
       };
+      pricingsCollection: {
+        items: {
+          title: string;
+          amount: number;
+          countryCode: string;
+          currencyCode: string;
+        }[];
+      };
     }[];
   };
 };
@@ -49,6 +57,13 @@ async function getCourses(): Promise<CoursesType> {
                 shortDescription,
                 slug,
                 tags,
+                 pricingsCollection{
+                    items{
+                      title,
+                      countryCode,
+                      amount
+                    }
+                  }
                 courseImage{
                     url,
                     width,

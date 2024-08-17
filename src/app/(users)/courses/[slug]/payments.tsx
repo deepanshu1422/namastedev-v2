@@ -364,8 +364,8 @@ export function PaymentSheet({
               <span className="font-extrabold text-prime">
                 {curreny}{" "}
                 {promo.discount
-                  ? amount + amount * 0.18 + 12 - promo.discount
-                  : amount + amount * 0.18 + 12}
+                  ? (amount + amount * 0.18 + 12 - promo.discount).toFixed(2)
+                  : (amount + amount * 0.18 + 12).toFixed(2)}
               </span>
             </div>
           </section>
