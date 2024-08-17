@@ -7,6 +7,7 @@ import GoogleAnalytics from "@/util/ga";
 import { Toaster } from "@/components/ui/sonner"
 import NextProvider from "@/util/next-auth";
 import PageSense from "@/util/pagesense";
+import Interakt from "@/util/interakt";
 
 export default function RootLayout({
   children,
@@ -27,6 +28,7 @@ export default function RootLayout({
       <Pixel />
       <Clarity />
       <PageSense />
+      <Interakt/>
       <GoogleAnalytics gaId={"G-BCTWV4GBCY"} />
     </html>
   );
