@@ -1,11 +1,13 @@
-"use client";
+// "use client";
 
 import Script from "next/script";
 
 export default function Interakt() {
   return (
-    <Script id="kiwi-sdk">
-      {`
+    <Script
+      id="kiwi-sdk"
+      dangerouslySetInnerHTML={{
+        __html: `
     (function(w,d,s,c,r,a,m){
       w['KiwiObject']=r;
       w[r]=w[r] || function () {
@@ -19,7 +21,8 @@ export default function Interakt() {
     })(window,document,'script',"https://app.interakt.ai/kiwi-sdk/kiwi-sdk-17-prod-min.js?v="+ new Date().getTime(),'kiwi');
     window.addEventListener("load",function () {
       kiwi.init('', 'rjgik3LsuJkrNGZSSNHaISZlOPZ0qvub', {});
-    });`}
-    </Script>
+    });`,
+      }}
+    />
   );
 }
