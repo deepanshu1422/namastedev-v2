@@ -236,7 +236,6 @@ export default function Checkout({
 
 export function Reviews({ children }: { children: React.ReactNode }) {
   const testimonials = [
-    { src: "https://i.ibb.co/8KN7nys/16.webp", alt: "30dayscoding dsa course" },
     {
       src: "https://i.ibb.co/0J72X2f/17.webp",
       alt: "30dayscoding mern course",
@@ -406,6 +405,7 @@ export function Reviews({ children }: { children: React.ReactNode }) {
       src: "https://i.ibb.co/0yxW2MG/IMG-8087.jpg",
       alt: "30dayscoding next js course review",
     },
+    { src: "https://i.ibb.co/8KN7nys/16.webp", alt: "30dayscoding dsa course" },
   ];
 
   return (
@@ -419,11 +419,11 @@ export function Reviews({ children }: { children: React.ReactNode }) {
             students.
           </DialogDescription>
         </DialogHeader>
-        <div className="flex gap-4 flex-wrap max-h-96 overflow-auto justify-center">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 max-h-96 w-full overflow-auto justify-center horizontal-scroll">
           {testimonials.map(({ alt, src }, i) => (
-            <Card key={i}>
-              <CardContent className="flex relative aspect-square items-center justify-center h-60 sm:h-40">
-                <Image src={src} alt={alt} fill className="object-cover" />
+            <Card className="w-full bg-slate-400 overflow-hidden h-60 sm:h-40" key={i}>
+              <CardContent className="flex relative items-center justify-center bg-slate-800 h-full">
+                <Image src={src} alt={alt} fill className="object-contain" />
               </CardContent>
             </Card>
           ))}

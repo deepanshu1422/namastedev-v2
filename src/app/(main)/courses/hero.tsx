@@ -51,7 +51,7 @@ export default function Hero({
         <div className="sm:pt-[8.5rem] sm:p-[2.5rem_4.75rem] max-sm:pt-16 max-sm:pb-[0.5rem] m-auto max-w-[89rem] flex max-sm:flex-col text-white">
           <section className="flex-1 grid place-content-center max-sm:px-11 max-phone:px-6 gap-2">
             <h1
-              className={`sm:max-w-3xl font-jakarta phone:text-[3.0rem] text-[2.3rem] font-extrabold bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight text-pretty`}
+              className={`sm:max-w-3xl font-jakarta phone:text-[3.0rem] text-[2.3rem] font-extrabold leading-tight text-pretty`}
             >
               {title}
             </h1>

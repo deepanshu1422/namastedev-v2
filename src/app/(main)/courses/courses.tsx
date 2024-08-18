@@ -110,9 +110,9 @@ function Course({
             className="object-cover group-hover:scale-105 transition-all"
           />
         </div>
-        <CardFooter className="px-0 py-0 flex-col gap-0.5 items-start text-sm text-muted-foreground">
+        <CardFooter className="px-0 py-0 flex-col gap-0.5 items-start text-muted-foreground">
           <h3 className="text-foreground font-semibold">{title}</h3>
-          <span className="taxt-xs tab:text-sm">Aryan Singh</span>
+          {/* <span className="taxt-xs tab:text-sm">Aryan Singh</span> */}
           <section className="flex gap-1 items-center">
             <span className="text-lime-500/80 font-semibold">5.0</span>
             <Star className="fill-lime-500/60 stroke-lime-500/60 h-4 w-4" />
