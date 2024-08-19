@@ -30,13 +30,61 @@ export default function Courses({
     <>
       <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-[85rem] gap-7 mx-auto max-phone:px-6 phone:px-10 py-5 tab:pb-8">
         {state
+          ? courses.bundleCollection.items
+              .filter((e) =>
+                e.bundleTitle.toLowerCase().includes(state.toLowerCase())
+              )
+              .map(
+                (
+                  { coverImage, slug, bundleTitle, pricingsCollection, rating },
+                  i
+                ) => (
+                  <Bundle
+                    rating={rating}
+                    key={i}
+                    courseImage={coverImage}
+                    tags={[""]}
+                    slug={slug}
+                    title={bundleTitle}
+                    pricingsCollection={pricingsCollection}
+                  />
+                )
+              )
+          : courses.bundleCollection.items.map(
+              (
+                { coverImage, slug, bundleTitle, pricingsCollection, rating },
+                i
+              ) => (
+                <Bundle
+                  rating={rating}
+                  key={i}
+                  courseImage={coverImage}
+                  tags={[""]}
+                  slug={slug}
+                  title={bundleTitle}
+                  pricingsCollection={pricingsCollection}
+                />
+              )
+            )}
+        {state
           ? courses.courseCollection.items
               .filter((e) =>
                 e.title.toLowerCase().includes(state.toLowerCase())
               )
               .map(
-                ({ courseImage, tags, slug, title, pricingsCollection }, i) => (
+                (
+                  {
+                    courseImage,
+                    tags,
+                    slug,
+                    title,
+                    pricingsCollection,
+                    rating,
+                  },
+                  i
+                ) => (
                   <Course
+                    rating={rating}
                     key={i}
                     courseImage={courseImage}
                     tags={tags}
@@ -47,8 +95,12 @@ export default function Courses({
                 )
               )
           : courses.courseCollection.items.map(
-              ({ courseImage, tags, slug, title, pricingsCollection }, i) => (
+              (
+                { courseImage, tags, slug, title, pricingsCollection, rating },
+                i
+              ) => (
                 <Course
+                  rating={rating}
                   key={i}
                   courseImage={courseImage}
                   tags={tags}
@@ -62,6 +114,9 @@ export default function Courses({
       {state &&
         !courses.courseCollection.items.filter((e) =>
           e.title.toLowerCase().includes(state.toLowerCase())
+        ).length &&
+        !courses.bundleCollection.items.filter((e) =>
+          e.bundleTitle.toLowerCase().includes(state.toLowerCase())
         ).length && (
           <div className="mx-auto max-w-[90rem] w-full text-center py-10 pb-40">
             <span className="font-semibold rounded-full p-2 px-4 border-4 border-double w-fit mx-auto items-center border-prime shadow-2xl text-sm text-white/60 flex gap-1">
@@ -79,12 +134,14 @@ function Course({
   tags,
   slug,
   title,
+  rating,
   pricingsCollection,
 }: {
   courseImage: { url: string; height: number; width: number };
   tags: string[];
   slug: string;
   title: string;
+  rating: number;
   pricingsCollection: {
     items: {
       title: string;
@@ -114,18 +171,26 @@ function Course({
           <h3 className="text-foreground font-semibold">{title}</h3>
           {/* <span className="taxt-xs tab:text-sm">Aryan Singh</span> */}
           <section className="flex gap-1 items-center">
-            <span className="text-lime-500/80 font-semibold">5.0</span>
-            <Star className="fill-lime-500/60 stroke-lime-500/60 h-4 w-4" />
-            <Star className="fill-lime-500/60 stroke-lime-500/60 h-4 w-4" />
-            <Star className="fill-lime-500/60 stroke-lime-500/60 h-4 w-4" />
-            <Star className="fill-lime-500/60 stroke-lime-500/60 h-4 w-4" />
-            <Star className="fill-lime-500/60 stroke-lime-500/60 h-4 w-4" />
+            <span className="text-lime-500/70">{rating}</span>
+            {Array.from({ length: rating }).map((_, i) => (
+              <Star
+                key={i}
+                className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4"
+              />
+            ))}
           </section>
           <span className="flex gap-2 text-lg text-white font-semibold">
             ₹{amount}
-            <span className="text-muted-foreground line-through">₹{(amount + 1) * 4}</span>
+            <span className="text-muted-foreground line-through">
+              ₹{(amount + 1) * 4}
+            </span>
             {/* <span className="text-lime-500">75%off</span> */}
-              <Badge className="bg-second/80 hover:bg-second" variant={"secondary"}>75% off</Badge>
+            <Badge
+              className="bg-second/80 hover:bg-second"
+              variant={"secondary"}
+            >
+              75% off
+            </Badge>
           </span>
         </CardFooter>
       </Link>
@@ -159,5 +224,74 @@ function Course({
         ))}
       </div>
     </Link>
+  );
+}
+
+function Bundle({
+  courseImage,
+  tags,
+  slug,
+  rating,
+  title,
+  pricingsCollection,
+}: {
+  courseImage: { url: string; height: number; width: number };
+  tags: string[];
+  slug: string;
+  rating: number;
+  title: string;
+  pricingsCollection: {
+    items: {
+      title: string;
+      amount: number;
+      countryCode: string;
+      currencyCode: string;
+    }[];
+  };
+}) {
+  const amount =
+    pricingsCollection.items.find((e) => e.countryCode == "IN")?.amount ?? 0;
+  return (
+    <Card className="select-none flex flex-col gap-2 bg-transparent drop-shadow-[30px_20px_100px_#07928183] border-none">
+      <Link
+        href={`/bundle/${slug}`}
+        className="flex flex-col gap-2 h-fit group"
+      >
+        <div className="relative bg-card/50 min-h-48 rounded-md overflow-hidden">
+          <Image
+            src={courseImage?.url ?? ""}
+            alt={title}
+            fill
+            className="object-cover group-hover:scale-105 transition-all"
+          />
+        </div>
+        <CardFooter className="px-0 py-0 flex-col gap-0.5 items-start text-muted-foreground">
+          <h3 className="text-foreground font-semibold">{title}</h3>
+          {/* <span className="taxt-xs tab:text-sm">Aryan Singh</span> */}
+          <section className="flex gap-1 items-center">
+            <span className="text-lime-500/70">{rating}</span>
+            {Array.from({ length: rating }).map((_, i) => (
+              <Star
+                key={i}
+                className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4"
+              />
+            ))}
+          </section>
+          <span className="flex gap-2 text-lg text-white font-semibold">
+            ₹{amount}
+            <span className="text-muted-foreground line-through">
+              ₹{(amount * 100) / 15}
+            </span>
+            {/* <span className="text-lime-500">75%off</span> */}
+            <Badge
+              className="bg-second/80 hover:bg-second"
+              variant={"secondary"}
+            >
+              85% off
+            </Badge>
+          </span>
+        </CardFooter>
+      </Link>
+    </Card>
   );
 }

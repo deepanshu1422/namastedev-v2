@@ -19,8 +19,8 @@ import { Reviews } from "../checkout";
 export default function Hero({
   title,
   image,
-  amount,
   rating,
+  amount,
   shortDescription,
   courseOffer,
   setYtOpen,
@@ -28,10 +28,10 @@ export default function Hero({
 }: {
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
+  rating: number;
   title: string;
   image: string;
   amount: number;
-  rating: number;
   shortDescription: string;
   courseOffer: string[];
 }) {
@@ -86,12 +86,12 @@ export default function Hero({
                 <section className="flex gap-1 items-center">
                   <span className="text-lime-500/70">{rating}</span>
                   {Array.from({ length: rating }).map((_, i) => (
-                    <Star key={i} className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4" />
+                    <Star
+                      key={i}
+                      className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4"
+                    />
                   ))}
                 </section>
-                {/* <span className="text-white/70 font-semibold text-sm">
-                (48 reviews)
-              </span> */}
                 <Reviews>
                   <button className="text-prime/90 underline hover:text-prime">
                     (12,000 review)
@@ -113,9 +113,9 @@ export default function Hero({
                 <span className="text-white text-2xl font-bold flex gap-2 items-end pt-1">
                   ₹{amount}
                   <span className="text-muted-foreground/70 italic line-through">
-                    ₹{(amount + 1) * 4}
+                    ₹{(amount * 100) / 15}
                   </span>
-                  <span>75% off</span>
+                  <span>85% off</span>
                 </span>
 
                 <div className="flex flex-col gap-2 py-1">
@@ -126,15 +126,6 @@ export default function Hero({
                   >
                     Buy Now
                   </Button>
-
-                  <Link href={"/mentorship"}>
-                    <Button
-                      variant={"outline"}
-                      className={`font-semibold text-foreground/80 hover:text-foreground w-full p-6 gap-1`}
-                    >
-                      Join Mentorship
-                    </Button>
-                  </Link>
                 </div>
 
                 <div className="flex flex-col gap-1">

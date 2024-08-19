@@ -2,18 +2,20 @@
 
 import { Button } from "@/components/ui/button";
 import { Check, Play } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 
 export default function Checkout({
-  checkout,
+  bundleId,
   image,
   amount,
   courseOffer,
   setOpen,
   setYtOpen,
 }: {
+  bundleId: string;
   checkout: string;
   image: string;
   amount: number;
@@ -21,6 +23,7 @@ export default function Checkout({
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
 }) {
+  const { data } = useSession();
   return (
     <div className="max-tab:hidden w-[500px] h-fit sticky -translate-y-[330px] top-[28rem]">
       <div className="max-w-sm bg-gradient-to-b from-head to-second/20 flex flex-col gap-4 relative max-tab:mx-auto ml-auto shadow-lg backdrop-blur-sm shadow-black/40 overflow-hidden p-0.5">
@@ -42,34 +45,42 @@ export default function Checkout({
           </div>
         </div>
         <div className="flex flex-col gap-3 px-4 py-5">
-          <span className="relative w-fit text-white sm:text-2xl font-bold flex gap-2 items-start">
-            ₹{amount}
-            <span className="text-muted-foreground/70 italic line-through">
-              ₹{(amount + 1) * 4}
-            </span>
-            {/* <Image className="absolute -top-14 -right-16" src={"/75off.png"} alt="30DC 70% off" height={100} width={100} /> */}
-            <span>(75% off)</span>
-          </span>
-
-          <div className="flex flex-col gap-2">
-            <Button
-              onClick={() => setOpen(true)}
-              size={"lg"}
-              className="flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
-            >
-              Buy Now
-            </Button>
-
-            <Link href={"/bundle/complete-package-all-course-bundle"} className="relative">
+          {/* @ts-ignore */}
+          {data?.user?.bundleId.includes(bundleId) ? (
+            <Link href={"/dashboard"} className="flex flex-col gap-2 relative">
               <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
               <Button
+                size={"lg"}
                 variant={"outline"}
-                className={`relative font-semibold text-foreground/80 hover:text-foreground w-full p-6 gap-1`}
+                className="relative flex items-center font-semibold gap-1 transition-all px-4 py-3 rounded-md text-white text-lg"
               >
-                Buy all courses @ ₹1200/-
+                Watch Now
               </Button>
             </Link>
-          </div>
+          ) : (
+            <>
+              <span className="relative w-fit text-white sm:text-2xl font-bold flex gap-2 items-start">
+                ₹{amount}
+                <span className="text-muted-foreground/70 italic line-through">
+                  ₹{(amount * 100) / 15}
+                </span>
+                {/* <Image className="absolute -top-14 -right-16" src={"/75off.png"} alt="30DC 70% off" height={100} width={100} /> */}
+                <span>(85% off)</span>
+              </span>
+
+              <div className="flex flex-col gap-2 relative">
+                <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
+                <Button
+                  onClick={() => setOpen(true)}
+                  size={"lg"}
+                  variant={"outline"}
+                  className="relative flex items-center font-semibold gap-1 transition-all px-4 py-3 rounded-md text-white text-lg"
+                >
+                  Buy Now
+                </Button>
+              </div>
+            </>
+          )}
 
           <div className="flex flex-col gap-1">
             <p className="tab:max-w-2xl max-tab:leading-6 line-clamp-3 text-white/60 italic font-semibold">

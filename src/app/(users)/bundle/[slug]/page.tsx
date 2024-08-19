@@ -12,34 +12,30 @@ const CodeSnippet = ({ children }: { children: string }) => (
   </div>
 );
 export type Courses = {
-  courseCollection: {
+  bundleCollection: {
     items: {
-      courseId: string;
-      title: string;
+      bundleId: string;
+      bundleTitle: string;
       shortDescription: string;
-      longDescription: string;
-      techStack: string;
-      offers: string[];
       learn: string[];
+      offers: string[];
       rating: number;
       slug: string;
-      projectsCollection: {
+      coursesCollection: {
         items: {
           title: string;
-          content: string[];
-          coverImage: {
+          slug: string;
+          rating: number,
+          courseImage: {
             url: string;
           };
         }[];
       };
-      courseImage: {
+      coverImage: {
         description: string;
         url: string;
         width: number;
         height: number;
-      };
-      courseCreator: {
-        name: string;
       };
       pricingsCollection: {
         items: {
@@ -53,24 +49,6 @@ export type Courses = {
         items: {
           question: string;
           answer: string;
-        }[];
-      };
-      modulesCollection: {
-        total: number;
-        items: {
-          title: string;
-          duration: string;
-          chaptersCollection: {
-            total: number;
-            items: [
-              {
-                public: boolean;
-                title: string;
-                duration: string;
-                youtubeId: string;
-              }
-            ];
-          };
         }[];
       };
     }[];
@@ -90,7 +68,7 @@ type Props = {
 
 export async function generateStaticParams() {
   const query = `query {
-        courseCollection{
+        bundleCollection{
         items{
             slug
             }
@@ -111,7 +89,7 @@ export async function generateStaticParams() {
 
   const data = await fetchedData.json();
 
-  return data.data.courseCollection.items.map((e: Record<string, string>) => ({
+  return data.data.bundleCollection.items.map((e: Record<string, string>) => ({
     slug: e.slug,
   }));
 }
@@ -124,12 +102,12 @@ export async function generateMetadata(
 
   try {
     const query = `query {
-            courseCollection{
+            bundleCollection{
             items{
                 slug,
-                title,
+                bundleTitle,
                 shortDescription,
-                courseImage{
+                coverImage{
                     url
                     }
                 }
@@ -150,7 +128,7 @@ export async function generateMetadata(
 
     const data = await fetchedData.json();
 
-    item = data.data.courseCollection.items.find(
+    item = data.data.bundleCollection.items.find(
       (e: Record<string, string>) => e.slug === params.slug
     );
   } catch (err) {
@@ -160,13 +138,13 @@ export async function generateMetadata(
   }
 
   return {
-    title: `${item?.title} | 30DC Courses`,
+    title: `${item?.bundleTitle} | 30DC Courses`,
     description: item?.shortDescription,
     openGraph: {
-      title: `${item?.title} | 30DC Courses`,
+      title: `${item?.bundleTitle} | 30DC Courses`,
       description: item?.shortDescription,
       images: {
-        url: item?.courseImage?.url ?? "",
+        url: item?.coverImage?.url ?? "",
       },
     },
   };
@@ -174,34 +152,33 @@ export async function generateMetadata(
 
 async function getCourses({ slug }: { slug: string }): Promise<Courses> {
   const query = `query {
-    courseCollection(where: {slug: "${slug}"},limit:1){
+    bundleCollection(where: {slug: "${slug}"},limit:1){
         items{
-        courseId,
-        title,
+        bundleId,
+        bundleTitle,
         shortDescription,
-        longDescription,
-        offers,
         learn,
         rating,
-        courseImage{   
+        offers,
+        coverImage{   
             description,
             url,
             width,
             height,
         },
         slug,
-        courseCreator{
-            name,
-        },
-         projectsCollection{
+        coursesCollection{
             items{
-              title,
-              content,
-              coverImage{
-                url
-              }
-            }
-          },
+                title,
+                slug,
+                rating,
+                courseImage{
+                    url,
+                    width,
+                    height
+                    },
+                }
+            },
         pricingsCollection{
             items{
             title,
@@ -209,27 +186,12 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
             countryCode,
             }
         },
-        faqCollection{
-          items{
+         faqCollection{
+        items{
           question,
           answer
-          }
-        },
-        modulesCollection{
-            total,
-            items{
-                title,
-                duration,
-                chaptersCollection{
-                total,
-                items{
-                title,
-                youtubeId,
-                public
-                    }
-                }
-                    }
-                }
+        }
+      }
             }
         }
     }`;
@@ -255,18 +217,11 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
 export default async function Home({ params: { slug } }: PageProps) {
   const data = await getCourses({ slug });
 
-  if (!data.courseCollection.items.length) return notFound();
+  if (!data.bundleCollection.items.length) return notFound();
 
   const {
-    courseCollection: { items },
+    bundleCollection: { items },
   } = data;
 
-  const { longDescription } = items[0];
-
-  let mdx = await MDXRemote({
-    source: longDescription?.toString(),
-    components: { CodeSnippet },
-  });
-
-  return <Main mdx={mdx} item={items[0]} />;
+  return <Main item={items[0]} />;
 }

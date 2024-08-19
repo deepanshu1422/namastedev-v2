@@ -39,13 +39,14 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import createBundlePayment from "../../../../../actions/createBundlePayment";
 
 export function PaymentSheet({
   cover,
   title,
   amount,
   curreny,
-  courseId,
+  bundleId,
   open,
   setOpen,
   setOpenPay,
@@ -54,7 +55,7 @@ export function PaymentSheet({
   title: string;
   amount: number;
   curreny: string;
-  courseId: string;
+  bundleId: string;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   setOpenPay: Dispatch<SetStateAction<boolean>>;
@@ -136,9 +137,9 @@ export function PaymentSheet({
 
       let res;
 
-      if (courseId) {
-        res = await createPayments({
-          courseId: courseId,
+      if (bundleId) {
+        res = await createBundlePayment({
+          bundleId: bundleId,
           email: session?.user?.email ?? formData.email,
           contact: formData.phone,
           name: session?.user?.name ?? formData.name,
@@ -531,22 +532,22 @@ export function PaymentModal({
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-3 pb-0 mx-auto w-full flex flex-col items-center gap-2">
+            <Link className="w-fit" href={"/dashboard"}>
             <Button
-              onClick={() => setOpenPay(false)}
+              // onClick={() => setOpenPay(false)}
               disabled={status === "loading"}
               className="w-full bg-prime/70 text-white hover:bg-prime"
             >
-              {status === "loading" ? "Adding Course..." : "Watch Now"}
+              {status === "loading" ? "Adding Course..." : "Visit Dashboard"}
             </Button>
-            <Link className="w-fit" href={"/dashboard"}>
-              <Button
+            </Link>
+              {/* <Button
                 variant={"link"}
                 disabled={status === "loading"}
                 className="text-white/40 hover:text-white"
               >
                 {status === "loading" ? "loading..." : "Visit Dashboard"}
-              </Button>
-            </Link>
+              </Button> */}
           </CardContent>
         </Card>
       </DialogContent>
@@ -556,12 +557,12 @@ export function PaymentModal({
 
 export function Floating({
   amount,
-  courseId,
+  bundleId,
   open,
   setOpen,
 }: {
   amount: number;
-  courseId: string;
+  bundleId: string;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
@@ -573,7 +574,7 @@ export function Floating({
 
   const { data: session } = useSession();
   // @ts-ignore
-  if (!session?.user?.courseId?.includes(courseId))
+  if (!session?.user?.bundleId?.includes(bundleId))
     return (
       <div className="md:hidden fixed bottom-0 z-20 bg-background/40 w-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30">
         <div className="flex flex-col gap-2 p-2">

@@ -21,13 +21,13 @@ import { Dispatch, SetStateAction, useState } from "react";
 import Image from "next/image";
 import Reviews from "./reviews";
 import Guides from "./guides";
+import Courses from "./courses";
 // import Reviews from "./reviews"
 
 export default function Details({
+  bundleId,
   image,
-  longDescription,
-  modulesCollection,
-  projectsCollection,
+  coursesCollection,
   amount,
   courseOffer,
   learn,
@@ -35,37 +35,20 @@ export default function Details({
   setYtOpen,
   faqs,
 }: {
+  bundleId: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
   courseOffer: string[];
   image: string;
-  longDescription: React.JSX.Element;
   amount: number;
   learn: string[];
-  projectsCollection: {
+  coursesCollection: {
     items: {
       title: string;
-      content: string[];
-      coverImage: {
+      slug: string;
+      rating: number;
+      courseImage: {
         url: string;
-      };
-    }[];
-  };
-  modulesCollection: {
-    total: number;
-    items: {
-      title: string;
-      duration: string;
-      chaptersCollection: {
-        total: number;
-        items: [
-          {
-            public: boolean;
-            title: string;
-            duration: string;
-            youtubeId: string;
-          }
-        ];
       };
     }[];
   };
@@ -74,21 +57,11 @@ export default function Details({
     answer: string;
   }[];
 }) {
-  const project = [
-    "Add certificates",
-    "Testimonials - scrollable like udemy",
-    "Font - size and bold like udemy - check carefully",
-    "Stop scrolling companies",
-    "Better page for /courses add testimonials",
-    "Course content mai “view more”",
-    "Add video to page - instead of photo at top",
-    "Add guides at the bottom",
-    "Add project section",
-  ];
-
   return (
     <div className="tab:px-20 tab:py-6 max-tab:pt-4 max-tab:pb-10 m-auto max-w-[80rem] flex w-full">
       <div className="flex flex-col w-full gap-6 px-6 overflow-hidden">
+        <Courses coursesCollection={coursesCollection} />
+
         <section className="flex flex-col gap-1">
           <div className="flex flex-col gap-3 border-prime/80 border bg-second/30 pt-5 p-4">
             <span className="text-2xl font-bold">What you&apos;ll learn</span>
@@ -113,45 +86,39 @@ export default function Details({
           </div>
         </section>
 
-        {projectsCollection.items.length && (
-          <section className="flex flex-col gap-4">
-            <div className="flex flex-col gap-1">
-              <h2 className="font-bold text-xl tab:text-2xl">
-                What you&apos;ll make
-              </h2>
-              <p className="text-sm text-pretty text-muted-foreground">
-                Add more creative value to your portfolio💡
-              </p>
+        {/* <section className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
+            <h2 className="font-bold text-xl tab:text-2xl">
+              What you&apos;ll make
+            </h2>
+            <p className="text-sm text-pretty text-muted-foreground">
+              Add more creative value to your portfolio💡
+            </p>
+          </div>
+          <div className="grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6">
+            <div className="max-tab:order-last flex flex-col gap-3">
+              <h3 className="font-bold text-xl tab:text-2xl">
+                Project&apos;s Title
+              </h3>
+              <div className="flex flex-col gap-1 pr-5">
+                {project.map((e, i) => (
+                  <span key={i} className="flex gap-2 items-center text-sm">
+                    <CheckCheck className="h-5 w-5 text-prime shrink-0" />
+                    {e}
+                  </span>
+                ))}
+              </div>
             </div>
-            {projectsCollection.items.map(
-              ({ content, coverImage, title }, i) => (
-                <div key={i} className="grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6">
-                  <div className="max-tab:order-last flex flex-col gap-3">
-                    <h3 className="font-bold text-xl tab:text-2xl">{title}</h3>
-                    <div className="flex flex-col gap-1 pr-5">
-                      {content.map((e, i) => (
-                        <span
-                          key={i}
-                          className="flex gap-2 items-center text-sm"
-                        >
-                          <CheckCheck className="h-5 w-5 text-prime shrink-0" />
-                          {e}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <Image
-                    src={coverImage.url}
-                    alt={"30DC Project Preview"}
-                    height={600}
-                    width={900}
-                    className="rounded-s-lg w-full tab:h-4/5 my-auto shadow-xl shadow-black/50 object-cover"
-                  />
-                </div>
-              )
-            )}
-          </section>
-        )}
+            <Image
+              src={image}
+              alt={"30DC Project Preview"}
+              height={600}
+              width={900}
+              className="rounded-s-lg w-full tab:h-4/5 my-auto shadow-xl shadow-black/50 object-cover"
+            />
+          </div>
+        </section> */}
+
         {/* <div>
           <section
             className={`flex flex-col ${
@@ -203,24 +170,14 @@ export default function Details({
           </div>
         </section>
 
-        <section className="flex flex-col gap-4">
-          <div className="flex max-sm:flex-col gap-2 sm:items-end">
-            <h2 className="text-xl tab:text-2xl font-bold text-white">
-              Course Content
-            </h2>
-            <span className="flex text-sm text-white/60 items-center">
-              ({modulesCollection.total} Lessons)
-            </span>
-          </div>
-          <Chapters modulesCollection={modulesCollection} />
-        </section>
-
         <Reviews />
         <Guides />
         <FAQ faqs={faqs} />
       </div>
 
       <Checkout
+      // @ts-ignore
+        bundleId={bundleId}
         setOpen={setOpen}
         setYtOpen={setYtOpen}
         courseOffer={courseOffer}
