@@ -9,7 +9,7 @@ export default function UserLayout({
     return (
         <div className="flex flex-col bg-bg">
             <Header />
-            <main className=" mt-6">{children}</main>
+            <main className=" my-6">{children}</main>
         </div>
     );
 }

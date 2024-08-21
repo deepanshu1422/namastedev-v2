@@ -90,7 +90,7 @@ export const navTitles: {
         },
         {
           title: "Resume Builder",
-          href: "/resume-bldr/personal-detail",
+          href: "/resume/personal-detail",
           description:
             "Create your best resume ever with our All-in-one AI Builder, Reviewer, and Optimizer.",
         },

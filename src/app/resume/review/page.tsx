@@ -2,6 +2,7 @@
 import React, { useState, useContext, useRef } from "react";
 import { DataContext } from '../../../context/resume-context'
 import { useRouter } from 'next/navigation';
+import { Button } from "@/components/ui/button";
 
 const BASE_URL = "https://octopus-app-o2znv.ondigitalocean.app"
 
@@ -173,12 +174,15 @@ const DownloadModal = ({ data }: { data: any }) => {
 
     return (
         <>
-            <button
+            <Button
+                onClick={initiateProcess}
+            >Download</Button>
+            {/* <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 onClick={initiateProcess}
             >
                 Download
-            </button>
+            </button> */}
 
             {isOpen && (
                 <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -187,13 +191,13 @@ const DownloadModal = ({ data }: { data: any }) => {
                             <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
                         </div>
 
-                        <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all max-w-sm w-full">
-                            <div className="bg-white px-4 py-5">
-                                <div className="mt-3 text-center sm:mt-5">
-                                    <h3 className="text-lg leading-6 font-medium text-gray-900">Download your resume</h3>
-                                    <div className="mt-2">
+                        <div className="bg-bg rounded-lg overflow-hidden shadow-xl transform transition-all max-w-sm w-full">
+                            <div className="bg-bg px-4 py-5 h-[100%]">
+                                <div className="mt-3 text-center h-full">
+                                    <h3 className="text-lg leading-6 font-medium text-white">Download your resume</h3>
+                                    <div className="mt-5">
                                         <form>
-                                            <div className="mt-2">
+                                            <div className="mt-2 flex justify-evenly">
                                                 {
                                                     isOpen ?
                                                         <a href={`${BASE_URL}/api/getpdf?id=${pdfId}`} ref={linkRef} style={{ display: 'none' }}>Hidden Link</a>
@@ -202,28 +206,22 @@ const DownloadModal = ({ data }: { data: any }) => {
                                                 }
                                                 {
                                                     isLoading ?
-                                                        <button
-                                                            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                                                        >
-                                                            Loading...
-                                                        </button>
+                                                        <Button
+                                                        > Loading...
+                                                        </Button>
                                                         :
-                                                        <button
+                                                        <Button
                                                             onClick={handleSubmit}
-                                                            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                                                        >
-                                                            Download
-                                                        </button>
-
+                                                        > Download
+                                                        </Button>
                                                 }
 
-                                                <button
-                                                    type="button"
-                                                    className="ml-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                                <Button
                                                     onClick={closeModal}
+                                                    variant={'outline'}
                                                 >
                                                     Cancel
-                                                </button>
+                                                </Button>
                                             </div>
                                         </form>
                                     </div>
