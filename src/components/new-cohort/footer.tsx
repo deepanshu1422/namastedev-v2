@@ -158,7 +158,7 @@ export default function Footer() {
                 </Link>
                 <Link
                   className="lg:hover:text-prime transition-all"
-                  href={"/resume-bldr/personal-detail"}
+                  href={"/resume/personal-detail"}
                 >
                   Resume Builder
                 </Link>
