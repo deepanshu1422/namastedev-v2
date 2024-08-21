@@ -11,6 +11,7 @@ import Script from "next/script";
 import { auth } from "@/auth";
 import QueryProvider from "@/lib/queryProvider";
 import GoogleTagManager from "@/components/tracking/GoogletagManager";
+import { DataProvider } from "../context/resume-context"
 
 import Freshdesk from "@/util/freshdesk";
 
@@ -26,20 +27,22 @@ export default async function RootLayout({
       <head>
         <GoogleTagManager containerId="GTM-W4LNH7RV" />
       </head>
-      <SessionProvider session={session}>
-        <QueryProvider>
-          <body
-            className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
-          >
-            {children}
-            <Footer />
-            <Toaster richColors />
-          </body>
-        </QueryProvider>
-      </SessionProvider>
-      {/* <Pixel /> */}
+      <DataProvider>
+        <SessionProvider session={session}>
+          <QueryProvider>
+            <body
+              className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
+            >
+              {children}
+              <Footer />
+              <Toaster richColors />
+            </body>
+          </QueryProvider>
+        </SessionProvider>
+        {/* <Pixel /> */}
+      </DataProvider>
       <Clarity />
-      <Freshdesk/>
+      <Freshdesk />
       <PageSense />
       {/* <GoogleAnalytics gaId={"G-BCTWV4GBCY"} /> */}
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
