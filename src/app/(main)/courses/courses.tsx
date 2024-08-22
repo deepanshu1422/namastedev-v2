@@ -28,7 +28,7 @@ export default function Courses({
 
   return (
     <>
-      <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-[85rem] gap-7 mx-auto max-phone:px-6 phone:px-10 py-5 tab:pb-8">
+      <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-[85rem] gap-7 mx-auto max-phone:px-6 px-10 py-5 tab:pb-8">
         {state
           ? courses.bundleCollection.items
               .filter((e) =>
@@ -154,17 +154,17 @@ function Course({
   const amount =
     pricingsCollection.items.find((e) => e.countryCode == "IN")?.amount ?? 0;
   return (
-    <Card className="select-none flex flex-col gap-2 bg-transparent border-none">
+    <Card className="select-none flex flex-col gap-2 bg-transparent border-none max-w-80 mx-auto">
       <Link
         href={`/courses/${slug}`}
         className="flex flex-col gap-2 h-fit group"
       >
-        <div className="relative bg-card/50 min-h-48 rounded-md overflow-hidden">
+        <div className="relative bg-card/50 min-h-48 rounded-md overflow-hidden aspect-[6/4]">
           <Image
             src={courseImage?.url ?? ""}
             alt={title}
             fill
-            className="object-cover group-hover:scale-105 transition-all"
+            className="object-contain group-hover:scale-105 transition-all"
           />
         </div>
         <CardFooter className="px-0 py-0 flex-col gap-0.5 items-start text-muted-foreground">
@@ -252,17 +252,17 @@ function Bundle({
   const amount =
     pricingsCollection.items.find((e) => e.countryCode == "IN")?.amount ?? 0;
   return (
-    <Card className="select-none flex flex-col gap-2 bg-transparent drop-shadow-[30px_20px_100px_#07928183] border-none">
+    <Card className="select-none flex flex-col gap-2 bg-transparent drop-shadow-[30px_20px_100px_#07928183] border-none max-w-80 mx-auto">
       <Link
         href={`/bundle/${slug}`}
         className="flex flex-col gap-2 h-fit group"
       >
-        <div className="relative bg-card/50 min-h-48 rounded-md overflow-hidden">
+        <div className="relative bg-card/50 min-h-48 rounded-md overflow-hidden aspect-[6/4]">
           <Image
             src={courseImage?.url ?? ""}
             alt={title}
             fill
-            className="object-cover group-hover:scale-105 transition-all"
+            className="object-contain group-hover:scale-105 transition-all"
           />
         </div>
         <CardFooter className="px-0 py-0 flex-col gap-0.5 items-start text-muted-foreground">

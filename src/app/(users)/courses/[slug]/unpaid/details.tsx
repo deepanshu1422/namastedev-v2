@@ -113,7 +113,7 @@ export default function Details({
           </div>
         </section>
 
-        {projectsCollection.items.length && (
+        {!!projectsCollection.items.length && (
           <section className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
               <h2 className="font-bold text-xl tab:text-2xl">

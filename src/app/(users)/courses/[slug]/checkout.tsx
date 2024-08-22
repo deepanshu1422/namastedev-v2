@@ -44,9 +44,9 @@ export default function Checkout({
   const { data: session } = useSession();
   return (
     <section className="flex flex-col md:max-w-[25%] shrink-0">
-      <div className="sticky top-20 flex flex-col gap-6 md:gap-3">
+      <div className="sticky top-28 flex flex-col gap-6 md:gap-3">
         {/* @ts-ignore */}
-        {!session?.user?.courseId?.includes(courseId) && (
+        {/* {!session?.user?.courseId?.includes(courseId) && (
           <div className="bg-gradient-to-b from-head/30 to-second/20 flex flex-col gap-1 rounded-md min-h-60 shadow-lg backdrop-blur-sm shadow-black/40 p-3">
             <span className="text-xs text-white/80">Complete Course</span>
             <div className="flex justify-between">
@@ -85,15 +85,10 @@ export default function Checkout({
                 Buy Now
               </Button>
             </div>
-            {/* <Button
-              className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg mt-3"
-            >
-              Buy Now
-            </Button> */}
           </div>
-        )}
+        )} */}
 
-        <div className="bg-gradient-to-b from-head/30 to-second/20 flex justify-between rounded-md shadow-lg backdrop-blur-sm shadow-black/40 overflow-hidden">
+        {/* <div className="bg-gradient-to-b from-head/30 to-second/20 flex justify-between rounded-md shadow-lg backdrop-blur-sm shadow-black/40 overflow-hidden">
           <Reviews>
             <div className="flex items-center gap-1 w-full">
               <span className="p-4 shadow-lg shadow-black">
@@ -105,7 +100,7 @@ export default function Checkout({
               </Button>
             </div>
           </Reviews>
-        </div>
+        </div> */}
 
         {/* <div className="bg-gradient-to-b from-head/30 to-second/20 flex flex-col gap-4 rounded-md shadow-lg backdrop-blur-sm shadow-black/40 p-4 px-3">
           <span className="font-bold">Publisher</span>
@@ -141,18 +136,28 @@ export default function Checkout({
           </div>
         </div> */}
 
-        <div className="bg-gradient-to-b from-head/30 to-second/20 flex flex-col gap-4 rounded-md shadow-lg backdrop-blur-sm shadow-black/40 p-4 px-3">
-          <span className="font-bold">Completion Certificate</span>
+        <Link
+          href={"/mentorship"}
+          className="bg-gradient-to-b from-head/30 to-second/20 flex flex-col gap-2 rounded-md shadow-lg backdrop-blur-sm shadow-black/40 p-2"
+        >
+          <span className="font-bold">Join 1:1 Mentorship</span>
           <Image
-            src={"/certificate.png"}
+            src={"/mentorship.jpeg"}
             width={500}
             height={500}
             alt="30DC Completion Certificate"
             className="aspect-[16/10] object-cover rounded-lg w-full"
           />
-        </div>
+          <Button
+            variant={"outline"}
+            size={"sm"}
+            className={`font-semibold text-foreground/80 hover:text-foreground relative w-full`}
+          >
+            Join Now
+          </Button>
+        </Link>
 
-        <div className="bg-gradient-to-b from-head/30 to-second/20 flex flex-col gap-4 rounded-md shadow-lg backdrop-blur-sm shadow-black/40 p-4 px-3">
+        {/* <div className="bg-gradient-to-b from-head/30 to-second/20 flex flex-col gap-4 rounded-md shadow-lg backdrop-blur-sm shadow-black/40 p-4 px-3">
           <span className="font-bold">Special Deals</span>
 
           <div className="grid gap-2">
@@ -180,7 +185,7 @@ export default function Checkout({
               </div>
             </Link>
 
-            {/* <div className="grid grid-cols-3 gap-2 md:gap-5 md:max-w-60 w-full">
+            <div className="grid grid-cols-3 gap-2 md:gap-5 md:max-w-60 w-full">
               <Image
                 className="rounded-md max-sm:w-full md:max-w-20 max-h-40 object-cover"
                 src={"/mern.jpg"}
@@ -222,9 +227,9 @@ export default function Checkout({
                   4.7
                 </span>
               </div>
-            </div> */}
+            </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="md:hidden block">
           <FAQ faqs={faqCollection.items} />
@@ -421,7 +426,10 @@ export function Reviews({ children }: { children: React.ReactNode }) {
         </DialogHeader>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 max-h-96 w-full overflow-auto justify-center horizontal-scroll">
           {testimonials.map(({ alt, src }, i) => (
-            <Card className="w-full bg-slate-400 overflow-hidden h-60 sm:h-40" key={i}>
+            <Card
+              className="w-full bg-slate-400 overflow-hidden h-60 sm:h-40"
+              key={i}
+            >
               <CardContent className="flex relative items-center justify-center bg-slate-800 h-full">
                 <Image src={src} alt={alt} fill className="object-contain" />
               </CardContent>

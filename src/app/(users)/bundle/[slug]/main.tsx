@@ -159,6 +159,7 @@ export default function Main({
     return (
       <main className="relative min-h-svh overflow-clip">
         <Hero
+          bundleId={bundleId}
           rating={rating}
           title={bundleTitle ?? "NULL"}
           image={coverImage?.url}

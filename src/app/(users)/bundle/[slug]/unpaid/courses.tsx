@@ -41,7 +41,7 @@ export default function Courses({
       <Carousel
         opts={{
           loop: true,
-          align: "start",
+          align: "center",
         }}
         plugins={[
           Autoplay({
@@ -52,7 +52,7 @@ export default function Courses({
         <CarouselContent>
           {coursesCollection.items.map(
             ({ courseImage, slug, title, rating }, index) => (
-              <CarouselItem className="basis-full md:basis-1/2" key={index}>
+              <CarouselItem className="basis-full md:basis-1/2 max-w-80" key={index}>
                 <Course
                   rating={rating ?? 0}
                   title={title}
@@ -89,12 +89,12 @@ function Course({
         href={`/courses/${slug}`}
         className="flex flex-col gap-2 h-fit group"
       >
-        <div className="relative bg-card/50 min-h-48 rounded-md overflow-hidden">
+        <div className="relative bg-card/50 aspect-[6/4] rounded-md overflow-hidden">
           <Image
             src={courseImage?.url ?? ""}
             alt={title}
             fill
-            className="object-cover group-hover:scale-105 transition-all"
+            className="group-hover:scale-105 transition-all"
           />
         </div>
         <CardFooter className="px-0 py-0 flex-col gap-0.5 items-start text-muted-foreground">

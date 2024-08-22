@@ -1,14 +1,8 @@
 "use client";
-
 import {
   ChevronLeft,
   ChevronRight,
-  Clock2,
-  Eye,
-  Link2,
-  Play,
   PlaySquare,
-  Share2,
   SignalMedium,
 } from "lucide-react";
 
@@ -23,7 +17,6 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
-import Image from "next/image";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -35,12 +28,22 @@ import {
 } from "@/components/ui/accordion";
 import CourseList from "./courses";
 import VideoPlayer from "./player";
-import { usePathname, useRouter } from "next/navigation";
-import { Badge } from "@/components/ui/badge";
-import { BASE_URL } from "@/util/constants";
-import Link from "next/link";
-import { toast } from "sonner";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import { useQuery } from "@tanstack/react-query";
+import getChapterData from "../../../../../actions/getChapterData";
+
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+
+import { MDXClient, SerializeResult } from "next-mdx-remote-client/csr";
+import { serialize } from "next-mdx-remote-client/serialize";
+import { Badge } from "@/components/ui/badge";
+
+const CodeSnippet = ({ children }: { children: string }) => (
+  <div className="md:max-w-full horizontal-scroll w-full bg-slate-500 max-sm:w-[90dvw] font-semibold shrink">
+    <SyntaxHighlighter style={gruvboxDark}>{children}</SyntaxHighlighter>
+  </div>
+);
 
 export default function Details({
   title,
@@ -92,6 +95,9 @@ export default function Details({
         total: number;
         items: [
           {
+            sys: {
+              id: string;
+            };
             public: boolean;
             title: string;
             duration: string;
@@ -158,17 +164,32 @@ export default function Details({
     }
   }
 
+  const { data, isPending } = useQuery({
+    queryKey: [
+      modulesCollection.items[vidIndex.modIndex].chaptersCollection.items[
+        vidIndex.chapterIndex
+      ].sys.id,
+    ],
+    queryFn: async ({ queryKey }) => {
+      const mdx = await getChapterData({ id: queryKey[0] });
+
+      console.log(JSON.stringify(mdx));
+
+      const mdxSource = await serialize({
+        source: mdx,
+      });
+
+      console.log(mdxSource);
+
+      return mdxSource;
+    },
+  });
+
   return (
     <div className="flex flex-col gap-4 tab:w-3/4 w-full">
       <section className="flex flex-col gap-2">
-        <h1 className="font-bold sm:text-xl">{title}</h1>
         <VideoPlayer
-          setOpen={setOpen}
-          courseId={courseId}
-          free={
-            modulesCollection.items[module]?.chaptersCollection.items[chapter]
-              ?.public
-          }
+          nextVideo={nextVideo}
           thumbnail={courseImage.url}
           title={
             modulesCollection.items[module]?.chaptersCollection.items[chapter]
@@ -176,10 +197,10 @@ export default function Details({
           }
           ytId={
             modulesCollection.items[module]?.chaptersCollection.items[chapter]
-              ?.youtubeId
+              .youtubeId
           }
         />
-        {/* <div className="lg:hidden flex flex-col gap-1">
+        <div className="lg:hidden flex flex-col gap-1">
           <span className="flex gap-0.5 w-full">
             <Button
               onClick={() => prevVideo()}
@@ -209,8 +230,8 @@ export default function Details({
             chapter={chapter}
             modules={modulesCollection}
           />
-        </div> */}
-        {/* <Publisher
+        </div>
+        <Publisher
           title={title}
           disabledNext={disabledNext}
           disabledPrev={disabledPrev}
@@ -218,20 +239,21 @@ export default function Details({
           prevVideo={prevVideo}
           name={"Aryan Singh"}
           src="/instructor.jpg"
-        /> */}
+        />
       </section>
 
-      <Description
-        chapterCount={chapterCount}
-        title={title}
-        chapterTitle={
-          modulesCollection.items[module]?.chaptersCollection.items[chapter]
-            ?.title
+      <section className="gap-1 font-bold sm:text-xl">
+        <div className="inline bg-second rounded-md text-sm font-bold p-2 mr-1">
+          {vidIndex.modIndex + 1}.{vidIndex.chapterIndex + 1}
+        </div>
+        {
+          modulesCollection.items[vidIndex.modIndex].chaptersCollection.items[
+            vidIndex.chapterIndex
+          ].title
         }
-        module={module}
-        chapter={chapter}
-        longDescription={longDescription}
-      />
+      </section>
+      <Description isPending={isPending} mdxSource={data} />
+      {/* {isPending ? <span>Loading</span> : data} */}
       <div className="hidden md:block">
         <FAQ faqs={faqCollection.items} />
       </div>
@@ -257,8 +279,8 @@ export function Publisher({
   prevVideo(): 0 | undefined;
 }) {
   return (
-    <section className="flex justify-between mx-auto">
-      {/* <div className="flex items-center gap-2">
+    <section className="flex w-full justify-between">
+      <div className="flex items-center gap-2">
         <Avatar>
           <AvatarImage src={src} alt={`${name} Instructor`} />
           <AvatarFallback>
@@ -273,7 +295,7 @@ export function Publisher({
           <span className="font-bold leading-4 text-sm">{name}</span>
           <span className="text-white/60 text-xs">Publisher</span>
         </span>
-      </div> */}
+      </div>
 
       <div className="lg:flex hidden gap-0.5">
         <Button
@@ -302,44 +324,53 @@ export function Publisher({
 }
 
 function Description({
-  title,
-  module,
-  chapter,
-  chapterTitle,
-  longDescription,
-  chapterCount,
+  isPending,
+  mdxSource,
 }: {
-  title: string;
-  module: number;
-  chapter: number;
-  chapterCount: number;
-  chapterTitle: string;
-  longDescription: React.JSX.Element;
+  isPending: boolean;
+  mdxSource:
+    | SerializeResult<Record<string, unknown>, Record<string, unknown>>
+    | undefined;
 }) {
+  // let mdx = documentToMarkdown({ longDescription }).content;
+
   return (
-    <section className="flex flex-col gap-2">
-      <span className="font-bold text-lg">Description</span>
-      <ErrorBoundary
-        errorComponent={({ error, reset }) => (
-          <div className="flex flex-col gap-1 text-sm">
-            <p>{error.message}</p>
+    <ErrorBoundary
+      errorComponent={({ error, reset }) => (
+        <div className="flex flex-col gap-1 text-sm">
+          Error
+          <p>{error.message}</p>
+        </div>
+      )}
+    >
+      <section className="flex flex-col gap-2">
+        <span className="font-bold text-lg">Description</span>
+        {isPending ? (
+          <>Loading Data...</>
+        ) : (
+          <div className="max-sm:text-sm text-white/80 leading-6 techStack">
+            {!mdxSource ? (
+              <ErrorComponent
+                error={{
+                  message: "No MDX String was found",
+                  name: "Empty MDX",
+                }}
+              />
+            ) : "error" in mdxSource ? (
+              <ErrorComponent error={mdxSource.error} />
+            ) : (
+              <>
+                <MDXClient
+                  {...mdxSource}
+                  components={{ CodeSnippet }}
+                  onError={ErrorComponent}
+                />
+              </>
+            )}
           </div>
         )}
-      >
-        <div className="text-sm text-white/80 leading-6 techStack">
-          {longDescription}
-        </div>
-      </ErrorBoundary>
-      {/* <p className="text-sm text-white/80 leading-6">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus non
-        veritatis magni minima accusamus quibusdam excepturi tenetur velit iusto
-        vel modi fugit dolorum ea dolor dolore ad, ipsa aut? At. Lorem ipsum
-        dolor sit amet consectetur adipisicing elit. Aliquid corrupti odio quod
-        pariatur nam necessitatibus obcaecati deleniti illum praesentium ut
-        rerum voluptate, aperiam nihil accusantium hic architecto autem
-        quibusdam id.
-      </p> */}
-    </section>
+      </section>
+    </ErrorBoundary>
   );
 }
 
@@ -482,4 +513,8 @@ export function FAQ({
       </div>
     </section>
   );
+}
+
+function ErrorComponent({ error }: { error: Error }) {
+  return <span>Error Occured: {error.message}</span>;
 }

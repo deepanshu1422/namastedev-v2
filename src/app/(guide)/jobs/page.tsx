@@ -1,9 +1,6 @@
 import { Metadata } from "next";
 import Jobs from "./jobs";
-import { DataTableDemo, Payment } from "@/components/jobs-comp/data-table-ex";
-import prisma from "@/util/prismaClient";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { unstable_cache } from "next/cache";
+import { DataTableDemo } from "@/components/jobs-comp/data-table-ex";
 import Hero from "./hero";
 
 export const metadata: Metadata = {

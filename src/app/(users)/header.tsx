@@ -15,7 +15,7 @@ export default function Header() {
         className={`sticky top-0 bg-yellow-400 font-bold flex items-center justify-center max-sm:text-xs text-sm text-black w-full p-2`}
       >
         <section className="flex overflow-hidden gap-20">
-          <div className="flex flex-nowrap gap-4 tracking-wide text-center text-pretty [animation:loop-scroll_10s_linear_infinite] w-full">
+          <div className="flex flex-nowrap gap-4 tracking-wide text-center text-pretty [animation:loop-scroll_20s_linear_infinite] w-full">
             <p className="text-nowrap">
               Access all courses for 1229/- Lifetime Valid
               <span className="underline mx-2">Claim now!</span>

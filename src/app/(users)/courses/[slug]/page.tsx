@@ -6,11 +6,11 @@ import { compileMDX, MDXRemote } from "next-mdx-remote/rsc";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-const CodeSnippet = ({ children }: { children: string }) => (
-  <div className="md:max-w-full horizontal-scroll w-full bg-slate-500 max-sm:w-[90dvw] font-semibold shrink mt-5">
-    <SyntaxHighlighter style={gruvboxDark}>{children}</SyntaxHighlighter>
-  </div>
-);
+// export const CodeSnippet = ({ children }: { children: string }) => (
+//   <div className="md:max-w-full horizontal-scroll w-full bg-slate-500 max-sm:w-[90dvw] font-semibold shrink mt-5">
+//     <SyntaxHighlighter style={gruvboxDark}>{children}</SyntaxHighlighter>
+//   </div>
+// );
 export type Courses = {
   courseCollection: {
     items: {
@@ -64,6 +64,9 @@ export type Courses = {
             total: number;
             items: [
               {
+                sys:{
+                  id: string
+                }
                 public: boolean;
                 title: string;
                 duration: string;
@@ -223,6 +226,9 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
                 chaptersCollection{
                 total,
                 items{
+                sys{
+                    id
+                  }
                 title,
                 youtubeId,
                 public
@@ -265,7 +271,7 @@ export default async function Home({ params: { slug } }: PageProps) {
 
   let mdx = await MDXRemote({
     source: longDescription?.toString(),
-    components: { CodeSnippet },
+    // components: { CodeSnippet },
   });
 
   return <Main mdx={mdx} item={items[0]} />;

@@ -48,7 +48,7 @@ export default function CourseList({
 }) {
   return (
     <Accordion
-      // defaultValue={`module-${module}`}
+      defaultValue={`module-${module}`}
       type="single"
       collapsible
       className="flex flex-col w-full gap-2 max-md:max-h-[50dvh] pr-1 max-md:overflow-hidden max-md:overflow-y-auto horizontal-scroll"

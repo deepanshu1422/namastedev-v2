@@ -65,6 +65,9 @@ type CourseItem = {
           total: number;
           items: [
             {
+              sys:{
+                id: string
+              }
               public: boolean;
               title: string;
               duration: string;
@@ -111,7 +114,7 @@ export default function Main({
     return (
       <main className="bg-footer">
         <section className="relative grid lg:grid-cols-[260px_1fr]">
-          <div className="hidden lg:flex flex-col sticky top-0 h-fit">
+          <div className="hidden lg:flex flex-col sticky top-8 h-fit">
             <div className="flex flex-col gap-4 p-7 h-full">
               <Link
                 href={"/courses"}
@@ -166,29 +169,6 @@ export default function Main({
             </section>
           </div>
         </section>
-
-        <PaymentSheet
-          open={open}
-          setOpen={setOpen}
-          courseId={courseId}
-          title={title}
-          cover={courseImage?.url}
-          amount={
-            pricingsCollection.items.find((e) => e.countryCode == "IN")
-              ?.amount ?? 0
-          }
-          curreny={"INR"}
-          setOpenPay={setOpenPay}
-        />
-        <Floating
-          amount={
-            pricingsCollection.items.find((e) => e.countryCode == "IN")
-              ?.amount ?? 0
-          }
-          open={open}
-          setOpen={setOpen}
-          courseId={courseId}
-        />
       </main>
     );
   }

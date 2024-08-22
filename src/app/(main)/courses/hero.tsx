@@ -51,16 +51,16 @@ export default function Hero({
         <div className="sm:pt-[8.5rem] sm:p-[2.5rem_4.75rem] max-sm:pt-16 max-sm:pb-[0.5rem] m-auto max-w-[89rem] flex max-sm:flex-col text-white">
           <section className="flex-1 grid place-items-center max-sm:px-11 max-phone:px-6 gap-2">
             <h1
-              className={`sm:max-w-3xl font-jakarta phone:text-[3.0rem] text-[2.3rem] font-extrabold leading-tight text-pretty`}
+              className={`sm:max-w-3xl font-jakarta phone:text-[3.0rem] text-[2.3rem] font-extrabold leading-tight text-pretty sm:text-center tab:text-start`}
             >
-              {title}
+              Job-Ready <span className="bg-prime/50">Beginner to Advanced Certified</span> Courses
             </h1>
 
-            <p className="max-w-3xl max-sm:text-sm max-sm:leading-6 text-white/80 line-clamp-2 tab:line-clamp-3">
+            <p className="max-w-3xl max-sm:text-sm max-sm:leading-6 text-white/80 line-clamp-2 tab:line-clamp-3 sm:text-center tab:text-start">
               {desc}
             </p>
 
-            <div className="tab:hidden block pt-2 max-h-80 h-full max-w-md m-auto w-full drop-shadow-[5px_6px_10px_#07928190] ">
+            <div className="tab:hidden block pt-2 max-h-80 h-full max-w-xs m-auto w-full drop-shadow-[5px_6px_10px_#07928190] ">
               <YoutubeEmbed embedId={"nTAHWER3K-0"} />
             </div>
 

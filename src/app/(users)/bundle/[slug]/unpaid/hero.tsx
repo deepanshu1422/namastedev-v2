@@ -15,8 +15,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 import { Reviews } from "../checkout";
+import { useSession } from "next-auth/react";
 
 export default function Hero({
+  bundleId,
   title,
   image,
   rating,
@@ -28,6 +30,7 @@ export default function Hero({
 }: {
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
+  bundleId: string;
   rating: number;
   title: string;
   image: string;
@@ -35,6 +38,7 @@ export default function Hero({
   shortDescription: string;
   courseOffer: string[];
 }) {
+  const { data } = useSession();
   return (
     <>
       <div className={`w-full grid bg-zinc-950/60 shadow`}>
@@ -110,23 +114,42 @@ export default function Hero({
               {/* <div className="text-sm text-white/40">Updated 4 months ago</div> */}
 
               <div className="tab:hidden flex flex-col gap-4">
-                <span className="text-white text-2xl font-bold flex gap-2 items-end pt-1">
-                  ₹{amount}
-                  <span className="text-muted-foreground/70 italic line-through">
-                    ₹{(amount * 100) / 15}
-                  </span>
-                  <span>85% off</span>
-                </span>
-
-                <div className="flex flex-col gap-2 py-1">
-                  <Button
-                    onClick={() => setOpen(true)}
-                    size={"lg"}
-                    className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
+                {/* @ts-ignore */}
+                {data?.user?.bundleId.includes(bundleId) ? (
+                  <Link
+                    href={"/dashboard"}
+                    className="flex flex-col gap-2 relative"
                   >
-                    Buy Now
-                  </Button>
-                </div>
+                    <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
+                    <Button
+                      size={"lg"}
+                      variant={"outline"}
+                      className="relative flex items-center font-semibold gap-1 transition-all px-4 py-3 rounded-md text-white text-lg"
+                    >
+                      Watch Now
+                    </Button>
+                  </Link>
+                ) : (
+                  <>
+                    <span className="text-white text-2xl font-bold flex gap-2 items-end pt-1">
+                      ₹{amount}
+                      <span className="text-muted-foreground/70 italic line-through">
+                        ₹{(amount * 100) / 15}
+                      </span>
+                      <span>85% off</span>
+                    </span>
+
+                    <div className="flex flex-col gap-2 py-1">
+                      <Button
+                        onClick={() => setOpen(true)}
+                        size={"lg"}
+                        className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
+                      >
+                        Buy Now
+                      </Button>
+                    </div>
+                  </>
+                )}
 
                 <div className="flex flex-col gap-1">
                   <p className="tab:max-w-2xl max-tab:leading-6 line-clamp-3 text-white/60 italic font-semibold">

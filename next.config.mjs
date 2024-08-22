@@ -1,11 +1,29 @@
 /** @type {import('next').NextConfig} */
+import createMDX from "@next/mdx";
 const nextConfig = {
-    images: {
-        domains: ["img.freepik.com", "ik.imagekit.io", "assets-global.website-files.com", "i.ibb.co", "images.ctfassets.net", "courses.30dayscoding.com", "d2dmyh35ffsxbl.cloudfront.net", "lh7-us.googleusercontent.com", "d502jbuhuh9wk.cloudfront.net"]
-    },
-    typescript: {
-        ignoreBuildErrors: true,
-    },
+  images: {
+    domains: [
+      "img.freepik.com",
+      "ik.imagekit.io",
+      "assets-global.website-files.com",
+      "i.ibb.co",
+      "images.ctfassets.net",
+      "courses.30dayscoding.com",
+      "d2dmyh35ffsxbl.cloudfront.net",
+      "lh7-us.googleusercontent.com",
+      "d502jbuhuh9wk.cloudfront.net",
+    ],
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 };
 
-export default nextConfig;
+
+const withMDX = createMDX({
+  // Add markdown plugins here, as desired
+});
+
+// Merge MDX config with Next.js config
+export default withMDX(nextConfig);
