@@ -24,18 +24,18 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-// export async function generateStaticParams() {
-//   const blogs: Pick<blog, "slug">[] = await prisma.blog.findMany({
-//     select: {
-//       slug: true,
-//     },
-//   });
+export async function generateStaticParams() {
+  const blogs: Pick<blog, "slug">[] = await prisma.blog.findMany({
+    select: {
+      slug: true,
+    },
+  });
 
-//   return blogs.map(({ slug }) => {
-//     if (!slug) return;
-//     slug: slug.toString();
-//   });
-// }
+  return blogs.map(({ slug }) => {
+    if (!slug) return;
+    slug: slug.toString();
+  });
+}
 
 export async function generateMetadata(
   { params, searchParams }: Props,
