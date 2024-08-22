@@ -4,10 +4,10 @@ import Footer from "@/components/new-cohort/footer";
 import Clarity from "@/util/clarity";
 import Pixel from "@/util/pixel";
 import GoogleAnalytics from "@/util/ga";
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/sonner";
 import NextProvider from "@/util/next-auth";
 import PageSense from "@/util/pagesense";
-import Interakt from "@/util/interakt";
+import Intercom from "@/util/intercom";
 
 export default function RootLayout({
   children,
@@ -25,6 +25,7 @@ export default function RootLayout({
           <Toaster />
         </body>
       </NextProvider>
+      <Intercom />
       <Pixel />
       <Clarity />
       <PageSense />
@@ -32,6 +33,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-
-

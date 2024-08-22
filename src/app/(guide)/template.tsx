@@ -46,36 +46,36 @@ export default function Template({ children }: { children: React.ReactNode }) {
   }, [pathName]);
 
   const navBar = [
-    {
-      title: "Explore",
-      icon: <Compass className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/explore",
-      selected: path === "/explore",
-    },
-    {
-      title: "Guides",
-      icon: <Book className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/guides",
-      selected: path === "/guides",
-    },
-    {
-      title: "Projects",
-      icon: <Network className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/projects",
-      selected: path === "/projects",
-    },
+    // {
+    //   title: "Explore",
+    //   icon: <Compass className="h-4 w-4 md:h-5 md:w-5" />,
+    //   href: "/explore",
+    //   selected: path === "/explore",
+    // },
+    // {
+    //   title: "Guides",
+    //   icon: <Book className="h-4 w-4 md:h-5 md:w-5" />,
+    //   href: "/guides",
+    //   selected: path === "/guides",
+    // },
+    // {
+    //   title: "Projects",
+    //   icon: <Network className="h-4 w-4 md:h-5 md:w-5" />,
+    //   href: "/projects",
+    //   selected: path === "/projects",
+    // },
     {
       title: "Jobs",
       icon: <Earth className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/jobs",
       selected: path === "/jobs",
     },
-    {
-      title: "Roadmaps",
-      icon: <Map className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/roadmaps",
-      selected: path === "/roadmaps",
-    },
+    // {
+    //   title: "Roadmaps",
+    //   icon: <Map className="h-4 w-4 md:h-5 md:w-5" />,
+    //   href: "/roadmaps",
+    //   selected: path === "/roadmaps",
+    // },
     {
       title: "Testimonials",
       icon: <Star className="h-4 w-4 md:h-5 md:w-5" />,
