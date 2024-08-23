@@ -11,6 +11,8 @@ import { useState } from "react";
 import Hero from "./unpaid/hero";
 import { YTModal } from "@/app/(guide)/testimonials/slider";
 import { useSession } from "next-auth/react";
+import { courseProgress } from "@/lib/jotai";
+import { useAtom } from "jotai";
 
 type CourseItem = {
   mdx: React.JSX.Element;
@@ -65,9 +67,9 @@ type CourseItem = {
           total: number;
           items: [
             {
-              sys:{
-                id: string
-              }
+              sys: {
+                id: string;
+              };
               public: boolean;
               title: string;
               duration: string;
@@ -110,6 +112,8 @@ export default function Main({
 
   const courseOffer = offers ?? [];
 
+  const [progress, setProgress] = useAtom(courseProgress);
+
   function Paid() {
     return (
       <main className="bg-footer">
@@ -132,6 +136,8 @@ export default function Main({
 
             <div className="px-7 max-h-[65dvh] overflow-hidden overflow-y-auto horizontal-scroll">
               <CourseList
+                courseId={courseId}
+                progress={progress}
                 chapter={vidIndex.chapterIndex}
                 module={vidIndex.modIndex}
                 modules={modulesCollection}

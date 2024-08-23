@@ -6,6 +6,8 @@ import Purchased from "./purchased";
 import Notifications from "./notifications";
 import { UserDialog } from "./new-user";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Dashboard | 30dayscoding",
   description:

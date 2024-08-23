@@ -185,11 +185,11 @@
 }
 
 .techStack ol {
-  @apply flex flex-col gap-3 list-disc text-white/80;
+  @apply flex flex-col gap-3 list-disc text-white/80 pl-4;
 }
 
 .techStack ul {
-  @apply flex flex-col gap-3 list-disc text-white/80;
+  @apply flex flex-col gap-3 list-disc text-white/80 pl-4;
 }
 
 .techStack li > strong {

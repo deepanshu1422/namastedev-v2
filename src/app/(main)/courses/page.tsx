@@ -47,13 +47,14 @@ export type CoursesType = {
         }[];
       };
     }[];
-  },
+  };
   bundleCollection: {
     items: {
       bundleTitle: string;
       shortDescription: string;
       slug: string;
       rating: number;
+      offers: string[];
       coverImage: {
         url: string;
         width: number;
@@ -100,6 +101,7 @@ async function getCourses(): Promise<CoursesType> {
                 shortDescription,
                 slug,
                 rating,
+                offers,
                pricingsCollection{
                     items{
                       title,

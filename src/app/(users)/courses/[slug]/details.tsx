@@ -1,5 +1,7 @@
 "use client";
 import {
+  CheckCircle,
+  CheckCircle2,
   ChevronLeft,
   ChevronRight,
   PlaySquare,
@@ -114,11 +116,6 @@ export default function Details({
       modulesCollection.items[modulesCollection.total - 1].chaptersCollection
         .total -
         1 && module === modulesCollection.total - 1;
-
-  let chapterCount = modulesCollection.items.reduce(
-    (acc, cur) => (acc += cur.chaptersCollection.total),
-    0
-  );
 
   function prevVideo() {
     if (vidIndex.chapterIndex === 0 && vidIndex.modIndex === 0) return 0;
@@ -319,6 +316,8 @@ export function Publisher({
           <ChevronRight className="h-4 w-4 translate-y-0.5" />
         </Button>
       </div>
+      
+      <Button variant={"outline"} className="gap-1 p-2 rounded-3xl"><CheckCircle2 className="w-4 h-4" /> Completed</Button>
     </section>
   );
 }
@@ -516,5 +515,9 @@ export function FAQ({
 }
 
 function ErrorComponent({ error }: { error: Error }) {
-  return <span>Error Occured: {error.message}</span>;
+  return (
+    <div className="min-h-10 w-full flex">
+      <Badge variant={"destructive"} className="m-auto rounded-md text-white">No Description</Badge>
+    </div>
+  );
 }

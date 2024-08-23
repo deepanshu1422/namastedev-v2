@@ -29,7 +29,7 @@ export default function Courses({
   return (
     <>
       <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-[85rem] gap-7 mx-auto max-phone:px-6 px-10 py-5 tab:pb-8">
-        {state
+        {/* {state
           ? courses.bundleCollection.items
               .filter((e) =>
                 e.bundleTitle.toLowerCase().includes(state.toLowerCase())
@@ -65,7 +65,7 @@ export default function Courses({
                   pricingsCollection={pricingsCollection}
                 />
               )
-            )}
+            )} */}
         {state
           ? courses.courseCollection.items
               .filter((e) =>
@@ -114,9 +114,6 @@ export default function Courses({
       {state &&
         !courses.courseCollection.items.filter((e) =>
           e.title.toLowerCase().includes(state.toLowerCase())
-        ).length &&
-        !courses.bundleCollection.items.filter((e) =>
-          e.bundleTitle.toLowerCase().includes(state.toLowerCase())
         ).length && (
           <div className="mx-auto max-w-[90rem] w-full text-center py-10 pb-40">
             <span className="font-semibold rounded-full p-2 px-4 border-4 border-double w-fit mx-auto items-center border-prime shadow-2xl text-sm text-white/60 flex gap-1">
@@ -154,7 +151,7 @@ function Course({
   const amount =
     pricingsCollection.items.find((e) => e.countryCode == "IN")?.amount ?? 0;
   return (
-    <Card className="select-none flex flex-col gap-2 bg-transparent border-none max-w-80 mx-auto">
+    <Card className="select-none flex flex-col gap-2 bg-transparent border-none w-full max-w-80 mx-auto">
       <Link
         href={`/courses/${slug}`}
         className="flex flex-col gap-2 h-fit group"
@@ -164,7 +161,7 @@ function Course({
             src={courseImage?.url ?? ""}
             alt={title}
             fill
-            className="object-contain group-hover:scale-105 transition-all"
+            className="object-cover group-hover:scale-105 transition-all"
           />
         </div>
         <CardFooter className="px-0 py-0 flex-col gap-0.5 items-start text-muted-foreground">

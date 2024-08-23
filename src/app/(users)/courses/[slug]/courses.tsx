@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
+import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Dispatch, SetStateAction, useCallback } from "react";
@@ -17,7 +18,11 @@ export default function CourseList({
   chapter,
   setVidIndex,
   setOpen,
+  courseId,
+  progress,
 }: {
+  courseId: string;
+  progress: Record<string, string[]>;
   module: number;
   chapter: number;
   setOpen?: Dispatch<SetStateAction<boolean>>;
@@ -36,6 +41,9 @@ export default function CourseList({
         total: number;
         items: [
           {
+            sys: {
+              id: string;
+            };
             public: boolean;
             title: string;
             duration: string;
@@ -64,7 +72,7 @@ export default function CourseList({
           </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-3 text-xs py-2">
             {chaptersCollection.items.map(
-              ({ title, public: free }, chapterIndex) => (
+              ({ title, public: free, sys: {id} }, chapterIndex) => (
                 <button
                   onClick={() => {
                     if (setOpen) setOpen(false);
@@ -74,9 +82,9 @@ export default function CourseList({
                   className={`flex gap-2 items-center justify-between hover:text-white/70 text-white/40`}
                 >
                   <div className="flex gap-2 items-center text-start">
-                    <div className="shrink-0 h-6 w-6 border-[1.5px] border-white/40 rounded-full grid place-items-center">
+                    {progress[courseId]?.includes(id) ? <CheckCircle2 className="shrink-0 h-6 w-6" /> : <div className="shrink-0 h-6 w-6 border-[1.5px] border-white/40 rounded-full grid place-items-center">
                       {chapterIndex + 1}
-                    </div>
+                    </div>}
                     <span
                       className={`line-clamp-1 ${
                         module == i && chapter == chapterIndex

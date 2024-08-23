@@ -17,12 +17,13 @@ const getCourses = async () => {
            items{
                 title,
                 slug,
-                    courseImage{
-                        url,
-                        width,
-                        height,
-                    }
-                },
+                rating,
+                courseImage{
+                    url,
+                    width,
+                    height,
+                }
+              },
             }
         }`;
 
@@ -83,7 +84,7 @@ export function Slider({ course }: { course: any }) {
                 href={`/courses/${e?.slug}`}
                 className="flex flex-col gap-2 h-fit group"
               >
-                <div className="relative bg-card/50 max-sm:min-h-44 min-h-40 rounded-md overflow-hidden">
+                <div className="relative bg-card/50 min-h-48 rounded-md overflow-hidden">
                   <Image
                     src={e?.courseImage?.url ?? ""}
                     alt={e?.title}
@@ -97,10 +98,10 @@ export function Slider({ course }: { course: any }) {
                   </span>
                   <span>Aryan Singh</span>
                   <section className="flex gap-1 items-center">
-                    <span className="text-yellow-500/80 font-semibold">
-                      4.7
+                    <span className="text-prime/80 font-semibold">
+                      {e?.rating}
                     </span>
-                    <Star className="fill-yellow-500/60 stroke-yellow-500/60 h-4 w-4" />
+                    <Star className="fill-prime/80 stroke-prime/80 h-4 w-4" />
                   </section>
                 </CardFooter>
               </Link>

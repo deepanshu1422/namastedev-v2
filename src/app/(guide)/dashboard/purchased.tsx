@@ -8,7 +8,7 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import refreshCourses from "../../../../actions/refreshCourses";
 import { Skeleton } from "@/components/ui/skeleton";
-import { MessageCircleQuestion } from "lucide-react";
+import { ChevronRight, MessageCircleQuestion } from "lucide-react";
 
 export default function Purchased() {
   const { data: session, update } = useSession();
@@ -66,9 +66,9 @@ function CourseCard({ e }: { e: any }) {
         <Badge className="text-white w-fit bg-prime/40 hover:bg-prime/60 rounded">
           Progress
         </Badge>
-        <Progress value={30} className="h-1 bg-bg" />
-        <span className="text-xs text-muted-foreground pt-3">
-          Last Updated: {new Date().toLocaleDateString()}
+        <Progress value={0} className="h-1 bg-bg" />
+        <span className="flex items-center text-xs text-muted-foreground">
+          Continue Watching <ChevronRight className="h-3 w-3" />
         </span>
       </div>
     </Link>

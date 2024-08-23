@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <div className="sticky top-0 z-50">
       <Link
-        href={"/course/dsa-live-placement-ready-course"}
+        href={"/bundle/complete-package-all-course-bundle"}
         //
         className={`sticky top-0 bg-yellow-400 font-bold flex items-center justify-center max-sm:text-xs text-sm text-black w-full p-2`}
       >

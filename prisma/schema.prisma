@@ -36,23 +36,36 @@ type heroImage {
 }
 
 model User {
-  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
-  email         String     @unique
+  email         String    @unique
   emailVerified DateTime?
   image         String?
   contact       String?
   state         String?
   country       String?
-  courseId      String[]   @default([])
-  bundleId      String[]   @default([])
+  courseId      String[]  @default([])
+  bundleId      String[]  @default([])
   accounts      Account[]
   sessions      Session[]
-  
-  Payments      Payments[]
+
+  Payments Payments[]
+  Progress Progress?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Progress {
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  email  String   @unique
+  course Course[]
+  user   User     @relation(fields: [email], references: [email])
+}
+
+type Course {
+  courseId   String
+  chapterIds String[]
 }
 
 model Account {
@@ -126,7 +139,7 @@ model Payments {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  User      User    @relation(fields: [email], references: [email])
+  User      User     @relation(fields: [email], references: [email])
 }
 
 model Invoices {

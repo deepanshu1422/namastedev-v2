@@ -86,7 +86,10 @@ export default function Hero({
                 <section className="flex gap-1 items-center">
                   <span className="text-lime-500/70">{rating}</span>
                   {Array.from({ length: rating }).map((_, i) => (
-                    <Star key={i} className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4" />
+                    <Star
+                      key={i}
+                      className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4"
+                    />
                   ))}
                 </section>
                 {/* <span className="text-white/70 font-semibold text-sm">
@@ -127,12 +130,16 @@ export default function Hero({
                     Buy Now
                   </Button>
 
-                  <Link href={"/mentorship"}>
+                  <Link
+                    href={"/bundle/complete-package-all-course-bundle"}
+                    className="relative"
+                  >
+                    <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
                     <Button
                       variant={"outline"}
-                      className={`font-semibold text-foreground/80 hover:text-foreground w-full p-6 gap-1`}
+                      className={`relative font-semibold text-foreground/80 hover:text-foreground w-full p-6 gap-1`}
                     >
-                      Join Mentorship
+                      Buy all courses @ ₹1200/-
                     </Button>
                   </Link>
                 </div>
