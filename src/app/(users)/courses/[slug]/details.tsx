@@ -42,7 +42,7 @@ import { serialize } from "next-mdx-remote-client/serialize";
 import { Badge } from "@/components/ui/badge";
 
 const CodeSnippet = ({ children }: { children: string }) => (
-  <div className="md:max-w-full horizontal-scroll w-full bg-slate-500 max-sm:w-[90dvw] font-semibold shrink">
+  <div className="hidden md:max-w-full horizontal-scroll w-full bg-slate-500 max-sm:w-[90dvw] font-semibold shrink">
     <SyntaxHighlighter style={gruvboxDark}>{children}</SyntaxHighlighter>
   </div>
 );
@@ -60,6 +60,7 @@ export default function Details({
   setOpen,
   vidIndex,
   setVidIndex,
+  progress,
 }: {
   vidIndex: { modIndex: number; chapterIndex: number };
   setVidIndex: Dispatch<
@@ -68,6 +69,7 @@ export default function Details({
       chapterIndex: number;
     }>
   >;
+  progress: Record<string, string[]>;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   title: string;
@@ -221,6 +223,7 @@ export default function Details({
             </Button>
           </span>
           <CourseDrawer
+            progress={progress}
             vidIndex={vidIndex}
             setVidIndex={setVidIndex}
             module={module}
@@ -234,8 +237,8 @@ export default function Details({
           disabledPrev={disabledPrev}
           nextVideo={nextVideo}
           prevVideo={prevVideo}
-          name={"Aryan Singh"}
-          src="/instructor.jpg"
+          name={"30DaysCoding"}
+          src="/logo.png"
         />
       </section>
 
@@ -251,9 +254,9 @@ export default function Details({
       </section>
       <Description isPending={isPending} mdxSource={data} />
       {/* {isPending ? <span>Loading</span> : data} */}
-      <div className="hidden md:block">
+      {/* <div className="hidden md:block">
         <FAQ faqs={faqCollection.items} />
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -276,7 +279,7 @@ export function Publisher({
   prevVideo(): 0 | undefined;
 }) {
   return (
-    <section className="flex w-full justify-between">
+    <section className="flex w-full justify-between mt-1">
       <div className="flex items-center gap-2">
         <Avatar>
           <AvatarImage src={src} alt={`${name} Instructor`} />
@@ -316,8 +319,14 @@ export function Publisher({
           <ChevronRight className="h-4 w-4 translate-y-0.5" />
         </Button>
       </div>
-      
-      <Button variant={"outline"} className="gap-1 p-2 rounded-3xl"><CheckCircle2 className="w-4 h-4" /> Completed</Button>
+
+      <Button
+        onClick={() => {}}
+        variant={"outline"}
+        className="gap-1 p-2 rounded-3xl"
+      >
+        <CheckCircle2 className="w-4 h-4" /> Completed
+      </Button>
     </section>
   );
 }
@@ -361,7 +370,13 @@ function Description({
               <>
                 <MDXClient
                   {...mdxSource}
-                  components={{ CodeSnippet }}
+                  components={{
+                    CodeSnippet,
+                    pre: ({ children }) => {
+                      const code = JSON.stringify(children?.toString())
+                      return <CodeSnippet>{code}</CodeSnippet>;
+                    },
+                  }}
                   onError={ErrorComponent}
                 />
               </>
@@ -420,10 +435,12 @@ function CourseDrawer({
   modules,
   vidIndex,
   setVidIndex,
+  progress,
 }: {
   module: number;
   chapter: number;
   vidIndex: { modIndex: number; chapterIndex: number };
+  progress: Record<string, string[]>;
   setVidIndex: Dispatch<
     SetStateAction<{
       modIndex: number;
@@ -439,6 +456,9 @@ function CourseDrawer({
         total: number;
         items: [
           {
+            sys: {
+              id: string;
+            };
             public: boolean;
             title: string;
             duration: string;
@@ -470,6 +490,8 @@ function CourseDrawer({
             setVidIndex={setVidIndex}
             chapter={vidIndex.chapterIndex}
             module={vidIndex.modIndex}
+            courseId=""
+            progress={progress}
             modules={modules}
           />
         </div>
@@ -517,7 +539,9 @@ export function FAQ({
 function ErrorComponent({ error }: { error: Error }) {
   return (
     <div className="min-h-10 w-full flex">
-      <Badge variant={"destructive"} className="m-auto rounded-md text-white">No Description</Badge>
+      <Badge variant={"destructive"} className="m-auto rounded-md text-white">
+        No Description
+      </Badge>
     </div>
   );
 }

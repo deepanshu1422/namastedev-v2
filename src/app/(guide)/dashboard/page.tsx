@@ -5,6 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Purchased from "./purchased";
 import Notifications from "./notifications";
 import { UserDialog } from "./new-user";
+import { auth } from "@/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -31,7 +32,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Dashboard() {
+export default async function Dashboard() {
+
+  const session = await auth()
+  
   return (
     <div className="flex h-full">
       <div className="flex-1 flex flex-col gap-2 px-6 py-5 lg:px-8 w-full">

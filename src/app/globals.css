@@ -201,7 +201,7 @@
 }
 
 .techStack pre {
-  @apply horizontal-scroll;
+  @apply horizontal-scroll break-all overflow-hidden;
 }
 
 .techStack a {

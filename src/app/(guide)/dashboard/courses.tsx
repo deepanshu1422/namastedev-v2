@@ -96,7 +96,7 @@ export function Slider({ course }: { course: any }) {
                   <span className="text-foreground font-semibold line-clamp-1">
                     {e?.title}
                   </span>
-                  <span>Aryan Singh</span>
+                  {/* <span>Aryan Singh</span> */}
                   <section className="flex gap-1 items-center">
                     <span className="text-prime/80 font-semibold">
                       {e?.rating}

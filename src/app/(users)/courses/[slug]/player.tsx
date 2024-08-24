@@ -4,11 +4,18 @@ import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/audio.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 
-import { MediaPlayer, MediaProvider, Poster } from "@vidstack/react";
+import {
+  isYouTubeProvider,
+  MediaPlayer,
+  MediaProvider,
+  MediaProviderAdapter,
+  Poster,
+} from "@vidstack/react";
 import {
   DefaultVideoLayout,
   defaultLayoutIcons,
 } from "@vidstack/react/player/layouts/default";
+import { useEffect } from "react";
 
 export default function VideoPlayer({
   title,
@@ -19,20 +26,20 @@ export default function VideoPlayer({
   ytId: string;
   title: string;
   thumbnail: string;
-  nextVideo(): 0 | undefined
+  nextVideo(): 0 | undefined;
 }) {
+
   return (
     <div className="relative aspect-video rounded-xl overflow-hidden w-full bg-background/90">
       <MediaPlayer
         onEnded={() => {
-          nextVideo()
+          nextVideo();
         }}
         src={`youtube/${ytId}`}
         viewType="video"
-        streamType="on-demand"
-        logLevel="warn"
-        autoPlay
+        logLevel="silent"
         crossOrigin
+        autoPlay
         playsInline
         title={title}
         poster={thumbnail}

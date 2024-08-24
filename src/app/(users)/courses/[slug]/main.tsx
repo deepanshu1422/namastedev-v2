@@ -13,8 +13,10 @@ import { YTModal } from "@/app/(guide)/testimonials/slider";
 import { useSession } from "next-auth/react";
 import { courseProgress } from "@/lib/jotai";
 import { useAtom } from "jotai";
+import { Session } from "next-auth";
 
 type CourseItem = {
+  session: Session | null,
   mdx: React.JSX.Element;
   item: {
     courseId: string;
@@ -84,6 +86,7 @@ type CourseItem = {
 
 export default function Main({
   mdx,
+  session,
   item: {
     title,
     courseId,
@@ -156,6 +159,7 @@ export default function Main({
                 modulesCollection={modulesCollection}
                 title={title}
                 courseId={courseId}
+                progress={progress}
                 courseImage={courseImage}
                 chapter={vidIndex.chapterIndex}
                 module={vidIndex.modIndex}
@@ -236,8 +240,6 @@ export default function Main({
       </main>
     );
   }
-
-  const { data: session } = useSession();
 
   return (
     <>
