@@ -39,6 +39,7 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import { useRouter } from "next/navigation";
 
 export function PaymentSheet({
   cover,
@@ -60,6 +61,8 @@ export function PaymentSheet({
   setOpenPay: Dispatch<SetStateAction<boolean>>;
 }) {
   const { data: session, update } = useSession();
+
+  const router = useRouter()
 
   const [formData, setFormData] = useState({
     name: session?.user?.name ?? "",
@@ -174,6 +177,7 @@ export function PaymentSheet({
         handler: async function (response: any) {
           setOpenPay(true);
           await update({ courses: true });
+          if (session?.user?.email) router.refresh()
         },
         prefill: {
           name: formData.name,
