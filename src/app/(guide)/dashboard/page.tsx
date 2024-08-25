@@ -2,10 +2,10 @@ import { Metadata } from "next";
 import React, { Suspense } from "react";
 import Courses from "./courses";
 import { Skeleton } from "@/components/ui/skeleton";
-import Purchased from "./purchased";
 import Notifications from "./notifications";
 import { UserDialog } from "./new-user";
 import { auth } from "@/auth";
+import PurchaseTabs from "./purchased";
 
 export const dynamic = "force-dynamic";
 
@@ -32,10 +32,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Dashboard() {
 
-  const session = await auth()
-  
+export default async function Dashboard() {
+  const session = await auth();
+
   return (
     <div className="flex h-full">
       <div className="flex-1 flex flex-col gap-2 px-6 py-5 lg:px-8 w-full">
@@ -43,11 +43,8 @@ export default async function Dashboard() {
           <Courses />
         </Suspense>
         <div className="flex justify-between py-3">
-          <span className="text-xl text-white/70 font-bold">
-            Purchased Courses
-          </span>
+          <PurchaseTabs />
         </div>
-        <Purchased />
       </div>
       <Notifications />
       <UserDialog />

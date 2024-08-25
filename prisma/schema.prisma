@@ -137,9 +137,10 @@ model Payments {
 
   completedLessons String[] @default([])
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  User      User     @relation(fields: [email], references: [email])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  User      User      @relation(fields: [email], references: [email])
+  Invoices  Invoices?
 }
 
 model Invoices {
@@ -159,6 +160,8 @@ model Invoices {
   SGST              Int?
   GST               Int?
   paymentGatewayFee Int?           @default(0)
+
+  payments Payments @relation(fields: [paymentId], references: [paymentId])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
