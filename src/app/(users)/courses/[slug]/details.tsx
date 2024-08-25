@@ -40,6 +40,8 @@ import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { MDXClient, SerializeResult } from "next-mdx-remote-client/csr";
 import { serialize } from "next-mdx-remote-client/serialize";
 import { Badge } from "@/components/ui/badge";
+// import { courseProgress } from "@/lib/jotai";
+import { useAtom } from "jotai";
 
 const CodeSnippet = ({ children }: { children: string }) => (
   <div className="hidden md:max-w-full horizontal-scroll w-full bg-slate-500 max-sm:w-[90dvw] font-semibold shrink">
@@ -60,7 +62,6 @@ export default function Details({
   setOpen,
   vidIndex,
   setVidIndex,
-  progress,
 }: {
   vidIndex: { modIndex: number; chapterIndex: number };
   setVidIndex: Dispatch<
@@ -69,7 +70,6 @@ export default function Details({
       chapterIndex: number;
     }>
   >;
-  progress: Record<string, string[]>;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   title: string;
@@ -169,6 +169,7 @@ export default function Details({
         vidIndex.chapterIndex
       ].sys.id,
     ],
+    staleTime: 10000,
     queryFn: async ({ queryKey }) => {
       const mdx = await getChapterData({ id: queryKey[0] });
 
@@ -223,7 +224,6 @@ export default function Details({
             </Button>
           </span>
           <CourseDrawer
-            progress={progress}
             vidIndex={vidIndex}
             setVidIndex={setVidIndex}
             module={module}
@@ -233,6 +233,12 @@ export default function Details({
         </div>
         <Publisher
           title={title}
+          chapterId={
+            modulesCollection.items[vidIndex.modIndex].chaptersCollection.items[
+              vidIndex.chapterIndex
+            ].sys.id
+          }
+          courseId={courseId}
           disabledNext={disabledNext}
           disabledPrev={disabledPrev}
           nextVideo={nextVideo}
@@ -264,6 +270,8 @@ export default function Details({
 
 export function Publisher({
   title,
+  courseId,
+  chapterId,
   name,
   src,
   disabledPrev,
@@ -272,6 +280,8 @@ export function Publisher({
   prevVideo,
 }: {
   title: string;
+  chapterId: string;
+  courseId: string;
   name: string;
   src: string;
   disabledPrev: boolean;
@@ -279,8 +289,10 @@ export function Publisher({
   nextVideo(): 0 | undefined;
   prevVideo(): 0 | undefined;
 }) {
+  // const [progress, setProgress] = useAtom(courseProgress);
+
   return (
-    <section className="flex w-full justify-between mt-1">
+    <section className="flex w-full gap-1 justify-between mt-1">
       <div className="flex items-center gap-2">
         <Avatar>
           <AvatarImage src={src} alt={`${name} Instructor`} />
@@ -321,13 +333,31 @@ export function Publisher({
         </Button>
       </div>
 
-      <Button
-        onClick={() => {}}
+      {/* <Button
+        onClick={() => {
+          console.log(progress);
+          setProgress(
+            progress
+              .find((e) => e.courseId === courseId)
+              ?.chapterIds.includes(chapterId)
+              ? progress.filter((e) => {
+                  if (e.courseId === courseId)
+                    return e.chapterIds.filter((e) => e !== chapterId);
+                  return e;
+                })
+              : progress.map((e) => {
+                  if (e.courseId === courseId)
+                    return { ...e, chapterIds: [...e.chapterIds, chapterId] };
+                  return e;
+                })
+          );
+        }}
         variant={"outline"}
         className="gap-1 p-2 rounded-3xl"
       >
-        <CheckCircle2 className="w-4 h-4" /> Completed
-      </Button>
+        <CheckCircle2 className="w-5 h-5" />
+        <span className="line-clamp-1">Mark Complete</span>
+      </Button> */}
     </section>
   );
 }
@@ -344,15 +374,7 @@ function Description({
   // let mdx = documentToMarkdown({ longDescription }).content;
 
   return (
-    <ErrorBoundary
-      errorComponent={({ error, reset }) => (
-        <div className="flex flex-col gap-1 text-sm">
-          Error
-          <p>{error.message}</p>
-        </div>
-      )}
-    >
-      <section className="flex flex-col gap-2">
+    <section className="flex flex-col gap-2">
         <span className="font-bold text-lg">Description</span>
         {isPending ? (
           <>Loading Data...</>
@@ -385,7 +407,16 @@ function Description({
           </div>
         )}
       </section>
-    </ErrorBoundary>
+      // <ErrorBoundary
+    //   errorComponent={({ error, reset }) => (
+    //     <div className="flex flex-col gap-1 text-sm">
+    //       Error
+    //       <p>{error.message}</p>
+    //     </div>
+    //   )}
+    // >
+      
+    // </ErrorBoundary>
   );
 }
 
@@ -436,12 +467,10 @@ function CourseDrawer({
   modules,
   vidIndex,
   setVidIndex,
-  progress,
 }: {
   module: number;
   chapter: number;
   vidIndex: { modIndex: number; chapterIndex: number };
-  progress: Record<string, string[]>;
   setVidIndex: Dispatch<
     SetStateAction<{
       modIndex: number;
@@ -492,7 +521,6 @@ function CourseDrawer({
             chapter={vidIndex.chapterIndex}
             module={vidIndex.modIndex}
             courseId=""
-            progress={progress}
             modules={modules}
           />
         </div>

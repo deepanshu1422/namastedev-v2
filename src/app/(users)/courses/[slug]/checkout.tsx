@@ -232,7 +232,7 @@ export default function Checkout({
         </div> */}
 
         <div className="md:hidden block">
-          <FAQ faqs={faqCollection.items} />
+          {/* <FAQ faqs={faqCollection.items} /> */}
         </div>
       </div>
     </section>

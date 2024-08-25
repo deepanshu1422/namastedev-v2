@@ -12498,4 +12498,6 @@ export const modalSchema = atom({
   languageArray: ["python"],
 });
 
-export const courseProgress = atom<Record<string, string[]>>({});
+export const courseProgress = atomWithStorage<
+  { courseId: string; chapterIds: string[] }[]
+>("course-progress", []);

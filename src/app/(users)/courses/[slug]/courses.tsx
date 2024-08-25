@@ -7,6 +7,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
+import { courseProgress } from "@/lib/jotai";
+import { useAtom } from "jotai";
 import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -19,10 +21,8 @@ export default function CourseList({
   setVidIndex,
   setOpen,
   courseId,
-  progress,
 }: {
   courseId: string;
-  progress: Record<string, string[]>;
   module: number;
   chapter: number;
   setOpen?: Dispatch<SetStateAction<boolean>>;
@@ -54,6 +54,9 @@ export default function CourseList({
     }[];
   };
 }) {
+
+  const [progress, setProgress] = useAtom(courseProgress);
+
   return (
     <Accordion
       defaultValue={`module-${module}`}
@@ -82,7 +85,7 @@ export default function CourseList({
                   className={`flex gap-2 items-center justify-between hover:text-white/70 text-white/40`}
                 >
                   <div className="flex gap-2 items-center text-start">
-                    {progress[courseId]?.includes(id) ? <CheckCircle2 className="shrink-0 h-6 w-6" /> : <div className="shrink-0 h-6 w-6 border-[1.5px] border-white/40 rounded-full grid place-items-center">
+                    {false ? <CheckCircle2 className="shrink-0 h-6 w-6" /> : <div className="shrink-0 h-6 w-6 border-[1.5px] border-white/40 rounded-full grid place-items-center">
                       {chapterIndex + 1}
                     </div>}
                     <span

@@ -1,6 +1,5 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -62,14 +61,14 @@ function CourseCard({ e }: { e: any }) {
         {/* <Image src={"/logo.png"} alt={"30DC Logo"} height={40} width={40} /> */}
       </div>
       <h3 className="font-semibold">{e.title}</h3>
-      <div className="flex flex-col gap-3 mt-auto">
-        <Badge className="text-white w-fit bg-prime/40 hover:bg-prime/60 rounded">
-          Progress
+      <div className="flex flex-col gap-3 mt-auto mb-2">
+        <Badge className="text-white w-fit bg-prime/20 hover:bg-prime/40 rounded">
+        Continue Watching <ChevronRight className="h-3 w-3" />
         </Badge>
-        <Progress value={0} className="h-1 bg-bg" />
-        <span className="flex items-center text-xs text-muted-foreground">
+        {/* <Progress value={0} className="h-1 bg-bg" /> */}
+        {/* <span className="flex items-center text-xs text-muted-foreground">
           Continue Watching <ChevronRight className="h-3 w-3" />
-        </span>
+        </span> */}
       </div>
     </Link>
   );

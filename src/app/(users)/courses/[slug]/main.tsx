@@ -10,9 +10,6 @@ import { Floating, PaymentModal, PaymentSheet } from "./payments";
 import { useState } from "react";
 import Hero from "./unpaid/hero";
 import { YTModal } from "@/app/(guide)/testimonials/slider";
-import { useSession } from "next-auth/react";
-import { courseProgress } from "@/lib/jotai";
-import { useAtom } from "jotai";
 import { Session } from "next-auth";
 
 type CourseItem = {
@@ -115,8 +112,6 @@ export default function Main({
 
   const courseOffer = offers ?? [];
 
-  const [progress, setProgress] = useAtom(courseProgress);
-
   function Paid() {
     return (
       <main className="bg-footer">
@@ -140,7 +135,6 @@ export default function Main({
             <div className="px-7 max-h-[65dvh] overflow-hidden overflow-y-auto horizontal-scroll">
               <CourseList
                 courseId={courseId}
-                progress={progress}
                 chapter={vidIndex.chapterIndex}
                 module={vidIndex.modIndex}
                 modules={modulesCollection}
@@ -148,7 +142,7 @@ export default function Main({
               />
             </div>
           </div>
-          <div className="bg-bg lg:rounded-s-3xl min-h-dvh py-6 max-tab:pt-[1rem] max-tab:pb-[2.5rem] px-4 md:px-6 m-auto w-full flex">
+          <div className="bg-bg lg:rounded-s-3xl min-h-dvh py-6 max-tab:pt-[1rem] px-4 md:px-6 m-auto w-full flex">
             <section className="relative flex max-md:flex-col gap-6 p-1 max-w-6xl w-full mx-auto">
               <Details
                 faqCollection={faqCollection}
@@ -159,7 +153,6 @@ export default function Main({
                 modulesCollection={modulesCollection}
                 title={title}
                 courseId={courseId}
-                progress={progress}
                 courseImage={courseImage}
                 chapter={vidIndex.chapterIndex}
                 module={vidIndex.modIndex}
