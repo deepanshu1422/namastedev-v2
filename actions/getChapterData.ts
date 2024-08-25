@@ -12,6 +12,9 @@ type Res = {
           content: [];
         };
       };
+      pdf: {
+        url: string | null;
+      };
     };
   };
 };
@@ -22,6 +25,9 @@ export default async function getChapterData({ id }: { id: string }) {
                 description {
                     json
                     }
+                     pdf {
+                      url
+                     }
                 }
             }`;
 
@@ -39,5 +45,8 @@ export default async function getChapterData({ id }: { id: string }) {
 
   const data: Res = await fetchedData.json();
 
-  return documentToMarkdown(data.data.chapters.description?.json).content ;
+  return {
+    mdx: documentToMarkdown(data.data.chapters.description?.json).content,
+    pdf: data.data.chapters.pdf?.url || null,
+  };
 }

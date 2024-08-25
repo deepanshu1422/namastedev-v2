@@ -6,9 +6,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
-import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
 import { Dispatch, SetStateAction, useCallback } from "react";
 
 export default function CourseList({
@@ -64,7 +61,7 @@ export default function CourseList({
           </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-3 text-xs py-2">
             {chaptersCollection.items.map(
-              ({ title, public: free }, chapterIndex) => (
+              ({ title }, chapterIndex) => (
                 <button
                   onClick={() => {
                     if (setOpen) setOpen(false);
@@ -87,11 +84,6 @@ export default function CourseList({
                       {title}
                     </span>
                   </div>
-                  {free && (
-                    <Badge className="px-1 py-0 text-[10px] font-normal text-white w-fit bg-prime/30 hover:bg-prime/30 rounded">
-                      Free
-                    </Badge>
-                  )}
                 </button>
               )
             )}

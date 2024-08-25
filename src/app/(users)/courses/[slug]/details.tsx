@@ -172,15 +172,15 @@ export default function Details({
     queryFn: async ({ queryKey }) => {
       const mdx = await getChapterData({ id: queryKey[0] });
 
-      console.log(JSON.stringify(mdx));
+      console.log(JSON.stringify(mdx.mdx));
 
       const mdxSource = await serialize({
-        source: mdx,
+        source: mdx.mdx,
       });
 
       console.log(mdxSource);
 
-      return mdxSource;
+      return { mdxSource: mdxSource, pdf: mdx.pdf };
     },
   });
 
@@ -252,11 +252,12 @@ export default function Details({
           ].title
         }
       </section>
-      <Description isPending={isPending} mdxSource={data} />
+      <Description isPending={isPending} mdxSource={data?.mdxSource} />
       {/* {isPending ? <span>Loading</span> : data} */}
       {/* <div className="hidden md:block">
         <FAQ faqs={faqCollection.items} />
       </div> */}
+      {data?.pdf && <PDFViewer url={data.pdf} />}
     </div>
   );
 }
@@ -373,7 +374,7 @@ function Description({
                   components={{
                     CodeSnippet,
                     pre: ({ children }) => {
-                      const code = JSON.stringify(children?.toString())
+                      const code = JSON.stringify(children?.toString());
                       return <CodeSnippet>{code}</CodeSnippet>;
                     },
                   }}
@@ -534,6 +535,10 @@ export function FAQ({
       </div>
     </section>
   );
+}
+
+function PDFViewer({ url }: { url: string }) {
+  return <iframe src={url} />;
 }
 
 function ErrorComponent({ error }: { error: Error }) {

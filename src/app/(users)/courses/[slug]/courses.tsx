@@ -95,11 +95,11 @@ export default function CourseList({
                       {title}
                     </span>
                   </div>
-                  {free && (
+                  {/* {free && (
                     <Badge className="px-1 py-0 text-[10px] font-normal text-white w-fit bg-prime/30 hover:bg-prime/30 rounded">
                       Free
                     </Badge>
-                  )}
+                  )} */}
                 </button>
               )
             )}
