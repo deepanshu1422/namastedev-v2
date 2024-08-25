@@ -6,7 +6,7 @@ import Link from "next/link";
 import MobileMenu from "../mobile-menu";
 import { useSession } from "next-auth/react";
 import { AuthDialog } from "@/app/(guide)/auth";
-import { LayoutDashboard } from "lucide-react";
+import { LayoutDashboard, LogIn } from "lucide-react";
 
 export default function Navbar() {
   // const { isSignedIn } = useAuth()
@@ -16,7 +16,7 @@ export default function Navbar() {
     <div className={`relative font-jakarta tab:min-h-9`}>
       <div className="min-h-16" />
 
-      <div className="flex bg-bg items-center justify-center text-lg text-white h-20 fixed top-0 w-full z-20 pt-2">
+      <div className="flex bg-bg items-center justify-center text-lg text-white sm:h-20 fixed top-0 w-full z-20 pt-2">
         <div
           className={`sm:p-[.875rem_2.25rem] p-[0.5rem_1rem] text-white flex gap-6 justify-between items-center w-full max-w-[90rem]`}
         >
@@ -51,8 +51,8 @@ export default function Navbar() {
               href={"/dashboard"}
               className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:p-2 rounded-md"
             >
-              <span className="text-sm max-sm:hidden">Dashboard</span>
-              <LayoutDashboard className="h-5 w-5 sm:hidden" />
+              <span className="text-sm max-sm:hidden">Login</span>
+              <LogIn className="h-5 w-5 sm:hidden" />
             </Link>
 
             <MobileMenu />

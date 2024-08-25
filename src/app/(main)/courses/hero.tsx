@@ -47,7 +47,7 @@ export default function Hero({
         <div className="sm:pt-[8.5rem] sm:p-[2.5rem_4.75rem] max-sm:pt-16 max-sm:pb-[0.5rem] m-auto max-w-[89rem] flex max-sm:flex-col text-white">
           <section className="flex-1 grid place-items-center max-sm:px-11 max-phone:px-6 gap-2">
             <h1
-              className={`sm:max-w-3xl phone:text-5xl text-3xl font-extrabold leading-[3]`}
+              className={` sm:text-center tab:text-start sm:max-w-3xl phone:text-5xl text-3xl font-extrabold leading-[1.3] sm:leading-[1.2]`}
             >
               Job-Ready{" "}
               <span className="bg-prime/50">Beginner to Advanced</span>{" "}

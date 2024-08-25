@@ -181,7 +181,7 @@
 }
 
 .techStack{
-  @apply max-sm:text-sm flex flex-col tab:gap-4 max-tab:gap-2;
+  @apply max-sm:text-sm flex flex-col tab:gap-4 max-tab:gap-2 break-all;
 }
 
 .techStack ol {
@@ -197,7 +197,7 @@
 }
 
 .techStack p {
-  @apply text-foreground/90;
+  @apply text-foreground/90 break-all;
 }
 
 .techStack pre {

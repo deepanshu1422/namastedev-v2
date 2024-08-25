@@ -97,10 +97,10 @@ export default function Hero({
               </span> */}
                 <Reviews>
                   <button className="text-prime/90 underline hover:text-prime">
-                    (12,000 review)
+                    (12,875 review)
                   </button>
                 </Reviews>
-                20,000+ Students
+                21,380+ Students
               </div>
 
               {/* <div className="text-white/70 max-tab:text-sm">
