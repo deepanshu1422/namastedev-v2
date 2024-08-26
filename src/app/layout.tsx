@@ -6,12 +6,12 @@ import Pixel from "@/util/pixel";
 import GoogleAnalytics from "@/util/ga";
 import { Toaster } from "@/components/ui/sonner";
 import PageSense from "@/util/pagesense";
-import SessionProvider from "@/util/next-auth";
+import { SessionProvider } from "next-auth/react";
 import Script from "next/script";
 import { auth } from "@/auth";
 import QueryProvider from "@/lib/queryProvider";
 import GoogleTagManager from "@/components/tracking/GoogletagManager";
-import { DataProvider } from "../context/resume-context"
+import { DataProvider } from "../context/resume-context";
 
 import Freshdesk from "@/util/freshdesk";
 
@@ -27,9 +27,9 @@ export default async function RootLayout({
       <head>
         <GoogleTagManager containerId="GTM-W4LNH7RV" />
       </head>
-      <DataProvider>
-        <SessionProvider session={session}>
-          <QueryProvider>
+      <SessionProvider session={session}>
+        <QueryProvider>
+          <DataProvider>
             <body
               className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
             >
@@ -37,10 +37,10 @@ export default async function RootLayout({
               <Footer />
               <Toaster richColors />
             </body>
-          </QueryProvider>
-        </SessionProvider>
-        {/* <Pixel /> */}
-      </DataProvider>
+          </DataProvider>
+        </QueryProvider>
+      </SessionProvider>
+      {/* <Pixel /> */}
       <Clarity />
 
       <PageSense />
@@ -49,12 +49,3 @@ export default async function RootLayout({
     </html>
   );
 }
-
-
-
-
-
-
-
-
-
