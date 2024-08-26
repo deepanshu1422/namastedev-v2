@@ -10,7 +10,10 @@ export default async function createPayments({ courseId, email, name, contact, s
 
     let body: Record<string, string> = {};
 
-    if (user?.user?.email) {
+    // @ts-ignore
+    const pass = !!user?.user?.phone && !!user?.user?.state
+
+    if (pass) {
         body = {
             email,
             courseId,
@@ -40,7 +43,7 @@ export default async function createPayments({ courseId, email, name, contact, s
 
     }
 
-    const paymentUrl = user?.user?.email ? "https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/purchase/course" : "https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/unregistered/purchase/course"
+    const paymentUrl = pass ? "https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/purchase/course" : "https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/unregistered/purchase/course"
 
     // console.log(paymentUrl);
 
