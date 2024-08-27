@@ -28,7 +28,7 @@ export default async function createPayments({
   // @ts-ignore
   const pass = !!user?.user?.phone && !!user?.user?.state;
 
-  if (!pass)
+  if (!pass && !!user?.user?.email)
     await prisma.user.update({
       where: { email },
       data: {

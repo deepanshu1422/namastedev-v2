@@ -1,66 +1,97 @@
-'use server'
+"use server";
 
 import { auth } from "@/auth";
+import prisma from "@/util/prismaClient";
 import { createSignedHeader } from "@/util/userUtils";
 
-export default async function createBundlePayment({ bundleId, email, name, contact, state, couponCode }: { bundleId: string, email: string; name: string; contact: string; state: string; couponCode?: string | null }) {
-    // console.log(bundleId, email);
+export default async function createBundlePayment({
+  bundleId,
+  email,
+  name,
+  contact,
+  state,
+  couponCode,
+}: {
+  bundleId: string;
+  email: string;
+  name: string;
+  contact: string;
+  state: string;
+  couponCode?: string | null;
+}) {
+  // console.log(bundleId, email);
 
-    const user = await auth()
+  const user = await auth();
 
-    let body: Record<string, string> = {};
+  let body: Record<string, string> = {};
 
-    if (user?.user?.email) {
-        body = {
-            email,
-            bundleId,
-            gateway: "razorpay",
-            countryCode: "IN",
-        }
-    } else {
-        body = {
-            name,
-            bundleId,
-            contact,
-            state,
-            email,
-            country: "India",
-            gateway: "razorpay",
-            countryCode: "IN",
-        }
-    }
+  // @ts-ignore
+  const pass = !!user?.user?.phone && !!user?.user?.state;
 
-    if (couponCode) body.couponCode = couponCode
+  if (!pass && !!user?.user?.email)
+    await prisma.user.update({
+      where: { email },
+      data: {
+        name,
+        contact,
+        state,
+      },
+    });
 
-    const signature = createSignedHeader(body, "password")
+  if (pass) {
+    body = {
+      email,
+      bundleId,
+      gateway: "razorpay",
+      countryCode: "IN",
+    };
+  } else {
+    body = {
+      name,
+      bundleId,
+      contact,
+      state,
+      email,
+      country: "India",
+      gateway: "razorpay",
+      countryCode: "IN",
+    };
+  }
 
-    const headers = {
-        "Content-Type": "application/json",
-        "x-30dc-signature": signature
+  if (couponCode) body.couponCode = couponCode;
 
-    }
+  const signature = createSignedHeader(body, "password");
 
-    const paymentUrl = user?.user?.email ? "https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/purchase/bundle" : "https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/unregistered/purchase/bundle"
+  const headers = {
+    "Content-Type": "application/json",
+    "x-30dc-signature": signature,
+  };
 
-    // console.log(paymentUrl);
+  const paymentUrl = pass
+    ? "https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/purchase/bundle"
+    : "https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/unregistered/purchase/bundle";
 
-    const data: Response = await (await fetch(paymentUrl, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(body)
-    })).json()
+  // console.log(paymentUrl);
 
-    // console.log(data);
-    return data
+  const data: Response = await (
+    await fetch(paymentUrl, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+    })
+  ).json();
+
+  // console.log(data);
+  return data;
 }
 
 type Response = {
-    error: boolean,
-    message?: string,
-    data: {
-        amount: number,
-        currency: string,
-        name: string,
-        orderId: string
-    }
-}
+  error: boolean;
+  message?: string;
+  data: {
+    amount: number;
+    currency: string;
+    name: string;
+    orderId: string;
+  };
+};
