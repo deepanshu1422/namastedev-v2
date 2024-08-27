@@ -11,6 +11,7 @@ export default async function getInvoice() {
   const payments = await prisma.payments.findMany({
     where: {
       email: session.user.email,
+      paymentStatus: "completed"
     },
     select: {
       paymentId: true,

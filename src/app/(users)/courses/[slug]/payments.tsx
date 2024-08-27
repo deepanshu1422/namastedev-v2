@@ -93,6 +93,7 @@ export function PaymentSheet({
     "bihar",
     "chhattisgarh",
     "goa",
+    "delhi",
     "gujarat",
     "haryana",
     "himachal_pradesh",

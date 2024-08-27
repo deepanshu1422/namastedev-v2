@@ -23,6 +23,8 @@ export default function PurchaseTabs() {
   const { data: session, update } = useSession();
 
   useEffect(() => {
+    // @ts-ignore
+    if (session?.user?.newUser) return ;
     update({ courses: true });
   }, []);
 
@@ -121,7 +123,7 @@ function InvoiceTile({
   return (
     <div className="min-h-12 flex max-sm:flex-col justify-between gap-3 p-2 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60 transition-all duration-300">
       <span className="flex flex-col gap-1">
-        <h3 className="font-semibold">
+        <h3 className="font-semibold line-clamp-2">
           {item.Invoices?.item ?? "Item Name Missing"}
         </h3>
         <span className="text-prime text-sm font-bold">{item.paymentId}</span>

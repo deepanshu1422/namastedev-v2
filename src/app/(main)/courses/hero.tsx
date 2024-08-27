@@ -1,4 +1,5 @@
 "use client";
+import YoutubeEmbed from "@/app/(guide)/testimonials/youtube-embed";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import Image from "next/image";
@@ -82,29 +83,3 @@ export default function Hero({
     </div>
   );
 }
-
-import { MediaPlayer, MediaProvider, Poster } from "@vidstack/react";
-import {
-  DefaultVideoLayout,
-  defaultLayoutIcons,
-} from "@vidstack/react/player/layouts/default";
-
-const YoutubeEmbed = ({ embedId }: { embedId: string }) => {
-  return (
-    <MediaPlayer
-      src={`youtube/${embedId}`}
-      viewType="video"
-      streamType="on-demand"
-      logLevel="warn"
-      crossOrigin
-      playsInline
-      // title={title}
-      poster={"/mentorship.jpeg"}
-    >
-      <MediaProvider>
-        <Poster className="vds-poster" />
-      </MediaProvider>
-      <DefaultVideoLayout icons={defaultLayoutIcons} />
-    </MediaPlayer>
-  );
-};

@@ -40,6 +40,7 @@ import {
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import createBundlePayment from "../../../../../actions/createBundlePayment";
+import { useRouter } from "next/navigation";
 
 export function PaymentSheet({
   cover,
@@ -61,6 +62,8 @@ export function PaymentSheet({
   setOpenPay: Dispatch<SetStateAction<boolean>>;
 }) {
   const { data: session, update } = useSession();
+
+  const router = useRouter()
 
   const [formData, setFormData] = useState({
     name: session?.user?.name ?? "",
@@ -175,6 +178,7 @@ export function PaymentSheet({
         handler: async function (response: any) {
           setOpenPay(true);
           await update({ courses: true });
+          if (session?.user?.email) router.refresh();
         },
         prefill: {
           name: formData.name,
@@ -533,15 +537,15 @@ export function PaymentModal({
           </CardHeader>
           <CardContent className="pt-3 pb-0 mx-auto w-full flex flex-col items-center gap-2">
             <Link className="w-fit" href={"/dashboard"}>
-            <Button
-              // onClick={() => setOpenPay(false)}
-              disabled={status === "loading"}
-              className="w-full bg-prime/70 text-white hover:bg-prime"
-            >
-              {status === "loading" ? "Adding Course..." : "Visit Dashboard"}
-            </Button>
+              <Button
+                // onClick={() => setOpenPay(false)}
+                disabled={status === "loading"}
+                className="w-full bg-prime/70 text-white hover:bg-prime"
+              >
+                {status === "loading" ? "Adding Course..." : "Visit Dashboard"}
+              </Button>
             </Link>
-              {/* <Button
+            {/* <Button
                 variant={"link"}
                 disabled={status === "loading"}
                 className="text-white/40 hover:text-white"

@@ -6,8 +6,6 @@ import Link from "next/link";
 import React, { Suspense } from "react";
 import Btn from "./btn";
 
-export const dynamic = "force-static";
-
 export default function Lifetime() {
   const benefits = [
     <p key={1}>

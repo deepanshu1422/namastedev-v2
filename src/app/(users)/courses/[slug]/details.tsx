@@ -44,7 +44,7 @@ import { Badge } from "@/components/ui/badge";
 import { useAtom } from "jotai";
 
 const CodeSnippet = ({ children }: { children: string }) => (
-  <div className="hidden md:max-w-full horizontal-scroll w-full bg-slate-500 max-sm:w-[90dvw] font-semibold shrink">
+  <div className="md:max-w-full horizontal-scroll w-full bg-slate-500 max-sm:w-[90dvw] font-semibold shrink">
     <SyntaxHighlighter style={gruvboxDark}>{children}</SyntaxHighlighter>
   </div>
 );
@@ -395,10 +395,10 @@ function Description({
                   {...mdxSource}
                   components={{
                     CodeSnippet,
-                    pre: ({ children }) => {
-                      const code = JSON.stringify(children?.toString());
-                      return <CodeSnippet>{code}</CodeSnippet>;
-                    },
+                    // pre: ({ children }) => {
+                    //   const code = JSON.stringify(children?.toString());
+                    //   return <CodeSnippet>{code}</CodeSnippet>;
+                    // },
                   }}
                   onError={ErrorComponent}
                 />
