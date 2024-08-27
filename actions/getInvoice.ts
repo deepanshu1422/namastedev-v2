@@ -13,6 +13,9 @@ export default async function getInvoice() {
       email: session.user.email,
       paymentStatus: "completed"
     },
+    orderBy:{
+      createdAt: "desc"
+    },
     select: {
       paymentId: true,
       Invoices: {

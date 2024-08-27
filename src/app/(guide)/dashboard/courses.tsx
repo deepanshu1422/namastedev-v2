@@ -55,12 +55,6 @@ export default async function Courses() {
   return (
     <section className="flex max-md:flex-col rounded-lg gap-2">
       <Slider course={items} />
-      {/* {items.map((e: any, i: number) => <Link href={`/courses/${e.slug}`} key={i} className='overflow-hidden group flex-1 relative min-h-16 md:h-48'>
-                <Image alt={e?.title} fill className='object-cover opacity-45 group-hover:scale-105 transition-all duration-200' src={e?.courseImage?.url ?? ""} />
-                <div className='relative h-full w-full bg-gradient-to-b from-50% from-second/40 to-transparent'>
-                    <p className='font-semibold md:text-lg p-1 md:p-3 mt-auto'>{e.title}</p>
-                </div>
-            </Link>)} */}
     </section>
   );
 }

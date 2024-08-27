@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Bell, MessageCircleQuestion } from "lucide-react";
 
 export default function Notifications() {
-    return <div className="max-xl:hidden flex flex-col gap-2 px-4 py-5 min-w-60 h-full border-l-2">
+    return <div className="sticky top-0 max-xl:hidden flex flex-col gap-2 px-4 py-5 min-w-60 h-full max-h-screen border-l-2">
         <span className="flex items-center gap-1">
             <Bell className="h-5 w-5" />
             Updates</span>

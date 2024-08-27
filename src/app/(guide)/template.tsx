@@ -346,7 +346,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
         </div>
       </div>
 
-      <div className="flex flex-col overflow-hidden">
+      <div className="flex flex-col max-sm:overflow-hidden">
         {/* <div className="h-20" ></div> */}
         <header className="bg-bg">
           <div className="bg-muted/40 flex items-center gap-4 border-b px-4 lg:px-6 h-14 lg:h-[60px]">

@@ -71,7 +71,7 @@ function Invoice() {
     </div>
   ) : (
     <div className="flex w-full h-52">
-      <Badge className="text-white gap-1 hover:bg-second/60 bg-second/40 rounded m-auto">
+      <Badge className="text-white gap-1 py-2 hover:bg-second/60 bg-second/40 rounded m-auto">
         <MessageCircleQuestion className="h-4 w-4" />
         Not Purchased Yet
       </Badge>
@@ -123,7 +123,7 @@ function InvoiceTile({
   return (
     <div className="min-h-12 flex max-sm:flex-col justify-between gap-3 p-2 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60 transition-all duration-300">
       <span className="flex flex-col gap-1">
-        <h3 className="font-semibold line-clamp-2">
+        <h3 className="font-semibold text-sm line-clamp-2">
           {item.Invoices?.item ?? "Item Name Missing"}
         </h3>
         <span className="text-prime text-sm font-bold">{item.paymentId}</span>
@@ -177,7 +177,7 @@ function CoursesFallback() {
 
 function InvoiceFallback() {
   return (
-    <div className="min-h-52 w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="w-full grid gap-2 py-2">
       <Skeleton className="min-h-12 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60" />
       <Skeleton className="min-h-12 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60" />
       <Skeleton className="min-h-12 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60" />

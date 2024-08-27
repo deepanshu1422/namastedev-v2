@@ -7,6 +7,15 @@ import { UserDialog } from "./new-user";
 import { auth } from "@/auth";
 import PurchaseTabs from "./purchased";
 
+import { Notebook, Terminal } from "lucide-react"
+
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert"
+import Link from "next/link";
+
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
@@ -37,12 +46,13 @@ export default async function Dashboard() {
   const session = await auth();
 
   return (
-    <div className="flex h-full">
-      <div className="flex-1 flex flex-col gap-2 px-6 py-5 lg:px-8 w-full">
-        <Suspense fallback={<CoursesFallback />}>
+    <div className="flex h-full relative overflow-clip">
+      <div className="flex-1 flex flex-col gap-4 px-6 py-5 lg:px-8 w-full max-w-6xl mx-auto">
+        {/* <Suspense fallback={<CoursesFallback />}>
           <Courses />
-        </Suspense>
-        <div className="flex justify-between py-3">
+        </Suspense> */}
+        <OldCourses />
+        <div className="flex justify-between">
           <PurchaseTabs />
         </div>
       </div>
@@ -63,4 +73,18 @@ function CoursesFallback() {
       ))}
     </section>
   );
+}
+
+export function OldCourses() {
+  return (
+    <Link target="_blank" href={"https://courses.30dayscoding.com/s/store"}>
+    <Alert className="border-prime/80 bg-gradient-to-b from-prime/60 to-second/60 shadow-lg">
+      <Notebook className="h-4 w-4" />
+      <AlertTitle>Note</AlertTitle>
+      <AlertDescription>
+        You can access all your previous bought courses <span className="text-primary underline">here.</span>
+      </AlertDescription>
+    </Alert>
+        </Link>
+  )
 }
