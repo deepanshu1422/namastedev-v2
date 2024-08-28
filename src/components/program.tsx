@@ -31,14 +31,12 @@ export default function Program() {
           </Reveal>
           <div className="flex flex-wrap py-3 gap-3 max-lg:hidden">
             <Reveal>
-              <Button>
-                <Link
-                  className="flex items-center gap-2 px-12"
-                  href={"https://courses.30dayscoding.com/s/store"}
-                >
-                  Buy Courses
-                </Link>
-              </Button>
+              <Link
+                // className="flex items-center gap-2 px-12"
+                href={"https://courses.30dayscoding.com/s/store"}
+              >
+                <Button>Buy Courses</Button>
+              </Link>
             </Reveal>
             <Reveal>
               <span className="max-w-96">

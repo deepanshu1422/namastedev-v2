@@ -5,17 +5,14 @@ import "@vidstack/react/player/styles/default/layouts/audio.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 
 import {
-  isYouTubeProvider,
   MediaPlayer,
   MediaProvider,
-  MediaProviderAdapter,
   Poster,
 } from "@vidstack/react";
 import {
   DefaultVideoLayout,
   defaultLayoutIcons,
 } from "@vidstack/react/player/layouts/default";
-import { useEffect } from "react";
 
 export default function VideoPlayer({
   title,

@@ -61,7 +61,7 @@ export default function Store() {
 
         <Link
           className="text-sm"
-          href={"https://courses.30dayscoding.com/s/store"}
+          href={"/courses"}
         >
           <button
             className={`font-jakarta flex items-center font-semibold gap-1 border-white border transition-all px-6 py-3 rounded-md`}

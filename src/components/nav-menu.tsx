@@ -23,50 +23,51 @@ export const navTitles: {
 }[] = [
     {
       title: "Courses",
-      href: [
-        // {
-        //   title: "Mern FullStack Course",
-        //   href: "/course/mern-full-stack-developer-course",
-        //   description:
-        //     "A complete mern full stack development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
-        // },
-        // {
-        //   title: "Live Mern Cohort",
-        //   href: "/course/mern-cohort",
-        //   description:
-        //     "A live mern stack development cohort from 30 days coding. Checkout on www.courses.30dayscoding.com",
-        // },
-        // {
-        //   title: "DSA Live Course",
-        //   href: "/course/dsa-live-placement-ready-course",
-        //   description:
-        //     "A live dsa placement ready course from 30 days coding. Checkout on www.courses.30dayscoding.com",
-        // },
-        {
-          title: "Recorded DSA Mastery Course",
-          href: "https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312",
-          description:
-            "A full dsa mastery course from 30 days coding. Checkout on www.courses.30dayscoding.com",
-        },
-        {
-          title: "MERN FullStack Course",
-          href: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
-          description:
-            "A complete mern full stack development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
-        },
-        {
-          title: "Next JS FullStack",
-          href: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
-          description:
-            "A live next js fullstack development cohort from 30 days coding. Checkout on www.courses.30dayscoding.com",
-        },
-        {
-          title: "All Courses Package",
-          href: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0",
-          description:
-            "Get a course from 30 days coding. Checkout on www.courses.30dayscoding.com",
-        },
-      ],
+      href: "/courses"
+      //      [
+      //   // {
+      //   //   title: "Mern FullStack Course",
+      //   //   href: "/course/mern-full-stack-developer-course",
+      //   //   description:
+      //   //     "A complete mern full stack development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
+      //   // },
+      //   // {
+      //   //   title: "Live Mern Cohort",
+      //   //   href: "/course/mern-cohort",
+      //   //   description:
+      //   //     "A live mern stack development cohort from 30 days coding. Checkout on www.courses.30dayscoding.com",
+      //   // },
+      //   // {
+      //   //   title: "DSA Live Course",
+      //   //   href: "/course/dsa-live-placement-ready-course",
+      //   //   description:
+      //   //     "A live dsa placement ready course from 30 days coding. Checkout on www.courses.30dayscoding.com",
+      //   // },
+      //   {
+      //     title: "Recorded DSA Mastery Course",
+      //     href: "https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312",
+      //     description:
+      //       "A full dsa mastery course from 30 days coding. Checkout on www.courses.30dayscoding.com",
+      //   },
+      //   {
+      //     title: "MERN FullStack Course",
+      //     href: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
+      //     description:
+      //       "A complete mern full stack development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
+      //   },
+      //   {
+      //     title: "Next JS FullStack",
+      //     href: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
+      //     description:
+      //       "A live next js fullstack development cohort from 30 days coding. Checkout on www.courses.30dayscoding.com",
+      //   },
+      //   {
+      //     title: "All Courses Package",
+      //     href: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0",
+      //     description:
+      //       "Get a course from 30 days coding. Checkout on www.courses.30dayscoding.com",
+      //   },
+      // ],
     },
     {
       title: "Services",

@@ -126,7 +126,7 @@ function InvoiceTile({
         <h3 className="font-semibold text-sm line-clamp-2">
           {item.Invoices?.item ?? "Item Name Missing"}
         </h3>
-        <span className="text-prime text-sm font-bold">{item.paymentId}</span>
+        <span className="text-prime text-xs sm:text-sm font-bold">{item.paymentId}</span>
       </span>
       <div className="flex flex-col gap-3 mt-auto mb-2">
         <Badge className="text-white w-fit bg-prime/20 hover:bg-prime/40 rounded">

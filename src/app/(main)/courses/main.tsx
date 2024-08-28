@@ -50,6 +50,15 @@ function Bundle({
   amount: number;
   slug: string;
 }) {
+
+  const mentorship= [
+    "1:1 Personalized Guidance",
+    "Access to All 10 Courses",
+    "24/7 Whatsapp Mentors",
+    "Full Stack Projects",
+    "SAAS Projects"
+  ]
+
   return (
     <div className="flex max-phone:flex-col w-full max-w-[85rem] gap-7 mx-auto max-phone:px-6 px-10 py-5 tab:pb-8">
       <div className="flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6">
@@ -94,7 +103,7 @@ function Bundle({
             Join 1:1 Mentorship Now and Get Live Session
           </h3>
           <div className="flex flex-col gap-1 pr-5">
-            {content.map((e, i) => (
+            {mentorship.map((e, i) => (
               <span key={i} className="flex gap-2 items-center text-sm">
                 <CheckCheck className="h-5 w-5 text-prime shrink-0" />
                 {e}

@@ -362,10 +362,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
                 className="flex flex-col overflow-hidden overflow-y-auto"
               >
                 <>
-                  <nav className="grid gap-2 text-lg font-medium">
+                  <nav className="grid gap-2 font-medium">
                     <Link
-                      href="#"
-                      className="flex items-center gap-2 text-lg font-semibold"
+                      href="/"
+                      className="flex items-center gap-2 font-semibold"
                     >
                       <Image
                         src={"/logo.png"}
@@ -376,13 +376,26 @@ export default function Template({ children }: { children: React.ReactNode }) {
                       <span className="sr-only">30DC</span>
                     </Link>
 
+                    {userMenu.map(({ href, icon, selected, title }, i) => (
+                      <Link
+                        key={i}
+                        href={href}
+                        className={`mx-[-0.65rem] flex items-center gap-2 ${
+                          selected ? "bg-muted" : "text-muted-foreground"
+                        } rounded-xl px-3 py-1 hover:text-foreground transition-all`}
+                      >
+                        {icon}
+                        {title}
+                      </Link>
+                    ))}
+
                     {navBar.map(({ href, icon, selected, title }, i) => (
                       <Link
                         key={i}
                         href={href}
-                        className={`mx-[-0.65rem] flex items-center gap-4 ${
+                        className={`mx-[-0.65rem] flex items-center gap-2 ${
                           selected ? "bg-muted" : "text-muted-foreground"
-                        } rounded-xl px-3 py-2 hover:text-foreground transition-all`}
+                        } rounded-xl px-3 py-1 hover:text-foreground transition-all`}
                       >
                         {icon}
                         {title}

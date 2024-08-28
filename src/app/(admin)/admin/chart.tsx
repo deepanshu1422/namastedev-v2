@@ -84,7 +84,7 @@ export function TransactionChart() {
         users: number;
       }[] = [];
 
-      console.log(data);
+      // console.log(data);
 
       for (let i = 30; i > 0; i--) {
         let formattedDate = format(subDays(currentDate, i), "yyyy-MM-dd");

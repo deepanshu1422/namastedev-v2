@@ -35,6 +35,7 @@ export const revalidate = 3600;
 
 const fetchBlogs = cache(async () => {
   const item = await prisma.blog.findMany({
+    take: 200,
     orderBy: { createdAt: "desc" },
     select: {
       title: true,
