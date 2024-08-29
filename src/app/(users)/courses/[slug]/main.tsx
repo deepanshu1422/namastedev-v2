@@ -11,9 +11,10 @@ import { useState } from "react";
 import Hero from "./unpaid/hero";
 import { YTModal } from "@/app/(guide)/testimonials/slider";
 import { Session } from "next-auth";
+import { UpsellModal } from "./unpaid/upsell";
 
 type CourseItem = {
-  session: Session | null,
+  session: Session | null;
   mdx: React.JSX.Element;
   item: {
     courseId: string;
@@ -109,6 +110,7 @@ export default function Main({
   const [open, setOpen] = useState(false);
   const [openPay, setOpenPay] = useState(false);
   const [openYt, setOpenYt] = useState(false);
+  const [openUpsell, setOpenUpsell] = useState(false);
 
   const courseOffer = offers ?? [];
 
@@ -189,7 +191,7 @@ export default function Main({
               ?.amount ?? 0
           }
           courseOffer={courseOffer}
-          setOpen={setOpen}
+          setOpen={setOpenUpsell}
           setYtOpen={setOpenYt}
         />
         <Detail
@@ -203,10 +205,11 @@ export default function Main({
           }
           courseOffer={courseOffer}
           learn={learn ?? []}
-          setOpen={setOpen}
+          setOpen={setOpenUpsell}
           setYtOpen={setOpenYt}
           faqs={faqCollection.items}
         />
+        <UpsellModal open={openUpsell} setOpen={setOpenUpsell} setPaymentOpen={setOpen} />
         <PaymentSheet
           open={open}
           setOpen={setOpen}
@@ -226,8 +229,7 @@ export default function Main({
             pricingsCollection.items.find((e) => e.countryCode == "IN")
               ?.amount ?? 0
           }
-          open={open}
-          setOpen={setOpen}
+          setOpen={setOpenUpsell}
           courseId={courseId}
         />
       </main>

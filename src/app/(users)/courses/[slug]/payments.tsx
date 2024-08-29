@@ -40,6 +40,7 @@ import {
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { useRouter } from "next/navigation";
+import triggerEvent from "@/services/tracking";
 
 export function PaymentSheet({
   cover,
@@ -62,7 +63,7 @@ export function PaymentSheet({
 }) {
   const { data: session, update } = useSession();
 
-  const router = useRouter()
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     name: session?.user?.name ?? "",
@@ -176,9 +177,10 @@ export function PaymentSheet({
         amount: res.data.amount,
         order_id: res.data.orderId,
         handler: async function (response: any) {
+          await triggerEvent();
           setOpenPay(true);
           await update({ courses: true });
-          if (session?.user?.email) router.refresh()
+          if (session?.user?.email) router.refresh();
         },
         prefill: {
           name: formData.name,
@@ -263,8 +265,8 @@ export function PaymentSheet({
     {
       title: "Order Details",
       body: (
-        <div className="flex flex-col gap-5">
-          <div className="grid sm:grid-cols-3 gap-2 pt-4">
+        <div className="flex flex-col gap-5 max-sm:pt-5">
+          {/* <div className="max-sm:hidden grid sm:grid-cols-3 gap-2 pt-4">
             <Image
               className="rounded-md max-sm:w-full max-h-40 object-cover bg-white/20"
               src={cover}
@@ -273,19 +275,47 @@ export function PaymentSheet({
               height={180}
             />
             <div className="sm:col-span-2 flex flex-col gap-1">
-              <p className="sm:text-lg">{title}</p>
+              <p className="max-sm:text-sm sm:leading-6 line-clamp-3">
+                {title}
+              </p>
               <span className="font-extrabold text-prime">
                 {curreny} {amount}
               </span>
             </div>
-          </div>
+          </div> */}
           <section className="flex flex-col gap-3 max-sm:text-sm">
             <div className="flex justify-between">
               <span>Course Price</span>
               <span className="font-extrabold">
+                {curreny} {((amount + 1) * 4) - 1}
+              </span>
+            </div>
+            <div className="text-prime font-semibold flex justify-between">
+              <span>Discount @ 75%</span>
+              <span className="font-extrabold">
+                -{curreny} {((amount + 1) * 3)}
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span>Sub Total</span>
+              <span className="font-extrabold">
                 {curreny} {amount}
               </span>
             </div>
+            <hr className="mt-3" />
+            <div className="flex justify-between">
+              <span>GST @ 18%</span>
+              <span className="font-extrabold">
+                {curreny} {(amount * 0.18).toFixed(0)}
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span>Platform Fee</span>
+              <span className="font-extrabold">
+                {curreny} {12}
+              </span>
+            </div>
+            <hr className="mt-3" />
             {promo.apply ? (
               <div className="flex flex-col gap-2">
                 <form
@@ -341,26 +371,13 @@ export function PaymentSheet({
                 </span>
               </div>
             )}
-            <hr className="my-5" />
-            <div className="flex justify-between">
-              <span>GST</span>
-              <span className="font-extrabold text-prime">
-                {curreny} {(amount * 0.18).toFixed(0)}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span>Platform Fee</span>
-              <span className="font-extrabold text-prime">
-                {curreny} {12}
-              </span>
-            </div>
             <div className="flex justify-between">
               <span>Total Pay</span>
               <span className="font-extrabold text-prime">
                 {curreny}{" "}
                 {promo.discount
-                  ? (amount + amount * 0.18 + 12 - promo.discount).toFixed(2)
-                  : (amount + amount * 0.18 + 12).toFixed(2)}
+                  ? (amount + amount * 0.18 + 12 - promo.discount).toFixed(0)
+                  : (amount + amount * 0.18 + 12).toFixed(0)}
               </span>
             </div>
           </section>
@@ -552,17 +569,15 @@ export function PaymentModal({
 export function Floating({
   amount,
   courseId,
-  open,
   setOpen,
 }: {
   amount: number;
   courseId: string;
-  open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
   let course = {
     price: amount,
-    ogPrice: (amount + 1) * 4,
+    ogPrice: ((amount + 1) * 4) - 1,
     discount: 75,
   };
 

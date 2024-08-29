@@ -15,8 +15,6 @@ import {
   Video,
 } from "lucide-react";
 import Checkout from "./checkout";
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
-import { Button } from "@/components/ui/button";
 import { Dispatch, SetStateAction, useState } from "react";
 import Image from "next/image";
 import Reviews from "./reviews";
@@ -128,15 +126,6 @@ export default function Details({
             <h2 className="text-xl tab:text-2xl font-bold text-white">
               Overview
             </h2>
-            <ErrorBoundary
-              errorComponent={({ error, reset }) => (
-                <div className="flex flex-col gap-1">
-                  <p>{error.message}</p>
-                </div>
-              )}
-            >
-              <div className="techStack">{longDescription}</div>
-            </ErrorBoundary>
           </section>
           <div className="flex w-full h-16 bg-gradient-to-b from-10% to-90% -translate-y-12 from-transparent to-bg">
             <Button

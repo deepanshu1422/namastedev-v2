@@ -35,12 +35,6 @@ import {
 } from "@/components/ui/accordion";
 import CourseList from "./courses";
 import VideoPlayer from "./player";
-import { usePathname, useRouter } from "next/navigation";
-import { Badge } from "@/components/ui/badge";
-import { BASE_URL } from "@/util/constants";
-import Link from "next/link";
-import { toast } from "sonner";
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 
 export default function Details({
   title,
@@ -319,17 +313,9 @@ function Description({
   return (
     <section className="flex flex-col gap-2">
       <span className="font-bold text-lg">Description</span>
-      <ErrorBoundary
-        errorComponent={({ error, reset }) => (
-          <div className="flex flex-col gap-1 text-sm">
-            <p>{error.message}</p>
-          </div>
-        )}
-      >
         <div className="text-sm text-white/80 leading-6 techStack">
           {longDescription}
         </div>
-      </ErrorBoundary>
       {/* <p className="text-sm text-white/80 leading-6">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus non
         veritatis magni minima accusamus quibusdam excepturi tenetur velit iusto

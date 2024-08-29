@@ -181,7 +181,7 @@
 }
 
 .techStack{
-  @apply max-sm:text-sm flex flex-col tab:gap-4 max-tab:gap-2 break-all;
+  @apply max-sm:text-sm flex flex-col tab:gap-4 max-tab:gap-2 text-wrap overflow-hidden;
 }
 
 .techStack ol {
@@ -197,11 +197,11 @@
 }
 
 .techStack p {
-  @apply text-foreground/90 break-all;
+  @apply text-foreground/90;
 }
 
 .techStack pre {
-  @apply horizontal-scroll break-all overflow-hidden;
+  @apply horizontal-scroll break-all hidden;
 }
 
 .techStack a {

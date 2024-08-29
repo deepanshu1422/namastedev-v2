@@ -179,7 +179,7 @@ function Course({
           <span className="flex gap-2 text-lg text-white font-semibold">
             ₹{amount}
             <span className="text-muted-foreground line-through">
-              ₹{(amount + 1) * 4}
+              ₹{((amount + 1) * 4) - 1}
             </span>
             {/* <span className="text-lime-500">75%off</span> */}
             <Badge

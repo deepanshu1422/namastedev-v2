@@ -30,7 +30,6 @@ import {
 } from "@/components/ui/accordion";
 import CourseList from "./courses";
 import VideoPlayer from "./player";
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { useQuery } from "@tanstack/react-query";
 import getChapterData from "../../../../../actions/getChapterData";
 
@@ -395,9 +394,9 @@ function Description({
                   {...mdxSource}
                   components={{
                     CodeSnippet,
-                    // pre: ({ children }) => {
+                    // pre: ({ children, defaultValue }) => {
                     //   const code = JSON.stringify(children?.toString());
-                    //   return <CodeSnippet>{code}</CodeSnippet>;
+                    //   return <CodeSnippet>{defaultValue}</CodeSnippet>;
                     // },
                   }}
                   onError={ErrorComponent}
@@ -407,16 +406,6 @@ function Description({
           </div>
         )}
       </section>
-      // <ErrorBoundary
-    //   errorComponent={({ error, reset }) => (
-    //     <div className="flex flex-col gap-1 text-sm">
-    //       Error
-    //       <p>{error.message}</p>
-    //     </div>
-    //   )}
-    // >
-      
-    // </ErrorBoundary>
   );
 }
 

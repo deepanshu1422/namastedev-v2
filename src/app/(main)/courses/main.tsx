@@ -61,7 +61,7 @@ function Bundle({
 
   return (
     <div className="flex max-phone:flex-col w-full max-w-[85rem] gap-7 mx-auto max-phone:px-6 px-10 py-5 tab:pb-8">
-      <div className="flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6">
+      <Link href={"/bundle/" + slug} className="flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6">
         <div className="max-tab:order-last flex flex-col gap-3">
           <h3 className="font-bold text-xl tab:text-2xl line-clamp-2">
             {title}
@@ -74,7 +74,7 @@ function Bundle({
               </span>
             ))}
 
-            <Link href={"/bundle/" + slug} className="relative mt-2">
+            <div className="relative mt-2">
               <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
               <Button
                 size={"sm"}
@@ -86,7 +86,7 @@ function Bundle({
                   ₹{amount + amount * 0.85}
                 </span>
               </Button>
-            </Link>
+            </div>
           </div>
         </div>
         <Image
@@ -96,8 +96,8 @@ function Bundle({
           width={900}
           className="rounded-s-lg w-full tab:h-4/5 my-auto shadow-xl shadow-black/50 object-cover"
         />
-      </div>
-      <div className="max-phone:hidden flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6">
+      </Link>
+      <Link href={"/mentorship"} className="max-phone:hidden flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6">
         <div className="max-tab:order-last flex flex-col gap-3">
           <h3 className="font-bold text-xl tab:text-2xl">
             Join 1:1 Mentorship Now and Get Live Session
@@ -110,7 +110,7 @@ function Bundle({
               </span>
             ))}
 
-            <Link href={"/mentorship"} className="relative mt-2">
+            <div className="relative mt-2">
               <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
               <Button
                 size={"sm"}
@@ -119,7 +119,7 @@ function Bundle({
               >
                 Join Mentorship
               </Button>
-            </Link>
+            </div>
           </div>
         </div>
         <Image
@@ -129,7 +129,7 @@ function Bundle({
           width={900}
           className="rounded-s-lg w-full tab:h-4/5 my-auto shadow-xl shadow-black/50 object-cover"
         />
-      </div>
+      </Link>
     </div>
   );
 }
