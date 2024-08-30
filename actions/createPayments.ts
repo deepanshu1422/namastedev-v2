@@ -21,14 +21,15 @@ export default async function createPayments({
 }) {
   // console.log(courseId, email);
 
-  const user = await auth();
+  const session = await auth();
 
   let body: Record<string, string> = {};
 
   // @ts-ignore
-  const pass = !!user?.user?.phone && !!user?.user?.state;
+  const pass = !!session?.user?.phone && !!session?.user?.state;
 
-  if (!pass && !!user?.user?.email)
+  // Checks user's detail when logged
+  if (!pass && !!session?.user?.email)
     await prisma.user.update({
       where: { email },
       data: {
@@ -37,6 +38,20 @@ export default async function createPayments({
         state,
       },
     });
+
+  if (!session?.user?.email) {
+    let user = await prisma.user.findFirst({ where: { email } });
+    if (!user?.contact || !user?.state) {
+      await prisma.user.update({
+        where: { email },
+        data: {
+          name,
+          contact,
+          state,
+        },
+      });
+    }
+  }
 
   if (pass) {
     body = {
@@ -67,9 +82,11 @@ export default async function createPayments({
     "x-30dc-signature": signature,
   };
 
+  const base_url = process.env.BACKEND_PAYMENT_API_ENDPOINT;
+
   const paymentUrl = pass
-    ? "https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/purchase/course"
-    : "https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/unregistered/purchase/course";
+    ? base_url + "/api/v1/purchase/course"
+    : base_url + "/api/v1/unregistered/purchase/course";
 
   // console.log(paymentUrl);
 

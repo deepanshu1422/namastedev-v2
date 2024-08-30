@@ -60,7 +60,7 @@ export default function Checkout({
               Buy Now
             </Button>
 
-            <Link href={"/bundle/complete-package-all-course-bundle"} className="relative">
+            {/* <Link href={"/bundle/complete-package-all-course-bundle"} className="relative">
               <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
               <Button
                 variant={"outline"}
@@ -68,7 +68,7 @@ export default function Checkout({
               >
                 Buy all courses @ ₹1200/-
               </Button>
-            </Link>
+            </Link> */}
           </div>
 
           <div className="flex flex-col gap-1">

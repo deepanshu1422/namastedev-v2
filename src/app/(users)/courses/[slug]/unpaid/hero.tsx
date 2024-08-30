@@ -130,7 +130,7 @@ export default function Hero({
                     Buy Now
                   </Button>
 
-                  <Link
+                  {/* <Link
                     href={"/bundle/complete-package-all-course-bundle"}
                     className="relative"
                   >
@@ -141,7 +141,7 @@ export default function Hero({
                     >
                       Buy all courses @ ₹1200/-
                     </Button>
-                  </Link>
+                  </Link> */}
                 </div>
 
                 <div className="flex flex-col gap-1">

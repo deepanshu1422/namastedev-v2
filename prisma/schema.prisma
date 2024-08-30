@@ -46,6 +46,7 @@ model User {
   country       String?
   courseId      String[]  @default([])
   bundleId      String[]  @default([])
+  mentorshipID  String[]  @default([])
   accounts      Account[]
   sessions      Session[]
 
@@ -132,8 +133,9 @@ model Payments {
   razorpayPaymentId String?
   razorpayOrderId   String?
 
-  courseId String?
-  bundleId String?
+  courseId     String?
+  bundleId     String?
+  mentorshipId String?
 
   completedLessons String[] @default([])
 
@@ -189,4 +191,5 @@ enum PaymentStatus {
 enum PurchaseType {
   course
   bundle
+  mentorship
 }

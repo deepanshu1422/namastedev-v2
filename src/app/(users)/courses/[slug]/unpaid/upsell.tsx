@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
@@ -34,9 +35,11 @@ export function UpsellModal({
   open,
   setOpen,
   setPaymentOpen,
+  setBundelPaymentOpen,
 }: {
   open: boolean;
   setPaymentOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setBundelPaymentOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -54,17 +57,23 @@ export function UpsellModal({
             {/* <DialogTitle>{info.title}</DialogTitle> */}
             {/* <DialogDescription>{info.desc}</DialogDescription> */}
           </DialogHeader>
-          <ProfileForm className="" />
+          <ProfileForm setOpen={setOpen} setOpenBundle={setBundelPaymentOpen} className="" />
+          <div className="w-full text-sm items-center flex gap-2">
+            <hr className="w-full" />
+            OR
+            <hr className="w-full" />
+          </div>
           <DialogFooter>
             {/* <DialogClose asChild> */}
-              <Button
-                onClick={() => {
-                    setOpen(false)
-                    setPaymentOpen(true)}}
-                className="bg-prime/80 hover:bg-prime text-white w-full"
-              >
-                Continue Purchase...
-              </Button>
+            <Button
+              onClick={() => {
+                setOpen(false);
+                setPaymentOpen(true);
+              }}
+              className="bg-prime/80 hover:bg-prime text-white w-full"
+            >
+              Continue Purchase...
+            </Button>
             {/* </DialogClose> */}
           </DialogFooter>
         </DialogContent>
@@ -79,17 +88,23 @@ export function UpsellModal({
           {/* <DrawerTitle>{info.title}</DrawerTitle> */}
           {/* <DrawerDescription>{info.desc}</DrawerDescription> */}
         </DrawerHeader>
-        <ProfileForm className="mx-4" />
+        <ProfileForm setOpen={setOpen} setOpenBundle={setBundelPaymentOpen} className="mx-4" />
+        <div className="w-full text-sm items-center flex gap-2">
+          <hr className="w-full" />
+          OR
+          <hr className="w-full" />
+        </div>
         <DrawerFooter className="pt-2">
           {/* <DrawerClose asChild> */}
-            <Button
-              onClick={() => {
-                setOpen(false)
-                setPaymentOpen(true)}}
-              className="bg-prime/80 hover:bg-prime text-white "
-            >
-              Continue Purchase...
-            </Button>
+          <Button
+            onClick={() => {
+              setOpen(false);
+              setPaymentOpen(true);
+            }}
+            className="bg-prime/80 hover:bg-prime text-white "
+          >
+            Continue Purchase...
+          </Button>
           {/* </DrawerClose> */}
         </DrawerFooter>
       </DrawerContent>
@@ -97,13 +112,23 @@ export function UpsellModal({
   );
 }
 
-function ProfileForm({ className }: React.ComponentProps<"div">) {
+function ProfileForm({
+  className,
+  setOpen,
+  setOpenBundle,
+}: {
+  className: string;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenBundle: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   return (
     <div
-      className={`${className} border-2 border-primary/60 rounded flex flex-col`}
+      className={`${className} cursor-pointer border-2 border-primary/60 rounded flex flex-col`}
     >
-      <Link
-        href={"/bundle/complete-package-all-course-bundle"}
+      <section
+        onClick={() => {
+          setOpen(false), setOpenBundle(true);
+        }}
         className="relative rounded overflow-hidden"
       >
         <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
@@ -126,14 +151,7 @@ function ProfileForm({ className }: React.ComponentProps<"div">) {
             Claim Now
           </Badge>
         </div>
-      </Link>
-      {/* <Image
-        src={"/mentorship.jpeg"}
-        alt=""
-        width={400}
-        height={400}
-        className="mx-auto"
-      /> */}
+      </section>
     </div>
   );
 }

@@ -7,6 +7,10 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import CourseList from "./courses";
 import { Floating, PaymentModal, PaymentSheet } from "./payments";
+import {
+  PaymentModal as BundleModal,
+  PaymentSheet as BundlePaymentSheet,
+} from "../../bundle/[slug]/payments";
 import { useState } from "react";
 import Hero from "./unpaid/hero";
 import { YTModal } from "@/app/(guide)/testimonials/slider";
@@ -108,7 +112,9 @@ export default function Main({
   });
 
   const [open, setOpen] = useState(false);
+  const [openBundle, setOpenBundle] = useState(false);
   const [openPay, setOpenPay] = useState(false);
+  const [openPayBunlde, setOpenPayBunlde] = useState(false);
   const [openYt, setOpenYt] = useState(false);
   const [openUpsell, setOpenUpsell] = useState(false);
 
@@ -209,7 +215,12 @@ export default function Main({
           setYtOpen={setOpenYt}
           faqs={faqCollection.items}
         />
-        <UpsellModal open={openUpsell} setOpen={setOpenUpsell} setPaymentOpen={setOpen} />
+        <UpsellModal
+          open={openUpsell}
+          setOpen={setOpenUpsell}
+          setPaymentOpen={setOpen}
+          setBundelPaymentOpen={setOpenBundle}
+        />
         <PaymentSheet
           open={open}
           setOpen={setOpen}
@@ -222,6 +233,16 @@ export default function Main({
           }
           curreny={"INR"}
           setOpenPay={setOpenPay}
+        />
+        <BundlePaymentSheet
+          open={openBundle}
+          setOpen={setOpenBundle}
+          bundleId={"ALL30DC"}
+          amount={
+            pricingsCollection.items.find((e) => e.countryCode == "IN")
+              ?.amount ?? 0
+          }
+          setOpenPay={setOpenPayBunlde}
         />
         <YTModal open={openYt} setOpen={setOpenYt} url="nTAHWER3K-0" />
         <Floating
@@ -241,6 +262,7 @@ export default function Main({
       {/* @ts-ignore */}
       {session?.user?.courseId?.includes(courseId) ? <Paid /> : <Unpaid />}
       <PaymentModal payModal={openPay} setOpenPay={setOpenPay} />
+      <BundleModal payModal={openPayBunlde} setOpenPay={setOpenPayBunlde} />
     </>
   );
 }

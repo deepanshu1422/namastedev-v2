@@ -154,7 +154,7 @@ export function PaymentSheet({
         return;
       }
       // make an endpoint to get this key
-      const key = "rzp_test_tVOEQJx5p7XYeW";
+      const key = process.env.NEXT_PUBLIC_RAZORPAY_CLIENT;
 
       if (res.error) {
         toast("Error Occured", {
@@ -262,137 +262,137 @@ export function PaymentSheet({
   }
 
   const orderPage = [
-    {
-      title: "Order Details",
-      body: (
-        <div className="flex flex-col gap-5 max-sm:pt-5">
-          {/* <div className="max-sm:hidden grid sm:grid-cols-3 gap-2 pt-4">
-            <Image
-              className="rounded-md max-sm:w-full max-h-40 object-cover bg-white/20"
-              src={cover}
-              alt={title}
-              width={280}
-              height={180}
-            />
-            <div className="sm:col-span-2 flex flex-col gap-1">
-              <p className="max-sm:text-sm sm:leading-6 line-clamp-3">
-                {title}
-              </p>
-              <span className="font-extrabold text-prime">
-                {curreny} {amount}
-              </span>
-            </div>
-          </div> */}
-          <section className="flex flex-col gap-3 max-sm:text-sm">
-            <div className="flex justify-between">
-              <span>Course Price</span>
-              <span className="font-extrabold">
-                {curreny} {((amount + 1) * 4) - 1}
-              </span>
-            </div>
-            <div className="text-prime font-semibold flex justify-between">
-              <span>Discount @ 75%</span>
-              <span className="font-extrabold">
-                -{curreny} {((amount + 1) * 3)}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span>Sub Total</span>
-              <span className="font-extrabold">
-                {curreny} {amount}
-              </span>
-            </div>
-            <hr className="mt-3" />
-            <div className="flex justify-between">
-              <span>GST @ 18%</span>
-              <span className="font-extrabold">
-                {curreny} {(amount * 0.18).toFixed(0)}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span>Platform Fee</span>
-              <span className="font-extrabold">
-                {curreny} {12}
-              </span>
-            </div>
-            <hr className="mt-3" />
-            {promo.apply ? (
-              <div className="flex flex-col gap-2">
-                <form
-                  className="flex gap-3 justify-between text-sm"
-                  onSubmit={applyCoupon}
-                >
-                  <Input
-                    disabled={submitting}
-                    name="coupon"
-                    required
-                    placeholder="Enter a promo code"
-                  />
-                  <Button
-                    disabled={submitting}
-                    className="text-prime"
-                    variant={"link"}
-                    size={"sm"}
-                  >
-                    Apply
-                  </Button>
-                </form>
-                <Button
-                  disabled={submitting}
-                  className="text-prime"
-                  onClick={() => setPromo({ ...promo, apply: false })}
-                  variant={"link"}
-                  size={"sm"}
-                >
-                  Cancel
-                </Button>
-              </div>
-            ) : promo.code ? (
-              <div className="flex gap-3 justify-between text-sm">
-                <span className="uppercase">{promo.code}</span>
-                <div className="flex gap-2">
-                  <span className="font-bold">-{promo.discount}</span>
-                  <MinusCircle
-                    onClick={() =>
-                      setPromo({ apply: false, code: null, discount: 0 })
-                    }
-                    className="h-5 w-5 cursor-pointer"
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="flex gap-3 justify-between text-sm">
-                <span>Promo Code</span>
-                <span
-                  onClick={() => setPromo({ ...promo, apply: true })}
-                  className="font-extrabold text-prime hover:underline cursor-pointer"
-                >
-                  Apply Code
-                </span>
-              </div>
-            )}
-            <div className="flex justify-between">
-              <span>Total Pay</span>
-              <span className="font-extrabold text-prime">
-                {curreny}{" "}
-                {promo.discount
-                  ? (amount + amount * 0.18 + 12 - promo.discount).toFixed(0)
-                  : (amount + amount * 0.18 + 12).toFixed(0)}
-              </span>
-            </div>
-          </section>
-        </div>
-      ),
-      footer: (
-        <Button
-          onClick={() => setFormState(1)}
-          className="w-full mt-auto hover:bg-prime/80 bg-prime/60 text-white"
-          type="submit"
-        >
-          Proceed
-        </Button>
-      ),
-    },
+    // {
+    //   title: "Order Details",
+    //   body: (
+    //     <div className="flex flex-col gap-5 max-sm:pt-5">
+    //       {/* <div className="max-sm:hidden grid sm:grid-cols-3 gap-2 pt-4">
+    //         <Image
+    //           className="rounded-md max-sm:w-full max-h-40 object-cover bg-white/20"
+    //           src={cover}
+    //           alt={title}
+    //           width={280}
+    //           height={180}
+    //         />
+    //         <div className="sm:col-span-2 flex flex-col gap-1">
+    //           <p className="max-sm:text-sm sm:leading-6 line-clamp-3">
+    //             {title}
+    //           </p>
+    //           <span className="font-extrabold text-prime">
+    //             {curreny} {amount}
+    //           </span>
+    //         </div>
+    //       </div> */}
+    //       <section className="flex flex-col gap-3 max-sm:text-sm">
+    //         <div className="flex justify-between">
+    //           <span>Course Price</span>
+    //           <span className="font-extrabold">
+    //             {curreny} {((amount + 1) * 4) - 1}
+    //           </span>
+    //         </div>
+    //         <div className="text-prime font-semibold flex justify-between">
+    //           <span>Discount @ 75%</span>
+    //           <span className="font-extrabold">
+    //             -{curreny} {((amount + 1) * 3)}
+    //           </span>
+    //         </div>
+    //         <div className="flex justify-between">
+    //           <span>Sub Total</span>
+    //           <span className="font-extrabold">
+    //             {curreny} {amount}
+    //           </span>
+    //         </div>
+    //         <hr className="mt-3" />
+    //         <div className="flex justify-between">
+    //           <span>GST @ 18%</span>
+    //           <span className="font-extrabold">
+    //             {curreny} {(amount * 0.18).toFixed(0)}
+    //           </span>
+    //         </div>
+    //         <div className="flex justify-between">
+    //           <span>Platform Fee</span>
+    //           <span className="font-extrabold">
+    //             {curreny} {12}
+    //           </span>
+    //         </div>
+    //         <hr className="mt-3" />
+    //         {promo.apply ? (
+    //           <div className="flex flex-col gap-2">
+    //             <form
+    //               className="flex gap-3 justify-between text-sm"
+    //               onSubmit={applyCoupon}
+    //             >
+    //               <Input
+    //                 disabled={submitting}
+    //                 name="coupon"
+    //                 required
+    //                 placeholder="Enter a promo code"
+    //               />
+    //               <Button
+    //                 disabled={submitting}
+    //                 className="text-prime"
+    //                 variant={"link"}
+    //                 size={"sm"}
+    //               >
+    //                 Apply
+    //               </Button>
+    //             </form>
+    //             <Button
+    //               disabled={submitting}
+    //               className="text-prime"
+    //               onClick={() => setPromo({ ...promo, apply: false })}
+    //               variant={"link"}
+    //               size={"sm"}
+    //             >
+    //               Cancel
+    //             </Button>
+    //           </div>
+    //         ) : promo.code ? (
+    //           <div className="flex gap-3 justify-between text-sm">
+    //             <span className="uppercase">{promo.code}</span>
+    //             <div className="flex gap-2">
+    //               <span className="font-bold">-{promo.discount}</span>
+    //               <MinusCircle
+    //                 onClick={() =>
+    //                   setPromo({ apply: false, code: null, discount: 0 })
+    //                 }
+    //                 className="h-5 w-5 cursor-pointer"
+    //               />
+    //             </div>
+    //           </div>
+    //         ) : (
+    //           <div className="flex gap-3 justify-between text-sm">
+    //             <span>Promo Code</span>
+    //             <span
+    //               onClick={() => setPromo({ ...promo, apply: true })}
+    //               className="font-extrabold text-prime hover:underline cursor-pointer"
+    //             >
+    //               Apply Code
+    //             </span>
+    //           </div>
+    //         )}
+    //         <div className="flex justify-between">
+    //           <span>Total Pay</span>
+    //           <span className="font-extrabold text-prime">
+    //             {curreny}{" "}
+    //             {promo.discount
+    //               ? (amount + amount * 0.18 + 12 - promo.discount).toFixed(0)
+    //               : (amount + amount * 0.18 + 12).toFixed(0)}
+    //           </span>
+    //         </div>
+    //       </section>
+    //     </div>
+    //   ),
+    //   footer: (
+    //     <Button
+    //       onClick={() => setFormState(1)}
+    //       className="w-full mt-auto hover:bg-prime/80 bg-prime/60 text-white"
+    //       type="submit"
+    //     >
+    //       Proceed
+    //     </Button>
+    //   ),
+    // },
     {
       title: "Payments Details",
       body: (
@@ -485,14 +485,14 @@ export function PaymentSheet({
           >
             Buy
           </Button>
-          <Button
+          {/* <Button
             variant={"outline"}
             onClick={() => setFormState(0)}
             className="w-full"
             type="submit"
           >
             Back
-          </Button>
+          </Button> */}
         </div>
       ),
     },

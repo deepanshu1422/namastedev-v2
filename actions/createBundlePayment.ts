@@ -67,9 +67,11 @@ export default async function createBundlePayment({
     "x-30dc-signature": signature,
   };
 
+  const base_url = process.env.BACKEND_PAYMENT_API_ENDPOINT
+
   const paymentUrl = pass
-    ? "https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/purchase/bundle"
-    : "https://sea-lion-app-nap5i.ondigitalocean.app/api/v1/unregistered/purchase/bundle";
+    ? base_url + "/api/v1/purchase/bundle"
+    : base_url + "/api/v1/unregistered/purchase/bundle";
 
   // console.log(paymentUrl);
 
