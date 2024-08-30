@@ -1,40 +1,34 @@
-"use server";
+'use server'
 
-import { auth } from "@/auth";
+export default async function refreshCourses(courses: [string]) {
 
-export default async function refreshCourses() {
-  const session = await auth();
+    if (courses?.length <= 0) return []
 
-  if (!session?.user?.email) return [];
+    const json = JSON.stringify(
+        courses.map((e: string) => ({ courseId: e }))
+    ).replace(/"([^"]+)":/g, "$1:");
 
-  // @ts-ignore
-  const courses = session?.user?.courseId
+    const query = `query { courseCollection(where: {OR: ${json}}){ items{ slug, courseId, title, longDescription, courseImage{ description, url, width, height, }, } } }`;
 
-  const json = JSON.stringify(
-    courses.map((e: string) => ({ courseId: e }))
-  ).replace(/"([^"]+)":/g, "$1:");
+    const data = await (
+        await fetch(
+            `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+                },
+                body: JSON.stringify({ query }),
+            }
+        )
+    ).json();
 
-  const query = `query { courseCollection(where: {OR: ${json}}){ items{ slug, courseId, title, longDescription, courseImage{ description, url, width, height, }, } } }`;
-
-  const data = await (
-    await fetch(
-      `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+    const {
+        data: {
+            courseCollection: { items },
         },
-        body: JSON.stringify({ query }),
-      }
-    )
-  ).json();
+    } = data;
 
-  const {
-    data: {
-      courseCollection: { items },
-    },
-  } = data;
-
-  return items;
+    return items
 }

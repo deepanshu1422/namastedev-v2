@@ -85,8 +85,8 @@ function Purchased({ session }: { session: Session | null }) {
   const { isPending, data: items } = useQuery({
     // @ts-ignore
     queryKey: [session?.user?.courseId ?? []],
-    queryFn: async () => {
-      return await refreshCourses();
+    queryFn: async ({ queryKey }) => {
+      return await refreshCourses(queryKey[0]);
     },
     staleTime: 1000 * 60 * 10,
   });
