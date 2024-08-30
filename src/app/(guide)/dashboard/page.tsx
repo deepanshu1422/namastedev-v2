@@ -43,7 +43,6 @@ export const metadata: Metadata = {
 
 
 export default async function Dashboard() {
-  const session = await auth();
 
   return (
     <div className="flex h-full relative overflow-clip">

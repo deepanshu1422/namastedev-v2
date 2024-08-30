@@ -51,9 +51,15 @@ export const {
 
       if (trigger == "update" && token.newUser) {
         // console.log("newUser");
-        const updatedUser = await prisma.user.update({
-          where: { id: token?.id as string },
-          data: {
+        const updatedUser = await prisma.user.upsert({
+          where: { email: token?.email as string },
+          create: {
+            email: token?.email as string,
+            name: session.name,
+            contact: session.phone!,
+            state: session.state!,
+          },
+          update: {
             name: session.name,
             contact: session.phone!,
             state: session.state!,
