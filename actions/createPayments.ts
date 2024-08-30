@@ -41,7 +41,7 @@ export default async function createPayments({
 
   if (!session?.user?.email) {
     let user = await prisma.user.findFirst({ where: { email } });
-    if (!user?.contact || !user?.state) {
+    if (!!user?.email && !(user?.contact && user?.state)) {
       await prisma.user.update({
         where: { email },
         data: {

@@ -46,7 +46,7 @@ model User {
   country       String?
   courseId      String[]  @default([])
   bundleId      String[]  @default([])
-  mentorshipID  String[]  @default([])
+  mentorshipId  String[]  @default([])
   accounts      Account[]
   sessions      Session[]
 
@@ -136,8 +136,6 @@ model Payments {
   courseId     String?
   bundleId     String?
   mentorshipId String?
-
-  completedLessons String[] @default([])
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt

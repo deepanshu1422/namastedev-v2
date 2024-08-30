@@ -21,14 +21,14 @@ export default async function createBundlePayment({
 }) {
   // console.log(bundleId, email);
 
-  const user = await auth();
+  const session = await auth();
 
   let body: Record<string, string> = {};
 
   // @ts-ignore
-  const pass = !!user?.user?.phone && !!user?.user?.state;
+  const pass = !!session?.user?.phone && !!session?.user?.state;
 
-  if (!pass && !!user?.user?.email)
+  if (!pass && !!session?.user?.email)
     await prisma.user.update({
       where: { email },
       data: {
@@ -37,6 +37,20 @@ export default async function createBundlePayment({
         state,
       },
     });
+
+  if (!session?.user?.email) {
+    let user = await prisma.user.findFirst({ where: { email } });
+    if (!!user?.email && !(user?.contact && user?.state)) {
+      await prisma.user.update({
+        where: { email },
+        data: {
+          name,
+          contact,
+          state,
+        },
+      });
+    }
+  }
 
   if (pass) {
     body = {
@@ -67,7 +81,7 @@ export default async function createBundlePayment({
     "x-30dc-signature": signature,
   };
 
-  const base_url = process.env.BACKEND_PAYMENT_API_ENDPOINT
+  const base_url = process.env.BACKEND_PAYMENT_API_ENDPOINT;
 
   const paymentUrl = pass
     ? base_url + "/api/v1/purchase/bundle"
