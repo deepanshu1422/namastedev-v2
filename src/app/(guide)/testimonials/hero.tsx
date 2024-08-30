@@ -69,7 +69,7 @@ export default function Hero() {
             </h2>
             <CourseGallary />
             <div className="max-sm:flex-col items-center gap-5 flex mx-auto">
-              <AnimatedButton link="https://courses.30dayscoding.com/s/store">
+              <AnimatedButton link="/courses">
                 <span className="flex gap-2 px-2 items-center">
                   Try Courses
                 </span>

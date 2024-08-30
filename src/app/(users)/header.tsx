@@ -172,7 +172,7 @@ export default function Header() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Link href={"https://courses.30dayscoding.com/s/store"}>
+                    <Link href={"/courses"}>
                       <Button
                         size="sm"
                         className="bg-prime hover:bg-prime/80 text-white w-full"

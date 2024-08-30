@@ -11,7 +11,7 @@ import Program from "@/components/program";
 import Script from "next/script";
 import Success from "@/components/mentorship-comp/success";
 
-export const fetchCache = 'force-cache'
+export const dynamic = 'force-dynamic' 
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),

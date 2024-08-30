@@ -26,7 +26,7 @@ type TestimonialType = {
   linkedin: string;
   profile: string;
   // course?: string;
-  link: string;
+  link: "/courses",
 };
 
 function Testimonial({
@@ -108,7 +108,7 @@ export function Slider() {
         </p>
       ),
       name: "Rojal Sapkota",
-      link: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0",
+      link: "/courses",
       linkedin: "https://www.linkedin.com/in/rojal-sapkota-787130237/",
       pos: "SDE@Google",
       profile: "/rojal-in.jpg",
@@ -127,7 +127,7 @@ export function Slider() {
         </p>
       ),
       name: "Harsh",
-      link: "https://courses.30dayscoding.com/courses/Full-stack-package-652a0a17e4b0db14394522ed",
+      link: "/courses",
       linkedin: "https://www.linkedin.com/in/harshpandey002/",
       pos: "SDE (Remote) USA",
       profile: "/harsh-in.jpg",
@@ -146,7 +146,7 @@ export function Slider() {
         </p>
       ),
       name: "Umang Chaudhary",
-      link: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
+      link: "/courses",
       linkedin: "https://www.linkedin.com/in/umang18oct/",
       pos: "SDE@Amazon",
       profile: "/umang-in.jpg",
@@ -165,7 +165,7 @@ export function Slider() {
         </p>
       ),
       name: "Kevin",
-      link: "https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view",
+      link: "/courses",
       linkedin: "https://www.linkedin.com/in/kevinmsmith131/",
       pos: "SDE@Tesla",
       profile: "",
@@ -185,7 +185,7 @@ export function Slider() {
         </p>
       ),
       name: "Manan Patel",
-      link: "https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view",
+      link: "/courses",
       linkedin: "https://www.linkedin.com/in/themananpatel/",
       pos: "SDE@Nasdaq",
       profile: "/manan-in.jpg",
@@ -204,7 +204,7 @@ export function Slider() {
         </p>
       ),
       name: "Sneha Michelle V.",
-      link: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0",
+      link: "/courses",
       linkedin: "https://www.linkedin.com/in/sneha-michelle-v-1b73b0213/",
       pos: "SDE@Bank of America",
       profile: "/sneha-in.jpg",

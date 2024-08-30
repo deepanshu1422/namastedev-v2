@@ -1,34 +1,40 @@
-'use server'
+"use server";
 
-export default async function refreshCourses(courses: [string]) {
+import { auth } from "@/auth";
 
-    if (courses?.length <= 0) return []
+export default async function refreshCourses() {
+  const session = await auth();
 
-    const json = JSON.stringify(
-        courses.map((e: string) => ({ courseId: e }))
-    ).replace(/"([^"]+)":/g, "$1:");
+  if (!session?.user?.email) return [];
 
-    const query = `query { courseCollection(where: {OR: ${json}}){ items{ slug, courseId, title, longDescription, courseImage{ description, url, width, height, }, } } }`;
+  // @ts-ignore
+  const courses = session?.user?.courseId
 
-    const data = await (
-        await fetch(
-            `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-                },
-                body: JSON.stringify({ query }),
-            }
-        )
-    ).json();
+  const json = JSON.stringify(
+    courses.map((e: string) => ({ courseId: e }))
+  ).replace(/"([^"]+)":/g, "$1:");
 
-    const {
-        data: {
-            courseCollection: { items },
+  const query = `query { courseCollection(where: {OR: ${json}}){ items{ slug, courseId, title, longDescription, courseImage{ description, url, width, height, }, } } }`;
+
+  const data = await (
+    await fetch(
+      `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
         },
-    } = data;
+        body: JSON.stringify({ query }),
+      }
+    )
+  ).json();
 
-    return items
+  const {
+    data: {
+      courseCollection: { items },
+    },
+  } = data;
+
+  return items;
 }

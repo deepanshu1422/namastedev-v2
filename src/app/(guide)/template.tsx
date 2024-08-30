@@ -83,6 +83,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
     //   selected: path === "/projects",
     // },
     {
+      title: "Courses",
+      icon: <Network className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/courses",
+      selected: path === "/projects",
+    },
+    {
       title: "Jobs",
       icon: <Earth className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/jobs",
@@ -333,7 +339,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-                <Link href={"https://courses.30dayscoding.com/s/store"}>
+                <Link href={"/courses"}>
                   <Button
                     size="sm"
                     className="bg-prime hover:bg-prime/80 text-white w-full"
@@ -420,7 +426,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                         </CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <Link href={"https://courses.30dayscoding.com/s/store"}>
+                        <Link href={"/courses"}>
                           <Button
                             size="sm"
                             className="bg-prime hover:bg-prime/80 text-white w-full"

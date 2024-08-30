@@ -289,7 +289,7 @@ export default function MobileMenu() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Link href={"https://courses.30dayscoding.com/s/store"}>
+                <Link href={"/courses"}>
                   <Button size="sm" className="text-white bg-prime w-full">
                     Enroll Now
                   </Button>
