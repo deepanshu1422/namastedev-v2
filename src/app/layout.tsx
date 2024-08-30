@@ -43,7 +43,7 @@ export default async function RootLayout({
         </QueryProvider>
       </SessionProvider>
       {/* <Pixel /> */}
-      <Intercom />
+      {/* <Intercom /> */}
       <Pixel />
       <Clarity />
 
