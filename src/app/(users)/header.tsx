@@ -93,31 +93,31 @@ export default function Header() {
         <section className="flex overflow-hidden gap-20">
           <div className="flex flex-nowrap gap-4 tracking-wide text-center text-pretty [animation:loop-scroll_20s_linear_infinite] w-full">
             <p className="text-nowrap">
-              Access all courses for 1229/- Lifetime Valid
+              Access all courses for 999/- Lifetime Valid
               <span className="underline mx-2">Claim now!</span>
             </p>
             <p className="text-nowrap">
-              Access all courses for 1229/- Lifetime Valid
+              Access all courses for 999/- Lifetime Valid
               <span className="underline mx-2">Claim now!</span>
             </p>
             <p className="text-nowrap">
-              Access all courses for 1229/- Lifetime Valid
+              Access all courses for 999/- Lifetime Valid
               <span className="underline mx-2">Claim now!</span>
             </p>
             <p className="text-nowrap">
-              Access all courses for 1229/- Lifetime Valid
+              Access all courses for 999/- Lifetime Valid
               <span className="underline mx-2">Claim now!</span>
             </p>
             <p className="text-nowrap">
-              Access all courses for 1229/- Lifetime Valid
+              Access all courses for 999/- Lifetime Valid
               <span className="underline mx-2">Claim now!</span>
             </p>
             <p className="text-nowrap">
-              Access all courses for 1229/- Lifetime Valid
+              Access all courses for 999/- Lifetime Valid
               <span className="underline mx-2">Claim now!</span>
             </p>
             <p className="text-nowrap">
-              Access all courses for 1229/- Lifetime Valid
+              Access all courses for 999/- Lifetime Valid
               <span className="underline mx-2">Claim now!</span>
             </p>
           </div>
