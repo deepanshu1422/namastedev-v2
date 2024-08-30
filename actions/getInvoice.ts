@@ -11,10 +11,10 @@ export default async function getInvoice() {
   const payments = await prisma.payments.findMany({
     where: {
       email: session.user.email,
-      paymentStatus: "completed"
+      paymentStatus: "completed",
     },
-    orderBy:{
-      createdAt: "desc"
+    orderBy: {
+      createdAt: "desc",
     },
     select: {
       paymentId: true,
@@ -22,6 +22,7 @@ export default async function getInvoice() {
         select: {
           item: true,
           createdAt: true,
+          amount: true,
         },
       },
     },

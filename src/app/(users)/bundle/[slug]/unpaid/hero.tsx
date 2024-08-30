@@ -115,7 +115,7 @@ export default function Hero({
 
               <div className="tab:hidden flex flex-col gap-4">
                 {/* @ts-ignore */}
-                {data?.user?.bundleId.includes(bundleId) ? (
+                {data?.user?.bundleId?.includes(bundleId) ? (
                   <Link
                     href={"/dashboard"}
                     className="flex flex-col gap-2 relative"

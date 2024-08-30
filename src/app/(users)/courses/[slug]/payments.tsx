@@ -168,6 +168,8 @@ export function PaymentSheet({
 
       setFormState(0);
 
+      console.log(res.data);
+
       const options = {
         key: key,
         description: "Test Transaction",
@@ -397,6 +399,7 @@ export function PaymentSheet({
       title: "Payments Details",
       body: (
         <div className="grid gap-4 py-4">
+          <p className="max-sm:text-sm sm:leading-6 line-clamp-3">{title}</p>
           <div className="grid grid-cols-5 items-center gap-4">
             <Label htmlFor="name" className="text-left">
               Name
@@ -522,13 +525,17 @@ export function PaymentSheet({
 }
 
 export function PaymentModal({
+  slug,
   payModal,
   setOpenPay,
 }: {
+  slug: string;
   payModal: boolean;
   setOpenPay: Dispatch<SetStateAction<boolean>>;
 }) {
   const { data, status } = useSession();
+  const router = useRouter();
+
   return (
     <Dialog open={payModal} onOpenChange={setOpenPay}>
       <DialogContent className="sm:max-w-[425px]">
@@ -544,7 +551,12 @@ export function PaymentModal({
           </CardHeader>
           <CardContent className="pt-3 pb-0 mx-auto w-full flex flex-col items-center gap-2">
             <Button
-              onClick={() => setOpenPay(false)}
+              onClick={() => {
+                if (status === "unauthenticated") {
+                  router.push(`/api/auth/signin?callbackUrl=/courses/${slug}`);
+                }
+                setOpenPay(false);
+              }}
               disabled={status === "loading"}
               className="w-full bg-prime/70 text-white hover:bg-prime"
             >
@@ -577,7 +589,7 @@ export function Floating({
 }) {
   let course = {
     price: amount,
-    ogPrice: ((amount + 1) * 4) - 1,
+    ogPrice: (amount + 1) * 4 - 1,
     discount: 75,
   };
 

@@ -24,7 +24,7 @@ export default function PurchaseTabs() {
 
   useEffect(() => {
     // @ts-ignore
-    if (session?.user?.newUser) return ;
+    if (session?.user?.newUser) return;
     update({ courses: true });
   }, []);
 
@@ -117,6 +117,7 @@ function InvoiceTile({
     Invoices: {
       createdAt: Date;
       item: string;
+      amount: number;
     } | null;
   };
 }) {
@@ -126,9 +127,14 @@ function InvoiceTile({
         <h3 className="font-semibold text-sm line-clamp-2">
           {item.Invoices?.item ?? "Item Name Missing"}
         </h3>
-        <span className="text-prime text-xs sm:text-sm font-bold">{item.paymentId}</span>
+        {/* <span className="text-prime text-xs sm:text-sm font-bold">
+          {item.paymentId}
+        </span> */}
       </span>
-      <div className="flex flex-col gap-3 mt-auto mb-2">
+      <div className="flex max-sm:flex-row-reverse max-sm:justify-between sm:flex-col gap-2 mt-auto mb-2">
+        <Badge className="text-white w-fit border-prime/50 bg-background hover:bg-background/40 rounded">
+          ₹{item.Invoices?.amount}
+        </Badge>
         <Badge className="text-white w-fit bg-prime/20 hover:bg-prime/40 rounded">
           {item.Invoices?.createdAt.toLocaleDateString() || "No Date"}
         </Badge>

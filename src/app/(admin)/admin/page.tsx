@@ -15,7 +15,6 @@ import { Suspense } from "react";
 import Transaction, { TransactionFallback } from "./transctions";
 import RecentUsers, { UsersFallback } from "./recent-users";
 import { TransactionChart } from "./chart";
-import DatePicker from "./date-picker";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),

@@ -63,7 +63,7 @@ export function PaymentSheet({
 }) {
   const { data: session, update } = useSession();
 
-  const router = useRouter()
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     name: session?.user?.name ?? "",
@@ -195,7 +195,7 @@ export function PaymentSheet({
 
       // @ts-ignore
       const paymentObject = new window.Razorpay(options);
-      
+
       paymentObject.on("payment.captured", function (response: any) {
         alert("Payment successful");
         setIsLoading(false);
@@ -380,6 +380,21 @@ export function PaymentSheet({
       title: "Payments Details",
       body: (
         <div className="grid gap-4 py-4">
+          <div className="grid sm:grid-cols-3 gap-2">
+            <Image
+              className="max-sm:hidden rounded-md max-sm:w-full max-h-40 object-contain bg-white/20"
+              src={cover ?? ""}
+              alt={title ?? ""}
+              width={280}
+              height={180}
+            />
+            <div className="sm:col-span-2 flex flex-col gap-1">
+              <p className="line-clamp-2">{title}</p>
+              <span className="font-extrabold text-prime">
+                {curreny} {amount}
+              </span>
+            </div>
+          </div>
           <div className="grid grid-cols-5 items-center gap-4">
             <Label htmlFor="name" className="text-left">
               Name

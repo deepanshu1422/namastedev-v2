@@ -5,6 +5,7 @@ import Detail from "./unpaid/details";
 import { Floating, PaymentModal, PaymentSheet } from "./payments";
 import { useState } from "react";
 import { YTModal } from "@/app/(guide)/testimonials/slider";
+import { useSearchParams } from "next/navigation";
 
 type BundleItem = {
   item: {
@@ -63,7 +64,9 @@ export default function Main({
     shortDescription,
   },
 }: BundleItem) {
-  const [open, setOpen] = useState(false);
+  const sheet = useSearchParams().get("sheet");
+
+  const [open, setOpen] = useState(Boolean(sheet));
   const [openPay, setOpenPay] = useState(false);
   const [openYt, setOpenYt] = useState(false);
 
@@ -210,7 +213,10 @@ export default function Main({
           setOpen={setOpen}
           bundleId={bundleId}
         />
-        <PaymentModal payModal={openPay} setOpenPay={setOpenPay} />
+        <PaymentModal
+          payModal={openPay}
+          setOpenPay={setOpenPay}
+        />
       </main>
     );
   }
