@@ -25,7 +25,7 @@ export type Courses = {
         items: {
           title: string;
           slug: string;
-          rating: number,
+          rating: number;
           courseImage: {
             url: string;
           };
@@ -205,7 +205,10 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
         Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
       },
       body: JSON.stringify({ query }),
-      cache: "no-cache",
+      cache: "force-cache",
+      next: {
+        revalidate: 3600 * 24,
+      },
     }
   );
 

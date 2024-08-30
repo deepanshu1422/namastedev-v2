@@ -64,9 +64,9 @@ export type Courses = {
             total: number;
             items: [
               {
-                sys:{
-                  id: string
-                }
+                sys: {
+                  id: string;
+                };
                 public: boolean;
                 title: string;
                 duration: string;
@@ -249,7 +249,10 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
         Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
       },
       body: JSON.stringify({ query }),
-      cache: "no-cache",
+      cache: "force-cache",
+      next: {
+        revalidate: 3600 * 24,
+      },
     }
   );
 
@@ -274,7 +277,7 @@ export default async function Home({ params: { slug } }: PageProps) {
     // components: { CodeSnippet },
   });
 
-  const session = await auth()
+  const session = await auth();
 
   return <Main mdx={mdx} item={items[0]} session={session} />;
 }
