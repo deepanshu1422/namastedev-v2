@@ -8,9 +8,10 @@ import type { Metadata } from "next";
 import Store from "@/components/home-components/store";
 import Faqs from "@/components/mentorship-comp/faq";
 import Program from "@/components/program";
-import Floating from "./resources/floating";
 import Script from "next/script";
 import Success from "@/components/mentorship-comp/success";
+
+export const fetchCache = 'force-cache'
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),

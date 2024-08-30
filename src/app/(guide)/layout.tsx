@@ -7,7 +7,6 @@ export default function GuideLayout({
 }>) {
   return (
     <div>
-      {/* <Menu /> */}
       {children}
     </div>
   );

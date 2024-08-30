@@ -1,10 +1,11 @@
 "use client";
-import React, { useRef } from "react";
+import React from "react";
 
 const YoutubeEmbed = ({ embedId }: { embedId: string }) => {
+
   return (
     <div
-      className={`relative flex-1 overflow-hidden min-h-52 bg-background/20 shadow-inner transition-all duration-500`}
+      className={`relative flex-1 overflow-hidden min-h-52 h-full bg-background/20 shadow-inner transition-all duration-500`}
     >
       <iframe
         className="h-full w-full left-0 top-0 absolute"

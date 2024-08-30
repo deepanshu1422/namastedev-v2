@@ -57,7 +57,7 @@ function CollapsibleMenu({
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
       {/* <div className="flex items-center"> */}
-      <CollapsibleTrigger className="mx-[-0.65rem] flex w-full items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground">
+      <CollapsibleTrigger className="mx-[-0.65rem] flex w-full items-center gap-4 rounded-xl px-3 py-1.5 text-muted-foreground hover:text-foreground text-base">
         {icon}
         <span>{title}</span>
         <ChevronDown
@@ -243,7 +243,7 @@ export default function MobileMenu() {
         className="flex flex-col overflow-y-auto overflow-x-hidden"
       >
         <>
-          <nav className="grid gap-2 text-lg font-medium">
+          <nav className="grid gap-1 text-lg font-medium">
             <Link
               href="/"
               className="flex items-center gap-2 text-lg font-semibold"
@@ -257,7 +257,7 @@ export default function MobileMenu() {
                   <Link
                     key={i}
                     href={href}
-                    className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground`}
+                    className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-1.5 text-muted-foreground hover:text-foreground text-base`}
                   >
                     {icon}
                     <span>{title}</span>
@@ -298,7 +298,7 @@ export default function MobileMenu() {
             </Card>
             <Image
               alt="30DayCoding New Challenge"
-              src={"/NEW.gif"}
+              src={"/best.gif"}
               height={120}
               width={120}
               className="absolute top-0 -translate-y-10 translate-x-10 right-0"

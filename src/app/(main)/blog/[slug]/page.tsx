@@ -31,10 +31,9 @@ export async function generateStaticParams() {
     },
   });
 
-  return blogs.map(({ slug }) => {
-    if (!slug) return;
-    slug: slug.toString();
-  });
+  return blogs.map(({ slug }) => ({
+    slug,
+  }));
 }
 
 export async function generateMetadata(
