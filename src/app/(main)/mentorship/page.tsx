@@ -11,7 +11,7 @@ import Floating from "./floating";
 import Mentor from "@/components/new-cohort/mentor";
 import Interakt from "@/util/interakt";
 
-export const dynamic = "force-static";
+// export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "Join 1:1 Mentorship | 30dayscoding",
