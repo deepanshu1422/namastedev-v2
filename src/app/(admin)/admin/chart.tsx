@@ -19,6 +19,8 @@ import {
 import DatePickerWithRange from "./date-picker";
 import { addDays, format, subDays } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
+import revalidatePages from "../../../../actions/revalidate-pages";
 
 const chartConfig = {
   views: {
@@ -123,13 +125,20 @@ export function TransactionChart() {
 
   return (
     <div className="flex flex-col gap-4 sm:gap-8">
-      <section className="flex max-sm:flex-col justify-between gap-4 pt-16">
+      <section className="flex justify-between gap-4 pt-16">
         <h2 className="text-3xl md:text-4xl font-semibold">
           <span className="text-muted-foreground text-2xl">#</span>Overview
         </h2>
-        <div className="flex gap-2 max-sm:w-full">
-          {/* <DatePickerWithRange generateDataArray={generateDataArray} /> */}
-        </div>
+        <Button
+          onClick={() => revalidatePages()}
+          size={"sm"}
+          variant={"destructive"}
+        >
+          Revalidate Pages
+        </Button>
+        {/* <div className="flex gap-2 max-sm:w-full">
+          <DatePickerWithRange generateDataArray={generateDataArray} />
+        </div> */}
       </section>
       <Card>
         <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
