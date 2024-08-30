@@ -24,3 +24,4 @@ const GoogleAnalytics = ({ gaId }: { gaId: string }) => (
   </>
 );
 export default GoogleAnalytics;
+
