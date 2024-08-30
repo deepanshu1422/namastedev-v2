@@ -33,7 +33,7 @@ export default function Hero({
                 alt="community image"
                 fill
                 src={heroImage}
-                className="object-cover opacity-10 pointer-events-none"
+                className="object-contain object-top opacity-10 pointer-events-none"
             />
             <div className="relative bg-gradient-to-t from-bg from-0% to-transparent to-50%">
                 <div className="relative tab:p-[6.5rem_5.5rem_4.75rem] max-tab:pt-[5rem] max-tab:pb-[2.5rem] m-auto max-w-[90rem] flex flex-auto max-tab:flex-col w-full justify-between text-white gap-3 sm:gap-7 h-full">

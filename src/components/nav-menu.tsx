@@ -121,7 +121,7 @@ export const navTitles: {
   // },
   {
     title: "Courses",
-    href: "https://courses.30dayscoding.com/s/store"
+    href: "/courses"
   },
   {
     title: "Blog",

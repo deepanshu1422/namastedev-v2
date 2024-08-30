@@ -1,9 +1,7 @@
-// import { DataTableDemo, Payment } from "@/components/jobs-comp/data-table-ex";
-import prisma from "@/util/prismaClient";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { Metadata } from "next";
-import { unstable_cache } from "next/cache";
 import Projects from "./projects";
+
+export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "30DC Projects | 30dayscoding",

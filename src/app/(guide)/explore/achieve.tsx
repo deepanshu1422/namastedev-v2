@@ -79,7 +79,7 @@ export function Slider() {
                 {testimonials.map(({ name, review }, index) => (
                     <CarouselItem className="basis-full md:basis-1/2 xl:basis-1/3" key={index}>
                         <div className="p-1">
-                            <Card className="flex flex-col select-none bg-second/50 relative overflow-hidden border-prime/40 min-h-96">
+                            <Card className="flex flex-col select-none bg-second/50 relative overflow-hidden border-prime/40 min-h-80">
                                 <Quote className="text-prime/70 h-32 w-32 absolute -top-6 -left-4 -z-20" />
                                 <CardHeader>
                                     {/* <CardTitle>Head {index + 1}</CardTitle> */}
@@ -101,10 +101,10 @@ export function Slider() {
                                             <span>{name}</span>
                                         </section>
                                     </div>
-                                    <Link href={"https://courses.30dayscoding.com/s/store"} className="flex gap-2 transition-all items-center bg-card rounded-md px-3 py-2 hover:text-prime">
+                                    {/* <Link href={"https://courses.30dayscoding.com/s/store"} className="flex gap-2 transition-all items-center bg-card rounded-md px-3 py-2 hover:text-prime">
                                         <Video className="sm:h-7 h-5 sm:w-7 w-5" />
                                         <span className="font-semibold max-sm:text-sm">Learn Now</span>
-                                    </Link>
+                                    </Link> */}
                                 </CardFooter>
                             </Card>
                         </div>

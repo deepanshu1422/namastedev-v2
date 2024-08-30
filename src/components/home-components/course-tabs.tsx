@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/tabs";
 import Image from "next/image";
 import Link from "next/link";
-import Reveal from "../framer/reveal";
 import { Badge } from "../ui/badge";
 
 export function CourseTabMenu({
@@ -30,11 +29,9 @@ export function CourseTabMenu({
     >
       <TabsList className="max-lg:max-w-[550px] mx-auto text-muted-foreground lg:grid lg:place-items-start flex flex-wrap justify-center gap-3 h-fit">
         {data.map(({ title }, i) => (
-          <Reveal key={i}>
             <NewTabsTrigger key={i} value={`chapter${i + 1}`}>
               <span>{title}</span>
             </NewTabsTrigger>
-          </Reveal>
         ))}
       </TabsList>
       {/* <TabsContent value="account">Tab 1</TabsContent>
@@ -46,7 +43,6 @@ export function CourseTabMenu({
             className="max-w-[700px] lg:max-w-96 w-full px-4"
             value={`chapter${i + 1}`}
           >
-            <Reveal>
               <div className="grid lg:grid-rows-2 lg:grid-flow-col max-lg:grid-cols-2 max-sm:grid-cols-1 gap-4 max-lg:gap-8 max-lg:place-items-center lg:w-[640px] lg:overflow-x-scroll horizontal-scroll p-2">
                 {courses.map(({ title, imgSrc, link }, index) => (
                   <Link
@@ -70,7 +66,6 @@ export function CourseTabMenu({
                   </Link>
                 ))}
               </div>
-            </Reveal>
           </TabsContent>
         ))}
       </div>

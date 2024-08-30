@@ -15,10 +15,7 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Phone } from "lucide-react"
-// import { toast } from "@/components/ui/use-toast"
 import { Dispatch, SetStateAction, useState } from "react"
-import createUser from "../../../actions/createUser"
 import { toast } from "sonner"
 import { signIn } from "next-auth/react"
 const FormSchema = z.object({

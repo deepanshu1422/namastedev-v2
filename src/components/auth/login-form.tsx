@@ -22,7 +22,7 @@ const FormSchema = z.object({
     password: z.string().min(8)
 })
 
-export default function LoginForm({ setVal, setOpen }: { setVal: Dispatch<SetStateAction<string>>, setOpen: Dispatch<SetStateAction<boolean>> }) {
+export default function LoginForm() {
 
     const [state, setState] = useState(true)
     const form = useForm<z.infer<typeof FormSchema>>({
@@ -51,7 +51,7 @@ export default function LoginForm({ setVal, setOpen }: { setVal: Dispatch<SetSta
             })
         } else {
             setState(true)
-            setOpen(false)
+            // setOpen(false)
             toast("Successfully LoggedIn", {
                 description: `Welcome back!`
             })
@@ -90,7 +90,7 @@ export default function LoginForm({ setVal, setOpen }: { setVal: Dispatch<SetSta
                 />
                 <span className="flex gap-1 pb-2">
                     <p>Don&apos;t have an account?</p>
-                    <span onClick={() => setVal("signup")} className="text-prime font-semibold cursor-pointer">SignUp</span>
+                    <span className="text-prime font-semibold cursor-pointer">SignUp</span>
                 </span>
                 <Button className="bg-prime/80 hover:bg-prime text-white font-semibold" disabled={!state} type="submit" >{state ? "Login" : "Logging..."}</Button>
             </form>

@@ -4,7 +4,6 @@ import { Check, CreditCard, Play, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { Suspense } from "react";
-import Render from "./render";
 import Btn from "./btn";
 
 export const benefits = [

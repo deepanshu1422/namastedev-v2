@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { CourseTabMenu } from "./course-tabs";
+import { courses } from "@/util/constants";
 
 export default function Store() {
   const courses = [

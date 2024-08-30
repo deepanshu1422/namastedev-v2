@@ -5,6 +5,8 @@ import ChallengesTabs from "./challenges";
 import Modal from "./modal";
 import Courses from "./courses";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: "The only DSA Tracking Sheet You NEED | 30dayscoding",
   description:
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
       "Explore our DSA code platform for mastering Data Structures and Algorithms. Access a wide range of DSA tutorials, practice problems, and coding challenges to enhance your programming skills and ace your technical interviews.",
     site: "https://30dayscoding.com",
   },
-}
+};
 
 export default async function Home() {
   return (
