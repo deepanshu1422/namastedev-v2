@@ -37,7 +37,7 @@ const staticMaps: MetadataRoute.Sitemap = [
         priority: 0.8,
     },
     {
-        url: 'https://30dayscoding.com/resources',
+        url: 'https://30dayscoding.com/links',
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.8,
@@ -80,6 +80,12 @@ const staticMaps: MetadataRoute.Sitemap = [
     },
     {
         url: 'https://30dayscoding.com/products',
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.8,
+    },
+    {
+        url: 'https://30dayscoding.com/live-cohort',
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.8,

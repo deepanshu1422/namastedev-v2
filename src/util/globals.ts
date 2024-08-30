@@ -1,7 +1,7 @@
 export const mentorship = {
     price: 8999,
     ogPrice: 16999,
-    discount: 6,
+    discount: 60,
     link: "https://rzp.io/l/kZPObNXZ"
 }
 

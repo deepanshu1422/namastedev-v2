@@ -5,13 +5,15 @@ import Clarity from "@/util/clarity";
 import Pixel from "@/util/pixel";
 import GoogleAnalytics from "@/util/ga";
 import { Toaster } from "@/components/ui/sonner";
-import PageSense from "@/util/pagesense";
 import { SessionProvider } from "next-auth/react";
 import Script from "next/script";
 import { auth } from "@/auth";
 import QueryProvider from "@/lib/queryProvider";
 import GoogleTagManager from "@/components/tracking/GoogletagManager";
 import { DataProvider } from "../context/resume-context";
+import NextProvider from "@/util/next-auth";
+import PageSense from "@/util/pagesense";
+import Intercom from "@/util/intercom";
 
 import Freshdesk from "@/util/freshdesk";
 
@@ -41,6 +43,8 @@ export default async function RootLayout({
         </QueryProvider>
       </SessionProvider>
       {/* <Pixel /> */}
+      <Intercom />
+      <Pixel />
       <Clarity />
 
       <PageSense />

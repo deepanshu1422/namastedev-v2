@@ -103,11 +103,11 @@ const testimonials: TestimonialType[] = [
         and setting a new career trajectory.
       </p>
     ),
-    name: "Harsh",
+    name: "Ishan",
     link: "https://courses.30dayscoding.com/courses/Full-stack-package-652a0a17e4b0db14394522ed",
-    linkedin: "https://www.linkedin.com/in/harshpandey002/",
+    linkedin: "https://www.linkedin.com/in/ishan/",
     pos: "SDE (Remote) USA",
-    profile: "/harsh-in.jpg",
+    profile: "/ishan-in.jpg",
   },
   {
     review: (
@@ -170,9 +170,9 @@ const testimonials: TestimonialType[] = [
   {
     review: (
       <p className="leading-6 text-sm font-normal">
-        I&apos;m happy to share that I&apos;m starting a new position as
-        Software Engineer 1-B at Bank of America! I&apos;m grateful to Vellore
-        Institute of Technology for providing this amazing opportunity.
+        I&apos;m happy to share that I&apos;m starting a new position as Software Engineer
+        1-B at Bank of America! I&apos;m grateful to Vellore Institute of Technology
+        for providing this amazing opportunity.
         <span className="bg-lime-500/40">
           I&apos;d also like to thank Aryan Singh and Deepanshu Udhwani, who
           continuously guided me with placements with their community (30 Days

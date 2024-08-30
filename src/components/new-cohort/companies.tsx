@@ -61,7 +61,7 @@ export function NewImage({ src = "/company1.png" }: { src?: string }) {
 
 export default function Companies() {
   return (
-    <div className={"grid grid-cols-1 gap-3 py-10 max-w-[90rem] m-auto"}>
+    <div className={"grid grid-cols-1 gap-3 pt-10 max-w-[90rem] m-auto"}>
       <Reveal>
         <span className="flex items-center justify-center gap-4 relative">
           <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />

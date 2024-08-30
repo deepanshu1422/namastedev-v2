@@ -99,75 +99,81 @@ export default function MobileMenu() {
   }, [pathName]);
 
   const navTitle = [
+    // {
+    //   icon: <Layers className="h-5 w-5" />,
+    //   title: "Courses",
+    //   // href: "/",
+    //   selected: false,
+    //   sources: [
+    //     {
+    //       title: "Recorded DSA Mastery Course",
+    //       href: "https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312",
+    //     },
+    //     {
+    //       title: "MERN FullStack Course",
+    //       href: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
+    //     },
+    //     {
+    //       title: "Next JS FullStack",
+    //       href: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
+    //     },
+    //     {
+    //       title: "All Courses Package",
+    //       href: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0",
+    //     },
+    //   ],
+    // },
+    // {
+    //   icon: <Wrench className="h-5 w-5" />,
+    //   title: "Services",
+    //   // href: "/products",
+    //   selected: false,
+    //   sources: [
+    //     {
+    //       title: "AI Mock Interview",
+    //       href: "https://talktohire.com/",
+    //     },
+    //     {
+    //       title: "Blogs",
+    //       href: "https://blogs.30dayscoding.com/",
+    //     },
+
+    //     {
+    //       title: "DSA Sheets",
+    //       href: "http://dsa.30dayscoding.com/",
+    //     },
+    //     {
+    //       title: "Resume Builder",
+    //       href: "https://resumebldr.vercel.app/app/personal-detail",
+    //     },
+    //     {
+    //       title: "Premium Guides",
+    //       href: "https://courses.30dayscoding.com/products",
+    //     },
+    //   ],
+    //   // number: 6,
+    // },
+    // {
+    //   icon: <Users className="h-5 w-5" />,
+    //   title: "Reviews",
+    //   // href: "/testimonials",
+    //   selected: false,
+    //   sources: [
+    //     {
+    //       title: "Testimonials",
+    //       href: "/testimonials",
+    //     },
+    //     {
+    //       title: "Wall of Love",
+    //       href: "/wall-of-love",
+    //     },
+    //   ],
+    // },
     {
       icon: <Layers className="h-5 w-5" />,
       title: "Courses",
-      // href: "/",
+      href: "https://courses.30dayscoding.com/s/store",
       selected: false,
-      sources: [
-        {
-          title: "Recorded DSA Mastery Course",
-          href: "https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312",
-        },
-        {
-          title: "MERN FullStack Course",
-          href: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
-        },
-        {
-          title: "Next JS FullStack",
-          href: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
-        },
-        {
-          title: "All Courses Package",
-          href: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0",
-        },
-      ],
-    },
-    {
-      icon: <Wrench className="h-5 w-5" />,
-      title: "Services",
-      // href: "/products",
-      selected: false,
-      sources: [
-        {
-          title: "AI Mock Interview",
-          href: "https://talktohire.com/",
-        },
-        {
-          title: "Blogs",
-          href: "https://blogs.30dayscoding.com/",
-        },
-
-        {
-          title: "DSA Sheets",
-          href: "http://dsa.30dayscoding.com/",
-        },
-        {
-          title: "Resume Builder",
-          href: "https://resumebldr.vercel.app/app/personal-detail",
-        },
-        {
-          title: "Premium Guides",
-          href: "https://courses.30dayscoding.com/products",
-        },
-      ],
-      // number: 6,
-    },
-    {
-      icon: <Users className="h-5 w-5" />,
-      title: "Reviews",
-      // href: "/testimonials",
-      selected: false,
-      sources: [
-        {
-          title: "Testimonials",
-          href: "/testimonials",
-        },
-        {
-          title: "Wall of Love",
-          href: "/wall-of-love",
-        },
-      ],
     },
     {
       icon: <Rss className="h-5 w-5" />,
@@ -181,12 +187,12 @@ export default function MobileMenu() {
       href: "/jobs",
       selected: false,
     },
-    {
-      icon: <Package className="h-5 w-5" />,
-      title: "Products",
-      href: "/products",
-      selected: false,
-    },
+    // {
+    //   icon: <Package className="h-5 w-5" />,
+    //   title: "Products",
+    //   href: "/products",
+    //   selected: false,
+    // },
     {
       icon: <Braces className="h-5 w-5" />,
       title: "DSA",
@@ -227,16 +233,15 @@ export default function MobileMenu() {
           <AlignJustify className="tab:hidden max-tab:h-5 max-tab:w-5 h-6 w-6 stroke-[1.5]" />
           <span className="sr-only">Toggle navigation menu</span>
         </button> */}
-        <Button
-                variant="outline"
-                size={"icon"}
-                className="shrink-0 md:hidden"
-              >
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle navigation menu</span>
-              </Button>
+        <Button variant="outline" size={"icon"} className="shrink-0 md:hidden">
+          <Menu className="h-5 w-5" />
+          <span className="sr-only">Toggle navigation menu</span>
+        </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="flex flex-col overflow-y-auto overflow-x-hidden">
+      <SheetContent
+        side="right"
+        className="flex flex-col overflow-y-auto overflow-x-hidden"
+      >
         <>
           <nav className="grid gap-1 text-lg font-medium">
             <Link
@@ -246,15 +251,13 @@ export default function MobileMenu() {
               <Image src={"/logo.png"} alt="logo" width={30} height={30} />
               <span className="sr-only">30DC</span>
             </Link>
-            {navTitle.map(({ href, icon, selected, title, sources }, i) => {
+            {navTitle.map(({ href, icon, title }, i) => {
               if (href)
                 return (
                   <Link
                     key={i}
                     href={href}
-                    className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl ${
-                      selected && "bg-muted"
-                    } px-3 py-1.5 text-muted-foreground hover:text-foreground text-base`}
+                    className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-1.5 text-muted-foreground hover:text-foreground text-base`}
                   >
                     {icon}
                     <span>{title}</span>
@@ -266,15 +269,15 @@ export default function MobileMenu() {
                   </Link>
                 );
 
-              if (sources !== undefined)
-                return (
-                  <CollapsibleMenu
-                    icon={icon}
-                    sources={sources!}
-                    title={title}
-                    key={i}
-                  />
-                );
+              // if (sources !== undefined)
+              //   return (
+              //     <CollapsibleMenu
+              //       icon={icon}
+              //       sources={sources!}
+              //       title={title}
+              //       key={i}
+              //     />
+              //   );
             })}
           </nav>
           <div className="relative mt-auto">
@@ -282,7 +285,7 @@ export default function MobileMenu() {
               <CardHeader>
                 <CardTitle>New Courses</CardTitle>
                 <CardDescription>
-                Upskill yourself with pocket friendly courses — enroll now
+                  Upskill yourself with pocket friendly courses — enroll now
                 </CardDescription>
               </CardHeader>
               <CardContent>

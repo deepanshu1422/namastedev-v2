@@ -1,0 +1,90 @@
+.testimonial-recorder {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+.recorder-container {
+  position: relative;
+}
+
+.time-indicator {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #3a3a3a;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.preview-container {
+  margin-top: 20px;
+}
+
+.preview-container video {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.upload-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.question-guide {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.question-guide h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.question-guide ul {
+  padding-left: 20px;
+}
+
+.question-guide li {
+  margin-bottom: 5px;
+}
+
+.powered-by {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #999;
+}
+
+.famewall {
+  font-weight: bold;
+  color: #4a90e2;
+}

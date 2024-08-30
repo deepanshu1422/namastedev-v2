@@ -4,7 +4,6 @@ export const templates = [
     // {
     //     title: "AI SaaS",
     //     description: "Explore our cutting-edge AI SaaS NextJS Template designed for optimal performance and scalability. Perfect for showcasing your AI-powered services with a modern, responsive design.",
-
     //     cover: "/templates/ai-saas.png",
     //     slug: "ai-saas",
     //     live: "https://30dc-ai-saas.vercel.app/",

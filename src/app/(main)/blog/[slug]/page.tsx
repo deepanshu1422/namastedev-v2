@@ -9,7 +9,6 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { BASE_URL } from "@/util/constants";
 import CopyBtn from "./copyBtn";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { cache } from "react";
 import YoutubeEmbed from "@/components/yotube-embed";
 
 export const dynamicParams = true;
@@ -23,18 +22,6 @@ type PageProps = {
 type Props = {
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
-};
-
-type BlogData = {
-  title: string;
-  description: string;
-  slug: string;
-  focusKeywords: string[];
-  heroImage: {
-    aiPrompt: string;
-  };
-  body: string;
-  relatedBlogs: string[];
 };
 
 export async function generateStaticParams() {
@@ -117,6 +104,8 @@ const getBlog = async (slug: string) => {
           alt: true,
         },
       },
+      tags: true,
+      focusKeyword: true,
       relatedBlogs: true,
       createdAt: true,
     },
@@ -127,6 +116,7 @@ const getBlog = async (slug: string) => {
 const getRecents = async () => {
   const item = await prisma.blog.findMany({
     take: 5,
+    orderBy: { createdAt: "desc" },
     select: {
       title: true,
       heroImage: {
@@ -168,10 +158,11 @@ export default async function Home({ params: { slug } }: PageProps) {
         }}
         slug={slug}
         createdAt={item.createdAt}
+        tag={item.tags[0] ?? item.focusKeyword[0]}
       />
 
       <div className="max-w-lg md:max-w-3xl m-auto px-8 lg:px-5 body">
-        <MDXRemote source={item.body ?? ""} components={{ YoutubeEmbed }}/>
+        <MDXRemote source={item.body ?? ""} components={{ YoutubeEmbed }} />
       </div>
 
       <div className="py-10 m-auto px-8 lg:px-5 grid gap-4 max-w-lg md:max-w-3xl">

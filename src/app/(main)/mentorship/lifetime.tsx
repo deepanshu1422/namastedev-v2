@@ -6,51 +6,52 @@ import Link from "next/link";
 import React, { Suspense } from "react";
 import Btn from "./btn";
 
+export const benefits = [
+  <p key={1}>
+    <em>
+      <strong>1:1 calls</strong>
+    </em>{" "}
+    for personalized guidance
+  </p>,
+  <p key={2}>
+    <em>
+      <strong>Access to all 10 courses</strong>
+    </em>{" "}
+    - MERN, Next JS, DSA, AI, Blockchain, JavaScript, Java, Python.
+  </p>,
+  <p key={3}>
+    <em>
+      <strong>24/7 WhatsApp</strong>
+    </em>{" "}
+    - chat access and QnA sessions with mentors.
+  </p>,
+  <p key={4}>
+    <em>
+      <strong>Full stack projects</strong>
+    </em>
+    , SaaS tools, MVPs.
+  </p>,
+  <p key={5}>
+    <em>
+      <strong>Resume</strong>
+    </em>
+    , cold emails, applying, etc.
+  </p>,
+  <p key={6}>
+    <em>
+      <strong>Interview</strong>
+    </em>{" "}
+    guides, resources, etc.
+  </p>,
+  <p key={7}>
+    <em>
+      <strong>Jobs</strong>
+    </em>
+    , internships, co-ops, etc.
+  </p>,
+];
+
 export default function Lifetime() {
-  const benefits = [
-    <p key={1}>
-      <em>
-        <strong>1:1 calls</strong>
-      </em>{" "}
-      for personalized guidance
-    </p>,
-    <p key={2}>
-      <em>
-        <strong>Access to all 10 courses</strong>
-      </em>{" "}
-      - MERN, Next JS, DSA, AI, Blockchain, JavaScript, Java, Python.
-    </p>,
-    <p key={3}>
-      <em>
-        <strong>24/7 WhatsApp</strong>
-      </em>{" "}
-      - chat access and QnA sessions with mentors.
-    </p>,
-    <p key={4}>
-      <em>
-        <strong>Full stack projects</strong>
-      </em>
-      , SaaS tools, MVPs.
-    </p>,
-    <p key={5}>
-      <em>
-        <strong>Resume</strong>
-      </em>
-      , cold emails, applying, etc.
-    </p>,
-    <p key={6}>
-      <em>
-        <strong>Interview</strong>
-      </em>{" "}
-      guides, resources, etc.
-    </p>,
-    <p key={7}>
-      <em>
-        <strong>Jobs</strong>
-      </em>
-      , internships, co-ops, etc.
-    </p>,
-  ];
 
   return (
     <div className="m-auto flex flex-col px-5 lg:px-20 pt-10 max-w-[75rem]">
@@ -62,9 +63,9 @@ export default function Lifetime() {
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
       <section className="flex mx-auto flex-wrap w-full items-center justify-center md:divide-x-2 divide-white py-2">
-        <span className="px-1 md:px-4">25,000+ Members</span>
+        <span className="px-1 md:px-4">30,000+ Members</span>
         <span className="md:hidden text-prime font-bold">&</span>
-        <span className="px-1 md:px-4">213 joined this month</span>
+        <span className="px-1 md:px-4">300+ joined this month</span>
         <span className="px-1 md:px-4 flex gap-2">
           <div className="flex gap-2 items-center">
             <Star className="h-5 w-5 fill-prime stroke-prime" />
@@ -94,12 +95,8 @@ export default function Lifetime() {
         ))}
       </div>
 
-      <h3 className="break-all font-jakarta font-extrabold text-4xl sm:text-5xl mx-auto sm:pt-6 text-center max-w-[90vw] text-wrap">
-        ₹{mentorship.price}/
-        <span className="line-through italic text-muted-foreground">
-          ₹{mentorship.ogPrice}
-        </span>
-        LifeLong Mentorship.
+      <h3 className="font-jakarta font-extrabold text-3xl sm:text-4xl mx-auto sm:pt-4 text-center max-w-[90vw] overflow-hidden text-wrap">
+        One Time Payment, Lifetime Mentorship
       </h3>
       <p className="m-auto py-2 pb-6 text-center text-sm max-w-3xl text-foreground/90">
         If you&apos;re not completely satisfied with your purchase, or if it

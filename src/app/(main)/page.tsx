@@ -212,19 +212,19 @@ export default function Home() {
       <Hero
         title="Become an Advanced, Job-Ready Developer!"
         desc="Join 10,000+ successful students who have transformed their lives with us."
-        heroImage="bg-[url('https://i.ibb.co/nn0YJDY/code-1.png')]"
+        heroImage="https://i.ibb.co/KXHGnmY/home.webp"
         subTitle="Pocket Friendly Courses with Certificates!"
         subDesc="Whether you're a beginner looking to dive into programming or an experienced developer seeking skill enhancement, our mentors' guidance and courses are well-designed for all levels of proficiency."
         ytId="enw3DVa1r5k"
       />
-      <Success />
-      <Course />
-      <Store />
-      <Mentor />
       <Companies />
+      <Store />
+      <Success />
+      {/* <Course /> */}
       <Program />
-      <Highlights />
-      <Testimonials />
+      <Mentor />
+      {/* <Highlights />
+      <Testimonials /> */}
       <Faqs faq={faq} />
       {/* <Floating /> */}
     </main>

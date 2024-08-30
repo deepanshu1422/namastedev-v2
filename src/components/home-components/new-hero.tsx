@@ -1,6 +1,7 @@
 import Btn from "@/app/(main)/mentorship/btn";
 import Button from "@/components/home-components/button";
 import { ArrowRight, GraduationCap, School, Star } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 function Video({
@@ -57,8 +58,9 @@ export default function Hero({
 }) {
   return (
     <>
-      <div className={`w-full grid ${heroImage} min-h-96 bg-cover`}>
-        <div className="tab:p-[6.5rem_2.5rem_6.75rem] max-tab:pt-[5rem] max-tab:pb-[4.5rem] m-auto max-w-4xl grid gap-5 place-items-center max-phone:place-items-start phone:text-center text-white">
+      <div className={`w-full grid min-h-96 relative`}>
+        <Image src={heroImage ?? ""} alt="30dc homepage" fill className="opacity-40" />
+        <div className="relative tab:p-[6.5rem_2.5rem_6.75rem] max-tab:pt-[5rem] max-tab:pb-[4.5rem] m-auto max-w-4xl grid gap-5 place-items-center max-phone:place-items-start phone:text-center text-white">
           <h1
             className={`font-jakarta phone:text-[3.7rem] text-[2.5rem] font-extrabold bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight px-2 max-phone:px-6 max-w-3xl`}
           >
@@ -105,7 +107,7 @@ export default function Hero({
         </div>
       </div>
 
-      <div className='m-auto flex flex-col px-10 lg:px-20 pt-10 max-w-[75rem] lg:pt-20'>
+      {/* <div className='m-auto flex flex-col px-10 lg:px-20 pt-10 max-w-[75rem] lg:pt-20'>
         <span className="flex items-center justify-center relative pb-4">
           <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
           <h1 className="font-jakarta bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight text-[2rem] sm:text-6xl font-extrabold text-center">
@@ -117,20 +119,24 @@ export default function Hero({
           <span className='px-1 md:px-4'>25,000+ Members</span>
           <span className='md:hidden text-prime font-bold'>&</span>
           <span className='px-1 md:px-4'>213 joined this month</span>
-          <span className='px-1 md:px-4 flex gap-2'>
+          <span className='px-1 md:px-4 flex flex-wrap justify-center max-sm:pt-1 gap-2'>
             <div className='flex gap-2 items-center'>
               <Star className='h-5 w-5 fill-prime stroke-prime' />
               <Star className='h-5 w-5 fill-prime stroke-prime' />
               <Star className='h-5 w-5 fill-prime stroke-prime' />
               <Star className='h-5 w-5 fill-prime stroke-prime' />
               <Star className='h-5 w-5 fill-prime stroke-prime' />
-            </div>4.93 <Link href={"/testimonials"} className='text-prime font-bold underline-offset-2 underline'>(200+ reviews)</Link></span>
+            </div>
+            <div className="flex gap-1">4.93
+              <Link href={"/testimonials"} className='text-prime font-bold underline-offset-2 underline'>(200+ reviews)</Link>
+            </div>
+          </span>
         </section>
 
         <Btn cover="/welcome.jpg" yt="nTAHWER3K-0" />
       </div>
 
-      <Video title={subTitle} desc={subDesc} youtubeId={ytId} />
+      <Video title={subTitle} desc={subDesc} youtubeId={ytId} /> */}
     </>
   );
 }
