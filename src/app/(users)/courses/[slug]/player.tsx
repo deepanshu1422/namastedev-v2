@@ -24,7 +24,7 @@ export default function VideoPlayer({
   thumbnail: string;
   nextVideo(): 0 | undefined;
 }) {
-  return !ytId && (
+  return !!ytId && (
     <div className="relative aspect-video rounded-xl overflow-hidden w-full bg-footer/90">
       <MediaPlayer
         onEnded={() => {
