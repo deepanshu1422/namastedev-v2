@@ -123,18 +123,18 @@ export const navTitles: {
     title: "Courses",
     href: "/courses"
   },
-  {
-    title: "Blog",
-    href: "/blog",
-  },
-  {
-    title: "Jobs",
-    href: "/jobs",
-  },
-  {
-    title: "DSA",
-    href: "/dsa",
-  },
+  // {
+  //   title: "Blog",
+  //   href: "/blog",
+  // },
+  // {
+  //   title: "Jobs",
+  //   href: "/jobs",
+  // },
+  // {
+  //   title: "DSA",
+  //   href: "/dsa",
+  // },
 ];
 
 export function NavMenu() {

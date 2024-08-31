@@ -25,28 +25,28 @@ export default function Footer() {
       //     "A live dsa placement ready course from 30 days coding. Checkout on www.courses.30dayscoding.com",
       // },
       {
+        title: "All Course Package",
+        link: "/bundle/complete-package-all-course-bundle",
+      },
+      {
         title: "MERN FullStack Course",
-        href: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
-        description:
-          "A complete mern full stack development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
+        link: "/courses/complete-webdev-course",
       },
       {
-        title: "Master DSA Course",
-        href: "https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312",
-        description:
-          "A full dsa mastry course from 30 days coding. Checkout on www.courses.30dayscoding.com",
+        title: "Job Ready DSA Course",
+        link: "/courses/dsa-complete-course",
       },
       {
-        title: "Next JS FullStack",
-        href: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
-        description:
-          "A live next js fullstack development cohort from 30 days coding. Checkout on www.courses.30dayscoding.com",
+        title: "Data Analytics Mastery",
+        link: "/courses/data-analytics-course",
       },
       {
-        title: "All Courses Package",
-        href: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0",
-        description:
-          "Get a course from 30 days coding. Checkout on www.courses.30dayscoding.com",
+        title: "Blockchain Mastery Course",
+        link: "/courses/complete-blockchain-course",
+      },
+      {
+        title: "AI Mastery Course",
+        link: "/courses/ai-complete-course",
       },
     ],
   };
@@ -127,11 +127,11 @@ export default function Footer() {
                 <span className="text-muted-foreground uppercase">
                   LIVE COURSES
                 </span>
-                {cousre.href.map(({ title, href }, i) => (
+                {cousre.href.map(({ title, link }, i) => (
                   <Link
                     key={i}
                     className="lg:hover:text-prime transition-all"
-                    href={href}
+                    href={link}
                   >
                     {title}
                   </Link>

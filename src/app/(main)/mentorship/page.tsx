@@ -59,7 +59,7 @@ export default function Home() {
     {
       question: "Any more questions?",
       answer:
-        "If you have any additional questions or need further assistance, we are here to help! Please feel free to reach out to us at projectsnightlight@gmail.com. Our dedicated support team is always ready to provide you with the information and support you need. Whether you have inquiries about course content, technical issues, or any other concerns, don’t hesitate to contact us. We aim to respond to all queries promptly and ensure that your experience with Projects Nightlight is as smooth and enjoyable as possible.",
+        "If you have any additional questions or need further assistance, we are here to help! Please feel free to reach out to us at support@nightlightprojects.freshdesk.com. Our dedicated support team is always ready to provide you with the information and support you need. Whether you have inquiries about course content, technical issues, or any other concerns, don’t hesitate to contact us. We aim to respond to all queries promptly and ensure that your experience with Projects Nightlight is as smooth and enjoyable as possible.",
     },
   ];
 

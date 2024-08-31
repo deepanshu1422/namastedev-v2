@@ -175,30 +175,30 @@ export default function MobileMenu() {
       href: "https://courses.30dayscoding.com/s/store",
       selected: false,
     },
-    {
-      icon: <Rss className="h-5 w-5" />,
-      title: "Blog",
-      href: "/blog",
-      selected: false,
-    },
-    {
-      icon: <Earth className="h-5 w-5" />,
-      title: "Jobs",
-      href: "/jobs",
-      selected: false,
-    },
+    // {
+    //   icon: <Rss className="h-5 w-5" />,
+    //   title: "Blog",
+    //   href: "/blog",
+    //   selected: false,
+    // },
+    // {
+    //   icon: <Earth className="h-5 w-5" />,
+    //   title: "Jobs",
+    //   href: "/jobs",
+    //   selected: false,
+    // },
     // {
     //   icon: <Package className="h-5 w-5" />,
     //   title: "Products",
     //   href: "/products",
     //   selected: false,
     // },
-    {
-      icon: <Braces className="h-5 w-5" />,
-      title: "DSA",
-      href: "/dsa",
-      selected: false,
-    },
+    // {
+    //   icon: <Braces className="h-5 w-5" />,
+    //   title: "DSA",
+    //   href: "/dsa",
+    //   selected: false,
+    // },
   ];
 
   return (
