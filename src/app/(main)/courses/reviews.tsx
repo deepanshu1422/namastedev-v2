@@ -126,11 +126,11 @@ export function Slider() {
           and setting a new career trajectory.
         </p>
       ),
-      name: "Harsh",
+      name: "Ishan",
       link: "/courses",
       linkedin: "https://www.linkedin.com/in/harshpandey002/",
       pos: "SDE (Remote) USA",
-      profile: "/harsh-in.jpg",
+      profile: "",
     },
     {
       review: (

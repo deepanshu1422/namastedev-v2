@@ -100,6 +100,18 @@ export default function Details({
           </div>
         </section>
 
+        <section className="flex flex-col gap-4">
+          <div className="flex max-sm:flex-col gap-2 sm:items-end">
+            <h2 className="text-xl tab:text-2xl font-bold text-white">
+              Course Content
+            </h2>
+            <span className="flex text-sm text-white/60 items-center">
+              ({modulesCollection.total} Lessons)
+            </span>
+          </div>
+          <Chapters modulesCollection={modulesCollection} />
+        </section>
+
         {!!projectsCollection.items.length && (
           <section className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
@@ -179,18 +191,6 @@ export default function Details({
               className="rounded-sm aspect-video max-w-xl w-full m-auto shadow-xl shadow-black/50 object-cover"
             />
           </div>
-        </section>
-
-        <section className="flex flex-col gap-4">
-          <div className="flex max-sm:flex-col gap-2 sm:items-end">
-            <h2 className="text-xl tab:text-2xl font-bold text-white">
-              Course Content
-            </h2>
-            <span className="flex text-sm text-white/60 items-center">
-              ({modulesCollection.total} Lessons)
-            </span>
-          </div>
-          <Chapters modulesCollection={modulesCollection} />
         </section>
 
         <Reviews />

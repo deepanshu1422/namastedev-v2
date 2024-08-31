@@ -179,14 +179,14 @@ function Course({
           <span className="flex gap-2 text-lg text-white font-semibold">
             ₹{amount}
             <span className="text-muted-foreground line-through">
-              ₹{((amount + 1) * 4) - 1}
+              ₹{((amount + 1) * 10) - 1}
             </span>
             {/* <span className="text-lime-500">75%off</span> */}
             <Badge
               className="bg-second/80 hover:bg-second"
               variant={"secondary"}
             >
-              75% off
+              90% off
             </Badge>
           </span>
         </CardFooter>

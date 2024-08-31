@@ -120,11 +120,11 @@ export function Slider() {
           and setting a new career trajectory.
         </p>
       ),
-      name: "Harsh",
+      name: "Ishan",
       link: "https://courses.30dayscoding.com/courses/Full-stack-package-652a0a17e4b0db14394522ed",
       linkedin: "https://www.linkedin.com/in/harshpandey002/",
       pos: "SDE (Remote) USA",
-      profile: "/harsh-in.jpg",
+      profile: "",
     },
     {
       review: (

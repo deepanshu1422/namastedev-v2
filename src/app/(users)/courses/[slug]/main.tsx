@@ -91,6 +91,7 @@ export default function Main({
   session,
   item: {
     title,
+    slug,
     courseId,
     courseImage,
     modulesCollection,
@@ -261,7 +262,7 @@ export default function Main({
     <>
       {/* @ts-ignore */}
       {session?.user?.courseId?.includes(courseId) ? <Paid /> : <Unpaid />}
-      <PaymentModal payModal={openPay} setOpenPay={setOpenPay} />
+      <PaymentModal slug={slug} payModal={openPay} setOpenPay={setOpenPay} />
       <BundleModal payModal={openPayBunlde} setOpenPay={setOpenPayBunlde} />
     </>
   );

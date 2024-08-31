@@ -116,9 +116,9 @@ export default function Hero({
                 <span className="text-white text-2xl font-bold flex gap-2 items-end pt-1">
                   ₹{amount}
                   <span className="text-muted-foreground/70 italic line-through">
-                    ₹{((amount + 1) * 4) - 1}
+                    ₹{((amount + 1) * 10) - 1}
                   </span>
-                  <span>75% off</span>
+                  <span>90% off</span>
                 </span>
 
                 <div className="flex flex-col gap-2 py-1">

@@ -74,6 +74,7 @@ export function UpsellModal({
                 setOpen(false);
                 setPaymentOpen(true);
               }}
+              className="w-full"
               variant={"secondary"}
             >
               Continue Purchase...

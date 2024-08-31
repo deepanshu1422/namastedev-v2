@@ -161,7 +161,7 @@ export default function Mentor() {
     },
   ];
   return (
-    <div className="m-auto flex flex-col items-center justify-center p-6 lg:p-10 gap-4 max-w-[80rem]">
+    <div className="m-auto flex flex-col items-center justify-center p-6 lg:p-10 gap-4 max-w-[75rem]">
       {/* Heading */}
       <span className="flex items-center justify-center gap-4 relative">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />

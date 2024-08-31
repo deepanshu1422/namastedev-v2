@@ -45,10 +45,10 @@ export default function Checkout({
           <span className="relative w-fit text-white sm:text-2xl font-bold flex gap-2 items-start">
             ₹{amount}
             <span className="text-muted-foreground/70 italic line-through">
-              ₹{((amount + 1) * 4) - 1}
+              ₹{((amount + 1) * 10) - 1}
             </span>
             {/* <Image className="absolute -top-14 -right-16" src={"/75off.png"} alt="30DC 70% off" height={100} width={100} /> */}
-            <span>(75% off)</span>
+            <span>(90% off)</span>
           </span>
 
           <div className="flex flex-col gap-2">
