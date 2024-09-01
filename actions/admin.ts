@@ -1,71 +1,198 @@
-'use server'
+"use server";
 
-import prisma from "@/util/prismaClient"
-import { subDays } from "date-fns";
+import prisma from "@/util/prismaClient";
+import { format, parseISO, subDays } from "date-fns";
 
 export default async function getPaymets(queryParams: {
-    q: string | null;
-    days: string | null;
-    status: string | null;
-    course: string | null;
-    page: string | null;
+  q: string | null;
+  days: string | null;
+  status: string | null;
+  course: string | null;
+  page: string | null;
 }) {
+  let where: Record<string, any> = {};
+  let skip: number = 0;
 
-    let where: Record<string, any> = {}
-    let skip: number = 0
+  if (queryParams.page) skip = (parseInt(queryParams.page ?? "0") - 1) * 10;
 
-    if (queryParams.page) skip = (parseInt(queryParams.page ?? "0") - 1) * 10
+  const days = parseInt(queryParams?.days ?? "1");
 
-    const days = parseInt(queryParams?.days ?? "7")
+  where.createdAt = {
+    lte: new Date(),
+    gte: subDays(new Date(), days ? days : 1),
+  };
 
-    where.createdAt = {
-        lte: new Date(),
-        gte: subDays(new Date(), days ? days : 7),
+  if (!!queryParams.status) where.paymentStatus = queryParams.status;
+
+  if (!!queryParams.course) {
+    if (queryParams.course === "ALL30DC") where.bundleId = queryParams.course;
+    else where.courseId = queryParams.course;
+  }
+
+  if (!!queryParams.q)
+    where.OR = [
+      {
+        email: {
+          contains: queryParams.q,
+        },
+      },
+      {
+        razorpayOrderId: {
+          contains: queryParams.q,
+        },
+      },
+    ];
+
+  // console.log(where);
+
+  const totalCount = await prisma.payments.count({
+    where,
+  });
+
+  // console.log({ totalCount });
+
+  const data = await prisma.payments.findMany({
+    select: {
+      createdAt: true,
+      basePrice: true,
+      courseId: true,
+      bundleId: true,
+      paymentStatus: true,
+      email: true,
+    },
+    where,
+    take: 10,
+    skip,
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return { data, totalCount };
+}
+
+export async function getRevenue() {
+  const today = new Date();
+
+  const revenueToday = await prisma.payments.aggregate({
+    _sum: {
+      basePrice: true,
+    },
+    _count: true,
+    where: {
+      paymentStatus: "completed",
+      createdAt: {
+        gte: new Date(today.setHours(0, 0, 0, 0)), // Start of today
+        lte: new Date(today.setHours(23, 59, 59, 999)), // End of today
+      },
+    },
+  });
+
+  const revenueTotal = await prisma.payments.aggregate({
+    _sum: {
+      basePrice: true,
+    },
+    _count: true,
+    where: {
+      paymentStatus: "completed",
+    },
+  });
+
+  const userToday = await prisma.user.aggregate({
+    _count: true,
+    where: {
+      createdAt: {
+        gte: new Date(today.setHours(0, 0, 0, 0)), // Start of today
+        lte: new Date(today.setHours(23, 59, 59, 999)), // End of today
+      },
+    },
+  });
+
+  const userTotal = await prisma.user.aggregate({
+    _count: true,
+  });
+
+  return { revenueToday, revenueTotal, userToday, userTotal };
+}
+
+export async function getHourlyRevenue() {
+  const startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
+
+  const endOfToday = new Date();
+  endOfToday.setHours(23, 59, 59, 999);
+
+  const payments = await prisma.payments.groupBy({
+    by: ["createdAt", "paymentStatus", "basePrice"],
+    where: {
+      createdAt: {
+        gte: startOfToday,
+        lte: endOfToday,
+      },
+    },
+  });
+
+  const groupedPayments = payments.reduce((acc, curr) => {
+    const day = format(parseISO(curr.createdAt.toISOString()), "HH:mm");
+    if (!acc[day]) {
+      acc[day] = [];
     }
+    acc[day].push(curr);
+    return acc;
+  }, {} as Record<string, typeof payments>);
 
-    if (!!queryParams.status) where.paymentStatus = queryParams.status
+  let resultPayments: Record<
+    string,
+    { success: number; initiated: number; revenue: number }
+  > = {};
 
-    if (!!queryParams.course) where.courseId = queryParams.course
+  Object.keys(groupedPayments).forEach((day) => {
+    resultPayments[day] = {
+      success: groupedPayments[day].filter(
+        (e) => e.paymentStatus === "completed"
+      ).length,
+      initiated: groupedPayments[day].filter(
+        (e) => e.paymentStatus === "created"
+      ).length,
+      revenue: groupedPayments[day].filter(e => e.paymentStatus === "completed").reduce(
+        (acc, cur) => (acc += cur.basePrice/100),
+        0
+      ),
+    };
+  });
 
-    if (!!queryParams.q) where.OR = [
-        {
-            email: {
-                contains: queryParams.q
-            }
-        },
-        {
-            razorpayOrderId: {
-                contains: queryParams.q
-            }
-        }
-    ]
+  function roundToHour(time: string) {
+    const [hour, minute] = time.split(":").map(Number);
+    return minute >= 30 ? `${(hour + 1) % 24}:00` : `${hour}:00`;
+  }
 
-    // console.log(where);
+  const hourlyPayments: Record<
+    string,
+    { success: number; initiated: number; revenue: number }
+  > = {};
 
-    const totalCount = await prisma.payments.count({
-        where
-    })
+  for (const [time, { initiated, success, revenue }] of Object.entries(
+    resultPayments
+  )) {
+    const roundedHour = roundToHour(time);
 
-    // console.log({ totalCount });
+    if (hourlyPayments[roundedHour]) {
+      hourlyPayments[roundedHour] = {
+        initiated: hourlyPayments[roundedHour].initiated + initiated,
+        success: hourlyPayments[roundedHour].success + success,
+        revenue: hourlyPayments[roundedHour].revenue + revenue,
+      };
+    } else {
+      hourlyPayments[roundedHour] = { initiated, success, revenue };
+    }
+  }
+  const sortedArray = Object.entries(hourlyPayments)
+    .map(([time, data]) => ({ time, ...data })) 
+    .sort((a, b) => {
+      const [aHour, aMinute] = a.time.split(":").map(Number);
+      const [bHour, bMinute] = b.time.split(":").map(Number);
+      return aHour - bHour || aMinute - bMinute;
+    });
 
-
-    const data = await prisma.payments.findMany({
-        select: {
-            createdAt: true,
-            basePrice: true,
-            courseId: true,
-            bundleId: true,
-            paymentStatus: true,
-            email: true
-        },
-        where,
-        take: 10,
-        skip,
-        orderBy: {
-            createdAt: "desc"
-        }
-    })
-
-    return { data, totalCount }
-
+  return { sortedArray };
 }

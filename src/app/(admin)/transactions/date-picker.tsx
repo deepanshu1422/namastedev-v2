@@ -25,7 +25,7 @@ export default function DatePicker({
   return (
     <div className="sm:w-60 w-full">
       <Select
-        value={params.get("days") ?? ""}
+        value={params.get("days") ?? "1"}
         onValueChange={(value) => {
           if (value)
             router.push(pathName + "?" + createQueryString("days", value));
@@ -35,6 +35,7 @@ export default function DatePicker({
           <SelectValue placeholder="Select Days" />
         </SelectTrigger>
         <SelectContent position="popper">
+          <SelectItem value="1">Today</SelectItem>
           <SelectItem value="7">Last 7 Days</SelectItem>
           <SelectItem value="30">Last 30 Days</SelectItem>
           <SelectItem value="90">Last 90 days</SelectItem>

@@ -119,6 +119,7 @@ export default function TableDemo({
             <SelectContent position="popper">
               <SelectItem value={PaymentStatus.completed}>Completed</SelectItem>
               <SelectItem value={PaymentStatus.created}>Created</SelectItem>
+              <SelectItem value={PaymentStatus.failed}>Failed</SelectItem>
             </SelectContent>
           </Select>
 
@@ -126,7 +127,9 @@ export default function TableDemo({
 
           <Select
             disabled={loadingCourses}
-            value={searchParams.get("course") ?? ""}
+            value={
+              searchParams.get("course") ?? searchParams.get("bundle") ?? ""
+            }
             onValueChange={(value) => {
               if (value)
                 router.push(
@@ -138,9 +141,35 @@ export default function TableDemo({
               <SelectValue placeholder="Course" />
             </SelectTrigger>
             <SelectContent position="popper">
+              <SelectItem className="uppercase" value={"ALL30DC"}>
+                ALL30DC
+              </SelectItem>
               {courseId?.map((e: Record<string, string>, i: number) => (
                 <SelectItem className="uppercase" key={i} value={e.courseId}>
                   {e.courseId}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          <Select
+            value={searchParams.get("page") ?? ""}
+            onValueChange={(value) => {
+              if (value)
+                router.push(
+                  pathName + "?" + createQueryString("page", String(value))
+                );
+            }}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Page" />
+            </SelectTrigger>
+            <SelectContent position="popper" className="max-h-60">
+              {Array.from({
+                length: Math.ceil((data?.totalCount ?? 0) / 10),
+              }).map((_, i) => (
+                <SelectItem className="uppercase" key={i} value={String(i + 1)}>
+                  {String(i + 1)}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -241,12 +270,12 @@ export default function TableDemo({
           </TableBody>
         </Table>
       </div>
-      {!isPending && !!data?.totalCount && (
+      {/* {!isPending && !!data?.totalCount && (
         <TablePagination
           createQueryString={createQueryString}
           total={data?.totalCount ?? 0}
         />
-      )}
+      )} */}
     </section>
   );
 }

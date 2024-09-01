@@ -11,12 +11,7 @@ import { $Enums } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Records from "./records";
-
-// export const metadata: Metadata = {
-//     metadataBase: new URL("https://30dayscoding.com"),
-//     title: "Transactions | 30dayscoding",
-//     description: "This is a about page for our total transactions.",
-// };
+import { TxnChart } from "./txn-chart";
 
 export type QureyResponse = Pick<
   UseQueryResult<
@@ -87,7 +82,7 @@ export default function Page() {
     queryKey: [
       {
         q,
-        days: days ?? "7",
+        days: days ?? "1",
         status,
         course,
         page: page ?? "1",
@@ -119,6 +114,8 @@ export default function Page() {
       </section>
 
       <Records />
+
+      <TxnChart />
 
       <DataTable
         clearQueryString={clearQueryString}

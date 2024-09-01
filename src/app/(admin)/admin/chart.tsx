@@ -16,7 +16,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import DatePickerWithRange from "./date-picker";
 import { addDays, format, subDays } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
@@ -88,7 +87,7 @@ export function TransactionChart() {
 
       // console.log(data);
 
-      for (let i = 30; i > 0; i--) {
+      for (let i = 30; i > -1; i--) {
         let formattedDate = format(subDays(currentDate, i), "yyyy-MM-dd");
         dataArray.push({
           date: formattedDate,

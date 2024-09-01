@@ -22,6 +22,8 @@ export const metadata: Metadata = {
   description: "This is a about page for our admin.",
 };
 
+export const dynamic = 'force-dynamic'
+
 export default function Dashboard() {
   return (
     <>
