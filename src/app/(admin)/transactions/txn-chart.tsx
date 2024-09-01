@@ -97,9 +97,9 @@ export function TxnChart() {
 
   const total = React.useMemo(
     () => ({
-      success: chartData.reduce((acc, curr) => acc + curr.success, 0),
-      initiated: chartData.reduce((acc, curr) => acc + curr.initiated, 0),
-      revenue: chartData.reduce((acc, curr) => acc + curr.revenue, 0),
+      success: chartData?.reduce((acc, curr) => acc + curr.success, 0),
+      initiated: chartData?.reduce((acc, curr) => acc + curr.initiated, 0),
+      revenue: chartData?.reduce((acc, curr) => acc + curr.revenue, 0),
     }),
     [chartData]
   );

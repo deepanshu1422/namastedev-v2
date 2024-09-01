@@ -154,16 +154,15 @@ export async function getHourlyRevenue() {
       initiated: groupedPayments[day].filter(
         (e) => e.paymentStatus === "created"
       ).length,
-      revenue: groupedPayments[day].filter(e => e.paymentStatus === "completed").reduce(
-        (acc, cur) => (acc += cur.basePrice/100),
-        0
-      ),
+      revenue: groupedPayments[day]
+        .filter((e) => e.paymentStatus === "completed")
+        .reduce((acc, cur) => (acc += cur.basePrice / 100), 0),
     };
   });
 
   function roundToHour(time: string) {
     const [hour, minute] = time.split(":").map(Number);
-    return minute >= 30 ? `${(hour + 1) % 24}:00` : `${hour}:00`;
+    return `${hour}:00`;
   }
 
   const hourlyPayments: Record<
@@ -187,7 +186,7 @@ export async function getHourlyRevenue() {
     }
   }
   const sortedArray = Object.entries(hourlyPayments)
-    .map(([time, data]) => ({ time, ...data })) 
+    .map(([time, data]) => ({ time, ...data }))
     .sort((a, b) => {
       const [aHour, aMinute] = a.time.split(":").map(Number);
       const [bHour, bMinute] = b.time.split(":").map(Number);
@@ -195,4 +194,46 @@ export async function getHourlyRevenue() {
     });
 
   return { sortedArray };
+}
+
+export async function getTransactions() {
+  const users = await prisma.user.groupBy({
+    by: ["createdAt"],
+  });
+
+  const payments = await prisma.payments.groupBy({
+    by: ["createdAt"],
+  });
+
+  const groupedUsers = users.reduce((acc, curr) => {
+    const day = format(parseISO(curr.createdAt.toISOString()), "yyyy-MM-dd");
+    if (!acc[day]) {
+      acc[day] = [];
+    }
+    acc[day].push(curr);
+    return acc;
+  }, {} as Record<string, typeof users>);
+
+  const groupedPayments = payments.reduce((acc, curr) => {
+    const day = format(parseISO(curr.createdAt.toISOString()), "yyyy-MM-dd");
+    if (!acc[day]) {
+      acc[day] = [];
+    }
+    acc[day].push(curr);
+    return acc;
+  }, {} as Record<string, typeof payments>);
+
+  let resultUsers: Record<string, number> = {};
+
+  Object.keys(groupedUsers).forEach((day) => {
+    resultUsers[day] = groupedUsers[day].length;
+  });
+
+  let resultPayments: Record<string, number> = {};
+
+  Object.keys(groupedPayments).forEach((day) => {
+    resultPayments[day] = groupedPayments[day].length;
+  });
+
+  return {resultPayments, resultUsers}
 }
