@@ -3,6 +3,20 @@
 import prisma from "@/util/prismaClient";
 import { format, parseISO, subDays } from "date-fns";
 
+const ISTTime = () => {
+  const currentTime = new Date();
+
+  const currentOffset = new Date().getTimezoneOffset();
+
+  const ISTOffset = 330;
+
+  const ISTTime = new Date(
+    currentTime.getTime() + (ISTOffset + currentOffset) * 60000
+  );
+
+  return ISTTime;
+};
+
 export default async function getPaymets(queryParams: {
   q: string | null;
   days: string | null;
@@ -15,11 +29,12 @@ export default async function getPaymets(queryParams: {
 
   if (queryParams.page) skip = (parseInt(queryParams.page ?? "0") - 1) * 10;
 
-  const days = parseInt(queryParams?.days ?? "1");
+  const days = parseInt(queryParams?.days ?? "1") - 1;
+  const today = ISTTime();
 
   where.createdAt = {
-    lte: new Date(),
-    gte: subDays(new Date(), days ? days : 1),
+    lte: new Date(today.setHours(23, 59, 59, 999)),
+    gte: subDays(new Date(today.setHours(0, 0, 0, 0)), days ? days : 0),
   };
 
   if (!!queryParams.status) where.paymentStatus = queryParams.status;
@@ -72,7 +87,7 @@ export default async function getPaymets(queryParams: {
 }
 
 export async function getRevenue() {
-  const today = new Date();
+  const today = ISTTime();
 
   const revenueToday = await prisma.payments.aggregate({
     _sum: {
@@ -102,8 +117,8 @@ export async function getRevenue() {
     _count: true,
     where: {
       createdAt: {
-        gte: new Date(today.setHours(0, 0, 0, 0)), // Start of today
-        lte: new Date(today.setHours(23, 59, 59, 999)), // End of today
+        gte: new Date(today.setHours(0, 0, 0, 0)),
+        lte: new Date(today.setHours(23, 59, 59, 999)),
       },
     },
   });
@@ -116,10 +131,10 @@ export async function getRevenue() {
 }
 
 export async function getHourlyRevenue() {
-  const startOfToday = new Date();
+  const startOfToday = ISTTime();
   startOfToday.setHours(0, 0, 0, 0);
 
-  const endOfToday = new Date();
+  const endOfToday = ISTTime();
   endOfToday.setHours(23, 59, 59, 999);
 
   const payments = await prisma.payments.groupBy({
@@ -235,5 +250,5 @@ export async function getTransactions() {
     resultPayments[day] = groupedPayments[day].length;
   });
 
-  return {resultPayments, resultUsers}
+  return { resultPayments, resultUsers };
 }
