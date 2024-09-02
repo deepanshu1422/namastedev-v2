@@ -1,19 +1,31 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const serverDate = new Date(Date.now());
-  const localString = serverDate.toLocaleString();
+  const serverDateUTC = new Date(Date.now());
+  const localString = serverDateUTC.toLocaleString();
 
-  // Convert UTC to IST
-  const offset = 5.5 * 60 * 60 * 1000; // 5.5 hours in milliseconds
-  const serverDateIST = new Date(serverDate.getTime() + offset);
+  const serverDateIST = new Date(
+    serverDateUTC.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
 
-  // Format to local string (IST)
   const localStringIST = serverDateIST.toLocaleString("en-IN", {
     timeZone: "Asia/Kolkata",
   });
 
-  console.log("Server Date in IST: ", localStringIST);
+  const localStringUTC = serverDateUTC.toLocaleString("en-IN", {
+    timeZone: "UTC",
+  });
 
-  return NextResponse.json({ serverDate, localString, serverDateIST, localStringIST });
+//   console.log("Server Date UTC: ", localStringUTC);
+//   console.log("Server Date in IST: ", serverDateIST.toISOString());
+//   console.log("Local String IST: ", localStringIST);
+
+  return NextResponse.json({
+    serverDateUTC,
+    localString,
+    serverDateIST: serverDateIST.toISOString(),
+    localStringIST,
+    localStringUTC,
+
+  });
 }
