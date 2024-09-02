@@ -1,18 +1,13 @@
 "use server";
 
 import prisma from "@/util/prismaClient";
-import { format, parseISO, subDays } from "date-fns";
+import { addMinutes, format, parseISO, subDays } from "date-fns";
 
 const ISTTime = () => {
   const currentTime = new Date();
 
-  const currentOffset = new Date().getTimezoneOffset();
-
-  const ISTOffset = 330;
-
-  const ISTTime = new Date(
-    currentTime.getTime() + (ISTOffset + currentOffset) * 60000
-  );
+  const offsetIST = 5.5 * 60 * 60 * 1000;
+  const ISTTime = addMinutes(new Date(currentTime.getTime() + offsetIST), 3);
 
   return ISTTime;
 };
