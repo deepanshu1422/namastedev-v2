@@ -3,18 +3,21 @@
 import prisma from "@/util/prismaClient";
 import { format, parseISO, subDays } from "date-fns";
 
-const ISTTime = () => {
-  const currentTime = new Date();
+const currentTime = () => {
+  const currentDate = new Date().toLocaleString("en-US", {
+    timeZone: "Asia/Kolkata",
+  });
 
-  const currentOffset = new Date().getTimezoneOffset();
+  const start = new Date(currentDate);
+  start.setHours(0, 0, 0, 0);
 
-  const ISTOffset = 330;
+  const end = new Date(currentDate);
+  end.setHours(23, 0, 0, 0);
 
-  const ISTTime = new Date(
-    currentTime.getTime() + (ISTOffset + currentOffset) * 60000
-  );
+  const startUTC = new Date(start.toLocaleString("en-US", { timeZone: "UTC" }));
+  const endUTC = new Date(end.toLocaleString("en-US", { timeZone: "UTC" }));
 
-  return ISTTime;
+  return { startUTC, endUTC };
 };
 
 export default async function getPaymets(queryParams: {
@@ -30,11 +33,11 @@ export default async function getPaymets(queryParams: {
   if (queryParams.page) skip = (parseInt(queryParams.page ?? "0") - 1) * 10;
 
   const days = parseInt(queryParams?.days ?? "1") - 1;
-  const today = ISTTime();
+  const today = currentTime();
 
   where.createdAt = {
-    lte: new Date(today.setHours(23, 59, 59, 999)),
-    gte: subDays(new Date(today.setHours(0, 0, 0, 0)), days ? days : 0),
+    gte: subDays(today.startUTC, days ? days : 0),
+    lte: today.endUTC,
   };
 
   if (!!queryParams.status) where.paymentStatus = queryParams.status;
@@ -87,7 +90,7 @@ export default async function getPaymets(queryParams: {
 }
 
 export async function getRevenue() {
-  const today = ISTTime();
+  const today = currentTime();
 
   const revenueToday = await prisma.payments.aggregate({
     _sum: {
@@ -97,8 +100,8 @@ export async function getRevenue() {
     where: {
       paymentStatus: "completed",
       createdAt: {
-        gte: new Date(today.setHours(0, 0, 0, 0)), // Start of today
-        lte: new Date(today.setHours(23, 59, 59, 999)), // End of today
+        gte: today.startUTC,
+        lte: today.endUTC,
       },
     },
   });
@@ -117,8 +120,8 @@ export async function getRevenue() {
     _count: true,
     where: {
       createdAt: {
-        gte: new Date(today.setHours(0, 0, 0, 0)),
-        lte: new Date(today.setHours(23, 59, 59, 999)),
+        gte: today.startUTC,
+        lte: today.endUTC,
       },
     },
   });
@@ -131,18 +134,13 @@ export async function getRevenue() {
 }
 
 export async function getHourlyRevenue() {
-  const startOfToday = ISTTime();
-  startOfToday.setHours(0, 0, 0, 0);
-
-  const endOfToday = ISTTime();
-  endOfToday.setHours(23, 59, 59, 999);
-
+  const today = currentTime();
   const payments = await prisma.payments.groupBy({
     by: ["createdAt", "paymentStatus", "basePrice"],
     where: {
       createdAt: {
-        gte: startOfToday,
-        lte: endOfToday,
+        gte: today.startUTC,
+        lte: today.endUTC,
       },
     },
   });
@@ -166,9 +164,7 @@ export async function getHourlyRevenue() {
       success: groupedPayments[day].filter(
         (e) => e.paymentStatus === "completed"
       ).length,
-      initiated: groupedPayments[day].filter(
-        (e) => e.paymentStatus === "created"
-      ).length,
+      initiated: groupedPayments[day].length,
       revenue: groupedPayments[day]
         .filter((e) => e.paymentStatus === "completed")
         .reduce((acc, cur) => (acc += cur.basePrice / 100), 0),
