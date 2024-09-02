@@ -51,7 +51,7 @@ const chartConfig = {
 
 export function TxnChart() {
   const { data, isPending } = useQuery({
-    queryKey: ["chart"],
+    queryKey: ["txnchart"],
     queryFn: async () => {
       const data = await getHourlyRevenue();
       return data;

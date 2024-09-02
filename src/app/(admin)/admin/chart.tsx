@@ -38,7 +38,7 @@ const chartConfig = {
 
 export function TransactionChart() {
   const { data, isPending } = useQuery({
-    queryKey: ["chart"],
+    queryKey: ["adminchart"],
     queryFn: async () => {
       const data = await getTransactions();
       return data;
