@@ -13,6 +13,18 @@ import Link from "next/link";
 import Records from "./records";
 import { TxnChart } from "./txn-chart";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { DefaultTabsTrigger, Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 export type QureyResponse = Pick<
   UseQueryResult<
     {
@@ -115,16 +127,25 @@ export default function Page() {
 
       <Records />
 
-      <TxnChart />
-
-      <DataTable
-        clearQueryString={clearQueryString}
-        createQueryString={createQueryString}
-        isPending={isPending}
-        isError={isError}
-        error={error}
-        data={data}
-      />
+      <Tabs defaultValue="chart">
+        <TabsList className="grid w-full grid-cols-2 bg-card max-w-96 mx-auto shadow-lg drop-shadow-[0px_0px_10px_#07928150] hover:drop-shadow-[0px_0px_15px_#07928170] transition-all">
+          <DefaultTabsTrigger value="chart">Chart</DefaultTabsTrigger>
+          <DefaultTabsTrigger value="table">Table</DefaultTabsTrigger>
+        </TabsList>
+        <TabsContent value="chart">
+          <TxnChart />
+        </TabsContent>
+        <TabsContent value="table">
+          <DataTable
+            clearQueryString={clearQueryString}
+            createQueryString={createQueryString}
+            isPending={isPending}
+            isError={isError}
+            error={error}
+            data={data}
+          />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

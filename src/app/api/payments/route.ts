@@ -1,9 +1,9 @@
-// import prisma from "@/util/prismaClient";
-// import { format, parseISO } from "date-fns";
-// import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-// export async function GET() {
+export async function GET() {
     
-
-//     return NextResponse.json({ resultUsers, resultPayments });
-// }
+    const serverDate = new Date(Date.now())
+    const localString = serverDate.toLocaleString()
+    
+    return NextResponse.json({ serverDate, localString });
+}

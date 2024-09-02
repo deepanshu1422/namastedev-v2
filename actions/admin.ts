@@ -3,21 +3,18 @@
 import prisma from "@/util/prismaClient";
 import { format, parseISO, subDays } from "date-fns";
 
-const currentTime = () => {
-  const currentDate = new Date().toLocaleString("en-US", {
-    timeZone: "Asia/Kolkata",
-  });
+const ISTTime = () => {
+  const currentTime = new Date();
 
-  const start = new Date(currentDate);
-  start.setHours(0, 0, 0, 0);
+  const currentOffset = new Date().getTimezoneOffset();
 
-  const end = new Date(currentDate);
-  end.setHours(23, 0, 0, 0);
+  const ISTOffset = 330;
 
-  const startUTC = new Date(start.toLocaleString("en-US", { timeZone: "UTC" }));
-  const endUTC = new Date(end.toLocaleString("en-US", { timeZone: "UTC" }));
+  const ISTTime = new Date(
+    currentTime.getTime() + (ISTOffset + currentOffset) * 60000
+  );
 
-  return { startUTC, endUTC };
+  return ISTTime;
 };
 
 export default async function getPaymets(queryParams: {
@@ -33,11 +30,11 @@ export default async function getPaymets(queryParams: {
   if (queryParams.page) skip = (parseInt(queryParams.page ?? "0") - 1) * 10;
 
   const days = parseInt(queryParams?.days ?? "1") - 1;
-  const today = currentTime();
+  const today = ISTTime();
 
   where.createdAt = {
-    gte: subDays(today.startUTC, days ? days : 0),
-    lte: today.endUTC,
+    lte: new Date(today.setHours(23, 59, 59, 999)),
+    gte: subDays(new Date(today.setHours(0, 0, 0, 0)), days ? days : 0),
   };
 
   if (!!queryParams.status) where.paymentStatus = queryParams.status;
@@ -90,7 +87,7 @@ export default async function getPaymets(queryParams: {
 }
 
 export async function getRevenue() {
-  const today = currentTime();
+  const today = ISTTime();
 
   const revenueToday = await prisma.payments.aggregate({
     _sum: {
@@ -100,8 +97,8 @@ export async function getRevenue() {
     where: {
       paymentStatus: "completed",
       createdAt: {
-        gte: today.startUTC,
-        lte: today.endUTC,
+        gte: new Date(today.setHours(0, 0, 0, 0)), // Start of today
+        lte: new Date(today.setHours(23, 59, 59, 999)), // End of today
       },
     },
   });
@@ -120,8 +117,8 @@ export async function getRevenue() {
     _count: true,
     where: {
       createdAt: {
-        gte: today.startUTC,
-        lte: today.endUTC,
+        gte: new Date(today.setHours(0, 0, 0, 0)),
+        lte: new Date(today.setHours(23, 59, 59, 999)),
       },
     },
   });
@@ -134,13 +131,18 @@ export async function getRevenue() {
 }
 
 export async function getHourlyRevenue() {
-  const today = currentTime();
+  const startOfToday = ISTTime();
+  startOfToday.setHours(0, 0, 0, 0);
+
+  const endOfToday = ISTTime();
+  endOfToday.setHours(23, 59, 59, 999);
+
   const payments = await prisma.payments.groupBy({
     by: ["createdAt", "paymentStatus", "basePrice"],
     where: {
       createdAt: {
-        gte: today.startUTC,
-        lte: today.endUTC,
+        gte: startOfToday,
+        lte: endOfToday,
       },
     },
   });
@@ -247,4 +249,62 @@ export async function getTransactions() {
   });
 
   return { resultPayments, resultUsers };
+}
+
+export async function exportPaymets(queryParams: {
+  q: string | null;
+  days: string | null;
+  status: string | null;
+  course: string | null;
+  page: string | null;
+}) {
+  let where: Record<string, any> = {};
+
+  const days = parseInt(queryParams?.days ?? "1") - 1;
+  const today = ISTTime();
+
+  where.createdAt = {
+    lte: new Date(today.setHours(23, 59, 59, 999)),
+    gte: subDays(new Date(today.setHours(0, 0, 0, 0)), days ? days : 0),
+  };
+
+  if (!!queryParams.status) where.paymentStatus = queryParams.status;
+
+  if (!!queryParams.course) {
+    if (queryParams.course === "ALL30DC") where.bundleId = queryParams.course;
+    else where.courseId = queryParams.course;
+  }
+
+  if (!!queryParams.q)
+    where.OR = [
+      {
+        email: {
+          contains: queryParams.q,
+        },
+      },
+      {
+        razorpayOrderId: {
+          contains: queryParams.q,
+        },
+      },
+    ];
+
+  // console.log({ totalCount });
+
+  const data = await prisma.payments.findMany({
+    select: {
+      createdAt: true,
+      basePrice: true,
+      courseId: true,
+      bundleId: true,
+      paymentStatus: true,
+      email: true,
+    },
+    where,
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return { data };
 }
