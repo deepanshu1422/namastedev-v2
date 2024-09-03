@@ -6,10 +6,10 @@ import { addMinutes, format, parseISO, subDays, subHours } from "date-fns";
 const ISTTime = () => {
   const currentTime = new Date();
 
-  const offsetIST = 5.5 * 60 * 60 * 1000;
-  const ISTTime = addMinutes(new Date(currentTime.getTime() + offsetIST), 3);
+  const startTime = subHours(currentTime.setHours(0, 0, 0, 0), 5.5);
+  const endTime = subHours(currentTime.setHours(23, 59, 59, 999), 5.5);
 
-  return ISTTime;
+  return { startTime, endTime };
 };
 
 export default async function getPaymets(queryParams: {
@@ -25,11 +25,11 @@ export default async function getPaymets(queryParams: {
   if (queryParams.page) skip = (parseInt(queryParams.page ?? "0") - 1) * 10;
 
   const days = parseInt(queryParams?.days ?? "1") - 1;
-  const today = ISTTime();
+  const { endTime, startTime } = ISTTime();
 
   where.createdAt = {
-    lte: subHours(new Date(today.setHours(23, 59, 59, 999)), 5.5),
-    gte: subHours(subDays(new Date(today.setHours(0, 0, 0, 0)), days ? days : 0), 5.5),
+    gte: subDays(startTime, days ? days : 0),
+    lte: endTime,
   };
 
   if (!!queryParams.status) where.paymentStatus = queryParams.status;
@@ -82,7 +82,7 @@ export default async function getPaymets(queryParams: {
 }
 
 export async function getRevenue() {
-  const today = ISTTime();
+  const { startTime, endTime } = ISTTime();
 
   const revenueToday = await prisma.payments.aggregate({
     _sum: {
@@ -92,8 +92,8 @@ export async function getRevenue() {
     where: {
       paymentStatus: "completed",
       createdAt: {
-        gte: subHours(new Date(today.setHours(0, 0, 0, 0)), 5.5), // Start of today
-        lte: subHours(new Date(today.setHours(23, 59, 59, 999)), 5.5), // End of today
+        gte: startTime,
+        lte: endTime,
       },
     },
   });
@@ -112,8 +112,8 @@ export async function getRevenue() {
     _count: true,
     where: {
       createdAt: {
-        gte: subHours(new Date(today.setHours(0, 0, 0, 0)), 5.5),
-        lte: subHours(new Date(today.setHours(23, 59, 59, 999)), 5.5),
+        gte: startTime,
+        lte: endTime,
       },
     },
   });
@@ -126,18 +126,14 @@ export async function getRevenue() {
 }
 
 export async function getHourlyRevenue() {
-  const startOfToday = ISTTime();
-  startOfToday.setHours(0, 0, 0, 0);
-
-  const endOfToday = ISTTime();
-  endOfToday.setHours(23, 59, 59, 999);
+  const { endTime, startTime } = ISTTime();
 
   const payments = await prisma.payments.groupBy({
     by: ["createdAt", "paymentStatus", "basePrice"],
     where: {
       createdAt: {
-        gte: subHours(startOfToday, 5.5),
-        lte: subHours(endOfToday, 5.5),
+        gte: startTime,
+        lte: endTime,
       },
     },
   });
@@ -152,19 +148,19 @@ export async function getHourlyRevenue() {
   }, {} as Record<string, typeof payments>);
 
   let resultPayments: Record<
-      string,
-      { success: number; initiated: number; revenue: number }
+    string,
+    { success: number; initiated: number; revenue: number }
   > = {};
 
   Object.keys(groupedPayments).forEach((day) => {
     resultPayments[day] = {
       success: groupedPayments[day].filter(
-          (e) => e.paymentStatus === "completed"
+        (e) => e.paymentStatus === "completed"
       ).length,
       initiated: groupedPayments[day].length,
       revenue: groupedPayments[day]
-          .filter((e) => e.paymentStatus === "completed")
-          .reduce((acc, cur) => (acc += cur.basePrice / 100), 0),
+        .filter((e) => e.paymentStatus === "completed")
+        .reduce((acc, cur) => (acc += cur.basePrice / 100), 0),
     };
   });
 
@@ -174,12 +170,12 @@ export async function getHourlyRevenue() {
   }
 
   const hourlyPayments: Record<
-      string,
-      { success: number; initiated: number; revenue: number }
+    string,
+    { success: number; initiated: number; revenue: number }
   > = {};
 
   for (const [time, { initiated, success, revenue }] of Object.entries(
-      resultPayments
+    resultPayments
   )) {
     const roundedHour = roundToHour(time);
 
@@ -194,12 +190,12 @@ export async function getHourlyRevenue() {
     }
   }
   const sortedArray = Object.entries(hourlyPayments)
-      .map(([time, data]) => ({ time, ...data }))
-      .sort((a, b) => {
-        const [aHour, aMinute] = a.time.split(":").map(Number);
-        const [bHour, bMinute] = b.time.split(":").map(Number);
-        return aHour - bHour || aMinute - bMinute;
-      });
+    .map(([time, data]) => ({ time, ...data }))
+    .sort((a, b) => {
+      const [aHour, aMinute] = a.time.split(":").map(Number);
+      const [bHour, bMinute] = b.time.split(":").map(Number);
+      return aHour - bHour || aMinute - bMinute;
+    });
 
   return { sortedArray };
 }
@@ -256,11 +252,11 @@ export async function exportPaymets(queryParams: {
   let where: Record<string, any> = {};
 
   const days = parseInt(queryParams?.days ?? "1") - 1;
-  const today = ISTTime();
+  const { endTime, startTime } = ISTTime();
 
   where.createdAt = {
-    lte: new Date(today.setHours(23, 59, 59, 999)),
-    gte: subDays(new Date(today.setHours(0, 0, 0, 0)), days ? days : 0),
+    lte: endTime,
+    gte: subDays(startTime, days ? days : 0),
   };
 
   if (!!queryParams.status) where.paymentStatus = queryParams.status;
