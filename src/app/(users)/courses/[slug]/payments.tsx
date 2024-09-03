@@ -179,7 +179,9 @@ export function PaymentSheet({
         amount: res.data.amount,
         order_id: res.data.orderId,
         handler: async function (response: any) {
-          await triggerEvent();
+          // await triggerEvent({
+
+          // });
           setOpenPay(true);
           await update({ courses: true });
           if (session?.user?.email) router.refresh();
@@ -190,7 +192,11 @@ export function PaymentSheet({
           contact: formData.phone,
         },
         notes: {
-          address: "30DC Corporate Office",
+          name: formData.name,
+          email: formData.email,
+          contact: formData.phone,
+          address: formData.state,
+          courseId
         },
         theme: {
           color: "#134543",

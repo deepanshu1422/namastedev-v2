@@ -186,7 +186,11 @@ export function PaymentSheet({
           contact: formData.phone,
         },
         notes: {
-          address: "30DC Corporate Office",
+          name: formData.name,
+          email: formData.email,
+          contact: formData.phone,
+          address: formData.state,
+          bundleId,
         },
         theme: {
           color: "#134543",
