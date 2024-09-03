@@ -25,7 +25,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { addDays, format, subDays } from "date-fns";
+import { addDays, format, parseISO, subDays } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import revalidatePages from "../../../../actions/revalidate-pages";
@@ -104,9 +104,71 @@ export function TxnChart() {
     [chartData]
   );
 
+  function roundToHour(time: string) {
+    const [hour, minute] = time.split(":").map(Number);
+    return `${hour}:00`;
+  }
+
   React.useEffect(() => {
     if (!isPending) {
-      if (data) setChartData(data?.sortedArray);
+      if (data) {
+
+        const groupedPayments = data.payments.reduce((acc, curr) => {
+          const day = format(parseISO(curr.createdAt.toISOString()), "HH:mm");
+          if (!acc[day]) {
+            acc[day] = [];
+          }
+          acc[day].push(curr);
+          return acc;
+        }, {} as Record<string, typeof data.payments>);
+      
+        let resultPayments: Record<
+          string,
+          { success: number; initiated: number; revenue: number }
+        > = {};
+      
+        Object.keys(groupedPayments).forEach((day) => {
+          resultPayments[day] = {
+            success: groupedPayments[day].filter(
+              (e) => e.paymentStatus === "completed"
+            ).length,
+            initiated: groupedPayments[day].length,
+            revenue: groupedPayments[day]
+              .filter((e) => e.paymentStatus === "completed")
+              .reduce((acc, cur) => (acc += cur.basePrice / 100), 0),
+          };
+        });
+      
+        const hourlyPayments: Record<
+          string,
+          { success: number; initiated: number; revenue: number }
+        > = {};
+      
+        for (const [time, { initiated, success, revenue }] of Object.entries(
+          resultPayments
+        )) {
+          const roundedHour = roundToHour(time);
+      
+          if (hourlyPayments[roundedHour]) {
+            hourlyPayments[roundedHour] = {
+              initiated: hourlyPayments[roundedHour].initiated + initiated,
+              success: hourlyPayments[roundedHour].success + success,
+              revenue: hourlyPayments[roundedHour].revenue + revenue,
+            };
+          } else {
+            hourlyPayments[roundedHour] = { initiated, success, revenue };
+          }
+        }
+        const sortedArray = Object.entries(hourlyPayments)
+          .map(([time, data]) => ({ time, ...data }))
+          .sort((a, b) => {
+            const [aHour, aMinute] = a.time.split(":").map(Number);
+            const [bHour, bMinute] = b.time.split(":").map(Number);
+            return aHour - bHour || aMinute - bMinute;
+          });
+
+        setChartData(sortedArray)
+      };
     }
   }, [data]);
 

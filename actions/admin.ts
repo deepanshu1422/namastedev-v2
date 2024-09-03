@@ -132,72 +132,13 @@ export async function getHourlyRevenue() {
     by: ["createdAt", "paymentStatus", "basePrice"],
     where: {
       createdAt: {
-        gte: addHours(startTime, 5.5),
+        gte: startTime,
         lte: endTime,
       },
     },
   });
 
-  const groupedPayments = payments.reduce((acc, curr) => {
-    const day = format(parseISO(curr.createdAt.toISOString()), "HH:mm");
-    if (!acc[day]) {
-      acc[day] = [];
-    }
-    acc[day].push(curr);
-    return acc;
-  }, {} as Record<string, typeof payments>);
-
-  let resultPayments: Record<
-    string,
-    { success: number; initiated: number; revenue: number }
-  > = {};
-
-  Object.keys(groupedPayments).forEach((day) => {
-    resultPayments[day] = {
-      success: groupedPayments[day].filter(
-        (e) => e.paymentStatus === "completed"
-      ).length,
-      initiated: groupedPayments[day].length,
-      revenue: groupedPayments[day]
-        .filter((e) => e.paymentStatus === "completed")
-        .reduce((acc, cur) => (acc += cur.basePrice / 100), 0),
-    };
-  });
-
-  function roundToHour(time: string) {
-    const [hour, minute] = time.split(":").map(Number);
-    return `${hour}:00`;
-  }
-
-  const hourlyPayments: Record<
-    string,
-    { success: number; initiated: number; revenue: number }
-  > = {};
-
-  for (const [time, { initiated, success, revenue }] of Object.entries(
-    resultPayments
-  )) {
-    const roundedHour = roundToHour(time);
-
-    if (hourlyPayments[roundedHour]) {
-      hourlyPayments[roundedHour] = {
-        initiated: hourlyPayments[roundedHour].initiated + initiated,
-        success: hourlyPayments[roundedHour].success + success,
-        revenue: hourlyPayments[roundedHour].revenue + revenue,
-      };
-    } else {
-      hourlyPayments[roundedHour] = { initiated, success, revenue };
-    }
-  }
-  const sortedArray = Object.entries(hourlyPayments)
-    .map(([time, data]) => ({ time, ...data }))
-    .sort((a, b) => {
-      const [aHour, aMinute] = a.time.split(":").map(Number);
-      const [bHour, bMinute] = b.time.split(":").map(Number);
-      return aHour - bHour || aMinute - bMinute;
-    });
-
-  return { sortedArray };
+  return { payments };
 }
 
 export async function getTransactions() {
