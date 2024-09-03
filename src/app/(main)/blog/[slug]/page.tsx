@@ -10,6 +10,7 @@ import { BASE_URL } from "@/util/constants";
 import CopyBtn from "./copyBtn";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import YoutubeEmbed from "@/components/yotube-embed";
+import { FooterAD, SquareAD } from "@/util/ads";
 
 export const dynamicParams = true;
 
@@ -161,9 +162,13 @@ export default async function Home({ params: { slug } }: PageProps) {
         tag={item.tags[0] ?? item.focusKeyword[0]}
       />
 
-      <div className="max-w-lg md:max-w-3xl m-auto px-8 lg:px-5 body">
-        <MDXRemote source={item.body ?? ""} components={{ YoutubeEmbed }} />
-      </div>
+      <section className="flex max-md:flex-col gap-2">
+        <SquareAD />
+        <div className="max-w-lg md:max-w-3xl m-auto px-8 lg:px-5 body">
+          <MDXRemote source={item.body ?? ""} components={{ YoutubeEmbed }} />
+        </div>
+        <SquareAD />
+      </section>
 
       <div className="py-10 m-auto px-8 lg:px-5 grid gap-4 max-w-lg md:max-w-3xl">
         <span className="text-2xl max-md:text-xl font-bold break-words">
@@ -214,6 +219,7 @@ export default async function Home({ params: { slug } }: PageProps) {
           </Link>
         </section>
         <hr className="border-gray-500 my-3" />
+        <FooterAD />
         <span className="text-2xl max-md:text-xl font-bold break-words">
           Latest Blogs
         </span>
