@@ -132,7 +132,7 @@ export async function getHourlyRevenue() {
     by: ["createdAt", "paymentStatus", "basePrice"],
     where: {
       createdAt: {
-        gte: subDays(startTime, -1),
+        gte: startTime,
         lte: endTime,
       },
     },
