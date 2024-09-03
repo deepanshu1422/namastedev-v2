@@ -70,22 +70,22 @@ function Testimonial({
   );
 }
 
-const testimonials: TestimonialType[] = [
+export const testimonials: TestimonialType[] = [
   {
     review: (
       <p className="leading-6 text-sm font-normal">
-        Before joining 30DC, I was struggling to make sense of the vast world of
-        tech.{" "}
+        Before joining 30DC, I was struggling to make sense of the vast world
+        of tech.{" "}
         <span className="bg-lime-500/40">
-          The mentorship program gave me a structured approach and personalized
-          guidance that I desperately needed.
+          The mentorship program gave me a structured approach and
+          personalized guidance that I desperately needed.
         </span>{" "}
         With 30DC&apos;s resources and community, I successfully transitioned
         from a non-tech background to securing a software engineering role.
       </p>
     ),
     name: "Rojal Sapkota",
-    link: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0",
+    link: "/courses",
     linkedin: "https://www.linkedin.com/in/rojal-sapkota-787130237/",
     pos: "SDE@Google",
     profile: "/rojal-in.jpg",
@@ -93,8 +93,8 @@ const testimonials: TestimonialType[] = [
   {
     review: (
       <p className="leading-6 text-sm font-normal">
-        I was stuck in a low-paying job and felt lost in my career. 30DC&apos;s
-        mentorship group changed everything for me.{" "}
+        I was stuck in a low-paying job and felt lost in my career.
+        30DC&apos;s mentorship group changed everything for me.{" "}
         <span className="bg-lime-500/40">
           The courses and community support helped me sharpen my skills and
           regain confidence.
@@ -104,18 +104,18 @@ const testimonials: TestimonialType[] = [
       </p>
     ),
     name: "Ishan",
-    link: "https://courses.30dayscoding.com/courses/Full-stack-package-652a0a17e4b0db14394522ed",
-    linkedin: "https://www.linkedin.com/in/ishan/",
-    pos: "SDE (Remote) USA",
-    profile: "/ishan-in.jpg",
+    link: "/mentorship",
+    linkedin: "https://www.linkedin.com/in/ishangupta305/",
+    pos: "SDE@Google",
+    profile: "/ishan-in.jpeg",
   },
   {
     review: (
       <p className="leading-6 text-sm font-normal">
         Joining 30DC was the best decision I made for my career.{" "}
         <span className="bg-lime-500/40">
-          The personalized mentorship and the comprehensive courses provided me
-          with the tools and strategies I needed to excel in interviews.
+          The personalized mentorship and the comprehensive courses provided
+          me with the tools and strategies I needed to excel in interviews.
         </span>{" "}
         Thanks to 30DC and the community, I secured an internship at LinkedIn,
         which eventually turned into a full-time software engineering position
@@ -123,9 +123,9 @@ const testimonials: TestimonialType[] = [
       </p>
     ),
     name: "Umang Chaudhary",
-    link: "https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d",
+    link: "/courses",
     linkedin: "https://www.linkedin.com/in/umang18oct/",
-    pos: "SDE@Amazon",
+    pos: "TikTok",
     profile: "/umang-in.jpg",
   },
   {
@@ -142,9 +142,9 @@ const testimonials: TestimonialType[] = [
       </p>
     ),
     name: "Kevin",
-    link: "https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view",
+    link: "/courses",
     linkedin: "https://www.linkedin.com/in/kevinmsmith131/",
-    pos: "SDE@Tesla",
+    pos: "Tesla",
     profile: "",
   },
   {
@@ -156,13 +156,13 @@ const testimonials: TestimonialType[] = [
           The structured courses and mentorship provided me with the direction
           and skills I needed to stand out.
         </span>{" "}
-        The supportive community kept me motivated throughout the process, and I
-        eventually landed a software engineering position at Netflix,
+        The supportive community kept me motivated throughout the process, and
+        I eventually landed a software engineering position at Netflix,
         transforming my career.
       </p>
     ),
     name: "Manan Patel",
-    link: "https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view",
+    link: "/courses",
     linkedin: "https://www.linkedin.com/in/themananpatel/",
     pos: "SDE@Nasdaq",
     profile: "/manan-in.jpg",
@@ -170,9 +170,9 @@ const testimonials: TestimonialType[] = [
   {
     review: (
       <p className="leading-6 text-sm font-normal">
-        I&apos;m happy to share that I&apos;m starting a new position as Software Engineer
-        1-B at Bank of America! I&apos;m grateful to Vellore Institute of Technology
-        for providing this amazing opportunity.
+        I&apos;m happy to share that I&apos;m starting a new position as
+        Software Engineer 1-B at Bank of America! I&apos;m grateful to Vellore
+        Institute of Technology for providing this amazing opportunity.
         <span className="bg-lime-500/40">
           I&apos;d also like to thank Aryan Singh and Deepanshu Udhwani, who
           continuously guided me with placements with their community (30 Days
@@ -181,7 +181,7 @@ const testimonials: TestimonialType[] = [
       </p>
     ),
     name: "Sneha Michelle V.",
-    link: "https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0",
+    link: "/courses",
     linkedin: "https://www.linkedin.com/in/sneha-michelle-v-1b73b0213/",
     pos: "SDE@Bank of America",
     profile: "/sneha-in.jpg",

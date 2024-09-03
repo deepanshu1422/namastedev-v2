@@ -88,12 +88,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
       href: "/courses",
       selected: path === "/projects",
     },
-    {
-      title: "Jobs",
-      icon: <Earth className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/jobs",
-      selected: path === "/jobs",
-    },
+    // {
+    //   title: "Jobs",
+    //   icon: <Earth className="h-4 w-4 md:h-5 md:w-5" />,
+    //   href: "/jobs",
+    //   selected: path === "/jobs",
+    // },
     // {
     //   title: "Roadmaps",
     //   icon: <Map className="h-4 w-4 md:h-5 md:w-5" />,
@@ -106,12 +106,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
       href: "/testimonials",
       selected: path === "/testimonials",
     },
-    {
-      title: "DSA",
-      icon: <Braces className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/dsa",
-      selected: path === "/dsa",
-    },
+    // {
+    //   title: "DSA",
+    //   icon: <Braces className="h-4 w-4 md:h-5 md:w-5" />,
+    //   href: "/dsa",
+    //   selected: path === "/dsa",
+    // },
     {
       title: "1:1 Mentorship",
       icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
