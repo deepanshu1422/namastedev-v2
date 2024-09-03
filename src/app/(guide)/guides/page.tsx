@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import Main from "./main";
 import Script from "next/script";
 
-export const dynamic = "force-static";
+;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),

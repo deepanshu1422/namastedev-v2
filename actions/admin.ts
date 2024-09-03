@@ -6,8 +6,8 @@ import { addHours, addMinutes, format, parseISO, subDays, subHours } from "date-
 const ISTTime = () => {
   const currentTime = new Date();
 
-  const startTime = subHours(currentTime.setHours(0, 0, 0, 0), 5.5);
-  const endTime = subHours(currentTime.setHours(23, 59, 59, 999), 5.5);
+  const startTime = subHours(currentTime.setHours(0, 0, 0, 0), 0);
+  const endTime = subHours(currentTime.setHours(23, 59, 59, 999), 0);
 
   return { startTime, endTime };
 };

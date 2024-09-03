@@ -8,7 +8,7 @@ import Challenge from "./challenges";
 import Interview from "./interview";
 import Banner from "./banner";
 
-export const dynamic = "force-static";
+;
 
 export const metadata: Metadata = {
   title: "Explore | 30dayscoding",
