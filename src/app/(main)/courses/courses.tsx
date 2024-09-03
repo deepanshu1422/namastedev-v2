@@ -277,7 +277,7 @@ function Bundle({
           <span className="flex gap-2 text-lg text-white font-semibold">
             ₹{amount}
             <span className="text-muted-foreground line-through">
-              ₹{(amount * 100) / 15}
+              ₹{((amount * 100) / 15).toFixed(0)}
             </span>
             {/* <span className="text-lime-500">75%off</span> */}
             <Badge

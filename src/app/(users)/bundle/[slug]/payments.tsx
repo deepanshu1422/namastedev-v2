@@ -581,7 +581,7 @@ export function Floating({
 }) {
   let course = {
     price: amount,
-    ogPrice: (amount * 100) / 15,
+    ogPrice: ((amount * 100) / 15).toFixed(0),
     discount: 75,
   };
 

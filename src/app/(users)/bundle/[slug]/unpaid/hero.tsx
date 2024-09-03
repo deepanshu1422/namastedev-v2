@@ -134,7 +134,7 @@ export default function Hero({
                     <span className="text-white text-2xl font-bold flex gap-2 items-end pt-1">
                       ₹{amount}
                       <span className="text-muted-foreground/70 italic line-through">
-                        ₹{(amount * 100) / 15}
+                        ₹{((amount * 100) / 15).toFixed(0)}
                       </span>
                       <span>85% off</span>
                     </span>

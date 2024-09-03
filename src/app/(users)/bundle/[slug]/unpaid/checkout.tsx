@@ -62,7 +62,7 @@ export default function Checkout({
               <span className="relative w-fit text-white sm:text-2xl font-bold flex gap-2 items-start">
                 ₹{amount}
                 <span className="text-muted-foreground/70 italic line-through">
-                  ₹{(amount * 100) / 15}
+                  ₹{((amount * 100) / 15).toFixed(0)}
                 </span>
                 {/* <Image className="absolute -top-14 -right-16" src={"/75off.png"} alt="30DC 70% off" height={100} width={100} /> */}
                 <span>(85% off)</span>
