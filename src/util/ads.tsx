@@ -21,6 +21,7 @@ export function SquareAD() {
         data-full-width-responsive="true"
       ></ins>
       <Script
+        id="suqare-ads"
         dangerouslySetInnerHTML={{
           __html: "(adsbygoogle = window.adsbygoogle || []).push({});",
         }}
@@ -40,6 +41,7 @@ export function FooterAD() {
         data-ad-slot="6408550814"
       ></ins>
       <Script
+        id="footer-ads"
         dangerouslySetInnerHTML={{
           __html: "(adsbygoogle = window.adsbygoogle || []).push({});",
         }}

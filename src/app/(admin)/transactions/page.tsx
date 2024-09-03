@@ -2,7 +2,7 @@
 
 import React, { useCallback } from "react";
 import DataTable from "./table";
-import DatePicker from "./date-picker";
+import { DatePickerWithRange } from "./date-picker";
 import TablePagination from "./pagination";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
@@ -23,7 +23,13 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { DefaultTabsTrigger, Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  DefaultTabsTrigger,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
 
 export type QureyResponse = Pick<
   UseQueryResult<
@@ -121,7 +127,7 @@ export default function Page() {
           </p>
         </div>
         <div className="flex gap-2 max-sm:w-full">
-          <DatePicker createQueryString={createQueryString} />
+          <DatePickerWithRange />
         </div>
       </section>
 

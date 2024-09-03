@@ -16,6 +16,7 @@ import PageSense from "@/util/pagesense";
 import Intercom from "@/util/intercom";
 
 import Freshdesk from "@/util/freshdesk";
+import AdSense from "@/util/ads";
 
 export default async function RootLayout({
   children,
@@ -28,6 +29,7 @@ export default async function RootLayout({
     <html lang="en">
       <head>
         <GoogleTagManager containerId="GTM-W4LNH7RV" />
+        <AdSense />
       </head>
       <SessionProvider session={session}>
         <QueryProvider>
