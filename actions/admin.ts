@@ -152,19 +152,19 @@ export async function getHourlyRevenue() {
   }, {} as Record<string, typeof payments>);
 
   let resultPayments: Record<
-    string,
-    { success: number; initiated: number; revenue: number }
+      string,
+      { success: number; initiated: number; revenue: number }
   > = {};
 
   Object.keys(groupedPayments).forEach((day) => {
     resultPayments[day] = {
       success: groupedPayments[day].filter(
-        (e) => e.paymentStatus === "completed"
+          (e) => e.paymentStatus === "completed"
       ).length,
       initiated: groupedPayments[day].length,
       revenue: groupedPayments[day]
-        .filter((e) => e.paymentStatus === "completed")
-        .reduce((acc, cur) => (acc += cur.basePrice / 100), 0),
+          .filter((e) => e.paymentStatus === "completed")
+          .reduce((acc, cur) => (acc += cur.basePrice / 100), 0),
     };
   });
 
@@ -174,12 +174,12 @@ export async function getHourlyRevenue() {
   }
 
   const hourlyPayments: Record<
-    string,
-    { success: number; initiated: number; revenue: number }
+      string,
+      { success: number; initiated: number; revenue: number }
   > = {};
 
   for (const [time, { initiated, success, revenue }] of Object.entries(
-    resultPayments
+      resultPayments
   )) {
     const roundedHour = roundToHour(time);
 
@@ -194,12 +194,12 @@ export async function getHourlyRevenue() {
     }
   }
   const sortedArray = Object.entries(hourlyPayments)
-    .map(([time, data]) => ({ time, ...data }))
-    .sort((a, b) => {
-      const [aHour, aMinute] = a.time.split(":").map(Number);
-      const [bHour, bMinute] = b.time.split(":").map(Number);
-      return aHour - bHour || aMinute - bMinute;
-    });
+      .map(([time, data]) => ({ time, ...data }))
+      .sort((a, b) => {
+        const [aHour, aMinute] = a.time.split(":").map(Number);
+        const [bHour, bMinute] = b.time.split(":").map(Number);
+        return aHour - bHour || aMinute - bMinute;
+      });
 
   return { sortedArray };
 }
