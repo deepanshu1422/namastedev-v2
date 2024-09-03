@@ -11,9 +11,7 @@ export default auth((req) => {
   // console.log("NextUrl", nextUrl);
 
   if (["/admin", "/transactions"].includes(nextUrl.pathname)) {
-    if (
-      req.auth?.user?.email !== "404rakshit@gmail.com"
-    ) {
+    if (req.auth?.user?.email !== process.env.ADMIN) {
       const newUrl = new URL(
         `/api/auth/signin?callbackUrl=${nextUrl.href}`,
         req.nextUrl.origin

@@ -124,7 +124,7 @@ export default function Page() {
       <Records />
 
       <Tabs defaultValue="chart">
-        <TabsList className="grid w-full grid-cols-2 bg-card max-w-96 mx-auto shadow-lg drop-shadow-[0px_0px_10px_#07928150] hover:drop-shadow-[0px_0px_15px_#07928170] transition-all">
+        <TabsList className="grid w-full grid-cols-2 bg-card max-w-96 mx-auto shadow-lg drop-shadow-[0px_0px_10px_#07928150] hover:drop-shadow-[0px_0px_15px_#07928170] transition-all py-2">
           <DefaultTabsTrigger value="chart">Chart</DefaultTabsTrigger>
           <DefaultTabsTrigger value="table">Table</DefaultTabsTrigger>
         </TabsList>
