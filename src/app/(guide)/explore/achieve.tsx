@@ -101,7 +101,7 @@ export function Slider() {
                                             <span>{name}</span>
                                         </section>
                                     </div>
-                                    {/* <Link href={"https://courses.30dayscoding.com/s/store"} className="flex gap-2 transition-all items-center bg-card rounded-md px-3 py-2 hover:text-prime">
+                                    {/* <Link href={"/courses"} className="flex gap-2 transition-all items-center bg-card rounded-md px-3 py-2 hover:text-prime">
                                         <Video className="sm:h-7 h-5 sm:w-7 w-5" />
                                         <span className="font-semibold max-sm:text-sm">Learn Now</span>
                                     </Link> */}

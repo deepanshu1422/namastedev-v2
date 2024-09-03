@@ -38,7 +38,7 @@ export function Slider() {
   const products = [
     {
       name: "30 Days of DSA",
-      link: "https://dsa.30dayscoding.com/"
+      link: "/courses"
     },
     {
       name: "30DC Jobs and Coding Challenges",

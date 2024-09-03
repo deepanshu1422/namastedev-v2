@@ -155,7 +155,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
   //               </CardDescription>
   //             </CardHeader>
   //             <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-  //               <Link href={"https://courses.30dayscoding.com/s/store"}>
+  //               <Link href={"/courses"}>
   //                 <Button
   //                   size="sm"
   //                   className="bg-prime hover:bg-prime/80 text-white w-full"
@@ -227,7 +227,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
   //                   <CardContent>
   //                     <Link
   //                       href={
-  //                         "https://courses.30dayscoding.com/s/store"
+  //                         "/courses"
   //                       }
   //                     >
   //                       <Button

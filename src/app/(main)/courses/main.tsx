@@ -51,11 +51,11 @@ function Bundle({
   slug: string;
 }) {
   const mentorship = [
-    "1:1 Personalized Guidance",
-    "Access to All 10 Courses",
-    "24/7 Whatsapp Mentors",
-    "Full Stack Projects",
-    "SAAS Projects",
+    "Resume Review",
+    "Referal to Big MNCs",
+    "24/7 Whatsapp Doubt Solving",
+    "Weekly interaction with Senior Engineers",
+    "Personalized Roadmap and Follow Up",
   ];
 
   return (
@@ -105,7 +105,7 @@ function Bundle({
       >
         <div className="max-tab:order-last flex flex-col gap-3">
           <h3 className="font-bold text-xl tab:text-2xl">
-            Join 1:1 Mentorship Now and Get Live Session
+            Job Assistance and Mentorship 
           </h3>
           <div className="flex flex-col gap-1 pr-5">
             {mentorship.map((e, i) => (

@@ -152,7 +152,7 @@ export default function Footer() {
                 </span>
                 <Link
                   className="lg:hover:text-prime transition-all"
-                  href={"https://dsa.30dayscoding.com/"}
+                  href={"/courses"}
                 >
                   DSA Sheets
                 </Link>

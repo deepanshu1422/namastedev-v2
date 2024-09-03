@@ -24,7 +24,7 @@ export default async function Floating() {
           </span>
         </p>
 
-        {/* <Link href={"https://courses.30dayscoding.com/s/store"} >
+        {/* <Link href={"/courses"} >
           <div className="group relative">
             <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-500 via-lime-500 to-emerald-500 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
             <Button

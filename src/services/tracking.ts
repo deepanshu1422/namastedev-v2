@@ -1,9 +1,7 @@
 import { sha256 } from "js-sha256";
 import * as fbq from "./fbpixel";
 
-const createSendingData = async (
-  eventId: string
-) => {
+const createSendingData = async (eventId: string) => {
   return {
     event_name: "Purchase",
     event_time: Math.floor(Date.now() / 1000),
@@ -23,8 +21,11 @@ const createSendingData = async (
   };
 };
 
-export default async function triggerEvent() {
-  const additionalData = {};
+export default async function triggerEvent({
+  additionalData,
+}: {
+  additionalData: Record<string, any>;
+}) {
 
   const eventId: string = crypto.randomUUID();
 

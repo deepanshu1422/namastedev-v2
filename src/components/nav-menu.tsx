@@ -84,7 +84,7 @@ export const navTitles: {
 
   //     {
   //       title: "DSA Sheets",
-  //       href: "https://dsa.30dayscoding.com/",
+  //       href: "/courses",
   //       description:
   //         "Explore our comprehensive Data Structures and Algorithms (DSA) sheet, meticulously curated to aid your journey through our DSA courses.",
   //     },

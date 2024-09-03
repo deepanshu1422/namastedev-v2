@@ -170,9 +170,15 @@ export default function MobileMenu() {
     //   ],
     // },
     {
+      icon: <Users className="h-5 w-5" />,
+      title: "Login",
+      href: "/dashboard",
+      selected: false,
+    },
+    {
       icon: <Layers className="h-5 w-5" />,
       title: "Courses",
-      href: "https://courses.30dayscoding.com/s/store",
+      href: "/courses",
       selected: false,
     },
     // {
@@ -181,12 +187,12 @@ export default function MobileMenu() {
     //   href: "/blog",
     //   selected: false,
     // },
-    // {
-    //   icon: <Earth className="h-5 w-5" />,
-    //   title: "Jobs",
-    //   href: "/jobs",
-    //   selected: false,
-    // },
+    {
+      icon: <Earth className="h-5 w-5" />,
+      title: "Mentorship",
+      href: "/mentorship",
+      selected: false,
+    },
     // {
     //   icon: <Package className="h-5 w-5" />,
     //   title: "Products",

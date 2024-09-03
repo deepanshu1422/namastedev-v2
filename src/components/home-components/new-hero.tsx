@@ -40,7 +40,6 @@ function Video({
   );
 }
 
-
 export default function Hero({
   title,
   desc,
@@ -59,7 +58,12 @@ export default function Hero({
   return (
     <>
       <div className={`w-full grid min-h-96 relative`}>
-        <Image src={heroImage ?? ""} alt="30dc homepage" fill className="opacity-40" />
+        <Image
+          src={heroImage ?? ""}
+          alt="30dc homepage"
+          fill
+          className="opacity-40"
+        />
         <div className="relative tab:p-[6.5rem_2.5rem_6.75rem] max-tab:pt-[5rem] max-tab:pb-[4.5rem] m-auto max-w-4xl grid gap-5 place-items-center max-phone:place-items-start phone:text-center text-white">
           <h1
             className={`font-jakarta phone:text-[3.7rem] text-[2.5rem] font-extrabold bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight px-2 max-phone:px-6 max-w-3xl`}
@@ -80,7 +84,7 @@ export default function Hero({
 
           <div className="p-[.5rem_1.00rem_.5rem_1.00rem] rounded-[3.125rem] flex max-lg:flex-col max-lg:w-full lg:flex-wrap items-center justify-center max-w-xl gap-5 my-2 mb-1">
             <Link
-              href={"/courses"}
+              href={"/bundle/complete-package-all-course-bundle"}
               className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
             >
               <span className="text-sm">All Courses</span>
@@ -140,15 +144,3 @@ export default function Hero({
     </>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
