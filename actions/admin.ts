@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/util/prismaClient";
-import { addMinutes, format, parseISO, subDays, subHours } from "date-fns";
+import { addHours, addMinutes, format, parseISO, subDays, subHours } from "date-fns";
 
 const ISTTime = () => {
   const currentTime = new Date();
@@ -132,7 +132,7 @@ export async function getHourlyRevenue() {
     by: ["createdAt", "paymentStatus", "basePrice"],
     where: {
       createdAt: {
-        gte: startTime,
+        gte: addHours(startTime, 5.5),
         lte: endTime,
       },
     },
