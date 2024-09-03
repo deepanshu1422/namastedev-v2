@@ -14,16 +14,6 @@ import Records from "./records";
 import { TxnChart } from "./txn-chart";
 
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
   DefaultTabsTrigger,
   Tabs,
   TabsContent,
