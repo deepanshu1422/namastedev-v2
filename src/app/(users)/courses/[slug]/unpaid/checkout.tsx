@@ -1,19 +1,23 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { sendEvent } from "@/services/fbpixel";
+import { sha256 } from "js-sha256";
 import { Check, Play } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 
 export default function Checkout({
-  checkout,
+  courseId,
   image,
   amount,
   courseOffer,
   setOpen,
   setYtOpen,
 }: {
+  courseId: string;
   checkout: string;
   image: string;
   amount: number;
@@ -21,6 +25,7 @@ export default function Checkout({
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
 }) {
+  const { data } = useSession();
   return (
     <div className="max-tab:hidden w-[500px] h-fit sticky -translate-y-[330px] top-[28rem]">
       <div className="max-w-sm bg-gradient-to-b from-head to-second/20 flex flex-col gap-4 relative max-tab:mx-auto ml-auto shadow-lg backdrop-blur-sm shadow-black/40 overflow-hidden p-0.5">
@@ -45,15 +50,25 @@ export default function Checkout({
           <span className="relative w-fit text-white sm:text-2xl font-bold flex gap-2 items-start">
             ₹{amount}
             <span className="text-muted-foreground/70 italic line-through">
-              ₹{((amount + 1) * 4) - 1}
+              ₹{(amount + 1) * 10 - 1}
             </span>
             {/* <Image className="absolute -top-14 -right-16" src={"/75off.png"} alt="30DC 70% off" height={100} width={100} /> */}
-            <span>(75% off)</span>
+            <span>(90% off)</span>
           </span>
 
           <div className="flex flex-col gap-2">
             <Button
-              onClick={() => setOpen(true)}
+              onClick={() => {
+                setOpen(true);
+                sendEvent("Initiate Checkout", {
+                  amount,
+                  content_ids: [courseId],
+                  content_type: "course",
+                  em: sha256(data?.user?.email ?? ""),
+                  ph: sha256(data?.user?.phone ?? ""),
+                  fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
+                });
+              }}
               size={"lg"}
               className="flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
             >

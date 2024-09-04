@@ -50,18 +50,20 @@ function Bundle({
   amount: number;
   slug: string;
 }) {
-
-  const mentorship= [
-    "1:1 Personalized Guidance",
-    "Access to All 10 Courses",
-    "24/7 Whatsapp Mentors",
-    "Full Stack Projects",
-    "SAAS Projects"
-  ]
+  const mentorship = [
+    "Resume Review",
+    "Referal to Big MNCs",
+    "24/7 Whatsapp Doubt Solving",
+    "Weekly interaction with Senior Engineers",
+    "Personalized Roadmap and Follow Up",
+  ];
 
   return (
     <div className="flex max-phone:flex-col w-full max-w-[85rem] gap-7 mx-auto max-phone:px-6 px-10 py-5 tab:pb-8">
-      <Link href={"/bundle/" + slug} className="flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6">
+      <Link
+        href={"/bundle/" + slug}
+        className="flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6"
+      >
         <div className="max-tab:order-last flex flex-col gap-3">
           <h3 className="font-bold text-xl tab:text-2xl line-clamp-2">
             {title}
@@ -83,7 +85,7 @@ function Bundle({
               >
                 Buy all @₹{amount}{" "}
                 <span className="italic line-through text-muted-foreground">
-                  ₹{amount + amount * 0.85}
+                  ₹{((amount * 100) / 15).toFixed(0)}
                 </span>
               </Button>
             </div>
@@ -97,10 +99,13 @@ function Bundle({
           className="rounded-s-lg w-full tab:h-4/5 my-auto shadow-xl shadow-black/50 object-cover"
         />
       </Link>
-      <Link href={"/mentorship"} className="max-phone:hidden flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6">
+      <Link
+        href={"/mentorship"}
+        className="max-phone:hidden flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6"
+      >
         <div className="max-tab:order-last flex flex-col gap-3">
           <h3 className="font-bold text-xl tab:text-2xl">
-            Join 1:1 Mentorship Now and Get Live Session
+            Job Assistance and Mentorship 
           </h3>
           <div className="flex flex-col gap-1 pr-5">
             {mentorship.map((e, i) => (

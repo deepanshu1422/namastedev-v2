@@ -2,7 +2,7 @@
 import { Metadata } from "next";
 import Roadmap from "./roadmap";
 
-export const dynamic = "force-static";
+;
 
 export const metadata: Metadata = {
   title: "30DC Roadmaps | 30dayscoding",

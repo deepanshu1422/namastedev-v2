@@ -41,6 +41,8 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import createBundlePayment from "../../../../../actions/createBundlePayment";
 import { useRouter } from "next/navigation";
+import { sendEvent } from "@/services/fbpixel";
+import { sha256 } from "js-sha256";
 
 export function PaymentSheet({
   cover,
@@ -176,6 +178,17 @@ export function PaymentSheet({
         amount: res.data.amount,
         order_id: res.data.orderId,
         handler: async function (response: any) {
+          sendEvent("Purchase", {
+            value: amount,
+            currency: "INR",
+            content_ids: [bundleId],
+            content_type: "bundle",
+            content_name: title,
+            em: sha256(formData.email), // Hashing example
+            ph: sha256(formData.phone),
+            fn: sha256(formData.name.split(" ")[0]),
+            ln: sha256(formData.name.split(" ")[1] ?? ""),
+          });
           setOpenPay(true);
           await update({ courses: true });
           if (session?.user?.email) router.refresh();
@@ -186,7 +199,11 @@ export function PaymentSheet({
           contact: formData.phone,
         },
         notes: {
-          address: "30DC Corporate Office",
+          name: formData.name,
+          email: formData.email,
+          contact: formData.phone,
+          address: formData.state,
+          bundleId,
         },
         theme: {
           color: "#134543",
@@ -577,7 +594,7 @@ export function Floating({
 }) {
   let course = {
     price: amount,
-    ogPrice: (amount * 100) / 15,
+    ogPrice: ((amount * 100) / 15).toFixed(0),
     discount: 75,
   };
 
@@ -590,7 +607,16 @@ export function Floating({
           <div className="flex-1 group relative">
             <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
             <Button
-              onClick={() => setOpen(true)}
+              onClick={() => {
+                setOpen(true);
+                sendEvent("Initiate Checkout", {
+                  content_ids: [bundleId],
+                  content_type: "bundle",
+                  em: sha256(session?.user?.email ?? ""),
+                  ph: sha256(session?.user?.phone ?? ""),
+                  fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
+                });
+              }}
               variant={"outline"}
               className={`font-semibold text-foreground/80 hover:text-foreground relative w-full p-6 text-sm gap-1`}
             >

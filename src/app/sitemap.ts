@@ -133,7 +133,7 @@ const staticMaps: MetadataRoute.Sitemap = [
         priority: 0.5,
     },
     {
-        url: 'https://dsa.30dayscoding.com/',
+        url: '/courses',
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.5,

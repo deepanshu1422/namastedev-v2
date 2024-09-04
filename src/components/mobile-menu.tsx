@@ -170,21 +170,27 @@ export default function MobileMenu() {
     //   ],
     // },
     {
+      icon: <Users className="h-5 w-5" />,
+      title: "Login",
+      href: "/dashboard",
+      selected: false,
+    },
+    {
       icon: <Layers className="h-5 w-5" />,
       title: "Courses",
-      href: "https://courses.30dayscoding.com/s/store",
+      href: "/courses",
       selected: false,
     },
-    {
-      icon: <Rss className="h-5 w-5" />,
-      title: "Blog",
-      href: "/blog",
-      selected: false,
-    },
+    // {
+    //   icon: <Rss className="h-5 w-5" />,
+    //   title: "Blog",
+    //   href: "/blog",
+    //   selected: false,
+    // },
     {
       icon: <Earth className="h-5 w-5" />,
-      title: "Jobs",
-      href: "/jobs",
+      title: "Mentorship",
+      href: "/mentorship",
       selected: false,
     },
     // {
@@ -193,12 +199,12 @@ export default function MobileMenu() {
     //   href: "/products",
     //   selected: false,
     // },
-    {
-      icon: <Braces className="h-5 w-5" />,
-      title: "DSA",
-      href: "/dsa",
-      selected: false,
-    },
+    // {
+    //   icon: <Braces className="h-5 w-5" />,
+    //   title: "DSA",
+    //   href: "/dsa",
+    //   selected: false,
+    // },
   ];
 
   return (
@@ -289,7 +295,7 @@ export default function MobileMenu() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Link href={"https://courses.30dayscoding.com/s/store"}>
+                <Link href={"/courses"}>
                   <Button size="sm" className="text-white bg-prime w-full">
                     Enroll Now
                   </Button>

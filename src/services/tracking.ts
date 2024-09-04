@@ -1,9 +1,15 @@
 import { sha256 } from "js-sha256";
 import * as fbq from "./fbpixel";
 
-const createSendingData = async (
-  eventId: string
-) => {
+const createSendingData = async ({
+  eventId,
+  name,
+  value,
+}: {
+  eventId: string;
+  name: string;
+  value: number;
+}) => {
   return {
     event_name: "Purchase",
     event_time: Math.floor(Date.now() / 1000),
@@ -17,20 +23,18 @@ const createSendingData = async (
     },
     custom_data: {
       currency: "INR",
-      value: 2000,
-      name: "deepanshu",
+      value,
+      name,
     },
   };
 };
 
-export default async function triggerEvent() {
-  const additionalData = {};
-
+export default async function triggerEvent(data: Record<string, any>) {
   const eventId: string = crypto.randomUUID();
 
-  // const sendData = await createSendingData(eventId);
+  // const sendData = await createSendingData({ eventId, name, value });
 
-  fbq.event("Purchase", additionalData, { eventID: eventId });
+  fbq.event("Purchase", data, { eventID: eventId });
 
   // fetch(
   //   `https://graph.facebook.com/v18.0/${process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}/events?access_token=${process.env.NEXT_PUBLIC_FBACCESSKEY}`,

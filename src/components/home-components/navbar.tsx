@@ -51,8 +51,8 @@ export default function Navbar() {
               href={"/dashboard"}
               className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:p-2 rounded-md"
             >
-              <span className="text-sm max-sm:hidden">Login</span>
-              <LogIn className="h-5 w-5 sm:hidden" />
+              <span className="text-sm">Login</span>
+              {/* <LogIn className="h-5 w-5 sm:hidden" /> */}
             </Link>
 
             <MobileMenu />

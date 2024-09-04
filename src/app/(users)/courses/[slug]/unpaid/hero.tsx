@@ -15,9 +15,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 import { Reviews } from "../checkout";
+import { sendEvent } from "@/services/fbpixel";
+import { sha256 } from "js-sha256";
+import { useSession } from "next-auth/react";
 
 export default function Hero({
   title,
+  courseId,
   image,
   amount,
   rating,
@@ -29,12 +33,14 @@ export default function Hero({
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
   title: string;
+  courseId: string;
   image: string;
   amount: number;
   rating: number;
   shortDescription: string;
   courseOffer: string[];
 }) {
+  const { data } = useSession();
   return (
     <>
       <div className={`w-full grid bg-zinc-950/60 shadow`}>
@@ -116,14 +122,24 @@ export default function Hero({
                 <span className="text-white text-2xl font-bold flex gap-2 items-end pt-1">
                   ₹{amount}
                   <span className="text-muted-foreground/70 italic line-through">
-                    ₹{((amount + 1) * 4) - 1}
+                    ₹{(amount + 1) * 10 - 1}
                   </span>
-                  <span>75% off</span>
+                  <span>90% off</span>
                 </span>
 
                 <div className="flex flex-col gap-2 py-1">
                   <Button
-                    onClick={() => setOpen(true)}
+                    onClick={() => {
+                      setOpen(true);
+                      sendEvent("Initiate Checkout", {
+                        amount,
+                        content_ids: [courseId],
+                        content_type: "course",
+                        em: sha256(data?.user?.email ?? ""),
+                        ph: sha256(data?.user?.phone ?? ""),
+                        fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
+                      });
+                    }}
                     size={"lg"}
                     className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
                   >

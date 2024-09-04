@@ -16,11 +16,11 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import DatePickerWithRange from "./date-picker";
 import { addDays, format, subDays } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import revalidatePages from "../../../../actions/revalidate-pages";
+import { getTransactions } from "../../../../actions/admin";
 
 const chartConfig = {
   views: {
@@ -38,9 +38,9 @@ const chartConfig = {
 
 export function TransactionChart() {
   const { data, isPending } = useQuery({
-    queryKey: ["chart"],
+    queryKey: ["adminchart"],
     queryFn: async () => {
-      const data = await (await fetch("/api/payments")).json();
+      const data = await getTransactions();
       return data;
     },
   });
@@ -78,26 +78,28 @@ export function TransactionChart() {
 
   React.useEffect(() => {
     if (!isPending) {
-      const currentDate = new Date();
+      if (data) {
+        const currentDate = new Date();
 
-      const dataArray: {
-        date: string | Date;
-        transactions: number;
-        users: number;
-      }[] = [];
+        const dataArray: {
+          date: string | Date;
+          transactions: number;
+          users: number;
+        }[] = [];
 
-      // console.log(data);
+        // console.log(data);
 
-      for (let i = 30; i > 0; i--) {
-        let formattedDate = format(subDays(currentDate, i), "yyyy-MM-dd");
-        dataArray.push({
-          date: formattedDate,
-          transactions: data.resultPayments[formattedDate] ?? 0, // Random number for transactions
-          users: data.resultUsers[formattedDate] ?? 0, // Random number for users
-        });
+        for (let i = 30; i > -1; i--) {
+          let formattedDate = format(subDays(currentDate, i), "yyyy-MM-dd");
+          dataArray.push({
+            date: formattedDate,
+            transactions: data.resultPayments[formattedDate] ?? 0, // Random number for transactions
+            users: data.resultUsers[formattedDate] ?? 0, // Random number for users
+          });
+        }
+
+        setChartData(dataArray);
       }
-
-      setChartData(dataArray);
     }
   }, [data]);
 

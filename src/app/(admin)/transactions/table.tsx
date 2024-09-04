@@ -37,6 +37,7 @@ import TablePagination from "./pagination";
 import { useQuery } from "@tanstack/react-query";
 import { getContentfulData } from "@/lib/cotentful";
 import getContentful from "../../../../actions/getContentful";
+import ExportBTN from "./export-btn";
 
 export default function TableDemo({
   data,
@@ -103,7 +104,7 @@ export default function TableDemo({
           </Button>
         </form>
 
-        <div className="flex gap-1">
+        <div className="flex max-sm:grid grid-cols-2 gap-1">
           <Select
             value={searchParams.get("status") ?? ""}
             onValueChange={(value) => {
@@ -113,20 +114,21 @@ export default function TableDemo({
                 );
             }}
           >
-            <SelectTrigger>
+            <SelectTrigger className="bg-card">
               <SelectValue placeholder="Status" />
             </SelectTrigger>
             <SelectContent position="popper">
               <SelectItem value={PaymentStatus.completed}>Completed</SelectItem>
               <SelectItem value={PaymentStatus.created}>Created</SelectItem>
+              <SelectItem value={PaymentStatus.failed}>Failed</SelectItem>
             </SelectContent>
           </Select>
-
           {/* {JSON.stringify(courseId)} */}
-
           <Select
             disabled={loadingCourses}
-            value={searchParams.get("course") ?? ""}
+            value={
+              searchParams.get("course") ?? searchParams.get("bundle") ?? ""
+            }
             onValueChange={(value) => {
               if (value)
                 router.push(
@@ -134,10 +136,13 @@ export default function TableDemo({
                 );
             }}
           >
-            <SelectTrigger>
+            <SelectTrigger className="bg-card">
               <SelectValue placeholder="Course" />
             </SelectTrigger>
             <SelectContent position="popper">
+              <SelectItem className="uppercase" value={"ALL30DC"}>
+                ALL30DC
+              </SelectItem>
               {courseId?.map((e: Record<string, string>, i: number) => (
                 <SelectItem className="uppercase" key={i} value={e.courseId}>
                   {e.courseId}
@@ -145,17 +150,56 @@ export default function TableDemo({
               ))}
             </SelectContent>
           </Select>
-
-          <Button
-            variant={"outline"}
-            size={"sm"}
-            className="max-sm:flex-1 gap-1"
+          <Select
+            value={searchParams.get("page") ?? ""}
+            onValueChange={(value) => {
+              if (value)
+                router.push(
+                  pathName + "?" + createQueryString("page", String(value))
+                );
+            }}
           >
-            <File className="h-4 w-4" /> Export
-          </Button>
+            <SelectTrigger className="bg-card">
+              <SelectValue placeholder="Page" />
+            </SelectTrigger>
+            <SelectContent position="popper" className="max-h-60">
+              {Array.from({
+                length: Math.ceil((data?.totalCount ?? 0) / 10),
+              }).map((_, i) => (
+                <SelectItem className="uppercase" key={i} value={String(i + 1)}>
+                  {String(i + 1)}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          {/* <CSVLink
+            data={[
+              {
+                firstname: "Ahmed",
+                lastname: "Tomi",
+                email: "ah@smthing.co.com",
+              },
+              {
+                firstname: "Raed",
+                lastname: "Labes",
+                email: "rl@smthing.co.com",
+              },
+              {
+                firstname: "Yezzi",
+                lastname: "Min l3b",
+                email: "ymin@cocococo.com",
+              },
+            ]}
+          > */}
+          {/* <ExportBTN query={} /> */}
+          {/* </CSVLink> */}
         </div>
         <Link href={pathName + clearQueryString()}>
-          <Button className="hidden sm:block" variant={"destructive"}>
+          <Button
+            size={"sm"}
+            className="hidden sm:block"
+            variant={"destructive"}
+          >
             Clear
           </Button>
         </Link>
@@ -173,8 +217,8 @@ export default function TableDemo({
           </Button>
         </Link>
       </div>
-      <div className="border border-border rounded-md overflow-hidden">
-        <Table className="bg-background">
+      <div className="border rounded-md overflow-hidden">
+        <Table className="bg-card">
           <TableHeader>
             <TableRow>
               <TableHead className="w-[180px]">Date & Time</TableHead>
@@ -241,12 +285,12 @@ export default function TableDemo({
           </TableBody>
         </Table>
       </div>
-      {!isPending && !!data?.totalCount && (
+      {/* {!isPending && !!data?.totalCount && (
         <TablePagination
           createQueryString={createQueryString}
           total={data?.totalCount ?? 0}
         />
-      )}
+      )} */}
     </section>
   );
 }

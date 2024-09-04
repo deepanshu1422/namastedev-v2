@@ -21,7 +21,7 @@ export default function Hero() {
         <h1 className="text-2xl md:text-3xl font-semibold">Explore Roadmaps</h1>
         <p className="text-sm text-muted-foreground">These paths are structured roadmaps to achieve a broader skillset.</p>
         <Slider />
-        <Link href={"https://courses.30dayscoding.com/s/store"}
+        <Link href={"/courses"}
           className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 rounded-md w-fit self-end"
         >
           <span className="text-sm">Explore all Roadmaps</span>

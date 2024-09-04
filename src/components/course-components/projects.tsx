@@ -71,7 +71,7 @@ export default function Projects() {
                 <Reveal>
                   <AnimatedButton
                     type="ext"
-                    link="https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0"
+                    link="/courses"
                   >
                     Buy Now
                   </AnimatedButton>
@@ -124,7 +124,7 @@ export default function Projects() {
                 <Reveal>
                   <AnimatedButton
                     type="ext"
-                    link="https://courses.30dayscoding.com/courses/Full-stack-package-652a0a17e4b0db14394522ed"
+                    link="/courses"
                   >
                     Buy Now
                   </AnimatedButton>

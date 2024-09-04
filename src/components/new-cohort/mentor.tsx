@@ -102,45 +102,45 @@ export default function Mentor() {
         },
       ],
     },
-    {
-      name: "Abhinav Awasthi",
-      profile: "https://i.ibb.co/GHMvNkm/instructor3.jpg",
-      position: "SDE @Zeta",
-      link: "https://www.linkedin.com/in/abhinavawasthi1/",
-      company: [
-        { name: "Zeta", path: "/zetasuite_logo.jfif" },
-        { name: "Linedin", path: "/linkedin_logo.jfif" },
-        {
-          name: "Harcourt Butler Technology University",
-          path: "/harcourt_butler_tech_uni.jfif",
-        },
-      ],
-    },
-    {
-      name: "Anand Singh",
-      profile: "https://i.ibb.co/gRbb7Zq/mentor3.jpg",
-      position: "SDE@Walmart",
-      link: "https://www.linkedin.com/in/anand-singh2410/",
-      company: [
-        { name: "DBS", path: "/dbs.jpg" },
-        { name: "Walmart Global IN", path: "/walmart.jpg" },
-        { name: "Thapar Institute of Engineering", path: "/thapar.jfif" },
-      ],
-    },
-    {
-      name: "Kshitiz Khosla",
-      profile: "https://i.ibb.co/sW80P1p/mentor4.jpg",
-      position: "SDE@Arcesium",
-      link: "https://www.linkedin.com/in/kshitizkhosla/",
-      company: [
-        { name: "Arcesium", path: "/arcesium.jpg" },
-        { name: "Amazon", path: "/amazon.jpg" },
-        {
-          name: "Birla Institute of Technology and Science, Pilani",
-          path: "/bits.jpg",
-        },
-      ],
-    },
+    // {
+    //   name: "Abhinav Awasthi",
+    //   profile: "https://i.ibb.co/GHMvNkm/instructor3.jpg",
+    //   position: "SDE @Zeta",
+    //   link: "https://www.linkedin.com/in/abhinavawasthi1/",
+    //   company: [
+    //     { name: "Zeta", path: "/zetasuite_logo.jfif" },
+    //     { name: "Linedin", path: "/linkedin_logo.jfif" },
+    //     {
+    //       name: "Harcourt Butler Technology University",
+    //       path: "/harcourt_butler_tech_uni.jfif",
+    //     },
+    //   ],
+    // },
+    // {
+    //   name: "Anand Singh",
+    //   profile: "https://i.ibb.co/gRbb7Zq/mentor3.jpg",
+    //   position: "SDE@Walmart",
+    //   link: "https://www.linkedin.com/in/anand-singh2410/",
+    //   company: [
+    //     { name: "DBS", path: "/dbs.jpg" },
+    //     { name: "Walmart Global IN", path: "/walmart.jpg" },
+    //     { name: "Thapar Institute of Engineering", path: "/thapar.jfif" },
+    //   ],
+    // },
+    // {
+    //   name: "Kshitiz Khosla",
+    //   profile: "https://i.ibb.co/sW80P1p/mentor4.jpg",
+    //   position: "SDE@Arcesium",
+    //   link: "https://www.linkedin.com/in/kshitizkhosla/",
+    //   company: [
+    //     { name: "Arcesium", path: "/arcesium.jpg" },
+    //     { name: "Amazon", path: "/amazon.jpg" },
+    //     {
+    //       name: "Birla Institute of Technology and Science, Pilani",
+    //       path: "/bits.jpg",
+    //     },
+    //   ],
+    // },
     {
       name: "Dhanush Kamath",
       profile: "https://i.ibb.co/zPbLFjd/mentor5.jpg",
@@ -161,7 +161,7 @@ export default function Mentor() {
     },
   ];
   return (
-    <div className="m-auto flex flex-col items-center justify-center p-6 lg:p-10 gap-4 max-w-[80rem]">
+    <div className="m-auto flex flex-col items-center justify-center p-6 lg:p-10 gap-4 max-w-[75rem]">
       {/* Heading */}
       <span className="flex items-center justify-center gap-4 relative">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />

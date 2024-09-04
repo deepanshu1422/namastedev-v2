@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 
-export const dynamic = "force-static";
+;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),
@@ -69,9 +69,9 @@ export default function Home() {
           please contact us at{" "}
           <Link
             className="font-semibold text-prime"
-            href={"mailto:projectsnightlight@gmail.com"}
+            href={"mailto:support@nightlightprojects.freshdesk.com"}
           >
-            projectsnightlight@gmail.com
+            support@nightlightprojects.freshdesk.com
           </Link>
           .
         </p>

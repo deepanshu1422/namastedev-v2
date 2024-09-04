@@ -91,6 +91,7 @@ export default function Main({
   session,
   item: {
     title,
+    slug,
     courseId,
     courseImage,
     modulesCollection,
@@ -188,6 +189,7 @@ export default function Main({
     return (
       <main className="relative min-h-svh overflow-clip">
         <Hero
+          courseId={courseId}
           rating={rating}
           title={title ?? "NULL"}
           image={courseImage?.url}
@@ -201,6 +203,7 @@ export default function Main({
           setYtOpen={setOpenYt}
         />
         <Detail
+          courseId={courseId}
           projectsCollection={projectsCollection}
           modulesCollection={modulesCollection}
           longDescription={mdx}
@@ -261,7 +264,7 @@ export default function Main({
     <>
       {/* @ts-ignore */}
       {session?.user?.courseId?.includes(courseId) ? <Paid /> : <Unpaid />}
-      <PaymentModal payModal={openPay} setOpenPay={setOpenPay} />
+      <PaymentModal slug={slug} payModal={openPay} setOpenPay={setOpenPay} />
       <BundleModal payModal={openPayBunlde} setOpenPay={setOpenPayBunlde} />
     </>
   );

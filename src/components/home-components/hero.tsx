@@ -41,7 +41,7 @@ export default function Hero({
           </div>
 
           <Link
-            href={"https://courses.30dayscoding.com/s/store"}
+            href={"/courses"}
             
           >
 

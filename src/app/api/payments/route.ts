@@ -1,45 +1,34 @@
-import prisma from "@/util/prismaClient";
-import { format, parseISO } from "date-fns";
+import { addMinutes, format, parseISO, subDays, subHours } from "date-fns";
 import { NextResponse } from "next/server";
 
+const ISTTime = () => {
+  const currentTime = new Date();
+
+  const startTime = subHours(currentTime.setHours(0, 0, 0, 0), 5.5);
+  const endTime = subHours(currentTime.setHours(23, 59, 59, 999), 5.5);
+
+  return { startTime, endTime };
+};
+
 export async function GET() {
-    const users = await prisma.user.groupBy({
-        by: ['createdAt'],
-    });
+  // const serverDateUTC = new Date(Date.now());
+  // const localString = serverDateUTC.toLocaleString();
 
-    const payments = await prisma.payments.groupBy({
-        by: ["createdAt"]
-    })
+  // const offsetIST = 5.5 * 60 * 60 * 1000;
+  // const serverDateIST = new Date(serverDateUTC.getTime() + offsetIST);
 
-    const groupedUsers = users.reduce((acc, curr) => {
-        const day = format(parseISO(curr.createdAt.toISOString()), 'yyyy-MM-dd');
-        if (!acc[day]) {
-            acc[day] = [];
-        }
-        acc[day].push(curr);
-        return acc;
-    }, {} as Record<string, typeof users>);
+  // const localStringIST = addMinutes(serverDateIST, 3)
+  //   .toISOString()
+  //   .replace("T", " ")
+  //   .slice(0, 19);
 
-    const groupedPayments = payments.reduce((acc, curr) => {
-        const day = format(parseISO(curr.createdAt.toISOString()), 'yyyy-MM-dd');
-        if (!acc[day]) {
-            acc[day] = [];
-        }
-        acc[day].push(curr);
-        return acc;
-    }, {} as Record<string, typeof payments>);
-
-    let resultUsers: Record<string, number> = {}
-
-    Object.keys(groupedUsers).forEach(day => {
-        resultUsers[day] = groupedUsers[day].length
-    });
-
-    let resultPayments: Record<string, number> = {}
-
-    Object.keys(groupedPayments).forEach(day => {
-        resultPayments[day] = groupedPayments[day].length
-    });
-
-    return NextResponse.json({ resultUsers, resultPayments });
+  const { endTime, startTime } = ISTTime();
+  return NextResponse.json({
+    endTime,
+    startTime,
+    //   serverDateUTC,
+    //   localString,
+    //   serverDateIST: serverDateIST.toISOString(),
+    //   localStringIST,
+  });
 }

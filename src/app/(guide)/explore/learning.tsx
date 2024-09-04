@@ -23,7 +23,7 @@ export default function Learning() {
         <h2 className="text-2xl md:text-3xl font-semibold">What we are offering</h2>
         <p className="text-sm text-muted-foreground">We offer a wide range of collection for latest trending technologies</p>
         <Slider />
-        <Link href={"https://courses.30dayscoding.com/s/store"}
+        <Link href={"/courses"}
           className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 rounded-md w-fit self-end"
         >
           <span className="text-sm">See Full Courses</span>

@@ -57,7 +57,11 @@ export function UpsellModal({
             {/* <DialogTitle>{info.title}</DialogTitle> */}
             {/* <DialogDescription>{info.desc}</DialogDescription> */}
           </DialogHeader>
-          <ProfileForm setOpen={setOpen} setOpenBundle={setBundelPaymentOpen} className="" />
+          <ProfileForm
+            setOpen={setOpen}
+            setOpenBundle={setBundelPaymentOpen}
+            className=""
+          />
           <div className="w-full text-sm items-center flex gap-2">
             <hr className="w-full" />
             OR
@@ -70,7 +74,8 @@ export function UpsellModal({
                 setOpen(false);
                 setPaymentOpen(true);
               }}
-              className="bg-prime/80 hover:bg-prime text-white w-full"
+              className="w-full"
+              variant={"secondary"}
             >
               Continue Purchase...
             </Button>
@@ -88,7 +93,11 @@ export function UpsellModal({
           {/* <DrawerTitle>{info.title}</DrawerTitle> */}
           {/* <DrawerDescription>{info.desc}</DrawerDescription> */}
         </DrawerHeader>
-        <ProfileForm setOpen={setOpen} setOpenBundle={setBundelPaymentOpen} className="mx-4" />
+        <ProfileForm
+          setOpen={setOpen}
+          setOpenBundle={setBundelPaymentOpen}
+          className="mx-4"
+        />
         <div className="w-full text-sm items-center flex gap-2">
           <hr className="w-full" />
           OR
@@ -101,7 +110,7 @@ export function UpsellModal({
               setOpen(false);
               setPaymentOpen(true);
             }}
-            className="bg-prime/80 hover:bg-prime text-white "
+            variant={"secondary"}
           >
             Continue Purchase...
           </Button>
@@ -125,7 +134,8 @@ function ProfileForm({
     <div
       className={`${className} cursor-pointer border-2 border-primary/60 rounded flex flex-col`}
     >
-      <Link href={"/bundle/complete-package-all-course-bundle?sheet=true"}
+      <Link
+        href={"/bundle/complete-package-all-course-bundle?sheet=true"}
         className="relative rounded overflow-hidden"
       >
         <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-prime via-prime to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
@@ -134,19 +144,22 @@ function ProfileForm({
           Limited Offer
         </div>
 
-        <div className="relative w-full p-4 sm:px-6 bg-background font-semibold flex gap-3">
+        <div className="relative w-full p-4 sm:px-6 bg-background font-semibold max-sm:flex-col flex gap-3">
           <div className="flex flex-col">
-            <p className="max-sm:text-sm">Get All Courses @ ₹1299/-</p>
-            <p className="max-sm:text-xs text-sm text-muted-foreground">
-              Intead of ₹499 Per Course
-            </p>
+            <p className="max-sm:text-sm">Get All Courses @ 999/-</p>
+            <div className="flex flex-col pt-0.5 text-sm">
+              <span>✅ Full Stack Mastery Course</span>
+              <span>✅ DSA Mastery Course</span>
+              <span>✅ Blockchain Mastery Course</span>
+              <span>✅ Data Analytics Course</span>
+              <span>✅ AI Mastery Course</span>
+            </div>
           </div>
-          <Badge
-            variant={"secondary"}
-            className="h-fit w-fit m-auto line-clamp-1"
+          <Button
+            className="bg-prime/80 hover:bg-prime text-white h-fit w-full sm:w-fit m-auto line-clamp-1 "
           >
             Claim Now
-          </Badge>
+          </Button>
         </div>
       </Link>
     </div>

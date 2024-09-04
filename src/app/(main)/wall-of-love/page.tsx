@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Floating from "./floating";
 
-export const dynamic = "force-static";
+;
 
 export const metadata: Metadata = {
   title: "Wall of Love | 30DaysCoding",

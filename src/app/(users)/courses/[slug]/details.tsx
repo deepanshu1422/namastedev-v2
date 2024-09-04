@@ -185,7 +185,7 @@ export default function Details({
   });
 
   return (
-    <div className="flex flex-col gap-4 tab:w-3/4 w-full">
+    <div className="flex flex-col gap-4 tab:w-3/4 w-full break-all">
       <section className="flex flex-col gap-2">
         <VideoPlayer
           nextVideo={nextVideo}

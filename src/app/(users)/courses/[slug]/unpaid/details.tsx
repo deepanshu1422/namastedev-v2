@@ -23,6 +23,7 @@ import Guides from "./guides";
 
 export default function Details({
   image,
+  courseId,
   longDescription,
   modulesCollection,
   projectsCollection,
@@ -36,6 +37,7 @@ export default function Details({
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
   courseOffer: string[];
+  courseId: string;
   image: string;
   longDescription: React.JSX.Element;
   amount: number;
@@ -98,6 +100,18 @@ export default function Details({
               ))}
             </div>
           </div>
+        </section>
+
+        <section className="flex flex-col gap-4">
+          <div className="flex max-sm:flex-col gap-2 sm:items-end">
+            <h2 className="text-xl tab:text-2xl font-bold text-white">
+              Course Content
+            </h2>
+            <span className="flex text-sm text-white/60 items-center">
+              ({modulesCollection.total} Lessons)
+            </span>
+          </div>
+          <Chapters modulesCollection={modulesCollection} />
         </section>
 
         {!!projectsCollection.items.length && (
@@ -181,18 +195,6 @@ export default function Details({
           </div>
         </section>
 
-        <section className="flex flex-col gap-4">
-          <div className="flex max-sm:flex-col gap-2 sm:items-end">
-            <h2 className="text-xl tab:text-2xl font-bold text-white">
-              Course Content
-            </h2>
-            <span className="flex text-sm text-white/60 items-center">
-              ({modulesCollection.total} Lessons)
-            </span>
-          </div>
-          <Chapters modulesCollection={modulesCollection} />
-        </section>
-
         <Reviews />
         <Guides />
         <FAQ faqs={faqs} />
@@ -204,6 +206,7 @@ export default function Details({
         courseOffer={courseOffer}
         amount={amount}
         image={image}
+        courseId={courseId}
         checkout="909"
       />
     </div>

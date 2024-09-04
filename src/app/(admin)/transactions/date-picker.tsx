@@ -1,46 +1,65 @@
-"use client";
+"use client"
+
+import * as React from "react"
+import { addDays, format } from "date-fns"
+import { Calendar as CalendarIcon } from "lucide-react"
+import { DateRange } from "react-day-picker"
+
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 
-export default function DatePicker({
-  createQueryString,
-}: {
-  createQueryString: (name: string, value: string) => string;
-}) {
-  //   const [date, setDate] = useState<DateRange | undefined>({
-  //     from: new Date(),
-  //     to: addDays(new Date(), 5),
-  //   });
-
-  const router = useRouter();
-  const pathName = usePathname();
-  const params = useSearchParams();
+export function DatePickerWithRange({
+  className,
+}: React.HTMLAttributes<HTMLDivElement>) {
+  const [date, setDate] = React.useState<DateRange | undefined>({
+    from: new Date(Date.now()),
+    to: new Date(Date.now()),
+  })
 
   return (
-    <div className="sm:w-60 w-full">
-      <Select
-        value={params.get("days") ?? ""}
-        onValueChange={(value) => {
-          if (value)
-            router.push(pathName + "?" + createQueryString("days", value));
-        }}
-      >
-        <SelectTrigger>
-          <SelectValue placeholder="Select Days" />
-        </SelectTrigger>
-        <SelectContent position="popper">
-          <SelectItem value="7">Last 7 Days</SelectItem>
-          <SelectItem value="30">Last 30 Days</SelectItem>
-          <SelectItem value="90">Last 90 days</SelectItem>
-          <SelectItem value="360">Last Year</SelectItem>
-        </SelectContent>
-      </Select>
+    <div className={cn("grid gap-2", className)}>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            id="date"
+            variant={"outline"}
+            className={cn(
+              "w-[300px] justify-start text-left font-normal",
+              !date && "text-muted-foreground"
+            )}
+          >
+            <CalendarIcon className="mr-2 h-4 w-4" />
+            {date?.from ? (
+              date.to ? (
+                <>
+                  {format(date.from, "LLL dd, y")} -{" "}
+                  {format(date.to, "LLL dd, y")}
+                </>
+              ) : (
+                format(date.from, "LLL dd, y")
+              )
+            ) : (
+              <span>Pick a date</span>
+            )}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0" align="start">
+          <Calendar
+            initialFocus
+            mode="range"
+            defaultMonth={date?.from}
+            selected={date}
+            onSelect={setDate}
+            numberOfMonths={2}
+          />
+        </PopoverContent>
+      </Popover>
     </div>
-  );
+  )
 }

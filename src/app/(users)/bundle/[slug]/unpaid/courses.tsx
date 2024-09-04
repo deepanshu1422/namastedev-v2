@@ -42,6 +42,7 @@ export default function Courses({
         opts={{
           loop: true,
           align: "center",
+          startIndex: -1
         }}
         plugins={[
           Autoplay({

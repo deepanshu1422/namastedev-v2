@@ -5,7 +5,7 @@ import ChallengesTabs from "./challenges";
 import Modal from "./modal";
 import Courses from "./courses";
 
-export const dynamic = "force-static";
+;
 
 export const metadata: Metadata = {
   title: "The only DSA Tracking Sheet You NEED | 30dayscoding",
