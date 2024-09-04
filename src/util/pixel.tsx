@@ -5,7 +5,8 @@ import Script from "next/script";
 export default function Pixel() {
   return (
     <>
-      <Script
+      {/* <Script
+        defer
         type="b2d703ce9eb7482864b437ed-text/javascript"
         id="pixel-tracker"
         dangerouslySetInnerHTML={{
@@ -17,10 +18,9 @@ export default function Pixel() {
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '988834379011528');
-            fbq('track', 'PageView');`,
+            fbq('init', '988834379011528');`,
         }}
-      />
+      /> */}
       {/* <noscript>
         <img
           height="1"

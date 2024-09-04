@@ -17,6 +17,7 @@ import Intercom from "@/util/intercom";
 
 import Freshdesk from "@/util/freshdesk";
 import AdSense from "@/util/ads";
+import PixelEvents from "@/services/fbpixel";
 
 export default async function RootLayout({
   children,
@@ -28,7 +29,8 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <GoogleTagManager containerId="GTM-W4LNH7RV" />
+        {/* <GoogleTagManager containerId="GTM-W4LNH7RV" /> */}
+        <Pixel />
         <AdSense />
       </head>
       <SessionProvider session={session}>
@@ -37,6 +39,7 @@ export default async function RootLayout({
             <body
               className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
             >
+              <PixelEvents />
               {children}
               <Footer />
               <Toaster richColors />
@@ -46,7 +49,6 @@ export default async function RootLayout({
       </SessionProvider>
       {/* <Pixel /> */}
       {/* <Intercom /> */}
-      <Pixel />
       <Clarity />
 
       <PageSense />
@@ -55,8 +57,3 @@ export default async function RootLayout({
     </html>
   );
 }
-
-
-
-
-

@@ -76,7 +76,7 @@ function CoursesFallback() {
 
 export function OldCourses() {
   return (
-    <Link target="_blank" href={"/courses"}>
+    <Link target="_blank" href={"https://courses.30dayscoding.com/s/store"}>
     <Alert className="border-prime/80 bg-gradient-to-b from-prime/60 to-second/60 shadow-lg">
       <Notebook className="h-4 w-4" />
       <AlertTitle>Note</AlertTitle>

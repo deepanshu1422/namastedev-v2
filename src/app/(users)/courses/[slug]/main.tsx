@@ -189,6 +189,7 @@ export default function Main({
     return (
       <main className="relative min-h-svh overflow-clip">
         <Hero
+          courseId={courseId}
           rating={rating}
           title={title ?? "NULL"}
           image={courseImage?.url}
@@ -202,6 +203,7 @@ export default function Main({
           setYtOpen={setOpenYt}
         />
         <Detail
+          courseId={courseId}
           projectsCollection={projectsCollection}
           modulesCollection={modulesCollection}
           longDescription={mdx}

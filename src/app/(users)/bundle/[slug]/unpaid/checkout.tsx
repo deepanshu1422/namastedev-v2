@@ -1,6 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { sendEvent } from "@/services/fbpixel";
+import { sha256 } from "js-sha256";
 import { Check, Play } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -71,7 +73,16 @@ export default function Checkout({
               <div className="flex flex-col gap-2 relative">
                 <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
                 <Button
-                  onClick={() => setOpen(true)}
+                  onClick={() => {
+                    setOpen(true);
+                    sendEvent("Initiate Checkout", {
+                      content_ids: [bundleId],
+                      content_type: "bundle",
+                      em: sha256(data?.user?.email ?? ""),
+                      ph: sha256(data?.user?.phone ?? ""),
+                      fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
+                    });
+                  }}
                   size={"lg"}
                   variant={"outline"}
                   className="relative flex items-center font-semibold gap-1 transition-all px-4 py-3 rounded-md text-white text-lg"

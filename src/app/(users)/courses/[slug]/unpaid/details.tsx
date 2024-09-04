@@ -23,6 +23,7 @@ import Guides from "./guides";
 
 export default function Details({
   image,
+  courseId,
   longDescription,
   modulesCollection,
   projectsCollection,
@@ -36,6 +37,7 @@ export default function Details({
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
   courseOffer: string[];
+  courseId: string;
   image: string;
   longDescription: React.JSX.Element;
   amount: number;
@@ -204,6 +206,7 @@ export default function Details({
         courseOffer={courseOffer}
         amount={amount}
         image={image}
+        courseId={courseId}
         checkout="909"
       />
     </div>

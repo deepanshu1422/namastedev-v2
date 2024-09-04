@@ -16,6 +16,8 @@ import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 import { Reviews } from "../checkout";
 import { useSession } from "next-auth/react";
+import { sendEvent } from "@/services/fbpixel";
+import { sha256 } from "js-sha256";
 
 export default function Hero({
   bundleId,
@@ -141,7 +143,17 @@ export default function Hero({
 
                     <div className="flex flex-col gap-2 py-1">
                       <Button
-                        onClick={() => setOpen(true)}
+                        onClick={() => {
+                          setOpen(true);
+                          sendEvent("Initiate Checkout", {
+                            content_ids: [bundleId],
+                            content_type: "bundle",
+                            content_name: title,
+                            em: sha256(data?.user?.email ?? ""),
+                            ph: sha256(data?.user?.phone ?? ""),
+                            fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
+                          });
+                        }}
                         size={"lg"}
                         className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
                       >
