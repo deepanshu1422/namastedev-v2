@@ -211,7 +211,7 @@ export default function Mentors() {
     let mentors: Profile[] = [
         {
             name: "Aryan Singh",
-            designation: "SWE @ Google",
+            designation: "Software Engineer @ Google",
             image: "https://i.ibb.co/YRBGz7v/instructor.jpg",
             description:
                 "Our lead mentor Aryan Singh, a visionary software engineer at Google, leads 30 Days Coding with a resilience hardly seen before. With roles in tech giants and projects like Blocktrain and DSA Revision, Aryan combines professional expertise with a passion for mentoring. His zeal to impart guidance to people stuck in the 'How do I brush my technical skills for this job?' phase, has led to him joining hands with Deepanshu Udhwani, resulting in the birth of 30 Days Coding.",
@@ -309,7 +309,7 @@ export default function Mentors() {
         {
             name: "Deepanshu Udhwani",
             image: "/instructor2.jpg",
-            designation: "Founder",
+            designation: "Software Engineer @ Alibaba Cloud & MakeMyTrip",
             social: {
                 linkedin: "https://www.linkedin.com/in/deepanshu-udhwani/",
                 instagram: "https://www.instagram.com/itsudhwani/",
@@ -381,11 +381,11 @@ export default function Mentors() {
     ];
 
     return (
-        <div className="m-auto grid grid-cols-1 place-items-center px-10 pt-5 lg:px-20 gap-16 max-w-[75rem]">
+        <div className="m-auto grid grid-cols-1 place-items-center px-6 pt-10 lg:px-20 gap-8 max-w-[75rem]">
             <span className="flex items-center justify-center gap-4 relative">
                 <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
                 <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
-                    Our Elite Mentors
+                    Get Mentored By The Best
                 </h2>
                 <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
             </span>

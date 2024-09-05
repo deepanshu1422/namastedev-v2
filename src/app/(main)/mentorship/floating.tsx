@@ -9,18 +9,18 @@ export default async function Floating() {
       <div className="flex max-lg:flex-col justify-between items-center gap-2 p-4 py-2 lg:max-w-[80rem] mx-auto">
         <section className="max-lg:hidden flex flex-col gap-1">
           <span className={`font-jakarta text-lg`}>
-            <span className="lg:text-2xl">One Time Payment</span>
+            <span className="lg:text-2xl">Lifetime Mentorship</span>
           </span>
 
           <div className="flex gap-2 text-sm font-semibold">
-            <span className="">Lifetime Mentorship</span>
+            <span className="">One Time Payment</span>
           </div>
         </section>
 
         <p className="lg:hidden flex gap-1 items-center">
           <GraduationCap className="h-5 w-5" />
           <span className="line-clamp-1">
-            One Time Payment Lifetime Mentorship
+          Lifetime Mentorship One Time Payment
           </span>
         </p>
 

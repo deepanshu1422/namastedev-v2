@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
 import { YTModal } from "@/app/(guide)/testimonials/slider";
 import YoutubeEmbed from "@/app/(guide)/testimonials/youtube-embed";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Play } from "lucide-react";
+import { CreditCard, Play } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { Dispatch, SetStateAction, useState } from "react";
@@ -59,25 +59,45 @@ function VideoTestimony({
   );
 }
 
-function NewVideo({ src, videoId, setOpen, setUrl }: { src: string; videoId: string; setOpen: Dispatch<SetStateAction<boolean>>; setUrl: Dispatch<SetStateAction<string>> }) {
-  return <div className='w-full'>
-    <AspectRatio onClick={() => {setOpen(true), setUrl(videoId)}} ratio={16 / 9} className="cursor-pointer bg-muted overflow-hidden rounded-lg">
-      <Image
-        src={src}
-        alt="30 days coding youtube video"
-        fill
-        className="rounded-md object-cover shadow-xl"
-      />
-      <button className='h-20 w-20 rounded-full bg-white border-4 border-prime shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
-        <Play className='h-10 w-10 fill-prime text-prime m-auto drop-shadow-xl shadow-prime translate-x-0.5' />
-      </button>
-    </AspectRatio>
-  </div>
+function NewVideo({
+  src,
+  videoId,
+  setOpen,
+  setUrl,
+}: {
+  src: string;
+  videoId: string;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  setUrl: Dispatch<SetStateAction<string>>;
+}) {
+  return (
+    <div className="w-full">
+      <AspectRatio
+        onClick={() => {
+          setOpen(true), setUrl(videoId);
+        }}
+        ratio={16 / 9}
+        className="cursor-pointer bg-muted overflow-hidden rounded-lg group"
+      >
+        <Image
+          src={src}
+          alt="30 days coding youtube video"
+          fill
+          className="rounded-md object-cover shadow-xl"
+        />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background/40 p-0.5 rounded-full shadow-2xl shadow-black group-active:-translate-y-[58%] group-hover:-translate-y-2/3 transition-transform">
+          <div className="bg-white/50 backdrop-blur-sm p-4 rounded-full">
+            <Play className="w-8 h-8 stroke-[3] fill-white" />
+          </div>
+        </div>
+      </AspectRatio>
+    </div>
+  );
 }
 
 export default function MentorshipGallary() {
-  const [open, setOpen] = useState(false)
-  const [url, setUrl] = useState("nTyg09pcOss")
+  const [open, setOpen] = useState(false);
+  const [url, setUrl] = useState("nTyg09pcOss");
   const courses = [
     {
       image: "/thumbs/7.jpg",
@@ -109,8 +129,8 @@ export default function MentorshipGallary() {
     <div className="flex flex-col gap-8 m-auto w-full max-w-[80rem] p-10">
       <span className="flex items-center justify-center gap-4 relative">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
-        <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
-          Excluisve Content
+        <h2 className="font-jakarta phone:shrink-0 text-3xl lg:text-[2rem] font-extrabold text-center">
+          Learn with other Successful People
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
@@ -124,10 +144,24 @@ export default function MentorshipGallary() {
           //   linkedinUrl={link}
           //   key={i}
           // />
-          <NewVideo key={i} setUrl={setUrl} src={image} videoId={embedId} setOpen={setOpen} />
+          <NewVideo
+            key={i}
+            setUrl={setUrl}
+            src={image}
+            videoId={embedId}
+            setOpen={setOpen}
+          />
         ))}
         <YTModal url={url} open={open} setOpen={setOpen} />
       </div>
+      <Link
+        href={"https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view"}
+        target="_blank"
+        className="bg-prime rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase"
+      >
+        <CreditCard className="h-10 w-10" />
+        Join Now
+      </Link>
     </div>
   );
 }

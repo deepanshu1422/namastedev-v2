@@ -10,10 +10,11 @@ import Success from "@/components/mentorship-comp/success";
 import Floating from "./floating";
 import Mentor from "@/components/new-cohort/mentor";
 import Interakt from "@/util/interakt";
-
+import Mentors from "./mentors";
+import Link from "next/link";
+import { CreditCard } from "lucide-react";
 
 export const dynamic = "force-dynamic";
-
 
 export const metadata: Metadata = {
   title: "Join 1:1 Mentorship | 30dayscoding",
@@ -92,20 +93,20 @@ export default function Home() {
         title="Lifetime 1:1 Mentorship + 10 Course Access"
         desc="Learn from Aryan, Deepanshu, and the 30DC team to get placed this season."
         heroImage="/main/hero_section_mentor.png"
-      /> */}
+        /> */}
       <Lifetime />
-      <Features />
+      <Mentors />
       <Success />
-      <MentorshipGallary />
       <Video
-        title={"1:1 Live Query Sessions"}
+        title={"Trusted by 1000s of Students"}
         desc={
-          "Resolve all your queries related to the industry and latest jobs with the help of our experts with live interactions and doubt clearing sessions."
+          "We will help you till you find the best job opportunity across the globe. hear it from our students and decide for yourselves."
         }
-        youtubeId={"ylUk7kImBeE"}
+        youtubeId={"2cZ_7LuxEQI"}
       />
-      <Mentor />
-      <JoinUs />
+      <MentorshipGallary />
+      {/* <JoinUs /> */}
+      <Features />
       <Faqs faq={faq} />
       <Interakt />
       <Floating />

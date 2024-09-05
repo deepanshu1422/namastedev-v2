@@ -2,7 +2,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Reveal from "@/components/framer/reveal";
-import { ShoppingBag } from "lucide-react";
+import { CreditCard, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 
 type TestimonialType = {
@@ -190,11 +190,11 @@ export const testimonials: TestimonialType[] = [
 
 export default function Success() {
   return (
-    <div className={"grid grid-cols-1 gap-1 py-10 max-w-[75rem] m-auto"}>
+    <div className={"grid grid-cols-1 gap-1 py-10 max-w-[75rem] m-auto px-6 lg:px-10"}>
       <span className="flex items-center justify-center gap-4 relative">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
-          Success Stories
+          100+ Success Stories
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
@@ -204,7 +204,7 @@ export default function Success() {
         remarkable accomplishments.
       </p>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 lg:px-10 py-5 lg:py-10">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 py-5 lg:py-10">
         {testimonials.map(
           ({ name, review, link, linkedin, pos, profile }, i) => (
             <Testimonial
@@ -227,7 +227,7 @@ export default function Success() {
         <div className="pointer-events-none h-full w-full absolute z-10 bg-gradient-to-r from-bg max-lg:from-0% from-5% via-bg/10 via-50% to-bg max-lg:to-100% to-95%"></div>
       </div> */}
 
-      <div className="m-auto">
+      {/* <div className="m-auto">
         <Link className="text-sm" href={"/testimonials"}>
           <button
             className={`font-jakarta flex items-center font-semibold gap-1 border-white border transition-all px-6 py-3 rounded-md`}
@@ -235,7 +235,15 @@ export default function Success() {
             Show More
           </button>
         </Link>
-      </div>
+      </div> */}
+      <Link
+        href={"https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view"}
+        target="_blank"
+        className="bg-prime rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase"
+      >
+        <CreditCard className="h-10 w-10" />
+        Join Now
+      </Link>
     </div>
   );
 }
