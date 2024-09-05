@@ -183,7 +183,7 @@ export function PaymentSheet({
             currency: "INR",
             content_ids: [bundleId],
             content_type: "bundle",
-            content_name: title,
+            content_name: title ?? "",
             em: sha256(formData.email), // Hashing example
             ph: sha256(formData.phone),
             fn: sha256(formData.name.split(" ")[0]),
