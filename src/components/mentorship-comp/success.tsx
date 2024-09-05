@@ -119,7 +119,7 @@ export const testimonials: TestimonialType[] = [
         </span>{" "}
         Thanks to 30DC and the community, I secured an internship at LinkedIn,
         which eventually turned into a full-time software engineering position
-        at Apple.
+        at TikTok.
       </p>
     ),
     name: "Umang Chaudhary",
@@ -138,7 +138,7 @@ export const testimonials: TestimonialType[] = [
           confidence to ace my interviews.
         </span>{" "}
         30DC&apos;s guidance was instrumental in helping me land a high-paying
-        role at Microsoft right after graduation.
+        role at Tesla right after graduation.
       </p>
     ),
     name: "Kevin",
@@ -157,7 +157,7 @@ export const testimonials: TestimonialType[] = [
           and skills I needed to stand out.
         </span>{" "}
         The supportive community kept me motivated throughout the process, and
-        I eventually landed a software engineering position at Netflix,
+        I eventually landed a software engineering position at Nasdaq,
         transforming my career.
       </p>
     ),
