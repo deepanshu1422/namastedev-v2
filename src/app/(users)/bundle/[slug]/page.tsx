@@ -41,6 +41,8 @@ export type Courses = {
         items: {
           title: string;
           amount: number;
+          percentage: number;
+          bigAmount: number;
           countryCode: string;
           currencyCode: string;
         }[];
@@ -183,6 +185,8 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
             items{
             title,
             amount,
+            percentage,
+            bigAmount,
             countryCode,
             }
         },

@@ -27,7 +27,9 @@ export default function Main({ courses }: { courses: CoursesType }) {
       answer: (
         <p>
           You can access mentorship support by visiting the following link{" "}
-          <Link className="text-prime" href={"/mentorship"}>Mentorship Support.</Link>
+          <Link className="text-prime" href={"/mentorship"}>
+            Mentorship Support.
+          </Link>
         </p>
       ),
     },
@@ -43,8 +45,18 @@ export default function Main({ courses }: { courses: CoursesType }) {
     },
     {
       question: "What will be the next step?",
-      answer:
-        <p>After completing the course, we recommend taking advantage of our mentorship program to further enhance your learning. Personalized mentorship can help you apply the knowledge from the course to real-world projects and provide guidance tailored to your career goals. Visit <Link className="text-prime" href={"/mentorship"}>Mentorship Support.</Link></p>,
+      answer: (
+        <p>
+          After completing the course, we recommend taking advantage of our
+          mentorship program to further enhance your learning. Personalized
+          mentorship can help you apply the knowledge from the course to
+          real-world projects and provide guidance tailored to your career
+          goals. Visit{" "}
+          <Link className="text-prime" href={"/mentorship"}>
+            Mentorship Support.
+          </Link>
+        </p>
+      ),
     },
   ];
 
@@ -81,9 +93,7 @@ export default function Main({ courses }: { courses: CoursesType }) {
         content={courses.bundleCollection.items[0].offers}
         title={courses.bundleCollection.items[0].bundleTitle}
         url={courses.bundleCollection.items[0].coverImage.url}
-        amount={
-          courses.bundleCollection.items[0].pricingsCollection.items[0].amount
-        }
+        price={courses.bundleCollection.items[0].pricingsCollection.items[0]}
         slug={courses.bundleCollection.items[0].slug}
       />
       <Courses state={state} courses={courses} />
@@ -115,7 +125,7 @@ function Faqs({
       >
         {faq.map(({ answer, question }, index) => (
           <div
-          key={index}
+            key={index}
             itemScope
             itemProp="mainEntity"
             itemType="https://schema.org/Question"
@@ -154,13 +164,17 @@ function Bundle({
   title,
   content,
   url,
-  amount,
+  price,
   slug,
 }: {
   title: string;
   content: string[];
   url: string;
-  amount: number;
+  price: {
+    amount: number;
+    percentage: number;
+    bigAmount: number;
+  };
   slug: string;
 }) {
   const mentorship = [
@@ -196,9 +210,9 @@ function Bundle({
                 variant={"outline"}
                 className={`relative font-semibold text-foreground/80 hover:text-foreground w-full gap-1`}
               >
-                Buy all @₹{amount}{" "}
+                Buy all @₹{price.amount}{" "}
                 <span className="italic line-through text-muted-foreground">
-                  ₹{((amount * 100) / 15).toFixed(0)}
+                  ₹{price.bigAmount}
                 </span>
               </Button>
             </div>
@@ -224,7 +238,7 @@ function Bundle({
             {mentorship.map((e, i) => (
               <span key={i} className="flex gap-2 items-center text-sm">
                 <CheckCheck className="h-5 w-5 text-prime shrink-0" />
-                {e}
+                <p className="line-clamp-1">{e}</p>
               </span>
             ))}
 

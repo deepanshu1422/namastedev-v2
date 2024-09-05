@@ -582,20 +582,24 @@ export function PaymentModal({
 }
 
 export function Floating({
-  amount,
+  price,
   bundleId,
   open,
   setOpen,
 }: {
-  amount: number;
+  price: {
+    amount: number;
+    percentage: number;
+    bigAmount: number;
+  };
   bundleId: string;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
   let course = {
-    price: amount,
-    ogPrice: ((amount * 100) / 15).toFixed(0),
-    discount: 75,
+    price: price.amount,
+    ogPrice: price.bigAmount,
+    discount: price.percentage,
   };
 
   const { data: session } = useSession();

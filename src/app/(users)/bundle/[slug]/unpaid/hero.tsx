@@ -24,7 +24,7 @@ export default function Hero({
   title,
   image,
   rating,
-  amount,
+  price,
   shortDescription,
   courseOffer,
   setYtOpen,
@@ -36,7 +36,11 @@ export default function Hero({
   rating: number;
   title: string;
   image: string;
-  amount: number;
+  price: {
+    amount: number;
+    percentage: number;
+    bigAmount: number;
+  };
   shortDescription: string;
   courseOffer: string[];
 }) {
@@ -134,11 +138,11 @@ export default function Hero({
                 ) : (
                   <>
                     <span className="text-white text-2xl font-bold flex gap-2 items-end pt-1">
-                      ₹{amount}
+                      ₹{price.amount}
                       <span className="text-muted-foreground/70 italic line-through">
-                        ₹{((amount * 100) / 15).toFixed(0)}
+                        ₹{price.bigAmount}
                       </span>
-                      <span>85% off</span>
+                      <span>{price.percentage}% off</span>
                     </span>
 
                     <div className="flex flex-col gap-2 py-1">

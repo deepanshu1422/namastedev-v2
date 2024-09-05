@@ -26,7 +26,7 @@ export default function Details({
   bundleId,
   image,
   coursesCollection,
-  amount,
+  price,
   courseOffer,
   learn,
   setOpen,
@@ -38,7 +38,11 @@ export default function Details({
   setYtOpen: Dispatch<SetStateAction<boolean>>;
   courseOffer: string[];
   image: string;
-  amount: number;
+  price: {
+    amount: number;
+    percentage: number;
+    bigAmount: number;
+  };
   learn: string[];
   coursesCollection: {
     items: {
@@ -165,12 +169,12 @@ export default function Details({
       </div>
 
       <Checkout
-      // @ts-ignore
+        // @ts-ignore
         bundleId={bundleId}
         setOpen={setOpen}
         setYtOpen={setYtOpen}
         courseOffer={courseOffer}
-        amount={amount}
+        price={price}
         image={image}
         checkout="909"
       />

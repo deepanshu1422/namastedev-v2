@@ -42,6 +42,8 @@ export type CoursesType = {
         items: {
           title: string;
           amount: number;
+          percentage: number;
+          bigAmount: number;
           countryCode: string;
           currencyCode: string;
         }[];
@@ -64,6 +66,8 @@ export type CoursesType = {
         items: {
           title: string;
           amount: number;
+          percentage: number;
+          bigAmount: number;
           countryCode: string;
           currencyCode: string;
         }[];
@@ -85,7 +89,9 @@ async function getCourses(): Promise<CoursesType> {
                     items{
                       title,
                       countryCode,
-                      amount
+                      amount,
+                      percentage,
+                      bigAmount
                     }
                   }
                 courseImage{
@@ -106,7 +112,9 @@ async function getCourses(): Promise<CoursesType> {
                     items{
                       title,
                       countryCode,
-                      amount
+                      amount,
+                      percentage,
+                      bigAmount
                     }
                   }
                 coverImage{

@@ -36,6 +36,8 @@ type BundleItem = {
       items: {
         title: string;
         amount: number;
+        percentage: number;
+        bigAmount: number;
         countryCode: string;
         currencyCode: string;
       }[];
@@ -167,9 +169,12 @@ export default function Main({
           title={bundleTitle ?? "NULL"}
           image={coverImage?.url}
           shortDescription={shortDescription ?? "NULL"}
-          amount={
-            pricingsCollection.items.find((e) => e.countryCode == "IN")
-              ?.amount ?? 0
+          price={
+            pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
+              amount: 0,
+              bigAmount: 0,
+              percentage: 0,
+            }
           }
           courseOffer={courseOffer}
           setOpen={setOpen}
@@ -180,9 +185,12 @@ export default function Main({
           coursesCollection={coursesCollection}
           // longDescription={mdx}
           image={coverImage?.url}
-          amount={
-            pricingsCollection.items.find((e) => e.countryCode == "IN")
-              ?.amount ?? 0
+          price={
+            pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
+              amount: 0,
+              bigAmount: 0,
+              percentage: 0,
+            }
           }
           courseOffer={courseOffer}
           learn={learn ?? []}
@@ -205,18 +213,18 @@ export default function Main({
         />
         <YTModal open={openYt} setOpen={setOpenYt} url="nTAHWER3K-0" />
         <Floating
-          amount={
-            pricingsCollection.items.find((e) => e.countryCode == "IN")
-              ?.amount ?? 0
+          price={
+            pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
+              amount: 0,
+              bigAmount: 0,
+              percentage: 0
+            }
           }
           open={open}
           setOpen={setOpen}
           bundleId={bundleId}
         />
-        <PaymentModal
-          payModal={openPay}
-          setOpenPay={setOpenPay}
-        />
+        <PaymentModal payModal={openPay} setOpenPay={setOpenPay} />
       </main>
     );
   }

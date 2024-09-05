@@ -143,6 +143,8 @@ function Course({
     items: {
       title: string;
       amount: number;
+      percentage: number;
+      bigAmount: number;
       countryCode: string;
       currencyCode: string;
     }[];
@@ -150,6 +152,10 @@ function Course({
 }) {
   const amount =
     pricingsCollection.items.find((e) => e.countryCode == "IN")?.amount ?? 0;
+  const bigAmount =
+    pricingsCollection.items.find((e) => e.countryCode == "IN")?.bigAmount ?? 0;
+  const percentage =
+    pricingsCollection.items.find((e) => e.countryCode == "IN")?.percentage ?? 0;
   return (
     <Card className="select-none flex flex-col gap-2 bg-transparent border-none w-full max-w-80 mx-auto">
       <Link
@@ -178,15 +184,13 @@ function Course({
           </section>
           <span className="flex gap-2 text-lg text-white font-semibold">
             ₹{amount}
-            <span className="text-muted-foreground line-through">
-              ₹{((amount + 1) * 10) - 1}
-            </span>
+            <span className="text-muted-foreground line-through">₹{bigAmount}</span>
             {/* <span className="text-lime-500">75%off</span> */}
             <Badge
               className="bg-second/80 hover:bg-second"
               variant={"secondary"}
             >
-              90% off
+              {percentage}% off
             </Badge>
           </span>
         </CardFooter>
@@ -221,74 +225,5 @@ function Course({
         ))}
       </div>
     </Link>
-  );
-}
-
-function Bundle({
-  courseImage,
-  tags,
-  slug,
-  rating,
-  title,
-  pricingsCollection,
-}: {
-  courseImage: { url: string; height: number; width: number };
-  tags: string[];
-  slug: string;
-  rating: number;
-  title: string;
-  pricingsCollection: {
-    items: {
-      title: string;
-      amount: number;
-      countryCode: string;
-      currencyCode: string;
-    }[];
-  };
-}) {
-  const amount =
-    pricingsCollection.items.find((e) => e.countryCode == "IN")?.amount ?? 0;
-  return (
-    <Card className="select-none flex flex-col gap-2 bg-transparent drop-shadow-[30px_20px_100px_#07928183] border-none max-w-80 mx-auto">
-      <Link
-        href={`/bundle/${slug}`}
-        className="flex flex-col gap-2 h-fit group"
-      >
-        <div className="relative bg-card/50 min-h-48 rounded-md overflow-hidden aspect-[6/4]">
-          <Image
-            src={courseImage?.url ?? ""}
-            alt={title}
-            fill
-            className="object-contain group-hover:scale-105 transition-all"
-          />
-        </div>
-        <CardFooter className="px-0 py-0 flex-col gap-0.5 items-start text-muted-foreground">
-          <h3 className="text-foreground font-semibold">{title}</h3>
-          {/* <span className="taxt-xs tab:text-sm">Aryan Singh</span> */}
-          <section className="flex gap-1 items-center">
-            <span className="text-lime-500/70">{rating}</span>
-            {Array.from({ length: rating }).map((_, i) => (
-              <Star
-                key={i}
-                className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4"
-              />
-            ))}
-          </section>
-          <span className="flex gap-2 text-lg text-white font-semibold">
-            ₹{amount}
-            <span className="text-muted-foreground line-through">
-              ₹{((amount * 100) / 15).toFixed(0)}
-            </span>
-            {/* <span className="text-lime-500">75%off</span> */}
-            <Badge
-              className="bg-second/80 hover:bg-second"
-              variant={"secondary"}
-            >
-              85% off
-            </Badge>
-          </span>
-        </CardFooter>
-      </Link>
-    </Card>
   );
 }

@@ -23,7 +23,7 @@ export default function Hero({
   title,
   courseId,
   image,
-  amount,
+  price,
   rating,
   shortDescription,
   courseOffer,
@@ -35,7 +35,11 @@ export default function Hero({
   title: string;
   courseId: string;
   image: string;
-  amount: number;
+  price: {
+    amount: number;
+    percentage: number;
+    bigAmount: number;
+  };
   rating: number;
   shortDescription: string;
   courseOffer: string[];
@@ -120,11 +124,11 @@ export default function Hero({
 
               <div className="tab:hidden flex flex-col gap-4">
                 <span className="text-white text-2xl font-bold flex gap-2 items-end pt-1">
-                  ₹{amount}
+                  ₹{price.amount}
                   <span className="text-muted-foreground/70 italic line-through">
-                    ₹{(amount + 1) * 10 - 1}
+                    ₹{price.bigAmount}
                   </span>
-                  <span>90% off</span>
+                  <span>{price.percentage}% off</span>
                 </span>
 
                 <div className="flex flex-col gap-2 py-1">
@@ -132,7 +136,7 @@ export default function Hero({
                     onClick={() => {
                       setOpen(true);
                       sendEvent("Initiate Checkout", {
-                        amount,
+                        amount: price.amount,
                         content_ids: [courseId],
                         content_type: "course",
                         em: sha256(data?.user?.email ?? ""),

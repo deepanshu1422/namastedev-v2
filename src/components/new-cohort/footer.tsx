@@ -145,7 +145,7 @@ export default function Footer() {
                 </Link> */}
               </div>
             </Reveal>
-            <Reveal>
+            {/* <Reveal>
               <div className="flex text-sm gap-4 flex-col max-w-64">
                 <span className="text-muted-foreground uppercase">
                   Resources
@@ -169,7 +169,7 @@ export default function Footer() {
                   Premium Guides
                 </Link>
               </div>
-            </Reveal>
+            </Reveal> */}
             <Reveal>
               <div className="flex text-sm gap-4 flex-col max-w-64">
                 <span className="text-muted-foreground uppercase">

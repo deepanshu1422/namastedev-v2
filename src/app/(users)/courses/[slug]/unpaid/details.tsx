@@ -27,7 +27,7 @@ export default function Details({
   longDescription,
   modulesCollection,
   projectsCollection,
-  amount,
+  price,
   courseOffer,
   learn,
   setOpen,
@@ -40,7 +40,11 @@ export default function Details({
   courseId: string;
   image: string;
   longDescription: React.JSX.Element;
-  amount: number;
+  price: {
+    amount: number;
+    percentage: number;
+    bigAmount: number;
+  };
   learn: string[];
   projectsCollection: {
     items: {
@@ -74,7 +78,6 @@ export default function Details({
     answer: string;
   }[];
 }) {
-  
   return (
     <div className="tab:px-20 tab:py-6 max-tab:pt-4 max-tab:pb-10 m-auto max-w-[80rem] flex w-full">
       <div className="flex flex-col w-full gap-6 px-6 overflow-hidden">
@@ -126,7 +129,10 @@ export default function Details({
             </div>
             {projectsCollection.items.map(
               ({ content, coverImage, title }, i) => (
-                <div key={i} className="grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6">
+                <div
+                  key={i}
+                  className="grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6"
+                >
                   <div className="max-tab:order-last flex flex-col gap-3">
                     <h3 className="font-bold text-xl tab:text-2xl">{title}</h3>
                     <div className="flex flex-col gap-1 pr-5">
@@ -204,7 +210,7 @@ export default function Details({
         setOpen={setOpen}
         setYtOpen={setYtOpen}
         courseOffer={courseOffer}
-        amount={amount}
+        price={price}
         image={image}
         courseId={courseId}
         checkout="909"

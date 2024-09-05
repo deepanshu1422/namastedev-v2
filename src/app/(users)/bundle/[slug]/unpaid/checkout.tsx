@@ -12,7 +12,7 @@ import { Dispatch, SetStateAction } from "react";
 export default function Checkout({
   bundleId,
   image,
-  amount,
+  price,
   courseOffer,
   setOpen,
   setYtOpen,
@@ -20,7 +20,11 @@ export default function Checkout({
   bundleId: string;
   checkout: string;
   image: string;
-  amount: number;
+  price: {
+    amount: number;
+    percentage: number;
+    bigAmount: number;
+  };
   courseOffer: string[];
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
@@ -62,12 +66,12 @@ export default function Checkout({
           ) : (
             <>
               <span className="relative w-fit text-white sm:text-2xl font-bold flex gap-2 items-start">
-                ₹{amount}
+                ₹{price.amount}
                 <span className="text-muted-foreground/70 italic line-through">
-                  ₹{((amount * 100) / 15).toFixed(0)}
+                  ₹{price.bigAmount}
                 </span>
                 {/* <Image className="absolute -top-14 -right-16" src={"/75off.png"} alt="30DC 70% off" height={100} width={100} /> */}
-                <span>(85% off)</span>
+                <span>({price.percentage}% off)</span>
               </span>
 
               <div className="flex flex-col gap-2 relative">

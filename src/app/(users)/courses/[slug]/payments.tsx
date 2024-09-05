@@ -595,18 +595,22 @@ export function PaymentModal({
 }
 
 export function Floating({
-  amount,
+  price,
   courseId,
   setOpen,
 }: {
-  amount: number;
+  price: {
+    amount: number;
+    percentage: number;
+    bigAmount: number;
+  };
   courseId: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
   let course = {
-    price: amount,
-    ogPrice: (amount + 1) * 4 - 1,
-    discount: 75,
+    price: price.amount,
+    ogPrice: price.bigAmount,
+    discount: price.percentage,
   };
 
   const { data: session } = useSession();
@@ -621,7 +625,7 @@ export function Floating({
               onClick={() => {
                 setOpen(true);
                 sendEvent("Initiate Checkout", {
-                  amount,
+                  amount: course.price,
                   content_ids: [courseId],
                   content_type: "course",
                   em: sha256(session?.user?.email ?? ""),

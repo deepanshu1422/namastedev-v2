@@ -52,6 +52,8 @@ type CourseItem = {
       items: {
         title: string;
         amount: number;
+        percentage: number;
+        bigAmount: number;
         countryCode: string;
         currencyCode: string;
       }[];
@@ -194,9 +196,12 @@ export default function Main({
           title={title ?? "NULL"}
           image={courseImage?.url}
           shortDescription={shortDescription ?? "NULL"}
-          amount={
-            pricingsCollection.items.find((e) => e.countryCode == "IN")
-              ?.amount ?? 0
+          price={
+            pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
+              amount: 0,
+              bigAmount: 0,
+              percentage: 0,
+            }
           }
           courseOffer={courseOffer}
           setOpen={setOpenUpsell}
@@ -208,9 +213,12 @@ export default function Main({
           modulesCollection={modulesCollection}
           longDescription={mdx}
           image={courseImage?.url}
-          amount={
-            pricingsCollection.items.find((e) => e.countryCode == "IN")
-              ?.amount ?? 0
+          price={
+            pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
+              amount: 0,
+              bigAmount: 0,
+              percentage: 0,
+            }
           }
           courseOffer={courseOffer}
           learn={learn ?? []}
@@ -249,9 +257,12 @@ export default function Main({
         />
         <YTModal open={openYt} setOpen={setOpenYt} url="nTAHWER3K-0" />
         <Floating
-          amount={
-            pricingsCollection.items.find((e) => e.countryCode == "IN")
-              ?.amount ?? 0
+          price={
+            pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
+              amount: 0,
+              percentage: 0,
+              bigAmount: 0,
+            }
           }
           setOpen={setOpenUpsell}
           courseId={courseId}

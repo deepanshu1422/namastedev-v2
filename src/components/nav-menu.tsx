@@ -122,8 +122,9 @@ export const navTitles: {
   // },
   {
     title: "Courses",
-    href: "/courses"
+    href: "/courses",
   },
+  { title: "Testimonials", href: "/testimonials" },
   // {
   //   title: "Blog",
   //   href: "/blog",
@@ -139,8 +140,7 @@ export const navTitles: {
 ];
 
 export function NavMenu() {
-
-  const pathName = usePathname()
+  const pathName = usePathname();
 
   return (
     <NavigationMenu>
@@ -149,7 +149,11 @@ export function NavMenu() {
           <NavigationMenuItem key={i}>
             {typeof href === "string" ? (
               <Link href={href} legacyBehavior passHref>
-                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} ${pathName === href && "hidden" }`}>
+                <NavigationMenuLink
+                  className={`${navigationMenuTriggerStyle()} ${
+                    pathName === href && "hidden"
+                  }`}
+                >
                   {title}
                 </NavigationMenuLink>
               </Link>
@@ -188,8 +192,7 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "flex justify-between items-center select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-prime/30 hover:text-accent-foreground focus:bg-prime/30 focus:text-accent-foreground",
-
+            "flex justify-between items-center select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-prime/30 hover:text-accent-foreground focus:bg-prime/30 focus:text-accent-foreground"
           )}
           {...props}
         >
@@ -204,5 +207,3 @@ const ListItem = React.forwardRef<
   );
 });
 ListItem.displayName = "ListItem";
-
-
