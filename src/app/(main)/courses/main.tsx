@@ -115,6 +115,7 @@ function Faqs({
       >
         {faq.map(({ answer, question }, index) => (
           <div
+          key={index}
             itemScope
             itemProp="mainEntity"
             itemType="https://schema.org/Question"
