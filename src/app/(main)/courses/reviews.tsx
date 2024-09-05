@@ -73,7 +73,7 @@ function Testimonial({
 
 export default function Reviews() {
   return (
-    <section className="flex flex-col gap-4 max-w-[85rem] mx-auto max-phone:px-6 phone:px-10 max-tab:py-5 pb-10">
+    <section className="flex flex-col gap-4 max-w-[85rem] mx-auto max-phone:px-6 phone:px-10">
       <div className="flex flex-col gap-1">
         <h2 className="font-bold text-xl tab:text-2xl">
           Know what our students say about us

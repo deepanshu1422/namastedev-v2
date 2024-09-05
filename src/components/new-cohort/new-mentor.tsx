@@ -156,7 +156,7 @@ export default function NewMentor() {
         <Reveal>
           <Profile
             name="Deepanshu Udhwani"
-            profile="https://i.ibb.co/8mFwp1C/instructor2.jpg"
+            profile="/instructor2.jpg"
             position="Founder"
             link="https://www.linkedin.com/in/deepanshu-udhwani/"
             company={[

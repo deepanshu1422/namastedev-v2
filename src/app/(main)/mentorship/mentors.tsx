@@ -308,7 +308,7 @@ export default function Mentors() {
         },
         {
             name: "Deepanshu Udhwani",
-            image: "https://i.ibb.co/8mFwp1C/instructor2.jpg",
+            image: "/instructor2.jpg",
             designation: "Founder",
             social: {
                 linkedin: "https://www.linkedin.com/in/deepanshu-udhwani/",

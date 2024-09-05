@@ -37,7 +37,6 @@ const fetchBlogs = cache(async () => {
   const item = await prisma.blog.findMany({
     take: 200,
     orderBy: { createdAt: "desc" },
-    take: 200,
     select: {
       title: true,
       description: true,

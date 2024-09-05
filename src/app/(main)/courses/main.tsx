@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Hero from "./hero";
 import Courses from "./courses";
 import type { CoursesType } from "./page";
@@ -9,12 +9,67 @@ import Image from "next/image";
 import { CheckCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Script from "next/script";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export default function Main({ courses }: { courses: CoursesType }) {
   const [state, setState] = useState("");
 
+  const faq = [
+    {
+      question: "How can I get mentorship support?",
+      answer: (
+        <p>
+          You can access mentorship support by visiting the following link{" "}
+          <Link className="text-prime" href={"/mentorship"}>Mentorship Support.</Link>
+        </p>
+      ),
+    },
+    {
+      question: "What is the duration of the course?",
+      answer:
+        "The course duration is usually 30 days but it can take few more days based on certain selection of courses. However, you can complete it at your own pace since you'll have lifetime access.",
+    },
+    {
+      question: "How often is the course updated?",
+      answer:
+        "We regularly update our courses to reflect the latest industry trends and practices. You will automatically receive access to all future updates at no extra cost.",
+    },
+    {
+      question: "What will be the next step?",
+      answer:
+        <p>After completing the course, we recommend taking advantage of our mentorship program to further enhance your learning. Personalized mentorship can help you apply the knowledge from the course to real-world projects and provide guidance tailored to your career goals. Visit <Link className="text-prime" href={"/mentorship"}>Mentorship Support.</Link></p>,
+    },
+  ];
+
   return (
     <main className="bg-background bg-bg min-h-svh transition-all">
+      <Script
+        id="main-faq"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: `{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [${faq.map(({ answer, question }) =>
+            JSON.stringify({
+              "@type": "Question",
+              name: question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: `<p>${answer}</p>`,
+              },
+            })
+          )}]
+        }`,
+        }}
+      />
       <Hero
         title="Job-Ready Mastery Courses"
         desc="Advance your development skills with our comprehensive online courses. Learn MERN Stack, Blockchain, Data Structures & Algorithms, AI, and more from industry experts."
@@ -33,7 +88,64 @@ export default function Main({ courses }: { courses: CoursesType }) {
       />
       <Courses state={state} courses={courses} />
       <Reviews />
+      <Faqs faq={faq} />
     </main>
+  );
+}
+
+function Faqs({
+  faq,
+}: {
+  faq: { question: string; answer: string[] | React.ReactNode }[];
+}) {
+  return (
+    <section className="flex flex-col gap-4 max-w-[85rem] w-full mx-auto max-phone:px-6 phone:px-10 max-md:py-5 pb-10">
+      <div className="flex flex-col gap-1">
+        <h2 className="font-bold capitalize text-xl tab:text-2xl">
+          frequently asked questions
+        </h2>
+        <p className="text-sm text-pretty text-muted-foreground">
+          These are some frequently asked queries we get from our user.
+        </p>
+      </div>
+      <Accordion
+        type="single"
+        collapsible
+        className="flex flex-col items-start gap-4 self-stretch w-full"
+      >
+        {faq.map(({ answer, question }, index) => (
+          <div
+            itemScope
+            itemProp="mainEntity"
+            itemType="https://schema.org/Question"
+            className="flex flex-col w-full items-start justify-center gap-5 rounded-xl border-head bg-second/70 p-1 px-5"
+          >
+            <AccordionItem
+              className="flex flex-col items-start gap-4 self-stretch w-full"
+              value={`item-${index}`}
+            >
+              <AccordionTrigger className="flex items-center gap-4 text-base text-start font-semibold leading-6 text-white w-full">
+                <span itemProp="name">{question}</span>
+              </AccordionTrigger>
+              <AccordionContent
+                itemScope
+                itemProp="acceptedAnswer"
+                itemType="https://schema.org/Answer"
+                className="flex flex-col gap-4"
+              >
+                <hr className="h-px w-full border-prime" />
+                <p
+                  itemProp="text"
+                  className="w-full max-lg:text-sm text-base leading-5"
+                >
+                  {answer}
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+          </div>
+        ))}
+      </Accordion>
+    </section>
   );
 }
 
@@ -105,7 +217,7 @@ function Bundle({
       >
         <div className="max-tab:order-last flex flex-col gap-3">
           <h3 className="font-bold text-xl tab:text-2xl">
-            Job Assistance and Mentorship 
+            Job Assistance and Mentorship
           </h3>
           <div className="flex flex-col gap-1 pr-5">
             {mentorship.map((e, i) => (
@@ -122,7 +234,7 @@ function Bundle({
                 variant={"outline"}
                 className={`relative font-semibold text-foreground/80 hover:text-foreground w-full gap-1`}
               >
-                Join Mentorship
+                Job Support Mentorship
               </Button>
             </div>
           </div>

@@ -41,7 +41,7 @@ export function Slider() {
         },
         {
             name: "Deepanshu Udhwani",
-            image: "/instructor2.jfif"
+            image: "/instructor2.jpg"
         },
         {
             name: "Abhinav Awasthi",

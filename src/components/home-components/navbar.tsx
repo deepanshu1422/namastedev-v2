@@ -20,7 +20,7 @@ export default function Navbar() {
         <div
           className={`sm:p-[.875rem_2.25rem] p-[0.5rem_1rem] text-white flex gap-6 justify-between items-center w-full max-w-[90rem]`}
         >
-          <section className="flex gap-12">
+          <section className="flex gap-6">
             <Link href={"/"} className="flex items-center gap-1">
               <Image
                 src={"/logo.png"}
@@ -44,7 +44,7 @@ export default function Navbar() {
               href={"/mentorship"}
               className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md"
             >
-              <span className="text-sm line-clamp-1">Join Mentorship</span>
+              <span className="text-sm line-clamp-1">Job Support Mentorship</span>
             </Link>
 
             <Link

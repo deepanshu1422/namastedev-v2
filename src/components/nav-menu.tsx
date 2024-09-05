@@ -14,6 +14,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { ChevronRight } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export type href = { title: string; href: string; description: string };
 
@@ -138,6 +139,9 @@ export const navTitles: {
 ];
 
 export function NavMenu() {
+
+  const pathName = usePathname()
+
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -145,7 +149,7 @@ export function NavMenu() {
           <NavigationMenuItem key={i}>
             {typeof href === "string" ? (
               <Link href={href} legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} ${pathName === href && "hidden" }`}>
                   {title}
                 </NavigationMenuLink>
               </Link>

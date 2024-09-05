@@ -11,7 +11,7 @@ type Faq = { index: number; question: string; answer: string };
 
 function Faq({ index, question, answer }: Faq) {
   return (
-    <div itemScope itemProp="mainEntity" itemType="https://schema.org/Question" className="flex flex-col w-full items-start justify-center gap-5 rounded-xl border-head bg-second p-3 px-5">
+    <div itemScope itemProp="mainEntity" itemType="https://schema.org/Question" className="flex flex-col w-full items-start justify-center gap-5 rounded-xl border-head bg-second p-1 px-5">
       <AccordionItem
         className="flex flex-col items-start gap-4 self-stretch w-full"
         value={`item-${index}`}

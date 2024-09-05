@@ -175,7 +175,7 @@ export default function Checkout({
               <div className="col-span-2 flex justify-between items-center gap-1">
                 <div className="flex flex-col justify-center gap-1">
                   <p className="text-sm font-bold line-clamp-1">
-                    Join Mentorship
+                    Job Support Mentorship
                   </p>
                   <span className="font-semibold text-xs text-muted-foreground">
                     Lifetime Access

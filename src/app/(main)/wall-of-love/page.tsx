@@ -254,7 +254,7 @@ export default function Testimonial() {
       id: 2,
       name: "Deepanshu Udhwani",
       designation: "Founder",
-      image: "https://i.ibb.co/8mFwp1C/instructor2.jpg",
+      image: "/instructor2.jpg",
       link: "https://www.instagram.com/itsudhwani/",
     },
   ];
