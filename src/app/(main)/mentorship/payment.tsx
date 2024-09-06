@@ -77,6 +77,7 @@ export function PaymentSheet({
     ).json();
 
     localStorage.setItem("geo", geo.country_code2);
+    localStorage.setItem("country", geo.country_name);
   }
 
   useEffect(() => {
@@ -166,6 +167,7 @@ export function PaymentSheet({
       let res;
 
       const geo = localStorage.getItem("geo") ?? "US";
+      const country = localStorage.getItem("country") ?? "USA";
 
       if (courseId) {
         res = await mentorshipPayment({
@@ -173,8 +175,9 @@ export function PaymentSheet({
           email: session?.user?.email ?? formData.email,
           contact: formData.phone,
           name: session?.user?.name ?? formData.name,
-          state: formData.state,
+          state: geo === "IN" ? formData.state : "Washington",
           gateway: geo === "IN" ? "razorpay" : "lemonSqueezy",
+          country,
         });
       } else {
         return;

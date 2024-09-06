@@ -20,7 +20,7 @@ export default async function mentorshipPayment({
   contact: string;
   state: string;
   gateway: "razorpay" | "lemonSqueezy";
-  country?: string;
+  country: string;
   couponCode?: string | null;
 }) {
   // console.log(courseId, email);
@@ -45,13 +45,14 @@ export default async function mentorshipPayment({
 
   if (!session?.user?.email) {
     let user = await prisma.user.findFirst({ where: { email } });
-    if (!!user?.email && !(user?.contact && user?.state)) {
+    if (!!user?.email && !(user?.contact && user?.state && user?.country)) {
       await prisma.user.update({
         where: { email },
         data: {
           name,
           contact,
           state,
+          country
         },
       });
     }
@@ -70,7 +71,7 @@ export default async function mentorshipPayment({
       mentorshipId,
       contact,
       state,
-      country: "India",
+      country,
       gateway,
     };
   }
