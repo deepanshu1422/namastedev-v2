@@ -108,7 +108,7 @@ export default function Home() {
       {/* <JoinUs /> */}
       <Features />
       <Faqs faq={faq} />
-      <Interakt />
+      {/* <Interakt /> */}
       <Floating />
       {/* <Highlights /> */}
       {/* <Testimonials /> */}
