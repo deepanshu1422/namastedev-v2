@@ -11,7 +11,7 @@ import Mentor from "@/components/new-cohort/mentor";
 import Interakt from "@/util/interakt";
 import Mentors from "./mentors";
 import { PaymentModal, PaymentSheet } from "./payment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Script from "next/script";
 
 export default function Main({
@@ -22,8 +22,6 @@ export default function Main({
     answer: string;
   }[];
 }) {
-    console.log("Heloo");
-    
   const [state, setState] = useState(false);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);

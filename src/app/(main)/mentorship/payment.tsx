@@ -274,6 +274,7 @@ export function PaymentSheet({
       });
     } catch (error) {
       toast.error(JSON.stringify(error));
+      console.error(error);
       setIsLoading(false);
     }
   };
