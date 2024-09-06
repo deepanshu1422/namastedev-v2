@@ -1,6 +1,12 @@
 "use client";
 
-import { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import Image from "next/image";
@@ -63,6 +69,19 @@ export function PaymentSheet({
   setOpenPay: Dispatch<SetStateAction<boolean>>;
 }) {
   const { data: session, update } = useSession();
+
+  async function getCountry() {
+    const ip = await (await fetch("https://api.ipify.org/?format=json")).json();
+    const geo = await (
+      await fetch(`https://api.iplocation.net/?cmd=ip-country&ip=${ip.ip}`)
+    ).json();
+
+    localStorage.setItem("geo", geo.country_code2);
+  }
+
+  useEffect(() => {
+    getCountry();
+  }, []);
 
   const router = useRouter();
 
@@ -146,6 +165,8 @@ export function PaymentSheet({
 
       let res;
 
+      const geo = localStorage.getItem("geo") ?? "US";
+
       if (courseId) {
         res = await mentorshipPayment({
           mentorshipId: "querty",
@@ -153,77 +174,84 @@ export function PaymentSheet({
           contact: formData.phone,
           name: session?.user?.name ?? formData.name,
           state: formData.state,
+          gateway: geo === "IN" ? "razorpay" : "lemonSqueezy",
         });
       } else {
         return;
       }
-      // make an endpoint to get this key
-      const key = process.env.NEXT_PUBLIC_RAZORPAY_CLIENT;
 
-      if (res.error) {
-        toast("Error Occured", {
-          position: "bottom-center",
-          description: res.message ?? JSON.stringify(res.error),
-        });
-        setIsLoading(false);
-        setOpen(false);
-        return;
-      }
+      if (!!res.data?.orderId) {
+        // make an endpoint to get this key
+        const key = process.env.NEXT_PUBLIC_RAZORPAY_CLIENT;
 
-      setFormState(0);
-
-      console.log(res.data);
-
-      const options = {
-        key: key,
-        description: "Test Transaction",
-        image: "/icon.png",
-        name: "30DaysCoding",
-        currency: res.data.currency,
-        amount: res.data.amount,
-        order_id: res.data.orderId,
-        handler: async function (response: any) {
-          sendEvent("Purchase", {
-            value: amount,
-            currency: "INR",
-            content_ids: [courseId],
-            content_type: "course",
-            content_name: title,
-            em: sha256(formData.email), // Hashing example
-            ph: sha256(formData.phone),
-            fn: sha256(formData.name.split(" ")[0]),
-            ln: sha256(formData.name.split(" ")[1] ?? ""),
+        if (res.error) {
+          toast("Error Occured", {
+            position: "bottom-center",
+            description: res.message ?? JSON.stringify(res.error),
           });
-          setOpenPay(true);
-          await update({ courses: true });
-          if (session?.user?.email) router.refresh();
-        },
-        prefill: {
-          name: formData.name,
-          email: formData.email,
-          contact: formData.phone,
-        },
-        notes: {
-          name: formData.name,
-          email: formData.email,
-          contact: formData.phone,
-          address: formData.state,
-          courseId,
-        },
-        theme: {
-          color: "#134543",
-        },
-      };
+          setIsLoading(false);
+          setOpen(false);
+          return;
+        }
 
-      // @ts-ignore
-      const paymentObject = new window.Razorpay(options);
+        setFormState(0);
 
-      paymentObject.on("payment.captured", function (response: any) {
-        alert("Payment successful");
-        setIsLoading(false);
-      });
+        console.log(res.data);
 
-      paymentObject.open();
+        const options = {
+          key: key,
+          description: "Test Transaction",
+          image: "/icon.png",
+          name: "30DaysCoding",
+          currency: res.data.currency,
+          amount: res.data.amount,
+          order_id: res.data.orderId,
+          handler: async function (response: any) {
+            sendEvent("Purchase", {
+              value: amount,
+              currency: "INR",
+              content_ids: [courseId],
+              content_type: "course",
+              content_name: title,
+              em: sha256(formData.email), // Hashing example
+              ph: sha256(formData.phone),
+              fn: sha256(formData.name.split(" ")[0]),
+              ln: sha256(formData.name.split(" ")[1] ?? ""),
+            });
+            setOpenPay(true);
+            await update({ courses: true });
+            if (session?.user?.email) router.refresh();
+          },
+          prefill: {
+            name: formData.name,
+            email: formData.email,
+            contact: formData.phone,
+          },
+          notes: {
+            name: formData.name,
+            email: formData.email,
+            contact: formData.phone,
+            address: formData.state,
+            courseId,
+          },
+          theme: {
+            color: "#134543",
+          },
+        };
+
+        // @ts-ignore
+        const paymentObject = new window.Razorpay(options);
+
+        paymentObject.on("payment.captured", function (response: any) {
+          alert("Payment successful");
+          setIsLoading(false);
+        });
+
+        paymentObject.open();
+      } else {
+        // @ts-ignore
+        LemonSqueezy.Url.Open(res.data?.url);
+      }
 
       setIsLoading(false);
       setOpen(false);
@@ -238,6 +266,7 @@ export function PaymentSheet({
         country: session?.user?.country ?? "",
       });
     } catch (error) {
+      console.log(error);
       setIsLoading(false);
     }
   };
@@ -534,7 +563,9 @@ export function PaymentModal({
               disabled={status === "loading"}
               className="w-full bg-prime/70 text-white hover:bg-prime"
             >
-              {status === "loading" ? "Joining Mentorship..." : "Check your email"}
+              {status === "loading"
+                ? "Joining Mentorship..."
+                : "Check your email"}
             </Button>
           </CardContent>
         </Card>
@@ -578,6 +609,7 @@ export function Floating({
                   content_ids: [courseId],
                   content_type: "mentorship",
                   em: sha256(session?.user?.email ?? ""),
+                  // @ts-ignore
                   ph: sha256(session?.user?.phone ?? ""),
                   fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
                 });

@@ -54,7 +54,7 @@ export default function Lifetime({
       <Btn cover="/new-mentorship.jpg" yt="9Lokc1bQixc" />
 
       <div className="flex flex-col gap-2 py-4 mx-auto md:text-lg">
-        {benefits.map((e, i) => (
+        {benefits?.map((e, i) => (
           <span key={i} className="flex gap-2">
             <Check className="shrink-0 w-5 h-5 stroke-prime" />
             {e}

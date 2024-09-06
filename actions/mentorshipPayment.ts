@@ -10,6 +10,7 @@ export default async function mentorshipPayment({
   name,
   contact,
   state,
+  gateway,
   country,
   couponCode,
 }: {
@@ -18,6 +19,7 @@ export default async function mentorshipPayment({
   name: string;
   contact: string;
   state: string;
+  gateway: "razorpay" | "lemonSqueezy";
   country?: string;
   couponCode?: string | null;
 }) {
@@ -59,7 +61,7 @@ export default async function mentorshipPayment({
     body = {
       email,
       mentorshipId,
-      gateway: "lemonSqueezy",
+      gateway,
     };
   } else {
     body = {
@@ -69,9 +71,11 @@ export default async function mentorshipPayment({
       contact,
       state,
       country: "India",
-      gateway: "lemonSqueezy",
+      gateway,
     };
   }
+
+  console.log("Payload: ", body);
 
   const signature = createSignedHeader(body, "password");
 
@@ -105,8 +109,11 @@ type Response = {
   message?: string;
   data: {
     amount: number;
+    totalAmount: number;
     currency: string;
     name: string;
-    orderId: string;
+    discount: number;
+    orderId?: string;
+    url?: string;
   };
 };
