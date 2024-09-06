@@ -160,18 +160,18 @@ export function PaymentSheet({
       return validationError({ message: "Invalid Email" });
     if (formData.phone.length !== 10)
       return validationError({ message: "Invalid Phone Number" });
-    if (!states.includes(formData.state))
-      return validationError({ message: "Select a State" });
-    if (!states.includes(formData.state))
-      return validationError({ message: "Select your country" });
+    // if (!states.includes(formData.state))
+    //   return validationError({ message: "Select a State" });
+    // if (!states.includes(formData.state))
+    //   return validationError({ message: "Select your country" });
 
     try {
       setIsLoading(true);
 
       let res;
 
-      const geo = localStorage.getItem("geo") ?? "US";
-      const country = localStorage.getItem("country") ?? "USA";
+      const geo = geoData ?? "US";
+      const country = countryData ?? "USA";
 
       if (courseId) {
         res = await mentorshipPayment({
@@ -179,7 +179,7 @@ export function PaymentSheet({
           email: session?.user?.email ?? formData.email,
           contact: formData.phone,
           name: session?.user?.name ?? formData.name,
-          state: geo === "IN" ? formData.state : "Washington",
+          state: geo === "IN" ? formData.state || "haryana" : "Washington",
           gateway: geo === "IN" ? "razorpay" : "lemonSqueezy",
           country,
         });
@@ -238,7 +238,7 @@ export function PaymentSheet({
             name: formData.name,
             email: formData.email,
             contact: formData.phone,
-            address: geo === "IN" ? formData.state : "Washington",
+            address: geo === "IN" ? formData.state || "haryana" : "Washington",
             courseId,
           },
           theme: {
@@ -273,7 +273,7 @@ export function PaymentSheet({
         country: session?.user?.country ?? "",
       });
     } catch (error) {
-      console.log(error);
+      toast.error(JSON.stringify(error));
       setIsLoading(false);
     }
   };

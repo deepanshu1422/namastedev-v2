@@ -25,8 +25,8 @@ export default async function RootLayout({
     <html lang="en">
       <head>
         {/* <GoogleTagManager containerId="GTM-W4LNH7RV" /> */}
-        <Script src="https://checkout.razorpay.com/v1/checkout.js" />
-        <Script src="https://app.lemonsqueezy.com/js/lemon.js" />
+        <Script id="razorpay" src="https://checkout.razorpay.com/v1/checkout.js" async />
+        <Script id="lemonSqueezy" src="https://app.lemonsqueezy.com/js/lemon.js" defer />
         <Pixel />
         <AdSense />
       </head>
@@ -53,4 +53,3 @@ export default async function RootLayout({
     </html>
   );
 }
-
