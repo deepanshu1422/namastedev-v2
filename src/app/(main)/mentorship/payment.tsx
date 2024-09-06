@@ -48,6 +48,8 @@ import triggerEvent from "@/services/tracking";
 import { sha256 } from "js-sha256";
 import { sendEvent } from "@/services/fbpixel";
 import mentorshipPayment from "../../../../actions/mentorshipPayment";
+import { useAtom } from "jotai";
+import { country, geo } from "@/lib/jotai";
 
 export function PaymentSheet({
   cover,
@@ -69,6 +71,8 @@ export function PaymentSheet({
   setOpenPay: Dispatch<SetStateAction<boolean>>;
 }) {
   const { data: session, update } = useSession();
+  const [geoData, setGeoData] = useAtom(geo);
+  const [countryData, setCountryData] = useAtom(country);
 
   async function getCountry() {
     const ip = await (await fetch("https://api.ipify.org/?format=json")).json();
@@ -76,8 +80,8 @@ export function PaymentSheet({
       await fetch(`https://api.iplocation.net/?cmd=ip-country&ip=${ip.ip}`)
     ).json();
 
-    localStorage.setItem("geo", geo.country_code2);
-    localStorage.setItem("country", geo.country_name);
+    setGeoData(geo.country_code2);
+    setCountryData(geo.country_name);
   }
 
   useEffect(() => {
@@ -234,7 +238,7 @@ export function PaymentSheet({
             name: formData.name,
             email: formData.email,
             contact: formData.phone,
-            address: formData.state,
+            address: geo === "IN" ? formData.state : "Washington",
             courseId,
           },
           theme: {
@@ -464,29 +468,46 @@ export function PaymentSheet({
               />
             </div>
           </div>
-          <div className="grid grid-cols-5 items-center gap-4">
-            <Label htmlFor="username" className="text-left">
-              State
-            </Label>
-            <Select
-              value={formData.state}
-              onValueChange={(e) => setFormData({ ...formData, state: e })}
-            >
-              <SelectTrigger className="border-prime/40 bg-bg w-full col-span-4 capitalize">
-                <SelectValue placeholder="Select State" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>States</SelectLabel>
-                  {states.map((e, i) => (
-                    <SelectItem className="capitalize" key={i} value={e}>
-                      {e.split("_").join(" ")}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
+          {geoData === "IN" ? (
+            <div className="grid grid-cols-5 items-center gap-4">
+              <Label htmlFor="username" className="text-left">
+                State
+              </Label>
+              <Select
+                value={formData.state}
+                onValueChange={(e) => setFormData({ ...formData, state: e })}
+              >
+                <SelectTrigger className="border-prime/40 bg-bg w-full col-span-4 capitalize">
+                  <SelectValue placeholder="Select State" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>States</SelectLabel>
+                    {states.map((e, i) => (
+                      <SelectItem className="capitalize" key={i} value={e}>
+                        {e.split("_").join(" ")}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+          ) : (
+            <div className="grid grid-cols-5 items-center gap-4">
+              <Label htmlFor="email" className="text-left">
+                Country
+              </Label>
+              <Input
+                disabled={!!countryData}
+                value={countryData}
+                id="country"
+                maxLength={40}
+                type="text"
+                placeholder="Your country"
+                className="col-span-4"
+              />
+            </div>
+          )}
         </div>
       ),
       footer: (
