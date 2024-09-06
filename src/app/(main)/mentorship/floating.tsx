@@ -1,9 +1,9 @@
 import AnimatedButton from "@/components/animated-button";
 import { mentorship } from "@/util/globals";
-import NewRazorpay from "@/util/new-razorpay";
 import { GraduationCap } from "lucide-react";
+import { Dispatch, SetStateAction } from "react";
 
-export default async function Floating() {
+export default function Floating({setOpen}:{setOpen: Dispatch<SetStateAction<boolean>>}) {
   return (
     <div className="fixed bottom-0 z-20 bg-background/40 w-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30">
       <div className="flex max-lg:flex-col justify-between items-center gap-2 p-4 py-2 lg:max-w-[80rem] mx-auto">
@@ -39,8 +39,8 @@ export default async function Floating() {
           </div>
         </Link> */}
 
-        <div className="max-lg:w-full">
-          <AnimatedButton link={mentorship.link}>Buy Now</AnimatedButton>
+        <div onClick={() => setOpen(true)} className="max-lg:w-full">
+          <AnimatedButton>Buy Now</AnimatedButton>
         </div>
         {/* <div
           className="razorpay-embed-btn"
