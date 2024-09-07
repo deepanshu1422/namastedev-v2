@@ -1,6 +1,9 @@
 import { atom, useAtom } from "jotai";
 import { atomWithStorage, loadable } from "jotai/utils";
 
+export const geo = atomWithStorage<string>("geo", "")
+export const country = atomWithStorage<string>("country", "")
+
 export const solved = atomWithStorage<string[]>("dsa-solved", []);
 
 export const dsaProblems = [

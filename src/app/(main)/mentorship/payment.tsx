@@ -1,10 +1,14 @@
 "use client";
 
-import { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
-import createPayments from "../../../../../actions/createPayments";
-import getCoupons from "../../../../../actions/getCoupon";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -39,10 +43,14 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import triggerEvent from "@/services/tracking";
 import { sha256 } from "js-sha256";
 import { sendEvent } from "@/services/fbpixel";
+import mentorshipPayment from "../../../../actions/mentorshipPayment";
+import { useAtom } from "jotai";
+import { country, geo } from "@/lib/jotai";
+import { BASE_URL } from "@/util/constants";
 
 export function PaymentSheet({
   cover,
@@ -64,6 +72,24 @@ export function PaymentSheet({
   setOpenPay: Dispatch<SetStateAction<boolean>>;
 }) {
   const { data: session, update } = useSession();
+  const [geoData, setGeoData] = useAtom(geo);
+  const [countryData, setCountryData] = useAtom(country);
+
+  async function getCountry() {
+    const ip = await (await fetch("https://api.ipify.org/?format=json")).json();
+    const geo = await (
+      await fetch(`https://api.iplocation.net/?cmd=ip-country&ip=${ip.ip}`)
+    ).json();
+
+    console.log(geo);
+
+    setGeoData(geo.country_code2);
+    setCountryData(geo.country_name);
+  }
+
+  useEffect(() => {
+    getCountry();
+  }, []);
 
   const router = useRouter();
 
@@ -74,6 +100,8 @@ export function PaymentSheet({
     phone: session?.user?.phone ?? "",
     // @ts-ignore
     state: session?.user?.state ?? "",
+    // @ts-ignore
+    country: session?.user?.country ?? "",
   });
 
   const [formState, setFormState] = useState(0);
@@ -121,6 +149,26 @@ export function PaymentSheet({
     "west_bengal",
   ];
 
+  const countryPhoneCodes = [
+    { country: "United States", countryCode: "US", phoneCode: "+1" },
+    { country: "India", countryCode: "IN", phoneCode: "+91" },
+    { country: "Singapore", countryCode: "SG", phoneCode: "+65" },
+    { country: "Australia", countryCode: "AU", phoneCode: "+61" },
+    { country: "United Kingdom", countryCode: "GB", phoneCode: "+44" },
+    { country: "China", countryCode: "CN", phoneCode: "+86" },
+    { country: "Japan", countryCode: "JP", phoneCode: "+81" },
+    { country: "Russia", countryCode: "RU", phoneCode: "+7" },
+    { country: "Brazil", countryCode: "BR", phoneCode: "+55" },
+    { country: "Germany", countryCode: "DE", phoneCode: "+49" },
+    { country: "France", countryCode: "FR", phoneCode: "+33" },
+    { country: "South Korea", countryCode: "KR", phoneCode: "+82" },
+    { country: "Indonesia", countryCode: "ID", phoneCode: "+62" },
+    { country: "Mexico", countryCode: "MX", phoneCode: "+52" },
+    { country: "Italy", countryCode: "IT", phoneCode: "+39" },
+    { country: "Turkey", countryCode: "TR", phoneCode: "+90" },
+    { country: "Other", countryCode: "XX", phoneCode: "NA" },
+  ];
+
   function validationError({ message }: { message: string }) {
     toast.error("Error Occured", {
       description: message,
@@ -135,93 +183,114 @@ export function PaymentSheet({
       return validationError({ message: "Invalid Email" });
     if (formData.phone.length !== 10)
       return validationError({ message: "Invalid Phone Number" });
-    if (!states.includes(formData.state))
-      return validationError({ message: "Select a State" });
+    // if (!states.includes(formData.state))
+    //   return validationError({ message: "Select a State" });
+    // if (!states.includes(formData.state))
+    //   return validationError({ message: "Select your country" });
 
     try {
       setIsLoading(true);
 
       let res;
 
+      const geo = geoData ?? "US";
+      const country = countryData ?? "USA";
+
       if (courseId) {
-        res = await createPayments({
-          courseId: courseId,
+        res = await mentorshipPayment({
+          mentorshipId: "querty",
           email: session?.user?.email ?? formData.email.toLocaleLowerCase(),
           contact: formData.phone,
           name: session?.user?.name ?? formData.name,
-          state: formData.state,
-          couponCode: promo.code,
+          state: geo === "IN" ? formData.state || "haryana" : "Washington",
+          gateway: geo === "IN" ? "razorpay" : "lemonSqueezy",
+          country,
         });
       } else {
         return;
       }
-      // make an endpoint to get this key
-      const key = process.env.NEXT_PUBLIC_RAZORPAY_CLIENT;
 
-      if (res.error) {
-        toast("Error Occured", {
-          position: "bottom-center",
-          description: res.message ?? JSON.stringify(res.error),
-        });
-        setIsLoading(false);
-        setOpen(false);
-        return;
-      }
+      if (!!res.data?.orderId || !!res.error) {
+        // make an endpoint to get this key
+        const key = process.env.NEXT_PUBLIC_RAZORPAY_CLIENT;
 
-      setFormState(0);
-
-      console.log(res.data);
-
-      const options = {
-        key: key,
-        description: "Test Transaction",
-        image: "/icon.png",
-        name: "30DaysCoding",
-        currency: res.data.currency,
-        amount: res.data.amount,
-        order_id: res.data.orderId,
-        handler: async function (response: any) {
-          sendEvent("Purchase", {
-            value: amount,
-            currency: "INR",
-            content_ids: [courseId],
-            content_type: "course",
-            content_name: title,
-            em: sha256(formData.email), // Hashing example
-            ph: sha256(formData.phone),
-            fn: sha256(formData.name.split(" ")[0]),
-            ln: sha256(formData.name.split(" ")[1] ?? ""),
+        if (!!res.error) {
+          toast("Error Occured", {
+            position: "bottom-center",
+            description: res.message ?? JSON.stringify(res.error),
+            action: (
+              <Link
+                className="border border-border rounded-md px-2 py-1 ml-auto"
+                href={"/instructions"}
+              >
+                Log In
+              </Link>
+            ),
           });
-          setOpenPay(true);
-          await update({ courses: true });
-          if (session?.user?.email) router.refresh();
-        },
-        prefill: {
-          name: formData.name,
-          email: formData.email.toLocaleLowerCase(),
-          contact: formData.phone,
-        },
-        notes: {
-          name: formData.name,
-          email: formData.email.toLocaleLowerCase(),
-          contact: formData.phone,
-          address: formData.state,
-          courseId,
-        },
-        theme: {
-          color: "#134543",
-        },
-      };
+          setIsLoading(false);
+          setOpen(false);
+          return;
+        }
 
-      // @ts-ignore
-      const paymentObject = new window.Razorpay(options);
+        setFormState(0);
 
-      paymentObject.on("payment.captured", function (response: any) {
-        alert("Payment successful");
-        setIsLoading(false);
-      });
+        console.log(res.data);
 
-      paymentObject.open();
+        const options = {
+          key: key,
+          description: "Test Transaction",
+          image: "/icon.png",
+          name: "30DaysCoding",
+          currency: res.data.currency,
+          amount: res.data.amount,
+          order_id: res.data.orderId,
+          callback_url: `${BASE_URL}/mentorship?success=true`,
+          // async function (response: any) {
+          //   sendEvent("Purchase", {
+          //     value: amount,
+          //     currency: "INR",
+          //     content_ids: [courseId],
+          //     content_type: "course",
+          //     content_name: title,
+          //     em: sha256(formData.email), // Hashing example
+          //     ph: sha256(formData.phone),
+          //     fn: sha256(formData.name.split(" ")[0]),
+          //     ln: sha256(formData.name.split(" ")[1] ?? ""),
+          //   });
+          //   setOpenPay(true);
+          //   await update({ courses: true });
+          //   if (session?.user?.email) router.refresh();
+          // },
+          prefill: {
+            name: formData.name,
+            email: formData.email.toLocaleLowerCase(),
+            contact: formData.phone,
+          },
+          notes: {
+            name: formData.name,
+            email: formData.email.toLocaleLowerCase(),
+            contact: formData.phone,
+            address: geo === "IN" ? formData.state || "haryana" : "Washington",
+            courseId,
+          },
+          theme: {
+            color: "#134543",
+          },
+        };
+
+        // @ts-ignore
+        const paymentObject = new window.Razorpay(options);
+
+        paymentObject.on("payment.captured", function (response: any) {
+          alert("Payment successful");
+          setIsLoading(false);
+        });
+
+        paymentObject.open();
+      } else {
+        // @ts-ignore
+        router.push(res.data?.url);
+      }
 
       setIsLoading(false);
       setOpen(false);
@@ -232,52 +301,15 @@ export function PaymentSheet({
         phone: session?.user?.phone ?? "",
         // @ts-ignore
         state: session?.user?.state ?? "",
+        // @ts-ignore
+        country: session?.user?.country ?? "",
       });
     } catch (error) {
+      toast.error(JSON.stringify(error));
+      console.error(error);
       setIsLoading(false);
     }
   };
-
-  async function applyCoupon(e: FormEvent<HTMLFormElement>) {
-    setSubmitting(true);
-
-    e.preventDefault();
-    const coupon = new FormData(e.currentTarget).get("coupon") as string;
-
-    if (!coupon) {
-      setSubmitting(false);
-      setPromo({
-        ...promo,
-        apply: false,
-      });
-      return null;
-    }
-
-    const { data, error, message } = await getCoupons({ couponCode: coupon });
-
-    setSubmitting(false);
-
-    if (error || !data)
-      toast.error("Coupon Invalid", {
-        description: JSON.stringify(message),
-        position: "bottom-center",
-      });
-
-    if (!data) return null;
-
-    toast.info("Coupon Applied", {
-      description: JSON.stringify(message),
-      position: "bottom-center",
-    });
-
-    const discount = amount * (data?.value / 100);
-
-    setPromo({
-      apply: false,
-      code: data?.couponCode ?? "",
-      discount: discount > data?.maxAmount ? data.maxAmount : discount,
-    });
-  }
 
   const orderPage = [
     // {
@@ -453,10 +485,31 @@ export function PaymentSheet({
             <Label htmlFor="phone" className="text-left">
               Phone
             </Label>
-            <div className="relative col-span-4">
-              <span className="absolute left-2 top-2 text-muted-foreground">
-                +91
-              </span>
+            <div className="relative flex col-span-4">
+              {geoData === "IN" ? (
+                <span className="absolute left-2 top-2 text-muted-foreground">
+                  +91
+                </span>
+              ) : (
+                <Select defaultValue={"US"}>
+                  <SelectTrigger className="w-[80px]">
+                    <SelectValue placeholder="" />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-60">
+                    <SelectGroup>
+                      <SelectLabel>Code</SelectLabel>
+                      {countryPhoneCodes.map(
+                        ({ countryCode, phoneCode }, i) => (
+                          <SelectItem key={i} value={countryCode}>
+                            {phoneCode}
+                          </SelectItem>
+                        )
+                      )}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              )}
+
               <Input
                 value={formData.phone}
                 onChange={(e) =>
@@ -464,34 +517,51 @@ export function PaymentSheet({
                 }
                 type="number"
                 id="phone"
-                className="pl-9"
+                className={geoData === "IN" ? "pl-9" : ""}
                 maxLength={10}
               />
             </div>
           </div>
-          <div className="grid grid-cols-5 items-center gap-4">
-            <Label htmlFor="username" className="text-left">
-              State
-            </Label>
-            <Select
-              value={formData.state}
-              onValueChange={(e) => setFormData({ ...formData, state: e })}
-            >
-              <SelectTrigger className="border-prime/40 bg-bg w-full col-span-4 capitalize">
-                <SelectValue placeholder="Select State" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>States</SelectLabel>
-                  {states.map((e, i) => (
-                    <SelectItem className="capitalize" key={i} value={e}>
-                      {e.split("_").join(" ")}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
+          {geoData === "IN" ? (
+            <div className="grid grid-cols-5 items-center gap-4">
+              <Label htmlFor="username" className="text-left">
+                State
+              </Label>
+              <Select
+                value={formData.state}
+                onValueChange={(e) => setFormData({ ...formData, state: e })}
+              >
+                <SelectTrigger className="border-prime/40 bg-bg w-full col-span-4 capitalize">
+                  <SelectValue placeholder="Select State" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>States</SelectLabel>
+                    {states.map((e, i) => (
+                      <SelectItem className="capitalize" key={i} value={e}>
+                        {e.split("_").join(" ")}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+          ) : (
+            <div className="grid grid-cols-5 items-center gap-4">
+              <Label htmlFor="email" className="text-left">
+                Country
+              </Label>
+              <Input
+                disabled={!!countryData}
+                value={countryData}
+                id="country"
+                maxLength={40}
+                type="text"
+                placeholder="Your country"
+                className="col-span-4"
+              />
+            </div>
+          )}
         </div>
       ),
       footer: (
@@ -541,19 +611,26 @@ export function PaymentSheet({
 }
 
 export function PaymentModal({
-  slug,
   payModal,
   setOpenPay,
 }: {
-  slug: string;
   payModal: boolean;
   setOpenPay: Dispatch<SetStateAction<boolean>>;
 }) {
-  const { data, status } = useSession();
+  const { data, status, update } = useSession();
   const router = useRouter();
 
+  const params = useSearchParams();
+  const [open, setOpen] = useState(Boolean(params.get("success")));
+
+  useEffect(() => {
+    if (open) {
+      update({ mentorship: true });
+    }
+  }, [open]);
+
   return (
-    <Dialog open={payModal} onOpenChange={setOpenPay}>
+    <Dialog open={open}>
       <DialogContent className="sm:max-w-[425px]">
         <Card className="bg-background border-none flex flex-col">
           <CardHeader className="p-1 items-center">
@@ -568,15 +645,14 @@ export function PaymentModal({
           <CardContent className="pt-3 pb-0 mx-auto w-full flex flex-col items-center gap-2">
             <Button
               onClick={() => {
-                if (status === "unauthenticated") {
-                  router.push(`/api/auth/signin?callbackUrl=/courses/${slug}`);
-                }
-                setOpenPay(false);
+                router.push(`/instructions`);
               }}
               disabled={status === "loading"}
               className="w-full bg-prime/70 text-white hover:bg-prime"
             >
-              {status === "loading" ? "Adding Course..." : "Watch Now"}
+              {status === "loading"
+                ? "Joining Mentorship..."
+                : "Visit Instruction Page"}
             </Button>
             <Link className="w-fit" href={"/dashboard"}>
               <Button

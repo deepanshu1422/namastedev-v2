@@ -39,6 +39,8 @@ export const {
           //@ts-ignore
           bundleId: user?.bundleId,
           //@ts-ignore
+          mentorshipId: user?.mentorshipId,
+          //@ts-ignore
           newUser: !user?.contact || !user?.state || !user.name,
           //@ts-ignore
           phone: user?.contact,
@@ -85,6 +87,7 @@ export const {
           ...token,
           courseId: user?.courseId,
           bundleId: user?.bundleId,
+          mentorshipId: user?.mentorshipId,
           newUser: !user?.contact || !user?.state || !user.name,
           phone: user?.contact,
           state: user?.state,
@@ -107,6 +110,7 @@ export const {
           id: token.id,
           courseId: token?.courseId,
           bundleId: token?.bundleId,
+          mentorshipId: token?.mentorshipId,
           newUser: token?.newUser,
           phone: token?.phone,
           state: token?.state,

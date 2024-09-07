@@ -145,7 +145,7 @@ export function PaymentSheet({
       if (bundleId) {
         res = await createBundlePayment({
           bundleId: bundleId,
-          email: session?.user?.email ?? formData.email,
+          email: session?.user?.email ?? formData.email.toLocaleLowerCase(),
           contact: formData.phone,
           name: session?.user?.name ?? formData.name,
           state: formData.state,
@@ -195,12 +195,12 @@ export function PaymentSheet({
         },
         prefill: {
           name: formData.name,
-          email: formData.email,
+          email: formData.email.toLocaleLowerCase(),
           contact: formData.phone,
         },
         notes: {
           name: formData.name,
-          email: formData.email,
+          email: formData.email.toLocaleLowerCase(),
           contact: formData.phone,
           address: formData.state,
           bundleId,

@@ -1,3 +1,4 @@
+'use client'
 import { Check, CreditCard, LucideCheckCircle } from "lucide-react";
 import Button from "./home-components/button";
 import { Button as Btns } from "./ui/button";
@@ -21,7 +22,7 @@ export default function Program() {
         </div>
 
         <div className="lg:w-1/2 w-full shrink-0 flex-1 flex flex-col gap-2">
-          {benefits.map((e, i) => (
+          {benefits?.map((e, i) => (
             <span key={i} className="flex gap-2">
               <Check className="shrink-0 w-5 h-5 stroke-prime" />
               {e}

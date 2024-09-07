@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export default auth((req) => {
   const { nextUrl } = req;
-  const AuthRoute = ["/dashboard"].includes(nextUrl.pathname);
+  const AuthRoute = ["/dashboard", "/instructions"].includes(nextUrl.pathname);
   const isLogged = !!req.auth;
 
   // console.log(req.auth);
@@ -27,6 +27,17 @@ export default auth((req) => {
         req.nextUrl.origin
       );
       return NextResponse.redirect(newUrl);
+    }else{
+      if (nextUrl.pathname === "/instructions") {
+        // @ts-ignore
+        if (!req.auth?.user?.mentorshipId?.includes("querty")) {
+          const newUrl = new URL(
+            `/mentorship`,
+            req.nextUrl.origin
+          );
+          return NextResponse.redirect(newUrl); 
+        }
+      }
     }
   }
 });

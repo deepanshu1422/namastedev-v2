@@ -130,6 +130,7 @@ model Payments {
   purchaseType   PurchaseType
 
   stripePaymentId   String?
+  lemonsqueezyId    String?
   razorpayPaymentId String?
   razorpayOrderId   String?
 
@@ -154,6 +155,7 @@ model Invoices {
   paymentGateway    PaymentGateway
   stripePaymentId   String?
   razorpayOrderId   String?
+  lemonsqueezyId    String?
   discountAmount    Int?           @default(0)
   IGST              Int?
   CGST              Int?
@@ -175,6 +177,7 @@ enum Currency {
 enum PaymentGateway {
   stripe
   razorpay
+  lemonSqueezy
 }
 
 enum PaymentStatus {
