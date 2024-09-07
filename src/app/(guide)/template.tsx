@@ -441,7 +441,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
                 </>
               </SheetContent>
             </Sheet>
-            <div className="ml-auto">
+            <div className="flex gap-3 ml-auto h-full p-2 max-md:w-full">
+              <Link className="w-full" href={"/instructions"}>
+                <Button className="w-full text-white bg-prime/80 hover:bg-prime">
+                  Access Mentorship
+                </Button>
+              </Link>
               {status === "loading" ? (
                 <button className="font-jakarta flex items-center font-semibold gap-2 bg-prime/20 transition-all p-2 rounded-md text-sm">
                   <svg

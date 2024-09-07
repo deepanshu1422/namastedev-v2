@@ -218,7 +218,14 @@ export function PaymentSheet({
           toast("Error Occured", {
             position: "bottom-center",
             description: res.message ?? JSON.stringify(res.error),
-            action: <Link className="border border-border rounded-md px-2 py-1 ml-auto" href={"/instructions"}>Log In</Link>
+            action: (
+              <Link
+                className="border border-border rounded-md px-2 py-1 ml-auto"
+                href={"/instructions"}
+              >
+                Log In
+              </Link>
+            ),
           });
           setIsLoading(false);
           setOpen(false);
@@ -238,7 +245,6 @@ export function PaymentSheet({
           amount: res.data.amount,
           order_id: res.data.orderId,
           callback_url: `${BASE_URL}/mentorship?success=true`,
-          redirect: true,
           // async function (response: any) {
           //   sendEvent("Purchase", {
           //     value: amount,
@@ -611,11 +617,17 @@ export function PaymentModal({
   payModal: boolean;
   setOpenPay: Dispatch<SetStateAction<boolean>>;
 }) {
-  const { data, status } = useSession();
+  const { data, status, update } = useSession();
   const router = useRouter();
 
   const params = useSearchParams();
   const [open, setOpen] = useState(Boolean(params.get("success")));
+
+  useEffect(() => {
+    if (open) {
+      update({ mentorship: true });
+    }
+  }, [open]);
 
   return (
     <Dialog open={open}>
@@ -631,14 +643,16 @@ export function PaymentModal({
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-3 pb-0 mx-auto w-full flex flex-col items-center gap-2">
-          <Button
+            <Button
               onClick={() => {
-                  router.push(`/instructions`);
+                router.push(`/instructions`);
               }}
               disabled={status === "loading"}
               className="w-full bg-prime/70 text-white hover:bg-prime"
             >
-              {status === "loading" ? "Joining Mentorship..." : "Visit Instruction Page"}
+              {status === "loading"
+                ? "Joining Mentorship..."
+                : "Visit Instruction Page"}
             </Button>
             <Link className="w-fit" href={"/dashboard"}>
               <Button
