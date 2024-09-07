@@ -146,7 +146,7 @@ export function PaymentSheet({
       if (courseId) {
         res = await createPayments({
           courseId: courseId,
-          email: session?.user?.email ?? formData.email,
+          email: session?.user?.email ?? formData.email.toLocaleLowerCase(),
           contact: formData.phone,
           name: session?.user?.name ?? formData.name,
           state: formData.state,
@@ -198,12 +198,12 @@ export function PaymentSheet({
         },
         prefill: {
           name: formData.name,
-          email: formData.email,
+          email: formData.email.toLocaleLowerCase(),
           contact: formData.phone,
         },
         notes: {
           name: formData.name,
-          email: formData.email,
+          email: formData.email.toLocaleLowerCase(),
           contact: formData.phone,
           address: formData.state,
           courseId,
@@ -627,8 +627,9 @@ export function Floating({
                 sendEvent("Initiate Checkout", {
                   amount: course.price,
                   content_ids: [courseId],
-                  content_type: "course",
+                  content_type: "mentorship",
                   em: sha256(session?.user?.email ?? ""),
+                  // @ts-ignore
                   ph: sha256(session?.user?.phone ?? ""),
                   fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
                 });

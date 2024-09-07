@@ -26,7 +26,7 @@ export default async function RootLayout({
       <head>
         {/* <GoogleTagManager containerId="GTM-W4LNH7RV" /> */}
         <Script id="razorpay" src="https://checkout.razorpay.com/v1/checkout.js" async />
-        <Script id="lemonSqueezy" src="https://app.lemonsqueezy.com/js/lemon.js" defer />
+        {/* <Script id="lemonSqueezy" src="https://app.lemonsqueezy.com/js/lemon.js" defer /> */}
         <Pixel />
         <AdSense />
       </head>

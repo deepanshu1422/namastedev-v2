@@ -43,13 +43,14 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import triggerEvent from "@/services/tracking";
 import { sha256 } from "js-sha256";
 import { sendEvent } from "@/services/fbpixel";
 import mentorshipPayment from "../../../../actions/mentorshipPayment";
 import { useAtom } from "jotai";
 import { country, geo } from "@/lib/jotai";
+import { BASE_URL } from "@/util/constants";
 
 export function PaymentSheet({
   cover,
@@ -79,6 +80,8 @@ export function PaymentSheet({
     const geo = await (
       await fetch(`https://api.iplocation.net/?cmd=ip-country&ip=${ip.ip}`)
     ).json();
+
+    console.log(geo);
 
     setGeoData(geo.country_code2);
     setCountryData(geo.country_name);
@@ -146,6 +149,26 @@ export function PaymentSheet({
     "west_bengal",
   ];
 
+  const countryPhoneCodes = [
+    { country: "United States", countryCode: "US", phoneCode: "+1" },
+    { country: "India", countryCode: "IN", phoneCode: "+91" },
+    { country: "Singapore", countryCode: "SG", phoneCode: "+65" },
+    { country: "Australia", countryCode: "AU", phoneCode: "+61" },
+    { country: "United Kingdom", countryCode: "GB", phoneCode: "+44" },
+    { country: "China", countryCode: "CN", phoneCode: "+86" },
+    { country: "Japan", countryCode: "JP", phoneCode: "+81" },
+    { country: "Russia", countryCode: "RU", phoneCode: "+7" },
+    { country: "Brazil", countryCode: "BR", phoneCode: "+55" },
+    { country: "Germany", countryCode: "DE", phoneCode: "+49" },
+    { country: "France", countryCode: "FR", phoneCode: "+33" },
+    { country: "South Korea", countryCode: "KR", phoneCode: "+82" },
+    { country: "Indonesia", countryCode: "ID", phoneCode: "+62" },
+    { country: "Mexico", countryCode: "MX", phoneCode: "+52" },
+    { country: "Italy", countryCode: "IT", phoneCode: "+39" },
+    { country: "Turkey", countryCode: "TR", phoneCode: "+90" },
+    { country: "Other", countryCode: "XX", phoneCode: "NA" },
+  ];
+
   function validationError({ message }: { message: string }) {
     toast.error("Error Occured", {
       description: message,
@@ -176,7 +199,7 @@ export function PaymentSheet({
       if (courseId) {
         res = await mentorshipPayment({
           mentorshipId: "querty",
-          email: session?.user?.email ?? formData.email,
+          email: session?.user?.email ?? formData.email.toLocaleLowerCase(),
           contact: formData.phone,
           name: session?.user?.name ?? formData.name,
           state: geo === "IN" ? formData.state || "haryana" : "Washington",
@@ -187,14 +210,15 @@ export function PaymentSheet({
         return;
       }
 
-      if (!!res.data?.orderId) {
+      if (!!res.data?.orderId || !!res.error) {
         // make an endpoint to get this key
         const key = process.env.NEXT_PUBLIC_RAZORPAY_CLIENT;
 
-        if (res.error) {
+        if (!!res.error) {
           toast("Error Occured", {
             position: "bottom-center",
             description: res.message ?? JSON.stringify(res.error),
+            action: <Link className="border border-border rounded-md px-2 py-1 ml-auto" href={"/instructions"}>Log In</Link>
           });
           setIsLoading(false);
           setOpen(false);
@@ -213,30 +237,32 @@ export function PaymentSheet({
           currency: res.data.currency,
           amount: res.data.amount,
           order_id: res.data.orderId,
-          handler: async function (response: any) {
-            sendEvent("Purchase", {
-              value: amount,
-              currency: "INR",
-              content_ids: [courseId],
-              content_type: "course",
-              content_name: title,
-              em: sha256(formData.email), // Hashing example
-              ph: sha256(formData.phone),
-              fn: sha256(formData.name.split(" ")[0]),
-              ln: sha256(formData.name.split(" ")[1] ?? ""),
-            });
-            setOpenPay(true);
-            await update({ courses: true });
-            if (session?.user?.email) router.refresh();
-          },
+          callback_url: `${BASE_URL}/mentorship?success=true`,
+          redirect: true,
+          // async function (response: any) {
+          //   sendEvent("Purchase", {
+          //     value: amount,
+          //     currency: "INR",
+          //     content_ids: [courseId],
+          //     content_type: "course",
+          //     content_name: title,
+          //     em: sha256(formData.email), // Hashing example
+          //     ph: sha256(formData.phone),
+          //     fn: sha256(formData.name.split(" ")[0]),
+          //     ln: sha256(formData.name.split(" ")[1] ?? ""),
+          //   });
+          //   setOpenPay(true);
+          //   await update({ courses: true });
+          //   if (session?.user?.email) router.refresh();
+          // },
           prefill: {
             name: formData.name,
-            email: formData.email,
+            email: formData.email.toLocaleLowerCase(),
             contact: formData.phone,
           },
           notes: {
             name: formData.name,
-            email: formData.email,
+            email: formData.email.toLocaleLowerCase(),
             contact: formData.phone,
             address: geo === "IN" ? formData.state || "haryana" : "Washington",
             courseId,
@@ -257,7 +283,7 @@ export function PaymentSheet({
         paymentObject.open();
       } else {
         // @ts-ignore
-        LemonSqueezy.Url.Open(res.data?.url);
+        router.push(res.data?.url);
       }
 
       setIsLoading(false);
@@ -453,10 +479,31 @@ export function PaymentSheet({
             <Label htmlFor="phone" className="text-left">
               Phone
             </Label>
-            <div className="relative col-span-4">
-              <span className="absolute left-2 top-2 text-muted-foreground">
-                +91
-              </span>
+            <div className="relative flex col-span-4">
+              {geoData === "IN" ? (
+                <span className="absolute left-2 top-2 text-muted-foreground">
+                  +91
+                </span>
+              ) : (
+                <Select defaultValue={"US"}>
+                  <SelectTrigger className="w-[80px]">
+                    <SelectValue placeholder="" />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-60">
+                    <SelectGroup>
+                      <SelectLabel>Code</SelectLabel>
+                      {countryPhoneCodes.map(
+                        ({ countryCode, phoneCode }, i) => (
+                          <SelectItem key={i} value={countryCode}>
+                            {phoneCode}
+                          </SelectItem>
+                        )
+                      )}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              )}
+
               <Input
                 value={formData.phone}
                 onChange={(e) =>
@@ -464,7 +511,7 @@ export function PaymentSheet({
                 }
                 type="number"
                 id="phone"
-                className="pl-9"
+                className={geoData === "IN" ? "pl-9" : ""}
                 maxLength={10}
               />
             </div>
@@ -567,8 +614,11 @@ export function PaymentModal({
   const { data, status } = useSession();
   const router = useRouter();
 
+  const params = useSearchParams();
+  const [open, setOpen] = useState(Boolean(params.get("success")));
+
   return (
-    <Dialog open={payModal} onOpenChange={setOpenPay}>
+    <Dialog open={open}>
       <DialogContent className="sm:max-w-[425px]">
         <Card className="bg-background border-none flex flex-col">
           <CardHeader className="p-1 items-center">
@@ -581,17 +631,24 @@ export function PaymentModal({
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-3 pb-0 mx-auto w-full flex flex-col items-center gap-2">
-            <Button
+          <Button
               onClick={() => {
-                setOpenPay(false);
+                  router.push(`/instructions`);
               }}
               disabled={status === "loading"}
               className="w-full bg-prime/70 text-white hover:bg-prime"
             >
-              {status === "loading"
-                ? "Joining Mentorship..."
-                : "Check your email"}
+              {status === "loading" ? "Joining Mentorship..." : "Visit Instruction Page"}
             </Button>
+            <Link className="w-fit" href={"/dashboard"}>
+              <Button
+                variant={"link"}
+                disabled={status === "loading"}
+                className="text-white/40 hover:text-white"
+              >
+                {status === "loading" ? "loading..." : "Visit Dashboard"}
+              </Button>
+            </Link>
           </CardContent>
         </Card>
       </DialogContent>

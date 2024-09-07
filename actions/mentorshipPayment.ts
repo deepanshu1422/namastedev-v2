@@ -52,7 +52,7 @@ export default async function mentorshipPayment({
           name,
           contact,
           state,
-          country
+          country,
         },
       });
     }
@@ -106,7 +106,13 @@ export default async function mentorshipPayment({
 }
 
 type Response = {
-  error: boolean;
+  error:
+    | {
+        code: string;
+        message: string;
+        details: null;
+      }
+    | boolean;
   message?: string;
   data: {
     amount: number;

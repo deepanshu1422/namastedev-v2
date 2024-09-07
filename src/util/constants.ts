@@ -1,4 +1,4 @@
-export const BASE_URL = "https://30dayscoding.com"
+export const BASE_URL = "https://testing.30dayscoding.com"
 
 export const templates = [
     // {
