@@ -113,7 +113,7 @@ export default function Store() {
       <span className="flex items-center justify-center gap-4 relative lg:pb-4">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h2 className="font-jakarta text-pretty text-[2rem] font-extrabold text-center">
-          Resources to get you JOB-READY
+          Pocket Friendly Courses with Certificates!
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>

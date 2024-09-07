@@ -10,6 +10,8 @@ import Faqs from "@/components/mentorship-comp/faq";
 import Program from "@/components/program";
 import Script from "next/script";
 import Success from "@/components/mentorship-comp/success";
+import Btn from "./mentorship/btn";
+import Mentors from "./mentorship/mentors";
 
 
 export const dynamic = "force-dynamic";
@@ -53,7 +55,7 @@ export default function Home() {
     {
       question: "What is the refund policy?",
       answer:
-        "We offer a [X]-day money-back guarantee. If you're not satisfied within this period, you can request a full refund, no questions asked.",
+        "We offer a 30-day money-back guarantee. If you're not satisfied within this period, you can request a full refund, no questions asked.",
     },
     {
       question: "Is this course beginner-friendly?",
@@ -107,12 +109,14 @@ export default function Home() {
         subDesc="Whether you're a beginner looking to dive into programming or an experienced developer seeking skill enhancement, our mentors' guidance and courses are well-designed for all levels of proficiency."
         ytId="enw3DVa1r5k"
       />
-      <Companies />
+      {/* <Btn cover="/new-mentorship.jpg" yt="9Lokc1bQixc" /> */}
+      {/* <Companies /> */}
       <Store />
       <Success />
       {/* <Course /> */}
       <Program />
-      <Mentor />
+      {/* <Mentor /> */}
+      <Mentors />
       {/* <Highlights />
       <Testimonials /> */}
       <Faqs faq={faq} />

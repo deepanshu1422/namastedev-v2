@@ -194,14 +194,14 @@ export default function Success() {
       <span className="flex items-center justify-center gap-4 relative">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
-          100+ Success Stories
+          1000+ Success Stories
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
       <p className="max-w-2xl text-center mx-auto text-sm text-white/70 px-10 line-clamp-2">
-        A collection of inspiring narratives highlighting the journeys of
-        individuals who have overcome significant challenges to achieve
-        remarkable accomplishments.
+        Our students are working at top companies like Google, Facebook,
+        Amazon, Microsoft, and many more. We are a community of 20,000+ students
+        from 10+ countries.
       </p>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 py-5 lg:py-10">
@@ -236,14 +236,14 @@ export default function Success() {
           </button>
         </Link>
       </div> */}
-      <Link
+      {/* <Link
         href={"https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view"}
         target="_blank"
         className="bg-prime rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase"
       >
         <CreditCard className="h-10 w-10" />
         Join Now
-      </Link>
+      </Link> */}
     </div>
   );
 }

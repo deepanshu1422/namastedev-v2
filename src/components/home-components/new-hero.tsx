@@ -108,6 +108,8 @@ export default function Hero({
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>
           </div>
+          <Btn cover="/new-mentorship.jpg" yt="2cZ_7LuxEQI" />
+          
         </div>
       </div>
 

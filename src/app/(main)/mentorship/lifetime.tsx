@@ -7,7 +7,7 @@ import React, { Suspense } from "react";
 import Btn from "./btn";
 
 export const benefits = [
-  "1:1 Mentorship calls with Aryan, Deepanshu, and team",
+  "QnA calls with Aryan, Deepanshu, and team",
   "Customized Roadmap & Resume for your needs",
   "24/7 WhatsApp Support for you",
   "Exclusive LIVE classes with team",
@@ -21,7 +21,7 @@ export default function Lifetime() {
       <span className="flex items-center justify-center gap-4 relative pb-4">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h1 className="font-jakarta bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight text-[2rem] sm:text-6xl font-extrabold text-center">
-          1:1 Lifetime Job Mentorship 
+        Jobs + networking + mentorship group
         </h1>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>

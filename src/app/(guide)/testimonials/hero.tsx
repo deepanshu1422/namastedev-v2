@@ -61,7 +61,7 @@ export function VideoTestimony({
 export default function Hero() {
   return (
     <div className="grid place-items-center gap-5">
-      <div className="w-full relative">
+      {/* <div className="w-full relative">
         <div className="flex max-lg:flex-col items-start max-lg:items-center justify-between px-10 pt-5 gap-10">
           <div className="flex flex-col gap-8 m-auto w-full">
             <h2 className="font-jakarta max-phone:text-[2rem] text-center text-[2.5rem] font-extrabold text-balance">
@@ -80,7 +80,7 @@ export default function Hero() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <Success />
     </div>
   );
