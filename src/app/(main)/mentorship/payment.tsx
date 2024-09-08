@@ -51,6 +51,7 @@ import mentorshipPayment from "../../../../actions/mentorshipPayment";
 import { useAtom } from "jotai";
 import { country, geo } from "@/lib/jotai";
 import { BASE_URL } from "@/util/constants";
+import { dataTagSymbol } from "@tanstack/react-query";
 
 export function PaymentSheet({
   cover,
@@ -223,7 +224,9 @@ export function PaymentSheet({
                 className="border border-border rounded-md px-2 py-1 ml-auto"
                 href={"/instructions"}
               >
-                Log In
+                {session?.user?.mentorshipId?.includes(courseId)
+                  ? "View"
+                  : "Log In"}
               </Link>
             ),
           });
@@ -244,23 +247,23 @@ export function PaymentSheet({
           currency: res.data.currency,
           amount: res.data.amount,
           order_id: res.data.orderId,
-          callback_url: `${BASE_URL}/mentorship?success=true`,
-          // async function (response: any) {
-          //   sendEvent("Purchase", {
-          //     value: amount,
-          //     currency: "INR",
-          //     content_ids: [courseId],
-          //     content_type: "course",
-          //     content_name: title,
-          //     em: sha256(formData.email), // Hashing example
-          //     ph: sha256(formData.phone),
-          //     fn: sha256(formData.name.split(" ")[0]),
-          //     ln: sha256(formData.name.split(" ")[1] ?? ""),
-          //   });
-          //   setOpenPay(true);
-          //   await update({ courses: true });
-          //   if (session?.user?.email) router.refresh();
-          // },
+          // callback_url: `${BASE_URL}/mentorship?success=true`,
+          handler: async function (response: any) {
+            console.log("Hello");
+            setOpenPay(true);
+            await update({ mentorship: true });
+            sendEvent("Purchase", {
+              value: amount,
+              currency: "INR",
+              content_ids: [courseId],
+              content_type: "mentorship",
+              content_name: title,
+              em: sha256(formData.email), // Hashing example
+              ph: sha256(formData.phone),
+              fn: sha256(formData.name.split(" ")[0]),
+              ln: sha256(formData.name.split(" ")[1] ?? ""),
+            });
+          },
           prefill: {
             name: formData.name,
             email: formData.email.toLocaleLowerCase(),
@@ -621,7 +624,7 @@ export function PaymentModal({
   const router = useRouter();
 
   const params = useSearchParams();
-  const [open, setOpen] = useState(Boolean(params.get("success")));
+  const [open, setOpen] = useState(payModal || Boolean(params.get("success")));
 
   useEffect(() => {
     if (open) {

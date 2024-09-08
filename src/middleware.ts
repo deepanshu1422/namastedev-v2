@@ -4,9 +4,9 @@ import { NextResponse } from "next/server";
 export default auth((req) => {
   const { nextUrl } = req;
   const AuthRoute = ["/dashboard", "/instructions"].includes(nextUrl.pathname);
-  const isLogged = !!req.auth;
+  const isLogged = !!req.auth?.user;
 
-  // console.log(req.auth);
+  console.log(req.auth);
 
   // console.log("NextUrl", nextUrl);
 
