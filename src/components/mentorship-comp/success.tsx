@@ -220,7 +220,7 @@ export const testimonials: TestimonialType[] = [
   {
     review: (
       <p className="leading-6 text-sm font-normal">
-        I was very confused before joining 30DC. I didn't know what to do and how to prepare for interviews.
+        I was very confused before joining 30DC. I did not know what to do and how to prepare for interviews.
         <span className="bg-lime-500/40">
           The 1:1 mentorship and the community support helped me sharpen my skills and
           regain confidence.
