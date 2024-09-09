@@ -64,7 +64,7 @@ export default function Main({
         }
         youtubeId={"2cZ_7LuxEQI"}
       />
-      <MentorshipGallary setOpenPay={setOpen} />
+      {/* <MentorshipGallary setOpenPay={setOpen} /> */}
       <Features />
       <Faqs faq={faq} />
       {/* <Interakt /> */}
