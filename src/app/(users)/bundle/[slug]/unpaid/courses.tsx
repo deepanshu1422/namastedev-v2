@@ -43,6 +43,7 @@ export default function Courses({
         {coursesCollection.items.map(
           ({ courseImage, slug, title, rating }, index) => (
             <Course
+              key={index}
               rating={rating ?? 0}
               title={title}
               courseImage={courseImage}

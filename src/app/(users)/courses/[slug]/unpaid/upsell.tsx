@@ -110,7 +110,7 @@ function Offer({
     <div className={`${className} cursor-pointer flex flex-col py-2`}>
       <div className="flex flex-col gap-1.5 text-sm pb-3">
         {courses.map((e, i) => (
-          <span className="flex items-center gap-2">
+          <span key={i} className="flex items-center gap-2">
             <Check className="w-4 h-4 stroke-primary" />
             {e}
           </span>
