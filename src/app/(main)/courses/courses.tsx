@@ -28,6 +28,18 @@ export default function Courses({
 
   return (
     <>
+    <span className="flex items-center justify-center gap-4 relative mt-8">
+        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
+        <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
+          Premium Courses for Job-Ready Skills
+        </h2>
+        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
+      </span>
+      <p className="max-w-2xl text-center mx-auto text-sm text-white/70 px-10 line-clamp-2">
+        Our students are working at top companies like Google, Facebook,
+        Amazon, Microsoft, and many more. We are a community of 20,000+ students
+        from 10+ countries.
+      </p>
       <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-[85rem] gap-7 mx-auto max-phone:px-6 px-10 py-5 tab:pb-8">
         {/* {state
           ? courses.bundleCollection.items
@@ -171,9 +183,9 @@ function Course({
           />
         </div>
         <CardFooter className="px-0 py-0 flex-col gap-0.5 items-start text-muted-foreground">
-          <h3 className="text-foreground font-semibold">{title}</h3>
+          {/* <h3 className="text-foreground font-semibold">{title}</h3> */}
           {/* <span className="taxt-xs tab:text-sm">Aryan Singh</span> */}
-          <section className="flex gap-1 items-center">
+          {/* <section className="flex gap-1 items-center">
             <span className="text-lime-500/70">{rating}</span>
             {Array.from({ length: rating }).map((_, i) => (
               <Star
@@ -181,7 +193,7 @@ function Course({
                 className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4"
               />
             ))}
-          </section>
+          </section> */}
           <span className="flex gap-2 text-lg text-white font-semibold">
             ₹{amount}
             <span className="text-muted-foreground line-through">₹{bigAmount}</span>

@@ -17,11 +17,37 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Mentors from "../mentorship/mentors";
+import Success from "@/components/mentorship-comp/success";
 
 export default function Main({ courses }: { courses: CoursesType }) {
   const [state, setState] = useState("");
 
   const faq = [
+    {
+      question: "Are the courses lifetime valid?",
+      answer: (
+        <p>
+          Yes, all our courses come with lifetime access, allowing you to revisit the materials whenever you need.
+        </p>
+      ),
+    },
+    {
+      question: "Is a certificate given?",
+      answer: (
+        <p>
+          Yes, upon successful completion of the course, you will receive a certificate to showcase your achievement.
+        </p>
+      ),
+    },
+    {
+      question: "How long will it take to complete the course?",
+      answer: (
+        <p>
+          You can take your time! The courses are designed for self-paced learning, so you can complete them at your convenience.
+        </p>
+      ),
+    },
     {
       question: "How can I get mentorship support?",
       answer: (
@@ -34,24 +60,18 @@ export default function Main({ courses }: { courses: CoursesType }) {
       ),
     },
     {
-      question: "What is the duration of the course?",
-      answer:
-        "The course duration is usually 30 days but it can take few more days based on certain selection of courses. However, you can complete it at your own pace since you'll have lifetime access.",
-    },
-    {
       question: "How often is the course updated?",
-      answer:
-        "We regularly update our courses to reflect the latest industry trends and practices. You will automatically receive access to all future updates at no extra cost.",
+      answer: (
+        <p>
+          We regularly update our courses to reflect the latest industry trends and practices. You will automatically receive access to all future updates at no extra cost.
+        </p>
+      ),
     },
     {
       question: "What will be the next step?",
       answer: (
         <p>
-          After completing the course, we recommend taking advantage of our
-          mentorship program to further enhance your learning. Personalized
-          mentorship can help you apply the knowledge from the course to
-          real-world projects and provide guidance tailored to your career
-          goals. Visit{" "}
+          After completing the course, we recommend taking advantage of our mentorship program to further enhance your learning. Personalized mentorship can help you apply the knowledge from the course to real-world projects and provide guidance tailored to your career goals. Visit{" "}
           <Link className="text-prime" href={"/mentorship"}>
             Mentorship Support.
           </Link>
@@ -84,7 +104,7 @@ export default function Main({ courses }: { courses: CoursesType }) {
       />
       <Hero
         title="Job-Ready Mastery Courses"
-        desc="Advance your development skills with our comprehensive online courses. Learn MERN Stack, Blockchain, Data Structures & Algorithms, AI, and more from industry experts."
+        desc="Advance your development skills with our comprehensive online courses. Learn Full Stack, Data Structures & Algorithms, AI, Blockchain, Data Analytics, and more from industry experts."
         heroImage="https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         search={state}
         setSearch={setState}
@@ -97,7 +117,10 @@ export default function Main({ courses }: { courses: CoursesType }) {
         slug={courses.bundleCollection.items[0].slug}
       />
       <Courses state={state} courses={courses} />
-      <Reviews />
+      {/* <Reviews /> */}
+      <Mentors />
+      <Success />
+      <div className="my-5"></div>
       <Faqs faq={faq} />
     </main>
   );
@@ -178,11 +201,11 @@ function Bundle({
   slug: string;
 }) {
   const mentorship = [
-    "Resume Review",
-    "Referal to Big MNCs",
+    "Personalized Roadmap and Resume Review",
+    "Access to all courses",
+    "Mentorship calls and QnA",
     "24/7 Whatsapp Doubt Solving",
-    "Weekly interaction with Senior Engineers",
-    "Personalized Roadmap and Follow Up",
+    "Biweekly events and interactions",
   ];
 
   return (
