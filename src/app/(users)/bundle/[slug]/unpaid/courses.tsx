@@ -38,11 +38,26 @@ export default function Courses({
           This bundle contains all these complete courses❤️
         </p>
       </div>
+
+      <div className="md:hidden flex flex-col gap-2">
+        {coursesCollection.items.map(
+          ({ courseImage, slug, title, rating }, index) => (
+            <Course
+              rating={rating ?? 0}
+              title={title}
+              courseImage={courseImage}
+              slug={slug}
+            />
+          )
+        )}
+      </div>
+
       <Carousel
+        className="max-md:hidden"
         opts={{
           loop: true,
           align: "center",
-          startIndex: -1
+          startIndex: -1,
         }}
         plugins={[
           Autoplay({
@@ -53,7 +68,10 @@ export default function Courses({
         <CarouselContent>
           {coursesCollection.items.map(
             ({ courseImage, slug, title, rating }, index) => (
-              <CarouselItem className="basis-full md:basis-1/2 max-w-80" key={index}>
+              <CarouselItem
+                className="basis-full md:basis-1/2 max-w-80"
+                key={index}
+              >
                 <Course
                   rating={rating ?? 0}
                   title={title}
@@ -85,21 +103,21 @@ function Course({
   };
 }) {
   return (
-    <Card className="select-none flex flex-col gap-2 bg-transparent border-none">
+    <Card className="select-none flex flex-col gap-2 bg-second/50 p-1 md:bg-transparent max-md:border-dashed max-md:border-2 max-md:border-prime/40 md:border-none max-md:rounded-none">
       <Link
         href={`/courses/${slug}`}
-        className="flex flex-col gap-2 h-fit group"
+        className="flex md:flex-col gap-2 h-fit group"
       >
-        <div className="relative bg-card/50 aspect-[6/4] rounded-md overflow-hidden">
+        <div className="relative bg-card/50 aspect-square md:aspect-[6/4] rounded-md overflow-hidden h-full shrink-0">
           <Image
             src={courseImage?.url ?? ""}
             alt={title}
             fill
-            className="group-hover:scale-105 transition-all"
+            className="object-cover group-hover:scale-105 transition-all"
           />
         </div>
-        <CardFooter className="px-0 py-0 flex-col gap-0.5 items-start text-muted-foreground">
-          <h3 className="text-foreground font-semibold line-clamp-2">
+        <CardFooter className="max-md:text-sm px-0 py-0 flex-col gap-0.5 items-start text-muted-foreground">
+          <h3 className="text-foreground font-semibold line-clamp-1 md:line-clamp-2">
             {title}
           </h3>
           {/* <span className="taxt-xs tab:text-sm">Aryan Singh</span> */}

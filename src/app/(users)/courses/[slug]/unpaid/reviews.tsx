@@ -17,6 +17,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { testimonials } from "@/components/mentorship-comp/success";
+import TestimonyVideo from "@/app/(users)/testimony-video";
 
 type TestimonialType = {
   name: string;
@@ -81,6 +82,7 @@ export default function Reviews() {
           These are the love we get from our users❤️
         </p>
       </div>
+      <TestimonyVideo />
       <Slider />
     </section>
   );

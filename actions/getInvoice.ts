@@ -23,6 +23,7 @@ export default async function getInvoice() {
           item: true,
           createdAt: true,
           amount: true,
+          currency: true,
         },
       },
     },

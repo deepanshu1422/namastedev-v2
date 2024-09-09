@@ -8,10 +8,6 @@ import {
 } from "@/components/ui/accordion";
 import {
   Check,
-  CheckCheck,
-  CheckCircle2,
-  ChevronDown,
-  Dot,
   Video,
 } from "lucide-react";
 import Checkout from "./checkout";

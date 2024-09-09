@@ -90,18 +90,25 @@ export function PaymentSheet({
   const [submitting, setSubmitting] = useState(false);
 
   const states = [
+    "andaman_and_nicobar_islands",
     "andhra_pradesh",
     "arunachal_pradesh",
     "assam",
     "bihar",
+    "chandigarh",
     "chhattisgarh",
+    "daman_and_diu",
+    "delhi",
     "goa",
     "gujarat",
     "haryana",
     "himachal_pradesh",
     "jharkhand",
+    "jammu_and_kashmir",
     "karnataka",
     "kerala",
+    "ladakh",
+    "lakshadweep",
     "madhya_pradesh",
     "maharashtra",
     "manipur",
@@ -109,6 +116,7 @@ export function PaymentSheet({
     "mizoram",
     "nagaland",
     "odisha",
+    "puducherry",
     "punjab",
     "rajasthan",
     "sikkim",
@@ -117,7 +125,7 @@ export function PaymentSheet({
     "tripura",
     "uttar_pradesh",
     "uttarakhand",
-    "west_bengal",
+    "west_bengal"
   ];
 
   function validationError({ message }: { message: string }) {

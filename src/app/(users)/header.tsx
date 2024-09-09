@@ -41,40 +41,22 @@ export default function Header() {
 
   const navBar = [
     {
+      title: "Dashboard",
+      icon: <HomeIcon className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/dashboard",
+      selected: path === "/dashboard",
+    },
+    {
       title: "Courses",
       icon: <Compass className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/courses",
       selected: path === "/courses",
     },
     {
-      title: "Projects",
-      icon: <Network className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/projects",
-      selected: path === "/projects",
-    },
-    {
-      title: "Jobs",
-      icon: <Earth className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/jobs",
-      selected: path === "/jobs",
-    },
-    {
-      title: "Roadmaps",
-      icon: <Map className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/roadmaps",
-      selected: path === "/roadmaps",
-    },
-    {
       title: "Testimonials",
       icon: <Star className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/testimonials",
       selected: path === "/testimonials",
-    },
-    {
-      title: "DSA",
-      icon: <Braces className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/dsa",
-      selected: path === "/dsa",
     },
     {
       title: "1:1 Mentorship",

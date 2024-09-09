@@ -217,10 +217,10 @@ export default function Mentors() {
                 "Our lead mentor Aryan Singh, a visionary software engineer at Google, leads 30 Days Coding with a resilience hardly seen before. With roles in tech giants and projects like Blocktrain and DSA Revision, Aryan combines professional expertise with a passion for mentoring. His zeal to impart guidance to people stuck in the 'How do I brush my technical skills for this job?' phase, has led to him joining hands with Deepanshu Udhwani, resulting in the birth of 30 Days Coding.",
             company: [
                 { name: "Google", path: "/company3.png" },
-                { name: "Arrow Electronics", path: "/arrow_logo.jfif" },
+                { name: "Arrow Electronics", path: "/arrow_logo.jpg" },
                 {
                     name: "Massachusetts Amherst",
-                    path: "/umassamherst_logo.jfif",
+                    path: "/umassamherst_logo.jpg",
                 },
             ],
             social: {
@@ -234,7 +234,7 @@ export default function Mentors() {
                     duration: "3y 8m",
                     company: "Google",
                     designation: "Software Engineer",
-                    imgSrc: "/google.jfif",
+                    imgSrc: "/google.jpg",
                 },
                 {
                     latest: "August, 2020",
@@ -242,7 +242,7 @@ export default function Mentors() {
                     duration: "4m",
                     company: "Google",
                     designation: "Software Engineer Intern",
-                    imgSrc: "/google.jfif",
+                    imgSrc: "/google.jpg",
                 },
                 {
                     latest: "May, 2020",
@@ -250,7 +250,7 @@ export default function Mentors() {
                     duration: "1y 5m",
                     company: "University of Massachusetts Amherst",
                     designation: "Software Engineer",
-                    imgSrc: "/umassamherst_logo.jfif",
+                    imgSrc: "/umassamherst_logo.jpg",
                 },
                 {
                     latest: "August, 2019",
@@ -258,7 +258,7 @@ export default function Mentors() {
                     duration: "3m",
                     company: "Arrow Electronics",
                     designation: "Software Engineer Intern",
-                    imgSrc: "/arrow_logo.jfif",
+                    imgSrc: "/arrow_logo.jpg",
                 },
             ],
             exp: 5,
@@ -315,9 +315,9 @@ export default function Mentors() {
                 instagram: "https://www.instagram.com/itsudhwani/",
             },
             company: [
-                { name: "MakeMyTrip", path: "/makemytrip_logo.jfif" },
-                { name: "Alibaba Cloud", path: "/alibaba.jfif" },
-                { name: "Thapar Institute of Engineering", path: "/thapar.jfif" },
+                { name: "MakeMyTrip", path: "/makemytrip_logo.jpg" },
+                { name: "Alibaba Cloud", path: "/alibaba.jpg" },
+                { name: "Thapar Institute of Engineering", path: "/thapar.jpg" },
             ],
             description:
                 "Deepanshu Udhwani, drawing from experience at MakeMyTrip, Alibaba Cloud, and various startups, founded 30 Days Coding to solve a simple problem faced by engineers across the globe - 'How do I prepare for this interview?' With a background in Computer Science and Marketing, he knows the exact composition of techical and non-technical aspects required for getting to your dream job.",
@@ -328,7 +328,7 @@ export default function Mentors() {
                     duration: "9m",
                     company: "30 Days Coding",
                     designation: "Founder",
-                    imgSrc: "/30days_logo.jfif",
+                    imgSrc: "/30days_logo.jpg",
                 },
                 {
                     latest: "February, 2024",
@@ -336,7 +336,7 @@ export default function Mentors() {
                     duration: "2y 9m",
                     company: "MakeMyTrip",
                     designation: "Senior Software Engineer",
-                    imgSrc: "/makemytrip_logo.jfif",
+                    imgSrc: "/makemytrip_logo.jpg",
                 },
                 {
                     latest: "September, 2020",
@@ -344,7 +344,7 @@ export default function Mentors() {
                     duration: "3m",
                     company: "Alibaba Cloud",
                     designation: "Software Development Intern",
-                    imgSrc: "/alibaba.jfif",
+                    imgSrc: "/alibaba.jpg",
                 },
                 {
                     latest: "March, 2020",

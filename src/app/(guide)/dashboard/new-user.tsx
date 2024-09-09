@@ -69,18 +69,25 @@ function UserForm() {
   const [updating, setUpdating] = useState(false);
 
   const states = [
+    "andaman_and_nicobar_islands",
     "andhra_pradesh",
     "arunachal_pradesh",
     "assam",
     "bihar",
+    "chandigarh",
     "chhattisgarh",
+    "daman_and_diu",
+    "delhi",
     "goa",
     "gujarat",
     "haryana",
     "himachal_pradesh",
     "jharkhand",
+    "jammu_and_kashmir",
     "karnataka",
     "kerala",
+    "ladakh",
+    "lakshadweep",
     "madhya_pradesh",
     "maharashtra",
     "manipur",
@@ -88,6 +95,7 @@ function UserForm() {
     "mizoram",
     "nagaland",
     "odisha",
+    "puducherry",
     "punjab",
     "rajasthan",
     "sikkim",
@@ -96,7 +104,7 @@ function UserForm() {
     "tripura",
     "uttar_pradesh",
     "uttarakhand",
-    "west_bengal",
+    "west_bengal"
   ];
 
   function onError({ message }: { message: string }) {

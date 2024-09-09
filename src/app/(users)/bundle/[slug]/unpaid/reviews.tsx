@@ -17,6 +17,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { testimonials } from "@/components/mentorship-comp/success";
+import TestimonyVideo from "@/app/(users)/testimony-video";
 
 type TestimonialType = {
   name: string;
@@ -37,7 +38,7 @@ function Testimonial({
   profile,
 }: TestimonialType) {
   return (
-    <div className="lg:hover:bg-opacity-70 transition-all duration-200 flex flex-col p-6 gap-4 bg-second rounded-lg min-h-80">
+    <div className="lg:hover:bg-opacity-70 transition-all duration-200 flex flex-col p-6 gap-4 bg-second/50 rounded-lg min-h-80">
       <div className="flex justify-between">
         <div className="flex items-center gap-2">
           <Avatar>
@@ -82,6 +83,7 @@ export default function Reviews() {
           These are the love we get from our users❤️
         </p>
       </div>
+      <TestimonyVideo />
       <Slider />
     </section>
   );
