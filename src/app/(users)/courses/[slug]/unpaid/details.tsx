@@ -106,19 +106,25 @@ export default function Details({
           </div>
         </section>
 
+        
+        <Mentors />
+
         <section className="flex flex-col gap-4">
           <div className="flex max-sm:flex-col gap-2 sm:items-end">
             <h2 className="text-xl tab:text-2xl font-bold text-white">
-              Course Content
+              Course content - land big opportunities!
             </h2>
+            
             <span className="flex text-sm text-white/60 items-center">
-              ({modulesCollection.total} Lessons)
+              ({modulesCollection.total} Modules)
             </span>
           </div>
           <Chapters modulesCollection={modulesCollection} />
         </section>
 
-        {!!projectsCollection.items.length && (
+        
+
+        {/* {!!projectsCollection.items.length && (
           <section className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
               <h2 className="font-bold text-xl tab:text-2xl">
@@ -159,7 +165,7 @@ export default function Details({
               )
             )}
           </section>
-        )}
+        )} */}
         {/* <div>
           <section
             className={`flex flex-col ${
@@ -204,7 +210,6 @@ export default function Details({
 
         <Reviews />
         <Guides />
-        <Mentors />
         <FAQ faqs={faqs} />
       </div>
 
@@ -243,7 +248,7 @@ export function Chapters({
     }[];
   };
 }) {
-  const [state, setState] = useState(modulesCollection.items.slice(0, 7));
+  const [state, setState] = useState(modulesCollection.items.slice(0, 10));
 
   return (
     <div className="flex flex-col gap-2">

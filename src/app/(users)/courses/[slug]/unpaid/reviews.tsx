@@ -76,10 +76,10 @@ export default function Reviews() {
     <section className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
         <h2 className="font-bold text-xl tab:text-2xl">
-          Know what our students say about us
+          1000+ student success stories
         </h2>
         <p className="text-sm text-pretty text-muted-foreground">
-          These are the love we get from our users❤️
+          Get started with 20,000+ students learning from 10+ countries
         </p>
       </div>
       <TestimonyVideo />

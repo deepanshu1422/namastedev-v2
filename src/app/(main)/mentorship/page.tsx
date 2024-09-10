@@ -30,27 +30,45 @@ export const metadata: Metadata = {
 export default function Home() {
   let faq = [
     {
-      question: "What is the refund policy ?",
+      question: "What is the refund policy?",
       answer:
-        "At 30DC, we strive to ensure that our users have a positive and rewarding experience with our courses.If, for any reason, you are not satisfied with your purchase, we offer a hassle - free refund policy.You can request a refund within 30 days of your purchase.To initiate a refund, please contact our support team at projectsnightlight @gmail.com with your order details.Once your request is processed, you will receive a confirmation email, and the refund will be credited to your original method of payment within 5 - 7 business days.",
+        "At 30DC, we are committed to ensuring that our users have a positive and rewarding experience with our courses. If, for any reason, you are not satisfied with your purchase, we offer a hassle-free refund policy. You can request a refund within 30 days of your purchase. To initiate a refund, please contact our support team at projectsnightlight@gmail.com with your order details. Once your request is processed, you will receive a confirmation email, and the refund will be credited to your original method of payment within 5 to 7 business days.",
     },
 
     {
-      question: "Do I get access to all courses ?",
+      question: "Do I get access to all courses?",
       answer:
-        "Yes, absolutely! When you purchase the mentorship, you gain access to all the courses available in our library.This means you can explore a wide range of topics and learn at your own pace.Our comprehensive course catalog is designed to cover various aspects of web development, data structures, AI, and much more.You can revisit any course as often as you like, ensuring that you have all the resources you need to achieve your learning goals.",
+        "Absolutely! When you purchase the mentorship, you gain access to all the courses available in our library. This means you can explore a wide range of topics and learn at your own pace. Our comprehensive course catalog is designed to cover various aspects of web development, data structures, AI, and much more. You can revisit any course as often as you like, ensuring that you have all the resources you need to achieve your learning goals.",
     },
 
     {
-      question: "How long is the mentorship ?",
+      question: "How long does the mentorship last?",
       answer:
-        "Our mentorship program is designed to provide you with lifetime support.Once you enroll in our courses, you will have access to mentors who are industry experts and experienced professionals.They will guide you throughout your learning journey, offering valuable insights, feedback, and personalized advice.Whether you have questions about course material, need career guidance, or seek project - specific advice, our mentors are here to help you succeed, long after you have completed your courses.",
+        "Our mentorship program is designed to provide you with lifetime support. Once you enroll in our courses, you will have access to mentors who are industry experts and experienced professionals. They will guide you throughout your learning journey, offering valuable insights, feedback, and personalized advice. Whether you have questions about course material, need career guidance, or seek project-specific advice, our mentors are here to help you succeed long after you have completed your courses.",
     },
 
     {
-      question: "Any more questions?",
+      question: "What if I have technical issues during the course?",
       answer:
-        "If you have any additional questions or need further assistance, we are here to help! Please feel free to reach out to us at support@nightlightprojects.freshdesk.com. Our dedicated support team is always ready to provide you with the information and support you need. Whether you have inquiries about course content, technical issues, or any other concerns, don’t hesitate to contact us. We aim to respond to all queries promptly and ensure that your experience with Projects Nightlight is as smooth and enjoyable as possible.",
+        "If you encounter any technical issues while taking the course, please reach out to our support team. We are here to assist you with any technical difficulties you may face, ensuring that your learning experience is smooth and uninterrupted.",
+    },
+
+    {
+      question: "Can I interact with other students?",
+      answer:
+        "Yes! We encourage interaction among students through our community forums and group sessions. Engaging with fellow learners can enhance your understanding of the material and provide networking opportunities.",
+    },
+
+    {
+      question: "Are there any prerequisites for the mentorship program?",
+      answer:
+        "No specific prerequisites are required to join our mentorship program. However, a basic understanding of programming concepts will be beneficial. Our courses are designed to cater to learners of all levels, from beginners to advanced.",
+    },
+
+    {
+      question: "How can I provide feedback about the courses?",
+      answer:
+        "We value your feedback! After completing a course, you will have the opportunity to provide feedback through a survey. Your insights help us improve our offerings and ensure that we meet the needs of our learners.",
     },
   ];
 

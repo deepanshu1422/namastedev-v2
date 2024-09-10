@@ -219,7 +219,7 @@ export default function Mentors() {
                 { name: "Google", path: "/company3.png" },
                 { name: "Arrow Electronics", path: "/arrow_logo.jpg" },
                 {
-                    name: "Massachusetts Amherst",
+                    name: "UMass Amherst",
                     path: "/umassamherst_logo.jpg",
                 },
             ],
@@ -309,7 +309,7 @@ export default function Mentors() {
         {
             name: "Deepanshu Udhwani",
             image: "/instructor2.jpg",
-            designation: "Software Engineer @ Alibaba Cloud & MakeMyTrip",
+            designation: "Software Engineer @ Alibaba Cloud & MakeMyTrip.",
             social: {
                 linkedin: "https://www.linkedin.com/in/deepanshu-udhwani/",
                 instagram: "https://www.instagram.com/itsudhwani/",
@@ -317,7 +317,7 @@ export default function Mentors() {
             company: [
                 { name: "MakeMyTrip", path: "/makemytrip_logo.jpg" },
                 { name: "Alibaba Cloud", path: "/alibaba.jpg" },
-                { name: "Thapar Institute of Engineering", path: "/thapar.jpg" },
+                { name: "Thapar - Engineering", path: "/thapar.jpg" },
             ],
             description:
                 "Deepanshu Udhwani, drawing from experience at MakeMyTrip, Alibaba Cloud, and various startups, founded 30 Days Coding to solve a simple problem faced by engineers across the globe - 'How do I prepare for this interview?' With a background in Computer Science and Marketing, he knows the exact composition of techical and non-technical aspects required for getting to your dream job.",

@@ -25,8 +25,7 @@ export default function Guides() {
           Premium Interview Guides Included ✨
         </h2>
         <p className="text-sm text-pretty text-muted-foreground">
-          These projects mentioned below with clean code so that you can make
-          you protfoilio look great.❤️
+          Guides that have helped our students get interviews at top companies.❤️
         </p>
       </div>
       <Slider guides={guides} />

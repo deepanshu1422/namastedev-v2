@@ -46,7 +46,7 @@ export function UpsellModal({
 
   const info = {
     title: "Exclusive Bundle Offer",
-    desc: "Unlock your full potential now. Get All 5 courses package bundle at discounted price.",
+    desc: "Get All 5 courses at 85% off. Lifetime access and certificate for each course.",
   };
 
   if (isDesktop) {
@@ -120,10 +120,10 @@ function Offer({
       <div className="flex justify-between items-center pb-3">
         <div className="flex items-end gap-2">
           <span className="text-2xl font-bold">₹999</span>
-          <span className="text-xl font-medium text-muted-foreground line-through italic">₹999</span>
+          <span className="text-xl font-medium text-muted-foreground line-through italic">₹9999</span>
         </div>
 
-        <Badge className="py-1 px-2 rounded h-fit bg-prime/50 hover:bg-prime/80 text-white">90% off</Badge>
+        <Badge className="py-1 px-2 rounded h-fit bg-red-500 hover:bg-red-700 text-white">90% off</Badge>
       </div>
 
       <div className="flex flex-col gap-3">
@@ -138,7 +138,7 @@ function Offer({
             }}
             className="w-full bg-prime/80 hover:bg-prime text-white"
           >
-            Claim Your Bundle Now
+            Claim Your Bundle Offer Now
           </Button>
         </Link>
         <Button
@@ -149,7 +149,7 @@ function Offer({
           className="w-full text-wrap"
           variant={"secondary"}
         >
-          No thanks, Continue
+          No thanks, continue with single course
         </Button>
       </div>
     </div>
