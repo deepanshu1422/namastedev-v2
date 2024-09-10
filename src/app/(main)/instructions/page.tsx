@@ -27,49 +27,62 @@ export default function Instructions() {
                 We will win when you get an awesome job - so let’s work hard
                 together.
               </p>
-              <p className="font-semibold">
-                Join the discord server -{" "}
-                <LinkMe
-                  title="Visit Channel"
+              <div className="flex max-md:flex-col gap-2">
+                <Link
+                target="_blank"
                   href={"https://discord.gg/8aeJzxACPG"}
-                />
-              </p>
+                  className="hover:scale-[1.02] transition-all duration-200 flex-1 font-semibold p-2 rounded-md border-dashed border-2 border-prime bg-second/40 shadow-lg shadow-black/80"
+                >
+                  Join the Discord Server
+                </Link>
+                <Link
+                target="_blank"
+                  href={"https://wa.me/+16504956282"}
+                  className="hover:scale-[1.02] transition-all duration-200 flex-1 font-semibold p-2 rounded-md border-dashed border-2 border-prime bg-second/40 shadow-lg shadow-black/80"
+                >
+                  Connect Aryan Via Whatsapp
+                </Link>
+              </div>
             </div>
             <hr className="h-1 w-20 border-white/80 max-sm:mt-3" />
           </section>
           <div className="flex flex-col gap-6 py-5 sm:py-10">
-          <div className="sm:hidden">
-            <span className="font-semibold">Table of Content</span>
-            <ul className="flex flex-col gap-2 py-2">
-              <li className="text-sm text-prime/70 underline">
-                <Link href={"#get-started"}>Get started [next steps]</Link>
-              </li>
-              <li className="text-sm text-prime/70 underline">
-                <Link href={"#usa-ca-guides"}>USA - Canada Guides</Link>
-              </li>
-              <li className="text-sm text-prime/70 underline">
-                <Link href={"#resume-tips"}>Resume tips</Link>
-              </li>
-              <li className="text-sm text-prime/70 underline">
-                <Link href={"#all-guides"}>All Guides</Link>
-              </li>
-              <li className="text-sm text-prime/70 underline">
-                <Link href={"#fullstack-dev"}>Full stack development</Link>
-              </li>
-              <li className="text-sm text-prime/70 underline">
-                <Link href={"#dsa"}>DSA</Link>
-              </li>
-              <li className="text-sm text-prime/70 underline">
-                <Link href={"#internship-job"}>Simple internship, job process and steps</Link>
-              </li>
-              <li className="text-sm text-prime/70 underline">
-                <Link href={"#fullstack-projects"}>Full stack projects inside courses</Link>
-              </li>
-              <li className="text-sm text-prime/70 underline">
-                <Link href={"#content"}>Useful content and videos</Link>
-              </li>
-            </ul>
-          </div>
+            <div className="sm:hidden">
+              <span className="font-semibold">Table of Content</span>
+              <ul className="flex flex-col gap-2 py-2">
+                <li className="text-sm text-prime/70 underline">
+                  <Link href={"#get-started"}>Get started [next steps]</Link>
+                </li>
+                <li className="text-sm text-prime/70 underline">
+                  <Link href={"#usa-ca-guides"}>USA - Canada Guides</Link>
+                </li>
+                <li className="text-sm text-prime/70 underline">
+                  <Link href={"#resume-tips"}>Resume tips</Link>
+                </li>
+                <li className="text-sm text-prime/70 underline">
+                  <Link href={"#all-guides"}>All Guides</Link>
+                </li>
+                <li className="text-sm text-prime/70 underline">
+                  <Link href={"#fullstack-dev"}>Full stack development</Link>
+                </li>
+                <li className="text-sm text-prime/70 underline">
+                  <Link href={"#dsa"}>DSA</Link>
+                </li>
+                <li className="text-sm text-prime/70 underline">
+                  <Link href={"#internship-job"}>
+                    Simple internship, job process and steps
+                  </Link>
+                </li>
+                <li className="text-sm text-prime/70 underline">
+                  <Link href={"#fullstack-projects"}>
+                    Full stack projects inside courses
+                  </Link>
+                </li>
+                <li className="text-sm text-prime/70 underline">
+                  <Link href={"#content"}>Useful content and videos</Link>
+                </li>
+              </ul>
+            </div>
             <section className="flex flex-col gap-3">
               <Link
                 href={"#get-started"}
@@ -81,6 +94,20 @@ export default function Instructions() {
                 <h2 id="get-started">Get started [next steps]</h2>
               </Link>
               <ol className="flex flex-col gap-4 list-decimal list-inside text-white/80 max-sm:text-sm">
+                <li>
+                  <b className="text-white">Start Connecting</b> with us through
+                  our various means such as:
+                  <ul className="list-inside list-disc pl-6 pt-2">
+                    <li>
+                      Join our Discord Server{" "}
+                      <LinkMe title="Join Now" href={"https://discord.gg/8aeJzxACPG"} />
+                    </li>
+                    <li>
+                      Reach out to Aryan and Connect via Whatsapp Messaging: 
+                      <LinkMe title="Message Now." href={"https://wa.me/+16504956282"} />
+                    </li>
+                  </ul>
+                </li>
                 <li>
                   <b className="text-white">Go through</b> this resume guide and
                   send your resume in discord -
@@ -95,8 +122,11 @@ export default function Instructions() {
                 </li>
                 <li>
                   <b className="text-white">Start posting</b> on LinkedIn and
-                  tag me -
-                  <LinkMe href="https://www.linkedin.com/in/singh1aryan/" />
+                  tag us -
+                  <ul className="list-inside list-disc pl-6 pt-2">
+                    <li>Aryan Singh - <LinkMe href="https://www.linkedin.com/in/singh1aryan/" /></li>
+                    <li>Deepanshu Udhwani - <LinkMe href="https://in.linkedin.com/in/deepanshu-udhwani" /></li>
+                  </ul>
                 </li>
                 <li>
                   <b className="text-white">Be active</b> in discord for Jobs,
@@ -370,7 +400,9 @@ export default function Instructions() {
                 <span className="max-sm:opacity-70 opacity-30 group-hover:opacity-70 transition-all duration-100">
                   #
                 </span>
-                <h2 id="fullstack-projects">Full stack projects inside courses</h2>
+                <h2 id="fullstack-projects">
+                  Full stack projects inside courses
+                </h2>
               </Link>
 
               <ol className="flex flex-col gap-4 list-decimal list-inside text-white/80 max-sm:text-sm">
@@ -421,7 +453,7 @@ export default function Instructions() {
         </div>
       </div>
       {/* Table of Content */}
-      <div className="max-sm:hidden px-5 py-3 mr-auto sticky top-28 h-fit">
+      <div className="max-sm:hidden px-5 py-3 mr-auto sticky top-28 h-fit max-w-60">
         <span className="font-semibold">Table of Content</span>
         <ul className="flex flex-col gap-2 py-2">
           <li className="text-sm text-white/80 hover:text-prime/80 transition-colors hover:underline">
@@ -443,10 +475,14 @@ export default function Instructions() {
             <Link href={"#dsa"}>DSA</Link>
           </li>
           <li className="text-sm text-white/80 hover:text-prime/80 transition-colors hover:underline">
-            <Link href={"#internship-job"}>Simple internship, job process and steps</Link>
+            <Link href={"#internship-job"}>
+              Simple internship, job process and steps
+            </Link>
           </li>
           <li className="text-sm text-white/80 hover:text-prime/80 transition-colors hover:underline">
-            <Link href={"#fullstack-projects"}>Full stack projects inside courses</Link>
+            <Link href={"#fullstack-projects"}>
+              Full stack projects inside courses
+            </Link>
           </li>
           <li className="text-sm text-white/80 hover:text-prime/80 transition-colors hover:underline">
             <Link href={"#content"}>Useful content and videos</Link>

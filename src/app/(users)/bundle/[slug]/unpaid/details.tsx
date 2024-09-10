@@ -164,6 +164,7 @@ export default function Details({
 
         <Reviews />
         <Guides />
+        <Mentors />
         <FAQ faqs={faqs} />
       </div>
 
