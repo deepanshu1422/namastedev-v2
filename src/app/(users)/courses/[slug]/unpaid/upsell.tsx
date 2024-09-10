@@ -132,10 +132,6 @@ function Offer({
           className="relative overflow-hidden"
         >
           <Button
-            onClick={() => {
-              setOpen(false);
-              setPaymentOpen(true);
-            }}
             className="w-full bg-prime/80 hover:bg-prime text-white"
           >
             Claim Your Bundle Offer Now

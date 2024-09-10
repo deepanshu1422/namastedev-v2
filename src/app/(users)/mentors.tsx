@@ -390,7 +390,7 @@ export default function Mentors() {
         </p>
       </div>
 
-      <div className="w-full grid sm:grid-cols-2 gap-6">
+      <div className="w-full grid sm:grid-cols-2 gap-3">
         {mentors.map(
           (
             {

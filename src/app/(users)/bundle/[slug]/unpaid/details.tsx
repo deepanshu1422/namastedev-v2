@@ -16,6 +16,7 @@ import Image from "next/image";
 import Reviews from "./reviews";
 import Guides from "./guides";
 import Courses from "./courses";
+import Mentors from "@/app/(users)/mentors";
 // import Reviews from "./reviews"
 
 export default function Details({
@@ -161,6 +162,7 @@ export default function Details({
 
         <Reviews />
         <Guides />
+        <Mentors />
         <FAQ faqs={faqs} />
       </div>
 
