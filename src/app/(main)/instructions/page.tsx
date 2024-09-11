@@ -42,6 +42,13 @@ export default function Instructions() {
                 >
                   Connect Aryan Via Whatsapp
                 </Link>
+                <Link
+                    target="_blank"
+                    href={"https://wa.me/+917018765080"}
+                    className="hover:scale-[1.02] transition-all duration-200 flex-1 font-semibold p-2 rounded-md border-dashed border-2 border-prime bg-second/40 shadow-lg shadow-black/80"
+                >
+                  Connect Deepanshu Via Whatsapp
+                </Link>
               </div>
             </div>
             <hr className="h-1 w-20 border-white/80 max-sm:mt-3" />
@@ -99,12 +106,21 @@ export default function Instructions() {
                   our various means such as:
                   <ul className="list-inside list-disc pl-6 pt-2">
                     <li>
+                      Join our Whatsapp Mentorship Group{" "}
+                      <LinkMe title="Join Now" href={"https://chat.whatsapp.com/JIJeGL2kLgv7HexOUPSKUH"} />
+                    </li>
+
+                    <li>
                       Join our Discord Server{" "}
-                      <LinkMe title="Join Now" href={"https://discord.gg/8aeJzxACPG"} />
+                      <LinkMe title="Join Now" href={"https://discord.gg/3RcxqE2y"} />
                     </li>
                     <li>
                       Reach out to Aryan and Connect via Whatsapp Messaging: 
                       <LinkMe title="Message Now." href={"https://wa.me/+16504956282"} />
+                    </li>
+                    <li>
+                      Reach out to Deepanshu and Connect via Whatsapp Messaging:
+                      <LinkMe title="Message Now." href={"https://wa.me/+917018765080"} />
                     </li>
                   </ul>
                 </li>
