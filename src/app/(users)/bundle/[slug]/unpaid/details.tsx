@@ -139,6 +139,7 @@ export default function Details({
             </Button>
           </div>
         </div> */}
+        <Mentors />
 
         <section className="flex flex-col gap-4">
           <div className="grid tab:grid-cols-2 gap-5 p-3 tab:p-6 shadow-xl border-prime/80 border bg-second/30">
@@ -160,9 +161,9 @@ export default function Details({
           </div>
         </section>
 
+
         <Reviews />
         <Guides />
-        <Mentors />
         <FAQ faqs={faqs} />
       </div>
 
