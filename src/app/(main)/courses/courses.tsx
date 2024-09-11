@@ -169,12 +169,12 @@ function Course({
   const percentage =
     pricingsCollection.items.find((e) => e.countryCode == "IN")?.percentage ?? 0;
   return (
-    <Card className="select-none flex flex-col gap-2 bg-transparent border-none w-full max-w-80 mx-auto">
+    <Card className="select-none flex flex-col gap-2 bg-transparent border-none w-full sm:max-w-80 mx-auto">
       <Link
         href={`/courses/${slug}`}
-        className="flex flex-col gap-2 h-fit group"
+        className="flex sm:flex-col gap-2 h-fit group"
       >
-        <div className="relative bg-card/50 min-h-48 rounded-md overflow-hidden aspect-[6/4]">
+        <div className="relative bg-card/50 max-sm:min-w-20 h-fit sm:min-h-48 rounded-md overflow-hidden aspect-square shrink-0 sm:aspect-[6/4]">
           <Image
             src={courseImage?.url ?? ""}
             alt={title}
@@ -183,18 +183,18 @@ function Course({
           />
         </div>
         <CardFooter className="px-0 py-0 flex-col gap-0.5 items-start text-muted-foreground">
-          {/* <h3 className="text-foreground font-semibold">{title}</h3> */}
+          <h3 className="sm:hidden text-foreground font-semibold line-clamp-2">{title}</h3>
           {/* <span className="taxt-xs tab:text-sm">Aryan Singh</span> */}
-          {/* <section className="flex gap-1 items-center">
-            <span className="text-lime-500/70">{rating}</span>
+          <section className="sm:hidden flex gap-1 items-center">
+            <span className="text-lime-500/70 text-sm">{rating}</span>
             {Array.from({ length: rating }).map((_, i) => (
               <Star
                 key={i}
                 className="fill-lime-500/60 stroke-lime-500/60 h-3 tab:h-4 w-3 tab:w-4"
               />
             ))}
-          </section> */}
-          <span className="flex gap-2 text-lg text-white font-semibold">
+          </section>
+          <span className="flex gap-2 sm:text-lg text-white font-semibold">
             ₹{amount}
             <span className="text-muted-foreground line-through">₹{bigAmount}</span>
             {/* <span className="text-lime-500">75%off</span> */}

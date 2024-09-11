@@ -70,7 +70,7 @@ export function Slider({ course }: { course: any }) {
       <CarouselContent>
         {course.map((e: any, i: any) => (
           <CarouselItem
-            className="max-sm:basis-4/5 sm:basis-1/2 md:basis-1/3 w-full h-fit"
+            className="aspect-[6/4] max-phone:basis-4/5 phone:basis-1/2 md:basis-1/3 w-full h-fit"
             key={i}
           >
             <Card className="select-none flex flex-col gap-2 bg-transparent border-none">
@@ -83,7 +83,7 @@ export function Slider({ course }: { course: any }) {
                     src={e?.courseImage?.url ?? ""}
                     alt={e?.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-all"
+                    className="object-contain group-hover:scale-105 transition-all"
                   />
                 </div>
                 <CardFooter className="px-0 py-0 flex-col items-start text-sm text-muted-foreground">

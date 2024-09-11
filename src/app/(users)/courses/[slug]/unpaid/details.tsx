@@ -80,7 +80,7 @@ export default function Details({
   }[];
 }) {
   return (
-    <div className="tab:px-20 tab:py-6 max-tab:pt-4 max-tab:pb-10 m-auto max-w-[80rem] flex w-full">
+    <div className="tab:px-20 tab:py-6 max-tab:pt-4 max-tab:pb-10 m-auto max-w-2xl tab:max-w-[80rem] flex w-full">
       <div className="flex flex-col w-full gap-6 px-6 overflow-hidden">
         <section className="flex flex-col gap-1">
           <div className="flex flex-col gap-3 border-prime/80 border bg-second/30 pt-5 p-4">

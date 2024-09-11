@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Autoplay from "embla-carousel-autoplay";
 import { Linkedin, Quote, ShoppingBagIcon, Star } from "lucide-react";
@@ -18,6 +18,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { testimonials } from "@/components/mentorship-comp/success";
 import TestimonyVideo from "@/app/(users)/testimony-video";
+import Image from "next/image";
 
 type TestimonialType = {
   name: string;
@@ -28,6 +29,37 @@ type TestimonialType = {
   // course?: string;
   link: string;
 };
+
+function MobileTestimonial({
+  name,
+  review,
+  link,
+  linkedin,
+  pos,
+  profile,
+}: TestimonialType) {
+  return (
+    <figure className="overflow-hidden flex rounded-xl p-0 bg-second/60">
+      <Avatar className="w-20 h-full rounded-none">
+        <AvatarImage className="object-cover" src={profile} />
+        <AvatarFallback className="rounded-none">
+          {name
+            .split(" ")
+            .map((e) => e[0])
+            .join("")
+            .toUpperCase()}
+        </AvatarFallback>
+      </Avatar>
+      <div className="py-4 p-3 text-left space-y-4">
+        <div className="line-clamp-3">{review}</div>
+        <figcaption className="font-medium text-sm">
+          <div className="text-prime">{name}</div>
+          <div className="text-muted-foreground">{pos}</div>
+        </figcaption>
+      </div>
+    </figure>
+  );
+}
 
 function Testimonial({
   name,
@@ -72,30 +104,74 @@ function Testimonial({
 }
 
 export default function Reviews() {
-    
   return (
     <section className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
         <h2 className="font-bold text-xl tab:text-2xl">
-          Know what our students say about us
+          1000+ student success stories
         </h2>
         <p className="text-sm text-pretty text-muted-foreground">
-          These are the love we get from our users❤️
+          Get started with 20,000+ students learning from 10+ countries
         </p>
       </div>
       <TestimonyVideo />
       <Slider />
+      <MobileSlider />
     </section>
   );
 }
 
-export function Slider() {
-
+export function MobileSlider() {
   return (
     <Carousel
+      className="md:hidden"
       opts={{
         loop: true,
-        align: "start"
+        align: "start",
+      }}
+      plugins={[
+        Autoplay({
+          delay: 3000,
+        }),
+      ]}
+    >
+      <CarouselContent>
+        {Array.from({ length: Math.ceil(testimonials.length / 3) }).map(
+          (_, i) => (
+            <CarouselItem
+              className="flex flex-col gap-2 md:hidden basis-full"
+              key={i}
+            >
+              {testimonials
+                .filter((_, index) => index >= i * 3 && index < (i + 1) * 3)
+                .map(({ link, linkedin, name, pos, profile, review }, i) => (
+                  <MobileTestimonial
+                    key={i}
+                    name={name}
+                    review={review}
+                    link={link}
+                    linkedin={linkedin}
+                    pos={pos}
+                    profile={profile}
+                  />
+                ))}
+            </CarouselItem>
+          )
+        )}
+      </CarouselContent>
+      <CarouselPrevious className="-left-4 h-12 w-12" />
+      <CarouselNext className="-right-4 h-12 w-12" />
+    </Carousel>
+  );
+}
+
+export function Slider() {
+  return (
+    <Carousel
+      className="max-md:hidden"
+      opts={{
+        loop: true,
+        align: "start",
       }}
       plugins={[
         Autoplay({
@@ -106,16 +182,19 @@ export function Slider() {
       <CarouselContent>
         {testimonials.map(
           ({ name, review, link, linkedin, pos, profile }, index) => (
-            <CarouselItem className="basis-full md:basis-1/2" key={index}>
+            <CarouselItem
+              className="max-md:hidden basis-full md:basis-1/2"
+              key={index}
+            >
               {/* <div className="p-1"> */}
-                <Testimonial
-                  name={name}
-                  review={review}
-                  link={link}
-                  linkedin={linkedin}
-                  pos={pos}
-                  profile={profile}
-                />
+              <Testimonial
+                name={name}
+                review={review}
+                link={link}
+                linkedin={linkedin}
+                pos={pos}
+                profile={profile}
+              />
               {/* </div> */}
             </CarouselItem>
           )
