@@ -71,7 +71,7 @@ export default function Main({
       <Floating setOpen={setOpen} />
       <PaymentSheet
         amount={8000}
-        courseId="querty"
+        courseId="mentor"
         cover="./mentorship.jpg"
         curreny="USD"
         open={open}

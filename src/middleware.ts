@@ -30,7 +30,7 @@ export default auth((req) => {
     }else{
       if (nextUrl.pathname === "/instructions") {
         // @ts-ignore
-        if (!req.auth?.user?.mentorshipId?.includes("querty")) {
+        if (!req.auth?.user?.mentorshipId?.includes("mentor")) {
           const newUrl = new URL(
             `/mentorship`,
             req.nextUrl.origin

@@ -206,7 +206,7 @@ export function PaymentSheet({
 
       if (courseId) {
         res = await mentorshipPayment({
-          mentorshipId: "querty",
+          mentorshipId: "mentor",
           email: session?.user?.email ?? formData.email.toLocaleLowerCase(),
           contact: formData.phone,
           name: session?.user?.name ?? formData.name,
