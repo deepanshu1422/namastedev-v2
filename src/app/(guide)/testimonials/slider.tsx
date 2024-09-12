@@ -72,7 +72,7 @@ export function Slider({
                   setOpen(true);
                   setUrl(href);
                 }}
-                className="relative cursor-pointer"
+                className="relative group cursor-pointer"
                 ratio={16 / 9}
               >
                 <Image
@@ -81,9 +81,9 @@ export function Slider({
                   className="rounded-xl object-cover shadow-lg shadow-black"
                   fill
                 />
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background p-2 rounded-full">
-                  <div className="bg-second/70 p-3 rounded-full">
-                    <Play className="w-6 h-5 stroke-[3] fill-white" />
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background/40 p-0.5 rounded-full shadow-2xl shadow-black group-active:-translate-y-[58%] group-hover:-translate-y-2/3 transition-transform">
+                  <div className="bg-white/50 backdrop-blur-sm p-4 rounded-full">
+                    <Play className="w-8 h-8 stroke-[3] fill-white" />
                   </div>
                 </div>
               </AspectRatio>
