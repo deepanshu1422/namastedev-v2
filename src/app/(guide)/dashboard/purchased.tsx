@@ -18,6 +18,8 @@ import {
 } from "@/components/ui/tabs";
 import { Session } from "next-auth";
 import getInvoice from "../../../../actions/getInvoice";
+import { useAtom } from "jotai";
+import { purchasedCourses } from "@/lib/jotai";
 
 export default function PurchaseTabs() {
   const { data: session, update } = useSession();
@@ -82,12 +84,17 @@ function Invoice() {
 function Purchased({ session }: { session: Session | null }) {
   // console.log(session?.user);
 
+  const [_, setCourses] = useAtom(purchasedCourses);
+
   const { isPending, data: items } = useQuery({
     // @ts-ignore
     queryKey: [session?.user?.courseId ?? []],
     queryFn: async ({ queryKey }) => {
-      return await refreshCourses(queryKey[0]);
+      const courses = await refreshCourses(queryKey[0]);
+      setCourses(courses.map((e: any) => e.title));
+      return courses;
     },
+
     staleTime: 1000 * 60 * 10,
   });
 
