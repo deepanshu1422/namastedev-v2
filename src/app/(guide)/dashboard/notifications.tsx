@@ -29,7 +29,7 @@ export default function Notifications() {
             size={"sm"}
             className="bg-prime/80 hover:bg-prime text-white"
           >
-            Generate Certificate
+            Download Certificate
           </Button>
         </div>
         {/* <Badge className="text-white gap-1 hover:bg-second/60 bg-second/40 rounded m-auto"><MessageCircleQuestion className="h-4 w-4" />No Updates Yet</Badge> */}

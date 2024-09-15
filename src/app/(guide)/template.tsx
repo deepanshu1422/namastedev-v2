@@ -487,7 +487,7 @@ function NotificationSheet({
               size={"sm"}
               className="bg-prime/80 hover:bg-prime text-white"
             >
-              Generate Certificate
+              Download Certificate
             </Button>
           </div>
         </div>

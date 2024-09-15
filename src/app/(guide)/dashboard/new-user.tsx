@@ -211,7 +211,7 @@ export function CertificateDialog({
               <CardTitle>30DC</CardTitle>
             </span>
             <CardDescription className="text-center">
-              Generate your Course Certificate!
+              Fasttrack your Certificate Generation Process!
             </CardDescription>
           </CardHeader>
           <CardContent className="p-1 space-y-2">
@@ -289,15 +289,19 @@ function CertificateForm() {
           value={formData.course}
           onValueChange={(e) => setFormData({ ...formData, course: e })}
         >
-          <SelectTrigger className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-prime focus-visible:ring-offset-2 border-prime/40 bg-bg/30 w-full col-span-4 capitalize">
+          <SelectTrigger className="sm:max-w-[370px] max-w-[325px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-prime focus-visible:ring-offset-2 border-prime/40 bg-bg/30 w-full col-span-4 capitalize">
             <SelectValue placeholder="Select a Course" />
           </SelectTrigger>
-          <SelectContent className="sm:max-w-[425px] max-w-[325px] overflow-hidden">
+          <SelectContent className="sm:max-w-[370px] max-w-[325px] overflow-hidden">
             <SelectGroup>
               <SelectLabel>Courses</SelectLabel>
               {courses.map((e, i) => (
-                <SelectItem className="line-clamp-1 capitalize" key={i} value={e}>
-                  {e.split("_").join(" ")}
+                <SelectItem
+                  className="line-clamp-1 capitalize"
+                  key={i}
+                  value={e}
+                >
+                  {e.substring(0,32)}...
                 </SelectItem>
               ))}
             </SelectGroup>
@@ -310,7 +314,7 @@ function CertificateForm() {
           variant={"outline"}
         >
           <File className="h-4 w-4" />
-          Generate Certificate
+          Download Certificate
         </Button>
       </form>
     </div>
