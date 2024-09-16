@@ -4,7 +4,7 @@ import Hero from "./unpaid/hero";
 import Detail from "./unpaid/details";
 import { Floating, PaymentModal, PaymentSheet } from "./payments";
 import { useState } from "react";
-import { YTModal } from "@/app/(guide)/testimonials/slider";
+import { YTModal } from "@/app/(main)/testimonials/slider";
 import { useSearchParams } from "next/navigation";
 
 type BundleItem = {

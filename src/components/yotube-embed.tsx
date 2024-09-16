@@ -2,7 +2,7 @@ import React from "react";
 import { AspectRatio } from "./ui/aspect-ratio";
 import Image from "next/image";
 import { Play } from "lucide-react";
-import { YTModal } from "@/app/(guide)/testimonials/slider";
+import { YTModal } from "@/app/(main)/testimonials/slider";
 
 const YoutubeEmbed = ({ embedId }: { embedId: string }) => {
   return (
