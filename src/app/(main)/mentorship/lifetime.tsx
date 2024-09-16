@@ -5,12 +5,13 @@ import React, { Dispatch, SetStateAction, Suspense } from "react";
 import Btn from "./btn";
 
 export const benefits = [
-  "QnA calls with Aryan, Deepanshu, and team",
-  "Customized Roadmap & Resume for your needs",
-  "24/7 WhatsApp Support for you",
-  "Exclusive LIVE classes with team",
-  "Lifetime - till you get job guarantee ",
-  "All courses included with LIVE classes",
+  "Group Q&A calls with Aryan, Ashok, and Deepanshu (2 calls/week)",
+  "Complete USA & Canada Jobs Course + 15+ Technical Interview Courses (MERN, DSA, etc.)",
+  "Personalized Resume Review Sessions + Resume and Cold Email Guides",
+  "Exclusive LIVE classes covering AI tools, workflows, and automation",
+  "Interview Preparation + Mock Interview Sessions + Salary Negotiation Training",
+  "Mindset Mastery and Resilience Training",
+  "Access to a Thriving Community + Networking Opportunities",
 ];
 
 export default function Lifetime({
@@ -23,17 +24,17 @@ export default function Lifetime({
       <span className="flex items-center justify-center gap-4 relative pb-4">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h1 className="font-jakarta bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight text-[2rem] sm:text-6xl font-extrabold text-center">
-        1:1 Personalized Mentorship (lifetime)
+        Job coaching program in USA and Canada (lifetime)
         </h1>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
       <section className="flex gap-1.5 mx-auto">
-        <img src="/flags/in.svg" alt="indian flag" className="h-7 w-7" />
+        {/* <img src="/flags/in.svg" alt="indian flag" className="h-7 w-7" /> */}
         <img src="/flags/us.svg" alt="usa flag" className="h-7 w-7" />
         <img src="/flags/ca.svg" alt="canada flag" className="h-7 w-7" />
-        <img src="/flags/gb.svg" alt="uk flag" className="h-7 w-7" />
+        {/* <img src="/flags/gb.svg" alt="uk flag" className="h-7 w-7" />
         <img src="/flags/sg.svg" alt="singapore flag" className="h-7 w-7" />
-        <img src="/flags/au.svg" alt="australian flag" className="h-7 w-7" />
+        <img src="/flags/au.svg" alt="australian flag" className="h-7 w-7" /> */}
       </section>
       <section className="flex mx-auto flex-wrap w-full max-md:text-sm items-center justify-center md:divide-x-2 divide-white py-2">
         <span className="px-1 md:px-4">Lifetime access to community</span>
@@ -55,11 +56,12 @@ export default function Lifetime({
 
       <div className="flex flex-col items-center py-4 mx-auto md:text-lg">
         {benefits?.map((e, i) => (
-          <div key={i} className="flex items-center w-full mb-4"> {/* Added mb-4 for spacing */}
-            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-prime text-white">
+          <div key={i} className="flex items-center w-full mb-4">
+            {/* Show numbers and line only on desktop view */}
+            <div className="hidden lg:flex items-center justify-center w-10 h-10 rounded-full bg-prime text-white">
               {i + 1}
             </div>
-            <div className="flex-grow h-1 bg-prime" />
+            <div className={`hidden lg:flex flex-grow h-1 bg-prime`} />
             <span className="flex gap-2 pl-4">
               <Check className="shrink-0 w-5 h-5 stroke-prime" />
               {e}
@@ -68,21 +70,21 @@ export default function Lifetime({
         ))}
       </div>
 
-      <h3 className="font-jakarta font-extrabold text-3xl sm:text-4xl mx-auto sm:pt-4 text-center max-w-[90vw] overflow-hidden text-wrap">
+      {/* <h3 className="font-jakarta font-extrabold text-3xl sm:text-4xl mx-auto sm:pt-4 text-center max-w-[90vw] overflow-hidden text-wrap">
         One Time Payment, Lifetime Mentorship
       </h3>
       <p className="m-auto py-2 pb-6 text-center text-sm max-w-3xl text-foreground/90">
         If you&apos;re not completely satisfied with your purchase, or if it
         doesn&apos;t meet your expectations, simply respond to the email receipt
         within 30 days to receive a full refund. No questions asked.
-      </p>
+      </p> */}
 
       <button
         onClick={() => setOpen(true)}
         className="bg-prime rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase"
       >
         <CreditCard className="h-10 w-10" />
-        Join Now
+        Join the Waitlist
       </button>
 
       <div className="flex flex-col md:flex-row justify-between mt-10 gap-4"> {/* Added gap for spacing */}

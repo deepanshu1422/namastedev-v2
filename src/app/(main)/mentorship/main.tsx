@@ -13,6 +13,60 @@ import Mentors from "./mentors";
 import { PaymentModal, PaymentSheet } from "./payment";
 import { useEffect, useState } from "react";
 import Script from "next/script";
+import { motion } from "framer-motion"; // Ensure you have framer-motion installed
+// import Card from "@/components/Card"; // Adjust the import based on your project structure
+// import CardContent from "@/components/CardContent"; // Adjust the import based on your project structure
+
+const steps = [
+  {
+    title: "Comprehensive Learning",
+    description: "Access to USA & Canada Jobs Courses, 15+ Technical Interview Courses, and AI tools workflows.",
+    details: "Dive deep into job market skills with our extensive course library.",
+    icon: ({ className }: { className: string }) => <i className={`fas fa-book ${className}`} />,
+    learningPoints: ["Learn USA & Canada Jobs Courses", "Understand AI tools workflows"],
+    estimatedTime: "4-6 weeks",
+  },
+  {
+    title: "Interactive Group Sessions",
+    description: "2 Group Q&A calls/week with expert mentors.",
+    details: "Engage in live sessions to clarify doubts and gain insights.",
+    icon: ({ className }: { className: string }) => <i className={`fas fa-users ${className}`} />,
+    learningPoints: ["Participate in 2 Group Q&A calls/week", "Engage in live sessions"],
+    estimatedTime: "2-3 weeks",
+  },
+  {
+    title: "Personalized Career Materials",
+    description: "Resume review sessions, guides for resumes and cold emails.",
+    details: "Craft compelling career documents with personalized feedback.",
+    icon: ({ className }: { className: string }) => <i className={`fas fa-file-alt ${className}`} />,
+    learningPoints: ["Get personalized resume review", "Guides for resumes and cold emails"],
+    estimatedTime: "2-3 weeks",
+  },
+  {
+    title: "Interview Preparation",
+    description: "Mock interviews and salary negotiation training.",
+    details: "Sharpen your interview skills and learn effective strategies.",
+    icon: ({ className }: { className: string }) => <i className={`fas fa-comments ${className}`} />,
+    learningPoints: ["Practice mock interviews", "Learn salary negotiation strategies"],
+    estimatedTime: "4-6 weeks",
+  },
+  {
+    title: "Mindset and Resilience Training",
+    description: "Develop a growth mindset and build resilience.",
+    details: "Cultivate the mental fortitude to overcome challenges.",
+    icon: ({ className }: { className: string }) => <i className={`fas fa-brain ${className}`} />,
+    learningPoints: ["Develop a growth mindset", "Build resilience"],
+    estimatedTime: "2-3 weeks",
+  },
+  {
+    title: "Community and Networking",
+    description: "Access to a thriving community with mobile and web apps.",
+    details: "Connect with peers, find opportunities, and access resources.",
+    icon: ({ className }: { className: string }) => <i className={`fas fa-network-wired ${className}`} />,
+    learningPoints: ["Join a thriving community", "Connect with peers and find opportunities"],
+    estimatedTime: "2-3 weeks",
+  },
+];
 
 export default function Main({
   faq,
@@ -57,13 +111,146 @@ export default function Main({
       <Lifetime setOpen={setOpen} />
       <Mentors />
       <Success />
-      <Video
+      
+      {/* Coaching Program Section */}
+      <div className="flex justify-center p-2"> {/* Centered the component and added padding outside the border */}
+        <div className="border border-red-500 rounded-lg p-6 bg-transparent shadow-md max-w-3xl md:mx-4 md:mt-6"> {/* Existing styles */}
+          <h2 className="font-bold text-4xl mb-4 text-center"> {/* Increased title size further */}
+            Work with us until you land your perfect <span className="text-green-500">DREAM JOB</span>
+          </h2>
+          <p className="text-center mb-4">By joining today, you lock in a discounted price of <span className="font-bold text-xl text-red-500">$449</span></p>
+          
+          <h3 className="font-bold text-xl mb-2">What you get:</h3>
+          <table className="min-w-full border-collapse border border-gray-300">
+            {/* <thead>
+              <tr>
+                <th className="border border-gray-300 p-2">Item</th>
+                <th className="border border-gray-300 p-2">Value</th>
+              </tr>
+            </thead> */}
+            <tbody>
+              <tr>
+                <td className="border border-gray-300 p-2">2 Group Q&A calls/week with Aryan, Ashok, Deepanshu</td>
+                <td className="border border-gray-300 p-2 underline text-green-500">$2000</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">Complete USA & Canada Jobs Course</td>
+                <td className="border border-gray-300 p-2 underline text-green-500">$2000</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">15+ Technical Interview Courses - MERN, DSA, etc</td>
+                <td className="border border-gray-300 p-2 underline text-green-500">$2000</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">Personalized Resume Review Sessions</td>
+                <td className="border border-gray-300 p-2 underline text-green-500">$1000</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">Complete AI tools, workflows, automation courses</td>
+                <td className="border border-gray-300 p-2 underline text-green-500">$2000</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">Resume, Cold Email Guides, and Review</td>
+                <td className="border border-gray-300 p-2 underline text-green-500">$2000</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">Interview Prep + Mock Interview prep</td>
+                <td className="border border-gray-300 p-2 underline text-green-500">$1000</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">Salary Negotiation Training</td>
+                <td className="border border-gray-300 p-2 underline text-green-500">$2000</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">Mindset Mastery and Resilience Training</td>
+                <td className="border border-gray-300 p-2 underline text-green-500">$1500</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">Thriving Community + Networking Opportunities</td>
+                <td className="border border-gray-300 p-2 underline text-green-500">$1200</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">Mobile Access to Community Resources</td>
+                <td className="border border-gray-300 p-2 underline text-green-500">$1200</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">iOS & Android Apps for 24/7 access to the community</td>
+                <td className="border border-gray-300 p-2 underline text-green-500">$1000</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p className="font-bold text-lg mt-3">Total Value: <span className="line-through">$12,500+</span></p>
+          <p className="font-bold text-xl">Current Offer: <span className="text-red-500">$449</span></p> {/* Updated current offer */}
+          <p className="text-sm text-gray-500">Soon: $649</p> {/* Updated soon price */}
+
+          <div className="flex justify-center mt-4">
+            <button className="bg-prime text-white rounded-full px-6 py-2 hover:opacity-80 transition-all duration-200">
+              Join the Waitlist
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full py-16">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-4">Step by step Path to Career Success</h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Embark on a transformative journey that combines comprehensive learning, personalized guidance, and community support to accelerate your career growth.
+          </p>
+          <div className="relative">
+            {steps.map((step, index) => (
+              <motion.div
+                key={index}
+                className="mb-16 flex items-start relative"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-r from-red-500 to-red-700 text-white flex items-center justify-center text-2xl font-bold z-10 shadow-lg">
+                  {index + 1}
+                </div>
+                <div className="ml-8 flex-grow border border-green-800 rounded-xl p-6 bg-second shadow-md hover:shadow-lg transition-shadow duration-300">
+                  <div className="p-4">
+                    <h3 className="text-2xl font-semibold mb-3 flex items-center text-white">
+                      <step.icon className="w-8 h-8 mr-3 text-red-500" />
+                      {step.title}
+                    </h3>
+                    <p className="text-base text-gray-300 mb-3">{step.description}</p>
+                    <p className="text-sm mb-5 text-gray-400">{step.details}</p>
+                    
+                    <div className="flex flex-wrap gap-3 mb-5">
+                      {step.learningPoints.map((point, idx) => (
+                        <span key={idx} className="text-white text-sm font-medium px-4 py-2 rounded-full shadow-sm border border-white">
+                          {point}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    {/* <div className="text-sm text-gray-300 flex items-center">
+                      <i className="fas fa-clock mr-2 text-red-500"></i>
+                      Estimated time: <span className="font-semibold ml-1">{step.estimatedTime}</span>
+                    </div> */}
+                  </div>
+                </div>
+                {index < steps.length - 1 && (
+                  <div className="absolute left-7 top-14 w-0.5 bg-gradient-to-b from-red-500 to-red-700 h-full transform -translate-x-1/2" />
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      
+      
+      {/* <Video
         title={"Trusted by 1000s of Students"}
         desc={
           "We will help you till you find the best job opportunity across the globe. hear it from our students and decide for yourselves."
         }
         youtubeId={"2cZ_7LuxEQI"}
-      />
+      /> */}
       {/* <MentorshipGallary setOpenPay={setOpen} /> */}
       <Features />
       <Faqs faq={faq} />
@@ -96,6 +283,8 @@ export default function Main({
         }
         youtubeId={"gIx8D2pyXVI"}
       /> */}
+      {/* Success Stories Carousel */}
+      
     </div>
   );
 }

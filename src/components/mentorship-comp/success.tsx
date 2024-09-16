@@ -248,10 +248,10 @@ export default function Success() {
       </span>
       <p className="max-w-2xl text-center mx-auto text-sm text-white/70 px-10 line-clamp-2">
         Our students are working at top companies like Google, Facebook,
-        Amazon, Microsoft, and many more. We are a community of 20,000+ students
-        from 10+ countries.
+        Amazon, Microsoft, and many more. In total, they have achieved
+        <span className="text-red-500"> $55.8M in job offer value.</span>
       </p>
-
+      
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 py-5 lg:py-10">
         {testimonials.map(
           ({ name, review, link, linkedin, pos, profile }, i) => (
