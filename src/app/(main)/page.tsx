@@ -102,7 +102,7 @@ export default function Home() {
         }}
       />
       <Hero
-        title="Become an Advanced, Job-Ready Developer!"
+        title="Premium, Affordable Courses for Job-Ready Skills"
         desc="Join 10,000+ successful students who have transformed their lives with us."
         heroImage="https://i.ibb.co/KXHGnmY/home.webp"
         subTitle="Pocket Friendly Courses with Certificates!"
@@ -112,11 +112,11 @@ export default function Home() {
       {/* <Btn cover="/new-mentorship.jpg" yt="9Lokc1bQixc" /> */}
       {/* <Companies /> */}
       <Store />
+      <Mentors />
       <Success />
       {/* <Course /> */}
-      <Program />
+      {/* <Program /> */}
       {/* <Mentor /> */}
-      <Mentors />
       {/* <Highlights />
       <Testimonials /> */}
       <Faqs faq={faq} />
