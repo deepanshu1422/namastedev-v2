@@ -53,12 +53,18 @@ export default function Lifetime({
 
       <Btn cover="/new-mentorship.jpg" yt="9Lokc1bQixc" />
 
-      <div className="flex flex-col gap-2 py-4 mx-auto md:text-lg">
+      <div className="flex flex-col items-center py-4 mx-auto md:text-lg">
         {benefits?.map((e, i) => (
-          <span key={i} className="flex gap-2">
-            <Check className="shrink-0 w-5 h-5 stroke-prime" />
-            {e}
-          </span>
+          <div key={i} className="flex items-center w-full mb-4"> {/* Added mb-4 for spacing */}
+            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-prime text-white">
+              {i + 1}
+            </div>
+            <div className="flex-grow h-1 bg-prime" />
+            <span className="flex gap-2 pl-4">
+              <Check className="shrink-0 w-5 h-5 stroke-prime" />
+              {e}
+            </span>
+          </div>
         ))}
       </div>
 
@@ -73,13 +79,55 @@ export default function Lifetime({
 
       <button
         onClick={() => setOpen(true)}
-        // href={"https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view"}
-        // target="_blank"
         className="bg-prime rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase"
       >
         <CreditCard className="h-10 w-10" />
         Join Now
       </button>
+
+      <div className="flex flex-col md:flex-row justify-between mt-10 gap-4"> {/* Added gap for spacing */}
+        <div className="border border-red-500 rounded-lg p-6 w-full md:w-1/2 bg-transparent shadow-md">
+          <h2 className="font-bold text-2xl mb-4 text-center">Who is this for?</h2> {/* Increased font size */}
+          <ul className="list-disc pl-5">
+            <li className="mb-2">
+              <span className="font-semibold">✅ Solution-oriented:</span> You thrive on finding effective solutions rather than getting stuck on problems.
+            </li>
+            <li className="mb-2">
+              <span className="font-semibold">✅ Persistent:</span> You have the determination to push through challenges without giving up.
+            </li>
+            <li className="mb-2">
+              <span className="font-semibold">✅ Open to feedback:</span> You welcome constructive criticism and use it to enhance your skills.
+            </li>
+            <li className="mb-2">
+              <span className="font-semibold">✅ Responsible:</span> You take charge of your actions and their consequences, learning from your experiences.
+            </li>
+            <li className="mb-2">
+              <span className="font-semibold">✅ Community-focused:</span> You actively contribute to and uplift the community around you.
+            </li>
+          </ul>
+        </div>
+
+        <div className="border border-red-500 rounded-lg p-6 w-full md:w-1/2 bg-transparent shadow-md">
+          <h2 className="font-bold text-2xl mb-4 text-center">Who is this not for?</h2> {/* Increased font size */}
+          <ul className="list-disc pl-5">
+            <li className="mb-2">
+              <span className="font-semibold">❌ Negative mindset:</span> You often focus on problems instead of seeking solutions.
+            </li>
+            <li className="mb-2">
+              <span className="font-semibold">❌ Easily discouraged:</span> You tend to give up when faced with difficulties.
+            </li>
+            <li className="mb-2">
+              <span className="font-semibold">❌ Seeking shortcuts:</span> You look for quick fixes instead of putting in the necessary effort.
+            </li>
+            <li className="mb-2">
+              <span className="font-semibold">❌ Blame-shifter:</span> You often attribute your challenges to external factors rather than taking responsibility.
+            </li>
+            <li className="mb-2">
+              <span className="font-semibold">❌ Isolated:</span> You prefer to work alone and do not engage with the community.
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
