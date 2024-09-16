@@ -88,7 +88,7 @@ export default function Lifetime({
       </button>
 
       <div className="flex flex-col md:flex-row justify-between mt-10 gap-4"> {/* Added gap for spacing */}
-        <div className="border green-red-500 rounded-lg p-6 w-full md:w-1/2 bg-transparent shadow-md">
+        <div className="border border-green-500 rounded-lg p-6 w-full md:w-1/2 bg-transparent shadow-md">
           <h2 className="font-bold text-2xl mb-4 text-center">Who is this for?</h2> {/* Increased font size */}
           <ul className="list-disc pl-5">
             <li className="mb-2">
