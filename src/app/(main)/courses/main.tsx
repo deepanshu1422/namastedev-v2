@@ -109,13 +109,13 @@ export default function Main({ courses }: { courses: CoursesType }) {
         search={state}
         setSearch={setState}
       />
-      <Bundle
+      {/* <Bundle
         content={courses.bundleCollection.items[0].offers}
         title={courses.bundleCollection.items[0].bundleTitle}
         url={courses.bundleCollection.items[0].coverImage.url}
         price={courses.bundleCollection.items[0].pricingsCollection.items[0]}
         slug={courses.bundleCollection.items[0].slug}
-      />
+      /> */}
       <Courses state={state} courses={courses} />
       {/* <Reviews /> */}
       <Mentors />

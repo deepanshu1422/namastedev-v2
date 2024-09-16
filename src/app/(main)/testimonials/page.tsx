@@ -35,7 +35,7 @@ export default function Testimonial() {
   return (
     <main className={`font-jakarta bg-bg min-h-svh text-white overflow-hidden`}>
       <NewHero
-        title="10+ Countries, 20,000+ Students"
+        title="Join 20,000+ Successful Students"
         desc="Our aim is to provide quality education to everyone, everywhere at affordable prices. Join us and become a part of our community."
         heroImage="https://images.unsplash.com/photo-1512314889357-e157c22f938d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       />

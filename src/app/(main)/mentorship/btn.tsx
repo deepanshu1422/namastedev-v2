@@ -1,6 +1,6 @@
 "use client";
 
-import { YTModal } from "@/app/(guide)/testimonials/slider";
+import { YTModal } from "@/app/(main)/testimonials/slider";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Play } from "lucide-react";
 import Image from "next/image";
