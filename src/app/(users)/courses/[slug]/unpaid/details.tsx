@@ -20,6 +20,7 @@ import Image from "next/image";
 import Reviews from "./reviews";
 import Guides from "./guides";
 import Mentors from "@/app/(users)/mentors";
+import VideoSlider from "@/app/(main)/testimonials/video-slider";
 // import Reviews from "./reviews"
 
 export default function Details({
@@ -112,7 +113,7 @@ export default function Details({
         <section className="flex flex-col gap-4">
           <div className="flex max-sm:flex-col gap-2 sm:items-end">
             <h2 className="text-xl tab:text-2xl font-bold text-white">
-              Course content - land big opportunities!
+              Course content - beginner to advanced
             </h2>
             
             <span className="flex text-sm text-white/60 items-center">
@@ -187,6 +188,7 @@ export default function Details({
             </Button>
           </div>
         </div> */}
+        <VideoSlider />
 
         <section className="flex flex-col gap-4">
           <div className="grid tab:grid-cols-2 gap-5 p-3 tab:p-6 shadow-xl border-prime/80 border bg-second/30">

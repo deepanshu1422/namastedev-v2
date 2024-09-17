@@ -7,6 +7,7 @@ import Public from "./public";
 // import Floating from "../resources/floating";
 import NewHero from "./new-hero";
 import VideoSlider from "./video-slider";
+import { CreditCard } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Testimonial | 30DaysCoding",
@@ -41,6 +42,13 @@ export default function Testimonial() {
       />
       <div className="mx-auto w-full max-w-[90rem] max-phone:p-[0_0_3.5rem] flex flex-col gap-10 p-[1.75rem_0_6.5rem]">
         <VideoSlider />
+        
+      <a href="/courses"
+        className="bg-prime rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase"
+      >
+        <CreditCard className="h-10 w-10" />
+        Access the courses
+      </a>
         <Hero />
         {/* <Inspirational /> */}
         <Watch />

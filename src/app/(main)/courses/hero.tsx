@@ -53,7 +53,7 @@ export default function Hero({
               className={` sm:text-center tab:text-start sm:max-w-3xl phone:text-5xl text-3xl font-extrabold leading-[1.3] sm:leading-[1.2]`}
             >
               
-              Courses trusted by <Link href={"/mentorship"} className="bg-prime/50">20,000+ developers</Link> from 10+ countries
+              The BEST courses trusted by <Link href={"/mentorship"} className="bg-prime/50">20,000+ developers</Link> from 10+ countries
             </h1>
 
             <p className="max-w-3xl max-sm:text-sm max-sm:leading-6 text-white/80 line-clamp-2 tab:line-clamp-3 sm:text-center tab:text-start">

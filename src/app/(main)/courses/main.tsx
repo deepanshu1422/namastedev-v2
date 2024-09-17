@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/accordion";
 import Mentors from "../mentorship/mentors";
 import Success from "@/components/mentorship-comp/success";
+import VideoSlider from "../testimonials/video-slider";
 
 export default function Main({ courses }: { courses: CoursesType }) {
   const [state, setState] = useState("");
@@ -117,6 +118,7 @@ export default function Main({ courses }: { courses: CoursesType }) {
         slug={courses.bundleCollection.items[0].slug}
       /> */}
       <Courses state={state} courses={courses} />
+      <VideoSlider />
       {/* <Reviews /> */}
       <Mentors />
       <Success />

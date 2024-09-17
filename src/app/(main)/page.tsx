@@ -12,6 +12,7 @@ import Script from "next/script";
 import Success from "@/components/mentorship-comp/success";
 import Btn from "./mentorship/btn";
 import Mentors from "./mentorship/mentors";
+import VideoSlider from "./testimonials/video-slider";
 
 
 export const dynamic = "force-dynamic";
@@ -114,6 +115,7 @@ export default function Home() {
       <Store />
       <Mentors />
       <Success />
+      <VideoSlider />
       {/* <Course /> */}
       {/* <Program /> */}
       {/* <Mentor /> */}
