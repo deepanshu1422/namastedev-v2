@@ -1,5 +1,5 @@
 "use client";
-import YoutubeEmbed from "@/app/(guide)/testimonials/youtube-embed";
+import YoutubeEmbed from "@/app/(main)/testimonials/youtube-embed";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import Image from "next/image";
