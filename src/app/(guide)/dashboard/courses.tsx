@@ -13,7 +13,7 @@ import React from "react";
 
 const getCourses = async () => {
   const query = `query {
-        courseCollection(where: {publish: true, domain: "${process.env.DOMAIN}"}, limit:5){
+        courseCollection(where: {publish: true, domain: "30dayscoding.com"}, limit:5){
            items{
                 title,
                 slug,

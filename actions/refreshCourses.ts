@@ -8,7 +8,7 @@ export default async function refreshCourses(courses: [string]) {
         courses.map((e: string) => ({ courseId: e }))
     ).replace(/"([^"]+)":/g, "$1:");
 
-    const query = `query { courseCollection(where: { publish: true, domain: "${process.env.DOMAIN}", OR: ${json}}){ items{ slug, courseId, title, longDescription, courseImage{ description, url, width, height, }, } } }`;
+    const query = `query { courseCollection(where: { publish: true, domain: "30dayscoding.com", OR: ${json}}){ items{ slug, courseId, title, longDescription, courseImage{ description, url, width, height, }, } } }`;
 
     const data = await (
         await fetch(

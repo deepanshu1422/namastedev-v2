@@ -78,7 +78,7 @@ export type CoursesType = {
 
 async function getCourses(): Promise<CoursesType> {
   const query = `query {
-        courseCollection(where: {publish: true, domain: "${process.env.DOMAIN}"}){
+        courseCollection(where: {publish: true, domain: "30dayscoding.com"}){
             items{
                 title,
                 shortDescription,
