@@ -17,7 +17,6 @@ import Reviews from "./reviews";
 import Guides from "./guides";
 import Courses from "./courses";
 import Mentors from "@/app/(users)/mentors";
-import VideoSlider from "@/app/(main)/testimonials/video-slider";
 // import Reviews from "./reviews"
 
 export default function Details({
@@ -62,7 +61,6 @@ export default function Details({
       <div className="flex flex-col w-full gap-6 px-6 overflow-hidden">
         <Courses coursesCollection={coursesCollection} />
 
-        <Mentors />
         <section className="flex flex-col gap-1">
           <div className="flex flex-col gap-3 border-prime/80 border bg-second/30 pt-5 p-4">
             <span className="text-2xl font-bold">What you&apos;ll learn</span>
@@ -141,6 +139,7 @@ export default function Details({
             </Button>
           </div>
         </div> */}
+        <Mentors />
 
         <section className="flex flex-col gap-4">
           <div className="grid tab:grid-cols-2 gap-5 p-3 tab:p-6 shadow-xl border-prime/80 border bg-second/30">
@@ -162,7 +161,6 @@ export default function Details({
           </div>
         </section>
 
-        <VideoSlider />
 
         <Reviews />
         <Guides />
