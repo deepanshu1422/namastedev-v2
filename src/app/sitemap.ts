@@ -166,7 +166,7 @@ export const getItem = cache(async () => {
 
 export const getCourses = async (): Promise<Record<string, string>[]> => {
     const data = await getContentfulData(`query {
-        courseCollection{
+        courseCollection(where: {publish: true, domain: "${process.env.DOMAIN}"}){
         items{
             slug
             }

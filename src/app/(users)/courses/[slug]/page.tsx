@@ -95,7 +95,7 @@ type Props = {
 
 export async function generateStaticParams() {
   const query = `query {
-        courseCollection{
+        courseCollection(where: {publish: true, domain: "${process.env.DOMAIN}"}){
         items{
             slug
             }
@@ -129,7 +129,7 @@ export async function generateMetadata(
 
   try {
     const query = `query {
-            courseCollection{
+            courseCollection(where: {publish: true, domain: "${process.env.DOMAIN}"}){
             items{
                 slug,
                 title,
@@ -179,7 +179,7 @@ export async function generateMetadata(
 
 async function getCourses({ slug }: { slug: string }): Promise<Courses> {
   const query = `query {
-    courseCollection(where: {slug: "${slug}"},limit:1){
+    courseCollection(where: { publish: true, domain: "${process.env.DOMAIN}", slug: "${slug}"},limit:1){
         items{
         courseId,
         title,
