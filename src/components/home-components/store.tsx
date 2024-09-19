@@ -67,14 +67,14 @@ export default function Store() {
         "https://images.ctfassets.net/3pv3o0yr6pgj/1NG12iPdUfv110we4DriYM/552ef0f60a858aa8cd084a2fc8238705/ALL_Courses.jpg",
         link: "/bundle/complete-package-all-course-bundle"
     },
-    {
-      title:
-        "Certified Full Stack Web development Job ready Course with 50+ projects",
-      category: ["fullstack"],
-      imgSrc:
-        "https://images.ctfassets.net/3pv3o0yr6pgj/1A48UlmU2KT534PwkHroKj/70609095acfd38e53a56e332203e2687/WhatsApp_Image_2024-08-24_at_09.56.26_b0ddc2b6.jpg",
-        link: "/courses/complete-webdev-course"
-    },
+    // {
+    //   title:
+    //     "Certified Full Stack Web development Job ready Course with 50+ projects",
+    //   category: ["fullstack"],
+    //   imgSrc:
+    //     "https://images.ctfassets.net/3pv3o0yr6pgj/1A48UlmU2KT534PwkHroKj/70609095acfd38e53a56e332203e2687/WhatsApp_Image_2024-08-24_at_09.56.26_b0ddc2b6.jpg",
+    //     link: "/courses/complete-webdev-course"
+    // },
     {
       title: "DSA Complete Job Ready Course with 250+ videos, revision guide",
       category: ["dsa"],
@@ -82,14 +82,14 @@ export default function Store() {
         "https://images.ctfassets.net/3pv3o0yr6pgj/5KSVf7vuNxFjxcHfm9idjM/4e5563dfa5f1ca9cc169a7274a7dbcac/64f93394e4b0e75ce98af312_scaled_cover.jpg",
         link: "/courses/dsa-complete-course"
     },
-    {
-      title:
-        "Complete Data Analytics Mastery Job ready Course - Python, SQL, Excel, Stats, Interview prep",
-      category: ["data analytics"],
-      imgSrc:
-        "https://images.ctfassets.net/3pv3o0yr6pgj/mdRH1g3VSgansurxZCQtC/648860d07f5b852370124b1d8d674791/data_analyst.jpg",
-        link: "/courses/data-analytics-course"
-    },
+    // {
+    //   title:
+    //     "Complete Data Analytics Mastery Job ready Course - Python, SQL, Excel, Stats, Interview prep",
+    //   category: ["data analytics"],
+    //   imgSrc:
+    //     "https://images.ctfassets.net/3pv3o0yr6pgj/mdRH1g3VSgansurxZCQtC/648860d07f5b852370124b1d8d674791/data_analyst.jpg",
+    //     link: "/courses/data-analytics-course"
+    // },
     {
       title:
         "Blockchain Mastery Complete Course - Solidity, Defi, NFTs, Projects",
@@ -98,14 +98,14 @@ export default function Store() {
         "https://images.ctfassets.net/3pv3o0yr6pgj/6CtQOysdzsX1zU7T1K0Enw/b704554e417531369ed125131eb0b806/blockchain_mastery2.jpg",
         link: "/courses/complete-blockchain-course"
     },
-    {
-      title:
-        "AI Mastery Complete Course - Tools, Workflows, Prompts, Projects, SaaS",
-      category: ["ai"],
-      imgSrc:
-        "https://images.ctfassets.net/3pv3o0yr6pgj/ycDwzGFLof8SimHWAMUGa/9905e118e6f5ab0c4646f63155520428/64eebe76e4b002b964b5645d_scaled_cover.jpg",
-        link: "/courses/ai-complete-course"
-    },
+    // {
+    //   title:
+    //     "AI Mastery Complete Course - Tools, Workflows, Prompts, Projects, SaaS",
+    //   category: ["ai"],
+    //   imgSrc:
+    //     "https://images.ctfassets.net/3pv3o0yr6pgj/ycDwzGFLof8SimHWAMUGa/9905e118e6f5ab0c4646f63155520428/64eebe76e4b002b964b5645d_scaled_cover.jpg",
+    //     link: "/courses/ai-complete-course"
+    // },
   ];
 
   return (
