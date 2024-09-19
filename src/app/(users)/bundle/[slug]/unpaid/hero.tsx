@@ -154,6 +154,7 @@ export default function Hero({
                             content_type: "bundle",
                             content_name: title,
                             em: sha256(data?.user?.email ?? ""),
+                            // @ts-ignore
                             ph: sha256(data?.user?.phone ?? ""),
                             fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
                           });
@@ -164,6 +165,17 @@ export default function Hero({
                         Buy Now
                       </Button>
                     </div>
+                    {bundleId !== "NEWALL30DC" && (
+                      <Link
+                        className="relative w-full"
+                        href={"/bundle/complete-package-all-course-bundle?sheet=true"}
+                      >
+                        <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
+                        <Button variant={"outline"} className="relative w-full font-jakarta flex items-center font-semibold gap-1 transition-all px-4 py-3 rounded-md text-white">
+                          Get All Bundles Courses 💰
+                        </Button>
+                      </Link>
+                    )}
                   </>
                 )}
 

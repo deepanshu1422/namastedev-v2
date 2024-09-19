@@ -24,7 +24,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Check } from "lucide-react";
+import { Check, Plug } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 
@@ -151,6 +151,10 @@ function Offer({
                 {e}
               </span>
             ))}
+            <span className="flex items-center gap-2">
+              <Plug className="w-4 h-4 stroke-primary" />
+              12 More Courses
+            </span>
           </div>
 
         </div>
@@ -169,7 +173,7 @@ function Offer({
         </div>
         <Link
           href={
-            "/bundle/all-courses-bundle-dsa-full-stack-blockchain-ai-data-analytics-python?sheet=true"
+            "/bundle/complete-package-all-course-bundle?sheet=true"
           }
           className="relative overflow-hidden group"
         >

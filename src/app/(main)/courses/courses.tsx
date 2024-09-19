@@ -33,59 +33,67 @@ export default function Courses({
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
-      <span className="inline-flex items-center justify-center whitespace-nowrap border rounded-3xl py-2 px-3 max-lg:text-xs text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 border-prime bg-prime/20 shadow-md ring-0">All Bundles</span>
+      <span className="inline-flex items-center justify-center whitespace-nowrap border rounded-3xl py-2 px-3 max-lg:text-xs text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 border-prime bg-prime/20 shadow-md ring-0">
+        All Bundles
+      </span>
       <div className="mx-auto grid md:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 max-sm:grid-cols-1 gap-4 max-lg:gap-8 max-lg:place-items-center horizontal-scroll p-2 max-lg:px-6 max-w-6xl">
-        {courses.bundleCollection.items.map(
-          ({ bundleTitle, coverImage, pricingsCollection, slug }, index) => {
-            const amount =
-              pricingsCollection.items.find((e) => e.countryCode == "IN")
-                ?.amount ?? 0;
-            const bigAmount =
-              pricingsCollection.items.find((e) => e.countryCode == "IN")
-                ?.bigAmount ?? 0;
-            const percentage =
-              pricingsCollection.items.find((e) => e.countryCode == "IN")
-                ?.percentage ?? 0;
+        {courses.bundleCollection.items
+          .filter(
+            (e) =>
+              e.slug !==
+              "complete-package-all-course-bundle"
+          )
+          .map(
+            ({ bundleTitle, coverImage, pricingsCollection, slug }, index) => {
+              const amount =
+                pricingsCollection.items.find((e) => e.countryCode == "IN")
+                  ?.amount ?? 0;
+              const bigAmount =
+                pricingsCollection.items.find((e) => e.countryCode == "IN")
+                  ?.bigAmount ?? 0;
+              const percentage =
+                pricingsCollection.items.find((e) => e.countryCode == "IN")
+                  ?.percentage ?? 0;
 
-            return (
-              <Link
-                key={index}
-                href={`/bundle/${slug}`}
-                className="flex-1 max-w-[300px] w-full lg:hover:-translate-y-1 h-full transition-all"
-              >
-                <div className="max-lg:m-auto flex flex-col justify-between max-lg:justify-center rounded-xl bg-stone-900 p-1 h-full">
-                  <div className="flex flex-col gap-1">
-                    <Image
-                      className="rounded-lg w-96 aspect-[6/4]"
-                      src={coverImage.url}
-                      width={280}
-                      height={280}
-                      alt={`30 days coding ${bundleTitle}`}
-                    />
-                    <p className="text-sm font-semibold p-1 line-clamp-2 text-wrap">
-                      {bundleTitle}
-                    </p>
-                  </div>
-                  <span className="flex gap-2 justify-between sm:text-lg text-white font-semibold p-1">
-                    <span className="flex gap-2">
-                      ₹{amount}
-                      <span className="text-muted-foreground line-through">
-                        ₹{bigAmount}
+              return (
+                <Link
+                  key={index}
+                  href={`/bundle/${slug}`}
+                  className="flex-1 max-w-[300px] w-full lg:hover:-translate-y-1 h-full transition-all"
+                >
+                  <div className="max-lg:m-auto flex flex-col justify-between max-lg:justify-center rounded-xl bg-stone-900 p-1 h-full">
+                    <div className="flex flex-col gap-1">
+                      <Image
+                        className="rounded-lg w-96 aspect-[6/4]"
+                        src={coverImage.url}
+                        width={280}
+                        height={280}
+                        alt={`30 days coding ${bundleTitle}`}
+                      />
+                      <p className="text-sm font-semibold p-1 line-clamp-2 text-wrap">
+                        {bundleTitle}
+                      </p>
+                    </div>
+                    <span className="flex gap-2 justify-between sm:text-lg text-white font-semibold p-1">
+                      <span className="flex gap-2">
+                        ₹{amount}
+                        <span className="text-muted-foreground line-through">
+                          ₹{bigAmount}
+                        </span>
                       </span>
+                      {/* <span className="text-lime-500">75%off</span> */}
+                      <Badge
+                        className="rounded bg-lime-800/80  hover:bg-lime-800"
+                        variant={"secondary"}
+                      >
+                        {percentage}% off
+                      </Badge>
                     </span>
-                    {/* <span className="text-lime-500">75%off</span> */}
-                    <Badge
-                      className="rounded bg-lime-800/80  hover:bg-lime-800"
-                      variant={"secondary"}
-                    >
-                      {percentage}% off
-                    </Badge>
-                  </span>
-                </div>
-              </Link>
-            );
-          }
-        )}
+                  </div>
+                </Link>
+              );
+            }
+          )}
       </div>
       <div className="flex max-lg:flex-col lg:gap-6 max-lg:items-center max-lg:gap-10 max-lg:px-0 mx-auto">
         <CourseTabMenu

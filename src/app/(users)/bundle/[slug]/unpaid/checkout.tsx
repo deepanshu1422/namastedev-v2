@@ -83,6 +83,7 @@ export default function Checkout({
                       content_ids: [bundleId],
                       content_type: "bundle",
                       em: sha256(data?.user?.email ?? ""),
+                      // @ts-ignore
                       ph: sha256(data?.user?.phone ?? ""),
                       fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
                     });
@@ -94,6 +95,16 @@ export default function Checkout({
                   Buy Now
                 </Button>
               </div>
+              {bundleId !== "NEWALL30DC" && (
+                <Link
+                  className="w-full"
+                  href={"/bundle/complete-package-all-course-bundle?sheet=true"}
+                >
+                  <Button className="w-full font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white">
+                    Get All Bundles Courses 💰
+                  </Button>
+                </Link>
+              )}
             </>
           )}
 

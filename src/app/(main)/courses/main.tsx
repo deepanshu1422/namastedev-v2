@@ -6,7 +6,7 @@ import Courses from "./courses";
 import type { CoursesType } from "./page";
 import Reviews from "./reviews";
 import Image from "next/image";
-import { CheckCheck } from "lucide-react";
+import { CheckCheck, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Script from "next/script";
@@ -29,7 +29,8 @@ export default function Main({ courses }: { courses: CoursesType }) {
       question: "Are the courses lifetime valid?",
       answer: (
         <p>
-          Yes, all our courses come with lifetime access, allowing you to revisit the materials whenever you need.
+          Yes, all our courses come with lifetime access, allowing you to
+          revisit the materials whenever you need.
         </p>
       ),
     },
@@ -37,7 +38,8 @@ export default function Main({ courses }: { courses: CoursesType }) {
       question: "Is a certificate given?",
       answer: (
         <p>
-          Yes, upon successful completion of the course, you will receive a certificate to showcase your achievement.
+          Yes, upon successful completion of the course, you will receive a
+          certificate to showcase your achievement.
         </p>
       ),
     },
@@ -45,7 +47,8 @@ export default function Main({ courses }: { courses: CoursesType }) {
       question: "How long will it take to complete the course?",
       answer: (
         <p>
-          You can take your time! The courses are designed for self-paced learning, so you can complete them at your convenience.
+          You can take your time! The courses are designed for self-paced
+          learning, so you can complete them at your convenience.
         </p>
       ),
     },
@@ -64,7 +67,9 @@ export default function Main({ courses }: { courses: CoursesType }) {
       question: "How often is the course updated?",
       answer: (
         <p>
-          We regularly update our courses to reflect the latest industry trends and practices. You will automatically receive access to all future updates at no extra cost.
+          We regularly update our courses to reflect the latest industry trends
+          and practices. You will automatically receive access to all future
+          updates at no extra cost.
         </p>
       ),
     },
@@ -72,7 +77,11 @@ export default function Main({ courses }: { courses: CoursesType }) {
       question: "What will be the next step?",
       answer: (
         <p>
-          After completing the course, we recommend taking advantage of our mentorship program to further enhance your learning. Personalized mentorship can help you apply the knowledge from the course to real-world projects and provide guidance tailored to your career goals. Visit{" "}
+          After completing the course, we recommend taking advantage of our
+          mentorship program to further enhance your learning. Personalized
+          mentorship can help you apply the knowledge from the course to
+          real-world projects and provide guidance tailored to your career
+          goals. Visit{" "}
           <Link className="text-prime" href={"/mentorship"}>
             Mentorship Support.
           </Link>
@@ -80,6 +89,12 @@ export default function Main({ courses }: { courses: CoursesType }) {
       ),
     },
   ];
+
+  const bundle = courses.bundleCollection.items.find(
+    (e) =>
+      e.slug ===
+      "complete-package-all-course-bundle"
+  );
 
   return (
     <main className="bg-background bg-bg min-h-svh transition-all">
@@ -110,13 +125,15 @@ export default function Main({ courses }: { courses: CoursesType }) {
         search={state}
         setSearch={setState}
       />
-      {/* <Bundle
-        content={courses.bundleCollection.items[0].offers}
-        title={courses.bundleCollection.items[0].bundleTitle}
-        url={courses.bundleCollection.items[0].coverImage.url}
-        price={courses.bundleCollection.items[0].pricingsCollection.items[0]}
-        slug={courses.bundleCollection.items[0].slug}
-      /> */}
+      <Bundle
+        content={bundle?.offers ?? [""]}
+        title={bundle?.bundleTitle ?? ""}
+        url={bundle?.coverImage.url ?? ""}
+        price={bundle?.pricingsCollection.items.find(
+          (e) => e.countryCode === "IN"
+        ) ?? {amount: 2499, bigAmount: 25000, percentage: 90}}
+        slug={bundle?.slug ?? "complete-package-all-course-bundle"}
+      />
       <Courses state={state} courses={courses} />
       <VideoSlider />
       {/* <Reviews /> */}
@@ -211,7 +228,7 @@ function Bundle({
   ];
 
   return (
-    <div className="flex max-phone:flex-col w-full max-w-[85rem] gap-7 mx-auto max-phone:px-6 px-10 py-5 tab:pb-8">
+    <div className="flex max-phone:flex-col w-full max-w-4xl gap-7 mx-auto max-phone:px-6 px-10 py-5 tab:pb-8 ">
       <Link
         href={"/bundle/" + slug}
         className="flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6"
@@ -227,6 +244,10 @@ function Bundle({
                 {e}
               </span>
             ))}
+              <span className="flex gap-2 items-center text-sm">
+                <Plus className="h-5 w-5 text-prime shrink-0" />
+                12 More Courses
+              </span>
 
             <div className="relative mt-2">
               <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
@@ -248,10 +269,10 @@ function Bundle({
           alt={"30DC Project Preview"}
           height={600}
           width={900}
-          className="rounded-s-lg w-full tab:h-4/5 my-auto shadow-xl shadow-black/50 object-cover"
+          className="rounded-s-lg w-full md:w-4/5 aspect-[6/4] tab:h-4/5 my-auto ml-auto shadow-xl shadow-black/50 object-cover"
         />
       </Link>
-      <Link
+      {/* <Link
         href={"/mentorship"}
         className="max-phone:hidden flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6"
       >
@@ -286,7 +307,7 @@ function Bundle({
           width={900}
           className="rounded-s-lg w-full tab:h-4/5 my-auto shadow-xl shadow-black/50 object-cover"
         />
-      </Link>
+      </Link> */}
     </div>
   );
 }
