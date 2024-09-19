@@ -30,6 +30,17 @@ type CourseItem = {
     learn: string[];
     rating: number;
     slug: string;
+    upsellBundle: {
+      bundleTitle: string;
+      slug: string;
+      pricingsCollection: {
+        items: {
+          amount: string;
+          bigAmount: string;
+          percentage: string;
+        };
+      }[];
+    };
     projectsCollection: {
       items: {
         title: string;
@@ -96,6 +107,7 @@ export default function Main({
     slug,
     courseId,
     courseImage,
+    upsellBundle,
     modulesCollection,
     pricingsCollection,
     projectsCollection,
@@ -122,6 +134,8 @@ export default function Main({
   const [openUpsell, setOpenUpsell] = useState(false);
 
   const courseOffer = offers ?? [];
+
+  // console.log(upsellBundle);
 
   function Paid() {
     return (
@@ -227,6 +241,11 @@ export default function Main({
           faqs={faqCollection.items}
         />
         <UpsellModal
+          title={upsellBundle?.bundleTitle}
+          slug={upsellBundle?.slug}
+          amount={upsellBundle?.pricingsCollection[0]?.items?.amount}
+          bigAmount={upsellBundle?.pricingsCollection[0]?.items?.bigAmount}
+          percentage={upsellBundle?.pricingsCollection[0]?.items?.percentage}
           open={openUpsell}
           setOpen={setOpenUpsell}
           setPaymentOpen={setOpen}

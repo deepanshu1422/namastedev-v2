@@ -24,19 +24,26 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import Image from "next/image";
-import { Check, TicketPercent } from "lucide-react";
+import { Check } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 
 export function UpsellModal({
+  title = "Job Ready Bundle - Full Stack, DSA, Interview Prep",
+  slug = "job-ready-bundle-full-stack-dsa-interview-prep",
+  amount = "999",
+  bigAmount = "9999",
+  percentage = "90",
   open,
   setOpen,
   setPaymentOpen,
   setBundelPaymentOpen,
 }: {
+  title?: string;
+  slug?: string;
+  amount?: string;
+  bigAmount?: string;
+  percentage?: string;
   open: boolean;
   setPaymentOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setBundelPaymentOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -46,7 +53,7 @@ export function UpsellModal({
 
   const info = {
     title: "Exclusive Bundle Offer",
-    desc: "Get All 5 courses at 85% off. Lifetime access and certificate for each course.",
+    desc: "Get All Courses at 90% off. Lifetime access and certificate for each course.",
   };
 
   if (isDesktop) {
@@ -58,6 +65,11 @@ export function UpsellModal({
             <DialogDescription>{info.desc}</DialogDescription>
           </DialogHeader>
           <Offer
+            title={title}
+            slug={slug}
+            amount={amount}
+            bigAmount={bigAmount}
+            percentage={percentage}
             setOpen={setOpen}
             setPaymentOpen={setPaymentOpen}
             setOpenBundle={setBundelPaymentOpen}
@@ -78,6 +90,11 @@ export function UpsellModal({
           </DrawerDescription>
         </DrawerHeader>
         <Offer
+          title={title}
+          slug={slug}
+          amount={amount}
+          bigAmount={bigAmount}
+          percentage={percentage}
           setOpen={setOpen}
           setPaymentOpen={setPaymentOpen}
           setOpenBundle={setBundelPaymentOpen}
@@ -89,11 +106,21 @@ export function UpsellModal({
 }
 
 function Offer({
+  title = "Job Ready Bundle - Full Stack, DSA, Interview Prep",
+  slug = "job-ready-bundle-full-stack-dsa-interview-prep",
+  amount = "999",
+  bigAmount = "9999",
+  percentage = "90",
   className,
   setOpen,
   setPaymentOpen,
   setOpenBundle,
 }: {
+  title?: string;
+  slug?: string;
+  amount?: string;
+  bigAmount?: string;
+  percentage?: string;
   className: string;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setPaymentOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -107,36 +134,82 @@ function Offer({
     "AI Mastery Course",
   ];
   return (
-    <div className={`${className} cursor-pointer flex flex-col py-2`}>
-      <div className="flex flex-col gap-1.5 text-sm pb-3">
-        {courses.map((e, i) => (
-          <span key={i} className="flex items-center gap-2">
-            <Check className="w-4 h-4 stroke-primary" />
-            {e}
-          </span>
-        ))}
-      </div>
+    <div className={`${className} cursor-pointer flex flex-col pb-2 gap-2`}>
+      <div className="bg-gradient-to-t to-head/80 from-second/80 p-3 rounded-md">
+        <div className="flex justify-between">
+          <div className="flex flex-col gap-1.5 text-xs pb-3">
+            {courses.map((e, i) => (
+              <span key={i} className="flex items-center gap-2">
+                <Check className="w-4 h-4 stroke-primary" />
+                {e}
+              </span>
+            ))}
+          </div>
 
-      <div className="flex justify-between items-center pb-3">
-        <div className="flex items-end gap-2">
-          <span className="text-2xl font-bold">₹999</span>
-          <span className="text-xl font-medium text-muted-foreground line-through italic">₹9999</span>
+          <span className="uppercase font-bold bg-yellow-500 text-black text-xs px-3 py-1 rounded-full h-fit break-all line-clamp-1">
+            Best Value
+          </span>
         </div>
 
-        <Badge className="py-1 px-2 rounded h-fit bg-red-500 hover:bg-red-700 text-white">90% off</Badge>
+        <div className="flex justify-between items-center pb-3">
+          <div className="flex items-end gap-2">
+            <span className="text-2xl font-bold">₹2499</span>
+            <span className="text-xl font-medium text-muted-foreground line-through italic">
+              ₹25000
+            </span>
+          </div>
+
+          <Badge className="py-1 px-2 rounded h-fit bg-red-500 hover:bg-red-700 text-white">
+            90% off
+          </Badge>
+        </div>
+        <Link
+          href={
+            "/bundle/all-courses-bundle-dsa-full-stack-blockchain-ai-data-analytics-python?sheet=true"
+          }
+          className="relative overflow-hidden group"
+        >
+          <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
+          <Button variant={"outline"} className="relative w-full">
+            Claim 20 Bundle Offers Now
+          </Button>
+        </Link>
       </div>
 
-      <div className="flex flex-col gap-3">
+      <div className="bg-gradient-to-t to-stone-800/80 from-stone-900/80 p-3 rounded-md">
+        <div className="flex flex-col gap-1.5 text-sm pb-3">
+          {/* {courses.map((e, i) => (
+            <span key={i} className="flex items-center gap-2">
+              <Check className="w-4 h-4 stroke-primary" />
+              {e}
+            </span>
+          ))} */}
+          <h3 className="text-lg line-clamp-2 font-semibold">{title}</h3>
+        </div>
+
+        <div className="flex justify-between items-center pb-3">
+          <div className="flex items-end gap-2">
+            <span className="text-2xl font-bold">₹{amount}</span>
+            <span className="text-xl font-medium text-muted-foreground line-through italic">
+              ₹{bigAmount}
+            </span>
+          </div>
+
+          <Badge className="py-1 px-2 rounded h-fit bg-red-500 hover:bg-red-700 text-white">
+            {percentage}% off
+          </Badge>
+        </div>
         <Link
-          href={"/bundle/complete-package-all-course-bundle?sheet=true"}
-          className="relative overflow-hidden"
+          href={`/bundle/${slug}?sheet=true`}
+          className="relative overflow-hidden group"
         >
-          <Button
-            className="w-full bg-prime/80 hover:bg-prime text-white"
-          >
+          <Button className="relative w-full bg-prime/80 hover:bg-prime text-white">
             Claim Your Bundle Offer Now
           </Button>
         </Link>
+      </div>
+
+      <div className="flex flex-col gap-3">
         <Button
           onClick={() => {
             setOpen(false);

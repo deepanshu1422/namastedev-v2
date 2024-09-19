@@ -70,7 +70,7 @@ type Props = {
 
 export async function generateStaticParams() {
   const query = `query {
-        bundleCollection{
+        bundleCollection(where: {publish: true}){
         items{
             slug
             }
@@ -104,7 +104,7 @@ export async function generateMetadata(
 
   try {
     const query = `query {
-            bundleCollection{
+            bundleCollection(where: {publish: true}){
             items{
                 slug,
                 bundleTitle,
@@ -154,7 +154,7 @@ export async function generateMetadata(
 
 async function getCourses({ slug }: { slug: string }): Promise<Courses> {
   const query = `query {
-    bundleCollection(where: {slug: "${slug}"},limit:1){
+    bundleCollection(where: {slug: "${slug}", publish: true},limit:1){
         items{
         bundleId,
         bundleTitle,

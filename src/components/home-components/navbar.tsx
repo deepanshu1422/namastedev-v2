@@ -34,7 +34,7 @@ export default function Navbar() {
               </span>
             </Link>
 
-            <div className="max-tab:hidden font-jakarta flex items-center font-medium gap-8">
+            <div className="max-md:hidden font-jakarta flex items-center font-medium gap-8">
               <NavMenu />
             </div>
           </section>
@@ -51,7 +51,7 @@ export default function Navbar() {
               href={"/dashboard"}
               className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:p-2 rounded-md"
             >
-              <span className="text-sm">Login</span>
+              <span className="text-sm">Dashboard</span>
               {/* <LogIn className="h-5 w-5 sm:hidden" /> */}
             </Link>
 

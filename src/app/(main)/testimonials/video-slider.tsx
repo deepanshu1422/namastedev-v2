@@ -23,7 +23,7 @@ function VideoCarousel() {
     { imgSrc: "/thumbs/t5.jpg", id: "G-q_thBCKL8" },
     { imgSrc: "/thumbs/t4.jpg", id: "bAVgLo6jxzA" },
     { imgSrc: "/thumbs/t3.jpg", id: "oi5mWIP1rt0" },
-    { imgSrc: "/thumbs/t2.jpg", id: "oi5mWIP1rt0" },
+    { imgSrc: "/thumbs/t2.jpg", id: "9sSe0RQrzpM" },
     { imgSrc: "/thumbs/t1.jpg", id: "p3J3KlJbls0" },
     { imgSrc: "/thumbs/t0.jpg", id: "v2ICShDxcaY" },
   ];

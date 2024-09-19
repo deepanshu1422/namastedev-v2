@@ -171,7 +171,7 @@ export default function MobileMenu() {
     // },
     {
       icon: <Users className="h-5 w-5" />,
-      title: "Login",
+      title: "Dashboard",
       href: "/dashboard",
       selected: false,
     },

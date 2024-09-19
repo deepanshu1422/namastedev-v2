@@ -13,7 +13,7 @@ import React from "react";
 
 const getCourses = async () => {
   const query = `query {
-        courseCollection(where: {publish: true, domain: "30dayscoding.com"}, limit:5){
+        courseCollection(where: { publish: true,domain: "30dayscoding.com"}, limit: 8){
            items{
                 title,
                 slug,
@@ -53,7 +53,7 @@ export default async function Courses() {
   } = data;
 
   return (
-    <section className="flex max-md:flex-col rounded-lg gap-2">
+    <section className="flex max-md:flex-col rounded-lg gap-2 overflow-hidden">
       <Slider course={items} />
     </section>
   );

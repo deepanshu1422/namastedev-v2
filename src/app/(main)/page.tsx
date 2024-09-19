@@ -1,19 +1,11 @@
 import Hero from "@/components/home-components/new-hero";
-import Companies from "@/components/new-cohort/companies";
-import Course from "@/components/home-components/course";
-import Highlights from "@/components/new-cohort/highligths";
-import Mentor from "@/components/new-cohort/mentor";
-import Testimonials from "@/components/mentorship-comp/testimonials";
 import type { Metadata } from "next";
 import Store from "@/components/home-components/store";
 import Faqs from "@/components/mentorship-comp/faq";
-import Program from "@/components/program";
 import Script from "next/script";
 import Success from "@/components/mentorship-comp/success";
-import Btn from "./mentorship/btn";
 import Mentors from "./mentorship/mentors";
 import VideoSlider from "./testimonials/video-slider";
-
 
 export const dynamic = "force-dynamic";
 
@@ -110,19 +102,11 @@ export default function Home() {
         subDesc="Whether you're a beginner looking to dive into programming or an experienced developer seeking skill enhancement, our mentors' guidance and courses are well-designed for all levels of proficiency."
         ytId="enw3DVa1r5k"
       />
-      {/* <Btn cover="/new-mentorship.jpg" yt="9Lokc1bQixc" /> */}
-      {/* <Companies /> */}
       <Store />
       <Mentors />
       <Success />
       <VideoSlider />
-      {/* <Course /> */}
-      {/* <Program /> */}
-      {/* <Mentor /> */}
-      {/* <Highlights />
-      <Testimonials /> */}
       <Faqs faq={faq} />
-      {/* <Floating /> */}
     </main>
   );
 }

@@ -23,6 +23,17 @@ export type Courses = {
       learn: string[];
       rating: number;
       slug: string;
+      upsellBundle: {
+        bundleTitle: string;
+        slug: string;
+        pricingsCollection: {
+          items: {
+            amount: string;
+            bigAmount: string;
+            percentage: string;
+          };
+        }[];
+      };
       projectsCollection: {
         items: {
           title: string;
@@ -95,7 +106,7 @@ type Props = {
 
 export async function generateStaticParams() {
   const query = `query {
-        courseCollection(where: {publish: true, domain: "30dayscoding.com"}){
+        courseCollection(where: { publish: true, domain: "30dayscoding.com"}){
         items{
             slug
             }
@@ -129,7 +140,7 @@ export async function generateMetadata(
 
   try {
     const query = `query {
-            courseCollection(where: {publish: true, domain: "30dayscoding.com"}){
+            courseCollection(where: { publish: true, domain: "30dayscoding.com"}){
             items{
                 slug,
                 title,
@@ -188,6 +199,17 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
         offers,
         learn,
         rating,
+        upsellBundle{
+          bundleTitle,
+          slug,
+          pricingsCollection(where: {countryCode: "IN"}, limit: 1){
+            items{
+              amount,
+              bigAmount,
+              percentage
+            }
+          }
+        }
         courseImage{   
             description,
             url,

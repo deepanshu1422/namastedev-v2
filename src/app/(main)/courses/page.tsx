@@ -78,7 +78,7 @@ export type CoursesType = {
 
 async function getCourses(): Promise<CoursesType> {
   const query = `query {
-        courseCollection(where: {publish: true, domain: "30dayscoding.com"}){
+        courseCollection(where: {publish: true, domain: "30dayscoding.com",  AND: [{courseId_not: "FSCC30DC"}, {courseId_not: "DAC30DC"}, {courseId_not: "ACC30DC"}] }){
             items{
                 title,
                 shortDescription,
@@ -101,9 +101,9 @@ async function getCourses(): Promise<CoursesType> {
                     },
                 }
             },
-            bundleCollection(limit: 1){
+            bundleCollection(where: { publish: true }, limit: 5){
             items{
-                ,bundleTitle
+                bundleTitle
                 shortDescription,
                 slug,
                 rating,
