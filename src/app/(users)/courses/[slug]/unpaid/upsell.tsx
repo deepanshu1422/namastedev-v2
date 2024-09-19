@@ -132,10 +132,17 @@ function Offer({
     "Blockchain Mastery Course",
     "Data Analytics Course",
     "AI Mastery Course",
+    "+12 more courses",
   ];
   return (
     <div className={`${className} cursor-pointer flex flex-col pb-2 gap-2`}>
       <div className="bg-gradient-to-t to-head/80 from-second/80 p-3 rounded-md">
+      <div className="flex justify-between mb-2">
+      <h3 className="text-lg line-clamp-2 font-semibold">17 Course bundle</h3>
+      <span className="uppercase font-bold bg-yellow-500 text-black text-xs px-3 py-1 rounded-full h-fit break-all line-clamp-1">
+        Best Value
+      </span>
+      </div>
         <div className="flex justify-between">
           <div className="flex flex-col gap-1.5 text-xs pb-3">
             {courses.map((e, i) => (
@@ -146,9 +153,6 @@ function Offer({
             ))}
           </div>
 
-          <span className="uppercase font-bold bg-yellow-500 text-black text-xs px-3 py-1 rounded-full h-fit break-all line-clamp-1">
-            Best Value
-          </span>
         </div>
 
         <div className="flex justify-between items-center pb-3">
@@ -171,7 +175,7 @@ function Offer({
         >
           <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
           <Button variant={"outline"} className="relative w-full">
-            Claim 20 Bundle Offers Now
+            Claim all course bundle offer
           </Button>
         </Link>
       </div>
@@ -204,7 +208,7 @@ function Offer({
           className="relative overflow-hidden group"
         >
           <Button className="relative w-full bg-prime/80 hover:bg-prime text-white">
-            Claim Your Bundle Offer Now
+            Claim this bundle offer
           </Button>
         </Link>
       </div>
