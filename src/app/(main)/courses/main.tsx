@@ -11,6 +11,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Script from "next/script";
 
+import { Badge } from "@/components/ui/badge";
+
 import {
   Accordion,
   AccordionContent,
@@ -125,19 +127,19 @@ export default function Main({ courses }: { courses: CoursesType }) {
         search={state}
         setSearch={setState}
       />
+      <Mentors />
       <Bundle
         content={bundle?.offers ?? [""]}
         title={bundle?.bundleTitle ?? ""}
         url={bundle?.coverImage.url ?? ""}
         price={bundle?.pricingsCollection.items.find(
           (e) => e.countryCode === "IN"
-        ) ?? {amount: 2499, bigAmount: 25000, percentage: 90}}
+        ) ?? { amount: 2499, bigAmount: 25000, percentage: 90 }}
         slug={bundle?.slug ?? "complete-package-all-course-bundle"}
       />
       <Courses state={state} courses={courses} />
       <VideoSlider />
       {/* <Reviews /> */}
-      <Mentors />
       <Success />
       <div className="my-5"></div>
       <Faqs faq={faq} />
@@ -228,12 +230,19 @@ function Bundle({
   ];
 
   return (
-    <div className="flex max-phone:flex-col w-full max-w-4xl gap-7 mx-auto max-phone:px-6 px-10 py-5 tab:pb-8 ">
+    <div className="flex max-phone:flex-col w-full max-w-4xl gap-7 mx-auto max-phone:px-6 px-10 py-10 tab:pb-8 ">
       <Link
         href={"/bundle/" + slug}
         className="flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6"
       >
         <div className="max-tab:order-last flex flex-col gap-3">
+
+          {/* <Badge
+            className="rounded bg-lime-800/80  hover:bg-lime-800 p-3"
+            variant={"secondary"}
+          >
+            <span className="text-sm">Best seller</span>
+          </Badge> */}
           <h3 className="font-bold text-xl tab:text-2xl line-clamp-2">
             {title}
           </h3>
@@ -244,10 +253,10 @@ function Bundle({
                 {e}
               </span>
             ))}
-              <span className="flex gap-2 items-center text-sm">
-                <Plus className="h-5 w-5 text-prime shrink-0" />
-                12 More Courses
-              </span>
+            <span className="flex gap-2 items-center text-sm">
+              <Plus className="h-5 w-5 text-prime shrink-0" />
+              12 More Courses
+            </span>
 
             <div className="relative mt-2">
               <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
@@ -256,7 +265,7 @@ function Bundle({
                 variant={"outline"}
                 className={`relative font-semibold text-foreground/80 hover:text-foreground w-full gap-1`}
               >
-                Buy all @₹{price.amount}{" "}
+                Buy all 17 courses for ₹{price.amount}{" "}
                 <span className="italic line-through text-muted-foreground">
                   ₹{price.bigAmount}
                 </span>
@@ -264,13 +273,15 @@ function Bundle({
             </div>
           </div>
         </div>
-        <Image
-          src={url}
-          alt={"30DC Project Preview"}
-          height={600}
-          width={900}
-          className="rounded-s-lg w-full md:w-4/5 aspect-[6/4] tab:h-4/5 my-auto ml-auto shadow-xl shadow-black/50 object-cover"
-        />
+        <div>
+          <Image
+            src={url}
+            alt={"30DC Project Preview"}
+            height={600}
+            width={900}
+            className="rounded-s-lg w-full md:w-4/5 aspect-[6/4] tab:h-4/5 my-auto ml-auto shadow-xl shadow-black/50 object-cover"
+          />
+        </div>
       </Link>
       {/* <Link
         href={"/mentorship"}
