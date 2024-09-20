@@ -112,87 +112,8 @@ export default function Main({
       <Mentors />
       <Success />
       
-      {/* Coaching Program Section */}
-      <div className="flex justify-center p-2"> {/* Centered the component and added padding outside the border */}
-        <div className="border border-red-500 rounded-lg p-6 bg-transparent shadow-md max-w-3xl md:mx-4 md:mt-6"> {/* Existing styles */}
-          <h2 className="font-bold text-4xl mb-4 text-center"> {/* Increased title size further */}
-            Work with us until you land your perfect <span className="text-green-500">DREAM JOB</span>
-          </h2>
-          <p className="text-center mb-4">By joining today, you lock in a discounted price of <span className="font-bold text-xl text-red-500">$449</span></p>
-          
-          <h3 className="font-bold text-xl mb-2">What you get:</h3>
-          <table className="min-w-full border-collapse border border-gray-300">
-            {/* <thead>
-              <tr>
-                <th className="border border-gray-300 p-2">Item</th>
-                <th className="border border-gray-300 p-2">Value</th>
-              </tr>
-            </thead> */}
-            <tbody>
-              <tr>
-                <td className="border border-gray-300 p-2">2 Group Q&A calls/week with Aryan, Ashok, Deepanshu</td>
-                <td className="border border-gray-300 p-2 underline text-green-500">$2000</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 p-2">Complete USA & Canada Jobs Course</td>
-                <td className="border border-gray-300 p-2 underline text-green-500">$2000</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 p-2">15+ Technical Interview Courses - MERN, DSA, etc</td>
-                <td className="border border-gray-300 p-2 underline text-green-500">$2000</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 p-2">Personalized Resume Review Sessions</td>
-                <td className="border border-gray-300 p-2 underline text-green-500">$1000</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 p-2">Complete AI tools, workflows, automation courses</td>
-                <td className="border border-gray-300 p-2 underline text-green-500">$2000</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 p-2">Resume, Cold Email Guides, and Review</td>
-                <td className="border border-gray-300 p-2 underline text-green-500">$2000</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 p-2">Interview Prep + Mock Interview prep</td>
-                <td className="border border-gray-300 p-2 underline text-green-500">$1000</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 p-2">Salary Negotiation Training</td>
-                <td className="border border-gray-300 p-2 underline text-green-500">$2000</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 p-2">Mindset Mastery and Resilience Training</td>
-                <td className="border border-gray-300 p-2 underline text-green-500">$1500</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 p-2">Thriving Community + Networking Opportunities</td>
-                <td className="border border-gray-300 p-2 underline text-green-500">$1200</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 p-2">Mobile Access to Community Resources</td>
-                <td className="border border-gray-300 p-2 underline text-green-500">$1200</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 p-2">iOS & Android Apps for 24/7 access to the community</td>
-                <td className="border border-gray-300 p-2 underline text-green-500">$1000</td>
-              </tr>
-            </tbody>
-          </table>
 
-          <p className="font-bold text-lg mt-3">Total Value: <span className="line-through">$12,500+</span></p>
-          <p className="font-bold text-xl">Current Offer: <span className="text-red-500">$449</span></p> {/* Updated current offer */}
-          <p className="text-sm text-gray-500">Soon: $649</p> {/* Updated soon price */}
-
-          <div className="flex justify-center mt-4">
-            <button className="bg-prime text-white rounded-full px-6 py-2 hover:opacity-80 transition-all duration-200">
-              Join the Waitlist
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="w-full py-16">
+      <div className="w-full">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-4">Step by step Path to Career Success</h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
@@ -200,12 +121,9 @@ export default function Main({
           </p>
           <div className="relative">
             {steps.map((step, index) => (
-              <motion.div
+              <div
                 key={index}
                 className="mb-16 flex items-start relative"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-r from-red-500 to-red-700 text-white flex items-center justify-center text-2xl font-bold z-10 shadow-lg">
                   {index + 1}
@@ -236,7 +154,7 @@ export default function Main({
                 {index < steps.length - 1 && (
                   <div className="absolute left-7 top-14 w-0.5 bg-gradient-to-b from-red-500 to-red-700 h-full transform -translate-x-1/2" />
                 )}
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
