@@ -96,7 +96,7 @@ export default function Checkout({
                 </Button>
               </div>
               <div className="flex justify-center">
-                <div> OR </div>
+                {/* <div> OR </div> */}
               </div>
               {bundleId !== "NEWALL30DC" && (
                 <Link

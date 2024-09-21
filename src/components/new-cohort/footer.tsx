@@ -29,24 +29,24 @@ export default function Footer() {
         link: "/bundle/complete-package-all-course-bundle",
       },
       {
-        title: "MERN FullStack Course",
-        link: "/courses/complete-webdev-course",
+        title: "Complete MERN Full Stack Course",
+        link: "/courses/complete-mern-stack-course",
       },
       {
-        title: "Job Ready DSA Course",
+        title: "DSA Complete Job Ready Course",
         link: "/courses/dsa-complete-course",
       },
       {
-        title: "Data Analytics Mastery",
-        link: "/courses/data-analytics-course",
-      },
-      {
-        title: "Blockchain Mastery Course",
-        link: "/courses/complete-blockchain-course",
-      },
-      {
-        title: "AI Mastery Course",
+        title: "Complete AI mastery Course",
         link: "/courses/ai-complete-course",
+      },
+      {
+        title: "SQL Mastery Complete Course",
+        link: "/courses/sql-mastery-complete-course",
+      },
+      {
+        title: "Blockchain Mastery Complete Course",
+        link: "/courses/complete-blockchain-course",
       },
     ],
   };

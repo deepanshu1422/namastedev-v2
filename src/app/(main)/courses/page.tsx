@@ -101,7 +101,7 @@ async function getCourses(): Promise<CoursesType> {
                     },
                 }
             },
-            bundleCollection(where: { publish: true }, limit: 5){
+            bundleCollection(where: { publish: true, slug: "complete-package-all-course-bundle" }, limit: 1){
             items{
                 bundleTitle
                 shortDescription,

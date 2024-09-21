@@ -137,12 +137,14 @@ function Offer({
   return (
     <div className={`${className} cursor-pointer flex flex-col pb-2 gap-2`}>
       <div className="bg-gradient-to-t to-head/80 from-second/80 p-3 rounded-md">
-      <div className="flex justify-between mb-2">
-      <h3 className="text-lg line-clamp-2 font-semibold">17 Course bundle</h3>
-      <span className="uppercase font-bold bg-yellow-500 text-black text-xs px-3 py-1 rounded-full h-fit break-all line-clamp-1">
-        Best Value
-      </span>
-      </div>
+        <div className="flex justify-between mb-2">
+          <h3 className="text-lg line-clamp-2 font-semibold">
+            17 Course bundle
+          </h3>
+          <span className="uppercase font-bold bg-yellow-500 text-black text-xs px-3 py-1 rounded-full h-fit break-all line-clamp-1">
+            Best Value
+          </span>
+        </div>
         <div className="flex justify-between">
           <div className="flex flex-col gap-1.5 text-xs pb-3">
             {courses.map((e, i) => (
@@ -156,7 +158,6 @@ function Offer({
               12 More Courses
             </span>
           </div>
-
         </div>
 
         <div className="flex justify-between items-center pb-3">
@@ -171,27 +172,10 @@ function Offer({
             90% off
           </Badge>
         </div>
-        <Link
-          href={
-            "/bundle/complete-package-all-course-bundle?sheet=true"
-          }
-          className="relative overflow-hidden group"
-        >
-          <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
-          <Button variant={"outline"} className="relative w-full">
-            Claim all course bundle offer
-          </Button>
-        </Link>
       </div>
 
-      <div className="bg-gradient-to-t to-stone-800/80 from-stone-900/80 p-3 rounded-md">
+      {/* <div className="bg-gradient-to-t to-stone-800/80 from-stone-900/80 p-3 rounded-md">
         <div className="flex flex-col gap-1.5 text-sm pb-3">
-          {/* {courses.map((e, i) => (
-            <span key={i} className="flex items-center gap-2">
-              <Check className="w-4 h-4 stroke-primary" />
-              {e}
-            </span>
-          ))} */}
           <h3 className="text-lg line-clamp-2 font-semibold">{title}</h3>
         </div>
 
@@ -215,7 +199,17 @@ function Offer({
             Claim this bundle offer
           </Button>
         </Link>
-      </div>
+      </div> */}
+
+      <Link
+        href={"/bundle/complete-package-all-course-bundle?sheet=true"}
+        className="relative overflow-hidden group"
+      >
+        {/* <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div> */}
+        <Button className="bg-prime/80 hover:bg-prime text-white relative w-full">
+          Claim all course bundle offer
+        </Button>
+      </Link>
 
       <div className="flex flex-col gap-3">
         <Button

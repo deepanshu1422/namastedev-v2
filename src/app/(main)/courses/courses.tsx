@@ -29,29 +29,14 @@ export default function Courses({
   return (
     <div className="grid place-items-center gap-8 max-w-[90rem] m-auto py-8">
       
-      <span className="flex items-center justify-center gap-4 relative lg:pb-2">
+      {/* <span className="flex items-center justify-center gap-4 relative lg:pb-2">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h2 className="font-jakarta text-balance text-3xl font-extrabold text-center max-sm:px-6">
           Affordable course-bundles to master high paying skills
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
-      {/* <div className="mb-4 flex items-center justify-center w-full">
-        <input
-          type="text"
-          placeholder="What do you want to learn?"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="border rounded p-2 bg-background text-foreground placeholder:text-muted-foreground w-[60%]"
-        />
-        <button
-          onClick={() => setSearchTerm("")}
-          className="ml-2 p-2 border rounded border-red-500 text-white w-[20%]"
-        >
-          Clear
-        </button>
-      </div> */}
-      
+           
       <div className="mx-auto grid md:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 max-sm:grid-cols-1 gap-4 max-lg:gap-8 max-lg:place-items-center horizontal-scroll p-2 max-lg:px-6 max-w-6xl">
         {courses.bundleCollection.items
           .filter(
@@ -109,7 +94,7 @@ export default function Courses({
               );
             }
           )}
-      </div>
+      </div> */}
       <span className="flex items-center justify-center gap-4 relative lg:pb-4">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h2 className="font-jakarta text-balance text-3xl font-extrabold text-center max-sm:px-6">
