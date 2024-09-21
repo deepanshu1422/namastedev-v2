@@ -30,8 +30,8 @@ export default function Instructions() {
               <div className="flex max-md:flex-col gap-2">
                 <Link
                 target="_blank"
-                  href={"https://discord.gg/8aeJzxACPG"}
-                  className="hover:scale-[1.02] transition-all duration-200 flex-1 font-semibold p-2 rounded-md border-dashed border-2 border-prime bg-second/40 shadow-lg shadow-black/80"
+                  href={"https://discord.gg/DKebNzkjzV"}
+                  className="hover:scale-[1.02] transition-all duration-200 flex-1 font-semibold p-2 rounded-md border-dashed border-2 border-prime bg-second/40 shadow-lg shadow-black/80 flex items-center justify-center"
                 >
                   Join the Discord Server
                 </Link>
@@ -112,7 +112,7 @@ export default function Instructions() {
 
                     <li>
                       Join our Discord Server{" "}
-                      <LinkMe title="Join Now" href={"https://discord.gg/3RcxqE2y"} />
+                      <LinkMe title="Join Now" href={"https://discord.gg/DKebNzkjzV"} />
                     </li>
                     <li>
                       Reach out to Aryan and Connect via Whatsapp Messaging: 
