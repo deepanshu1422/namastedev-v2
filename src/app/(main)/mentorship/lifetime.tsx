@@ -24,7 +24,7 @@ export default function Lifetime({
       <span className="flex items-center justify-center gap-4 relative pb-4">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h1 className="font-jakarta bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight text-[2rem] sm:text-6xl font-extrabold text-center">
-        Job coaching program in USA and Canada (lifetime)
+        Join the best coding community with live classes(lifetime)
         </h1>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
@@ -84,7 +84,7 @@ export default function Lifetime({
         className="bg-prime rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase"
       >
         <CreditCard className="h-10 w-10" />
-        Join the Waitlist
+        Join now
       </button>
 
       <div className="flex flex-col md:flex-row justify-between mt-10 gap-4"> {/* Added gap for spacing */}

@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { HelpCircle, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { CoursesType } from "./page";
 import { Card, CardFooter } from "@/components/ui/card";
 
@@ -14,6 +14,8 @@ export default function Courses({
   state: string;
   courses: CoursesType;
 }) {
+  const [searchTerm, setSearchTerm] = useState("");
+
   if (courses.courseCollection?.items.length == 0)
     return (
       <div className="mx-auto max-w-[90rem] w-full text-center py-10 pb-40">
@@ -26,22 +28,36 @@ export default function Courses({
 
   return (
     <div className="grid place-items-center gap-8 max-w-[90rem] m-auto py-8">
-      <span className="flex items-center justify-center gap-4 relative lg:pb-4">
+      
+      <span className="flex items-center justify-center gap-4 relative lg:pb-2">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h2 className="font-jakarta text-balance text-3xl font-extrabold text-center max-sm:px-6">
-          Pocket Friendly Courses with Certificates!
+          Affordable course-bundles to master high paying skills
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
-      <span className="inline-flex items-center justify-center whitespace-nowrap border rounded-3xl py-2 px-3 max-lg:text-xs text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 border-prime bg-prime/20 shadow-md ring-0">
-        All Bundles
-      </span>
+      {/* <div className="mb-4 flex items-center justify-center w-full">
+        <input
+          type="text"
+          placeholder="What do you want to learn?"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="border rounded p-2 bg-background text-foreground placeholder:text-muted-foreground w-[60%]"
+        />
+        <button
+          onClick={() => setSearchTerm("")}
+          className="ml-2 p-2 border rounded border-red-500 text-white w-[20%]"
+        >
+          Clear
+        </button>
+      </div> */}
+      
       <div className="mx-auto grid md:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 max-sm:grid-cols-1 gap-4 max-lg:gap-8 max-lg:place-items-center horizontal-scroll p-2 max-lg:px-6 max-w-6xl">
         {courses.bundleCollection.items
           .filter(
             (e) =>
-              e.slug !==
-              "complete-package-all-course-bundle"
+              e.slug !== "complete-package-all-course-bundle" &&
+              e.bundleTitle.toLowerCase().includes(searchTerm.toLowerCase())
           )
           .map(
             ({ bundleTitle, coverImage, pricingsCollection, slug }, index) => {
@@ -81,7 +97,6 @@ export default function Courses({
                           ₹{bigAmount}
                         </span>
                       </span>
-                      {/* <span className="text-lime-500">75%off</span> */}
                       <Badge
                         className="rounded bg-lime-800/80  hover:bg-lime-800"
                         variant={"secondary"}
@@ -95,6 +110,14 @@ export default function Courses({
             }
           )}
       </div>
+      <span className="flex items-center justify-center gap-4 relative lg:pb-4">
+        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
+        <h2 className="font-jakarta text-balance text-3xl font-extrabold text-center max-sm:px-6">
+          Pocket Friendly Courses with Certificates!
+        </h2>
+        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
+      </span>
+      
       <div className="flex max-lg:flex-col lg:gap-6 max-lg:items-center max-lg:gap-10 max-lg:px-0 mx-auto">
         <CourseTabMenu
           data={[
@@ -151,6 +174,7 @@ export default function Courses({
               ),
             },
           ]}
+          searchTerm={searchTerm}
         />
       </div>
     </div>
@@ -171,47 +195,11 @@ export default function Courses({
         10+ countries.
       </p>
       <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-[85rem] gap-7 mx-auto max-phone:px-6 px-10 py-5 tab:pb-8">
-        {/* {state
-          ? courses.bundleCollection.items
-              .filter((e) =>
-                e.bundleTitle.toLowerCase().includes(state.toLowerCase())
-              )
-              .map(
-                (
-                  { coverImage, slug, bundleTitle, pricingsCollection, rating },
-                  i
-                ) => (
-                  <Bundle
-                    rating={rating}
-                    key={i}
-                    courseImage={coverImage}
-                    tags={[""]}
-                    slug={slug}
-                    title={bundleTitle}
-                    pricingsCollection={pricingsCollection}
-                  />
-                )
-              )
-          : courses.bundleCollection.items.map(
-              (
-                { coverImage, slug, bundleTitle, pricingsCollection, rating },
-                i
-              ) => (
-                <Bundle
-                  rating={rating}
-                  key={i}
-                  courseImage={coverImage}
-                  tags={[""]}
-                  slug={slug}
-                  title={bundleTitle}
-                  pricingsCollection={pricingsCollection}
-                />
-              )
-            )} */}
         {state
           ? courses.courseCollection.items
               .filter((e) =>
-                e.title.toLowerCase().includes(state.toLowerCase())
+                e.title.toLowerCase().includes(state.toLowerCase()) &&
+                e.title.toLowerCase().includes(searchTerm.toLowerCase())
               )
               .map(
                 (
@@ -236,22 +224,33 @@ export default function Courses({
                   />
                 )
               )
-          : courses.courseCollection.items.map(
-              (
-                { courseImage, tags, slug, title, pricingsCollection, rating },
-                i
-              ) => (
-                <Course
-                  rating={rating}
-                  key={i}
-                  courseImage={courseImage}
-                  tags={tags}
-                  slug={slug}
-                  title={title}
-                  pricingsCollection={pricingsCollection}
-                />
+          : courses.courseCollection.items
+              .filter((e) =>
+                e.title.toLowerCase().includes(searchTerm.toLowerCase())
               )
-            )}
+              .map(
+                (
+                  {
+                    courseImage,
+                    tags,
+                    slug,
+                    title,
+                    pricingsCollection,
+                    rating,
+                  },
+                  i
+                ) => (
+                  <Course
+                    rating={rating}
+                    key={i}
+                    courseImage={courseImage}
+                    tags={tags}
+                    slug={slug}
+                    title={title}
+                    pricingsCollection={pricingsCollection}
+                  />
+                )
+              )}
       </section>
       {state &&
         !courses.courseCollection.items.filter((e) =>
@@ -272,6 +271,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 function CourseTabMenu({
   data,
+  searchTerm,
 }: {
   data: {
     title: string;
@@ -294,6 +294,7 @@ function CourseTabMenu({
       };
     }[];
   }[];
+  searchTerm: string;
 }) {
   return (
     <Tabs defaultValue="chapter1" className="flex shrink-0 flex-col gap-2">
@@ -316,68 +317,69 @@ function CourseTabMenu({
             value={`chapter${i + 1}`}
           >
             <div className="grid md:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 max-sm:grid-cols-1 gap-4 max-lg:gap-8 max-lg:place-items-center horizontal-scroll p-2 max-w-6xl">
-              {courses.map(
-                (
-                  {
-                    title,
-                    courseImage,
-                    pricingsCollection,
-                    rating,
-                    shortDescription,
-                    slug,
-                    tags,
-                  },
-                  index
-                ) => {
-                  const amount =
-                    pricingsCollection.items.find((e) => e.countryCode == "IN")
-                      ?.amount ?? 0;
-                  const bigAmount =
-                    pricingsCollection.items.find((e) => e.countryCode == "IN")
-                      ?.bigAmount ?? 0;
-                  const percentage =
-                    pricingsCollection.items.find((e) => e.countryCode == "IN")
-                      ?.percentage ?? 0;
+              {courses
+                .filter(course => course.title.toLowerCase().includes(searchTerm.toLowerCase()))
+                .map(
+                  (
+                    {
+                      title,
+                      courseImage,
+                      pricingsCollection,
+                      rating,
+                      shortDescription,
+                      slug,
+                      tags,
+                    },
+                    index
+                  ) => {
+                    const amount =
+                      pricingsCollection.items.find((e) => e.countryCode == "IN")
+                        ?.amount ?? 0;
+                    const bigAmount =
+                      pricingsCollection.items.find((e) => e.countryCode == "IN")
+                        ?.bigAmount ?? 0;
+                    const percentage =
+                      pricingsCollection.items.find((e) => e.countryCode == "IN")
+                        ?.percentage ?? 0;
 
-                  return (
-                    <Link
-                      key={index}
-                      href={`/courses/${slug}`}
-                      className="flex-1 max-w-[300px] w-full lg:hover:-translate-y-1 h-full transition-all"
-                    >
-                      <div className="max-lg:m-auto flex flex-col justify-between max-lg:justify-center rounded-xl bg-second/40 p-1 h-full">
-                        <div className="flex flex-col gap-1">
-                          <Image
-                            className="rounded-lg w-96 aspect-[6/4]"
-                            src={courseImage.url}
-                            width={280}
-                            height={280}
-                            alt={`30 days coding ${title}`}
-                          />
-                          <p className="text-sm font-semibold p-1 line-clamp-2 text-wrap">
-                            {title}
-                          </p>
-                        </div>
-                        <span className="flex gap-2 justify-between sm:text-lg text-white font-semibold p-1">
-                          <span className="flex gap-2">
-                            ₹{amount}
-                            <span className="text-muted-foreground line-through">
-                              ₹{bigAmount}
+                    return (
+                      <Link
+                        key={index}
+                        href={`/courses/${slug}`}
+                        className="flex-1 max-w-[300px] w-full lg:hover:-translate-y-1 h-full transition-all"
+                      >
+                        <div className="max-lg:m-auto flex flex-col justify-between max-lg:justify-center rounded-xl bg-second/40 p-1 h-full">
+                          <div className="flex flex-col gap-1">
+                            <Image
+                              className="rounded-lg w-96 aspect-[6/4]"
+                              src={courseImage.url}
+                              width={280}
+                              height={280}
+                              alt={`30 days coding ${title}`}
+                            />
+                            <p className="text-sm font-semibold p-1 line-clamp-2 text-wrap">
+                              {title}
+                            </p>
+                          </div>
+                          <span className="flex gap-2 justify-between sm:text-lg text-white font-semibold p-1">
+                            <span className="flex gap-2">
+                              ₹{amount}
+                              <span className="text-muted-foreground line-through">
+                                ₹{bigAmount}
+                              </span>
                             </span>
+                            <Badge
+                              className="rounded bg-prime/60  hover:bg-prime/80"
+                              variant={"secondary"}
+                            >
+                              {percentage}% off
+                            </Badge>
                           </span>
-                          {/* <span className="text-lime-500">75%off</span> */}
-                          <Badge
-                            className="rounded bg-prime/60  hover:bg-prime/80"
-                            variant={"secondary"}
-                          >
-                            {percentage}% off
-                          </Badge>
-                        </span>
-                      </div>
-                    </Link>
-                  );
-                }
-              )}
+                        </div>
+                      </Link>
+                    );
+                  }
+                )}
             </div>
           </TabsContent>
         ))}
@@ -435,7 +437,6 @@ function Course({
           <h3 className="sm:hidden text-foreground font-semibold line-clamp-2">
             {title}
           </h3>
-          {/* <span className="taxt-xs tab:text-sm">Aryan Singh</span> */}
           <section className="sm:hidden flex gap-1 items-center">
             <span className="text-lime-500/70 text-sm">{rating}</span>
             {Array.from({ length: rating }).map((_, i) => (
@@ -450,7 +451,6 @@ function Course({
             <span className="text-muted-foreground line-through">
               ₹{bigAmount}
             </span>
-            {/* <span className="text-lime-500">75%off</span> */}
             <Badge
               className="bg-second/80 hover:bg-second"
               variant={"secondary"}

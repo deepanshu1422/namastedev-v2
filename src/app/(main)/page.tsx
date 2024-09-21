@@ -102,8 +102,8 @@ export default function Home() {
         subDesc="Whether you're a beginner looking to dive into programming or an experienced developer seeking skill enhancement, our mentors' guidance and courses are well-designed for all levels of proficiency."
         ytId="enw3DVa1r5k"
       />
-      <Store />
       <Mentors />
+      <Store />
       <Success />
       <VideoSlider />
       <Faqs faq={faq} />
