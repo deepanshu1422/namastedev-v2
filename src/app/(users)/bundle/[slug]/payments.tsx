@@ -439,10 +439,10 @@ export function PaymentSheet({
                 <p>{e}</p>
               </span>
             ))}
-            <span className="flex gap-1">
+            {/* <span className="flex gap-1">
                 <Plus className="text-primary h-4 w-3" />
                 <p>12 More Courses</p>
-              </span>
+              </span> */}
           </div>
           <div className="grid grid-cols-5 items-center gap-4">
             <Label htmlFor="name" className="text-left">
