@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
-import Btn from "../mentorship/btn";
+import Btn from "../community/btn";
 import Link from "next/link";
 
 export default function Hero({

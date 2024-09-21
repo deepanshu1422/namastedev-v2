@@ -59,9 +59,9 @@ export default function Header() {
       selected: path === "/testimonials",
     },
     {
-      title: "1:1 Mentorship",
+      title: "Community",
       icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/mentorship",
+      href: "/community",
     },
   ];
 

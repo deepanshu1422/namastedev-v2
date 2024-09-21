@@ -87,9 +87,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
       selected: path === "/testimonials",
     },
     {
-      title: "1:1 Mentorship",
+      title: "Community",
       icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/mentorship",
+      href: "/community",
     },
   ];
 
@@ -265,7 +265,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
             <div className="flex gap-3 ml-auto h-full py-2 max-md:w-full">
               <Link className="w-full" href={"/instructions"}>
                 <Button className="w-full text-white bg-prime/80 hover:bg-prime">
-                  Access Mentorship
+                  Aceess Community
                 </Button>
               </Link>
               {status === "loading" ? (

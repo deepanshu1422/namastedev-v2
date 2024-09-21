@@ -5,12 +5,12 @@ import Main from "./main";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Join 1:1 Mentorship | 30dayscoding",
+  title: "Join 30DC Community | 30dayscoding",
   description:
     "Resolve all your queries related to the industry and latest jobs with the help of our mentors with live interactions and mentorship sessions.",
   openGraph: {
     images: "https://i.ibb.co/p2jp1S1/30dc2.webp",
-    title: "Join 1:1 Mentorship | 30dayscoding",
+    title: "Join 30DC Community | 30dayscoding",
     description:
       "Resolve all your queries related to the industry and latest jobs with the help of our mentors with live interactions and mentorship sessions.",
     url: "https://30dayscoding.com",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     images: "https://i.ibb.co/p2jp1S1/30dc2.webp",
-    title: "Join 1:1 Mentorship | 30dayscoding",
+    title: "Join 30DC Community | 30dayscoding",
     description:
       "Resolve all your queries related to the industry and latest jobs with the help of our mentors with live interactions and mentorship sessions.",
     site: "https://30dayscoding.com",

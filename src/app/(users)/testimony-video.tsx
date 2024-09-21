@@ -31,7 +31,7 @@ export default function TestimonyVideo() {
         <div className="my-auto">
           <VideoModal yt="UFMiRRNd1FI">
             <Image
-              src={"/mentorship.jpeg"}
+              src={"/mentorship.jpg"}
               alt={"30DC Project Preview"}
               height={600}
               width={900}

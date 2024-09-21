@@ -19,7 +19,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import Mentors from "../mentorship/mentors";
+import Mentors from "../community/mentors";
 import Success from "@/components/mentorship-comp/success";
 import VideoSlider from "../testimonials/video-slider";
 
@@ -59,7 +59,7 @@ export default function Main({ courses }: { courses: CoursesType }) {
       answer: (
         <p>
           You can access mentorship support by visiting the following link{" "}
-          <Link className="text-prime" href={"/mentorship"}>
+          <Link className="text-prime" href={"/community"}>
             Mentorship Support.
           </Link>
         </p>
@@ -84,7 +84,7 @@ export default function Main({ courses }: { courses: CoursesType }) {
           mentorship can help you apply the knowledge from the course to
           real-world projects and provide guidance tailored to your career
           goals. Visit{" "}
-          <Link className="text-prime" href={"/mentorship"}>
+          <Link className="text-prime" href={"/community"}>
             Mentorship Support.
           </Link>
         </p>
@@ -284,7 +284,7 @@ function Bundle({
         </div>
       </Link>
       {/* <Link
-        href={"/mentorship"}
+        href={"/community"}
         className="max-phone:hidden flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6"
       >
         <div className="max-tab:order-last flex flex-col gap-3">
@@ -312,7 +312,7 @@ function Bundle({
           </div>
         </div>
         <Image
-          src={"/mentorship.jpeg"}
+          src={"/mentorship.jpg"}
           alt={"30DC Mentorship"}
           height={600}
           width={900}

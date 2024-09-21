@@ -1,4 +1,4 @@
-import Btn from "@/app/(main)/mentorship/btn";
+import Btn from "@/app/(main)/community/btn";
 import Button from "@/components/home-components/button";
 import { ArrowRight, GraduationCap, School, Star } from "lucide-react";
 import Image from "next/image";
@@ -92,7 +92,7 @@ export default function Hero({
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>
             {/* <Link
-              href={"/mentorship"}
+              href={"/community"}
               className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
             >
               <span className="text-sm">1:1 Mentorship</span>

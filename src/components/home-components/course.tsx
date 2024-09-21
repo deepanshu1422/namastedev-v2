@@ -19,7 +19,7 @@ export default function Course() {
 
       <div className="flex w-full max-lg:flex-col gap-6 justify-center max-lg:items-center max-lg:max-w-[550px] px-10">
         <Link
-          href={"/mentorship"}
+          href={"/community"}
           className="flex-1 max-lg:w-full lg:max-w-[450px] hover:opacity-90"
         >
           <div className="max-lg:m-auto flex items-center lg:p-[2rem_1.5rem_2.5rem] p-4 shadow-[0_2px_40px_0_rgba(0,0,0,.2)] gap-4 rounded-t-xl bg-second h-fit">

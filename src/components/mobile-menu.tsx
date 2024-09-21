@@ -189,8 +189,8 @@ export default function MobileMenu() {
     // },
     {
       icon: <Earth className="h-5 w-5" />,
-      title: "Mentorship",
-      href: "/mentorship",
+      title: "Community",
+      href: "/community",
       selected: false,
     },
     // {

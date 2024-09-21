@@ -13,7 +13,7 @@ const staticMaps: MetadataRoute.Sitemap = [
         priority: 1,
     },
     {
-        url: 'https://30dayscoding.com/mentorship',
+        url: 'https://30dayscoding.com/community',
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.8,

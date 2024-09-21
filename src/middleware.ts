@@ -32,7 +32,7 @@ export default auth((req) => {
         // @ts-ignore
         if (!req.auth?.user?.mentorshipId?.includes("mentor")) {
           const newUrl = new URL(
-            `/mentorship`,
+            `/community`,
             req.nextUrl.origin
           );
           return NextResponse.redirect(newUrl); 

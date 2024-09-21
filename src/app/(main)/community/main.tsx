@@ -182,7 +182,7 @@ export default function Main({
         open={open}
         setOpen={setOpen}
         setOpenPay={setOpenModal}
-        title="1:1 Mentorship Lifetime Access"
+        title="Join 30DC Community Lifetime Access"
       />
       <PaymentModal payModal={openModal} setOpenPay={setOpenModal} />
       {/* <Highlights /> */}

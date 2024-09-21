@@ -137,12 +137,12 @@ export default function Checkout({
         </div> */}
 
         <Link
-          href={"/mentorship"}
+          href={"/community"}
           className="bg-gradient-to-b from-head/30 to-second/20 flex flex-col gap-2 rounded-md shadow-lg backdrop-blur-sm shadow-black/40 p-2"
         >
-          <span className="font-bold">Join 1:1 Mentorship</span>
+          <span className="font-bold">Join 30DC Community</span>
           <Image
-            src={"/mentorship.jpeg"}
+            src={"/mentorship.jpg"}
             width={500}
             height={500}
             alt="30DC Completion Certificate"
@@ -162,12 +162,12 @@ export default function Checkout({
 
           <div className="grid gap-2">
             <Link
-              href={"/mentorship"}
+              href={"/community"}
               className="grid grid-cols-3 gap-2 md:gap-6 md:max-w-60 w-full"
             >
               <Image
                 className="rounded-md max-sm:w-full md:max-w-20 max-h-40 object-cover"
-                src={"/mentorship.jpeg"}
+                src={"/mentorship.jpg"}
                 alt={"mern course"}
                 width={300}
                 height={200}

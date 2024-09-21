@@ -23,7 +23,7 @@ export default function Challenge() {
         <h2 className="text-2xl md:text-3xl font-semibold">Got time? Start exploring our products for free</h2>
         <p className="text-sm text-muted-foreground">Coding products on 30 Days Coding are great to form a everyday coding habit.</p>
         <Slider />
-        {/* <Link href={"/mentorship"}
+        {/* <Link href={"/community"}
           className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 rounded-md w-fit self-end"
         >
           <span className="text-sm">See All Challenges</span>
