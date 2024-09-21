@@ -44,20 +44,20 @@ import { useRouter } from "next/navigation";
 import { sendEvent } from "@/services/fbpixel";
 import { sha256 } from "js-sha256";
 
+
+
 export function PaymentSheet({
   cover,
   title,
   amount,
   curreny,
   bundleId,
-  courseOffer,
   open,
   setOpen,
   setOpenPay,
 }: {
   cover?: string;
   title?: string;
-  courseOffer: string[];
   amount: number;
   curreny?: string;
   bundleId: string;
@@ -128,6 +128,16 @@ export function PaymentSheet({
     "uttar_pradesh",
     "uttarakhand",
     "west_bengal",
+  ];
+
+  // Define courseOffer as a variable
+  const courseOffer = [
+    "Full stack Web Development",
+    "Data Structures and Algorithms",
+    "Data Analytics mastery",
+    "AI and Blockchain",
+    "Lifetime valid and Certificates",
+    "12 More Courses",
   ];
 
   function validationError({ message }: { message: string }) {
