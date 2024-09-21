@@ -104,7 +104,7 @@ export default function Checkout({
                   href={"/bundle/complete-package-all-course-bundle?sheet=true"}
                 >
                   <Button className="w-full font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white">
-                    Get all 17 courses for ₹2499/-
+                    Get all 17 courses for ₹999/-
                   </Button>
                 </Link>
               )}

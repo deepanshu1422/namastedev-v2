@@ -201,6 +201,7 @@ export default function Main({
         <PaymentSheet
           open={open}
           setOpen={setOpen}
+          courseOffer={courseOffer}
           bundleId={bundleId}
           title={bundleTitle}
           cover={coverImage?.url}

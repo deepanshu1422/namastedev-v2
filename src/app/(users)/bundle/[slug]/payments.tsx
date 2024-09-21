@@ -26,7 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { MinusCircle } from "lucide-react";
+import { Check, MinusCircle, Plus } from "lucide-react";
 
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
@@ -50,12 +50,14 @@ export function PaymentSheet({
   amount,
   curreny,
   bundleId,
+  courseOffer,
   open,
   setOpen,
   setOpenPay,
 }: {
   cover?: string;
   title?: string;
+  courseOffer: string[];
   amount: number;
   curreny?: string;
   bundleId: string;
@@ -125,7 +127,7 @@ export function PaymentSheet({
     "tripura",
     "uttar_pradesh",
     "uttarakhand",
-    "west_bengal"
+    "west_bengal",
   ];
 
   function validationError({ message }: { message: string }) {
@@ -404,7 +406,7 @@ export function PaymentSheet({
     {
       title: "Payments Details",
       body: (
-        <div className="grid gap-4 py-4">
+        <div className="grid gap-2 py-4">
           <div className="grid sm:grid-cols-3 gap-2">
             <Image
               className="max-sm:hidden rounded-md max-sm:w-full max-h-40 object-contain bg-white/20"
@@ -419,6 +421,18 @@ export function PaymentSheet({
                 {curreny} {amount}
               </span>
             </div>
+          </div>
+          <div className="grid gap-1 text-xs mb-2">
+            {courseOffer.map((e, i) => (
+              <span key={i} className="flex gap-1">
+                <Check className="text-primary h-4 w-3" />
+                <p>{e}</p>
+              </span>
+            ))}
+            <span className="flex gap-1">
+                <Plus className="text-primary h-4 w-3" />
+                <p>12 More Courses</p>
+              </span>
           </div>
           <div className="grid grid-cols-5 items-center gap-4">
             <Label htmlFor="name" className="text-left">

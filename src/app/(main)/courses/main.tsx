@@ -134,7 +134,7 @@ export default function Main({ courses }: { courses: CoursesType }) {
         url={bundle?.coverImage.url ?? ""}
         price={bundle?.pricingsCollection.items.find(
           (e) => e.countryCode === "IN"
-        ) ?? { amount: 2499, bigAmount: 25000, percentage: 90 }}
+        ) ?? { amount: 999, bigAmount: 25000, percentage: 90 }}
         slug={bundle?.slug ?? "complete-package-all-course-bundle"}
       />
       <Courses state={state} courses={courses} />
