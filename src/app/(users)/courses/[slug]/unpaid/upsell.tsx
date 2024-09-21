@@ -24,7 +24,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Check, Plug } from "lucide-react";
+import { Check, Plug, Plus } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 
@@ -132,7 +132,6 @@ function Offer({
     "Blockchain Mastery Course",
     "Data Analytics Course",
     "AI Mastery Course",
-    "+12 more courses",
   ];
   return (
     <div className={`${className} cursor-pointer flex flex-col pb-2 gap-2`}>
@@ -154,7 +153,7 @@ function Offer({
               </span>
             ))}
             <span className="flex items-center gap-2">
-              <Plug className="w-4 h-4 stroke-primary" />
+              <Plus className="w-4 h-4 stroke-primary" />
               12 More Courses
             </span>
           </div>
