@@ -59,9 +59,9 @@ export default function Main({ courses }: { courses: CoursesType }) {
       answer: (
         <p>
           You can access mentorship support by visiting the following link{" "}
-          <Link className="text-prime" href={"/community"}>
+          {/* <Link className="text-prime" href={"/community"}> */}
             Mentorship Support.
-          </Link>
+          {/* </Link> */}
         </p>
       ),
     },
@@ -84,9 +84,9 @@ export default function Main({ courses }: { courses: CoursesType }) {
           mentorship can help you apply the knowledge from the course to
           real-world projects and provide guidance tailored to your career
           goals. Visit{" "}
-          <Link className="text-prime" href={"/community"}>
+          {/* <Link className="text-prime" href={"/community"}> */}
             Mentorship Support.
-          </Link>
+          {/* </Link> */}
         </p>
       ),
     },

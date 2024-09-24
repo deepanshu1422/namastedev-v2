@@ -104,7 +104,7 @@ export const testimonials: TestimonialType[] = [
       </p>
     ),
     name: "Ishan",
-    link: "/community",
+    link: "/",
     linkedin: "https://www.linkedin.com/in/ishangupta305/",
     pos: "Full time job @ Microsoft, Google",
     profile: "/ishan-in.jpeg",
