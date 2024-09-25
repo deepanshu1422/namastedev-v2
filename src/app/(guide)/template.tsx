@@ -86,11 +86,11 @@ export default function Template({ children }: { children: React.ReactNode }) {
       href: "/testimonials",
       selected: path === "/testimonials",
     },
-    {
-      title: "Community",
-      icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/community",
-    },
+    // {
+    //   title: "Community",
+    //   icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
+    //   href: "/community",
+    // },
   ];
 
   return (

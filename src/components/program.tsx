@@ -42,7 +42,7 @@ export default function Program() {
         </p>
 
         <Link
-          href={"/community"}
+          href={"/"}
           className="bg-prime rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase"
         >
           <CreditCard className="h-10 w-10" />

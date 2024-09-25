@@ -51,21 +51,37 @@ export default function PixelEvents() {
       localStorage.setItem("ext-ID", crypto.randomUUID());
 
     // Track initial page view
-    // @ts-ignore
-    fbq(
-      "track",
-      "PageView",
-      {
-        fbp: document.cookie
-          .split("; ")
-          .find((row) => row.startsWith("_fbp="))
-          ?.split("=")[1],
-        external_id: localStorage.getItem("ext-ID"),
-      },
-      eventId
-    );
 
     (async () => {
+      console.log(document.cookie);
+
+      const ip = await (
+        await fetch("https://api.ipify.org/?format=json")
+      ).json();
+      // @ts-ignore
+      fbq(
+        "track",
+        "PageView",
+        {
+          fbp: document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("_fbp="))
+            ?.split("=")[1],
+          fbc: document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("_fbc="))
+            ?.split("=")[1],
+          fb_login_id: document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("_fb_login_id="))
+            ?.split("=")[1],
+          external_id: localStorage.getItem("ext-ID"),
+          client_user_agent: navigator.userAgent,
+          client_ip_address: ip.ip,
+        },
+        eventId
+      );
+
       await sendSeverEvent({
         event_name: "PageView",
         event_id: eventId,
@@ -74,7 +90,17 @@ export default function PixelEvents() {
             .split("; ")
             .find((row) => row.startsWith("_fbp="))
             ?.split("=")[1],
+          fbc: document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("_fbc="))
+            ?.split("=")[1],
+          fb_login_id: document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("_fb_login_id="))
+            ?.split("=")[1],
           external_id: localStorage.getItem("ext-ID"),
+          client_user_agent: navigator.userAgent,
+          client_ip_address: ip.ip,
         },
         custom_data: {},
       });
@@ -96,15 +122,27 @@ export const sendEvent = async (
   if (!localStorage.getItem("ext-ID"))
     localStorage.setItem("ext-ID", crypto.randomUUID());
 
+  const ip = await (await fetch("https://api.ipify.org/?format=json")).json();
+
   //@ts-ignore
   window.fbq(
     "track",
     name,
     {
       ...options,
+      client_user_agent: navigator.userAgent,
+      client_ip_address: ip.ip,
       fbp: document.cookie
         .split("; ")
         .find((row) => row.startsWith("_fbp="))
+        ?.split("=")[1],
+      fbc: document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("_fbc="))
+        ?.split("=")[1],
+      fb_login_id: document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("_fb_login_id="))
         ?.split("=")[1],
       external_id: localStorage.getItem("ext-ID"),
     },
@@ -121,9 +159,20 @@ export const sendEvent = async (
       em: [(options?.em as string) ?? null],
       ph: [(options?.ph as string) ?? null],
       fn: [(options?.fn as string) ?? null],
+
+      client_user_agent: navigator.userAgent,
+      client_ip_address: ip.ip,
       fbp: document.cookie
         .split("; ")
         .find((row) => row.startsWith("_fbp="))
+        ?.split("=")[1],
+      fbc: document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("_fbc="))
+        ?.split("=")[1],
+      fb_login_id: document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("_fb_login_id="))
         ?.split("=")[1],
       external_id: localStorage.getItem("ext-ID"),
     },

@@ -187,12 +187,12 @@ export default function MobileMenu() {
     //   href: "/blog",
     //   selected: false,
     // },
-    {
-      icon: <Earth className="h-5 w-5" />,
-      title: "Community",
-      href: "/community",
-      selected: false,
-    },
+    // {
+    //   icon: <Earth className="h-5 w-5" />,
+    //   title: "Community",
+    //   href: "/community",
+    //   selected: false,
+    // },
     // {
     //   icon: <Package className="h-5 w-5" />,
     //   title: "Products",
