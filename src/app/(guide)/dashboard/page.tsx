@@ -81,7 +81,7 @@ export function OldCourses() {
       <Notebook className="h-4 w-4" />
       <AlertTitle>Note</AlertTitle>
       <AlertDescription>
-        You can access all your previous bought courses <span className="text-primary underline">here.</span>
+        If you purchased courses before September 1st, please access them <span className="text-primary underline">here.</span>
       </AlertDescription>
     </Alert>
         </Link>
