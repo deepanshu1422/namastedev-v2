@@ -250,3 +250,25 @@ export async function exportPaymets(queryParams: {
 
   return { data };
 }
+
+export async function getUsers(queryParams: { email: string }) {
+  let user = await prisma.user.findMany({
+    where: {
+      email: {
+        contains: queryParams.email,
+      },
+    },
+    select: {
+      bundleId: true,
+      courseId: true,
+      email: true,
+      name: true,
+      _count: true,
+      image: true,
+      mentorshipId: true,
+    },
+    take: 10,
+  });
+
+  return user;
+}
