@@ -81,14 +81,4 @@ export function OldCourses() {
     </Alert>
         </Link>
   )
-      <Alert className="border-prime/80 bg-gradient-to-b from-prime/60 to-second/60 shadow-lg">
-        <Notebook className="h-4 w-4" />
-        <AlertTitle>Note</AlertTitle>
-        <AlertDescription>
-          You can access all your previous bought courses{" "}
-          <span className="text-primary underline">here.</span>
-        </AlertDescription>
-      </Alert>
-    </Link>
-  );
 }
