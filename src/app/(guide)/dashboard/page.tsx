@@ -48,12 +48,12 @@ export default async function Dashboard() {
     <div className="flex h-full relative overflow-hidden">
       <div className="flex-1 flex flex-col gap-4 px-6 py-5 lg:px-8 w-full max-w-6xl mx-auto overflow-hidden">
         <OldCourses />
-        <Suspense fallback={<CoursesFallback />}>
-          <Courses />
-        </Suspense>
         <div className="flex justify-between">
           <PurchaseTabs />
         </div>
+        <Suspense fallback={<CoursesFallback />}>
+          <Courses />
+        </Suspense>
       </div>
       <Notifications />
       <UserDialog />
