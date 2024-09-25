@@ -53,7 +53,7 @@ export default function PixelEvents() {
     // Track initial page view
 
     (async () => {
-      console.log(document.cookie);
+      // console.log(document.cookie);
 
       const ip = await (
         await fetch("https://api.ipify.org/?format=json")

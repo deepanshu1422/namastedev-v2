@@ -46,7 +46,6 @@ export default async function Dashboard() {
           <PurchaseTabs />
         </div>
         <Suspense fallback={<CoursesFallback />}>
-          <span className="md:text-lg font-bold">Other Courses</span>
           <Courses />
         </Suspense>
       </div>
