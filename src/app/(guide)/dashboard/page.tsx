@@ -11,6 +11,8 @@ import { Notebook, Terminal } from "lucide-react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { BASE_URL } from "@/util/constants";
 
 export const dynamic = "force-dynamic";
 
@@ -38,6 +40,11 @@ export const metadata: Metadata = {
 };
 
 export default async function Dashboard() {
+
+  const session = await auth()
+
+  if (!session?.user?.email) redirect(`/api/auth/signin?callbackUrl=${process.env.NEXTAUTH_URL}/dashboard`)
+
   return (
     <div className="flex h-full relative overflow-hidden">
       <div className="flex-1 flex flex-col gap-4 px-6 py-5 lg:px-8 w-full max-w-6xl mx-auto overflow-hidden">
