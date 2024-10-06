@@ -16,6 +16,23 @@ function TestimonyImages({ imageUrl, alt }: { imageUrl: string; alt: string }) {
 
 export default function Watch() {
   const images = [
+    // New images
+    {
+      src: "https://i.ibb.co/F3nFkMs/image.png",
+      alt: "New testimonial image 1",
+    },
+    {
+      src: "https://i.ibb.co/W6Fbr8n/image.png",
+      alt: "New testimonial image 2",
+    },
+    {
+      src: "https://i.ibb.co/xHjcb88/image.png",
+      alt: "New testimonial image 3",
+    },
+    {
+      src: "https://i.ibb.co/5WSN7F4/image.png",
+      alt: "New testimonial image 4",
+    },
     { src: "https://i.ibb.co/9HBX8KR/p5.webp", alt: "30dc courses" },
     { src: "https://i.ibb.co/0XfP66P/p4.webp", alt: "30dc mern stack course" },
     {

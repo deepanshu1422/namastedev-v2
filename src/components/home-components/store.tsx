@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { CourseTabMenu } from "./course-tabs";
 import { courses } from "@/util/constants";
+import { FaCheck } from 'react-icons/fa';
 
 export default function Store() {
   // const courses = [
@@ -60,7 +61,7 @@ export default function Store() {
   const bundle = [
     {
       title:
-        "All 17 Courses Bundle - DSA, Full stack, Blockchain, AI, Data analytics, Python, Interview and 15 more.",
+      "17 Course Mega Bundle: Full Stack, DSA, AI, Blockchain, Python & More - Lifetime Access",
       link: "bundle/complete-package-all-course-bundle",
       imgSrc:
         "https://images.ctfassets.net/3pv3o0yr6pgj/70h8KSfhjqdiIecfwf6fJY/c67a069d098b3c87e0774b1db9f6f920/17_courses.jpg",
@@ -197,22 +198,80 @@ export default function Store() {
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
-      <div className="flex w-full max-lg:flex-col lg:gap-6 max-lg:items-center max-lg:gap-10 max-lg:px-0 lg:max-w-[925px]">
+      
+      <div className="w-full max-w-[1200px] px-4">
+        <div className="bg-second rounded-lg shadow-lg overflow-hidden">
+          <div className="p-8 flex flex-col md:flex-row">
+            <div className="md:w-1/2 md:pr-8 mb-6 md:mb-0">
+              <img src={bundle[0].imgSrc} alt={bundle[0].title} className="w-full h-auto object-cover rounded-lg" />
+            </div>
+            <div className="md:w-1/2">
+              <h3 className="text-3xl font-bold text-white mb-4">{bundle[0].title}</h3>
+              <div className="space-y-6">
+                {/* <div>
+                  <h4 className="text-xl font-semibold mb-4">Bundle Features:</h4>
+                  <ul className="space-y-2">
+                    {[
+                      "Access to all 17 courses",
+                      "Lifetime validity",
+                      "Certificate of completion",
+                      "24/7 support",
+                      "Regular updates",
+                      "Hands-on projects",
+                      "Interview preparation",
+                      "Job assistance"
+                    ].map((feature, index) => (
+                      <li key={index} className="flex items-center">
+                        <FaCheck className="text-green-500 mr-2" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div> */}
+                <div>
+                  <h4 className="text-xl font-semibold mb-4">Included Courses:</h4>
+                  <ul className="space-y-2">
+                    {courses.slice(0, 5).map((course, index) => (
+                      <li key={index} className="flex items-start">
+                        <FaCheck className="text-green-500 mr-2 mt-1 flex-shrink-0" />
+                        <span className="text-sm">{course.title}</span>
+                      </li>
+                    ))}
+                    <li className="flex items-start">
+                      <FaCheck className="text-green-500 mr-2 mt-1 flex-shrink-0" />
+                      <span className="text-sm">And {courses.length - 5} more courses!</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="bg-second border-t border-white p-6 flex flex-col sm:flex-row justify-between items-center">
+            <div className="mb-4 sm:mb-0">
+              <span className="text-3xl font-bold text-white">₹999/-</span>
+              <span className="text-lg text-gray-300 ml-2">One-time payment</span>
+            </div>
+            <Link href={bundle[0].link}>
+              <button className="bg-prime text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300">
+                Get the Bundle
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className="flex w-full max-lg:flex-col lg:gap-6 max-lg:items-center max-lg:gap-10 max-lg:px-0 lg:max-w-[925px]">
         <CourseTabMenu
           data={[
-            {
-              title: "All Bundles",
-              courses: bundle,
-            },
             {
               title: "All Courses",
               courses: courses,
             },
           ]}
         />
-      </div>
+      </div> */}
 
-      <Link className="text-sm" href={"/courses"}>
+      <Link className="text-lg" href={"/courses"}>
         <button
           className={`font-jakarta flex items-center font-semibold gap-1 border-white border transition-all px-6 py-3 rounded-md`}
         >

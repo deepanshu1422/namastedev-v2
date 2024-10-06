@@ -81,8 +81,83 @@ export default function Public() {
       alt: "30dayscoding mern course review",
     },
   ];
+
+  const newTestimonials = [
+    { src: "https://i.ibb.co/k3jxFpP/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/Kj8xHfc/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/m8vF15J/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/7GxGnKJ/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/sRC3pCT/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/j5QK1TZ/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/pyxKFx8/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/zZvZbNQ/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/wyjXhXZ/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/ZMWt8t8/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/Btrd8WN/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/q0NnJDD/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/j32sf26/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/dcNjN4v/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/V293mvX/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/XVxhSHF/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/F3bsz7r/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/JRrXpjf/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/Pr25mhc/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/jy8Cf5J/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/64HDR6m/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/HnBG8gF/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/WkNqNH2/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/bvM9MCQ/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/ssxLrb2/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/rQJfyqd/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/87Rj4C6/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/ThMBTNS/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/8bV4Cgc/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/vZysV5V/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/Tk0znCb/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/Qc3r9WW/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/rsm0c9Y/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/86Xt91s/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/yWJWnqW/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/QYJXMy6/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/QYtWDtZ/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/nM5NYSr/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/X2Sw0n1/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/GPWV544/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/BPkJxz4/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/QPtbB6v/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/LSKPQH1/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/zFWz6ZM/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/7bvXTL6/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/djhNdKW/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/rySkHHp/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/m46NMz7/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/sqFF872/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/RN4x8rq/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/qFQh8Pn/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/HD3dL3s/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/HP1D11N/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/TmNTBq1/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/0fdHzy0/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/LR35zgt/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/xqzYBLC/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/PD4JvFq/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/h7xxQb3/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/rcwG4JS/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/4MBfjFn/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/0f0vKsq/image.png", alt: "Testimonial image" },
+    { src: "https://i.ibb.co/2ytcKzV/image.png", alt: "Testimonial image" },
+  ];
   return (
     <div className="grid grid-cols-1 gap-1 w-full max-w-[75rem] m-auto px-6 lg:px-10">
+      <h1 className="font-jakarta max-phone:text-[2rem] text-[2.5rem] font-extrabold text-center">
+       Become part of the next generation of developers
+      </h1>
+      <div className="relative grid md:grid-cols-2 xl:grid-cols-3 gap-6 justify-center md:p-3">
+        {newTestimonials.map(({ src, alt }, i) => (
+          <TestimonyImages key={i} imageUrl={src} alt={alt} />
+        ))}
+      </div>
+
       <h1 className="font-jakarta max-phone:text-[2rem] text-[2.5rem] font-extrabold text-center">
         More people are building in public with us
       </h1>
