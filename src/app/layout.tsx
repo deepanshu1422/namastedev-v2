@@ -28,12 +28,17 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-         <GoogleTagManager containerId="GTM-W4LNH7RV" />
-        <Script id="razorpay" src="https://checkout.razorpay.com/v1/checkout.js" async />
+        <GoogleAnalytics gaId={"G-6PWT2QJ1GP"} />
+        {/* <GoogleTagManager containerId="GTM-W4LNH7RV" /> */}
+        <Script
+          id="razorpay"
+          src="https://checkout.razorpay.com/v1/checkout.js"
+          async
+        />
         {/* <Script id="lemonSqueezy" src="https://app.lemonsqueezy.com/js/lemon.js" defer /> */}
         <Pixel />
         <AdSense />
-          <GoogleAds />
+        <GoogleAds />
       </head>
       <SessionProvider session={session}>
         <QueryProvider>
@@ -54,9 +59,6 @@ export default async function RootLayout({
       <Clarity />
 
       <PageSense />
-       <GoogleAnalytics gaId={"G-BCTWV4GBCY"} />
     </html>
   );
 }
-
-
