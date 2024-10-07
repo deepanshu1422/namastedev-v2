@@ -18,12 +18,14 @@ import { Reviews } from "../checkout";
 import { useSession } from "next-auth/react";
 import { sendEvent } from "@/services/fbpixel";
 import { sha256 } from "js-sha256";
+import { addToCart } from "@/services/gaEvents";
 
 export default function Hero({
   bundleId,
   title,
   image,
   rating,
+  addToCart,
   price,
   shortDescription,
   courseOffer,
@@ -32,6 +34,7 @@ export default function Hero({
 }: {
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
+  addToCart: () => void;
   bundleId: string;
   rating: number;
   title: string;
@@ -158,6 +161,7 @@ export default function Hero({
                             ph: sha256(data?.user?.phone ?? ""),
                             fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
                           });
+                          addToCart();
                         }}
                         size={"lg"}
                         className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
@@ -168,10 +172,15 @@ export default function Hero({
                     {bundleId !== "NEWALL30DC" && (
                       <Link
                         className="relative w-full"
-                        href={"/bundle/complete-package-all-course-bundle?sheet=true"}
+                        href={
+                          "/bundle/complete-package-all-course-bundle?sheet=true"
+                        }
                       >
                         <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
-                        <Button variant={"outline"} className="relative w-full font-jakarta flex items-center font-semibold gap-1 transition-all px-4 py-3 rounded-md text-white">
+                        <Button
+                          variant={"outline"}
+                          className="relative w-full font-jakarta flex items-center font-semibold gap-1 transition-all px-4 py-3 rounded-md text-white"
+                        >
                           Get All Bundles Courses 💰
                         </Button>
                       </Link>

@@ -6,10 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  Check,
-  Video,
-} from "lucide-react";
+import { Check, Video } from "lucide-react";
 import Checkout from "./checkout";
 import { Dispatch, SetStateAction, useState } from "react";
 import Image from "next/image";
@@ -29,8 +26,10 @@ export default function Details({
   learn,
   setOpen,
   setYtOpen,
+  addToCart,
   faqs,
 }: {
+  addToCart: () => void;
   bundleId: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
@@ -170,6 +169,7 @@ export default function Details({
       </div>
 
       <Checkout
+        addToCart={addToCart}
         // @ts-ignore
         bundleId={bundleId}
         setOpen={setOpen}

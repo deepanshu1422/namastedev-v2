@@ -43,8 +43,7 @@ import createBundlePayment from "../../../../../actions/createBundlePayment";
 import { useRouter } from "next/navigation";
 import { sendEvent } from "@/services/fbpixel";
 import { sha256 } from "js-sha256";
-
-
+import { beginCheckout, purchase } from "@/services/gaEvents";
 
 export function PaymentSheet({
   cover,
@@ -57,7 +56,7 @@ export function PaymentSheet({
   setOpenPay,
 }: {
   cover?: string;
-  title?: string;
+  title: string;
   amount: number;
   curreny?: string;
   bundleId: string;
@@ -65,7 +64,7 @@ export function PaymentSheet({
   setOpen: Dispatch<SetStateAction<boolean>>;
   setOpenPay: Dispatch<SetStateAction<boolean>>;
 }) {
-  const { data: session, update } = useSession();
+  const { data: session, status, update } = useSession();
 
   const router = useRouter();
 
@@ -163,6 +162,17 @@ export function PaymentSheet({
       let res;
 
       if (bundleId) {
+        beginCheckout({
+          title,
+          amount,
+          itemId: bundleId,
+          itemType: "bundle",
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          state: formData.state,
+          loggedIn: status === "authenticated",
+        });
+
         res = await createBundlePayment({
           bundleId: bundleId,
           email: session?.user?.email ?? formData.email.toLocaleLowerCase(),
@@ -208,6 +218,16 @@ export function PaymentSheet({
             ph: sha256(formData.phone),
             fn: sha256(formData.name.split(" ")[0]),
             ln: sha256(formData.name.split(" ")[1] ?? ""),
+          });
+          purchase({
+            title,
+            amount,
+            itemId: bundleId,
+            itemType: "bundle",
+            name: formData.name,
+            email: formData.email.toLocaleLowerCase(),
+            state: formData.state,
+            loggedIn: status === "authenticated",
           });
           setOpenPay(true);
           await update({ courses: true });
@@ -618,6 +638,7 @@ export function Floating({
   bundleId,
   open,
   setOpen,
+  addToCart,
 }: {
   price: {
     amount: number;
@@ -627,6 +648,7 @@ export function Floating({
   bundleId: string;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  addToCart: () => void;
 }) {
   let course = {
     price: price.amount,
@@ -649,9 +671,11 @@ export function Floating({
                   content_ids: [bundleId],
                   content_type: "bundle",
                   em: sha256(session?.user?.email ?? ""),
+                  // @ts-ignore
                   ph: sha256(session?.user?.phone ?? ""),
                   fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
                 });
+                addToCart();
               }}
               variant={"outline"}
               className={`font-semibold text-foreground/80 hover:text-foreground relative w-full p-6 text-sm gap-1`}

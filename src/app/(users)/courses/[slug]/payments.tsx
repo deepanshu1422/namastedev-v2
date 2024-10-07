@@ -43,6 +43,7 @@ import { useRouter } from "next/navigation";
 import triggerEvent from "@/services/tracking";
 import { sha256 } from "js-sha256";
 import { sendEvent } from "@/services/fbpixel";
+import { beginCheckout, purchase } from "@/services/gaEvents";
 
 export function PaymentSheet({
   cover,
@@ -63,7 +64,7 @@ export function PaymentSheet({
   setOpen: Dispatch<SetStateAction<boolean>>;
   setOpenPay: Dispatch<SetStateAction<boolean>>;
 }) {
-  const { data: session, update } = useSession();
+  const { data: session, status, update } = useSession();
 
   const router = useRouter();
 
@@ -125,7 +126,7 @@ export function PaymentSheet({
     "tripura",
     "uttar_pradesh",
     "uttarakhand",
-    "west_bengal"
+    "west_bengal",
   ];
 
   function validationError({ message }: { message: string }) {
@@ -151,6 +152,16 @@ export function PaymentSheet({
       let res;
 
       if (courseId) {
+        beginCheckout({
+          title,
+          amount,
+          itemId: courseId,
+          itemType: "course",
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          state: formData.state,
+          loggedIn: status === "authenticated",
+        });
         res = await createPayments({
           courseId: courseId,
           email: session?.user?.email ?? formData.email.toLocaleLowerCase(),
@@ -198,6 +209,16 @@ export function PaymentSheet({
             ph: sha256(formData.phone),
             fn: sha256(formData.name.split(" ")[0]),
             ln: sha256(formData.name.split(" ")[1] ?? ""),
+          });
+          purchase({
+            title,
+            amount,
+            itemId: courseId,
+            itemType: "course",
+            name: formData.name,
+            email: formData.email.toLocaleLowerCase(),
+            state: formData.state,
+            loggedIn: status === "authenticated",
           });
           setOpenPay(true);
           await update({ courses: true });
@@ -602,10 +623,12 @@ export function PaymentModal({
 }
 
 export function Floating({
+  addToCart,
   price,
   courseId,
   setOpen,
 }: {
+  addToCart: () => void;
   price: {
     amount: number;
     percentage: number;
@@ -640,6 +663,7 @@ export function Floating({
                   ph: sha256(session?.user?.phone ?? ""),
                   fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
                 });
+                addToCart();
               }}
               variant={"outline"}
               className={`font-semibold text-foreground/80 hover:text-foreground relative w-full p-6 text-sm gap-1`}

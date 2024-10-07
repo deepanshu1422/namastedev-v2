@@ -29,9 +29,11 @@ export default function Hero({
   courseOffer,
   setYtOpen,
   setOpen,
+  addToCart,
 }: {
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
+  addToCart: () => void;
   title: string;
   courseId: string;
   image: string;
@@ -140,9 +142,11 @@ export default function Hero({
                         content_ids: [courseId],
                         content_type: "course",
                         em: sha256(data?.user?.email ?? ""),
+                        // @ts-ignore
                         ph: sha256(data?.user?.phone ?? ""),
                         fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
                       });
+                      addToCart();
                     }}
                     size={"lg"}
                     className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"

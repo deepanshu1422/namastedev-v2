@@ -15,6 +15,7 @@ export default function Checkout({
   price,
   courseOffer,
   setOpen,
+  addToCart,
   setYtOpen,
 }: {
   bundleId: string;
@@ -28,6 +29,7 @@ export default function Checkout({
   courseOffer: string[];
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
+  addToCart: () => void;
 }) {
   const { data } = useSession();
   return (
@@ -87,6 +89,7 @@ export default function Checkout({
                       ph: sha256(data?.user?.phone ?? ""),
                       fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
                     });
+                    addToCart();
                   }}
                   size={"lg"}
                   variant={"outline"}
@@ -95,9 +98,7 @@ export default function Checkout({
                   Buy Now
                 </Button>
               </div>
-              <div className="flex justify-center">
-                {/* <div> OR </div> */}
-              </div>
+              <div className="flex justify-center">{/* <div> OR </div> */}</div>
               {bundleId !== "NEWALL30DC" && (
                 <Link
                   className="w-full"

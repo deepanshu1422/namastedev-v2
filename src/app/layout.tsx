@@ -13,9 +13,10 @@ import PageSense from "@/util/pagesense";
 
 import AdSense from "@/util/ads";
 import PixelEvents from "@/services/fbpixel";
-import GoogleAnalytics from "@/util/ga";
+// import GoogleAnalytics from "@/util/ga";
 import GoogleTagManager from "@/components/tracking/GoogletagManager";
 import GoogleAds from "@/util/googleAds";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export default async function RootLayout({
   children,

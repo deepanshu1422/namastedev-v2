@@ -34,10 +34,12 @@ export default function Details({
   learn,
   setOpen,
   setYtOpen,
+  addToCart,
   faqs,
 }: {
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
+  addToCart: () => void;
   courseOffer: string[];
   courseId: string;
   image: string;
@@ -107,7 +109,6 @@ export default function Details({
           </div>
         </section>
 
-        
         <Mentors />
 
         <section className="flex flex-col gap-4">
@@ -115,15 +116,13 @@ export default function Details({
             <h2 className="text-xl tab:text-2xl font-bold text-white">
               Course content - beginner to advanced
             </h2>
-            
+
             <span className="flex text-sm text-white/60 items-center">
               ({modulesCollection.total} Modules)
             </span>
           </div>
           <Chapters modulesCollection={modulesCollection} />
         </section>
-
-        
 
         {/* {!!projectsCollection.items.length && (
           <section className="flex flex-col gap-4">
@@ -216,6 +215,7 @@ export default function Details({
       </div>
 
       <Checkout
+        addToCart={addToCart}
         setOpen={setOpen}
         setYtOpen={setYtOpen}
         courseOffer={courseOffer}

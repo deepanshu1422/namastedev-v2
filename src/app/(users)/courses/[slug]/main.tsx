@@ -11,11 +11,14 @@ import {
   PaymentModal as BundleModal,
   PaymentSheet as BundlePaymentSheet,
 } from "../../bundle/[slug]/payments";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Hero from "./unpaid/hero";
 import { YTModal } from "@/app/(main)/testimonials/slider";
 import { Session } from "next-auth";
 import { UpsellModal } from "./unpaid/upsell";
+
+import { addToCart, viewItem } from "@/services/gaEvents";
+import { usePathname } from "next/navigation";
 
 type CourseItem = {
   session: Session | null;
@@ -135,6 +138,21 @@ export default function Main({
 
   const courseOffer = offers ?? [];
 
+  const pathName = usePathname();
+
+  useEffect(() => {
+    // @ts-ignore
+    if (!session?.user?.courseId?.includes(courseId)) {
+      viewItem({
+        title,
+        slug,
+        itemId: courseId,
+        itemType: "course",
+        value: pricingsCollection.items[0].amount,
+      });
+    }
+  }, [pathName]);
+
   // console.log(upsellBundle);
 
   function Paid() {
@@ -202,9 +220,20 @@ export default function Main({
   }
 
   function Unpaid() {
+    function addToCartEvent() {
+      addToCart({
+        itemId: courseId,
+        itemType: "course",
+        slug,
+        title,
+        value: pricingsCollection.items[0].amount,
+      });
+    }
+
     return (
       <main className="relative min-h-svh overflow-clip">
         <Hero
+          addToCart={addToCartEvent}
           courseId={courseId}
           rating={rating}
           title={title ?? "NULL"}
@@ -222,6 +251,7 @@ export default function Main({
           setYtOpen={setOpenYt}
         />
         <Detail
+          addToCart={addToCartEvent}
           courseId={courseId}
           projectsCollection={projectsCollection}
           modulesCollection={modulesCollection}
@@ -264,7 +294,7 @@ export default function Main({
           curreny={"INR"}
           setOpenPay={setOpenPay}
         />
-        <BundlePaymentSheet
+        {/* <BundlePaymentSheet
           open={openBundle}
           setOpen={setOpenBundle}
           bundleId={"ALL30DC"}
@@ -273,9 +303,10 @@ export default function Main({
               ?.amount ?? 0
           }
           setOpenPay={setOpenPayBunlde}
-        />
+        /> */}
         <YTModal open={openYt} setOpen={setOpenYt} url="nTAHWER3K-0" />
         <Floating
+          addToCart={addToCartEvent}
           price={
             pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
               amount: 0,
