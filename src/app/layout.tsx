@@ -15,6 +15,7 @@ import AdSense from "@/util/ads";
 import PixelEvents from "@/services/fbpixel";
 import GoogleAnalytics from "@/util/ga";
 import GoogleTagManager from "@/components/tracking/GoogletagManager";
+import GoogleAds from "@/util/googleAds";
 
 export default async function RootLayout({
   children,
@@ -31,6 +32,7 @@ export default async function RootLayout({
         {/* <Script id="lemonSqueezy" src="https://app.lemonsqueezy.com/js/lemon.js" defer /> */}
         <Pixel />
         <AdSense />
+          <GoogleAds />
       </head>
       <SessionProvider session={session}>
         <QueryProvider>
