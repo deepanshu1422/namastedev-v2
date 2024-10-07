@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),
   title: "Refund Policy | 30DaysCoding",
   description:
-    "This is a refund policy page for our development course for 30 days coding challenge. You can reachout to use anytime. Checkout on www.courses.30dayscoding.com",
+    "This is a refund policy page for our development course for 30 days coding challenge. You can reachout to use anytime",
 };
 
 export default function Home() {
@@ -18,17 +18,10 @@ export default function Home() {
         <p>Thank you for shopping at 30dayscoding.com</p>
         <ul className="list-inside list-disc">
           <li>Non-tangible irrevocable goods (&quot;Digital products&quot;)</li>
-          {/* <li>Phone: +1234567890</li> */}
           <li>
             We do not issue refunds for non-tangible irrevocable goods
             (&quot;digital products&quot;) once the order is confirmed and the
             product is sent.
-          </li>
-          <li>
-            For courses, a refund can only be issued if you send a valid reason
-            to projectsnight@gmail.com. Please go through the course once properly
-            before requesting a refund. We have literally everything in the course
-            from basic to advanced.
           </li>
         </ul>
         <h3 className="text-2xl font-bold text-second">
