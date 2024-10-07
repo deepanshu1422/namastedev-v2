@@ -25,21 +25,12 @@ export default function Home() {
             product is sent.
           </li>
           <li>
-            For courses, a refund can only be issued within 48 hours of
-            purchase; as everything is managed by graphy, we won&apos;t be able
-            to issue any refund after that.
+            For courses, a refund can only be issued if you send a valid reason
+            to projectsnight@gmail.com. Please go through the course once properly
+            before requesting a refund. We have literally everything in the course
+            from basic to advanced.
           </li>
         </ul>
-        <p>
-          Fill this form -{" "}
-          <Link
-            className="font-semibold text-prime"
-            target="_blank"
-            href={"https://forms.gle/bG9e9WoT55L6f1qp7 "}
-          >
-            https://forms.gle/bG9e9WoT55L6f1qp7
-          </Link>
-        </p>
         <h3 className="text-2xl font-bold text-second">
           POWERED BY NIGHT LIGHT PROJECTS
         </h3>
