@@ -29,6 +29,8 @@ export function viewItem({
 }) {
   sendEnhancedEvent("view_item", {
     ecommerce: {
+      currency: "INR",
+      value: value,
       items: [{
         item_name: title,
         item_id: itemId,
@@ -36,9 +38,11 @@ export function viewItem({
         item_category: itemType,
         item_variant: slug,
         item_type: 'course',
-      }],
-      value: value
-    }
+        quantity: 1
+      }]
+    },
+    currency: "INR",
+    value: value
   });
 }
 
@@ -57,6 +61,8 @@ export function addToCart({
 }) {
   sendEnhancedEvent("add_to_cart", {
     ecommerce: {
+      currency: "INR",
+      value: value,
       items: [{
         item_name: title,
         item_id: itemId,
@@ -64,9 +70,11 @@ export function addToCart({
         item_category: itemType,
         item_variant: slug,
         item_type: 'course',
-      }],
-      value: value
-    }
+        quantity: 1
+      }]
+    },
+    currency: "INR",
+    value: value
   });
 }
 
@@ -91,15 +99,19 @@ export function beginCheckout({
 }) {
   sendEnhancedEvent("begin_checkout", {
     ecommerce: {
+      currency: "INR",
+      value: amount,
       items: [{
         item_name: title,
         item_id: itemId,
         price: amount,
         item_category: itemType,
         item_type: 'course',
-      }],
-      value: amount
+        quantity: 1
+      }]
     },
+    currency: "INR",
+    value: amount,
     user_properties: {
       user_id: email,
       name,
@@ -140,8 +152,11 @@ export function purchase({
         price: amount,
         item_category: itemType,
         item_type: 'course',
+        quantity: 1
       }]
     },
+    currency: "INR",
+    value: amount,
     user_properties: {
       user_id: email,
       name,
