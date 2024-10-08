@@ -1,6 +1,19 @@
 "use client";
 
-import { sendGAEvent } from "@next/third-parties/google";
+// Since @next/third-parties/google is not found, let's use a more standard approach
+declare global {
+  interface Window {
+    gtag: (...args: any[]) => void;
+  }
+}
+
+function sendGAEvent(params: any) {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', params.event, params);
+  } else {
+    console.error('Google Analytics not initialized');
+  }
+}
 
 // Generate a unique session ID
 const sessionId = Date.now().toString(36) + Math.random().toString(36).substr(2);
@@ -11,6 +24,13 @@ function sendEnhancedEvent(eventName: string, eventParams: any) {
     event: eventName,
     session_id: sessionId,
     ...eventParams
+  });
+}
+
+export function pageView(url: string) {
+  sendEnhancedEvent('page_view', {
+    page_location: url,
+    page_title: document.title,
   });
 }
 
@@ -28,21 +48,16 @@ export function viewItem({
   value: number;
 }) {
   sendEnhancedEvent("view_item", {
-    ecommerce: {
-      currency: "INR",
-      value: value,
-      items: [{
-        item_name: title,
-        item_id: itemId,
-        price: value,
-        item_category: itemType,
-        item_variant: slug,
-        item_type: 'course',
-        quantity: 1
-      }]
-    },
     currency: "INR",
-    value: value
+    value: value,
+    items: [{
+      item_name: title,
+      item_id: itemId,
+      price: value,
+      item_category: itemType,
+      item_variant: slug,
+      quantity: 1
+    }]
   });
 }
 
@@ -60,21 +75,16 @@ export function addToCart({
   value: number;
 }) {
   sendEnhancedEvent("add_to_cart", {
-    ecommerce: {
-      currency: "INR",
-      value: value,
-      items: [{
-        item_name: title,
-        item_id: itemId,
-        price: value,
-        item_category: itemType,
-        item_variant: slug,
-        item_type: 'course',
-        quantity: 1
-      }]
-    },
     currency: "INR",
-    value: value
+    value: value,
+    items: [{
+      item_name: title,
+      item_id: itemId,
+      price: value,
+      item_category: itemType,
+      item_variant: slug,
+      quantity: 1
+    }]
   });
 }
 
@@ -98,20 +108,15 @@ export function beginCheckout({
   loggedIn: boolean;
 }) {
   sendEnhancedEvent("begin_checkout", {
-    ecommerce: {
-      currency: "INR",
-      value: amount,
-      items: [{
-        item_name: title,
-        item_id: itemId,
-        price: amount,
-        item_category: itemType,
-        item_type: 'course',
-        quantity: 1
-      }]
-    },
     currency: "INR",
     value: amount,
+    items: [{
+      item_name: title,
+      item_id: itemId,
+      price: amount,
+      item_category: itemType,
+      quantity: 1
+    }],
     user_properties: {
       user_id: email,
       name,
@@ -142,21 +147,16 @@ export function purchase({
   loggedIn: boolean;
 }) {
   sendEnhancedEvent("purchase", {
-    ecommerce: {
-      transaction_id: Date.now().toString(),
-      value: amount,
-      currency: "INR",
-      items: [{
-        item_name: title,
-        item_id: itemId,
-        price: amount,
-        item_category: itemType,
-        item_type: 'course',
-        quantity: 1
-      }]
-    },
-    currency: "INR",
+    transaction_id: Date.now().toString(),
     value: amount,
+    currency: "INR",
+    items: [{
+      item_name: title,
+      item_id: itemId,
+      price: amount,
+      item_category: itemType,
+      quantity: 1
+    }],
     user_properties: {
       user_id: email,
       name,
@@ -167,7 +167,6 @@ export function purchase({
   });
 }
 
-// New functions for course-specific events
 export function startCourse(courseId: string, courseName: string) {
   sendEnhancedEvent("start_course", {
     course_id: courseId,
