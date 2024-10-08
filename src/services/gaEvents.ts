@@ -19,12 +19,16 @@ function sendGAEvent(params: any) {
 const sessionId = Date.now().toString(36) + Math.random().toString(36).substr(2);
 
 function sendEnhancedEvent(eventName: string, eventParams: any) {
-  console.log(`Sending ${eventName} event`, eventParams);
-  sendGAEvent({
+  const payload = {
     event: eventName,
-    session_id: sessionId,
     ...eventParams
-  });
+  };
+  console.log(`Sending ${eventName} event`, JSON.stringify(payload, null, 2));
+  try {
+    sendGAEvent(payload);
+  } catch (error) {
+    console.error(`Error sending ${eventName} event:`, error);
+  }
 }
 
 export function pageView(url: string) {
@@ -147,18 +151,20 @@ export function purchase({
   loggedIn: boolean;
 }) {
   sendEnhancedEvent("purchase", {
-    transaction_id: Date.now().toString(),
-    value: amount,
     currency: "INR",
+    transaction_id: `T_${Date.now()}`,
+    value: amount,
+    tax: 0,
+    shipping: 0,
     items: [{
-      item_name: title,
       item_id: itemId,
-      price: amount,
+      item_name: title,
       item_category: itemType,
+      price: amount,
       quantity: 1
     }],
+    user_id: email,
     user_properties: {
-      user_id: email,
       name,
       email,
       state,
