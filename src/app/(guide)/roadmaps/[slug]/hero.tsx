@@ -50,12 +50,12 @@ export default function Hero({
               {description}
             </p>
             
-            {/* New content: Roadmap points */}
+            {/* Updated content: Roadmap points */}
             <ul className="mt-4 space-y-2 max-w-xl max-sm:text-sm text-muted-foreground">
               <li>• Set clear goals and milestones for your coding journey</li>
               <li>• Break down complex topics into manageable daily tasks</li>
               <li>• Combine theory with hands-on coding practice</li>
-              <li>• Stay consistent and code every day, even if it's just for 30 minutes</li>
+              <li>• Stay consistent and code every day, even if it&apos;s just for 30 minutes</li>
               <li>• Join a community or find a coding buddy for support and accountability</li>
               <li>• Review and reflect on your progress regularly</li>
             </ul>
