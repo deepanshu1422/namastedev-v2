@@ -148,7 +148,9 @@ export default function Main({
         slug,
         itemId: courseId,
         itemType: "course",
-        value: pricingsCollection.items[0].amount,
+        value:
+          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            ?.amount ?? 399,
       });
     }
   }, [pathName]);
@@ -226,7 +228,9 @@ export default function Main({
         itemType: "course",
         slug,
         title,
-        value: pricingsCollection.items[0].amount,
+        value:
+          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            ?.amount ?? 399,
       });
     }
 

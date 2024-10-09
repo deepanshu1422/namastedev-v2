@@ -89,7 +89,9 @@ export default function Main({
         slug,
         itemId: bundleId,
         itemType: "bundle",
-        value: pricingsCollection.items[0].amount,
+        value:
+          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            ?.amount ?? 999,
       });
   }, [pathName]);
 
@@ -194,7 +196,9 @@ export default function Main({
         itemType: "bundle",
         slug,
         title: bundleTitle,
-        value: pricingsCollection.items[0].amount,
+        value:
+          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            ?.amount ?? 999,
       });
     }
 
