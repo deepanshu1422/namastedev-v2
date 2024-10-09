@@ -2169,7 +2169,7 @@ export const guidesData = [
 
 export const roadmapsData = [
     {
-        "name": "Mern FullStack",
+        "name": "MERN FullStack roadmap",
         "description": "Dive into the world of React, a JavaScript library for building user interfaces, and learn to create interactive and dynamic web applications efficiently.",
         "slug": "mern-react",
         cover: "/courses/mern.jpg",
@@ -2213,7 +2213,7 @@ export const roadmapsData = [
         ]
     },
     {
-        "name": "Blockchain Development",
+        "name": "Blockchain Development roadmap",
         "description": "Explore the technology behind decentralized systems and cryptocurrencies, and learn to develop decentralized applications (DApps) and smart contracts.",
         "slug": "blockchain-development",
         url: "https://courses.30dayscoding.com/courses/Blockchain-developer-course-64eec408e4b002b964b568be",
@@ -2235,7 +2235,7 @@ export const roadmapsData = [
         ]
     },
     {
-        "name": "DSA",
+        "name": "Data Structures and Algorithms roadmap",
         "description": "Discover the techniques and tools used to analyze and interpret complex data sets, extract meaningful insights algoeithms, and make data-driven decisions.",
         "slug": "data-structures-algorithm",
         cover: "/courses/dsa.jpg",
@@ -2265,7 +2265,7 @@ export const roadmapsData = [
         ]
     },
     {
-        "name": "Next JS",
+        "name": "Next JS roadmap",
         "description": "Explore Next JS framework for building web applications, and learn to create scalable and efficient single-page applications (SPAs).",
         "slug": "next-js",
         cover: "/courses/nextjs.jpg",
@@ -2304,7 +2304,7 @@ export const roadmapsData = [
         ]
     },
     {
-        "name": "Prompt Engineer",
+        "name": "Prompt Engineer roadmap",
         "description": "Develop skills in leveraging prompt engineering techniques to enhance creativity, productivity, and problem-solving abilities in various domains.",
         "slug": "prompt-engineer",
         image: "/roadmaps/5.webp",

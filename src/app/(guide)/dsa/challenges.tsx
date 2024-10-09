@@ -92,7 +92,20 @@ export function ProblemTable({ problems, state, index, mode }: {
               if (data.includes(code)) return setData(data.filter((e) => e !== code))
               setData([...data, code])
             }} /></TableCell>
-            <TableCell><Link className="hover:text-primary hover:underline" target="_blank" href={"https://leetcode.com/problems/" + link}>{title}</Link></TableCell>
+            <TableCell>
+              {/* <Link className="hover:text-primary hover:underline" target="_blank" href={"https://leetcode.com/problems/" + link}>{title}</Link> */}
+            <span className="cursor-pointer text-primary/80 hover:text-primary" onClick={() => {
+                setOpen(true)
+                setCode({ question: title, languageArray: lang })
+                setUrl({
+                  code,
+                  language: "python",
+                  ext: "py"
+                })
+              }}>
+                {title}
+              </span>
+            </TableCell>
             <TableCell className="text-right"><Badge className={`uppercase rounded ${difficulty === "easy" && "bg-green-600/50"} ${difficulty === "medium" && "bg-yellow-600/50"} ${difficulty === "hard" && "bg-red-600/50"} `} variant={"secondary"}>{difficulty}</Badge></TableCell>
             <TableCell className="text-right w-[80px]">
               <span className="cursor-pointer text-primary/80 hover:text-primary" onClick={() => {

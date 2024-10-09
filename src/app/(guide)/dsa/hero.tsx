@@ -59,11 +59,11 @@ export default function Hero() {
 
       <div className="flex flex-col items-center gap-3 relative z-10 w-full max-w-6xl mx-auto text-center">
         <h1 className="font-bric text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-lime-300 to-green-800 max-w-2xl">
-          The only DSA tracking sheet you NEED!
+          Revise Data Structures and Algorithms
         </h1>
         <div className="flex flex-col gap-5 items-center justify-center w-full">
           <p className="max-w-xl md:max-w-3xl max-sm:text-sm sm:text-lg text-muted-foreground">
-            Explore our DSA code platform for mastering Data Structures and Algorithms. Access a wide range of DSA tutorials, practice problems, and coding challenges.
+            Practice, revise, and ace your interviews with our comprehensive DSA tracking sheet.
           </p>
           <div className="flex-1 w-full flex gap-2 justify-center relative">
             <div className="relative w-full md:w-2/3 max-w-lg h-fit">

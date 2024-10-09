@@ -19,12 +19,18 @@ const sessionId =
   Date.now().toString(36) + Math.random().toString(36).substr(2);
 
 function sendEnhancedEvent(eventName: string, eventParams: any) {
-  console.log(`Sending ${eventName} event`, eventParams);
-  sendGAEvent({
+  const payload = {
     event: eventName,
     session_id: sessionId,
     ...eventParams,
-  });
+  };
+
+  console.log(`Sending ${eventName} event`, JSON.stringify(payload, null, 2));
+  try {
+    sendGAEvent(payload);
+  } catch (error) {
+    console.error(`Error sending ${eventName} event:`, error);
+  }
 
   sendServerEvents(eventName, eventParams);
 }
@@ -188,8 +194,6 @@ export function purchase({
   loggedIn: boolean;
 }) {
   sendEnhancedEvent("purchase", {
-    transaction_id: Date.now().toString(),
-    value: amount,
     currency: "INR",
     // items: [
     //   {
