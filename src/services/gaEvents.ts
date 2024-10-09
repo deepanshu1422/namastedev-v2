@@ -26,11 +26,11 @@ function sendEnhancedEvent(eventName: string, eventParams: any) {
   };
 
   // console.log(`Sending ${eventName} event`, JSON.stringify(payload, null, 2));
-  try {
-    sendGAEvent(payload);
-  } catch (error) {
-    console.error(`Error sending ${eventName} event:`, error);
-  }
+  // try {
+  //   sendGAEvent(payload);
+  // } catch (error) {
+  //   console.error(`Error sending ${eventName} event:`, error);
+  // }
 
   sendServerEvents(eventName, eventParams);
 }
