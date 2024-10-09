@@ -75,22 +75,23 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
   const navBar = [
     {
-      title: "Courses",
+      title: "All courses",
       icon: <Network className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/courses",
       selected: path === "/projects",
     },
     {
-      title: "Testimonials",
+      title: "Roadmaps",
       icon: <Star className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/testimonials",
-      selected: path === "/testimonials",
+      href: "/roadmaps",
+      selected: path === "/roadmaps",
     },
-    // {
-    //   title: "Community",
-    //   icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
-    //   href: "/community",
-    // },
+    {
+      title: "DSA sheet",
+      icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/dsa",
+      selected: path === "/dsa",
+    },
   ];
 
   return (
@@ -110,7 +111,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
               <div className="flex flex-col gap-2 pb-2">
                 <span className="text-xs max-lg:hidden uppercase">
-                  Main Menu
+                  Access your account
                 </span>
                 {userMenu.map(({ href, icon, selected, title }, i) => (
                   <Link
@@ -125,7 +126,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                   </Link>
                 ))}
                 <span className="text-xs max-lg:hidden uppercase">
-                  Other Products
+                  Explore more
                 </span>
                 <span className="text-xs text-muted-foreground text-center lg:hidden">
                   ----
@@ -263,11 +264,11 @@ export default function Template({ children }: { children: React.ReactNode }) {
               </SheetContent>
             </Sheet>
             <div className="flex gap-3 ml-auto h-full py-2 max-md:w-full">
-              <Link className="w-full" href={"/instructions"}>
+              {/* <Link className="w-full" href={"/instructions"}>
                 <Button className="w-full text-white bg-prime/80 hover:bg-prime">
                   Aceess Community
                 </Button>
-              </Link>
+              </Link> */}
               {status === "loading" ? (
                 <button className="font-jakarta flex items-center font-semibold gap-2 bg-prime/20 transition-all p-2 rounded-md text-sm">
                   <svg
@@ -342,7 +343,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
               ) : (
                 <AuthDialog>
                   <button className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md text-sm">
-                    Login
+                    Dashboard
                   </button>
                 </AuthDialog>
               )}

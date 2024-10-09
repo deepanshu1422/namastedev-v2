@@ -18,12 +18,11 @@ export default function Hero({
         </p> */}
 
         <h1 className="font-bric text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-lime-300 to-green-800 w-fit">
-          Roadmaps
+          Explore Roadmaps!
         </h1>
         <div className="flex xl:items-end max-xl:flex-col gap-5 justify-start xl:justify-between w-full">
           <p className="max-w-xl max-sm:text-sm sm:text-lg text-muted-foreground">
-            Explore a multiple range of roadmaps especially designed by 30 days
-            of coding team enhance your skills and enrich your skill set.
+            Everything in the world of Web Development, AI, Blockchain, Data Science, and more.
           </p>
           <div className="flex-1 w-full flex xl:justify-end">
             <div className="relative w-full md:w-2/3 max-w-lg">
