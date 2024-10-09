@@ -25,7 +25,7 @@ function sendEnhancedEvent(eventName: string, eventParams: any) {
     ...eventParams,
   };
 
-  console.log(`Sending ${eventName} event`, JSON.stringify(payload, null, 2));
+  // console.log(`Sending ${eventName} event`, JSON.stringify(payload, null, 2));
   try {
     sendGAEvent(payload);
   } catch (error) {
@@ -46,7 +46,7 @@ function sendServerEvents(eventName: string, eventParams: any) {
   //     ...eventParams,
   //   },
   // });
-// 
+  //
   fetch(`https://jellyfish-app-mqgem.ondigitalocean.app/google-analytics-api`, {
     method: "POST",
     headers: {
@@ -54,13 +54,13 @@ function sendServerEvents(eventName: string, eventParams: any) {
       Authorization: `Bearer EAAMi1bkn4eQBOZCHsnmtxUGfi0sZCqRxIuuYf`,
     },
     body: JSON.stringify({
-        data: {
-          client_id: localStorage.getItem("ext-ID"),
-          event_name: eventName,
-          event_params: {
-            ...eventParams,
-          },
+      data: {
+        client_id: localStorage.getItem("ext-ID"),
+        event_name: eventName,
+        event_params: {
+          ...eventParams,
         },
+      },
     }),
   })
     .then((response) => response.json())
