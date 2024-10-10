@@ -124,7 +124,10 @@ export const navTitles: {
     title: "Courses",
     href: "/courses",
   },
-  { title: "Testimonials", href: "/testimonials" },
+  // { title: "Testimonials", href: "/testimonials" },
+  // { title: "Community", href: "/community" },
+  { title: "Roadmaps", href: "/roadmaps" },
+  { title: "DSA", href: "/dsa" },
   // {
   //   title: "Blog",
   //   href: "/blog",
