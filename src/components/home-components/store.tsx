@@ -189,16 +189,68 @@ export default function Store() {
     },
   ];
 
+  const community = {
+    title: "Join our Lifetime coding community",
+    imgSrc: "https://i.ibb.co/842S9FM/comm.jpg",
+    link: "/community",
+    benefits: [
+      "24/7 chat access for any help",
+      "Live classes and coding sessions",
+      "Regular QnA sessions with mentors",
+      "Access to all 17 courses lifetime",
+      "Lifetime validity until you land a job",
+      "Regular Hackathons challenges",
+    ],
+    price: "₹9,999/-"
+  };
+
   return (
     <div className="grid place-items-center gap-8 max-w-[90rem] m-auto py-8">
       <span className="flex items-center justify-center gap-4 relative lg:pb-4">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h2 className="font-jakarta text-pretty text-[2rem] font-extrabold text-center">
-          Pocket Friendly Courses with Certificates!
+          Access our coding community and courses!!!
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
       
+      <div className="w-full max-w-[1200px] px-4">
+        <div className="bg-second rounded-lg shadow-lg overflow-hidden">
+          <div className="p-8 flex flex-col md:flex-row">
+            <div className="md:w-1/2 md:pr-8 mb-6 md:mb-0">
+              <img src={community.imgSrc} alt={community.title} className="w-full h-auto object-cover rounded-lg" />
+            </div>
+            <div className="md:w-1/2">
+              <h3 className="text-3xl font-bold text-white mb-4">{community.title}</h3>
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-xl font-semibold mb-4">Community Benefits:</h4>
+                  <ul className="space-y-2">
+                    {community.benefits.map((benefit, index) => (
+                      <li key={index} className="flex items-center">
+                        <FaCheck className="text-green-500 mr-2" />
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="bg-second border-t border-white p-6 flex flex-col sm:flex-row justify-between items-center">
+            <div className="mb-4 sm:mb-0">
+              <span className="text-3xl font-bold text-white">{community.price}</span>
+              <span className="text-lg text-gray-300 ml-2">One-time payment</span>
+            </div>
+            <Link href={community.link}>
+              <button className="bg-prime text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300">
+                Join the Community
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
       <div className="w-full max-w-[1200px] px-4">
         <div className="bg-second rounded-lg shadow-lg overflow-hidden">
           <div className="p-8 flex flex-col md:flex-row">
@@ -259,6 +311,7 @@ export default function Store() {
           </div>
         </div>
       </div>
+      
 
       {/* <div className="flex w-full max-lg:flex-col lg:gap-6 max-lg:items-center max-lg:gap-10 max-lg:px-0 lg:max-w-[925px]">
         <CourseTabMenu

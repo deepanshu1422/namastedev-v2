@@ -91,14 +91,14 @@ export default function Hero({
               <School className="max-lg:hidden w-4 h-4" />
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>
-            {/* <Link
+            <Link
               href={"/community"}
               className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
             >
-              <span className="text-sm">1:1 Mentorship</span>
+              <span className="text-sm">Community</span>
               <GraduationCap className="max-lg:hidden w-4 h-4" />
               <ArrowRight className="lg:hidden w-4 h-4" />
-            </Link> */}
+            </Link>
             <Link
               href={"/testimonials"}
               className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}

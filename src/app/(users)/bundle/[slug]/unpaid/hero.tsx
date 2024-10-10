@@ -113,6 +113,8 @@ export default function Hero({
                 21,380+ Students
               </div>
 
+              
+
               {/* <div className="text-white/70 max-tab:text-sm">
                 Author:{" "}
                 <span className="text-white font-semibold px-1 underline">
@@ -201,6 +203,16 @@ export default function Hero({
                       {e}
                     </span>
                   ))}
+                </div>
+
+                {/* New discount offers section */}
+                <div className="mt-4 bg-gradient-to-r from-yellow-400 to-orange-500 p-4 rounded-lg">
+                  <h3 className="text-lg font-bold mb-2">Limited Time Offers:</h3>
+                  <ol className="list-decimal list-inside space-y-2">
+                    <li>85% discount - Valid only for today!</li>
+                    <li>Buy one, get second course 50% off</li>
+                    <li>Early bird special: Extra 10% off for first 100 buyers</li>
+                  </ol>
                 </div>
               </div>
             </div>
