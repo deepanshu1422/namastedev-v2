@@ -206,10 +206,24 @@ function ProfileCard({
   );
 }
 
+function NewProfileCard({name,
+  designation,
+  image,}: {name: string,
+    designation: string,
+    image: string,}){
+  return <div className="flex flex-col gap-5 w-full h-full text-center justify-start items-center">
+    <Image width={150} height={150} className="rounded-full" src={image} alt={`${name}'s Profile`} />
+    <div className="flex flex-col gap-1">
+      <span className="font-semibold">{name}</span>
+      <p className="text-muted-foreground text-xs">{designation}</p>
+    </div>
+  </div>
+}
+
 export default function Mentors() {
   let mentors: Profile[] = [
     {
-      name: "Aryan Singh",
+      name: "Aryan",
       designation: "Software Engineer @ Google",
       image: "https://i.ibb.co/YRBGz7v/instructor.jpg",
       description:
@@ -306,7 +320,7 @@ export default function Mentors() {
       cover: "cover",
     },
     {
-      name: "Deepanshu Udhwani",
+      name: "Deepanshu",
       image: "/instructor2.jpg",
       designation: "Software Engineer @ Alibaba Cloud & MakeMyTrip",
       social: {
@@ -378,7 +392,7 @@ export default function Mentors() {
       cover: "cover",
     },
     {
-      name: "Ashok Sharma",
+      name: "Ashok",
       image: "/as-mentor.jpeg",
       designation: "Senior Data Analyst & Scientist",
       social: {
@@ -462,7 +476,7 @@ export default function Mentors() {
         </p>
       </div>
 
-      <div className="w-full grid sm:grid-cols-2 gap-3">
+      <div className="w-full grid grid-cols-3 gap-3">
         {mentors.map(
           (
             {
@@ -479,19 +493,21 @@ export default function Mentors() {
             },
             i
           ) => (
-            <ProfileCard
-              key={i}
-              name={name}
-              image={image}
-              description={description}
-              designation={designation}
-              company={company}
-              social={social}
-              career={career}
-              exp={exp}
-              skills={skills}
-              cover={cover}
-            />
+            // <ProfileCard
+            //   key={i}
+            //   name={name}
+            //   image={image}
+            //   description={description}
+            //   designation={designation}
+            //   company={company}
+            //   social={social}
+            //   career={career}
+            //   exp={exp}
+            //   skills={skills}
+            //   cover={cover}
+            // />
+            
+            <NewProfileCard key={i} designation={designation} image={image} name={name} />
           )
         )}
       </div>
