@@ -4,6 +4,8 @@ import { Check, CreditCard, Play, Star,
   CheckCheck } from "lucide-react";
 import React, { Dispatch, SetStateAction, Suspense } from "react";
 import Btn from "./btn";
+import Link from "next/link";
+import { ChevronDownCircle } from "lucide-react";
 
 export const benefits = [
   "25+ courses, 150+ hours of content, 40+ guides",
@@ -68,14 +70,15 @@ export default function Lifetime({
         doesn&apos;t meet your expectations, simply respond to the email receipt
         within 30 days to receive a full refund. No questions asked.
       </p> */}
-
-      <button
-        onClick={() => setOpen(true)}
-        className="bg-prime rounded-full px-4 text-center py-3 max-w-3xl mx-auto w-full text-3xl sm:text-4xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase"
-      >
-        <CreditCard className="h-10 w-10" />
-        Join for ₹9,999
-      </button>
+      
+      <div className="px-6 lg:px-10">
+        <Link href={"#apply"} className="mx-auto">
+          <button className="mt-10 border-4 border-prime rounded-full px-4 text-center py-2 max-w-3xl mx-auto w-full text-2xl sm:text-2xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase">
+            <ChevronDownCircle className="h-8 w-8" />
+            Fill the form
+          </button>
+        </Link>
+      </div>
 
     </div>
   );

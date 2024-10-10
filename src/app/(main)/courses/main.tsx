@@ -19,7 +19,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import Mentors from "../community/mentors";
+import Mentors from "../mentorship/mentors";
 import Success from "@/components/mentorship-comp/success";
 import VideoSlider from "../testimonials/video-slider";
 

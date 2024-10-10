@@ -1,4 +1,4 @@
-import Btn from "@/app/(main)/community/btn";
+import Btn from "@/app/(main)/mentorship/btn";
 import Button from "@/components/home-components/button";
 import { ArrowRight, GraduationCap, School, Star } from "lucide-react";
 import Image from "next/image";

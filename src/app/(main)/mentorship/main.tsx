@@ -16,6 +16,8 @@ import Script from "next/script";
 import { motion } from "framer-motion"; // Ensure you have framer-motion installed
 import Events from "./events";
 import Carousel from "./carousel";
+import { CreditCard } from "lucide-react";
+import CourseGrid from "./courses";
 // import Card from "@/components/Card"; // Adjust the import based on your project structure
 // import CardContent from "@/components/CardContent"; // Adjust the import based on your project structure
 
@@ -114,31 +116,143 @@ export default function Main({
       <Carousel />
       <Mentors />
       
-      <div className="flex flex-col md:flex-row justify-center mt-10 gap-4 mx-5"> {/* Added gap for spacing */}
-        <div className="border border-green-500 rounded-lg p-6 w-full md:w-1/2 bg-transparent shadow-md">
-          <h2 className="font-bold text-4xl mb-4 text-center">Lifetime access to community</h2> {/* Increased font size */}
-          <ul className="list-disc pl-5 text-sm">
-            <li className="mb-2">
-              <span className="font-semibold">✅ 24/7 chat access:</span> Get help anytime you need it.
-            </li>
-            <li className="mb-2">
-              <span className="font-semibold">✅ Live classes and coding sessions:</span> Participate in interactive learning experiences.
-            </li>
-            <li className="mb-2">
-              <span className="font-semibold">✅ Regular Q&A sessions with mentors:</span> Get your questions answered by experienced professionals.
-            </li>
-            <li className="mb-2">
-              <span className="font-semibold">✅ Access to all 17 courses:</span> Lifetime access to a comprehensive curriculum.
-            </li>
-            <li className="mb-2">
-              <span className="font-semibold">✅ Lifetime validity:</span> Your membership remains active until you land a job.
-            </li>
-            <li className="mb-2">
-              <span className="font-semibold">✅ Regular Hackathons and challenges:</span> Put your skills to the test and grow through practical experience.
-            </li>
-          </ul>
-        </div>
+      <CourseGrid setOpen={setOpen} />
+
+      <div className="items-center max-w-3xl mx-auto" id="apply">
+      <h2
+            id="apply"
+            className="font-bold text-5xl mb-4 text-center text-balance"
+          >
+            We will help you land the perfect{" "}
+            <span className="text-green-500 underline decoration-white decoration-4">
+              DREAM JOB
+            </span>
+          </h2>
+          <button
+            onClick={() => {
+              setOpen(true);
+            }}
+            className="bg-prime my-3 rounded-full mt-5 px-4 text-center py-2 max-w-3xl mx-auto w-full text-2xl sm:text-3xl font-extrabold flex items-center gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase"
+          >
+            <CreditCard className="h-10 w-10" />
+            Apply now
+          </button>
+        
+      <h3 className="font-bold text-xl my-4">
+        You get EVERYTHING for lifetime access at a discounted price of <span className="text-green-500 underline decoration-4 decoration-red-500"> ₹9,999</span></h3>
+        <table className="min-w-full border-collapse border border-gray-300">
+            <tbody>
+              <tr>
+                <td className="border border-gray-300 p-2">
+                  2 Group Q&A calls/week with Aryan, Ashok, Deepanshu
+                </td>
+                <td className="line-through border border-gray-300 p-2 underline text-green-500">
+                  ₹14,999
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">
+                  Complete USA & Canada Jobs Course
+                </td>
+                <td className="line-through border border-gray-300 p-2 underline text-green-500">
+                  ₹13,999
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">
+                  15+ Technical Interview Courses - MERN, DSA, etc
+                </td>
+                <td className="line-through border border-gray-300 p-2 underline text-green-500">
+                  ₹14,999
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">
+                  Personalized Resume Review Sessions
+                </td>
+                <td className="line-through border border-gray-300 p-2 underline text-green-500">
+                  ₹11,999
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">
+                  Complete AI tools, workflows, automation courses
+                </td>
+                <td className="line-through border border-gray-300 p-2 underline text-green-500">
+                  ₹12,999
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">
+                  Resume, Cold Email Guides, and Review
+                </td>
+                <td className="line-through border border-gray-300 p-2 underline text-green-500">
+                  ₹10,999
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">
+                  Interview Prep + Mock Interview prep
+                </td>
+                <td className="line-through border border-gray-300 p-2 underline text-green-500">
+                  ₹13,999
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">
+                  Salary Negotiation Training
+                </td>
+                <td className="line-through border border-gray-300 p-2 underline text-green-500">
+                  ₹11,999
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">
+                  Mindset Mastery and Resilience Training
+                </td>
+                <td className="line-through border border-gray-300 p-2 underline text-green-500">
+                  ₹10,999
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">
+                  Thriving Community + Networking Opportunities
+                </td>
+                <td className="line-through border border-gray-300 p-2 underline text-green-500">
+                  ₹9,999
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 p-2">
+                  Android and iOS Mobile Access to Community Resources
+                </td>
+                <td className="line-through border border-gray-300 p-2 underline text-green-500">
+                  ₹9,999
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          {/* <p className="text-center my-4 text-2xl">
+            By joining today, you lock in a discounted price of{" "}
+            <span className="font-bold text-xl text-red-500">$749</span> (lifetime)
+          </p> */}
+          <h3 className="font-bold text-xl my-4">You get EVERYTHING for lifetime access at a discounted price of <span className="text-green-500 underline decoration-4 decoration-red-500">  ₹9,999</span></h3>
+
+          {/* <InfoForm /> */}
+
+          <button
+            onClick={() => {
+              setOpen(true);
+            }}
+            className="bg-prime my-3 rounded-full mt-5 px-4 text-center py-2 max-w-3xl mx-auto w-full text-2xl sm:text-3xl font-extrabold flex items-center gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase"
+          >
+            <CreditCard className="h-10 w-10" />
+            Apply now
+          </button>
+
       </div>
+
 
       <Success />
       <Events />
@@ -200,16 +314,14 @@ export default function Main({
       <Features />
       <Faqs faq={faq} />
       {/* <Interakt /> */}
-      <Floating setOpen={setOpen} />
+      {/* <Floating setOpen={setOpen} /> */}
       <PaymentSheet
-        amount={8000}
+        openPay={openModal}
         courseId="mentor"
-        cover="./mentorship.jpg"
-        curreny="USD"
         open={open}
         setOpen={setOpen}
         setOpenPay={setOpenModal}
-        title="Join 30DC Community Lifetime Access"
+        title="1:1 Mentorship Lifetime Access"
       />
       <PaymentModal payModal={openModal} setOpenPay={setOpenModal} />
       {/* <Highlights /> */}

@@ -3,8 +3,8 @@ import { Check, CreditCard, LucideCheckCircle } from "lucide-react";
 import Button from "./home-components/button";
 import { Button as Btns } from "./ui/button";
 import Link from "next/link";
-import Btn from "@/app/(main)/community/btn";
-import { benefits } from "@/app/(main)/community/lifetime";
+import Btn from "@/app/(main)/mentorship/btn";
+import { benefits } from "@/app/(main)/mentorship/lifetime";
 
 export default function Program() {
   return (

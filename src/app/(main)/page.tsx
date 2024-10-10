@@ -4,7 +4,7 @@ import Store from "@/components/home-components/store";
 import Faqs from "@/components/mentorship-comp/faq";
 import Script from "next/script";
 import Success from "@/components/mentorship-comp/success";
-import Mentors from "./community/mentors";
+import Mentors from "./mentorship/mentors";
 import VideoSlider from "./testimonials/video-slider";
 
 export const dynamic = "force-dynamic";

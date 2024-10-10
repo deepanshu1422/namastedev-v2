@@ -4,7 +4,7 @@ import { Check, CreditCard, Play, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { Suspense } from "react";
-import Btn from "../community/btn";
+import Btn from "../mentorship/btn";
 
 export default function Lifetime() {
   return (
