@@ -366,10 +366,12 @@ export default function ResumeBuilder() {
   return (
     <div className="flex flex-col h-screen">
 
-      <div className="flex flex-1 overflow-hidden">
-        <div className="w-1/2 p-4 overflow-y-auto">
+<div className="flex flex-1 overflow-hidden">
+  <div className="w-full md:w-1/2 p-4 overflow-y-auto">
           <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold mb-4">Build the perfect resume</h2>
+              
+              <div>
               <Button 
                 onClick={handleDownloadPDF} 
                 className="mr-4 border-white border-2 text-white bg-second"
@@ -377,8 +379,14 @@ export default function ResumeBuilder() {
                 {isGeneratingPDF ? 'Generating PDF...' : 'Download PDF'}
                 <Download className="ml-2 h-4 w-4" />
               </Button>
+              </div>
           </div>
-          <p className="mb-4">
+          
+          <p className="md:hidden text-center text-red-500 font-bold mb-4 underline text-xl">
+            Open on your laptop to build your resume
+          </p>
+
+          <p className="mb-4 mt-2 border-2 border-gray-300 p-4">
             Check out the  
             <a 
               href="https://bit.ly/30dc-resume" 
@@ -395,7 +403,13 @@ export default function ResumeBuilder() {
               className="text-green-500 hover:text-green-700 underline ml-1"
             >
             upskilling courses
-            </a>
+            </a>. Any bugs? Give <a 
+                href="https://forms.gle/X5bgfQbhcAPNaZaB8"
+                target="_blank"
+                rel="noopener noreferrer"
+              className="text-green-500 hover:text-green-700 underline ml-1"
+              > Give feedback
+              </a>
           </p>
           
           <div className="space-y-4">
@@ -587,7 +601,7 @@ export default function ResumeBuilder() {
           </div>
         </div>
         
-        <div className="w-1/2 p-4 overflow-y-auto">
+        <div className="w-1/2 p-4 overflow-y-auto hidden md:block">
           <div className=" p-6 shadow-lg border border-gray-300" style={{ fontFamily: 'Times New Roman, serif' }}>
             <h1 className="text-3xl font-bold text-center mb-2">{resume.name}</h1>
             <p className="text-center mb-4">{resume.contact}</p>
