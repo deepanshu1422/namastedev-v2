@@ -162,7 +162,7 @@ const generatePDF = (resumeData: Resume): string => {
       const skills = [
         { title: 'Languages', content: resumeData.skills.languages },
         { title: 'Frameworks', content: resumeData.skills.frameworks },
-        { title: 'Developer Tools', content: resumeData.skills.developerTools },
+        { title: 'Dev Tools', content: resumeData.skills.developerTools },
         { title: 'Libraries', content: resumeData.skills.libraries }
       ];
       skills.forEach(skill => {
@@ -368,8 +368,8 @@ export default function ResumeBuilder() {
 
       <div className="flex flex-1 overflow-hidden">
         <div className="w-1/2 p-4 overflow-y-auto">
-          <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold mb-4">Resume Builder</h2>
+          <div className="flex justify-between items-center">
+          <h2 className="text-2xl font-bold mb-4">Build the perfect resume</h2>
               <Button 
                 onClick={handleDownloadPDF} 
                 className="mr-4 border-white border-2 text-white bg-second"
@@ -378,6 +378,25 @@ export default function ResumeBuilder() {
                 <Download className="ml-2 h-4 w-4" />
               </Button>
           </div>
+          <p className="mb-4">
+            Check out the  
+            <a 
+              href="https://bit.ly/30dc-resume" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-green-500 hover:text-green-700 underline ml-1"
+            >
+              resume guide
+            </a> 
+           <span> and our </span><a 
+              href="https://30dayscoding.com/bundle/complete-package-all-course-bundle" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-green-500 hover:text-green-700 underline ml-1"
+            >
+            upskilling courses
+            </a>
+          </p>
           
           <div className="space-y-4">
             <div>
