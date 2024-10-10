@@ -14,6 +14,8 @@ import { PaymentModal, PaymentSheet } from "./payment";
 import { useEffect, useState } from "react";
 import Script from "next/script";
 import { motion } from "framer-motion"; // Ensure you have framer-motion installed
+import Events from "./events";
+import Carousel from "./carousel";
 // import Card from "@/components/Card"; // Adjust the import based on your project structure
 // import CardContent from "@/components/CardContent"; // Adjust the import based on your project structure
 
@@ -109,11 +111,39 @@ export default function Main({
         }}
       /> */}
       <Lifetime setOpen={setOpen} />
+      <Carousel />
       <Mentors />
-      <Success />
       
+      <div className="flex flex-col md:flex-row justify-center mt-10 gap-4 mx-5"> {/* Added gap for spacing */}
+        <div className="border border-green-500 rounded-lg p-6 w-full md:w-1/2 bg-transparent shadow-md">
+          <h2 className="font-bold text-4xl mb-4 text-center">Lifetime access to community</h2> {/* Increased font size */}
+          <ul className="list-disc pl-5 text-sm">
+            <li className="mb-2">
+              <span className="font-semibold">✅ 24/7 chat access:</span> Get help anytime you need it.
+            </li>
+            <li className="mb-2">
+              <span className="font-semibold">✅ Live classes and coding sessions:</span> Participate in interactive learning experiences.
+            </li>
+            <li className="mb-2">
+              <span className="font-semibold">✅ Regular Q&A sessions with mentors:</span> Get your questions answered by experienced professionals.
+            </li>
+            <li className="mb-2">
+              <span className="font-semibold">✅ Access to all 17 courses:</span> Lifetime access to a comprehensive curriculum.
+            </li>
+            <li className="mb-2">
+              <span className="font-semibold">✅ Lifetime validity:</span> Your membership remains active until you land a job.
+            </li>
+            <li className="mb-2">
+              <span className="font-semibold">✅ Regular Hackathons and challenges:</span> Put your skills to the test and grow through practical experience.
+            </li>
+          </ul>
+        </div>
+      </div>
 
-      <div className="w-full">
+      <Success />
+      <Events />
+
+      {/* <div className="w-full">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-4">Step by step Path to Career Success</h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
@@ -145,10 +175,7 @@ export default function Main({
                       ))}
                     </div>
                     
-                    {/* <div className="text-sm text-gray-300 flex items-center">
-                      <i className="fas fa-clock mr-2 text-red-500"></i>
-                      Estimated time: <span className="font-semibold ml-1">{step.estimatedTime}</span>
-                    </div> */}
+                    
                   </div>
                 </div>
                 {index < steps.length - 1 && (
@@ -158,7 +185,7 @@ export default function Main({
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
 
       
       

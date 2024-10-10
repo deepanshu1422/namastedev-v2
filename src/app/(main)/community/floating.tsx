@@ -9,7 +9,7 @@ export default function Floating({setOpen}:{setOpen: Dispatch<SetStateAction<boo
       <div className="flex max-lg:flex-col justify-between items-center gap-2 p-4 py-2 lg:max-w-[80rem] mx-auto">
         <section className="max-lg:hidden flex flex-col gap-1">
           <span className={`font-jakarta text-lg`}>
-            <span className="lg:text-2xl">Lifetime Mentorship</span>
+            <span className="lg:text-2xl">Lifetime Community membership</span>
           </span>
 
           <div className="flex gap-2 text-sm font-semibold">
@@ -20,7 +20,7 @@ export default function Floating({setOpen}:{setOpen: Dispatch<SetStateAction<boo
         <p className="lg:hidden flex gap-1 items-center">
           <GraduationCap className="h-5 w-5" />
           <span className="line-clamp-1">
-          Lifetime Mentorship One Time Payment
+          Lifetime community membership
           </span>
         </p>
 
@@ -40,7 +40,7 @@ export default function Floating({setOpen}:{setOpen: Dispatch<SetStateAction<boo
         </Link> */}
 
         <div onClick={() => setOpen(true)} className="max-lg:w-full">
-          <AnimatedButton>Buy Now</AnimatedButton>
+          <AnimatedButton>Join for ₹9,999</AnimatedButton>
         </div>
         {/* <div
           className="razorpay-embed-btn"
