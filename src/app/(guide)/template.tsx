@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { GraduationCap, HomeIcon, Menu, Network, Star } from "lucide-react";
+import { FileText, GraduationCap, HomeIcon, Menu, Network, Star } from "lucide-react";
 
 import {
   AlertDialog,
@@ -79,6 +79,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
       icon: <Network className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/courses",
       selected: path === "/projects",
+    },
+    {
+      title: "Resume",
+      icon: <FileText className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/resume",
+      selected: path === "/resume",
     },
     {
       title: "Roadmaps",
