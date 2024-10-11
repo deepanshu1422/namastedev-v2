@@ -95,14 +95,18 @@ export function viewItem({
     event_id: Date.now().toString(),
     currency: "INR",
     value: value,
-    // items: [{
-    item_name: title,
-    item_id: itemId,
-    price: value,
-    item_category: itemType,
-    item_variant: slug,
     quantity: 1,
-    // }]
+    item_id: itemId,
+    items: [
+      {
+        item_id: itemId,
+        item_name: title,
+        price: value,
+        item_category: itemType,
+        item_variant: slug,
+        quantity: 1,
+      },
+    ],
   });
 }
 
@@ -123,14 +127,18 @@ export function addToCart({
     event_id: Date.now().toString(),
     currency: "INR",
     value: value,
-    // items: [{
-    item_name: title,
-    item_id: itemId,
-    price: value,
-    item_category: itemType,
-    item_variant: slug,
     quantity: 1,
-    // }]
+    item_id: itemId,
+    items: [
+      {
+        item_id: itemId,
+        item_name: title,
+        price: value,
+        item_category: itemType,
+        item_variant: slug,
+        quantity: 1,
+      },
+    ],
   });
 }
 
@@ -157,20 +165,25 @@ export function beginCheckout({
     event_id: Date.now().toString(),
     currency: "INR",
     value: amount,
-    // items: [{
-    item_name: title,
     item_id: itemId,
-    price: amount,
-    item_category: itemType,
-    quantity: 1,
-    // }],
-    // user_properties: {
-    user_id: email,
-    name,
     email,
-    state,
-    logged_in: loggedIn,
-    // }
+    quantity: 1,
+    items: [
+      {
+        item_name: title,
+        item_id: itemId,
+        price: amount,
+        item_category: itemType,
+        quantity: 1,
+      },
+    ],
+    user_properties: {
+      user_id: email,
+      name,
+      email,
+      state,
+      logged_in: loggedIn,
+    },
   });
 }
 
@@ -194,43 +207,53 @@ export function purchase({
   loggedIn: boolean;
 }) {
   sendEnhancedEvent("purchase", {
+    transaction_id: Date.now().toString(),
     currency: "INR",
-    // items: [
-    //   {
-    item_name: title,
+    value: amount,
     item_id: itemId,
-    price: amount,
-    item_category: itemType,
-    quantity: 1,
-    //   },
-    // ],
-    // user_properties: {
-    user_id: email,
-    name,
     email,
-    state,
-    logged_in: loggedIn,
-    // },
+    quantity: 1,
+    items: [
+      {
+        item_name: title,
+        item_id: itemId,
+        price: amount,
+        item_category: itemType,
+        quantity: 1,
+      },
+    ],
+    user_properties: {
+      user_id: email,
+      name,
+      email,
+      state,
+      logged_in: loggedIn,
+    },
   });
 
   sendEnhancedEvent("conversion_event_purchase", {
     transaction_id: Date.now().toString(),
     value: amount,
     currency: "INR",
-    // items: [{
-    item_name: title,
     item_id: itemId,
-    price: amount,
-    item_category: itemType,
-    quantity: 1,
-    // }],
-    // user_properties: {
-    user_id: email,
-    name,
     email,
-    state,
-    logged_in: loggedIn,
-    // }
+    quantity: 1,
+    items: [
+      {
+        item_name: title,
+        item_id: itemId,
+        price: amount,
+        item_category: itemType,
+        quantity: 1,
+      },
+    ],
+    user_properties: {
+      user_id: email,
+      name,
+      email,
+      state,
+      logged_in: loggedIn,
+    },
   });
 }
 
