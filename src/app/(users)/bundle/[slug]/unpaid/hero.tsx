@@ -113,8 +113,6 @@ export default function Hero({
                 21,380+ Students
               </div>
 
-              
-
               {/* <div className="text-white/70 max-tab:text-sm">
                 Author:{" "}
                 <span className="text-white font-semibold px-1 underline">
@@ -125,70 +123,53 @@ export default function Hero({
               {/* <div className="text-sm text-white/40">Updated 4 months ago</div> */}
 
               <div className="tab:hidden flex flex-col gap-4">
-                {/* @ts-ignore */}
-                {data?.user?.bundleId?.includes(bundleId) ? (
-                  <Link
-                    href={"/dashboard"}
-                    className="flex flex-col gap-2 relative"
-                  >
-                    <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
-                    <Button
-                      size={"lg"}
-                      variant={"outline"}
-                      className="relative flex items-center font-semibold gap-1 transition-all px-4 py-3 rounded-md text-white text-lg"
-                    >
-                      Watch Now
-                    </Button>
-                  </Link>
-                ) : (
-                  <>
-                    <span className="text-white text-2xl font-bold flex gap-2 items-end pt-1">
-                      ₹{price.amount}
-                      <span className="text-muted-foreground/70 italic line-through">
-                        ₹{price.bigAmount}
-                      </span>
-                      <span>{price.percentage}% off</span>
+                <>
+                  <span className="text-white text-2xl font-bold flex gap-2 items-end pt-1">
+                    ₹{price.amount}
+                    <span className="text-muted-foreground/70 italic line-through">
+                      ₹{price.bigAmount}
                     </span>
+                    <span>{price.percentage}% off</span>
+                  </span>
 
-                    <div className="flex flex-col gap-2 py-1">
+                  <div className="flex flex-col gap-2 py-1">
+                    <Button
+                      onClick={() => {
+                        setOpen(true);
+                        sendEvent("Initiate Checkout", {
+                          content_ids: [bundleId],
+                          content_type: "bundle",
+                          content_name: title,
+                          em: sha256(data?.user?.email ?? ""),
+                          // @ts-ignore
+                          ph: sha256(data?.user?.phone ?? ""),
+                          fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
+                        });
+                        addToCart();
+                      }}
+                      size={"lg"}
+                      className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
+                    >
+                      Buy Now
+                    </Button>
+                  </div>
+                  {bundleId !== "NEWALL30DC" && (
+                    <Link
+                      className="relative w-full"
+                      href={
+                        "/bundle/complete-package-all-course-bundle?sheet=true"
+                      }
+                    >
+                      <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
                       <Button
-                        onClick={() => {
-                          setOpen(true);
-                          sendEvent("Initiate Checkout", {
-                            content_ids: [bundleId],
-                            content_type: "bundle",
-                            content_name: title,
-                            em: sha256(data?.user?.email ?? ""),
-                            // @ts-ignore
-                            ph: sha256(data?.user?.phone ?? ""),
-                            fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
-                          });
-                          addToCart();
-                        }}
-                        size={"lg"}
-                        className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
+                        variant={"outline"}
+                        className="relative w-full font-jakarta flex items-center font-semibold gap-1 transition-all px-4 py-3 rounded-md text-white"
                       >
-                        Buy Now
+                        Get All Bundles Courses 💰
                       </Button>
-                    </div>
-                    {bundleId !== "NEWALL30DC" && (
-                      <Link
-                        className="relative w-full"
-                        href={
-                          "/bundle/complete-package-all-course-bundle?sheet=true"
-                        }
-                      >
-                        <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
-                        <Button
-                          variant={"outline"}
-                          className="relative w-full font-jakarta flex items-center font-semibold gap-1 transition-all px-4 py-3 rounded-md text-white"
-                        >
-                          Get All Bundles Courses 💰
-                        </Button>
-                      </Link>
-                    )}
-                  </>
-                )}
+                    </Link>
+                  )}
+                </>
 
                 <div className="flex flex-col gap-1">
                   <p className="tab:max-w-2xl max-tab:leading-6 line-clamp-3 text-white/60 italic font-semibold">
@@ -207,11 +188,15 @@ export default function Hero({
 
                 {/* New discount offers section */}
                 <div className="mt-4 bg-gradient-to-r from-yellow-400 to-orange-500 p-4 rounded-lg">
-                  <h3 className="text-lg font-bold mb-2">Limited Time Offers:</h3>
+                  <h3 className="text-lg font-bold mb-2">
+                    Limited Time Offers:
+                  </h3>
                   <ol className="list-decimal list-inside space-y-2">
                     <li>85% discount - Valid only for today!</li>
                     <li>Buy one, get second course 50% off</li>
-                    <li>Early bird special: Extra 10% off for first 100 buyers</li>
+                    <li>
+                      Early bird special: Extra 10% off for first 100 buyers
+                    </li>
                   </ol>
                 </div>
               </div>

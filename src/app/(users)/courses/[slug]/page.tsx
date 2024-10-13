@@ -2,15 +2,9 @@ import React from "react";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import Main from "./main";
-import { compileMDX, MDXRemote } from "next-mdx-remote/rsc";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import { auth } from "@/auth";
-// export const CodeSnippet = ({ children }: { children: string }) => (
-//   <div className="md:max-w-full horizontal-scroll w-full bg-slate-500 max-sm:w-[90dvw] font-semibold shrink mt-5">
-//     <SyntaxHighlighter style={gruvboxDark}>{children}</SyntaxHighlighter>
-//   </div>
-// );
+
+export const dynamic = 'force-static';
+
 export type Courses = {
   courseCollection: {
     items: {
@@ -296,14 +290,5 @@ export default async function Home({ params: { slug } }: PageProps) {
     courseCollection: { items },
   } = data;
 
-  const { longDescription } = items[0];
-
-  let mdx = await MDXRemote({
-    source: longDescription?.toString(),
-    // components: { CodeSnippet },
-  });
-
-  const session = await auth();
-
-  return <Main mdx={mdx} item={items[0]} session={session} />;
+  return <Main item={items[0]} />;
 }

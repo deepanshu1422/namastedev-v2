@@ -1,0 +1,166 @@
+"use client";
+
+import Details from "./details";
+import Checkout from "./checkout";
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
+import CourseList from "./courses";
+import { useState } from "react";
+import { Session } from "next-auth";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+
+type CourseItem = {
+  session: Session | null;
+  item: {
+    courseId: string;
+    title: string;
+    shortDescription: string;
+    longDescription: string;
+    techStack: string;
+    offers: string[];
+    learn: string[];
+    rating: number;
+    slug: string;
+    upsellBundle: {
+      bundleTitle: string;
+      slug: string;
+      pricingsCollection: {
+        items: {
+          amount: string;
+          bigAmount: string;
+          percentage: string;
+        };
+      }[];
+    };
+    projectsCollection: {
+      items: {
+        title: string;
+        content: string[];
+        coverImage: {
+          url: string;
+        };
+      }[];
+    };
+    courseImage: {
+      description: string;
+      url: string;
+      width: number;
+      height: number;
+    };
+    courseCreator: {
+      name: string;
+    };
+    pricingsCollection: {
+      items: {
+        title: string;
+        amount: number;
+        percentage: number;
+        bigAmount: number;
+        countryCode: string;
+        currencyCode: string;
+      }[];
+    };
+    faqCollection: {
+      items: {
+        question: string;
+        answer: string;
+      }[];
+    };
+    modulesCollection: {
+      total: number;
+      items: {
+        title: string;
+        duration: string;
+        chaptersCollection: {
+          total: number;
+          items: [
+            {
+              sys: {
+                id: string;
+              };
+              public: boolean;
+              title: string;
+              duration: string;
+              youtubeId: string;
+            }
+          ];
+        };
+      }[];
+    };
+  };
+};
+
+export default function Main({
+  session,
+  item: {
+    title,
+    courseId,
+    courseImage,
+    modulesCollection,
+  },
+}: CourseItem) {
+  const [vidIndex, setVidIndex] = useState<{
+    modIndex: number;
+    chapterIndex: number;
+  }>({
+    modIndex: 0,
+    chapterIndex: 0,
+  });
+
+  // @ts-ignore
+  if (!session?.user?.courseId?.includes(courseId))
+    return redirect(`/dashboard`);
+
+  function Paid() {
+    return (
+      <main className="bg-footer">
+        <section className="relative grid lg:grid-cols-[260px_1fr]">
+          <div className="hidden lg:flex flex-col sticky top-8 h-fit">
+            <div className="flex flex-col gap-4 p-7 h-full">
+              <Link
+                href={"/courses"}
+                className="flex gap-2 text-xs text-white/70 hover:text-white/90"
+              >
+                <ChevronLeft className="h-3 w-3" />
+                Other Courses
+              </Link>
+
+              <div className="flex flex-col">
+                <span className="text-[11px] text-white/70">Course</span>
+                <span className="text-sm font-semibold">{title}</span>
+              </div>
+            </div>
+
+            <div className="px-7 max-h-[65dvh] overflow-hidden overflow-y-auto horizontal-scroll">
+              <CourseList
+                courseId={courseId}
+                chapter={vidIndex.chapterIndex}
+                module={vidIndex.modIndex}
+                modules={modulesCollection}
+                setVidIndex={setVidIndex}
+              />
+            </div>
+          </div>
+          <div className="bg-bg lg:rounded-s-3xl min-h-dvh py-6 max-tab:pt-[1rem] px-4 md:px-6 m-auto w-full flex">
+            <section className="relative flex max-md:flex-col gap-6 p-1 max-w-6xl w-full mx-auto">
+              <Details
+                vidIndex={vidIndex}
+                modulesCollection={modulesCollection}
+                title={title}
+                courseId={courseId}
+                courseImage={courseImage}
+                chapter={vidIndex.chapterIndex}
+                module={vidIndex.modIndex}
+                setVidIndex={setVidIndex}
+              />
+              <Checkout />
+            </section>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  return <Paid />;
+}

@@ -1,11 +1,6 @@
 "use client";
 
 import Detail from "./unpaid/details";
-import Details from "./details";
-import Checkout from "./checkout";
-import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
-import CourseList from "./courses";
 import { Floating, PaymentModal, PaymentSheet } from "./payments";
 import {
   PaymentModal as BundleModal,
@@ -14,15 +9,12 @@ import {
 import { useEffect, useState } from "react";
 import Hero from "./unpaid/hero";
 import { YTModal } from "@/app/(main)/testimonials/slider";
-import { Session } from "next-auth";
 import { UpsellModal } from "./unpaid/upsell";
 
 import { addToCart, viewItem } from "@/services/gaEvents";
 import { usePathname } from "next/navigation";
 
 type CourseItem = {
-  session: Session | null;
-  mdx: React.JSX.Element;
   item: {
     courseId: string;
     title: string;
@@ -103,8 +95,6 @@ type CourseItem = {
 };
 
 export default function Main({
-  mdx,
-  session,
   item: {
     title,
     slug,
@@ -113,10 +103,8 @@ export default function Main({
     upsellBundle,
     modulesCollection,
     pricingsCollection,
-    projectsCollection,
     faqCollection,
     offers,
-    learn,
     rating,
     shortDescription,
   },
@@ -142,84 +130,16 @@ export default function Main({
 
   useEffect(() => {
     // @ts-ignore
-    if (!session?.user?.courseId?.includes(courseId)) {
-      viewItem({
-        title,
-        slug,
-        itemId: courseId,
-        itemType: "course",
-        value:
-          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
-            ?.amount ?? 399,
-      });
-    }
+    viewItem({
+      title,
+      slug,
+      itemId: courseId,
+      itemType: "course",
+      value:
+        pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
+        399,
+    });
   }, [pathName]);
-
-  // console.log(upsellBundle);
-
-  function Paid() {
-    return (
-      <main className="bg-footer">
-        <section className="relative grid lg:grid-cols-[260px_1fr]">
-          <div className="hidden lg:flex flex-col sticky top-8 h-fit">
-            <div className="flex flex-col gap-4 p-7 h-full">
-              <Link
-                href={"/courses"}
-                className="flex gap-2 text-xs text-white/70 hover:text-white/90"
-              >
-                <ChevronLeft className="h-3 w-3" />
-                Other Courses
-              </Link>
-
-              <div className="flex flex-col">
-                <span className="text-[11px] text-white/70">Course</span>
-                <span className="text-sm font-semibold">{title}</span>
-              </div>
-            </div>
-
-            <div className="px-7 max-h-[65dvh] overflow-hidden overflow-y-auto horizontal-scroll">
-              <CourseList
-                courseId={courseId}
-                chapter={vidIndex.chapterIndex}
-                module={vidIndex.modIndex}
-                modules={modulesCollection}
-                setVidIndex={setVidIndex}
-              />
-            </div>
-          </div>
-          <div className="bg-bg lg:rounded-s-3xl min-h-dvh py-6 max-tab:pt-[1rem] px-4 md:px-6 m-auto w-full flex">
-            <section className="relative flex max-md:flex-col gap-6 p-1 max-w-6xl w-full mx-auto">
-              <Details
-                faqCollection={faqCollection}
-                vidIndex={vidIndex}
-                open={open}
-                setOpen={setOpen}
-                longDescription={mdx}
-                modulesCollection={modulesCollection}
-                title={title}
-                courseId={courseId}
-                courseImage={courseImage}
-                chapter={vidIndex.chapterIndex}
-                module={vidIndex.modIndex}
-                setVidIndex={setVidIndex}
-              />
-              <Checkout
-                features={courseOffer}
-                faqCollection={faqCollection}
-                amount={
-                  pricingsCollection.items.find((e) => e.countryCode == "IN")
-                    ?.amount ?? 0
-                }
-                courseId={courseId}
-                open={open}
-                setOpen={setOpen}
-              />
-            </section>
-          </div>
-        </section>
-      </main>
-    );
-  }
 
   function Unpaid() {
     function addToCartEvent() {
@@ -257,9 +177,7 @@ export default function Main({
         <Detail
           addToCart={addToCartEvent}
           courseId={courseId}
-          projectsCollection={projectsCollection}
           modulesCollection={modulesCollection}
-          longDescription={mdx}
           image={courseImage?.url}
           price={
             pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
@@ -269,7 +187,6 @@ export default function Main({
             }
           }
           courseOffer={courseOffer}
-          learn={learn ?? []}
           setOpen={setOpenUpsell}
           setYtOpen={setOpenYt}
           faqs={faqCollection.items}
@@ -286,6 +203,7 @@ export default function Main({
           setBundelPaymentOpen={setOpenBundle}
         />
         <PaymentSheet
+          slug={slug}
           open={open}
           setOpen={setOpen}
           courseId={courseId}
@@ -327,8 +245,7 @@ export default function Main({
 
   return (
     <>
-      {/* @ts-ignore */}
-      {session?.user?.courseId?.includes(courseId) ? <Paid /> : <Unpaid />}
+      <Unpaid />
       <PaymentModal slug={slug} payModal={openPay} setOpenPay={setOpenPay} />
       <BundleModal payModal={openPayBunlde} setOpenPay={setOpenPayBunlde} />
     </>

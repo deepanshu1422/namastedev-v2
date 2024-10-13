@@ -157,7 +157,7 @@ function InvoiceTile({
 function CourseCard({ e }: { e: any }) {
   return (
     <Link
-      href={`/courses/${e?.slug}` || ""}
+      href={`/dashboard/${e?.slug}` || ""}
       className="min-h-52 flex flex-col gap-3 py-2 px-3 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60 transition-all duration-300"
     >
       <div className="flex justify-between">

@@ -185,7 +185,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
       <div className="flex flex-col max-sm:overflow-hidden">
         {/* <div className="h-20" ></div> */}
         <header className="bg-bg">
-          <div className="bg-muted/40 flex items-center gap-3 border-b px-4 lg:px-6 h-14 lg:h-[60px]">
+          <div className="bg-muted/40 flex items-center gap-3 border-b px-4 lg:px-6 h-14 lg:h-[60px] sticky top-0">
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon" className="md:hidden">
@@ -269,7 +269,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                 </>
               </SheetContent>
             </Sheet>
-            <div className="flex gap-3 ml-auto h-full py-2 max-md:w-full">
+            <div className="flex gap-3 ml-auto h-full py-2">
               {/* <Link className="w-full" href={"/instructions"}>
                 <Button className="w-full text-white bg-prime/80 hover:bg-prime">
                   Aceess Community

@@ -33,7 +33,7 @@ export default function Header() {
   const pathName = usePathname();
   const [path, setPath] = useState(pathName);
 
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
 
   useEffect(() => {
     setPath(pathName);
@@ -182,34 +182,11 @@ export default function Header() {
               More Courses
             </Button>
           </Link>
-          {status === "loading" ? (
-            <svg
-              className="animate-spin"
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-            </svg>
-          ) : status === "authenticated" ? (
-            <Link href="/dashboard">
-              <Button variant={"link"} size={"sm"} className="text-white">
-                Dashboard
-              </Button>
-            </Link>
-          ) : (
-            <AuthDialog>
-              <Button variant={"link"} size={"sm"} className="text-white">
-                Login
-              </Button>
-            </AuthDialog>
-          )}
+          <Link href="/dashboard">
+            <Button variant={"link"} size={"sm"} className="text-white">
+              Dashboard
+            </Button>
+          </Link>
         </div>
       </section>
     </div>

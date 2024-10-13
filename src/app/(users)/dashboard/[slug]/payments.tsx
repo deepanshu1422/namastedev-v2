@@ -46,9 +46,10 @@ import { sendEvent } from "@/services/fbpixel";
 import { beginCheckout, purchase } from "@/services/gaEvents";
 
 export function PaymentSheet({
+  cover,
   title,
   amount,
-  slug,
+  curreny,
   courseId,
   open,
   setOpen,
@@ -56,7 +57,6 @@ export function PaymentSheet({
 }: {
   cover: string;
   title: string;
-  slug: string;
   amount: number;
   curreny: string;
   courseId: string;
@@ -222,7 +222,7 @@ export function PaymentSheet({
           });
           setOpenPay(true);
           await update({ courses: true });
-          if (session?.user?.email) router.push(`/dashboard/${slug}`);
+          if (session?.user?.email) router.refresh();
         },
         prefill: {
           name: formData.name,

@@ -71,7 +71,7 @@ export default function Main({
 }: BundleItem) {
   const sheet = useSearchParams().get("sheet");
 
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
   const [open, setOpen] = useState(Boolean(sheet));
   const [openPay, setOpenPay] = useState(false);
@@ -83,7 +83,7 @@ export default function Main({
 
   useEffect(() => {
     // @ts-ignore
-    if (!session?.user?.bundleId?.includes(bundleId))
+    // if (!session?.user?.bundleId?.includes(bundleId))
       viewItem({
         title: bundleTitle,
         slug,
@@ -182,13 +182,6 @@ export default function Main({
   // }
 
   function Unpaid() {
-    // viewItem({
-    //   title: bundleTitle,
-    //   slug,
-    //   itemId: bundleId,
-    //   itemType: "bundle",
-    //   value: pricingsCollection.items[0].amount,
-    // });
 
     function addToCartEvent() {
       addToCart({

@@ -46,7 +46,7 @@ export default async function Dashboard() {
   if (!session?.user?.email) redirect(`/api/auth/signin?callbackUrl=${process.env.NEXTAUTH_URL}/dashboard`)
 
   return (
-    <div className="flex h-full relative overflow-hidden">
+    <div className="flex h-full relative">
       <div className="flex-1 flex flex-col gap-4 px-6 py-5 lg:px-8 w-full max-w-6xl mx-auto overflow-hidden">
         <OldCourses />
         <div className="flex justify-between">

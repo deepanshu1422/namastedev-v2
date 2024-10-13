@@ -6,14 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  Check,
-  CheckCheck,
-  CheckCircle2,
-  ChevronDown,
-  Dot,
-  Video,
-} from "lucide-react";
+import { Video } from "lucide-react";
 import Checkout from "./checkout";
 import { Dispatch, SetStateAction, useState } from "react";
 import Image from "next/image";
@@ -26,12 +19,12 @@ import VideoSlider from "@/app/(main)/testimonials/video-slider";
 export default function Details({
   image,
   courseId,
-  longDescription,
+  // longDescription,
   modulesCollection,
-  projectsCollection,
+  // projectsCollection,
   price,
   courseOffer,
-  learn,
+  // learn,
   setOpen,
   setYtOpen,
   addToCart,
@@ -43,22 +36,22 @@ export default function Details({
   courseOffer: string[];
   courseId: string;
   image: string;
-  longDescription: React.JSX.Element;
+  // longDescription: React.JSX.Element;
   price: {
     amount: number;
     percentage: number;
     bigAmount: number;
   };
-  learn: string[];
-  projectsCollection: {
-    items: {
-      title: string;
-      content: string[];
-      coverImage: {
-        url: string;
-      };
-    }[];
-  };
+  // learn: string[];
+  // projectsCollection: {
+  //   items: {
+  //     title: string;
+  //     content: string[];
+  //     coverImage: {
+  //       url: string;
+  //     };
+  //   }[];
+  // };
   modulesCollection: {
     total: number;
     items: {

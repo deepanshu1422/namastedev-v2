@@ -2,34 +2,55 @@ import React from "react";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import Main from "./main";
-
-export const dynamic = "force-static";
-
+import { compileMDX, MDXRemote } from "next-mdx-remote/rsc";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { auth } from "@/auth";
+// export const CodeSnippet = ({ children }: { children: string }) => (
+//   <div className="md:max-w-full horizontal-scroll w-full bg-slate-500 max-sm:w-[90dvw] font-semibold shrink mt-5">
+//     <SyntaxHighlighter style={gruvboxDark}>{children}</SyntaxHighlighter>
+//   </div>
+// );
 export type Courses = {
-  bundleCollection: {
+  courseCollection: {
     items: {
-      bundleId: string;
-      bundleTitle: string;
+      courseId: string;
+      title: string;
       shortDescription: string;
-      learn: string[];
+      longDescription: string;
+      techStack: string;
       offers: string[];
+      learn: string[];
       rating: number;
       slug: string;
-      coursesCollection: {
+      upsellBundle: {
+        bundleTitle: string;
+        slug: string;
+        pricingsCollection: {
+          items: {
+            amount: string;
+            bigAmount: string;
+            percentage: string;
+          };
+        }[];
+      };
+      projectsCollection: {
         items: {
           title: string;
-          slug: string;
-          rating: number;
-          courseImage: {
+          content: string[];
+          coverImage: {
             url: string;
           };
         }[];
       };
-      coverImage: {
+      courseImage: {
         description: string;
         url: string;
         width: number;
         height: number;
+      };
+      courseCreator: {
+        name: string;
       };
       pricingsCollection: {
         items: {
@@ -45,6 +66,27 @@ export type Courses = {
         items: {
           question: string;
           answer: string;
+        }[];
+      };
+      modulesCollection: {
+        total: number;
+        items: {
+          title: string;
+          duration: string;
+          chaptersCollection: {
+            total: number;
+            items: [
+              {
+                sys: {
+                  id: string;
+                };
+                public: boolean;
+                title: string;
+                duration: string;
+                youtubeId: string;
+              }
+            ];
+          };
         }[];
       };
     }[];
@@ -64,7 +106,7 @@ type Props = {
 
 export async function generateStaticParams() {
   const query = `query {
-        bundleCollection(where: {publish: true}){
+        courseCollection(where: { publish: true, domain: "30dayscoding.com"}){
         items{
             slug
             }
@@ -85,7 +127,7 @@ export async function generateStaticParams() {
 
   const data = await fetchedData.json();
 
-  return data.data.bundleCollection.items.map((e: Record<string, string>) => ({
+  return data.data.courseCollection.items.map((e: Record<string, string>) => ({
     slug: e.slug,
   }));
 }
@@ -98,12 +140,12 @@ export async function generateMetadata(
 
   try {
     const query = `query {
-            bundleCollection(where: {publish: true}){
+            courseCollection(where: { publish: true, domain: "30dayscoding.com"}){
             items{
                 slug,
-                bundleTitle,
+                title,
                 shortDescription,
-                coverImage{
+                courseImage{
                     url
                     }
                 }
@@ -124,7 +166,7 @@ export async function generateMetadata(
 
     const data = await fetchedData.json();
 
-    item = data.data.bundleCollection.items.find(
+    item = data.data.courseCollection.items.find(
       (e: Record<string, string>) => e.slug === params.slug
     );
   } catch (err) {
@@ -134,13 +176,13 @@ export async function generateMetadata(
   }
 
   return {
-    title: `${item?.bundleTitle} | 30DC Courses`,
+    title: `${item?.title} | 30DC Courses`,
     description: item?.shortDescription,
     openGraph: {
-      title: `${item?.bundleTitle} | 30DC Courses`,
+      title: `${item?.title} | 30DC Courses`,
       description: item?.shortDescription,
       images: {
-        url: item?.coverImage?.url ?? "",
+        url: item?.courseImage?.url ?? "",
       },
     },
   };
@@ -148,33 +190,45 @@ export async function generateMetadata(
 
 async function getCourses({ slug }: { slug: string }): Promise<Courses> {
   const query = `query {
-    bundleCollection(where: {slug: "${slug}", publish: true},limit:1){
+    courseCollection(where: { publish: true, domain: "30dayscoding.com", slug: "${slug}"},limit:1){
         items{
-        bundleId,
-        bundleTitle,
+        courseId,
+        title,
         shortDescription,
+        longDescription,
+        offers,
         learn,
         rating,
-        offers,
-        coverImage{   
+        upsellBundle{
+          bundleTitle,
+          slug,
+          pricingsCollection(where: {countryCode: "IN"}, limit: 1){
+            items{
+              amount,
+              bigAmount,
+              percentage
+            }
+          }
+        }
+        courseImage{   
             description,
             url,
             width,
             height,
         },
         slug,
-        coursesCollection{
+        courseCreator{
+            name,
+        },
+         projectsCollection{
             items{
-                title,
-                slug,
-                rating,
-                courseImage{
-                    url,
-                    width,
-                    height
-                    },
-                }
-            },
+              title,
+              content,
+              coverImage{
+                url
+              }
+            }
+          },
         pricingsCollection{
             items{
             title,
@@ -184,12 +238,30 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
             countryCode,
             }
         },
-         faqCollection{
-        items{
+        faqCollection{
+          items{
           question,
           answer
-        }
-      }
+          }
+        },
+        modulesCollection{
+            total,
+            items{
+                title,
+                duration,
+                chaptersCollection{
+                total,
+                items{
+                sys{
+                    id
+                  }
+                title,
+                youtubeId,
+                public
+                    }
+                }
+                    }
+                }
             }
         }
     }`;
@@ -218,11 +290,13 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
 export default async function Home({ params: { slug } }: PageProps) {
   const data = await getCourses({ slug });
 
-  if (!data.bundleCollection.items.length) return notFound();
+  if (!data.courseCollection.items.length) return notFound();
 
   const {
-    bundleCollection: { items },
+    courseCollection: { items },
   } = data;
 
-  return <Main item={items[0]} />;
+  const session = await auth();
+
+  return <Main item={items[0]} session={session} />;
 }
