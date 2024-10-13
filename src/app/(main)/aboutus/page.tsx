@@ -1,8 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
 
-;
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),
   title: "About Us | 30DaysCoding",
@@ -56,6 +54,13 @@ export default function Home() {
             </Link>
           </li>
         </ul>
+
+        <div className="flex flex-col gap-1">
+          <h3 className="text-lg font-bold text-second">
+            Nightlight Projects Office Address
+          </h3>
+          <p className="text-prime font-semibold">#1249 , Sector no. 19 , Faridabad 121002</p>
+        </div>
         <h3 className="text-2xl font-bold text-second">
           POWERED BY NIGHT LIGHT PROJECTS
         </h3>
