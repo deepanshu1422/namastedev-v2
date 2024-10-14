@@ -5,7 +5,7 @@ import Roadmap from "./roadmap";
 ;
 
 export const metadata: Metadata = {
-  title: "30DC Roadmaps | 30dayscoding",
+  title: "Tech Roadmaps | 30dayscoding",
   description:
     "Discover a world of practical learning with our guide page! Explore a diverse range of guide designed by 30 days of coding team to enhance your skills and enrich your portfolio. From beginner-friendly to advanced, our guide cater to all levels, ensuring an immersive learning experience.",
   openGraph: {

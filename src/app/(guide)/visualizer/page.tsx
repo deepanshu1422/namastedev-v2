@@ -2,24 +2,24 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "The only DSA Tracking Sheet You NEED | 30dayscoding",
+  title: "DSA Visualizations | 30dayscoding",
   description:
-    "Explore our DSA code platform for mastering Data Structures and Algorithms. Access a wide range of DSA tutorials, practice problems, and coding challenges to enhance your programming skills and ace your technical interviews.",
+    "Explore interactive visualizations for key Data Structures and Algorithms concepts. Enhance your understanding of DSA with our visual learning tools.",
   openGraph: {
     images: "https://i.ibb.co/7KP3CJp/dsa-1.webp",
-    title: "The only DSA Tracking Sheet You NEED | 30dayscoding",
+    title: "DSA Visualizations | 30dayscoding",
     description:
-      "Explore our DSA code platform for mastering Data Structures and Algorithms. Access a wide range of DSA tutorials, practice problems, and coding challenges to enhance your programming skills and ace your technical interviews.",
-    url: "https://30dayscoding.com",
+      "Dive into interactive visualizations for Data Structures and Algorithms. Improve your DSA skills with our visual learning platform.",
+    url: "https://30dayscoding.com/visualizer",
     type: "website",
   },
-  keywords: ["30 days coding, coding, coding challenges"],
+  keywords: ["DSA visualizations, algorithm visualization, data structures, algorithms, visual learning"],
   twitter: {
     card: "summary_large_image",
     images: "https://i.ibb.co/7KP3CJp/dsa-1.webp",
-    title: "The only DSA Tracking Sheet You NEED | 30dayscoding",
+    title: "DSA Visualizations | 30dayscoding",
     description:
-      "Explore our DSA code platform for mastering Data Structures and Algorithms. Access a wide range of DSA tutorials, practice problems, and coding challenges to enhance your programming skills and ace your technical interviews.",
+      "Explore interactive visualizations for key Data Structures and Algorithms concepts. Enhance your understanding of DSA with our visual learning tools.",
     site: "https://30dayscoding.com",
   },
 };
