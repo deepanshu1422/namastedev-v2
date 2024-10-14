@@ -92,18 +92,18 @@ export default function Hero({
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>
             <Link
-              href={"/community"}
+              href={"/dsa"}
               className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
             >
-              <span className="text-sm">Community</span>
+              <span className="text-sm">DSA sheet</span>
               <GraduationCap className="max-lg:hidden w-4 h-4" />
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>
             <Link
-              href={"/testimonials"}
+              href={"/roadmaps"}
               className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
             >
-              <span className="text-sm">Testimonials</span>
+              <span className="text-sm">Roadmaps</span>
               <Star className="max-lg:hidden w-4 h-4" />
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>

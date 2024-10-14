@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FileText, GraduationCap, HomeIcon, Menu, Network, Star } from "lucide-react";
+import { FileText, GraduationCap, HomeIcon, Menu, Network, Star, Eye } from "lucide-react";
 
 import {
   AlertDialog,
@@ -97,6 +97,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
       icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/dsa",
       selected: path === "/dsa",
+    },
+    {
+      title: "DSA visualizer",
+      icon: <Eye className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/dsa-visualizer",
+      selected: path === "/dsa-visualizer",
     },
   ];
 
