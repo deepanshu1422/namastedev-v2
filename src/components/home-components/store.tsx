@@ -208,13 +208,13 @@ export default function Store() {
     <div className="grid place-items-center gap-8 max-w-[90rem] m-auto py-8">
       <span className="flex items-center justify-center gap-4 relative lg:pb-4">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
-        <h2 className="font-jakarta text-pretty text-[2rem] font-extrabold text-center">
+        {/* <h2 className="font-jakarta text-pretty text-[2rem] font-extrabold text-center">
           Access our coding community and courses!!!
-        </h2>
+        </h2> */}
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
       
-      <div className="w-full max-w-[1200px] px-4">
+      {/* <div className="w-full max-w-[1200px] px-4">
         <div className="bg-second rounded-lg shadow-lg overflow-hidden">
           <div className="p-8 flex flex-col md:flex-row">
             <div className="md:w-1/2 md:pr-8 mb-6 md:mb-0">
@@ -249,7 +249,7 @@ export default function Store() {
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="w-full max-w-[1200px] px-4">
         <div className="bg-second rounded-lg shadow-lg overflow-hidden">

@@ -453,7 +453,7 @@ export default function Mentors() {
   ];
 
   return (
-    <div className="m-auto grid grid-cols-1 place-items-center px-6 pt-10 lg:px-20 gap-8 max-w-[80rem]">
+    <div className="m-auto grid grid-cols-1 place-items-center px-6 py-10 lg:px-20 gap-8 max-w-[80rem] ">
       <span className="flex items-center justify-center gap-4 relative">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
