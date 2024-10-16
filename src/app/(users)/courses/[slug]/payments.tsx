@@ -465,7 +465,7 @@ export function PaymentSheet({
                 {curreny} {amount}
               </span>
             </div>
-            {guides.length && (
+            {Boolean(guides.length) && (
               <>
                 <hr className="mt-3" />
                 <div className="flex flex-col gap-3 justify-between">
