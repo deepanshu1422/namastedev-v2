@@ -38,42 +38,65 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
 import { useRouter } from "next/navigation";
-import triggerEvent from "@/services/tracking";
 import { sha256 } from "js-sha256";
 import { sendEvent } from "@/services/fbpixel";
+import { beginCheckout, purchase } from "@/services/gaEvents";
+
+import { Checkbox } from "@/components/ui/checkbox";
 
 export function PaymentSheet({
-  cover,
   title,
   amount,
-  curreny,
+  bigAmount,
+  percentage,
+  slug,
   courseId,
   open,
+  curreny,
+  guides,
   setOpen,
   setOpenPay,
 }: {
   cover: string;
   title: string;
+  slug: string;
   amount: number;
+  bigAmount: number;
+  percentage: number;
   curreny: string;
   courseId: string;
   open: boolean;
+  guides: {
+    guideId: string;
+    title: string;
+    description: string;
+    pricing: {
+      amount: number;
+      bigAmount: number;
+    };
+  }[];
   setOpen: Dispatch<SetStateAction<boolean>>;
   setOpenPay: Dispatch<SetStateAction<boolean>>;
 }) {
-  const { data: session, update } = useSession();
+  const { data: session, status, update } = useSession();
 
   const router = useRouter();
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    name: string;
+    email: string;
+    phone: string;
+    state: string;
+    gudies: string[];
+  }>({
     name: session?.user?.name ?? "",
     email: session?.user?.email ?? "",
     // @ts-ignore
     phone: session?.user?.phone ?? "",
     // @ts-ignore
     state: session?.user?.state ?? "",
+    gudies: [],
   });
 
   const [formState, setFormState] = useState(0);
@@ -90,19 +113,25 @@ export function PaymentSheet({
   const [submitting, setSubmitting] = useState(false);
 
   const states = [
+    "andaman_and_nicobar_islands",
     "andhra_pradesh",
     "arunachal_pradesh",
     "assam",
     "bihar",
+    "chandigarh",
     "chhattisgarh",
-    "goa",
+    "daman_and_diu",
     "delhi",
+    "goa",
     "gujarat",
     "haryana",
     "himachal_pradesh",
     "jharkhand",
+    "jammu_and_kashmir",
     "karnataka",
     "kerala",
+    "ladakh",
+    "lakshadweep",
     "madhya_pradesh",
     "maharashtra",
     "manipur",
@@ -110,6 +139,7 @@ export function PaymentSheet({
     "mizoram",
     "nagaland",
     "odisha",
+    "puducherry",
     "punjab",
     "rajasthan",
     "sikkim",
@@ -144,6 +174,16 @@ export function PaymentSheet({
       let res;
 
       if (courseId) {
+        beginCheckout({
+          title,
+          amount,
+          itemId: courseId,
+          itemType: "course",
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          state: formData.state,
+          loggedIn: status === "authenticated",
+        });
         res = await createPayments({
           courseId: courseId,
           email: session?.user?.email ?? formData.email.toLocaleLowerCase(),
@@ -151,6 +191,7 @@ export function PaymentSheet({
           name: session?.user?.name ?? formData.name,
           state: formData.state,
           couponCode: promo.code,
+          guides: formData.gudies
         });
       } else {
         return;
@@ -192,9 +233,19 @@ export function PaymentSheet({
             fn: sha256(formData.name.split(" ")[0]),
             ln: sha256(formData.name.split(" ")[1] ?? ""),
           });
+          purchase({
+            title,
+            amount,
+            itemId: courseId,
+            itemType: "course",
+            name: formData.name,
+            email: formData.email.toLocaleLowerCase(),
+            state: formData.state,
+            loggedIn: status === "authenticated",
+          });
           setOpenPay(true);
           await update({ courses: true });
-          if (session?.user?.email) router.refresh();
+          if (session?.user?.email) router.push(`/dashboard/${slug}`);
         },
         prefill: {
           name: formData.name,
@@ -232,185 +283,55 @@ export function PaymentSheet({
         phone: session?.user?.phone ?? "",
         // @ts-ignore
         state: session?.user?.state ?? "",
+        gudies: [],
       });
     } catch (error) {
       setIsLoading(false);
     }
   };
 
-  async function applyCoupon(e: FormEvent<HTMLFormElement>) {
-    setSubmitting(true);
+  // async function applyCoupon(e: FormEvent<HTMLFormElement>) {
+  //   setSubmitting(true);
 
-    e.preventDefault();
-    const coupon = new FormData(e.currentTarget).get("coupon") as string;
+  //   e.preventDefault();
+  //   const coupon = new FormData(e.currentTarget).get("coupon") as string;
 
-    if (!coupon) {
-      setSubmitting(false);
-      setPromo({
-        ...promo,
-        apply: false,
-      });
-      return null;
-    }
+  //   if (!coupon) {
+  //     setSubmitting(false);
+  //     setPromo({
+  //       ...promo,
+  //       apply: false,
+  //     });
+  //     return null;
+  //   }
 
-    const { data, error, message } = await getCoupons({ couponCode: coupon });
+  //   const { data, error, message } = await getCoupons({ couponCode: coupon });
 
-    setSubmitting(false);
+  //   setSubmitting(false);
 
-    if (error || !data)
-      toast.error("Coupon Invalid", {
-        description: JSON.stringify(message),
-        position: "bottom-center",
-      });
+  //   if (error || !data)
+  //     toast.error("Coupon Invalid", {
+  //       description: JSON.stringify(message),
+  //       position: "bottom-center",
+  //     });
 
-    if (!data) return null;
+  //   if (!data) return null;
 
-    toast.info("Coupon Applied", {
-      description: JSON.stringify(message),
-      position: "bottom-center",
-    });
+  //   toast.info("Coupon Applied", {
+  //     description: JSON.stringify(message),
+  //     position: "bottom-center",
+  //   });
 
-    const discount = amount * (data?.value / 100);
+  //   const discount = amount * (data?.value / 100);
 
-    setPromo({
-      apply: false,
-      code: data?.couponCode ?? "",
-      discount: discount > data?.maxAmount ? data.maxAmount : discount,
-    });
-  }
+  //   setPromo({
+  //     apply: false,
+  //     code: data?.couponCode ?? "",
+  //     discount: discount > data?.maxAmount ? data.maxAmount : discount,
+  //   });
+  // }
 
   const orderPage = [
-    // {
-    //   title: "Order Details",
-    //   body: (
-    //     <div className="flex flex-col gap-5 max-sm:pt-5">
-    //       {/* <div className="max-sm:hidden grid sm:grid-cols-3 gap-2 pt-4">
-    //         <Image
-    //           className="rounded-md max-sm:w-full max-h-40 object-cover bg-white/20"
-    //           src={cover}
-    //           alt={title}
-    //           width={280}
-    //           height={180}
-    //         />
-    //         <div className="sm:col-span-2 flex flex-col gap-1">
-    //           <p className="max-sm:text-sm sm:leading-6 line-clamp-3">
-    //             {title}
-    //           </p>
-    //           <span className="font-extrabold text-prime">
-    //             {curreny} {amount}
-    //           </span>
-    //         </div>
-    //       </div> */}
-    //       <section className="flex flex-col gap-3 max-sm:text-sm">
-    //         <div className="flex justify-between">
-    //           <span>Course Price</span>
-    //           <span className="font-extrabold">
-    //             {curreny} {((amount + 1) * 4) - 1}
-    //           </span>
-    //         </div>
-    //         <div className="text-prime font-semibold flex justify-between">
-    //           <span>Discount @ 75%</span>
-    //           <span className="font-extrabold">
-    //             -{curreny} {((amount + 1) * 3)}
-    //           </span>
-    //         </div>
-    //         <div className="flex justify-between">
-    //           <span>Sub Total</span>
-    //           <span className="font-extrabold">
-    //             {curreny} {amount}
-    //           </span>
-    //         </div>
-    //         <hr className="mt-3" />
-    //         <div className="flex justify-between">
-    //           <span>GST @ 18%</span>
-    //           <span className="font-extrabold">
-    //             {curreny} {(amount * 0.18).toFixed(0)}
-    //           </span>
-    //         </div>
-    //         <div className="flex justify-between">
-    //           <span>Platform Fee</span>
-    //           <span className="font-extrabold">
-    //             {curreny} {12}
-    //           </span>
-    //         </div>
-    //         <hr className="mt-3" />
-    //         {promo.apply ? (
-    //           <div className="flex flex-col gap-2">
-    //             <form
-    //               className="flex gap-3 justify-between text-sm"
-    //               onSubmit={applyCoupon}
-    //             >
-    //               <Input
-    //                 disabled={submitting}
-    //                 name="coupon"
-    //                 required
-    //                 placeholder="Enter a promo code"
-    //               />
-    //               <Button
-    //                 disabled={submitting}
-    //                 className="text-prime"
-    //                 variant={"link"}
-    //                 size={"sm"}
-    //               >
-    //                 Apply
-    //               </Button>
-    //             </form>
-    //             <Button
-    //               disabled={submitting}
-    //               className="text-prime"
-    //               onClick={() => setPromo({ ...promo, apply: false })}
-    //               variant={"link"}
-    //               size={"sm"}
-    //             >
-    //               Cancel
-    //             </Button>
-    //           </div>
-    //         ) : promo.code ? (
-    //           <div className="flex gap-3 justify-between text-sm">
-    //             <span className="uppercase">{promo.code}</span>
-    //             <div className="flex gap-2">
-    //               <span className="font-bold">-{promo.discount}</span>
-    //               <MinusCircle
-    //                 onClick={() =>
-    //                   setPromo({ apply: false, code: null, discount: 0 })
-    //                 }
-    //                 className="h-5 w-5 cursor-pointer"
-    //               />
-    //             </div>
-    //           </div>
-    //         ) : (
-    //           <div className="flex gap-3 justify-between text-sm">
-    //             <span>Promo Code</span>
-    //             <span
-    //               onClick={() => setPromo({ ...promo, apply: true })}
-    //               className="font-extrabold text-prime hover:underline cursor-pointer"
-    //             >
-    //               Apply Code
-    //             </span>
-    //           </div>
-    //         )}
-    //         <div className="flex justify-between">
-    //           <span>Total Pay</span>
-    //           <span className="font-extrabold text-prime">
-    //             {curreny}{" "}
-    //             {promo.discount
-    //               ? (amount + amount * 0.18 + 12 - promo.discount).toFixed(0)
-    //               : (amount + amount * 0.18 + 12).toFixed(0)}
-    //           </span>
-    //         </div>
-    //       </section>
-    //     </div>
-    //   ),
-    //   footer: (
-    //     <Button
-    //       onClick={() => setFormState(1)}
-    //       className="w-full mt-auto hover:bg-prime/80 bg-prime/60 text-white"
-    //       type="submit"
-    //     >
-    //       Proceed
-    //     </Button>
-    //   ),
-    // },
     {
       title: "Payments Details",
       body: (
@@ -495,6 +416,214 @@ export function PaymentSheet({
         </div>
       ),
       footer: (
+        <Button
+          onClick={() => setFormState(1)}
+          className="w-full mt-auto hover:bg-prime/80 bg-prime/60 text-white"
+          type="submit"
+        >
+          Proceed
+        </Button>
+      ),
+    },
+    {
+      title: "Order Details",
+      body: (
+        <div className="flex flex-col gap-5 max-sm:pt-5">
+          {/* <div className="max-sm:hidden grid sm:grid-cols-3 gap-2 pt-4">
+            <Image
+              className="rounded-md max-sm:w-full max-h-40 object-cover bg-white/20"
+              src={cover}
+              alt={title}
+              width={280}
+              height={180}
+            />
+            <div className="sm:col-span-2 flex flex-col gap-1">
+              <p className="max-sm:text-sm sm:leading-6 line-clamp-3">
+                {title}
+              </p>
+              <span className="font-extrabold text-prime">
+                {curreny} {amount}
+              </span>
+            </div>
+          </div> */}
+          <section className="flex flex-col gap-3 max-sm:text-sm">
+            <div className="flex justify-between">
+              <span>Course Price</span>
+              <span className="font-extrabold">
+                {curreny} {bigAmount}
+              </span>
+            </div>
+            <div className="text-prime font-semibold flex justify-between">
+              <span>Discount @ {percentage}%</span>
+              <span className="font-extrabold">
+                -{curreny} {bigAmount - amount}
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span>Sub Total</span>
+              <span className="font-extrabold">
+                {curreny} {amount}
+              </span>
+            </div>
+            {guides.length && (
+              <>
+                <hr className="mt-3" />
+                <div className="flex flex-col gap-3 justify-between">
+                  <span className="font-semibold">
+                    🔔Don&apos;t missout on our guides
+                  </span>
+                  <div className="flex flex-col gap-3">
+                    {guides.map(
+                      ({ description, guideId, pricing, title }, i) => {
+                        return (
+                          <div
+                            onClick={() => {
+                              if (!formData.gudies?.includes(guideId))
+                                setFormData({
+                                  ...formData,
+                                  gudies: [...formData.gudies, guideId],
+                                });
+                              else {
+                                setFormData({
+                                  ...formData,
+                                  gudies: formData.gudies.filter(
+                                    (e) => e !== guideId
+                                  ),
+                                });
+                              }
+                            }}
+                            key={i}
+                            className={`flex flex-col gap-2 rounded-md border ${
+                              formData.gudies?.includes(guideId) &&
+                              "bg-second/40"
+                            } transition-all duration-100 border-prime/40`}
+                          >
+                            <div className="flex flex-col gap-1 p-2">
+                              <h3 className="font-semibold">{title}</h3>
+                              <p className="text-xs text-white/60 line-clamp-2">
+                                {description}
+                              </p>
+                            </div>
+                            <div className="flex items-center gap-3 p-2 bg-second/60">
+                              <Checkbox
+                                checked={formData.gudies?.includes(guideId)}
+                                onCheckedChange={(checked) => {
+                                  return checked
+                                    ? setFormData({
+                                        ...formData,
+                                        gudies: [...formData.gudies, guideId],
+                                      })
+                                    : setFormData({
+                                        ...formData,
+                                        gudies: formData.gudies.filter(
+                                          (e) => e !== guideId
+                                        ),
+                                      });
+                                }}
+                              />
+                              <div className="flex gap-1 items-center">
+                                Add for
+                                <span className="text-lg font-semibold">
+                                  INR {pricing.amount}
+                                </span>
+                                <span className="line-through text-sm text-white/60">
+                                  INR {pricing.bigAmount}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      }
+                    )}
+                  </div>
+                </div>
+              </>
+            )}
+            {/* <span className="font-extrabold">
+                {curreny} {12}
+              </span> */}
+            {/* <hr className="mt-3" />
+            <div className="flex justify-between">
+              <span>GST @ 18%</span>
+              <span className="font-extrabold">
+                {curreny} {(amount * 0.18).toFixed(0)}
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span>Platform Fee</span>
+              <span className="font-extrabold">
+                {curreny} {12}
+              </span>
+            </div>
+            <hr className="mt-3" />
+            {promo.apply ? (
+              <div className="flex flex-col gap-2">
+                <form
+                  className="flex gap-3 justify-between text-sm"
+                  onSubmit={applyCoupon}
+                >
+                  <Input
+                    disabled={submitting}
+                    name="coupon"
+                    required
+                    placeholder="Enter a promo code"
+                  />
+                  <Button
+                    disabled={submitting}
+                    className="text-prime"
+                    variant={"link"}
+                    size={"sm"}
+                  >
+                    Apply
+                  </Button>
+                </form>
+                <Button
+                  disabled={submitting}
+                  className="text-prime"
+                  onClick={() => setPromo({ ...promo, apply: false })}
+                  variant={"link"}
+                  size={"sm"}
+                >
+                  Cancel
+                </Button>
+              </div>
+            ) : promo.code ? (
+              <div className="flex gap-3 justify-between text-sm">
+                <span className="uppercase">{promo.code}</span>
+                <div className="flex gap-2">
+                  <span className="font-bold">-{promo.discount}</span>
+                  <MinusCircle
+                    onClick={() =>
+                      setPromo({ apply: false, code: null, discount: 0 })
+                    }
+                    className="h-5 w-5 cursor-pointer"
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="flex gap-3 justify-between text-sm">
+                <span>Promo Code</span>
+                <span
+                  onClick={() => setPromo({ ...promo, apply: true })}
+                  className="font-extrabold text-prime hover:underline cursor-pointer"
+                >
+                  Apply Code
+                </span>
+              </div>
+            )} */}
+            {/* <div className="flex flex-col gap-3">
+              <span>Total Pay</span>
+              <span className="font-extrabold text-prime">
+                {curreny}{" "}
+                {promo.discount
+                  ? (amount + amount * 0.18 + 12 - promo.discount).toFixed(0)
+                  : (amount + amount * 0.18 + 12).toFixed(0)}
+              </span>
+            </div> */}
+          </section>
+        </div>
+      ),
+      footer: (
         <div className="w-full mt-auto flex flex-col gap-2">
           <Button
             disabled={isLoading}
@@ -502,16 +631,23 @@ export function PaymentSheet({
             className="disabled:animate-pulse w-full hover:bg-prime/80 bg-prime/60 text-white"
             type="submit"
           >
-            Buy
+            Buy @ INR{" "}
+            {amount +
+              formData.gudies.reduce(
+                (sum, cur) =>
+                  // @ts-ignore
+                  sum + guides.find((e) => e.guideId === cur)?.pricing.amount,
+                0
+              )}
           </Button>
-          {/* <Button
+          <Button
             variant={"outline"}
             onClick={() => setFormState(0)}
             className="w-full"
             type="submit"
           >
             Back
-          </Button> */}
+          </Button>
         </div>
       ),
     },
@@ -528,7 +664,7 @@ export function PaymentSheet({
             Buy Now
           </Button>
         </SheetTrigger> */}
-        <SheetContent className="h-full w-full flex flex-col">
+        <SheetContent className="h-full w-full flex flex-col overflow-y-auto">
           <SheetHeader>
             <SheetTitle>{orderPage[formState].title}</SheetTitle>
           </SheetHeader>
@@ -595,10 +731,12 @@ export function PaymentModal({
 }
 
 export function Floating({
+  addToCart,
   price,
   courseId,
   setOpen,
 }: {
+  addToCart: () => void;
   price: {
     amount: number;
     percentage: number;
@@ -633,6 +771,7 @@ export function Floating({
                   ph: sha256(session?.user?.phone ?? ""),
                   fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
                 });
+                addToCart();
               }}
               variant={"outline"}
               className={`font-semibold text-foreground/80 hover:text-foreground relative w-full p-6 text-sm gap-1`}

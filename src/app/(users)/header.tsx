@@ -33,7 +33,7 @@ export default function Header() {
   const pathName = usePathname();
   const [path, setPath] = useState(pathName);
 
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
 
   useEffect(() => {
     setPath(pathName);
@@ -41,28 +41,16 @@ export default function Header() {
 
   const navBar = [
     {
+      title: "Dashboard",
+      icon: <HomeIcon className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/dashboard",
+      selected: path === "/dashboard",
+    },
+    {
       title: "Courses",
       icon: <Compass className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/courses",
       selected: path === "/courses",
-    },
-    {
-      title: "Projects",
-      icon: <Network className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/projects",
-      selected: path === "/projects",
-    },
-    {
-      title: "Jobs",
-      icon: <Earth className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/jobs",
-      selected: path === "/jobs",
-    },
-    {
-      title: "Roadmaps",
-      icon: <Map className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/roadmaps",
-      selected: path === "/roadmaps",
     },
     {
       title: "Testimonials",
@@ -71,15 +59,9 @@ export default function Header() {
       selected: path === "/testimonials",
     },
     {
-      title: "DSA",
-      icon: <Braces className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/dsa",
-      selected: path === "/dsa",
-    },
-    {
-      title: "1:1 Mentorship",
+      title: "Community",
       icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/mentorship",
+      href: "/community",
     },
   ];
 
@@ -88,7 +70,7 @@ export default function Header() {
       <Link
         href={"/bundle/complete-package-all-course-bundle"}
         //
-        className={`sticky top-0 bg-yellow-400 font-bold flex items-center justify-center max-sm:text-xs text-sm text-black w-full p-2`}
+        className={`sticky top-0 bg-lime-400 font-bold flex items-center justify-center max-sm:text-xs text-sm text-black w-full p-2`}
       >
         <section className="flex overflow-hidden gap-20">
           <div className="flex flex-nowrap gap-4 tracking-wide text-center text-pretty [animation:loop-scroll_20s_linear_infinite] w-full">
@@ -200,34 +182,11 @@ export default function Header() {
               More Courses
             </Button>
           </Link>
-          {status === "loading" ? (
-            <svg
-              className="animate-spin"
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-            </svg>
-          ) : status === "authenticated" ? (
-            <Link href="/dashboard">
-              <Button variant={"link"} size={"sm"} className="text-white">
-                Dashboard
-              </Button>
-            </Link>
-          ) : (
-            <AuthDialog>
-              <Button variant={"link"} size={"sm"} className="text-white">
-                Login
-              </Button>
-            </AuthDialog>
-          )}
+          <Link href="/dashboard">
+            <Button variant={"link"} size={"sm"} className="text-white">
+              Dashboard
+            </Button>
+          </Link>
         </div>
       </section>
     </div>

@@ -22,7 +22,7 @@ export default function Interview() {
                 <h2 className="text-2xl md:text-3xl font-semibold">Make yourself ready for a better future</h2>
                 <p className="text-sm text-muted-foreground">Get our guidence direfctly from our mentors for preparation of real-world interview.</p>
                 <Slider />
-                {/* <Link href={"/mentorship"}
+                {/* <Link href={"/community"}
                     className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 rounded-md w-fit self-end"
                 >
                     <span className="text-sm">See Full Courses</span>
@@ -44,7 +44,7 @@ export function Slider() {
                         <Link href={"https://pages.razorpay.com/pl_NRwJhRPeyZEekG/view"} className="p-1 group">
                             <Card className="select-none flex flex-col gap-4 bg-transparent border-none">
                                 <div className="relative bg-card/50 min-h-36 min-w-16 rounded-md overflow-hidden">
-                                    <Image src={"/mentorship.jpeg"} alt="" fill className="object-cover group-hover:scale-105 transition-all" />
+                                    <Image src={"/mentorship.jpg"} alt="" fill className="object-cover group-hover:scale-105 transition-all" />
                                 </div>
                                 {/* <CardHeader>
                                     <CardTitle></CardTitle>

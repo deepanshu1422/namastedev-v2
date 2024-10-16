@@ -29,9 +29,11 @@ export default function Hero({
   courseOffer,
   setYtOpen,
   setOpen,
+  addToCart,
 }: {
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
+  addToCart: () => void;
   title: string;
   courseId: string;
   image: string;
@@ -48,7 +50,7 @@ export default function Hero({
   return (
     <>
       <div className={`w-full grid bg-zinc-950/60 shadow`}>
-        <div className="tab:px-20 tab:pt-14 tab:pb-3 max-tab:pt-[1rem] max-tab:pb-5 m-auto max-w-[80rem] flex flex-auto max-tab:flex-col w-full justify-between text-white gap-3 sm:gap-7 h-full">
+        <div className="tab:px-20 tab:pt-14 tab:pb-3 max-tab:pt-[1rem] max-tab:pb-5 m-auto max-w-xl tab:max-w-[80rem] flex flex-auto max-tab:flex-col w-full justify-between text-white gap-3 sm:gap-7 h-full">
           <section className="grid gap-5 h-fit tab:max-w-[60%]">
             <Link
               className="px-6 flex gap-1 items-center text-sm text-muted-foreground hover:text-foreground w-fit"
@@ -67,7 +69,7 @@ export default function Hero({
                 src={image}
                 height={800}
                 width={1200}
-                className="bg-prime/20 max-tab:max-h-60 object-cover"
+                className="bg-prime/20 aspect-[6/4]"
               />
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background/40 p-0.5 rounded-full shadow-2xl shadow-black group-hover:-translate-y-2/3 transition-transform">
                 <div className="bg-white/50 backdrop-blur-sm p-4 rounded-full">
@@ -140,9 +142,11 @@ export default function Hero({
                         content_ids: [courseId],
                         content_type: "course",
                         em: sha256(data?.user?.email ?? ""),
+                        // @ts-ignore
                         ph: sha256(data?.user?.phone ?? ""),
                         fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
                       });
+                      addToCart();
                     }}
                     size={"lg"}
                     className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"

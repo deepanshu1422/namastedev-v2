@@ -18,6 +18,8 @@ import {
 } from "@/components/ui/tabs";
 import { Session } from "next-auth";
 import getInvoice from "../../../../actions/getInvoice";
+import { useAtom } from "jotai";
+import { purchasedCourses } from "@/lib/jotai";
 
 export default function PurchaseTabs() {
   const { data: session, update } = useSession();
@@ -82,12 +84,17 @@ function Invoice() {
 function Purchased({ session }: { session: Session | null }) {
   // console.log(session?.user);
 
+  const [_, setCourses] = useAtom(purchasedCourses);
+
   const { isPending, data: items } = useQuery({
     // @ts-ignore
     queryKey: [session?.user?.courseId ?? []],
     queryFn: async ({ queryKey }) => {
-      return await refreshCourses(queryKey[0]);
+      const courses = await refreshCourses(queryKey[0]);
+      setCourses(courses.map((e: any) => e.title));
+      return courses;
     },
+
     staleTime: 1000 * 60 * 10,
   });
 
@@ -150,7 +157,7 @@ function InvoiceTile({
 function CourseCard({ e }: { e: any }) {
   return (
     <Link
-      href={`/courses/${e?.slug}` || ""}
+      href={`/dashboard/${e?.slug}` || ""}
       className="min-h-52 flex flex-col gap-3 py-2 px-3 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60 transition-all duration-300"
     >
       <div className="flex justify-between">

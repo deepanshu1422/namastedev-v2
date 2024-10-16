@@ -1,5 +1,5 @@
 "use client";
-import YoutubeEmbed from "@/app/(guide)/testimonials/youtube-embed";
+import YoutubeEmbed from "@/app/(main)/testimonials/youtube-embed";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import Image from "next/image";
@@ -52,13 +52,20 @@ export default function Hero({
             <h1
               className={` sm:text-center tab:text-start sm:max-w-3xl phone:text-5xl text-3xl font-extrabold leading-[1.3] sm:leading-[1.2]`}
             >
-              Become an <Link href={"/mentorship"} className="bg-prime/50">Advanced, Job-Ready</Link>{" "}
-              Developer!
+              
+              Premium and Affordable courses trusted by <span className="bg-prime/50">20,000+ developers</span> from 10+ countries
             </h1>
 
             <p className="max-w-3xl max-sm:text-sm max-sm:leading-6 text-white/80 line-clamp-2 tab:line-clamp-3 sm:text-center tab:text-start">
               {desc}
             </p>
+            {/* <div className="w-full max-w-3xl">
+              <Link href="/dashboard" className="mt-4 text inline-block" target="_blank"  >
+                <button className="bg-prime hover:bg-prime/90 text-white font-bold py-2 px-4 rounded">
+                  Access My Courses
+                </button>
+              </Link>
+            </div> */}
 
             <div className="tab:hidden block pt-2 max-h-80 h-full max-w-xs m-auto w-full drop-shadow-[5px_6px_10px_#07928190] ">
               <Btn cover="/welcome.jpg" yt={"nTAHWER3K-0"} />
@@ -73,13 +80,17 @@ export default function Hero({
                 className="phone:p-6 w-full appearance-none bg-background phone:pl-9 pl-9 shadow-none"
               />
             </span> */}
-          </section>
+          </section>  
           <div className="flex-1 max-tab:hidden flex max-tab:py-5 drop-shadow-[5px_6px_10px_#07928190]">
             <div className="h-full w-full tab:w-4/5 m-auto">
               <Btn cover="/welcome.jpg" yt={"nTAHWER3K-0"} />
             </div>
           </div>
+          
         </div>
+
+        {/*  */}
+        
       </div>
     </div>
   );

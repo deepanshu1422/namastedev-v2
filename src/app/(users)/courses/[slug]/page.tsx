@@ -2,15 +2,9 @@ import React from "react";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import Main from "./main";
-import { compileMDX, MDXRemote } from "next-mdx-remote/rsc";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import { auth } from "@/auth";
-// export const CodeSnippet = ({ children }: { children: string }) => (
-//   <div className="md:max-w-full horizontal-scroll w-full bg-slate-500 max-sm:w-[90dvw] font-semibold shrink mt-5">
-//     <SyntaxHighlighter style={gruvboxDark}>{children}</SyntaxHighlighter>
-//   </div>
-// );
+
+export const dynamic = "force-static";
+
 export type Courses = {
   courseCollection: {
     items: {
@@ -23,6 +17,28 @@ export type Courses = {
       learn: string[];
       rating: number;
       slug: string;
+      upsellBundle: {
+        bundleTitle: string;
+        slug: string;
+        pricingsCollection: {
+          items: {
+            amount: string;
+            bigAmount: string;
+            percentage: string;
+          };
+        }[];
+      };
+      guidesCollection: {
+        items: {
+          guideId: string;
+          title: string;
+          description: string;
+          pricing: {
+            amount: number;
+            bigAmount: number;
+          };
+        }[];
+      };
       projectsCollection: {
         items: {
           title: string;
@@ -95,7 +111,7 @@ type Props = {
 
 export async function generateStaticParams() {
   const query = `query {
-        courseCollection{
+        courseCollection(where: { publish: true, domain: "30dayscoding.com"}){
         items{
             slug
             }
@@ -129,7 +145,7 @@ export async function generateMetadata(
 
   try {
     const query = `query {
-            courseCollection{
+            courseCollection(where: { publish: true, domain: "30dayscoding.com"}){
             items{
                 slug,
                 title,
@@ -179,7 +195,7 @@ export async function generateMetadata(
 
 async function getCourses({ slug }: { slug: string }): Promise<Courses> {
   const query = `query {
-    courseCollection(where: {slug: "${slug}"},limit:1){
+    courseCollection(where: { publish: true, domain: "30dayscoding.com", slug: "${slug}"},limit:1){
         items{
         courseId,
         title,
@@ -188,6 +204,17 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
         offers,
         learn,
         rating,
+        upsellBundle{
+          bundleTitle,
+          slug,
+          pricingsCollection(where: {countryCode: "IN"}, limit: 1){
+            items{
+              amount,
+              bigAmount,
+              percentage
+            }
+          }
+        }
         courseImage{   
             description,
             url,
@@ -198,6 +225,17 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
         courseCreator{
             name,
         },
+        guidesCollection{
+            items{
+              guideId,
+              title,
+              description,
+              pricing{
+                amount,
+                bigAmount
+              }
+            }
+          },
          projectsCollection{
             items{
               title,
@@ -274,14 +312,5 @@ export default async function Home({ params: { slug } }: PageProps) {
     courseCollection: { items },
   } = data;
 
-  const { longDescription } = items[0];
-
-  let mdx = await MDXRemote({
-    source: longDescription?.toString(),
-    // components: { CodeSnippet },
-  });
-
-  const session = await auth();
-
-  return <Main mdx={mdx} item={items[0]} session={session} />;
+  return <Main item={items[0]} />;
 }

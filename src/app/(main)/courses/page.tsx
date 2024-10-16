@@ -76,9 +76,11 @@ export type CoursesType = {
   };
 };
 
+// AND: [{courseId_not: "FSCC30DC"}, {courseId_not: "DAC30DC"}]
+
 async function getCourses(): Promise<CoursesType> {
   const query = `query {
-        courseCollection{
+        courseCollection(where: {publish: true, domain: "30dayscoding.com" }, order: order_ASC){
             items{
                 title,
                 shortDescription,
@@ -101,9 +103,9 @@ async function getCourses(): Promise<CoursesType> {
                     },
                 }
             },
-            bundleCollection(limit: 1){
+            bundleCollection(where: { publish: true, slug: "complete-package-all-course-bundle" }, limit: 1){
             items{
-                ,bundleTitle
+                bundleTitle
                 shortDescription,
                 slug,
                 rating,

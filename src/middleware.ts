@@ -3,14 +3,14 @@ import { NextResponse } from "next/server";
 
 export default auth((req) => {
   const { nextUrl } = req;
-  const AuthRoute = ["/dashboard", "/instructions"].includes(nextUrl.pathname);
-  const isLogged = !!req.auth;
+  const AuthRoute = ["/instructions"].includes(nextUrl.pathname);
+  const isLogged = !!req.auth?.user;
 
   // console.log(req.auth);
 
   // console.log("NextUrl", nextUrl);
 
-  if (["/admin", "/transactions"].includes(nextUrl.pathname)) {
+  if (["/admin", "/transactions", "/new-users"].includes(nextUrl.pathname)) {
     if (req.auth?.user?.email !== process.env.ADMIN) {
       const newUrl = new URL(
         `/api/auth/signin?callbackUrl=${nextUrl.href}`,
@@ -30,9 +30,9 @@ export default auth((req) => {
     }else{
       if (nextUrl.pathname === "/instructions") {
         // @ts-ignore
-        if (!req.auth?.user?.mentorshipId?.includes("querty")) {
+        if (!req.auth?.user?.mentorshipId?.includes("mentor")) {
           const newUrl = new URL(
-            `/mentorship`,
+            `/community`,
             req.nextUrl.origin
           );
           return NextResponse.redirect(newUrl); 

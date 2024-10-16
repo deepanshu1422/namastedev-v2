@@ -59,7 +59,7 @@ export function CourseTabMenu({
                         height={280}
                         alt={`30 days coding ${title}`}
                       />
-                      <p className="text-sm font-semibold inline p-1 line-clamp-2 text-wrap">
+                      <p className="text-sm font-semibold p-1 line-clamp-1 text-wrap">
                         {title}
                       </p>
                     </div>

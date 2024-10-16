@@ -10,7 +10,7 @@ export default function PixelEvents() {
 
   let isPixelInitialized = false;
 
-  const pathName = usePathname()
+  const pathName = usePathname();
 
   useEffect(() => {
     if (!isPixelInitialized) {
@@ -51,32 +51,60 @@ export default function PixelEvents() {
       localStorage.setItem("ext-ID", crypto.randomUUID());
 
     // Track initial page view
-    // @ts-ignore
-    fbq(
-      "track",
-      "PageView",
-      {
-        fbp: document.cookie
-          .split("; ")
-          .find((row) => row.startsWith("_fbp="))
-          ?.split("=")[1],
-        external_id: localStorage.getItem("ext-ID"),
-      },
-      eventId
-    );
 
-    sendSeverEvent({
-      event_name: "PageView",
-      event_id: eventId,
-      user_data: {
-        fbp: document.cookie
-          .split("; ")
-          .find((row) => row.startsWith("_fbp="))
-          ?.split("=")[1],
-        external_id: localStorage.getItem("ext-ID"),
-      },
-      custom_data: {},
-    });
+    (async () => {
+      // console.log(document.cookie);
+
+      const ip = await (
+        await fetch("https://api.ipify.org/?format=json")
+      ).json();
+      // @ts-ignore
+      fbq(
+        "track",
+        "PageView",
+        {
+          fbp: document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("_fbp="))
+            ?.split("=")[1],
+          fbc: document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("_fbc="))
+            ?.split("=")[1],
+          fb_login_id: document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("_fb_login_id="))
+            ?.split("=")[1],
+          external_id: localStorage.getItem("ext-ID"),
+          client_user_agent: navigator.userAgent,
+          client_ip_address: ip.ip,
+        },
+        eventId
+      );
+
+      // await sendSeverEvent({
+      //   event_name: "PageView",
+      //   event_id: eventId,
+      //   user_data: {
+      //     fbp: document.cookie
+      //       .split("; ")
+      //       .find((row) => row.startsWith("_fbp="))
+      //       ?.split("=")[1],
+      //     fbc: document.cookie
+      //       .split("; ")
+      //       .find((row) => row.startsWith("_fbc="))
+      //       ?.split("=")[1],
+      //     fb_login_id: document.cookie
+      //       .split("; ")
+      //       .find((row) => row.startsWith("_fb_login_id="))
+      //       ?.split("=")[1],
+      //     external_id: localStorage.getItem("ext-ID"),
+      //     client_user_agent: navigator.userAgent,
+      //     client_ip_address: ip.ip,
+      //   },
+      //   custom_data: {},
+      // });
+    })();
   }, [pathName]);
 
   return null;
@@ -85,7 +113,7 @@ export default function PixelEvents() {
 export const pageview = () => {};
 
 // https://developers.facebook.com/docs/facebook-pixel/advanced/
-export const sendEvent = (
+export const sendEvent = async (
   name: string,
   options: Record<string, string | string[] | number>
 ) => {
@@ -94,22 +122,34 @@ export const sendEvent = (
   if (!localStorage.getItem("ext-ID"))
     localStorage.setItem("ext-ID", crypto.randomUUID());
 
-  //@ts-ignore
-  window.fbq(
-    "track",
-    name,
-    {
-      ...options,
-      fbp: document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("_fbp="))
-        ?.split("=")[1],
-      external_id: localStorage.getItem("ext-ID"),
-    },
-    eventId
-  );
+  const ip = await (await fetch("https://api.ipify.org/?format=json")).json();
 
-  sendSeverEvent({
+  //@ts-ignore
+  // window.fbq(
+  //   "track",
+  //   name,
+  //   {
+  //     ...options,
+  //     client_user_agent: navigator.userAgent,
+  //     client_ip_address: ip.ip,
+  //     fbp: document.cookie
+  //       .split("; ")
+  //       .find((row) => row.startsWith("_fbp="))
+  //       ?.split("=")[1],
+  //     fbc: document.cookie
+  //       .split("; ")
+  //       .find((row) => row.startsWith("_fbc="))
+  //       ?.split("=")[1],
+  //     fb_login_id: document.cookie
+  //       .split("; ")
+  //       .find((row) => row.startsWith("_fb_login_id="))
+  //       ?.split("=")[1],
+  //     external_id: localStorage.getItem("ext-ID"),
+  //   },
+  //   eventId
+  // );
+
+  await sendSeverEvent({
     event_id: eventId,
     event_name: name,
     custom_data: {
@@ -119,16 +159,27 @@ export const sendEvent = (
       em: [(options?.em as string) ?? null],
       ph: [(options?.ph as string) ?? null],
       fn: [(options?.fn as string) ?? null],
+
+      client_user_agent: navigator.userAgent,
+      client_ip_address: ip.ip,
       fbp: document.cookie
         .split("; ")
         .find((row) => row.startsWith("_fbp="))
+        ?.split("=")[1],
+      fbc: document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("_fbc="))
+        ?.split("=")[1],
+      fb_login_id: document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("_fb_login_id="))
         ?.split("=")[1],
       external_id: localStorage.getItem("ext-ID"),
     },
   });
 };
 
-export const sendSeverEvent = ({
+export const sendSeverEvent = async ({
   event_name,
   event_id,
   user_data,
@@ -139,29 +190,33 @@ export const sendSeverEvent = ({
   user_data: Record<string, string | number | string[] | undefined | null>;
   custom_data: Record<string, string | number | string[] | undefined | null>;
 }) => {
-  // console.log("AHH")
-  fetch(`https://faas-blr1-8177d592.doserverless.co/api/v1/namespaces/fn-0af9762f-3295-4678-bace-a7a30a29ff2f/actions/fb-convertion-endpoint?blocking=true&result=true`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Basic ${process.env.COVERSION_API_TOKEN}`,
-      },
-      body: JSON.stringify({
+  // console.log("Sent Data");
+
+  await fetch(`https://jellyfish-app-mqgem.ondigitalocean.app/convertion-api`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer EAAMi1bkn4eQBOZCHsnmtxUGfi0sZCqRxIuuYf`,
+    },
+    body: JSON.stringify({
+      data: {
         data: [
           {
             event_name,
-            event_time: Date.now(),
+            event_time: Math.floor(Date.now() / 1000),
             action_source: "website",
             event_id,
             user_data,
             custom_data,
           },
         ],
-      }),
-    }
-  )
+      },
+    }),
+  })
     .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error("Error:", error));
+    .then((data) => {
+      // console.log(data);
+      console.log("Data Sent");
+    })
+    .catch((error) => console.error("Error:", JSON.stringify(error)));
 };

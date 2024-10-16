@@ -65,7 +65,7 @@ function Slider({ guides }: { guides: string[] }) {
       <CarouselContent>
         {guides.map((e, index) => (
           <CarouselItem
-            className="basis-full sm:basis-1/2 md:basis-1/3"
+            className="basis-1/3"
             key={index}
           >
             <Image

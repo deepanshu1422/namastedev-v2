@@ -1,19 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Book,
-  Bookmark,
-  Braces,
-  Compass,
-  Earth,
-  GraduationCap,
-  HomeIcon,
-  Map,
-  Menu,
-  Network,
-  Star,
-} from "lucide-react";
+import { FileText, GraduationCap, HomeIcon, Menu, Network, Star, Eye } from "lucide-react";
 
 import {
   AlertDialog,
@@ -24,7 +12,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
 import { Button } from "@/components/ui/button";
@@ -37,16 +24,39 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { AuthDialog } from "./auth";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Badge } from "@/components/ui/badge";
+import { CertificateDialog } from "./dashboard/new-user";
+import { useAtom } from "jotai";
+import { certificate, notification } from "@/lib/jotai";
+
 export default function Template({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
   const [path, setPath] = useState(pathName);
+  const [logout, setLogout] = useState(false);
+  const [notify, setNotify] = useState(false);
 
   const { data: session, status } = useSession();
 
@@ -64,213 +74,37 @@ export default function Template({ children }: { children: React.ReactNode }) {
   ];
 
   const navBar = [
-    // {
-    //   title: "Explore",
-    //   icon: <Compass className="h-4 w-4 md:h-5 md:w-5" />,
-    //   href: "/explore",
-    //   selected: path === "/explore",
-    // },
-    // {
-    //   title: "Guides",
-    //   icon: <Book className="h-4 w-4 md:h-5 md:w-5" />,
-    //   href: "/guides",
-    //   selected: path === "/guides",
-    // },
     {
-      title: "Courses",
+      title: "All courses",
       icon: <Network className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/courses",
       selected: path === "/projects",
     },
-    // {
-    //   title: "Jobs",
-    //   icon: <Earth className="h-4 w-4 md:h-5 md:w-5" />,
-    //   href: "/jobs",
-    //   selected: path === "/jobs",
-    // },
-    // {
-    //   title: "Roadmaps",
-    //   icon: <Map className="h-4 w-4 md:h-5 md:w-5" />,
-    //   href: "/roadmaps",
-    //   selected: path === "/roadmaps",
-    // },
     {
-      title: "Testimonials",
-      icon: <Star className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/testimonials",
-      selected: path === "/testimonials",
+      title: "Resume",
+      icon: <FileText className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/resume",
+      selected: path === "/resume",
     },
-    // {
-    //   title: "DSA",
-    //   icon: <Braces className="h-4 w-4 md:h-5 md:w-5" />,
-    //   href: "/dsa",
-    //   selected: path === "/dsa",
-    // },
     {
-      title: "1:1 Mentorship",
+      title: "Roadmaps",
+      icon: <Star className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/roadmaps",
+      selected: path === "/roadmaps",
+    },
+    {
+      title: "DSA sheet",
       icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/mentorship",
+      href: "/dsa",
+      selected: path === "/dsa",
+    },
+    {
+      title: "DSA visualizer",
+      icon: <Eye className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/visualizer",
+      selected: path === "/visualizer",
     },
   ];
-
-  // return (
-  //   <div className="grid min-h-screen w-full md:grid-cols-[60px_1fr] lg:grid-cols-[280px_1fr]">
-  //     <div className="hidden border-r bg-muted/40 md:block">
-  //       <div className="flex h-full max-h-screen flex-col gap-2 sticky top-0">
-  //         <div className="flex h-14 items-center border-b px-4 py-2 lg:h-[60px] lg:px-6">
-  //           <Link href="/" className="flex items-center gap-2 font-semibold">
-  //             <Image src={"/logo.png"} alt="logo" width={35} height={35} />
-  //             <span className="max-lg:hidden">30DC</span>
-  //           </Link>
-  //         </div>
-  //         <div className="flex-1">
-  //           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-  //             {navBar.map(({ href, icon, selected, title }, i) => (
-  //               <Link
-  //                 key={i}
-  //                 href={href}
-  //                 className={`flex items-center gap-3 ${selected && "bg-second/20 text-prime"
-  //                   } rounded-lg px-3 max-lg:py-3 lg:py-2 text-muted-foreground transition-all hover:text-prime`}
-  //               >
-  //                 {icon}
-  //                 <span className="hidden lg:block">
-  //                   {title}
-  //                 </span>
-  //               </Link>
-  //             ))}
-  //           </nav>
-  //         </div>
-  //         <div className="max-lg:hidden relative mt-auto p-4">
-  //           <Card>
-  //             <CardHeader className="p-2 pt-0 md:p-4">
-  //               <CardTitle>New Courses</CardTitle>
-  //               <CardDescription>
-  //                 Upskill yourself with pocket friendly courses — Enroll Now
-  //               </CardDescription>
-  //             </CardHeader>
-  //             <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-  //               <Link href={"/courses"}>
-  //                 <Button
-  //                   size="sm"
-  //                   className="bg-prime hover:bg-prime/80 text-white w-full"
-  //                 >
-  //                   Enroll Now
-  //                 </Button>
-  //               </Link>
-  //             </CardContent>
-  //             <Image
-  //               alt="30DayCoding New Challenge"
-  //               src={"/NEW.gif"}
-  //               height={120}
-  //               width={120}
-  //               className="absolute top-0 -translate-y-5 translate-x-3 right-0"
-  //             />
-  //           </Card>
-  //         </div>
-  //       </div>
-  //     </div>
-  //     <div className="flex flex-col overflow-hidden">
-  //       <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-  //         <Sheet>
-  //           <SheetTrigger asChild>
-  //             <Button
-  //               variant="outline"
-  //               size="icon"
-  //               className="shrink-0 md:hidden"
-  //             >
-  //               <Menu className="h-5 w-5" />
-  //               <span className="sr-only">Toggle navigation menu</span>
-  //             </Button>
-  //           </SheetTrigger>
-  //           <SheetContent side="left" className="flex flex-col overflow-hidden overflow-y-auto">
-  //             <>
-  //               <nav className="grid gap-2 text-lg font-medium">
-  //                 <Link
-  //                   href="#"
-  //                   className="flex items-center gap-2 text-lg font-semibold"
-  //                 >
-  //                   <Image
-  //                     src={"/logo.png"}
-  //                     alt="logo"
-  //                     width={30}
-  //                     height={30}
-  //                   />
-  //                   <span className="sr-only">30DC</span>
-  //                 </Link>
-
-  //                 {navBar.map(({ href, icon, selected, title }, i) => (
-  //                   <Link
-  //                     key={i}
-  //                     href={href}
-  //                     className={`mx-[-0.65rem] flex items-center gap-4 ${selected ? "bg-muted" : "text-muted-foreground"
-  //                       } rounded-xl px-3 py-2 hover:text-foreground transition-all`}
-  //                   >
-  //                     {icon}
-  //                     {title}
-  //                   </Link>
-  //                 ))}
-  //               </nav>
-  //               <div className="relative mt-auto">
-  //                 <Card>
-  //                   <CardHeader>
-  //                     <CardTitle>New Courses</CardTitle>
-  //                     <CardDescription>
-  //                       Upskill yourself with pocket friendly courses — Enroll Now
-  //                     </CardDescription>
-  //                   </CardHeader>
-  //                   <CardContent>
-  //                     <Link
-  //                       href={
-  //                         "/courses"
-  //                       }
-  //                     >
-  //                       <Button
-  //                         size="sm"
-  //                         className="bg-prime hover:bg-prime/80 text-white w-full"
-  //                       >
-  //                         Enroll Now
-  //                       </Button>
-  //                     </Link>
-  //                   </CardContent>
-  //                 </Card>
-  //                 <Image
-  //                   alt="30DayCoding New Challenge"
-  //                   src={"/NEW.gif"}
-  //                   height={120}
-  //                   width={120}
-  //                   className="absolute top-0 -translate-y-10 translate-x-10 right-0"
-  //                 />
-  //               </div>
-  //             </>
-  //           </SheetContent>
-  //         </Sheet>
-  //         <div className="w-full flex-1"></div>
-  //         {status === "authenticated" ? <Button variant="secondary" size="icon" className="rounded-full">
-  //           {/* <DropdownMenu>
-  //             <DropdownMenuTrigger asChild>
-  //               <Button variant="secondary" size="icon" className="rounded-full">
-  //                 <CircleUser className="h-5 w-5" />
-  //                 <span className="sr-only">Toggle user menu</span>
-  //               </Button>
-  //             </DropdownMenuTrigger>
-  //             <DropdownMenuContent align="end">
-  //               <DropdownMenuLabel>Welocme, {userData.user?.name} </DropdownMenuLabel>
-  //               <DropdownMenuSeparator />
-  //               <DropdownMenuItem>Settings</DropdownMenuItem>
-  //               <DropdownMenuItem>Support</DropdownMenuItem>
-  //               <DropdownMenuSeparator />
-  //               <DropdownMenuItem onClick={() => signOut()}>Logout</DropdownMenuItem>
-  //             </DropdownMenuContent>
-  //           </DropdownMenu> */}
-  //         </Button> : (status === "loading" ? <Button variant={"secondary"} className="px-8 text-white" size="icon" >Loading</Button> : <AuthDialog>
-  //           <Button className="bg-prime/80 hover:bg-prime px-8 text-white" size="icon" >Login</Button>
-  //         </AuthDialog>)}
-
-  //       </header>
-  //       {children}
-  //     </div>
-  //   </div>
-  // )
 
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[60px_1fr] lg:grid-cols-[280px_1fr]">
@@ -289,7 +123,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
               <div className="flex flex-col gap-2 pb-2">
                 <span className="text-xs max-lg:hidden uppercase">
-                  Main Menu
+                  Access your account
                 </span>
                 {userMenu.map(({ href, icon, selected, title }, i) => (
                   <Link
@@ -304,7 +138,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                   </Link>
                 ))}
                 <span className="text-xs max-lg:hidden uppercase">
-                  Other Products
+                  Explore more
                 </span>
                 <span className="text-xs text-muted-foreground text-center lg:hidden">
                   ----
@@ -357,11 +191,11 @@ export default function Template({ children }: { children: React.ReactNode }) {
       <div className="flex flex-col max-sm:overflow-hidden">
         {/* <div className="h-20" ></div> */}
         <header className="bg-bg">
-          <div className="bg-muted/40 flex items-center gap-4 border-b px-4 lg:px-6 h-14 lg:h-[60px]">
+          <div className="bg-muted/40 flex items-center gap-3 border-b px-4 lg:px-6 h-14 lg:h-[60px] sticky top-0">
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon" className="md:hidden">
-                  <Menu className="h-5 w-5" />
+                  <Menu className="h-5 w-5 mx-2" />
                   <span className="sr-only">Toggle navigation menu</span>
                 </Button>
               </SheetTrigger>
@@ -441,12 +275,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
                 </>
               </SheetContent>
             </Sheet>
-            <div className="flex gap-3 ml-auto h-full p-2 max-md:w-full">
-              <Link className="w-full" href={"/instructions"}>
+            <div className="flex gap-3 ml-auto h-full py-2">
+              {/* <Link className="w-full" href={"/instructions"}>
                 <Button className="w-full text-white bg-prime/80 hover:bg-prime">
-                  Access Mentorship
+                  Aceess Community
                 </Button>
-              </Link>
+              </Link> */}
               {status === "loading" ? (
                 <button className="font-jakarta flex items-center font-semibold gap-2 bg-prime/20 transition-all p-2 rounded-md text-sm">
                   <svg
@@ -511,13 +345,17 @@ export default function Template({ children }: { children: React.ReactNode }) {
                 </button>
               ) : status === "authenticated" ? (
                 <UserButton
+                  logout={logout}
+                  notify={notify}
+                  setLogout={setLogout}
+                  setNotify={setNotify}
                   src={session.user?.image ?? ""}
                   name={session.user?.name ?? session.user?.email ?? ""}
                 />
               ) : (
                 <AuthDialog>
                   <button className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md text-sm">
-                    Login
+                    Dashboard
                   </button>
                 </AuthDialog>
               )}
@@ -530,17 +368,75 @@ export default function Template({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function UserButton({ src, name }: { src: string; name: string }) {
+export function UserButton({
+  src,
+  name,
+  logout,
+  notify,
+  setLogout,
+  setNotify,
+}: {
+  src: string;
+  name: string;
+  logout: boolean;
+  notify: boolean;
+  setLogout: React.Dispatch<React.SetStateAction<boolean>>;
+  setNotify: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const [open, setOpen] = useAtom(certificate);
+  const [notifications] = useAtom(notification);
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Avatar className="cursor-pointer">
-          <AvatarImage src={src} />
-          <AvatarFallback className="uppercase text-white font-bold">
-            {name[0]}
-          </AvatarFallback>
-        </Avatar>
-      </AlertDialogTrigger>
+    <div className="relative">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Avatar className="cursor-pointer">
+            <AvatarImage src={src} />
+            <AvatarFallback className="uppercase text-white font-bold">
+              {name[0]}
+            </AvatarFallback>
+          </Avatar>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="min-w-[9rem]" align="end">
+          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => setNotify(true)}>
+            Notifications{" "}
+            {Boolean(notifications.filter((e) => e.new === true).length) && (
+              <Badge className="bg-red-600 text-white ml-auto flex h-5 w-5 text-xs shrink-0 items-center justify-center rounded-full">
+                {notifications.filter((e) => e.new === true).length}
+              </Badge>
+            )}
+          </DropdownMenuItem>
+          <Link href={"/support"}>
+            <DropdownMenuItem>Support</DropdownMenuItem>
+          </Link>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => setLogout(true)}>
+            Logout
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <CertificateDialog open={open} setOpen={setOpen} />
+      <LogoutModal logout={logout} setLogout={setLogout} />
+      <NotificationSheet notify={notify} setNotify={setNotify} />
+      {Boolean(notifications.filter((e) => e.new === true).length) && (
+        <div className="absolute top-0 right-0 h-4 w-4 grid place-items-center font-semibold bg-red-700 text-xs rounded-full">
+          {notifications.filter((e) => e.new === true).length}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function LogoutModal({
+  logout,
+  setLogout,
+}: {
+  logout: boolean;
+  setLogout: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  return (
+    <AlertDialog open={logout} onOpenChange={setLogout}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you sure want to Sign Out?</AlertDialogTitle>
@@ -560,5 +456,60 @@ export function UserButton({ src, name }: { src: string; name: string }) {
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
+  );
+}
+
+function NotificationSheet({
+  notify,
+  setNotify,
+}: {
+  notify: boolean;
+  setNotify: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const [open, setOpen] = useAtom(certificate);
+  const [notfications, setNotifications] = useAtom(notification);
+
+  return (
+    <Sheet open={notify} onOpenChange={setNotify}>
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>Notifications</SheetTitle>
+          <SheetDescription>
+            Stay tuned for new updates, we&apos;ll notify and reach out to you
+            soon.
+          </SheetDescription>
+        </SheetHeader>
+        <div className="grid gap-4 py-4">
+          <div className="rounded-lg border-prime border bg-second/30 min-h-20 w-full flex flex-col gap-2 p-1">
+            <Badge className="rounded bg-prime/60 hover:bg-prime/80 text-white text-center w-full">
+              🎉 Certificate Ready!
+            </Badge>
+            <p className="text-sm px-2">
+              Your certificate is generated. Download it from here now!
+            </p>
+            <Button
+              onClick={() => {
+                setNotify(false),
+                  setNotifications(
+                    notfications.map((e) =>
+                      e.id === 1 ? { ...e, new: false } : e
+                    )
+                  ),
+                  setOpen(true);
+              }}
+              size={"sm"}
+              className="bg-prime/80 hover:bg-prime text-white"
+            >
+              Download Certificate
+            </Button>
+          </div>
+        </div>
+        {/* <SheetFooter>
+          <SheetClose asChild>
+            <Button type="submit">Save changes</Button>
+          </SheetClose>
+        </SheetFooter> */}
+      </SheetContent>
+    </Sheet>
   );
 }

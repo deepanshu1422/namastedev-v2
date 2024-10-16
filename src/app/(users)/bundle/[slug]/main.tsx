@@ -3,9 +3,12 @@
 import Hero from "./unpaid/hero";
 import Detail from "./unpaid/details";
 import { Floating, PaymentModal, PaymentSheet } from "./payments";
-import { useState } from "react";
-import { YTModal } from "@/app/(guide)/testimonials/slider";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { YTModal } from "@/app/(main)/testimonials/slider";
+import { usePathname, useSearchParams } from "next/navigation";
+
+import { addToCart, viewItem } from "@/services/gaEvents";
+import { useSession } from "next-auth/react";
 
 type BundleItem = {
   item: {
@@ -68,11 +71,29 @@ export default function Main({
 }: BundleItem) {
   const sheet = useSearchParams().get("sheet");
 
+  // const { data: session } = useSession();
+
   const [open, setOpen] = useState(Boolean(sheet));
   const [openPay, setOpenPay] = useState(false);
   const [openYt, setOpenYt] = useState(false);
 
   const courseOffer = offers;
+
+  const pathName = usePathname();
+
+  useEffect(() => {
+    // @ts-ignore
+    // if (!session?.user?.bundleId?.includes(bundleId))
+      viewItem({
+        title: bundleTitle,
+        slug,
+        itemId: bundleId,
+        itemType: "bundle",
+        value:
+          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            ?.amount ?? 999,
+      });
+  }, [pathName]);
 
   // function Paid() {
   //   return (
@@ -161,9 +182,23 @@ export default function Main({
   // }
 
   function Unpaid() {
+
+    function addToCartEvent() {
+      addToCart({
+        itemId: bundleId,
+        itemType: "bundle",
+        slug,
+        title: bundleTitle,
+        value:
+          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            ?.amount ?? 999,
+      });
+    }
+
     return (
       <main className="relative min-h-svh overflow-clip">
         <Hero
+          addToCart={addToCartEvent}
           bundleId={bundleId}
           rating={rating}
           title={bundleTitle ?? "NULL"}
@@ -181,6 +216,7 @@ export default function Main({
           setYtOpen={setOpenYt}
         />
         <Detail
+          addToCart={addToCartEvent}
           bundleId={bundleId}
           coursesCollection={coursesCollection}
           // longDescription={mdx}
@@ -213,11 +249,12 @@ export default function Main({
         />
         <YTModal open={openYt} setOpen={setOpenYt} url="nTAHWER3K-0" />
         <Floating
+          addToCart={addToCartEvent}
           price={
             pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
               amount: 0,
               bigAmount: 0,
-              percentage: 0
+              percentage: 0,
             }
           }
           open={open}

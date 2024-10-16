@@ -25,8 +25,7 @@ export default function Guides() {
           Premium Interview Guides Included ✨
         </h2>
         <p className="text-sm text-pretty text-muted-foreground">
-          These projects mentioned below with clean code so that you can make
-          you protfoilio look great.❤️
+          Guides that have helped our students get interviews at top companies.❤️
         </p>
       </div>
       <Slider guides={guides} />
@@ -65,7 +64,7 @@ function Slider({ guides }: { guides: string[] }) {
       <CarouselContent>
         {guides.map((e, index) => (
           <CarouselItem
-            className="basis-full sm:basis-1/2 md:basis-1/3"
+            className="basis-1/3"
             key={index}
           >
             <Image

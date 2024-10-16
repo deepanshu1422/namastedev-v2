@@ -18,12 +18,14 @@ import { Reviews } from "../checkout";
 import { useSession } from "next-auth/react";
 import { sendEvent } from "@/services/fbpixel";
 import { sha256 } from "js-sha256";
+import { addToCart } from "@/services/gaEvents";
 
 export default function Hero({
   bundleId,
   title,
   image,
   rating,
+  addToCart,
   price,
   shortDescription,
   courseOffer,
@@ -32,6 +34,7 @@ export default function Hero({
 }: {
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
+  addToCart: () => void;
   bundleId: string;
   rating: number;
   title: string;
@@ -48,7 +51,7 @@ export default function Hero({
   return (
     <>
       <div className={`w-full grid bg-zinc-950/60 shadow`}>
-        <div className="tab:px-20 tab:pt-14 tab:pb-3 max-tab:pt-[1rem] max-tab:pb-5 m-auto max-w-[80rem] flex flex-auto max-tab:flex-col w-full justify-between text-white gap-3 sm:gap-7 h-full">
+        <div className="tab:px-20 tab:pt-14 tab:pb-3 max-tab:pt-[1rem] max-tab:pb-5 m-auto max-tab:max-w-xl max-w-[80rem] flex flex-auto max-tab:flex-col w-full justify-between text-white gap-3 sm:gap-7 h-full">
           <section className="grid gap-5 h-fit tab:max-w-[60%]">
             <Link
               className="px-6 flex gap-1 items-center text-sm text-muted-foreground hover:text-foreground w-fit"
@@ -67,7 +70,7 @@ export default function Hero({
                 src={image}
                 height={800}
                 width={1200}
-                className="bg-prime/20 max-tab:max-h-60 object-cover"
+                className="bg-prime/20 object-cover aspect-[6/4]"
               />
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background/40 p-0.5 rounded-full shadow-2xl shadow-black group-hover:-translate-y-2/3 transition-transform">
                 <div className="bg-white/50 backdrop-blur-sm p-4 rounded-full">
@@ -120,52 +123,53 @@ export default function Hero({
               {/* <div className="text-sm text-white/40">Updated 4 months ago</div> */}
 
               <div className="tab:hidden flex flex-col gap-4">
-                {/* @ts-ignore */}
-                {data?.user?.bundleId?.includes(bundleId) ? (
-                  <Link
-                    href={"/dashboard"}
-                    className="flex flex-col gap-2 relative"
-                  >
-                    <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
-                    <Button
-                      size={"lg"}
-                      variant={"outline"}
-                      className="relative flex items-center font-semibold gap-1 transition-all px-4 py-3 rounded-md text-white text-lg"
-                    >
-                      Watch Now
-                    </Button>
-                  </Link>
-                ) : (
-                  <>
-                    <span className="text-white text-2xl font-bold flex gap-2 items-end pt-1">
-                      ₹{price.amount}
-                      <span className="text-muted-foreground/70 italic line-through">
-                        ₹{price.bigAmount}
-                      </span>
-                      <span>{price.percentage}% off</span>
+                <>
+                  <span className="text-white text-2xl font-bold flex gap-2 items-end pt-1">
+                    ₹{price.amount}
+                    <span className="text-muted-foreground/70 italic line-through">
+                      ₹{price.bigAmount}
                     </span>
+                    <span>{price.percentage}% off</span>
+                  </span>
 
-                    <div className="flex flex-col gap-2 py-1">
+                  <div className="flex flex-col gap-2 py-1">
+                    <Button
+                      onClick={() => {
+                        setOpen(true);
+                        sendEvent("Initiate Checkout", {
+                          content_ids: [bundleId],
+                          content_type: "bundle",
+                          content_name: title,
+                          em: sha256(data?.user?.email ?? ""),
+                          // @ts-ignore
+                          ph: sha256(data?.user?.phone ?? ""),
+                          fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
+                        });
+                        addToCart();
+                      }}
+                      size={"lg"}
+                      className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
+                    >
+                      Buy Now
+                    </Button>
+                  </div>
+                  {bundleId !== "NEWALL30DC" && (
+                    <Link
+                      className="relative w-full"
+                      href={
+                        "/bundle/complete-package-all-course-bundle?sheet=true"
+                      }
+                    >
+                      <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
                       <Button
-                        onClick={() => {
-                          setOpen(true);
-                          sendEvent("Initiate Checkout", {
-                            content_ids: [bundleId],
-                            content_type: "bundle",
-                            content_name: title,
-                            em: sha256(data?.user?.email ?? ""),
-                            ph: sha256(data?.user?.phone ?? ""),
-                            fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
-                          });
-                        }}
-                        size={"lg"}
-                        className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
+                        variant={"outline"}
+                        className="relative w-full font-jakarta flex items-center font-semibold gap-1 transition-all px-4 py-3 rounded-md text-white"
                       >
-                        Buy Now
+                        Get All Bundles Courses 💰
                       </Button>
-                    </div>
-                  </>
-                )}
+                    </Link>
+                  )}
+                </>
 
                 <div className="flex flex-col gap-1">
                   <p className="tab:max-w-2xl max-tab:leading-6 line-clamp-3 text-white/60 italic font-semibold">
@@ -180,6 +184,20 @@ export default function Hero({
                       {e}
                     </span>
                   ))}
+                </div>
+
+                {/* New discount offers section */}
+                <div className="mt-4 bg-gradient-to-r from-yellow-400 to-orange-500 p-4 rounded-lg">
+                  <h3 className="text-lg font-bold mb-2">
+                    Limited Time Offers:
+                  </h3>
+                  <ol className="list-decimal list-inside space-y-2">
+                    <li>85% discount - Valid only for today!</li>
+                    <li>Buy one, get second course 50% off</li>
+                    <li>
+                      Early bird special: Extra 10% off for first 100 buyers
+                    </li>
+                  </ol>
                 </div>
               </div>
             </div>

@@ -2,15 +2,9 @@ import React from "react";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import Main from "./main";
-import { compileMDX, MDXRemote } from "next-mdx-remote/rsc";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-const CodeSnippet = ({ children }: { children: string }) => (
-  <div className="md:max-w-full horizontal-scroll w-full bg-slate-500 max-sm:w-[90dvw] font-semibold shrink mt-5">
-    <SyntaxHighlighter style={gruvboxDark}>{children}</SyntaxHighlighter>
-  </div>
-);
+export const dynamic = "force-static";
+
 export type Courses = {
   bundleCollection: {
     items: {
@@ -70,7 +64,7 @@ type Props = {
 
 export async function generateStaticParams() {
   const query = `query {
-        bundleCollection{
+        bundleCollection(where: {publish: true}){
         items{
             slug
             }
@@ -104,7 +98,7 @@ export async function generateMetadata(
 
   try {
     const query = `query {
-            bundleCollection{
+            bundleCollection(where: {publish: true}){
             items{
                 slug,
                 bundleTitle,
@@ -154,7 +148,7 @@ export async function generateMetadata(
 
 async function getCourses({ slug }: { slug: string }): Promise<Courses> {
   const query = `query {
-    bundleCollection(where: {slug: "${slug}"},limit:1){
+    bundleCollection(where: {slug: "${slug}", publish: true},limit:1){
         items{
         bundleId,
         bundleTitle,

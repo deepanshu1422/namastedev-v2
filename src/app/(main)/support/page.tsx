@@ -30,13 +30,13 @@ export default function Home() {
             Email:{" "}
             <Link
               className="font-semibold text-prime"
-              href={"mailto:support@nightlightprojects.freshdesk.com"}
+              href={"mailto:projectsnightlight@gmail.com"}
             >
-              support@nightlightprojects.freshdesk.com
+              projectsnightlight@gmail.com
             </Link>
           </li>
           {/* <li>Phone: +1234567890</li> */}
-          <li>
+          {/* <li>
             DM Chats:{" "}
             <Link
               target="_blank"
@@ -53,7 +53,7 @@ export default function Home() {
             >
               Deepanshu Udawani
             </Link>
-          </li>
+          </li> */}
         </ul>
 
         <h3 className="text-2xl font-bold text-second capitalize">
@@ -61,13 +61,35 @@ export default function Home() {
         </h3>
 
         <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="item-1" className="border-b">
+          <AccordionItem value="item-1" className="border p-2">
             <AccordionTrigger className="text-start">
               How can I access my already purchased course which I am unable to
               find ?
             </AccordionTrigger>
             <AccordionContent>
-              Do not worry all your purchased courses are safe just store on another platform, You can find all your purchased course on
+              If you purchased courses before September 1st, You can find all your purchased course on
+              <Link
+                target="_blank"
+                className="font-semibold text-prime pl-2"
+                href={"https://courses.30dayscoding.com/s/store"}
+              >
+                https://courses.30dayscoding.com/s/store
+              </Link>. Visit here to get the access.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-1" className="border p-2">
+            <AccordionTrigger className="text-start">
+              I am facing login issues
+            </AccordionTrigger>
+            <AccordionContent>
+              Please visit  <Link
+                target="_blank"
+                className="font-semibold text-prime pl-2"
+                href={"https://30dayscoding.com/dashboard"}
+              >
+                https://30dayscoding.com/dashboard
+              </Link>  and see if you have the course access. If you purchased courses before September 1st, 
+              You can find all your purchased course on
               <Link
                 target="_blank"
                 className="font-semibold text-prime pl-2"

@@ -85,7 +85,7 @@ export default async function mentorshipPayment({
     "x-30dc-signature": signature,
   };
 
-  const base_url = "https://stingray-app-p5p3r.ondigitalocean.app";
+  const base_url = process.env.BACKEND_PAYMENT_API_ENDPOINT;
 
   const paymentUrl = pass
     ? base_url + "/api/v1/purchase/mentorship"

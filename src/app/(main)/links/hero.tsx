@@ -45,7 +45,7 @@ function Courses({
 export default function Hero() {
   let courses = [
     {
-      title: "1:1 Mentorship",
+      title: "Join Community",
       imgSrc: "/logo.png",
       link: "/mentorship",
       category: ["mentorship", "job"],

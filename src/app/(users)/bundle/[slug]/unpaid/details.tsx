@@ -6,20 +6,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  Check,
-  CheckCheck,
-  CheckCircle2,
-  ChevronDown,
-  Dot,
-  Video,
-} from "lucide-react";
+import { Check, Video } from "lucide-react";
 import Checkout from "./checkout";
 import { Dispatch, SetStateAction, useState } from "react";
 import Image from "next/image";
 import Reviews from "./reviews";
 import Guides from "./guides";
 import Courses from "./courses";
+import Mentors from "@/app/(users)/mentors";
+import VideoSlider from "@/app/(main)/testimonials/video-slider";
 // import Reviews from "./reviews"
 
 export default function Details({
@@ -31,8 +26,10 @@ export default function Details({
   learn,
   setOpen,
   setYtOpen,
+  addToCart,
   faqs,
 }: {
+  addToCart: () => void;
   bundleId: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
@@ -60,10 +57,11 @@ export default function Details({
   }[];
 }) {
   return (
-    <div className="tab:px-20 tab:py-6 max-tab:pt-4 max-tab:pb-10 m-auto max-w-[80rem] flex w-full">
+    <div className="tab:px-20 tab:py-6 max-tab:pt-4 max-tab:pb-10 m-auto max-tab:max-w-2xl max-w-[80rem] flex w-full">
       <div className="flex flex-col w-full gap-6 px-6 overflow-hidden">
         <Courses coursesCollection={coursesCollection} />
 
+        <Mentors />
         <section className="flex flex-col gap-1">
           <div className="flex flex-col gap-3 border-prime/80 border bg-second/30 pt-5 p-4">
             <span className="text-2xl font-bold">What you&apos;ll learn</span>
@@ -163,12 +161,15 @@ export default function Details({
           </div>
         </section>
 
+        <VideoSlider />
+
         <Reviews />
         <Guides />
         <FAQ faqs={faqs} />
       </div>
 
       <Checkout
+        addToCart={addToCart}
         // @ts-ignore
         bundleId={bundleId}
         setOpen={setOpen}

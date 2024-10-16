@@ -85,7 +85,7 @@ export default function Mentor() {
       company: [
         { name: "MakeMyTrip", path: "/makemytrip_logo.jfif" },
         { name: "Alibaba Cloud", path: "/alibaba.jfif" },
-        { name: "Thapar Institute of Engineering", path: "/thapar.jfif" },
+        { name: "Thapar - Engineering", path: "/thapar.jfif" },
       ],
     },
     {
@@ -97,7 +97,7 @@ export default function Mentor() {
         { name: "Google", path: "/company3.png" },
         { name: "Arrow Electronics", path: "/arrow_logo.jfif" },
         {
-          name: "Massachusetts Amherst",
+          name: "UMass Amherst",
           path: "/umassamherst_logo.jfif",
         },
       ],
@@ -124,7 +124,7 @@ export default function Mentor() {
     //   company: [
     //     { name: "DBS", path: "/dbs.jpg" },
     //     { name: "Walmart Global IN", path: "/walmart.jpg" },
-    //     { name: "Thapar Institute of Engineering", path: "/thapar.jfif" },
+    //     { name: "Thapar - Engineering", path: "/thapar.jfif" },
     //   ],
     // },
     // {

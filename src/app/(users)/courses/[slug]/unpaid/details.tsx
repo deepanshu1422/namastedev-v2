@@ -6,55 +6,52 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  Check,
-  CheckCheck,
-  CheckCircle2,
-  ChevronDown,
-  Dot,
-  Video,
-} from "lucide-react";
+import { Video } from "lucide-react";
 import Checkout from "./checkout";
 import { Dispatch, SetStateAction, useState } from "react";
 import Image from "next/image";
 import Reviews from "./reviews";
 import Guides from "./guides";
+import Mentors from "@/app/(users)/mentors";
+import VideoSlider from "@/app/(main)/testimonials/video-slider";
 // import Reviews from "./reviews"
 
 export default function Details({
   image,
   courseId,
-  longDescription,
+  // longDescription,
   modulesCollection,
-  projectsCollection,
+  // projectsCollection,
   price,
   courseOffer,
-  learn,
+  // learn,
   setOpen,
   setYtOpen,
+  addToCart,
   faqs,
 }: {
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
+  addToCart: () => void;
   courseOffer: string[];
   courseId: string;
   image: string;
-  longDescription: React.JSX.Element;
+  // longDescription: React.JSX.Element;
   price: {
     amount: number;
     percentage: number;
     bigAmount: number;
   };
-  learn: string[];
-  projectsCollection: {
-    items: {
-      title: string;
-      content: string[];
-      coverImage: {
-        url: string;
-      };
-    }[];
-  };
+  // learn: string[];
+  // projectsCollection: {
+  //   items: {
+  //     title: string;
+  //     content: string[];
+  //     coverImage: {
+  //       url: string;
+  //     };
+  //   }[];
+  // };
   modulesCollection: {
     total: number;
     items: {
@@ -79,9 +76,9 @@ export default function Details({
   }[];
 }) {
   return (
-    <div className="tab:px-20 tab:py-6 max-tab:pt-4 max-tab:pb-10 m-auto max-w-[80rem] flex w-full">
+    <div className="tab:px-20 tab:py-6 max-tab:pt-4 max-tab:pb-10 m-auto max-w-2xl tab:max-w-[80rem] flex w-full">
       <div className="flex flex-col w-full gap-6 px-6 overflow-hidden">
-        <section className="flex flex-col gap-1">
+        {/* <section className="flex flex-col gap-1">
           <div className="flex flex-col gap-3 border-prime/80 border bg-second/30 pt-5 p-4">
             <span className="text-2xl font-bold">What you&apos;ll learn</span>
             <div className="grid phone:grid-cols-2 gap-5 py-3">
@@ -103,21 +100,24 @@ export default function Details({
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
+
+        <Mentors />
 
         <section className="flex flex-col gap-4">
           <div className="flex max-sm:flex-col gap-2 sm:items-end">
             <h2 className="text-xl tab:text-2xl font-bold text-white">
-              Course Content
+              Course content - beginner to advanced
             </h2>
+
             <span className="flex text-sm text-white/60 items-center">
-              ({modulesCollection.total} Lessons)
+              ({modulesCollection.total} Modules)
             </span>
           </div>
           <Chapters modulesCollection={modulesCollection} />
         </section>
 
-        {!!projectsCollection.items.length && (
+        {/* {!!projectsCollection.items.length && (
           <section className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
               <h2 className="font-bold text-xl tab:text-2xl">
@@ -158,7 +158,7 @@ export default function Details({
               )
             )}
           </section>
-        )}
+        )} */}
         {/* <div>
           <section
             className={`flex flex-col ${
@@ -180,6 +180,7 @@ export default function Details({
             </Button>
           </div>
         </div> */}
+        <VideoSlider />
 
         <section className="flex flex-col gap-4">
           <div className="grid tab:grid-cols-2 gap-5 p-3 tab:p-6 shadow-xl border-prime/80 border bg-second/30">
@@ -207,6 +208,7 @@ export default function Details({
       </div>
 
       <Checkout
+        addToCart={addToCart}
         setOpen={setOpen}
         setYtOpen={setYtOpen}
         courseOffer={courseOffer}
@@ -241,7 +243,7 @@ export function Chapters({
     }[];
   };
 }) {
-  const [state, setState] = useState(modulesCollection.items.slice(0, 7));
+  const [state, setState] = useState(modulesCollection.items.slice(0, 10));
 
   return (
     <div className="flex flex-col gap-2">

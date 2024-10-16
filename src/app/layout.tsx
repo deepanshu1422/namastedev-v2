@@ -13,6 +13,10 @@ import PageSense from "@/util/pagesense";
 
 import AdSense from "@/util/ads";
 import PixelEvents from "@/services/fbpixel";
+// import GoogleAnalytics from "@/util/ga";
+import GoogleTagManager from "@/components/tracking/GoogletagManager";
+import GoogleAds from "@/util/googleAds";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export default async function RootLayout({
   children,
@@ -24,11 +28,17 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
+        <GoogleAnalytics gaId={"G-6PWT2QJ1GP"} />
         {/* <GoogleTagManager containerId="GTM-W4LNH7RV" /> */}
-        <Script id="razorpay" src="https://checkout.razorpay.com/v1/checkout.js" async />
+        <Script
+          id="razorpay"
+          src="https://checkout.razorpay.com/v1/checkout.js"
+          async
+        />
         {/* <Script id="lemonSqueezy" src="https://app.lemonsqueezy.com/js/lemon.js" defer /> */}
         <Pixel />
         <AdSense />
+        <GoogleAds />
       </head>
       <SessionProvider session={session}>
         <QueryProvider>
@@ -49,7 +59,6 @@ export default async function RootLayout({
       <Clarity />
 
       <PageSense />
-      {/* <GoogleAnalytics gaId={"G-BCTWV4GBCY"} /> */}
     </html>
   );
 }

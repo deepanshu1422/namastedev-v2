@@ -24,19 +24,26 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import Image from "next/image";
-import { TicketPercent } from "lucide-react";
+import { Check, Plug, Plus } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 
 export function UpsellModal({
+  title = "Job Ready Bundle - Full Stack, DSA, Interview Prep",
+  slug = "job-ready-bundle-full-stack-dsa-interview-prep",
+  amount = "999",
+  bigAmount = "9999",
+  percentage = "90",
   open,
   setOpen,
   setPaymentOpen,
   setBundelPaymentOpen,
 }: {
+  title?: string;
+  slug?: string;
+  amount?: string;
+  bigAmount?: string;
+  percentage?: string;
   open: boolean;
   setPaymentOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setBundelPaymentOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -45,8 +52,8 @@ export function UpsellModal({
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const info = {
-    title: "Bundle Offer",
-    desc: "Instead of buying only one course you can get all courses at discounted price.",
+    title: "Exclusive Bundle Offer",
+    desc: "Get All Courses at 90% off. Lifetime access and certificate for each course.",
   };
 
   if (isDesktop) {
@@ -54,33 +61,20 @@ export function UpsellModal({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="gap-2 sm:max-w-[425px]">
           <DialogHeader>
-            {/* <DialogTitle>{info.title}</DialogTitle> */}
-            {/* <DialogDescription>{info.desc}</DialogDescription> */}
+            <DialogTitle>{info.title}</DialogTitle>
+            <DialogDescription>{info.desc}</DialogDescription>
           </DialogHeader>
-          <ProfileForm
+          <Offer
+            title={title}
+            slug={slug}
+            amount={amount}
+            bigAmount={bigAmount}
+            percentage={percentage}
             setOpen={setOpen}
+            setPaymentOpen={setPaymentOpen}
             setOpenBundle={setBundelPaymentOpen}
             className=""
           />
-          <div className="w-full text-sm items-center flex gap-2">
-            <hr className="w-full" />
-            OR
-            <hr className="w-full" />
-          </div>
-          <DialogFooter>
-            {/* <DialogClose asChild> */}
-            <Button
-              onClick={() => {
-                setOpen(false);
-                setPaymentOpen(true);
-              }}
-              className="w-full"
-              variant={"secondary"}
-            >
-              Continue Purchase...
-            </Button>
-            {/* </DialogClose> */}
-          </DialogFooter>
         </DialogContent>
       </Dialog>
     );
@@ -90,78 +84,116 @@ export function UpsellModal({
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          {/* <DrawerTitle>{info.title}</DrawerTitle> */}
-          {/* <DrawerDescription>{info.desc}</DrawerDescription> */}
+          <DrawerTitle>{info.title}</DrawerTitle>
+          <DrawerDescription className="line-clamp-2">
+            {info.desc}
+          </DrawerDescription>
         </DrawerHeader>
-        <ProfileForm
+        <Offer
+          title={title}
+          slug={slug}
+          amount={amount}
+          bigAmount={bigAmount}
+          percentage={percentage}
           setOpen={setOpen}
+          setPaymentOpen={setPaymentOpen}
           setOpenBundle={setBundelPaymentOpen}
           className="mx-4"
         />
-        <div className="w-full text-sm items-center flex gap-2">
-          <hr className="w-full" />
-          OR
-          <hr className="w-full" />
-        </div>
-        <DrawerFooter className="pt-2">
-          {/* <DrawerClose asChild> */}
-          <Button
-            onClick={() => {
-              setOpen(false);
-              setPaymentOpen(true);
-            }}
-            variant={"secondary"}
-          >
-            Continue Purchase...
-          </Button>
-          {/* </DrawerClose> */}
-        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );
 }
 
-function ProfileForm({
+function Offer({
+  title = "Job Ready Bundle - Full Stack, DSA, Interview Prep",
+  slug = "job-ready-bundle-full-stack-dsa-interview-prep",
+  amount = "999",
+  bigAmount = "9999",
+  percentage = "90",
   className,
   setOpen,
+  setPaymentOpen,
   setOpenBundle,
 }: {
+  title?: string;
+  slug?: string;
+  amount?: string;
+  bigAmount?: string;
+  percentage?: string;
   className: string;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setPaymentOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setOpenBundle: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const courses = [
+    "Full Stack Mastery Course",
+    "DSA Mastery Course",
+    "Blockchain Mastery Course",
+    "Data Analytics Course",
+    "AI Mastery Course",
+  ];
   return (
-    <div
-      className={`${className} cursor-pointer border-2 border-primary/60 rounded flex flex-col`}
-    >
-      <Link
-        href={"/bundle/complete-package-all-course-bundle?sheet=true"}
-        className="relative rounded overflow-hidden"
-      >
-        <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-prime via-prime to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
-        <div className="flex justify-center items-center gap-1 text-sm bg-primary/60 py-1 relative">
-          <TicketPercent className="h-4 w-4" />
-          Limited Offer
+    <div className={`${className} cursor-pointer flex flex-col pb-2 gap-2`}>
+      <div className="bg-gradient-to-t to-head/80 from-second/80 p-3 rounded-md">
+        <div className="flex justify-between mb-2">
+          <h3 className="text-lg line-clamp-2 font-semibold">
+            17 Course bundle
+          </h3>
+          <span className="uppercase font-bold bg-yellow-500 text-black text-xs px-3 py-1 rounded-full h-fit break-all line-clamp-1">
+            Best Value
+          </span>
+        </div>
+        <div className="flex justify-between">
+          <div className="flex flex-col gap-1.5 text-xs pb-3">
+            {courses.map((e, i) => (
+              <span key={i} className="flex items-center gap-2">
+                <Check className="w-4 h-4 stroke-primary" />
+                {e}
+              </span>
+            ))}
+            <span className="flex items-center gap-2">
+              <Plus className="w-4 h-4 stroke-primary" />
+              12 More Courses
+            </span>
+          </div>
         </div>
 
-        <div className="relative w-full p-4 sm:px-6 bg-background font-semibold max-sm:flex-col flex gap-3">
-          <div className="flex flex-col">
-            <p className="max-sm:text-sm">Get All Courses @ 999/-</p>
-            <div className="flex flex-col pt-0.5 text-sm">
-              <span>✅ Full Stack Mastery Course</span>
-              <span>✅ DSA Mastery Course</span>
-              <span>✅ Blockchain Mastery Course</span>
-              <span>✅ Data Analytics Course</span>
-              <span>✅ AI Mastery Course</span>
-            </div>
+        <div className="flex justify-between items-center pb-3">
+          <div className="flex items-end gap-2">
+            <span className="text-2xl font-bold">₹999</span>
+            <span className="text-xl font-medium text-muted-foreground line-through italic">
+              ₹25000
+            </span>
           </div>
-          <Button
-            className="bg-prime/80 hover:bg-prime text-white h-fit w-full sm:w-fit m-auto line-clamp-1 "
-          >
-            Claim Now
-          </Button>
+
+          <Badge className="py-1 px-2 rounded h-fit bg-red-500 hover:bg-red-700 text-white">
+            95% off
+          </Badge>
         </div>
+      </div>
+
+      <Link
+        href={"/bundle/complete-package-all-course-bundle?sheet=true"}
+        className="relative overflow-hidden group"
+      >
+        <Button className="bg-prime/80 hover:bg-prime text-white relative w-full">
+          Claim all course bundle offer
+        </Button>
       </Link>
+
+      <div className="flex flex-col gap-3">
+        <Button
+          onClick={() => {
+            setOpen(false);
+            setPaymentOpen(true);
+          }}
+          className="w-full text-wrap"
+          variant={"secondary"}
+        >
+          No thanks, continue with single course
+        </Button>
+      </div>
     </div>
   );
 }

@@ -26,7 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { MinusCircle } from "lucide-react";
+import { Check, MinusCircle, Plus } from "lucide-react";
 
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
@@ -43,6 +43,7 @@ import createBundlePayment from "../../../../../actions/createBundlePayment";
 import { useRouter } from "next/navigation";
 import { sendEvent } from "@/services/fbpixel";
 import { sha256 } from "js-sha256";
+import { beginCheckout, purchase } from "@/services/gaEvents";
 
 export function PaymentSheet({
   cover,
@@ -55,7 +56,7 @@ export function PaymentSheet({
   setOpenPay,
 }: {
   cover?: string;
-  title?: string;
+  title: string;
   amount: number;
   curreny?: string;
   bundleId: string;
@@ -63,7 +64,7 @@ export function PaymentSheet({
   setOpen: Dispatch<SetStateAction<boolean>>;
   setOpenPay: Dispatch<SetStateAction<boolean>>;
 }) {
-  const { data: session, update } = useSession();
+  const { data: session, status, update } = useSession();
 
   const router = useRouter();
 
@@ -90,18 +91,25 @@ export function PaymentSheet({
   const [submitting, setSubmitting] = useState(false);
 
   const states = [
+    "andaman_and_nicobar_islands",
     "andhra_pradesh",
     "arunachal_pradesh",
     "assam",
     "bihar",
+    "chandigarh",
     "chhattisgarh",
+    "daman_and_diu",
+    "delhi",
     "goa",
     "gujarat",
     "haryana",
     "himachal_pradesh",
     "jharkhand",
+    "jammu_and_kashmir",
     "karnataka",
     "kerala",
+    "ladakh",
+    "lakshadweep",
     "madhya_pradesh",
     "maharashtra",
     "manipur",
@@ -109,6 +117,7 @@ export function PaymentSheet({
     "mizoram",
     "nagaland",
     "odisha",
+    "puducherry",
     "punjab",
     "rajasthan",
     "sikkim",
@@ -118,6 +127,16 @@ export function PaymentSheet({
     "uttar_pradesh",
     "uttarakhand",
     "west_bengal",
+  ];
+
+  // Define courseOffer as a variable
+  const courseOffer = [
+    "Full stack Web Development",
+    "Data Structures and Algorithms",
+    "Data Analytics mastery",
+    "AI and Blockchain",
+    "Lifetime valid and Certificates",
+    "12 More Courses",
   ];
 
   function validationError({ message }: { message: string }) {
@@ -143,6 +162,17 @@ export function PaymentSheet({
       let res;
 
       if (bundleId) {
+        beginCheckout({
+          title,
+          amount,
+          itemId: bundleId,
+          itemType: "bundle",
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          state: formData.state,
+          loggedIn: status === "authenticated",
+        });
+
         res = await createBundlePayment({
           bundleId: bundleId,
           email: session?.user?.email ?? formData.email.toLocaleLowerCase(),
@@ -188,6 +218,16 @@ export function PaymentSheet({
             ph: sha256(formData.phone),
             fn: sha256(formData.name.split(" ")[0]),
             ln: sha256(formData.name.split(" ")[1] ?? ""),
+          });
+          purchase({
+            title,
+            amount,
+            itemId: bundleId,
+            itemType: "bundle",
+            name: formData.name,
+            email: formData.email.toLocaleLowerCase(),
+            state: formData.state,
+            loggedIn: status === "authenticated",
           });
           setOpenPay(true);
           await update({ courses: true });
@@ -396,7 +436,7 @@ export function PaymentSheet({
     {
       title: "Payments Details",
       body: (
-        <div className="grid gap-4 py-4">
+        <div className="grid gap-2 py-4">
           <div className="grid sm:grid-cols-3 gap-2">
             <Image
               className="max-sm:hidden rounded-md max-sm:w-full max-h-40 object-contain bg-white/20"
@@ -411,6 +451,18 @@ export function PaymentSheet({
                 {curreny} {amount}
               </span>
             </div>
+          </div>
+          <div className="grid gap-1 text-xs mb-2">
+            {courseOffer.map((e, i) => (
+              <span key={i} className="flex gap-1">
+                <Check className="text-primary h-4 w-3" />
+                <p>{e}</p>
+              </span>
+            ))}
+            {/* <span className="flex gap-1">
+                <Plus className="text-primary h-4 w-3" />
+                <p>12 More Courses</p>
+              </span> */}
           </div>
           <div className="grid grid-cols-5 items-center gap-4">
             <Label htmlFor="name" className="text-left">
@@ -586,6 +638,7 @@ export function Floating({
   bundleId,
   open,
   setOpen,
+  addToCart,
 }: {
   price: {
     amount: number;
@@ -595,6 +648,7 @@ export function Floating({
   bundleId: string;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  addToCart: () => void;
 }) {
   let course = {
     price: price.amount,
@@ -617,9 +671,11 @@ export function Floating({
                   content_ids: [bundleId],
                   content_type: "bundle",
                   em: sha256(session?.user?.email ?? ""),
+                  // @ts-ignore
                   ph: sha256(session?.user?.phone ?? ""),
                   fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
                 });
+                addToCart();
               }}
               variant={"outline"}
               className={`font-semibold text-foreground/80 hover:text-foreground relative w-full p-6 text-sm gap-1`}

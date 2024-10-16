@@ -13,7 +13,7 @@ const staticMaps: MetadataRoute.Sitemap = [
         priority: 1,
     },
     {
-        url: 'https://30dayscoding.com/mentorship',
+        url: 'https://30dayscoding.com/community',
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.8,
@@ -166,7 +166,7 @@ export const getItem = cache(async () => {
 
 export const getCourses = async (): Promise<Record<string, string>[]> => {
     const data = await getContentfulData(`query {
-        courseCollection{
+        courseCollection(where: {publish: true, domain: "30dayscoding.com"}){
         items{
             slug
             }

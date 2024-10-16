@@ -36,7 +36,7 @@ export function verifyHeaderSignatureClerk(body: string, receivedSignature: stri
     );
 }
 
-export function createSignedHeader(body: Record<string, string | number>, secretKey: string) {
+export function createSignedHeader(body: Record<string, string | number | string[]>, secretKey: string) {
     const bodyString = JSON.stringify(body);
     const hash = crypto.createHmac('sha256', secretKey)
         .update(bodyString)

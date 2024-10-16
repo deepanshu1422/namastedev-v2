@@ -1,8 +1,27 @@
-import { atom, useAtom } from "jotai";
+import { atom } from "jotai";
 import { atomWithStorage, loadable } from "jotai/utils";
 
-export const geo = atomWithStorage<string>("geo", "")
-export const country = atomWithStorage<string>("country", "")
+export const certificate = atom<boolean>(false);
+export const purchasedCourses = atom<string[]>([]);
+
+export const notification = atomWithStorage<
+  {
+    id: number,
+    title: string;
+    description: string;
+    new: boolean;
+  }[]
+>("notifications", [
+  {
+    id: 1,
+    title: "🎉 Certificate Ready!",
+    description: "Your certificate is generated. Download it from here now!",
+    new: true,
+  },
+]);
+
+export const geo = atomWithStorage<string>("geo", "");
+export const country = atomWithStorage<string>("country", "");
 
 export const solved = atomWithStorage<string[]>("dsa-solved", []);
 

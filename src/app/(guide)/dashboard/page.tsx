@@ -7,14 +7,12 @@ import { UserDialog } from "./new-user";
 import { auth } from "@/auth";
 import PurchaseTabs from "./purchased";
 
-import { Notebook, Terminal } from "lucide-react"
+import { Notebook, Terminal } from "lucide-react";
 
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "@/components/ui/alert"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { BASE_URL } from "@/util/constants";
 
 export const dynamic = "force-dynamic";
 
@@ -41,19 +39,22 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default async function Dashboard() {
 
+  const session = await auth()
+
+  if (!session?.user?.email) redirect(`/api/auth/signin?callbackUrl=${process.env.NEXTAUTH_URL}/dashboard`)
+
   return (
-    <div className="flex h-full relative overflow-clip">
-      <div className="flex-1 flex flex-col gap-4 px-6 py-5 lg:px-8 w-full max-w-6xl mx-auto">
+    <div className="flex h-full relative">
+      <div className="flex-1 flex flex-col gap-4 px-6 py-5 lg:px-8 w-full max-w-6xl mx-auto overflow-hidden">
         <OldCourses />
-        <Suspense fallback={<CoursesFallback />}>
-          <Courses />
-        </Suspense>
         <div className="flex justify-between">
           <PurchaseTabs />
         </div>
+        <Suspense fallback={<CoursesFallback />}>
+          <Courses />
+        </Suspense>
       </div>
       <Notifications />
       <UserDialog />
@@ -81,7 +82,7 @@ export function OldCourses() {
       <Notebook className="h-4 w-4" />
       <AlertTitle>Note</AlertTitle>
       <AlertDescription>
-        You can access all your previous bought courses <span className="text-primary underline">here.</span>
+        If you purchased courses before September 1st, please access them <span className="text-primary underline">here.</span>
       </AlertDescription>
     </Alert>
         </Link>

@@ -6,10 +6,12 @@ import Courses from "./courses";
 import type { CoursesType } from "./page";
 import Reviews from "./reviews";
 import Image from "next/image";
-import { CheckCheck } from "lucide-react";
+import { CheckCheck, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Script from "next/script";
+
+import { Badge } from "@/components/ui/badge";
 
 import {
   Accordion,
@@ -17,31 +19,61 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Mentors from "../mentorship/mentors";
+import Success from "@/components/mentorship-comp/success";
+import VideoSlider from "../testimonials/video-slider";
 
 export default function Main({ courses }: { courses: CoursesType }) {
   const [state, setState] = useState("");
 
   const faq = [
     {
-      question: "How can I get mentorship support?",
+      question: "Are the courses lifetime valid?",
       answer: (
         <p>
-          You can access mentorship support by visiting the following link{" "}
-          <Link className="text-prime" href={"/mentorship"}>
-            Mentorship Support.
-          </Link>
+          Yes, all our courses come with lifetime access, allowing you to
+          revisit the materials whenever you need.
         </p>
       ),
     },
     {
-      question: "What is the duration of the course?",
-      answer:
-        "The course duration is usually 30 days but it can take few more days based on certain selection of courses. However, you can complete it at your own pace since you'll have lifetime access.",
+      question: "Is a certificate given?",
+      answer: (
+        <p>
+          Yes, upon successful completion of the course, you will receive a
+          certificate to showcase your achievement.
+        </p>
+      ),
+    },
+    {
+      question: "How long will it take to complete the course?",
+      answer: (
+        <p>
+          You can take your time! The courses are designed for self-paced
+          learning, so you can complete them at your convenience.
+        </p>
+      ),
+    },
+    {
+      question: "How can I get mentorship support?",
+      answer: (
+        <p>
+          You can access mentorship support by visiting the following link{" "}
+          {/* <Link className="text-prime" href={"/community"}> */}
+            Mentorship Support.
+          {/* </Link> */}
+        </p>
+      ),
     },
     {
       question: "How often is the course updated?",
-      answer:
-        "We regularly update our courses to reflect the latest industry trends and practices. You will automatically receive access to all future updates at no extra cost.",
+      answer: (
+        <p>
+          We regularly update our courses to reflect the latest industry trends
+          and practices. You will automatically receive access to all future
+          updates at no extra cost.
+        </p>
+      ),
     },
     {
       question: "What will be the next step?",
@@ -52,13 +84,19 @@ export default function Main({ courses }: { courses: CoursesType }) {
           mentorship can help you apply the knowledge from the course to
           real-world projects and provide guidance tailored to your career
           goals. Visit{" "}
-          <Link className="text-prime" href={"/mentorship"}>
+          {/* <Link className="text-prime" href={"/community"}> */}
             Mentorship Support.
-          </Link>
+          {/* </Link> */}
         </p>
       ),
     },
   ];
+
+  const bundle = courses.bundleCollection.items.find(
+    (e) =>
+      e.slug ===
+      "complete-package-all-course-bundle"
+  );
 
   return (
     <main className="bg-background bg-bg min-h-svh transition-all">
@@ -84,20 +122,26 @@ export default function Main({ courses }: { courses: CoursesType }) {
       />
       <Hero
         title="Job-Ready Mastery Courses"
-        desc="Advance your development skills with our comprehensive online courses. Learn MERN Stack, Blockchain, Data Structures & Algorithms, AI, and more from industry experts."
+        desc="Advance your development skills with our comprehensive online courses. Learn Full Stack, Data Structures & Algorithms, AI, Blockchain, Data Analytics, and more from industry experts."
         heroImage="https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         search={state}
         setSearch={setState}
       />
+      <Mentors />
       <Bundle
-        content={courses.bundleCollection.items[0].offers}
-        title={courses.bundleCollection.items[0].bundleTitle}
-        url={courses.bundleCollection.items[0].coverImage.url}
-        price={courses.bundleCollection.items[0].pricingsCollection.items[0]}
-        slug={courses.bundleCollection.items[0].slug}
+        content={bundle?.offers ?? [""]}
+        title={bundle?.bundleTitle ?? ""}
+        url={bundle?.coverImage.url ?? ""}
+        price={bundle?.pricingsCollection.items.find(
+          (e) => e.countryCode === "IN"
+        ) ?? { amount: 999, bigAmount: 25000, percentage: 90 }}
+        slug={bundle?.slug ?? "complete-package-all-course-bundle"}
       />
       <Courses state={state} courses={courses} />
-      <Reviews />
+      <VideoSlider />
+      {/* <Reviews /> */}
+      <Success />
+      <div className="my-5"></div>
       <Faqs faq={faq} />
     </main>
   );
@@ -178,20 +222,27 @@ function Bundle({
   slug: string;
 }) {
   const mentorship = [
-    "Resume Review",
-    "Referal to Big MNCs",
+    "Personalized Roadmap and Resume Review",
+    "Access to all courses",
+    "Mentorship calls and QnA",
     "24/7 Whatsapp Doubt Solving",
-    "Weekly interaction with Senior Engineers",
-    "Personalized Roadmap and Follow Up",
+    "Biweekly events and interactions",
   ];
 
   return (
-    <div className="flex max-phone:flex-col w-full max-w-[85rem] gap-7 mx-auto max-phone:px-6 px-10 py-5 tab:pb-8">
+    <div className="flex max-phone:flex-col w-full max-w-4xl gap-7 mx-auto max-phone:px-6 px-10 py-10 tab:pb-8 ">
       <Link
         href={"/bundle/" + slug}
         className="flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6"
       >
         <div className="max-tab:order-last flex flex-col gap-3">
+
+          {/* <Badge
+            className="rounded bg-lime-800/80  hover:bg-lime-800 p-3"
+            variant={"secondary"}
+          >
+            <span className="text-sm">Best seller</span>
+          </Badge> */}
           <h3 className="font-bold text-xl tab:text-2xl line-clamp-2">
             {title}
           </h3>
@@ -202,6 +253,10 @@ function Bundle({
                 {e}
               </span>
             ))}
+            <span className="flex gap-2 items-center text-sm">
+              <Plus className="h-5 w-5 text-prime shrink-0" />
+              12 More Courses
+            </span>
 
             <div className="relative mt-2">
               <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
@@ -210,7 +265,7 @@ function Bundle({
                 variant={"outline"}
                 className={`relative font-semibold text-foreground/80 hover:text-foreground w-full gap-1`}
               >
-                Buy all @₹{price.amount}{" "}
+                Buy all 17 courses for ₹{price.amount}{" "}
                 <span className="italic line-through text-muted-foreground">
                   ₹{price.bigAmount}
                 </span>
@@ -218,16 +273,18 @@ function Bundle({
             </div>
           </div>
         </div>
-        <Image
-          src={url}
-          alt={"30DC Project Preview"}
-          height={600}
-          width={900}
-          className="rounded-s-lg w-full tab:h-4/5 my-auto shadow-xl shadow-black/50 object-cover"
-        />
+        <div>
+          <Image
+            src={url}
+            alt={"30DC Project Preview"}
+            height={600}
+            width={900}
+            className="rounded-s-lg w-full md:w-4/5 aspect-[6/4] tab:h-4/5 my-auto ml-auto shadow-xl shadow-black/50 object-cover"
+          />
+        </div>
       </Link>
-      <Link
-        href={"/mentorship"}
+      {/* <Link
+        href={"/community"}
         className="max-phone:hidden flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6"
       >
         <div className="max-tab:order-last flex flex-col gap-3">
@@ -255,13 +312,13 @@ function Bundle({
           </div>
         </div>
         <Image
-          src={"/mentorship.jpeg"}
+          src={"/mentorship.jpg"}
           alt={"30DC Mentorship"}
           height={600}
           width={900}
           className="rounded-s-lg w-full tab:h-4/5 my-auto shadow-xl shadow-black/50 object-cover"
         />
-      </Link>
+      </Link> */}
     </div>
   );
 }

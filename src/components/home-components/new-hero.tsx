@@ -84,7 +84,7 @@ export default function Hero({
 
           <div className="p-[.5rem_1.00rem_.5rem_1.00rem] rounded-[3.125rem] flex max-lg:flex-col max-lg:w-full lg:flex-wrap items-center justify-center max-w-xl gap-5 my-2 mb-1">
             <Link
-              href={"/bundle/complete-package-all-course-bundle"}
+              href={"/courses"}
               className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
             >
               <span className="text-sm">All Courses</span>
@@ -92,22 +92,24 @@ export default function Hero({
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>
             <Link
-              href={"/mentorship"}
+              href={"/dsa"}
               className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
             >
-              <span className="text-sm">1:1 Mentorship</span>
+              <span className="text-sm">DSA sheet</span>
               <GraduationCap className="max-lg:hidden w-4 h-4" />
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>
             <Link
-              href={"/testimonials"}
+              href={"/roadmaps"}
               className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
             >
-              <span className="text-sm">Testimonials</span>
+              <span className="text-sm">Roadmaps</span>
               <Star className="max-lg:hidden w-4 h-4" />
               <ArrowRight className="lg:hidden w-4 h-4" />
             </Link>
           </div>
+          <Btn cover="/new-mentorship.jpg" yt="2cZ_7LuxEQI" />
+          
         </div>
       </div>
 

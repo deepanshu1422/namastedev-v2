@@ -21,7 +21,7 @@ export default function Navbar() {
           className={`sm:p-[.875rem_2.25rem] p-[0.5rem_1rem] text-white flex gap-6 justify-between items-center w-full max-w-[90rem]`}
         >
           <section className="flex gap-6">
-            <Link href={"/"} className="flex items-center gap-1">
+            <Link href={"/"} className="flex items-center gap-1 shrink-0">
               <Image
                 src={"/logo.png"}
                 alt="logo"
@@ -34,24 +34,26 @@ export default function Navbar() {
               </span>
             </Link>
 
-            <div className="max-tab:hidden font-jakarta flex items-center font-medium gap-8">
+            <div className="max-md:hidden font-jakarta flex items-center font-medium gap-8">
               <NavMenu />
             </div>
           </section>
 
           <section className="flex items-center gap-2">
-            <Link
-              href={"/mentorship"}
+            {/* <Link
+              href={"/community"}
               className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md"
             >
-              <span className="text-sm line-clamp-1">Job Support Mentorship</span>
-            </Link>
+              <span className="text-sm line-clamp-1">
+                Community
+              </span>
+            </Link> */}
 
             <Link
               href={"/dashboard"}
               className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:p-2 rounded-md"
             >
-              <span className="text-sm">Login</span>
+              <span className="text-sm">Dashboard</span>
               {/* <LogIn className="h-5 w-5 sm:hidden" /> */}
             </Link>
 

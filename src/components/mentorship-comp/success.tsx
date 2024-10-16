@@ -59,7 +59,7 @@ function Testimonial({
         <Link
           target="_blank"
           href={link}
-          className="flex gap-1 p-2 rounded-full bg-prime/90 hover:bg-prime/70 text-sm font-semibold shadow-[rgb(0,_0,_0)_6px_6px_0px_0px] border-2 hover:translate-x-1 hover:translate-y-1 transition-all duration-75 hover:shadow-[rgb(0,_0,_0)_3px_3px_0px_0px]"
+          className="flex gap-1 h-fit p-2 rounded-full bg-prime/90 hover:bg-prime/70 text-sm font-semibold shadow-[rgb(0,_0,_0)_6px_6px_0px_0px] border-2 hover:translate-x-1 hover:translate-y-1 transition-all duration-75 hover:shadow-[rgb(0,_0,_0)_3px_3px_0px_0px]"
         >
           <ShoppingBag className="h-5 w-5" />
           {/* Try Now */}
@@ -87,7 +87,7 @@ export const testimonials: TestimonialType[] = [
     name: "Rojal Sapkota",
     link: "/courses",
     linkedin: "https://www.linkedin.com/in/rojal-sapkota-787130237/",
-    pos: "SDE@Google",
+    pos: "Internship @ Google",
     profile: "/rojal-in.jpg",
   },
   {
@@ -104,9 +104,9 @@ export const testimonials: TestimonialType[] = [
       </p>
     ),
     name: "Ishan",
-    link: "/mentorship",
+    link: "/",
     linkedin: "https://www.linkedin.com/in/ishangupta305/",
-    pos: "SDE@Google",
+    pos: "Full time job @ Microsoft, Google",
     profile: "/ishan-in.jpeg",
   },
   {
@@ -125,7 +125,7 @@ export const testimonials: TestimonialType[] = [
     name: "Umang Chaudhary",
     link: "/courses",
     linkedin: "https://www.linkedin.com/in/umang18oct/",
-    pos: "TikTok",
+    pos: "Full time job @ Amazon, TikTok",
     profile: "/umang-in.jpg",
   },
   {
@@ -144,7 +144,7 @@ export const testimonials: TestimonialType[] = [
     name: "Kevin",
     link: "/courses",
     linkedin: "https://www.linkedin.com/in/kevinmsmith131/",
-    pos: "Tesla",
+    pos: "Full time job @ Tesla",
     profile: "",
   },
   {
@@ -164,7 +164,7 @@ export const testimonials: TestimonialType[] = [
     name: "Manan Patel",
     link: "/courses",
     linkedin: "https://www.linkedin.com/in/themananpatel/",
-    pos: "SDE@Nasdaq",
+    pos: "Full time job @Nasdaq",
     profile: "/manan-in.jpg",
   },
   {
@@ -183,8 +183,56 @@ export const testimonials: TestimonialType[] = [
     name: "Sneha Michelle V.",
     link: "/courses",
     linkedin: "https://www.linkedin.com/in/sneha-michelle-v-1b73b0213/",
-    pos: "SDE@Bank of America",
+    pos: "Full time job @Bank of America",
     profile: "/sneha-in.jpg",
+  },
+  {
+    review: (
+      <p className="leading-6 text-sm font-normal">
+        I cracked my internship at Vistaprint because of 30DC community and mentorship.
+        The 1:1 mentorship and the community support helped me sharpen my skills and
+        regain confidence. <span className="bg-lime-500/40">
+          I am grateful to 30DC for providing me with the resources and support to land my dream job.
+        </span>
+      </p>
+    ),
+    name: "Shubham Batra",
+    link: "/courses",
+    linkedin: "https://www.linkedin.com/in/shubham-batra/",
+    pos: "Internship @ Vistaprint",
+    profile: "",
+  },
+  {
+    review: (
+      <p className="leading-6 text-sm font-normal">
+        I would like to express my deepest appreciation to my mentor Aryan Singh for their countless hours of invaluable 
+        guidance and continued support which has played an instrumental role in my success. <span className="bg-lime-500/40">
+          I landed a SDE role at Paypal.
+        </span>
+      </p>
+    ),
+    name: "Aditya Maheshwari",
+    link: "/courses",
+    linkedin: "https://www.linkedin.com/posts/aditya-maheshwari-05_gratitude-newbeginnings-softwareengineer-activity-7074263436834086912-EkW_?utm_source=share&utm_medium=member_desktop",
+    pos: "Full time job @ Paypal",
+    profile: "",
+  },
+  {
+    review: (
+      <p className="leading-6 text-sm font-normal">
+        I was very confused before joining 30DC. I did not know what to do and how to prepare for interviews.
+        <span className="bg-lime-500/40">
+          The 1:1 mentorship and the community support helped me sharpen my skills and
+          regain confidence.
+        </span>
+        I am grateful to 30DC for providing me with the resources and support to land my dream job.
+      </p>
+    ),
+    name: "Nikhil Seth",
+    link: "/courses",
+    linkedin: "https://www.linkedin.com/in/nikhil-seth9/",
+    pos: "Full time job @ Air Canada",
+    profile: "",
   },
 ];
 
@@ -194,16 +242,16 @@ export default function Success() {
       <span className="flex items-center justify-center gap-4 relative">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
-          100+ Success Stories
+          1000+ Success Stories
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>
       <p className="max-w-2xl text-center mx-auto text-sm text-white/70 px-10 line-clamp-2">
-        A collection of inspiring narratives highlighting the journeys of
-        individuals who have overcome significant challenges to achieve
-        remarkable accomplishments.
+        Our students are working at top companies like Google, Facebook,
+        Amazon, Microsoft, and many more. In total, they have achieved
+        <span className="text-red-500"> $55.8M in job offer value.</span>
       </p>
-
+      
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 py-5 lg:py-10">
         {testimonials.map(
           ({ name, review, link, linkedin, pos, profile }, i) => (

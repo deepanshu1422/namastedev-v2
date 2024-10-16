@@ -1,13 +1,23 @@
 "use server";
 
 import prisma from "@/util/prismaClient";
-import { addHours, addMinutes, format, parseISO, subDays, subHours } from "date-fns";
+import {
+  addHours,
+  addMinutes,
+  format,
+  parseISO,
+  subDays,
+  subHours,
+} from "date-fns";
 
-const ISTTime = () => {
-  const currentTime = new Date();
+const ISTTime = async () => {
+  const IST = await (
+    await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata")
+  ).json();
+  const currentTime = new Date(IST.datetime);
 
-  const startTime = subHours(currentTime.setHours(0, 0, 0, 0), 5.5);
-  const endTime = subHours(currentTime.setHours(23, 59, 59, 999), 5.5);
+  const startTime = new Date(currentTime.setHours(0, 0, 0, 0));
+  const endTime = new Date(currentTime.setHours(23, 59, 59, 999));
 
   return { startTime, endTime };
 };
@@ -25,7 +35,7 @@ export default async function getPaymets(queryParams: {
   if (queryParams.page) skip = (parseInt(queryParams.page ?? "0") - 1) * 10;
 
   const days = parseInt(queryParams?.days ?? "1") - 1;
-  const { endTime, startTime } = ISTTime();
+  const { endTime, startTime } = await ISTTime();
 
   where.createdAt = {
     gte: subDays(startTime, days ? days : 0),
@@ -82,7 +92,7 @@ export default async function getPaymets(queryParams: {
 }
 
 export async function getRevenue() {
-  const { startTime, endTime } = ISTTime();
+  const { startTime, endTime } = await ISTTime();
 
   const revenueToday = await prisma.payments.aggregate({
     _sum: {
@@ -126,7 +136,7 @@ export async function getRevenue() {
 }
 
 export async function getHourlyRevenue() {
-  const { endTime, startTime } = ISTTime();
+  const { endTime, startTime } = await await ISTTime();
 
   const payments = await prisma.payments.groupBy({
     by: ["createdAt", "paymentStatus", "basePrice"],
@@ -193,7 +203,7 @@ export async function exportPaymets(queryParams: {
   let where: Record<string, any> = {};
 
   const days = parseInt(queryParams?.days ?? "1") - 1;
-  const { endTime, startTime } = ISTTime();
+  const { endTime, startTime } = await ISTTime();
 
   where.createdAt = {
     lte: endTime,
@@ -239,4 +249,26 @@ export async function exportPaymets(queryParams: {
   });
 
   return { data };
+}
+
+export async function getUsers(queryParams: { email: string }) {
+  let user = await prisma.user.findMany({
+    where: {
+      email: {
+        contains: queryParams.email,
+      },
+    },
+    select: {
+      bundleId: true,
+      courseId: true,
+      email: true,
+      name: true,
+      _count: true,
+      image: true,
+      mentorshipId: true,
+    },
+    take: 10,
+  });
+
+  return user;
 }

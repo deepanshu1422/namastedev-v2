@@ -15,6 +15,7 @@ export default function Checkout({
   price,
   courseOffer,
   setOpen,
+  addToCart,
   setYtOpen,
 }: {
   bundleId: string;
@@ -28,6 +29,7 @@ export default function Checkout({
   courseOffer: string[];
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
+  addToCart: () => void;
 }) {
   const { data } = useSession();
   return (
@@ -51,51 +53,50 @@ export default function Checkout({
           </div>
         </div>
         <div className="flex flex-col gap-3 px-4 py-5">
-          {/* @ts-ignore */}
-          {data?.user?.bundleId?.includes(bundleId) ? (
-            <Link href={"/dashboard"} className="flex flex-col gap-2 relative">
+          <>
+            <span className="relative w-fit text-white sm:text-2xl font-bold flex gap-2 items-start">
+              ₹{price.amount}
+              <span className="text-muted-foreground/70 italic line-through">
+                ₹{price.bigAmount}
+              </span>
+              {/* <Image className="absolute -top-14 -right-16" src={"/75off.png"} alt="30DC 70% off" height={100} width={100} /> */}
+              <span>({price.percentage}% off)</span>
+            </span>
+
+            <div className="flex flex-col gap-2 relative">
               <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
               <Button
+                onClick={() => {
+                  setOpen(true);
+                  sendEvent("Initiate Checkout", {
+                    content_ids: [bundleId],
+                    content_type: "bundle",
+                    em: sha256(data?.user?.email ?? ""),
+                    // @ts-ignore
+                    ph: sha256(data?.user?.phone ?? ""),
+                    fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
+                  });
+                  addToCart();
+                }}
                 size={"lg"}
                 variant={"outline"}
                 className="relative flex items-center font-semibold gap-1 transition-all px-4 py-3 rounded-md text-white text-lg"
               >
-                Watch Now
+                Buy Now
               </Button>
-            </Link>
-          ) : (
-            <>
-              <span className="relative w-fit text-white sm:text-2xl font-bold flex gap-2 items-start">
-                ₹{price.amount}
-                <span className="text-muted-foreground/70 italic line-through">
-                  ₹{price.bigAmount}
-                </span>
-                {/* <Image className="absolute -top-14 -right-16" src={"/75off.png"} alt="30DC 70% off" height={100} width={100} /> */}
-                <span>({price.percentage}% off)</span>
-              </span>
-
-              <div className="flex flex-col gap-2 relative">
-                <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
-                <Button
-                  onClick={() => {
-                    setOpen(true);
-                    sendEvent("Initiate Checkout", {
-                      content_ids: [bundleId],
-                      content_type: "bundle",
-                      em: sha256(data?.user?.email ?? ""),
-                      ph: sha256(data?.user?.phone ?? ""),
-                      fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
-                    });
-                  }}
-                  size={"lg"}
-                  variant={"outline"}
-                  className="relative flex items-center font-semibold gap-1 transition-all px-4 py-3 rounded-md text-white text-lg"
-                >
-                  Buy Now
+            </div>
+            <div className="flex justify-center">{/* <div> OR </div> */}</div>
+            {bundleId !== "NEWALL30DC" && (
+              <Link
+                className="w-full"
+                href={"/bundle/complete-package-all-course-bundle?sheet=true"}
+              >
+                <Button className="w-full font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white">
+                  Get all 17 courses for ₹999/-
                 </Button>
-              </div>
-            </>
-          )}
+              </Link>
+            )}
+          </>
 
           <div className="flex flex-col gap-1">
             <p className="tab:max-w-2xl max-tab:leading-6 line-clamp-3 text-white/60 italic font-semibold">

@@ -137,12 +137,12 @@ export default function Checkout({
         </div> */}
 
         <Link
-          href={"/mentorship"}
+          href={"/bundle/complete-package-all-course-bundle"}
           className="bg-gradient-to-b from-head/30 to-second/20 flex flex-col gap-2 rounded-md shadow-lg backdrop-blur-sm shadow-black/40 p-2"
         >
-          <span className="font-bold">Join 1:1 Mentorship</span>
+          <span className="font-bold">Get All 30DC Courses</span>
           <Image
-            src={"/mentorship.jpeg"}
+            src={"https://images.ctfassets.net/3pv3o0yr6pgj/70h8KSfhjqdiIecfwf6fJY/c67a069d098b3c87e0774b1db9f6f920/17_courses.jpg"}
             width={500}
             height={500}
             alt="30DC Completion Certificate"
@@ -153,7 +153,7 @@ export default function Checkout({
             size={"sm"}
             className={`font-semibold text-foreground/80 hover:text-foreground relative w-full`}
           >
-            Join Now
+            Buy @ ₹999/-
           </Button>
         </Link>
 
@@ -162,12 +162,12 @@ export default function Checkout({
 
           <div className="grid gap-2">
             <Link
-              href={"/mentorship"}
+              href={"/community"}
               className="grid grid-cols-3 gap-2 md:gap-6 md:max-w-60 w-full"
             >
               <Image
                 className="rounded-md max-sm:w-full md:max-w-20 max-h-40 object-cover"
-                src={"/mentorship.jpeg"}
+                src={"/mentorship.jpg"}
                 alt={"mern course"}
                 width={300}
                 height={200}

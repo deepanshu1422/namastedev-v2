@@ -5,7 +5,7 @@ import { getContentfulData } from "@/lib/cotentful"
 export default async function getContentful() {
 
     const data = await getContentfulData(`query {
-        courseCollection{
+        courseCollection(where: {publish: true, domain: "30dayscoding.com"}){
         items{
             courseId
             }

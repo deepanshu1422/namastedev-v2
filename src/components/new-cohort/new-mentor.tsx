@@ -105,7 +105,7 @@ export default function NewMentor() {
               { name: "Google", path: "/company3.png" },
               { name: "Arrow Electronics", path: "/arrow_logo.jfif" },
               {
-                name: "Massachusetts Amherst",
+                name: "UMass Amherst",
                 path: "/umassamherst_logo.jfif",
               },
             ]}
@@ -162,7 +162,7 @@ export default function NewMentor() {
             company={[
               { name: "MakeMyTrip", path: "/makemytrip_logo.jfif" },
               { name: "Alibaba Cloud", path: "/alibaba.jfif" },
-              { name: "Thapar Institute of Engineering", path: "/thapar.jfif" },
+              { name: "Thapar - Engineering", path: "/thapar.jfif" },
             ]}
             desc="Deepanshu Udhwani, drawing from experience at MakeMyTrip, Alibaba Cloud, and various startups, founded 30 Days Coding to solve a simple problem faced by engineers across the globe - 'How do I prepare for this interview?' With a background in Computer Science and Marketing, he knows the exact composition of techical and non-technical aspects required for getting to your dream job."
           />

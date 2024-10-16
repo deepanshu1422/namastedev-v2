@@ -1,16 +1,11 @@
 import Hero from "@/components/home-components/new-hero";
-import Companies from "@/components/new-cohort/companies";
-import Course from "@/components/home-components/course";
-import Highlights from "@/components/new-cohort/highligths";
-import Mentor from "@/components/new-cohort/mentor";
-import Testimonials from "@/components/mentorship-comp/testimonials";
 import type { Metadata } from "next";
 import Store from "@/components/home-components/store";
 import Faqs from "@/components/mentorship-comp/faq";
-import Program from "@/components/program";
 import Script from "next/script";
 import Success from "@/components/mentorship-comp/success";
-
+import Mentors from "./mentorship/mentors";
+import VideoSlider from "./testimonials/video-slider";
 
 export const dynamic = "force-dynamic";
 
@@ -53,7 +48,7 @@ export default function Home() {
     {
       question: "What is the refund policy?",
       answer:
-        "We offer a [X]-day money-back guarantee. If you're not satisfied within this period, you can request a full refund, no questions asked.",
+        "We offer a 30-day money-back guarantee. If you're not satisfied within this period, you can request a full refund, no questions asked.",
     },
     {
       question: "Is this course beginner-friendly?",
@@ -100,23 +95,18 @@ export default function Home() {
         }}
       />
       <Hero
-        title="Become an Advanced, Job-Ready Developer!"
+        title="Premium, Affordable Courses for Job-Ready Skills"
         desc="Join 10,000+ successful students who have transformed their lives with us."
         heroImage="https://i.ibb.co/KXHGnmY/home.webp"
         subTitle="Pocket Friendly Courses with Certificates!"
         subDesc="Whether you're a beginner looking to dive into programming or an experienced developer seeking skill enhancement, our mentors' guidance and courses are well-designed for all levels of proficiency."
         ytId="enw3DVa1r5k"
       />
-      <Companies />
+      <Mentors />
       <Store />
       <Success />
-      {/* <Course /> */}
-      <Program />
-      <Mentor />
-      {/* <Highlights />
-      <Testimonials /> */}
+      <VideoSlider />
       <Faqs faq={faq} />
-      {/* <Floating /> */}
     </main>
   );
 }

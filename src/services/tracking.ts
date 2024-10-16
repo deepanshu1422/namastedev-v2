@@ -53,3 +53,4 @@ export default async function triggerEvent(data: Record<string, any>) {
   //   .then((data) => console.log(data))
   //   .catch((error) => console.error("Error:", error));
 }
+

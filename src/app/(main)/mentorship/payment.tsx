@@ -1,24 +1,11 @@
 "use client";
 
-import {
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
-import { useSession } from "next-auth/react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+// import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 
 import {
   Select,
@@ -32,7 +19,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { MinusCircle } from "lucide-react";
 
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 import {
   Card,
@@ -41,37 +36,84 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
 import { useRouter, useSearchParams } from "next/navigation";
-import triggerEvent from "@/services/tracking";
-import { sha256 } from "js-sha256";
-import { sendEvent } from "@/services/fbpixel";
-import mentorshipPayment from "../../../../actions/mentorshipPayment";
 import { useAtom } from "jotai";
 import { country, geo } from "@/lib/jotai";
-import { BASE_URL } from "@/util/constants";
+import addToWaitlist from "../../../../actions/addToWaitlist";
+// import addToWaitlist from "@/actions/addToWaitlist";
+
+import * as React from "react";
+
+import { cn } from "@/lib/utils";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+
+function DrawerDialog({
+  open,
+  setOpen,
+  title,
+  children,
+}: {
+  title: string;
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  children: React.ReactNode;
+}) {
+  // const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  // if (isDesktop) {
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+        </DialogHeader>
+        {children}
+      </DialogContent>
+    </Dialog>
+  );
+  // }
+
+  return (
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerContent>
+        <DrawerHeader className="text-left">
+          <DrawerTitle>{title}</DrawerTitle>
+        </DrawerHeader>
+        <div className="px-4">{children}</div>
+        <DrawerFooter className="pt-2">
+          <DrawerClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
+}
 
 export function PaymentSheet({
-  cover,
   title,
-  amount,
-  curreny,
-  courseId,
   open,
   setOpen,
   setOpenPay,
 }: {
-  cover: string;
   title: string;
-  amount: number;
-  curreny: string;
   courseId: string;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  openPay: boolean;
   setOpenPay: Dispatch<SetStateAction<boolean>>;
 }) {
-  const { data: session, update } = useSession();
+  // const { data: session, update } = useSession();
   const [geoData, setGeoData] = useAtom(geo);
   const [countryData, setCountryData] = useAtom(country);
 
@@ -81,7 +123,7 @@ export function PaymentSheet({
       await fetch(`https://api.iplocation.net/?cmd=ip-country&ip=${ip.ip}`)
     ).json();
 
-    console.log(geo);
+    // console.log(geo);
 
     setGeoData(geo.country_code2);
     setCountryData(geo.country_name);
@@ -94,14 +136,20 @@ export function PaymentSheet({
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    name: session?.user?.name ?? "",
-    email: session?.user?.email ?? "",
+    name: "",
+    email: "",
     // @ts-ignore
-    phone: session?.user?.phone ?? "",
+    phone: "",
     // @ts-ignore
-    state: session?.user?.state ?? "",
+    state: "",
     // @ts-ignore
-    country: session?.user?.country ?? "",
+    country: "",
+    // @ts-ignore
+    phoneCode: "US",
+    // @ts-ignore
+    university: "",
+    // @ts-ignore
+    gradeYear: "2024",
   });
 
   const [formState, setFormState] = useState(0);
@@ -118,19 +166,25 @@ export function PaymentSheet({
   const [submitting, setSubmitting] = useState(false);
 
   const states = [
+    "andaman_and_nicobar_islands",
     "andhra_pradesh",
     "arunachal_pradesh",
     "assam",
     "bihar",
+    "chandigarh",
     "chhattisgarh",
-    "goa",
+    "daman_and_diu",
     "delhi",
+    "goa",
     "gujarat",
     "haryana",
     "himachal_pradesh",
     "jharkhand",
+    "jammu_and_kashmir",
     "karnataka",
     "kerala",
+    "ladakh",
+    "lakshadweep",
     "madhya_pradesh",
     "maharashtra",
     "manipur",
@@ -138,6 +192,7 @@ export function PaymentSheet({
     "mizoram",
     "nagaland",
     "odisha",
+    "puducherry",
     "punjab",
     "rajasthan",
     "sikkim",
@@ -183,277 +238,81 @@ export function PaymentSheet({
       return validationError({ message: "Invalid Email" });
     if (formData.phone.length !== 10)
       return validationError({ message: "Invalid Phone Number" });
-    // if (!states.includes(formData.state))
-    //   return validationError({ message: "Select a State" });
-    // if (!states.includes(formData.state))
-    //   return validationError({ message: "Select your country" });
+    if (formData.university.length < 5)
+      return validationError({ message: "University Name is Too Short" });
 
     try {
       setIsLoading(true);
 
-      let res;
-
       const geo = geoData ?? "US";
       const country = countryData ?? "USA";
 
-      if (courseId) {
-        res = await mentorshipPayment({
-          mentorshipId: "querty",
-          email: session?.user?.email ?? formData.email.toLocaleLowerCase(),
-          contact: formData.phone,
-          name: session?.user?.name ?? formData.name,
-          state: geo === "IN" ? formData.state || "haryana" : "Washington",
-          gateway: geo === "IN" ? "razorpay" : "lemonSqueezy",
-          country,
-        });
-      } else {
-        return;
-      }
+      const prefix =
+        geo === "IN"
+          ? "+91"
+          : countryPhoneCodes.find((e) => e.countryCode === formData.phoneCode)
+              ?.phoneCode;
 
-      if (!!res.data?.orderId || !!res.error) {
-        // make an endpoint to get this key
-        const key = process.env.NEXT_PUBLIC_RAZORPAY_CLIENT;
-
-        if (!!res.error) {
-          toast("Error Occured", {
-            position: "bottom-center",
-            description: res.message ?? JSON.stringify(res.error),
-            action: (
-              <Link
-                className="border border-border rounded-md px-2 py-1 ml-auto"
-                href={"/instructions"}
-              >
-                Log In
-              </Link>
-            ),
-          });
-          setIsLoading(false);
-          setOpen(false);
-          return;
-        }
-
-        setFormState(0);
-
-        console.log(res.data);
-
-        const options = {
-          key: key,
-          description: "Test Transaction",
-          image: "/icon.png",
-          name: "30DaysCoding",
-          currency: res.data.currency,
-          amount: res.data.amount,
-          order_id: res.data.orderId,
-          callback_url: `${BASE_URL}/mentorship?success=true`,
-          // async function (response: any) {
-          //   sendEvent("Purchase", {
-          //     value: amount,
-          //     currency: "INR",
-          //     content_ids: [courseId],
-          //     content_type: "course",
-          //     content_name: title,
-          //     em: sha256(formData.email), // Hashing example
-          //     ph: sha256(formData.phone),
-          //     fn: sha256(formData.name.split(" ")[0]),
-          //     ln: sha256(formData.name.split(" ")[1] ?? ""),
-          //   });
-          //   setOpenPay(true);
-          //   await update({ courses: true });
-          //   if (session?.user?.email) router.refresh();
-          // },
-          prefill: {
-            name: formData.name,
-            email: formData.email.toLocaleLowerCase(),
-            contact: formData.phone,
-          },
-          notes: {
-            name: formData.name,
-            email: formData.email.toLocaleLowerCase(),
-            contact: formData.phone,
-            address: geo === "IN" ? formData.state || "haryana" : "Washington",
-            courseId,
-          },
-          theme: {
-            color: "#134543",
-          },
-        };
-
-        // @ts-ignore
-        const paymentObject = new window.Razorpay(options);
-
-        paymentObject.on("payment.captured", function (response: any) {
-          alert("Payment successful");
-          setIsLoading(false);
-        });
-
-        paymentObject.open();
-      } else {
-        // @ts-ignore
-        router.push(res.data?.url);
-      }
-
-      setIsLoading(false);
-      setOpen(false);
-      setFormData({
-        name: session?.user?.name ?? "",
-        email: session?.user?.email ?? "",
-        // @ts-ignore
-        phone: session?.user?.phone ?? "",
-        // @ts-ignore
-        state: session?.user?.state ?? "",
-        // @ts-ignore
-        country: session?.user?.country ?? "",
+      const res = await addToWaitlist({
+        email: formData.email.toLocaleLowerCase(),
+        contact: prefix + formData.phone,
+        name: formData.name,
+        state: geo === "IN" ? formData.state || "haryana" : "Washington",
+        country,
+        university: formData.university,
+        gradeYear: formData.gradeYear
       });
+
+      if (!!res.error) {
+        toast("Error Occured", {
+          position: "bottom-center",
+          description: res.message,
+        });
+        setIsLoading(false);
+        setOpen(false);
+      } else {
+        setIsLoading(false);
+        setOpen(false);
+        setOpenPay(true);
+        setFormData({
+          name: "",
+          email: "",
+          // @ts-ignore
+          phone: "",
+          // @ts-ignore
+          state: "",
+          // @ts-ignore
+          country: "",
+          // @ts-ignore
+          phoneCode: "US",
+          // @ts-ignore
+          university: "",
+          // @ts-ignore
+          gradeYear: "2024",
+        });
+      }
     } catch (error) {
-      toast.error(JSON.stringify(error));
+      toast.error("Error Occuered", { description: JSON.stringify(error) });
       console.error(error);
       setIsLoading(false);
     }
   };
 
   const orderPage = [
-    // {
-    //   title: "Order Details",
-    //   body: (
-    //     <div className="flex flex-col gap-5 max-sm:pt-5">
-    //       {/* <div className="max-sm:hidden grid sm:grid-cols-3 gap-2 pt-4">
-    //         <Image
-    //           className="rounded-md max-sm:w-full max-h-40 object-cover bg-white/20"
-    //           src={cover}
-    //           alt={title}
-    //           width={280}
-    //           height={180}
-    //         />
-    //         <div className="sm:col-span-2 flex flex-col gap-1">
-    //           <p className="max-sm:text-sm sm:leading-6 line-clamp-3">
-    //             {title}
-    //           </p>
-    //           <span className="font-extrabold text-prime">
-    //             {curreny} {amount}
-    //           </span>
-    //         </div>
-    //       </div> */}
-    //       <section className="flex flex-col gap-3 max-sm:text-sm">
-    //         <div className="flex justify-between">
-    //           <span>Course Price</span>
-    //           <span className="font-extrabold">
-    //             {curreny} {((amount + 1) * 4) - 1}
-    //           </span>
-    //         </div>
-    //         <div className="text-prime font-semibold flex justify-between">
-    //           <span>Discount @ 75%</span>
-    //           <span className="font-extrabold">
-    //             -{curreny} {((amount + 1) * 3)}
-    //           </span>
-    //         </div>
-    //         <div className="flex justify-between">
-    //           <span>Sub Total</span>
-    //           <span className="font-extrabold">
-    //             {curreny} {amount}
-    //           </span>
-    //         </div>
-    //         <hr className="mt-3" />
-    //         <div className="flex justify-between">
-    //           <span>GST @ 18%</span>
-    //           <span className="font-extrabold">
-    //             {curreny} {(amount * 0.18).toFixed(0)}
-    //           </span>
-    //         </div>
-    //         <div className="flex justify-between">
-    //           <span>Platform Fee</span>
-    //           <span className="font-extrabold">
-    //             {curreny} {12}
-    //           </span>
-    //         </div>
-    //         <hr className="mt-3" />
-    //         {promo.apply ? (
-    //           <div className="flex flex-col gap-2">
-    //             <form
-    //               className="flex gap-3 justify-between text-sm"
-    //               onSubmit={applyCoupon}
-    //             >
-    //               <Input
-    //                 disabled={submitting}
-    //                 name="coupon"
-    //                 required
-    //                 placeholder="Enter a promo code"
-    //               />
-    //               <Button
-    //                 disabled={submitting}
-    //                 className="text-prime"
-    //                 variant={"link"}
-    //                 size={"sm"}
-    //               >
-    //                 Apply
-    //               </Button>
-    //             </form>
-    //             <Button
-    //               disabled={submitting}
-    //               className="text-prime"
-    //               onClick={() => setPromo({ ...promo, apply: false })}
-    //               variant={"link"}
-    //               size={"sm"}
-    //             >
-    //               Cancel
-    //             </Button>
-    //           </div>
-    //         ) : promo.code ? (
-    //           <div className="flex gap-3 justify-between text-sm">
-    //             <span className="uppercase">{promo.code}</span>
-    //             <div className="flex gap-2">
-    //               <span className="font-bold">-{promo.discount}</span>
-    //               <MinusCircle
-    //                 onClick={() =>
-    //                   setPromo({ apply: false, code: null, discount: 0 })
-    //                 }
-    //                 className="h-5 w-5 cursor-pointer"
-    //               />
-    //             </div>
-    //           </div>
-    //         ) : (
-    //           <div className="flex gap-3 justify-between text-sm">
-    //             <span>Promo Code</span>
-    //             <span
-    //               onClick={() => setPromo({ ...promo, apply: true })}
-    //               className="font-extrabold text-prime hover:underline cursor-pointer"
-    //             >
-    //               Apply Code
-    //             </span>
-    //           </div>
-    //         )}
-    //         <div className="flex justify-between">
-    //           <span>Total Pay</span>
-    //           <span className="font-extrabold text-prime">
-    //             {curreny}{" "}
-    //             {promo.discount
-    //               ? (amount + amount * 0.18 + 12 - promo.discount).toFixed(0)
-    //               : (amount + amount * 0.18 + 12).toFixed(0)}
-    //           </span>
-    //         </div>
-    //       </section>
-    //     </div>
-    //   ),
-    //   footer: (
-    //     <Button
-    //       onClick={() => setFormState(1)}
-    //       className="w-full mt-auto hover:bg-prime/80 bg-prime/60 text-white"
-    //       type="submit"
-    //     >
-    //       Proceed
-    //     </Button>
-    //   ),
-    // },
     {
-      title: "Payments Details",
+      title: "Apply for Job mentorship community",
       body: (
         <div className="grid gap-4 py-4">
-          <p className="max-sm:text-sm sm:leading-6 line-clamp-3">{title}</p>
+          {/* <p className="max-sm:text-sm sm:leading-6 line-clamp-3">{title}</p> */}
+          
+          <h3
+            className="flex justify-center decoration-red-500 underline decoration-4">We will reach out to you within 24 hours on WhatsApp
+          </h3>
           <div className="grid grid-cols-5 items-center gap-4">
             <Label htmlFor="name" className="text-left">
               Name
-            </Label>
+            </Label>  
             <Input
-              disabled={!!session?.user?.name}
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
@@ -469,7 +328,6 @@ export function PaymentSheet({
               Email
             </Label>
             <Input
-              disabled={!!session?.user?.email}
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
@@ -486,30 +344,26 @@ export function PaymentSheet({
               Phone
             </Label>
             <div className="relative flex col-span-4">
-              {geoData === "IN" ? (
-                <span className="absolute left-2 top-2 text-muted-foreground">
-                  +91
-                </span>
-              ) : (
-                <Select defaultValue={"US"}>
-                  <SelectTrigger className="w-[80px]">
-                    <SelectValue placeholder="" />
-                  </SelectTrigger>
-                  <SelectContent className="max-h-60">
-                    <SelectGroup>
-                      <SelectLabel>Code</SelectLabel>
-                      {countryPhoneCodes.map(
-                        ({ countryCode, phoneCode }, i) => (
-                          <SelectItem key={i} value={countryCode}>
-                            {phoneCode}
-                          </SelectItem>
-                        )
-                      )}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              )}
-
+              <Select
+                value={formData.phoneCode}
+                onValueChange={(e: string) =>
+                  setFormData({ ...formData, phoneCode: e })
+                }
+              >
+                <SelectTrigger className="w-[80px]">
+                  <SelectValue placeholder="" />
+                </SelectTrigger>
+                <SelectContent className="max-h-60">
+                  <SelectGroup>
+                    <SelectLabel>Code</SelectLabel>
+                    {countryPhoneCodes.map(({ countryCode, phoneCode }, i) => (
+                      <SelectItem key={i} value={countryCode}>
+                        {phoneCode}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
               <Input
                 value={formData.phone}
                 onChange={(e) =>
@@ -517,12 +371,54 @@ export function PaymentSheet({
                 }
                 type="number"
                 id="phone"
-                className={geoData === "IN" ? "pl-9" : ""}
                 maxLength={10}
               />
             </div>
           </div>
-          {geoData === "IN" ? (
+          <div className="grid grid-cols-5 items-center gap-4">
+            <Label htmlFor="university" className="text-left">
+              University
+            </Label>
+            <Input
+              value={formData.university}
+              onChange={(e) =>
+                setFormData({ ...formData, university: e.target.value })
+              }
+              id="university"
+              maxLength={60}
+              type="text"
+              placeholder="University's Name"
+              className="col-span-4"
+            />
+          </div>
+          <div className="grid grid-cols-5 items-center gap-4">
+            <Label htmlFor="phone" className="col-span-2 text-left">
+              Graduation Year
+            </Label>
+            <div className="relative flex col-span-3">
+              <Select
+                value={formData.gradeYear ?? "2024"}
+                onValueChange={(e: string) =>
+                  setFormData({ ...formData, gradeYear: e })
+                }
+              >
+                <SelectTrigger className="">
+                  <SelectValue placeholder="" />
+                </SelectTrigger>
+                <SelectContent className="max-h-60">
+                  <SelectGroup>
+                    <SelectLabel>Year</SelectLabel>
+                    {Array.from({ length: 26 }, (_, i) => 2015 + i).map((e, i) => (
+                      <SelectItem key={i} value={String(e)}> 
+                        {e}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          {/* {geoData === "IN" && (
             <div className="grid grid-cols-5 items-center gap-4">
               <Label htmlFor="username" className="text-left">
                 State
@@ -546,22 +442,7 @@ export function PaymentSheet({
                 </SelectContent>
               </Select>
             </div>
-          ) : (
-            <div className="grid grid-cols-5 items-center gap-4">
-              <Label htmlFor="email" className="text-left">
-                Country
-              </Label>
-              <Input
-                disabled={!!countryData}
-                value={countryData}
-                id="country"
-                maxLength={40}
-                type="text"
-                placeholder="Your country"
-                className="col-span-4"
-              />
-            </div>
-          )}
+          )} */}
         </div>
       ),
       footer: (
@@ -572,16 +453,8 @@ export function PaymentSheet({
             className="disabled:animate-pulse w-full hover:bg-prime/80 bg-prime/60 text-white"
             type="submit"
           >
-            Buy
+            Join Waitlist
           </Button>
-          {/* <Button
-            variant={"outline"}
-            onClick={() => setFormState(0)}
-            className="w-full"
-            type="submit"
-          >
-            Back
-          </Button> */}
         </div>
       ),
     },
@@ -589,23 +462,14 @@ export function PaymentSheet({
 
   return (
     <>
-      <Sheet open={open} onOpenChange={setOpen}>
-        {/* <SheetTrigger asChild>
-          <Button
-            size={"lg"}
-            className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
-          >
-            Buy Now
-          </Button>
-        </SheetTrigger> */}
-        <SheetContent className="h-full w-full flex flex-col">
-          <SheetHeader>
-            <SheetTitle>{orderPage[formState].title}</SheetTitle>
-          </SheetHeader>
-          {orderPage[formState].body}
-          {orderPage[formState].footer}
-        </SheetContent>
-      </Sheet>
+      <DrawerDialog
+        open={open}
+        setOpen={setOpen}
+        title={orderPage[formState].title}
+      >
+        {orderPage[formState].body}
+        {orderPage[formState].footer}
+      </DrawerDialog>
     </>
   );
 }
@@ -617,54 +481,30 @@ export function PaymentModal({
   payModal: boolean;
   setOpenPay: Dispatch<SetStateAction<boolean>>;
 }) {
-  const { data, status, update } = useSession();
-  const router = useRouter();
-
   const params = useSearchParams();
-  const [open, setOpen] = useState(Boolean(params.get("success")));
-
-  useEffect(() => {
-    if (open) {
-      update({ mentorship: true });
-    }
-  }, [open]);
+  const [open, setOpen] = useState(payModal || Boolean(params.get("success")));
 
   return (
-    <Dialog open={open}>
+    <Dialog open={open || payModal} onOpenChange={setOpenPay}>
       <DialogContent className="sm:max-w-[425px]">
         <Card className="bg-background border-none flex flex-col">
           <CardHeader className="p-1 items-center">
             <span className="flex items-center gap-2">
-              <Image src={"/icon.png"} alt="30dc icon" height={40} width={40} />
-              <CardTitle>30DC</CardTitle>
+              <Image src={"/new.svg"} alt="30dc icon" height={40} width={40} />
+              <CardTitle>1:1 Job Coaching</CardTitle>
             </span>
             <CardDescription className="text-center">
-              Thank you for trusting in us. Team 30DC
+              Please check your email or text for the notification - We are
+              taking candidates on a rolling basis only.
             </CardDescription>
           </CardHeader>
-          <CardContent className="pt-3 pb-0 mx-auto w-full flex flex-col items-center gap-2">
-            <Button
-              onClick={() => {
-                router.push(`/instructions`);
-              }}
-              disabled={status === "loading"}
-              className="w-full bg-prime/70 text-white hover:bg-prime"
-            >
-              {status === "loading"
-                ? "Joining Mentorship..."
-                : "Visit Instruction Page"}
-            </Button>
-            <Link className="w-fit" href={"/dashboard"}>
-              <Button
-                variant={"link"}
-                disabled={status === "loading"}
-                className="text-white/40 hover:text-white"
-              >
-                {status === "loading" ? "loading..." : "Visit Dashboard"}
-              </Button>
-            </Link>
-          </CardContent>
+          {/* <CardContent className="pt-3 pb-0 mx-auto w-full flex flex-col items-center gap-2"></CardContent> */}
         </Card>
+        {/* <DialogClose asChild>
+          <Button className="w-full bg-prime/70 text-white hover:bg-prime">
+            Welcome to Mentorship
+          </Button>
+        </DialogClose> */}
       </DialogContent>
     </Dialog>
   );
@@ -689,7 +529,7 @@ export function Floating({
     discount: price.percentage,
   };
 
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
   // @ts-ignore
   if (!session?.user?.courseId?.includes(courseId))
     return (
@@ -700,15 +540,6 @@ export function Floating({
             <Button
               onClick={() => {
                 setOpen(true);
-                sendEvent("Initiate Checkout", {
-                  amount: course.price,
-                  content_ids: [courseId],
-                  content_type: "mentorship",
-                  em: sha256(session?.user?.email ?? ""),
-                  // @ts-ignore
-                  ph: sha256(session?.user?.phone ?? ""),
-                  fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
-                });
               }}
               variant={"outline"}
               className={`font-semibold text-foreground/80 hover:text-foreground relative w-full p-6 text-sm gap-1`}

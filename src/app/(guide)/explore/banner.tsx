@@ -11,13 +11,13 @@ export default function Banner() {
                 <section className="flex flex-col gap-4">
                     <h3 className="text-3xl lg:text-5xl font-bold max-w-lg">Try 30Days Mentorship Now.</h3>
                     <p className="max-w-lg lg:text-lg text-muted-foreground">Upskill yourself and 10x your development output. Get hundreds of high quality courses, projects, coding problems and x-ray insights.</p>
-                    <Link className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 rounded-md w-fit" href={"/mentorship"}>
+                    <Link className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 rounded-md w-fit" href={"/community"}>
                         <span className="text-sm">Job Support Mentorship</span>
                     </Link>
                 </section>
                 <div className="h-full w-full lg:w-[500px] mt-auto ml-auto">
                     <AspectRatio ratio={16 / 10} className="relative rounded-tl overflow-hidden">
-                        <Image src={"/mentorship.jpeg"} alt="30 days coding mentorship image" className="object-cover" fill />
+                        <Image src={"/mentorship.jpg"} alt="30 days coding mentorship image" className="object-cover" fill />
                     </AspectRatio>
                 </div>
             </div >

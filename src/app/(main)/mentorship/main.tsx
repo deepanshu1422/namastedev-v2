@@ -13,6 +13,64 @@ import Mentors from "./mentors";
 import { PaymentModal, PaymentSheet } from "./payment";
 import { useEffect, useState } from "react";
 import Script from "next/script";
+import { motion } from "framer-motion"; // Ensure you have framer-motion installed
+import Events from "./events";
+import Carousel from "./carousel";
+import { CreditCard } from "lucide-react";
+import CourseGrid from "./courses";
+// import Card from "@/components/Card"; // Adjust the import based on your project structure
+// import CardContent from "@/components/CardContent"; // Adjust the import based on your project structure
+
+const steps = [
+  {
+    title: "Comprehensive Learning",
+    description: "Access to USA & Canada Jobs Courses, 15+ Technical Interview Courses, and AI tools workflows.",
+    details: "Dive deep into job market skills with our extensive course library.",
+    icon: ({ className }: { className: string }) => <i className={`fas fa-book ${className}`} />,
+    learningPoints: ["Learn USA & Canada Jobs Courses", "Understand AI tools workflows"],
+    estimatedTime: "4-6 weeks",
+  },
+  {
+    title: "Interactive Group Sessions",
+    description: "2 Group Q&A calls/week with expert mentors.",
+    details: "Engage in live sessions to clarify doubts and gain insights.",
+    icon: ({ className }: { className: string }) => <i className={`fas fa-users ${className}`} />,
+    learningPoints: ["Participate in 2 Group Q&A calls/week", "Engage in live sessions"],
+    estimatedTime: "2-3 weeks",
+  },
+  {
+    title: "Personalized Career Materials",
+    description: "Resume review sessions, guides for resumes and cold emails.",
+    details: "Craft compelling career documents with personalized feedback.",
+    icon: ({ className }: { className: string }) => <i className={`fas fa-file-alt ${className}`} />,
+    learningPoints: ["Get personalized resume review", "Guides for resumes and cold emails"],
+    estimatedTime: "2-3 weeks",
+  },
+  {
+    title: "Interview Preparation",
+    description: "Mock interviews and salary negotiation training.",
+    details: "Sharpen your interview skills and learn effective strategies.",
+    icon: ({ className }: { className: string }) => <i className={`fas fa-comments ${className}`} />,
+    learningPoints: ["Practice mock interviews", "Learn salary negotiation strategies"],
+    estimatedTime: "4-6 weeks",
+  },
+  {
+    title: "Mindset and Resilience Training",
+    description: "Develop a growth mindset and build resilience.",
+    details: "Cultivate the mental fortitude to overcome challenges.",
+    icon: ({ className }: { className: string }) => <i className={`fas fa-brain ${className}`} />,
+    learningPoints: ["Develop a growth mindset", "Build resilience"],
+    estimatedTime: "2-3 weeks",
+  },
+  {
+    title: "Community and Networking",
+    description: "Access to a thriving community with mobile and web apps.",
+    details: "Connect with peers, find opportunities, and access resources.",
+    icon: ({ className }: { className: string }) => <i className={`fas fa-network-wired ${className}`} />,
+    learningPoints: ["Join a thriving community", "Connect with peers and find opportunities"],
+    estimatedTime: "2-3 weeks",
+  },
+];
 
 export default function Main({
   faq,
@@ -55,47 +113,11 @@ export default function Main({
         }}
       /> */}
       <Lifetime setOpen={setOpen} />
+      <Carousel />
       <Mentors />
-      <Success />
-      <Video
-        title={"Trusted by 1000s of Students"}
-        desc={
-          "We will help you till you find the best job opportunity across the globe. hear it from our students and decide for yourselves."
-        }
-        youtubeId={"2cZ_7LuxEQI"}
-      />
-      <MentorshipGallary setOpenPay={setOpen} />
-      <Features />
-      <Faqs faq={faq} />
-      {/* <Interakt /> */}
-      <Floating setOpen={setOpen} />
-      <PaymentSheet
-        amount={8000}
-        courseId="querty"
-        cover="./mentorship.jpg"
-        curreny="USD"
-        open={open}
-        setOpen={setOpen}
-        setOpenPay={setOpenModal}
-        title="1:1 Mentorship Lifetime Access"
-      />
-      <PaymentModal payModal={openModal} setOpenPay={setOpenModal} />
-      {/* <Highlights /> */}
-      {/* <Testimonials /> */}
-      {/* <Video
-        title={"Best Practices for Developers by Our Mentors"}
-        desc={
-          "Explore the latest technologies wit the help of our experts with live interactions and doubt clearing sessions."
-        }
-        youtubeId={"KMufzzSF6SE"}
-      /> */}
-      {/* <Video
-        title={"1:1 Live Session with our Mentors"}
-        desc={
-          "Explore the latest technologies with the help of our experts with live interactions and doubt clearing sessions."
-        }
-        youtubeId={"gIx8D2pyXVI"}
-      /> */}
+      
+      
     </div>
   );
 }
+
