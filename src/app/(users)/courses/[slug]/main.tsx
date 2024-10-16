@@ -36,6 +36,17 @@ type CourseItem = {
         };
       }[];
     };
+    guidesCollection: {
+      items: {
+        guideId: string;
+        title: string;
+        description: string;
+        pricing: {
+          amount: number;
+          bigAmount: number;
+        };
+      }[];
+    };
     projectsCollection: {
       items: {
         title: string;
@@ -107,6 +118,7 @@ export default function Main({
     offers,
     rating,
     shortDescription,
+    guidesCollection
   },
 }: CourseItem) {
   const [vidIndex, setVidIndex] = useState<{
@@ -209,9 +221,18 @@ export default function Main({
           courseId={courseId}
           title={title}
           cover={courseImage?.url}
+          guides={guidesCollection.items}
           amount={
             pricingsCollection.items.find((e) => e.countryCode == "IN")
               ?.amount ?? 0
+          }
+          bigAmount={
+            pricingsCollection.items.find((e) => e.countryCode == "IN")
+              ?.bigAmount ?? 0
+          }
+          percentage={
+            pricingsCollection.items.find((e) => e.countryCode == "IN")
+              ?.percentage ?? 0
           }
           curreny={"INR"}
           setOpenPay={setOpenPay}
