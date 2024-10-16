@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FileText, GraduationCap, HomeIcon, Menu, Network, Star, Eye } from "lucide-react";
+import { FileText, GraduationCap, HomeIcon, Menu, Network, Star, Eye, Check } from "lucide-react";
 
 import {
   AlertDialog,
@@ -75,10 +75,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
   const navBar = [
     {
-      title: "All courses",
+      title: "Motivation",
       icon: <Network className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/courses",
-      selected: path === "/projects",
+      href: "/motivation",
+      selected: path === "/motivation",
     },
     {
       title: "Resume",
@@ -91,6 +91,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
       icon: <Star className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/roadmaps",
       selected: path === "/roadmaps",
+    },
+    {
+      title: "Interview",
+      icon: <Check className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/interview",
+      selected: path === "/interview",
     },
     {
       title: "DSA sheet",
