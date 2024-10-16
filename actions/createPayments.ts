@@ -11,7 +11,6 @@ export default async function createPayments({
   contact,
   state,
   couponCode,
-  guides,
 }: {
   courseId: string;
   email: string;
@@ -19,13 +18,12 @@ export default async function createPayments({
   contact: string;
   state: string;
   couponCode?: string | null;
-  guides: string[];
 }) {
   // console.log(courseId, email);
 
   const session = await auth();
 
-  let body: Record<string, string | string[]> = {};
+  let body: Record<string, string> = {};
 
   // @ts-ignore
   const pass = !!session?.user?.phone && !!session?.user?.state;
@@ -57,11 +55,10 @@ export default async function createPayments({
 
   if (pass) {
     body = {
-      email: session.user?.email ?? email,
+      email,
       courseId,
       gateway: "razorpay",
       countryCode: "IN",
-      guides,
     };
   } else {
     body = {
@@ -73,7 +70,6 @@ export default async function createPayments({
       country: "India",
       gateway: "razorpay",
       countryCode: "IN",
-      guides,
     };
   }
 
@@ -102,6 +98,7 @@ export default async function createPayments({
     })
   ).json();
 
+  // console.log(data);
   return data;
 }
 

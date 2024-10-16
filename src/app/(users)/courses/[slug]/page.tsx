@@ -3,7 +3,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import Main from "./main";
 
-export const dynamic = "force-static";
+export const dynamic = 'force-static';
 
 export type Courses = {
   courseCollection: {
@@ -25,17 +25,6 @@ export type Courses = {
             amount: string;
             bigAmount: string;
             percentage: string;
-          };
-        }[];
-      };
-      guidesCollection: {
-        items: {
-          guideId: string;
-          title: string;
-          description: string;
-          pricing: {
-            amount: number;
-            bigAmount: number;
           };
         }[];
       };
@@ -225,17 +214,6 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
         courseCreator{
             name,
         },
-        guidesCollection{
-            items{
-              guideId,
-              title,
-              description,
-              pricing{
-                amount,
-                bigAmount
-              }
-            }
-          },
          projectsCollection{
             items{
               title,
