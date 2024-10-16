@@ -274,7 +274,7 @@ export function DataTableDemo({ data }: { data: Jobs[] }) {
           }
           className="sm:max-w-sm ring-prime"
         />
-        <Link href={"https://forms.zohopublic.in/projectsnightlight/form/JobApplication/formperma/MWL5md1g-C2xr4RuhPFkIj8DUy9h04g9Kv16x8ZySIQ"} target={"_blank"} className="max-sm:w-full">
+        {/* <Link href={"https://forms.zohopublic.in/projectsnightlight/form/JobApplication/formperma/MWL5md1g-C2xr4RuhPFkIj8DUy9h04g9Kv16x8ZySIQ"} target={"_blank"} className="max-sm:w-full">
           <div className="group relative w-full">
             <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
             <Button
@@ -283,7 +283,7 @@ export function DataTableDemo({ data }: { data: Jobs[] }) {
             >Get Hired with Us
             </Button>
           </div>
-        </Link>
+        </Link> */}
         {/* <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button

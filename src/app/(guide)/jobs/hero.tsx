@@ -14,13 +14,13 @@ export default function Hero() {
         </p> */}
 
         <h1 className="font-bric text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-lime-300 to-green-800 max-w-2xl">
-          One Stop For Applying and Tracking Jobs
+          Find tech jobs from around the world
         </h1>
         <div className="flex flex-col gap-5 items-center justify-center w-full">
-          <p className="max-w-xl md:max-w-2xl max-sm:text-sm sm:text-lg text-muted-foreground">
+          {/* <p className="max-w-xl md:max-w-2xl max-sm:text-sm sm:text-lg text-muted-foreground">
             Explore a multiple range of jobs especially designed by 30 days of
             coding team enhance your skills and enrich your skill set.
-          </p>
+          </p> */}
           {/* <div className="flex-1 w-full flex justify-center">
             <div className="relative w-full md:w-2/3 max-w-lg">
               <Search className="absolute left-2.5 top-[30%] h-4 w-4 text-muted-foreground" />
@@ -44,6 +44,16 @@ export default function Hero() {
               />
             </div>
           </div> */}
+
+          {/* New buttons */}
+          <div className="flex gap-4 mt-6">
+            <button className="px-6 py-3 border border-lime-500 text-white font-semibold rounded-lg hover:bg-lime-600 transition-colors">
+              Hire with us
+            </button>
+            <button className="px-6 py-3 bg-green-700 text-white font-semibold rounded-lg hover:bg-green-800 transition-colors">
+              Apply for remote jobs
+            </button>
+          </div>
         </div>
       </div>
     </div>
