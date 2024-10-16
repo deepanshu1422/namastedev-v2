@@ -51,7 +51,7 @@ export default function TopicQuestions({ params }: { params: { topic?: string } 
     return (
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-6">Topic Not Found</h1>
-        <p>Sorry, we couldn't find any questions for the topic: {topic}</p>
+        <p>Sorry, we couldn&apos;t find any questions for the topic: {topic}</p>
         <Link href="/interview" className="text-blue-500 hover:underline">
           Return to Interview Dashboard
         </Link>
