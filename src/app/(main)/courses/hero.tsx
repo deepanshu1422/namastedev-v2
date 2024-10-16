@@ -37,7 +37,7 @@ export default function Hero({
 
   return (
     <div
-      className={`w-full grid relative overflow-hidden min-h-[400px] bg-zinc-950`}
+      className={`w-full grid relative overflow-hidden min-h-[200px] bg-zinc-950`}
     >
       <Image
         alt="community image"
@@ -67,9 +67,9 @@ export default function Hero({
               </Link>
             </div> */}
 
-            <div className="tab:hidden block pt-2 max-h-80 h-full max-w-xs m-auto w-full drop-shadow-[5px_6px_10px_#07928190] ">
+            {/* <div className="tab:hidden block pt-2 max-h-80 h-full max-w-xs m-auto w-full drop-shadow-[5px_6px_10px_#07928190] ">
               <Btn cover="/welcome.jpg" yt={"nTAHWER3K-0"} />
-            </div>
+            </div> */}
 
             {/* <span className="relative flex mt-3 w-full max-w-2xl">
               <Search className="absolute left-2.5 top-[30%] h-5 w-5 text-muted-foreground" />

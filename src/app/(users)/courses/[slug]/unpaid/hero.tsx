@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
-import {useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
@@ -49,16 +49,20 @@ export default function Hero({
   courseOffer: string[];
 }) {
   const { data } = useSession();
-  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
+  const [timeLeft, setTimeLeft] = useState({
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
     const getEndTime = () => {
-      let endTime = localStorage.getItem('offerEndTime');
+      let endTime = localStorage.getItem("offerEndTime");
       if (!endTime) {
         // Generate a random duration between 0 and 2.5 hours (in milliseconds)
         const randomDuration = Math.floor(Math.random() * 2.5 * 60 * 60 * 1000);
         endTime = (Date.now() + randomDuration).toString();
-        localStorage.setItem('offerEndTime', endTime);
+        localStorage.setItem("offerEndTime", endTime);
       }
       return parseInt(endTime);
     };
@@ -67,7 +71,9 @@ export default function Hero({
       const difference = getEndTime() - Date.now();
       if (difference > 0) {
         const hours = Math.floor(difference / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const minutes = Math.floor(
+          (difference % (1000 * 60 * 60)) / (1000 * 60)
+        );
         const seconds = Math.floor((difference % (1000 * 60)) / 1000);
         return { hours, minutes, seconds };
       }
@@ -77,7 +83,11 @@ export default function Hero({
     const timer = setInterval(() => {
       const newTimeLeft = calculateTimeLeft();
       setTimeLeft(newTimeLeft);
-      if (newTimeLeft.hours === 0 && newTimeLeft.minutes === 0 && newTimeLeft.seconds === 0) {
+      if (
+        newTimeLeft.hours === 0 &&
+        newTimeLeft.minutes === 0 &&
+        newTimeLeft.seconds === 0
+      ) {
         clearInterval(timer);
       }
     }, 1000);
@@ -162,8 +172,29 @@ export default function Hero({
               </div> */}
 
               {/* <div className="text-sm text-white/40">Updated 4 months ago</div> */}
-
               <div className="tab:hidden flex flex-col gap-4">
+                <div className="text-white text-center font-bold bg-gradient-to-r from-prime/30 to-second/30 rounded-lg p-3 shadow-inner">
+                  <p className="text-sm uppercase tracking-wider mb-2">
+                    Offer ends in:
+                  </p>
+                  <div className="flex justify-center items-center">
+                    {[
+                      { value: timeLeft.hours, label: "Hours" },
+                      { value: timeLeft.minutes, label: "Minutes" },
+                      { value: timeLeft.seconds, label: "Seconds" },
+                    ].map(({ value, label }, index) => (
+                      <div key={label} className="flex items-center">
+                        <span className="text-3xl font-mono bg-gradient-to-b from-white to-white/70 text-transparent bg-clip-text">
+                          {String(value).padStart(2, "0")}
+                        </span>
+                        <span className="text-xs text-white/70 ml-1">
+                          {label.charAt(0)}
+                        </span>
+                        {index < 2 && <span className="text-2xl mx-2">:</span>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
                 <span className="text-white text-2xl font-bold flex gap-2 items-end pt-1">
                   ₹{price.amount}
                   <span className="text-muted-foreground/70 italic line-through">
@@ -192,26 +223,6 @@ export default function Hero({
                   >
                     Buy Now
                   </Button>
-
-                  
-          <div className="text-white text-center font-bold bg-gradient-to-r from-prime/30 to-second/30 rounded-lg p-3 shadow-inner">
-            <p className="text-sm uppercase tracking-wider mb-2">Offer ends in:</p>
-            <div className="flex justify-center items-center">
-              {[
-                { value: timeLeft.hours, label: 'Hours' },
-                { value: timeLeft.minutes, label: 'Minutes' },
-                { value: timeLeft.seconds, label: 'Seconds' }
-              ].map(({ value, label }, index) => (
-                <div key={label} className="flex items-center">
-                  <span className="text-3xl font-mono bg-gradient-to-b from-white to-white/70 text-transparent bg-clip-text">
-                    {String(value).padStart(2, '0')}
-                  </span>
-                  <span className="text-xs text-white/70 ml-1">{label.charAt(0)}</span>
-                  {index < 2 && <span className="text-2xl mx-2">:</span>}
-                </div>
-              ))}
-            </div>
-          </div>
 
                   {/* <Link
                     href={"/bundle/complete-package-all-course-bundle"}

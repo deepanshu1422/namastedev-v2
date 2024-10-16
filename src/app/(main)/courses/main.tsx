@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Hero from "./hero";
 import Courses from "./courses";
 import type { CoursesType } from "./page";
@@ -60,7 +60,7 @@ export default function Main({ courses }: { courses: CoursesType }) {
         <p>
           You can access mentorship support by visiting the following link{" "}
           {/* <Link className="text-prime" href={"/community"}> */}
-            Mentorship Support.
+          Mentorship Support.
           {/* </Link> */}
         </p>
       ),
@@ -83,9 +83,8 @@ export default function Main({ courses }: { courses: CoursesType }) {
           mentorship program to further enhance your learning. Personalized
           mentorship can help you apply the knowledge from the course to
           real-world projects and provide guidance tailored to your career
-          goals. Visit{" "}
-          {/* <Link className="text-prime" href={"/community"}> */}
-            Mentorship Support.
+          goals. Visit {/* <Link className="text-prime" href={"/community"}> */}
+          Mentorship Support.
           {/* </Link> */}
         </p>
       ),
@@ -93,9 +92,7 @@ export default function Main({ courses }: { courses: CoursesType }) {
   ];
 
   const bundle = courses.bundleCollection.items.find(
-    (e) =>
-      e.slug ===
-      "complete-package-all-course-bundle"
+    (e) => e.slug === "complete-package-all-course-bundle"
   );
 
   return (
@@ -127,22 +124,25 @@ export default function Main({ courses }: { courses: CoursesType }) {
         search={state}
         setSearch={setState}
       />
-      <Mentors />
       <Bundle
         content={bundle?.offers ?? [""]}
         title={bundle?.bundleTitle ?? ""}
         url={bundle?.coverImage.url ?? ""}
-        price={bundle?.pricingsCollection.items.find(
-          (e) => e.countryCode === "IN"
-        ) ?? { amount: 999, bigAmount: 25000, percentage: 90 }}
+        price={
+          bundle?.pricingsCollection.items.find(
+            (e) => e.countryCode === "IN"
+          ) ?? { amount: 999, bigAmount: 25000, percentage: 90 }
+        }
         slug={bundle?.slug ?? "complete-package-all-course-bundle"}
       />
       <Courses state={state} courses={courses} />
       <VideoSlider />
       {/* <Reviews /> */}
       <Success />
+      <Mentors />
       <div className="my-5"></div>
       <Faqs faq={faq} />
+      <Floating />
     </main>
   );
 }
@@ -236,7 +236,6 @@ function Bundle({
         className="flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6"
       >
         <div className="max-tab:order-last flex flex-col gap-3">
-
           {/* <Badge
             className="rounded bg-lime-800/80  hover:bg-lime-800 p-3"
             variant={"secondary"}
@@ -319,6 +318,92 @@ function Bundle({
           className="rounded-s-lg w-full tab:h-4/5 my-auto shadow-xl shadow-black/50 object-cover"
         />
       </Link> */}
+    </div>
+  );
+}
+
+function Floating({}) {
+  const [timeLeft, setTimeLeft] = useState({
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  useEffect(() => {
+    const getEndTime = () => {
+      let endTime = localStorage.getItem("offerEndTime");
+      if (!endTime) {
+        // Generate a random duration between 0 and 2.5 hours (in milliseconds)
+        const randomDuration = Math.floor(Math.random() * 2.5 * 60 * 60 * 1000);
+        endTime = (Date.now() + randomDuration).toString();
+        localStorage.setItem("offerEndTime", endTime);
+      }
+      return parseInt(endTime);
+    };
+
+    const calculateTimeLeft = () => {
+      const difference = getEndTime() - Date.now();
+      if (difference > 0) {
+        const hours = Math.floor(difference / (1000 * 60 * 60));
+        const minutes = Math.floor(
+          (difference % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+        return { hours, minutes, seconds };
+      }
+      return { hours: 0, minutes: 0, seconds: 0 };
+    };
+
+    const timer = setInterval(() => {
+      const newTimeLeft = calculateTimeLeft();
+      setTimeLeft(newTimeLeft);
+      if (
+        newTimeLeft.hours === 0 &&
+        newTimeLeft.minutes === 0 &&
+        newTimeLeft.seconds === 0
+      ) {
+        clearInterval(timer);
+      }
+    }, 1000);
+
+    setTimeLeft(calculateTimeLeft());
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="md:hidden fixed bottom-0 z-20 bg-background/40 w-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30">
+      <div className="flex flex-col gap-2 p-2">
+        <div className="flex-1 group relative">
+          <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
+          <Link href={"/bundle/complete-package-all-course-bundle"}>
+            <Button
+              variant={"outline"}
+              className={`flex flex-col font-semibold text-foreground/80 hover:text-foreground relative w-full p-3 py-6 text-sm gap-1`}
+            >
+              <div className="absolute -top-2 left-1 flex justify-center items-center rounded-lg bg-gradient-to-r from-lime-600/80 to-second px-2 shadow-inner">
+                {/* <span className="mr-2">Offer Ends In</span> */}
+                {[
+                  { value: timeLeft.hours, label: "Hours" },
+                  { value: timeLeft.minutes, label: "Minutes" },
+                  { value: timeLeft.seconds, label: "Seconds" },
+                ].map(({ value, label }, index) => (
+                  <div key={label} className="flex items-center">
+                    <span className="font-mono bg-gradient-to-b from-white to-white/70 text-transparent bg-clip-text">
+                      {String(value).padStart(2, "0")}
+                    </span>
+                    <span className="text-sm text-white/70">
+                      {label.charAt(0)}
+                    </span>
+                    {index < 2 && <span className="mx-2">:</span>}
+                  </div>
+                ))}
+              </div>
+              <span className="">All Courses in ₹999/-</span>
+            </Button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
