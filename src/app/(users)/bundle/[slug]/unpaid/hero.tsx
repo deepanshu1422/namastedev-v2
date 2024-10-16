@@ -187,7 +187,7 @@ export default function Hero({
                 </div>
 
                 {/* New discount offers section */}
-                <div className="mt-4 bg-gradient-to-r from-yellow-400 to-orange-500 p-4 rounded-lg">
+                {/* <div className="mt-4 bg-gradient-to-r from-yellow-400 to-orange-500 p-4 rounded-lg">
                   <h3 className="text-lg font-bold mb-2">
                     Limited Time Offers:
                   </h3>
@@ -198,7 +198,7 @@ export default function Hero({
                       Early bird special: Extra 10% off for first 100 buyers
                     </li>
                   </ol>
-                </div>
+                </div> */}
               </div>
             </div>
           </section>
