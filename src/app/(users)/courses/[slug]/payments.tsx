@@ -191,7 +191,7 @@ export function PaymentSheet({
           name: session?.user?.name ?? formData.name,
           state: formData.state,
           couponCode: promo.code,
-          guides: formData.gudies
+          guides: formData.gudies,
         });
       } else {
         return;
@@ -245,7 +245,7 @@ export function PaymentSheet({
           });
           setOpenPay(true);
           await update({ courses: true });
-          if (session?.user?.email) router.push(`/dashboard/${slug}`);
+          router.push(`/dashboard/${slug}`);
         },
         prefill: {
           name: formData.name,
@@ -704,9 +704,7 @@ export function PaymentModal({
           <CardContent className="pt-3 pb-0 mx-auto w-full flex flex-col items-center gap-2">
             <Button
               onClick={() => {
-                if (status === "unauthenticated") {
-                  router.push(`/api/auth/signin?callbackUrl=/courses/${slug}`);
-                }
+                router.push(`/dashboard/${slug}`);
                 setOpenPay(false);
               }}
               disabled={status === "loading"}
