@@ -391,62 +391,363 @@ export
             ]
         },
         react: {
+
             interviewQuestions: [
                 {
-                    question: "What is the difference between '==' and '===' in JavaScript?",
-                    answer: "'==' is the equality operator that compares values after performing type coercion if necessary. '===' is the strict equality operator that compares both value and type without performing type coercion."
+                    question: "What is React and what are its main features?",
+                    answer: "React is a JavaScript library for building user interfaces. Its main features include: Virtual DOM for efficient updates, component-based architecture, unidirectional data flow, JSX syntax, and React Hooks for state management in functional components."
                 },
                 {
-                    question: "Explain the concept of closures in JavaScript.",
-                    answer: "A closure is a function that has access to variables in its outer (enclosing) lexical scope, even after the outer function has returned. It allows for data privacy and the creation of function factories."
+                    question: "Explain the difference between functional and class components.",
+                    answer: "Functional components are JavaScript functions that take props and return JSX. They're simpler and can use Hooks for state and lifecycle features. Class components are ES6 classes that extend React.Component, have their own state, lifecycle methods, and render method."
                 },
-                // ... Add more interview questions
+                {
+                    question: "What is JSX?",
+                    answer: "JSX is a syntax extension for JavaScript used in React. It allows you to write HTML-like code in your JavaScript files. JSX gets transformed into JavaScript objects representing React elements."
+                },
+                {
+                    question: "What are props in React?",
+                    answer: "Props (short for properties) are a way of passing data from parent to child components in React. They are read-only and help make components reusable and dynamic."
+                },
+                {
+                    question: "Explain the concept of state in React.",
+                    answer: "State is a JavaScript object that holds dynamic data in a component. When state changes, React re-renders the component. In class components, state is managed via this.state and this.setState(). In functional components, state is managed using the useState hook."
+                },
+                {
+                    question: "What is the virtual DOM and how does it work?",
+                    answer: "The virtual DOM is a lightweight copy of the actual DOM. React uses it to improve performance. When state changes, React creates a new virtual DOM, compares it with the previous one, and only updates the real DOM where necessary, reducing expensive DOM operations."
+                },
+                {
+                    question: "What are React hooks? Name a few commonly used hooks.",
+                    answer: "Hooks are functions that let you use state and other React features in functional components. Common hooks include: useState for state management, useEffect for side effects, useContext for context consumption, useRef for creating mutable references, and useCallback and useMemo for performance optimization."
+                },
+                {
+                    question: "Explain the lifecycle methods in class components.",
+                    answer: "Lifecycle methods are special methods that run at different stages of a component's life. Key methods include: componentDidMount (after first render), componentDidUpdate (after updates), componentWillUnmount (before removal), and render (returns JSX to be rendered)."
+                },
+                {
+                    question: "How do you handle events in React?",
+                    answer: "React events are named using camelCase and passed as functions. For example: onClick={handleClick}. In class components, you typically bind methods in the constructor. In functional components, you can define event handlers as regular functions or arrow functions."
+                },
+                {
+                    question: "What is the significance of keys in React lists?",
+                    answer: "Keys help React identify which items in a list have changed, been added, or been removed. They should be unique among siblings. Keys help in efficient updating of the UI, especially in dynamic lists."
+                },
+                {
+                    question: "What is the purpose of React.Fragment?",
+                    answer: "React.Fragment allows you to group multiple elements without adding an extra DOM node. It's useful when you need to return multiple elements from a component's render method without wrapping them in a div or other container element."
+                },
+                {
+                    question: "Explain the concept of conditional rendering in React.",
+                    answer: "Conditional rendering in React allows you to render different UI based on certain conditions. This can be done using if statements, ternary operators, or logical && operator in JSX."
+                },
+                {
+                    question: "What is the difference between controlled and uncontrolled components?",
+                    answer: "In controlled components, form data is handled by React state. The value of the input is controlled by React. In uncontrolled components, form data is handled by the DOM itself. Refs are used to get form values from the DOM."
+                },
+                {
+                    question: "How do you pass data between components in React?",
+                    answer: "Data can be passed from parent to child via props, from child to parent via callbacks, between siblings through a common parent (lifting state up), or using context for deeply nested components. For complex applications, state management libraries like Redux or MobX can be used."
+                },
+                {
+                    question: "What is context in React and when would you use it?",
+                    answer: "Context provides a way to pass data through the component tree without having to pass props down manually at every level. It's useful for sharing 'global' data like themes, user authentication status, or language preferences."
+                },
+                {
+                    question: "Explain the concept of higher-order components (HOCs).",
+                    answer: "A higher-order component is a function that takes a component and returns a new component with some added functionality. HOCs are used for code reuse, logic abstraction, and state manipulation. They're a pattern derived from React's compositional nature."
+                },
+                {
+                    question: "What is the purpose of the useEffect hook?",
+                    answer: "useEffect is used for side effects in functional components. It serves similar purposes to componentDidMount, componentDidUpdate, and componentWillUnmount in class components. It's used for data fetching, subscriptions, or manually changing the DOM."
+                },
+                {
+                    question: "How do you optimize performance in a React application?",
+                    answer: "Performance can be optimized by: using React.memo for functional components or PureComponent for class components to prevent unnecessary re-renders, using useMemo and useCallback hooks to memoize values and functions, code-splitting with React.lazy and Suspense, virtualizing long lists, and minimizing state updates."
+                },
+                {
+                    question: "What is code-splitting in React and why is it useful?",
+                    answer: "Code-splitting is a technique to split your code into small chunks which can then be loaded on demand. It's useful for improving the performance of large React applications by reducing the size of the initial bundle that needs to be downloaded."
+                },
+                {
+                    question: "Explain the concept of lifting state up.",
+                    answer: "Lifting state up is a pattern used when several components need to share the same changing data. Instead of keeping the state in child components, you lift it up to their closest common ancestor. This makes the state shareable between components and keeps it in sync."
+                },
+                {
+                    question: "What are error boundaries in React?",
+                    answer: "Error boundaries are React components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed. They catch errors during rendering, in lifecycle methods, and in constructors of the whole tree below them."
+                },
+                {
+                    question: "How does React handle forms?",
+                    answer: "React can handle forms using controlled components where form data is controlled by React state, or uncontrolled components where form data is handled by the DOM. For controlled components, you use state to store input values and update them on change events."
+                },
+                {
+                    question: "What is the difference between Element and Component in React?",
+                    answer: "An Element is a plain object describing what you want to appear on the screen in terms of the DOM nodes or other components. Elements can contain other Elements in their props. A Component is a function or class that accepts input and returns a React element."
+                },
+                {
+                    question: "Explain the concept of reconciliation in React.",
+                    answer: "Reconciliation is the process React uses to efficiently update the DOM. When a component's state changes, React creates a new virtual DOM tree, diffs it with the previous one, and calculates the most efficient way to update the actual DOM. This process is also known as diffing."
+                },
+                {
+                    question: "What are pure components in React?",
+                    answer: "Pure Components in React are similar to regular components, except they automatically implement shouldComponentUpdate() with a shallow prop and state comparison. This can provide a performance boost in some cases by reducing the number of renders."
+                }
             ],
             takeHomeProjects: [
                 {
-                    question: "Build a task management application with local storage",
-                    answer: "This project involves creating a web app that allows users to add, edit, and delete tasks. Use local storage to persist data between sessions. Focus on UI/UX and efficient state management."
+                    question: "Build a task management application with React",
+                    answer: "Create a task management app with features like adding tasks, marking them as complete, filtering tasks, and persisting data in local storage. Use React hooks for state management and side effects."
                 },
                 {
-                    question: "Create a weather app using a public API",
-                    answer: "Use a public API to fetch weather data and display it on a web page. Focus on handling errors and edge cases."
+                    question: "Develop a weather dashboard using a public API",
+                    answer: "Build a weather dashboard that fetches data from a public weather API. Include features like searching for locations, displaying current weather, and showing a 5-day forecast. Use React Router for navigation between pages."
                 },
                 {
-                    question: "Develop a simple e-commerce product page with a shopping cart",
-                    answer: "Build a simple e-commerce product page with a shopping cart. Focus on handling product variations and cart functionality."
+                    question: "Create a blog platform with React and a headless CMS",
+                    answer: "Develop a blog platform using React for the frontend and a headless CMS like Contentful or Strapi for content management. Implement features like listing posts, individual post pages, and categories."
                 },
-                // ... Add more take-home project ideas
+                {
+                    question: "Build an e-commerce product page with shopping cart functionality",
+                    answer: "Create a product page for an e-commerce site. Include features like product variants, add to cart functionality, and a mini cart display. Use Context API or Redux for state management."
+                },
+                {
+                    question: "Develop a movie database application using The Movie DB API",
+                    answer: "Build a movie database app that allows users to search for movies, view details, and save favorites. Implement infinite scrolling for movie lists and use React Router for navigation."
+                },
+                {
+                    question: "Create a real-time chat application with React and Firebase",
+                    answer: "Develop a real-time chat application using React for the frontend and Firebase for backend services. Include features like user authentication, real-time messaging, and online status indicators."
+                },
+                {
+                    question: "Build a quiz application with multiple choice questions",
+                    answer: "Create a quiz app that presents users with multiple-choice questions, tracks their score, and shows results at the end. Implement a timer for each question and use React's state management for handling user responses."
+                },
+                {
+                    question: "Develop a personal finance tracker",
+                    answer: "Build a finance tracker that allows users to input income and expenses, categorize transactions, and view spending trends. Use charts for data visualization and implement drag-and-drop functionality for categorizing transactions."
+                },
+                {
+                    question: "Create a recipe management application",
+                    answer: "Develop a recipe management app where users can add, edit, and delete recipes. Include features like ingredient scaling, meal planning, and a shopping list generator. Use local storage or a backend API for data persistence."
+                },
+                {
+                    question: "Build a social media dashboard",
+                    answer: "Create a dashboard that aggregates data from various social media platforms using their APIs. Implement data visualization using charts and graphs, and include features like scheduling posts and analyzing engagement metrics."
+                },
+                {
+                    question: "Develop a markdown editor with live preview",
+                    answer: "Build a markdown editor that allows users to write markdown and see a live preview. Include features like syntax highlighting, custom toolbar, and the ability to save and load documents."
+                },
+                {
+                    question: "Create a job board application",
+                    answer: "Develop a job board where companies can post jobs and job seekers can apply. Implement features like job search, filtering, and application tracking. Use a backend API for data management."
+                },
+                {
+                    question: "Build a workout tracker application",
+                    answer: "Create an app for tracking workouts, including features like creating custom workouts, logging exercises, and visualizing progress over time. Implement user authentication and data persistence."
+                },
+                {
+                    question: "Develop a language learning application",
+                    answer: "Build an application to help users learn a new language. Include features like flashcards, quizzes, and progress tracking. Use spaced repetition algorithms for efficient learning."
+                },
+                {
+                    question: "Create a collaborative drawing application",
+                    answer: "Develop a web-based drawing application that allows multiple users to draw on the same canvas in real-time. Implement features like different brush sizes, colors, and the ability to save and share drawings."
+                },
+                {
+                    question: "Build a podcast player application",
+                    answer: "Create a podcast player that allows users to search for podcasts, subscribe to shows, download episodes, and track listening progress. Implement audio playback controls and a responsive design for mobile use."
+                },
+                {
+                    question: "Develop a personal portfolio website builder",
+                    answer: "Build a tool that allows users to create and customize their own portfolio websites without coding knowledge. Include features like drag-and-drop layout editing, theme customization, and project showcases."
+                },
+                {
+                    question: "Create a habit tracker application",
+                    answer: "Develop an application for tracking daily habits. Include features like streak counting, progress visualization, and reminder notifications. Use local storage or a backend API for data persistence."
+                },
+                {
+                    question: "Build a note-taking application with rich text editing",
+                    answer: "Create a note-taking app with features like rich text editing, note organization (folders/tags), and search functionality. Implement sync across devices using a backend API."
+                },
+                {
+                    question: "Develop a project management tool",
+                    answer: "Build a project management application with features like task assignment, progress tracking, and team collaboration. Implement a kanban board interface and use websockets for real-time updates."
+                },
+                {
+                    question: "Create a music streaming service frontend",
+                    answer: "Develop the frontend for a music streaming service. Focus on features like playlist management, search functionality, and audio playback. Use a public music API for song data."
+                },
+                {
+                    question: "Build a data visualization dashboard",
+                    answer: "Create a dashboard that visualizes complex datasets using various chart types. Focus on interactivity and performance with large datasets. Use a library like D3.js or recharts for advanced visualizations."
+                },
+                {
+                    question: "Develop a personal knowledge base application",
+                    answer: "Build an application for organizing personal knowledge, including features like note-taking, linking between notes, and visualization of connections. Implement a graph-based data structure for representing knowledge."
+                },
+                {
+                    question: "Create a cryptocurrency portfolio tracker",
+                    answer: "Develop an application that allows users to track their cryptocurrency investments. Include features like real-time price updates, portfolio analysis, and historical performance charts."
+                },
+                {
+                    question: "Build an online code editor and compiler",
+                    answer: "Create a web-based code editor that supports multiple programming languages. Implement features like syntax highlighting, code execution, and the ability to save and share code snippets."
+                }
             ],
             bigCompanyQuestions: [
                 {
-                    question: "Implement a debounce function in JavaScript.",
-                    answer: "A debounce function limits the rate at which a function can fire. Here's a simple implementation: ..."
+                  question: "Implement a custom hook for handling form state in React.",
+                  answer: "Here's a basic implementation of a useForm hook: const useForm = (initialState = {}) => { const [values, setValues] = useState(initialState); const handleChange = (e) => { setValues({ ...values, [e.target.name]: e.target.value }); }; const resetForm = () => setValues(initialState); return [values, handleChange, resetForm]; };"
                 },
                 {
-                    question: "Explain the concept of prototypal inheritance in JavaScript.",
-                    answer: "Prototypal inheritance is a method by which an object can inherit properties and methods from another object. ..."
-                },
-                // ... Add more big company questions
-            ],
-            simpleProjects: [
-                {
-                    question: "Create a to-do list application",
-                    answer: "Build a simple to-do list app with features like adding tasks, marking them as complete, and deleting tasks. Use vanilla JavaScript or a framework of your choice."
+                  question: "Explain how you would optimize a React application that's rendering a large list of items.",
+                  answer: "To optimize rendering of large lists: 1) Use virtualization (react-window or react-virtualized) to render only visible items. 2) Implement pagination or infinite scrolling. 3) Use React.memo to prevent unnecessary re-renders of list items. 4) Use the useCallback hook for event handlers passed to list items. 5) Consider using a web worker for heavy computations."
                 },
                 {
-                    question: "Build a calculator with basic arithmetic operations",
-                    answer: "Implement basic arithmetic operations like addition, subtraction, multiplication, and division. Use a simple UI to display results."
+                  question: "Implement a higher-order component (HOC) that adds loading functionality to any component.",
+                  answer: "Here's a simple HOC for adding loading functionality: const withLoading = (WrappedComponent) => { return function WithLoading(props) { const [isLoading, setIsLoading] = useState(true); useEffect(() => { setTimeout(() => setIsLoading(false), 2000); }, []); return isLoading ? <div>Loading...</div> : <WrappedComponent {...props} />; }; };"
                 },
                 {
-                    question: "Develop a countdown timer",
-                    answer: "Build a countdown timer that takes a user-inputted time and counts down to zero. Use a simple UI to display the countdown."
-                },
-                {
-                    question: "Make a simple quiz game",
-                    answer: "Build a simple quiz game with multiple-choice questions. Use a simple UI to display questions and keep track of scores."
-                },
-                // ... Add more simple project ideas
-            ]
+                    question: "Implement a custom hook for handling API calls with loading and error states.",
+                    answer: "Here's a custom hook for API calls: const useApi = (url) => { const [data, setData] = useState(null); const [loading, setLoading] = useState(true); const [error, setError] = useState(null); useEffect(() => { const fetchData = async () => { try { const response = await fetch(url); const json = await response.json(); setData(json); setLoading(false); } catch (error) { setError(error); setLoading(false); } }; fetchData(); }, [url]); return { data, loading, error }; };"
+                  },
+                  {
+                    question: "Explain the concept of code splitting in React and how to implement it.",
+                    answer: "Code splitting is a technique to split your code into small chunks which can then be loaded on demand. In React, it's implemented using dynamic import() syntax along with React.lazy and Suspense. Example: const OtherComponent = React.lazy(() => import('./OtherComponent')); function MyComponent() { return ( <React.Suspense fallback={<div>Loading...</div>}> <OtherComponent /> </React.Suspense> ); }"
+                  },
+                  {
+                    question: "Implement a custom hook for managing local storage in React.",
+                    answer: "Here's a custom hook for local storage: const useLocalStorage = (key, initialValue) => { const [storedValue, setStoredValue] = useState(() => { try { const item = window.localStorage.getItem(key); return item ? JSON.parse(item) : initialValue; } catch (error) { console.log(error); return initialValue; } }); const setValue = (value) => { try { const valueToStore = value instanceof Function ? value(storedValue) : value; setStoredValue(valueToStore); window.localStorage.setItem(key, JSON.stringify(valueToStore)); } catch (error) { console.log(error); } }; return [storedValue, setValue]; };"
+                  },
+                  {
+                    question: "Explain the concept of context in React and how to use it effectively.",
+                    answer: "Context provides a way to pass data through the component tree without having to pass props down manually at every level. To use it effectively: 1) Create a context using React.createContext(). 2) Provide the context value at a high level in your app using Context.Provider. 3) Consume the context in nested components using useContext hook or Context.Consumer. Use context for global data like themes, user info, or language preferences."
+                  },
+                  {
+                    question: "Implement a custom hook for managing pagination in React.",
+                    answer: "Here's a custom pagination hook: const usePagination = (data, itemsPerPage) => { const [currentPage, setCurrentPage] = useState(1); const maxPage = Math.ceil(data.length / itemsPerPage); const currentData = () => { const begin = (currentPage - 1) * itemsPerPage; const end = begin + itemsPerPage; return data.slice(begin, end); }; const next = () => { setCurrentPage((currentPage) => Math.min(currentPage + 1, maxPage)); }; const prev = () => { setCurrentPage((currentPage) => Math.max(currentPage - 1, 1)); }; const jump = (page) => { const pageNumber = Math.max(1, page); setCurrentPage((currentPage) => Math.min(pageNumber, maxPage)); }; return { next, prev, jump, currentData, currentPage, maxPage }; };"
+                  },
+                  {
+                    question: "Explain the differences between useMemo and useCallback hooks.",
+                    answer: "useMemo is used to memoize expensive computations. It takes a function and an array of dependencies, and only recomputes the memoized value when one of the dependencies has changed. useCallback is similar, but it's used to memoize functions instead of values. It's useful when passing callbacks to optimized child components that rely on reference equality to prevent unnecessary renders."
+                  },
+                  {
+                    question: "Implement a custom hook for managing forms with validation in React.",
+                    answer: "Here's a basic form hook with validation: const useForm = (initialState, validate) => { const [values, setValues] = useState(initialState); const [errors, setErrors] = useState({}); const [isSubmitting, setIsSubmitting] = useState(false); useEffect(() => { if (isSubmitting) { const noErrors = Object.keys(errors).length === 0; if (noErrors) { console.log('Form is valid! Submitting...'); setIsSubmitting(false); } else { setIsSubmitting(false); } } }, [errors]); const handleChange = (event) => { setValues({ ...values, [event.target.name]: event.target.value }); }; const handleSubmit = (event) => { event.preventDefault(); setErrors(validate(values)); setIsSubmitting(true); }; return { handleChange, handleSubmit, values, errors, isSubmitting }; };"
+                  },
+                  {
+                    question: "Explain the concept of render props and how it compares to higher-order components.",
+                    answer: "Render props is a technique where a component receives a function prop that it uses to render its content. HOCs are functions that take a component and return a new component with additional props or behavior. Render props are more flexible and avoid naming collisions, while HOCs are easier to debug and can be composed. Hooks have largely replaced both patterns for many use cases."
+                  },
+                  {
+                    question: "Implement a custom hook for managing a modal in React.",
+                    answer: "Here's a custom modal hook: const useModal = () => { const [isOpen, setIsOpen] = useState(false); const toggle = () => setIsOpen(!isOpen); return { isOpen, toggle }; }; // Usage: const Modal = ({ children, isOpen, toggle }) => { if (!isOpen) return null; return ( <div className='modal'> <div className='modal-content'> {children} <button onClick={toggle}>Close</button> </div> </div> ); };"
+                  }
+                ],
+                simpleProjects: [
+                  {
+                    question: "Create a simple counter application",
+                    answer: "Build a counter app with increment, decrement, and reset functionality using useState hook."
+                  },
+                  {
+                    question: "Develop a to-do list application",
+                    answer: "Create a to-do list where users can add, delete, and mark tasks as complete. Use useState for state management."
+                  },
+                  {
+                    question: "Build a basic calculator",
+                    answer: "Implement a calculator with basic arithmetic operations. Use state to manage the display and calculations."
+                  },
+                  {
+                    question: "Create a weather app using a public API",
+                    answer: "Build a simple weather app that fetches data from a public weather API and displays current weather for a given location."
+                  },
+                  {
+                    question: "Develop a simple quiz application",
+                    answer: "Create a quiz app with multiple-choice questions. Keep track of the score and display results at the end."
+                  },
+                  {
+                    question: "Build a basic form with validation",
+                    answer: "Implement a form (e.g., signup form) with client-side validation for fields like email, password, etc."
+                  },
+                  {
+                    question: "Create a simple movie search application",
+                    answer: "Build an app that allows users to search for movies using a public movie API. Display results in a list or grid."
+                  },
+                  {
+                    question: "Develop a basic e-commerce product list",
+                    answer: "Create a page that displays a list of products. Include features like filtering and sorting."
+                  },
+                  {
+                    question: "Build a timer/stopwatch application",
+                    answer: "Implement a timer or stopwatch with start, pause, and reset functionality."
+                  },
+                  {
+                    question: "Create a simple blog post viewer",
+                    answer: "Build a basic blog application that displays a list of posts and allows users to view individual posts."
+                  },
+                  {
+                    question: "Develop a basic image gallery",
+                    answer: "Create an image gallery with thumbnail views and the ability to view images in a larger size."
+                  },
+                  {
+                    question: "Build a simple chat UI",
+                    answer: "Implement the UI for a chat application. Focus on the layout and message display (actual messaging functionality not required)."
+                  },
+                  {
+                    question: "Create a basic calendar component",
+                    answer: "Develop a calendar component that displays days of the month and allows navigation between months."
+                  },
+                  {
+                    question: "Build a simple music player UI",
+                    answer: "Create the UI for a music player with play, pause, skip, and volume control (actual audio playback not required)."
+                  },
+                  {
+                    question: "Develop a basic cryptocurrency price tracker",
+                    answer: "Build an app that displays current prices of popular cryptocurrencies using a public API."
+                  },
+                  {
+                    question: "Create a simple recipe finder",
+                    answer: "Implement a recipe finder that allows users to search for recipes based on ingredients using a recipe API."
+                  },
+                  {
+                    question: "Build a basic note-taking application",
+                    answer: "Create a simple note-taking app where users can add, edit, and delete notes. Use local storage for persistence."
+                  },
+                  {
+                    question: "Develop a simple drawing app",
+                    answer: "Implement a basic drawing application using HTML canvas and React."
+                  },
+                  {
+                    question: "Create a basic bookmarking tool",
+                    answer: "Build a simple bookmarking application where users can save and categorize website URLs."
+                  },
+                  {
+                    question: "Build a simple expense tracker",
+                    answer: "Implement a basic expense tracker where users can add and categorize expenses."
+                  },
+                  {
+                    question: "Develop a basic pomodoro timer",
+                    answer: "Create a pomodoro timer application with work and break intervals."
+                  },
+                  {
+                    question: "Build a simple color picker",
+                    answer: "Implement a color picker that allows users to select colors and displays the corresponding hex and RGB values."
+                  },
+                  {
+                    question: "Create a basic markdown previewer",
+                    answer: "Develop a simple markdown editor with a live preview of the formatted text."
+                  },
+                  {
+                    question: "Build a simple kanban board",
+                    answer: "Implement a basic kanban board with columns for 'To Do', 'In Progress', and 'Done'. Allow adding and moving tasks between columns."
+                  },
+                  {
+                    question: "Develop a basic file explorer UI",
+                    answer: "Create a simple file explorer interface with a tree view of folders and files."
+                  }
+                ]
         },
     };
 
