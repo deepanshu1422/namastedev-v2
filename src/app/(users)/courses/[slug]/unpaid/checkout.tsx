@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { sendEvent } from "@/services/fbpixel";
+import { BASE_URL } from "@/util/constants";
 import { sha256 } from "js-sha256";
 import { Check, Play } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -14,11 +15,13 @@ export default function Checkout({
   image,
   price,
   courseOffer,
+  slug,
   setOpen,
   setYtOpen,
   addToCart,
 }: {
   addToCart: () => void;
+  slug: string;
   courseId: string;
   checkout: string;
   image: string;
@@ -74,6 +77,7 @@ export default function Checkout({
                   // @ts-ignore
                   ph: sha256(data?.user?.phone ?? ""),
                   fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
+                  event_source_url: `${BASE_URL}/courses/${slug}`
                 });
                 addToCart();
               }}

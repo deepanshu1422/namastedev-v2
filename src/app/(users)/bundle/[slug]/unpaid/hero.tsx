@@ -19,6 +19,7 @@ import { useSession } from "next-auth/react";
 import { sendEvent } from "@/services/fbpixel";
 import { sha256 } from "js-sha256";
 import { addToCart } from "@/services/gaEvents";
+import { BASE_URL } from "@/util/constants";
 
 export default function Hero({
   bundleId,
@@ -27,6 +28,7 @@ export default function Hero({
   rating,
   addToCart,
   price,
+  slug,
   shortDescription,
   courseOffer,
   setYtOpen,
@@ -39,6 +41,7 @@ export default function Hero({
   rating: number;
   title: string;
   image: string;
+  slug: string;
   price: {
     amount: number;
     percentage: number;
@@ -144,6 +147,7 @@ export default function Hero({
                           // @ts-ignore
                           ph: sha256(data?.user?.phone ?? ""),
                           fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
+                          event_source_url: `${BASE_URL}/bundle/${slug}`
                         });
                         addToCart();
                       }}

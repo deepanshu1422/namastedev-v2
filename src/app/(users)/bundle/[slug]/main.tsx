@@ -19,6 +19,17 @@ type BundleItem = {
     rating: number;
     slug: string;
     offers: string[];
+    guidesCollection: {
+      items: {
+        guideId: string;
+        title: string;
+        description: string;
+        pricing: {
+          amount: number;
+          bigAmount: number;
+        };
+      }[];
+    };
     coursesCollection: {
       items: {
         title: string;
@@ -84,15 +95,15 @@ export default function Main({
   useEffect(() => {
     // @ts-ignore
     // if (!session?.user?.bundleId?.includes(bundleId))
-      viewItem({
-        title: bundleTitle,
-        slug,
-        itemId: bundleId,
-        itemType: "bundle",
-        value:
-          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
-            ?.amount ?? 999,
-      });
+    viewItem({
+      title: bundleTitle,
+      slug,
+      itemId: bundleId,
+      itemType: "bundle",
+      value:
+        pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
+        999,
+    });
   }, [pathName]);
 
   // function Paid() {
@@ -182,7 +193,6 @@ export default function Main({
   // }
 
   function Unpaid() {
-
     function addToCartEvent() {
       addToCart({
         itemId: bundleId,
@@ -201,6 +211,7 @@ export default function Main({
           addToCart={addToCartEvent}
           bundleId={bundleId}
           rating={rating}
+          slug={slug}
           title={bundleTitle ?? "NULL"}
           image={coverImage?.url}
           shortDescription={shortDescription ?? "NULL"}
@@ -216,6 +227,7 @@ export default function Main({
           setYtOpen={setOpenYt}
         />
         <Detail
+          slug={slug}
           addToCart={addToCartEvent}
           bundleId={bundleId}
           coursesCollection={coursesCollection}
@@ -236,6 +248,7 @@ export default function Main({
         />
         <PaymentSheet
           open={open}
+          slug={slug}
           setOpen={setOpen}
           bundleId={bundleId}
           title={bundleTitle}
@@ -249,6 +262,7 @@ export default function Main({
         />
         <YTModal open={openYt} setOpen={setOpenYt} url="nTAHWER3K-0" />
         <Floating
+          slug={slug}
           addToCart={addToCartEvent}
           price={
             pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {

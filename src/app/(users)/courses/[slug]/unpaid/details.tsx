@@ -19,6 +19,7 @@ import VideoSlider from "@/app/(main)/testimonials/video-slider";
 export default function Details({
   image,
   courseId,
+  slug,
   // longDescription,
   modulesCollection,
   // projectsCollection,
@@ -36,6 +37,7 @@ export default function Details({
   courseOffer: string[];
   courseId: string;
   image: string;
+  slug: string;
   // longDescription: React.JSX.Element;
   price: {
     amount: number;
@@ -209,6 +211,7 @@ export default function Details({
 
       <Checkout
         addToCart={addToCart}
+        slug={slug}
         setOpen={setOpen}
         setYtOpen={setYtOpen}
         courseOffer={courseOffer}

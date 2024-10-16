@@ -44,6 +44,7 @@ import { useRouter } from "next/navigation";
 import { sendEvent } from "@/services/fbpixel";
 import { sha256 } from "js-sha256";
 import { beginCheckout, purchase } from "@/services/gaEvents";
+import { BASE_URL } from "@/util/constants";
 
 export function PaymentSheet({
   cover,
@@ -51,12 +52,14 @@ export function PaymentSheet({
   amount,
   curreny,
   bundleId,
+  slug,
   open,
   setOpen,
   setOpenPay,
 }: {
   cover?: string;
   title: string;
+  slug: string;
   amount: number;
   curreny?: string;
   bundleId: string;
@@ -218,6 +221,8 @@ export function PaymentSheet({
             ph: sha256(formData.phone),
             fn: sha256(formData.name.split(" ")[0]),
             ln: sha256(formData.name.split(" ")[1] ?? ""),
+            num_items: 1,
+            event_source_url: `${BASE_URL}/bundle/${slug}`,
           });
           purchase({
             title,
@@ -639,12 +644,14 @@ export function Floating({
   open,
   setOpen,
   addToCart,
+  slug
 }: {
   price: {
     amount: number;
     percentage: number;
     bigAmount: number;
   };
+  slug: string;
   bundleId: string;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -674,6 +681,7 @@ export function Floating({
                   // @ts-ignore
                   ph: sha256(session?.user?.phone ?? ""),
                   fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
+                  event_source_url: `${BASE_URL}/bundle/${slug}`
                 });
                 addToCart();
               }}

@@ -18,11 +18,13 @@ import { Reviews } from "../checkout";
 import { sendEvent } from "@/services/fbpixel";
 import { sha256 } from "js-sha256";
 import { useSession } from "next-auth/react";
+import { BASE_URL } from "@/util/constants";
 
 export default function Hero({
   title,
   courseId,
   image,
+  slug,
   price,
   rating,
   shortDescription,
@@ -34,6 +36,7 @@ export default function Hero({
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
   addToCart: () => void;
+  slug: string;
   title: string;
   courseId: string;
   image: string;
@@ -145,6 +148,7 @@ export default function Hero({
                         // @ts-ignore
                         ph: sha256(data?.user?.phone ?? ""),
                         fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
+                        event_source_url: `${BASE_URL}/courses/${slug}`
                       });
                       addToCart();
                     }}
