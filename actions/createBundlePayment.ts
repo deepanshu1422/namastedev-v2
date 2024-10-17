@@ -10,6 +10,7 @@ export default async function createBundlePayment({
   name,
   contact,
   state,
+  guides,
   couponCode,
 }: {
   bundleId: string;
@@ -17,13 +18,14 @@ export default async function createBundlePayment({
   name: string;
   contact: string;
   state: string;
+  guides: string[];
   couponCode?: string | null;
 }) {
   // console.log(bundleId, email);
 
   const session = await auth();
 
-  let body: Record<string, string> = {};
+  let body: Record<string, string | string[]> = {};
 
   // @ts-ignore
   const pass = !!session?.user?.phone && !!session?.user?.state;
@@ -58,6 +60,7 @@ export default async function createBundlePayment({
       bundleId,
       gateway: "razorpay",
       countryCode: "IN",
+      guides,
     };
   } else {
     body = {
@@ -69,6 +72,7 @@ export default async function createBundlePayment({
       country: "India",
       gateway: "razorpay",
       countryCode: "IN",
+      guides,
     };
   }
 
