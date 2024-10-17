@@ -77,6 +77,8 @@ function CoursesFallback() {
 
 export function OldCourses() {
   return (
+    <>
+    
     <Link target="_blank" href={"https://courses.30dayscoding.com/s/store"}>
     <Alert className="border-prime/80 bg-gradient-to-b from-prime/60 to-second/60 shadow-lg">
       <Notebook className="h-4 w-4" />
@@ -86,5 +88,16 @@ export function OldCourses() {
       </AlertDescription>
     </Alert>
         </Link>
+        
+    <Link target="_blank" href={"https://forms.gle/ciyZXYBv8qHKChCw9"}>
+    <Alert className="border-prime/80 bg-gradient-to-b from-prime/60 to-second/60 shadow-lg">
+      <Notebook className="h-4 w-4" />
+      <AlertTitle>Access issue?</AlertTitle>
+      <AlertDescription>
+        If you are seeing any access issues, please fill this form <span className="text-primary underline">here.</span>
+      </AlertDescription>
+    </Alert>
+        </Link>
+        </>
   )
 }

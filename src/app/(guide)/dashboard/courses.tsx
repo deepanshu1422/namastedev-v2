@@ -11,6 +11,7 @@ import { CheckCheck, Plus, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { FaCheck } from "react-icons/fa";
 
 const getCourses = async () => {
   const query = `query {
@@ -62,10 +63,114 @@ export default async function Courses() {
     "12 More Courses",
   ];
 
+  const community = {
+    title: "Join our Lifetime coding community",
+    imgSrc: "https://i.ibb.co/842S9FM/comm.jpg",
+    link: "/lifetime",
+    benefits: [
+      "Access to all future courses for lifetime",
+      "24/7 chat access for any help",
+      "3 Teaching Assistant Help",
+      "Regular QnA sessions with mentors",
+      "Regular Hackathons and challenges",
+    ],
+    price: "₹5,499/-"
+  };
+
   return (
     <div className="flex flex-col w-full gap-7 mx-auto py-5 tab:pb-8 ">
-      <span className="md:text-lg font-bold">Other Courses</span>
-      <Link
+      {/* <span className="text-xl font-bold ">Lifetime deals for 30DC members</span> */}
+      
+      <div className="w-full max-w-[1200px] px-4">
+        <div className="bg-second rounded-lg shadow-lg overflow-hidden">
+          <div className="p-8 flex flex-col md:flex-row">
+            <div className="md:w-1/2 md:pr-8 mb-6 md:mb-0">
+              <img src={community.imgSrc} alt={community.title} className="w-full h-auto object-cover rounded-lg" />
+            </div>
+            <div className="md:w-1/2">
+              <h3 className="text-3xl font-bold text-white mb-4">{community.title}</h3>
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-xl font-semibold mb-4">Community Benefits:</h4>
+                  <ul className="space-y-2">
+                    {community.benefits.map((benefit, index) => (
+                      <li key={index} className="flex items-center">
+                        <FaCheck className="text-green-500 mr-2" />
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="bg-second border-t border-white p-6 flex flex-col sm:flex-row justify-between items-center">
+            <div className="mb-4 sm:mb-0">
+              <span className="text-3xl font-bold text-white">{community.price}</span>
+              <span className="text-lg text-gray-300 ml-2">One-time payment</span>
+            </div>
+            <Link href={community.link} target="_blank">
+              <button className="bg-prime text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300">
+                Join the Community
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+{/* <Link
+  href={"/lifetime"}
+  className="flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6"
+>
+  <div className="max-tab:order-last flex flex-col gap-3">
+    <h3 className="font-bold text-xl tab:text-2xl line-clamp-2">
+      Lifetime Community Access - Live Classes, Mentorship, 24/7 Support, and More
+    </h3>
+    <div className="flex flex-col gap-1 pr-5">
+      {[
+        "Live Workshops with Industry Experts",
+        "Q&A Sessions for Doubt Clearing",
+        "3 Teaching Assistant Help",
+        "24/7 Community Chat Access",
+        "Exclusive Learning Resources",
+      ].map((e, i) => (
+        <span key={i} className="flex gap-2 items-center text-sm">
+          <CheckCheck className="h-5 w-5 text-prime shrink-0" />
+          {e}
+        </span>
+      ))}
+      <span className="flex gap-2 items-center text-sm">
+        <Plus className="h-5 w-5 text-prime shrink-0" />
+        Career Guidance and Networking
+      </span>
+
+      <div className="relative mt-2">
+        <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
+        <Button
+          size={"sm"}
+          variant={"outline"}
+          className={`relative font-semibold text-foreground/80 hover:text-foreground w-full gap-1`}
+        >
+          Get Lifetime Access for ₹5499{" "}
+          <span className="italic line-through text-muted-foreground">
+            ₹50000
+          </span>
+        </Button>
+      </div>
+    </div>
+  </div>
+        <div>
+          <Image
+            src={
+              "https://images.ctfassets.net/3pv3o0yr6pgj/70h8KSfhjqdiIecfwf6fJY/c67a069d098b3c87e0774b1db9f6f920/17_courses.jpg"
+            }
+            alt={"30DC Project Preview"}
+            height={600}
+            width={900}
+            className="rounded-s-lg w-full md:w-4/5 aspect-[6/4] tab:h-4/5 my-auto ml-auto shadow-xl shadow-black/50 object-cover"
+          />
+        </div>
+</Link> */}
+      {/* <Link
         href={"/bundle/complete-package-all-course-bundle"}
         className="flex-1 grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6"
       >
@@ -112,7 +217,7 @@ export default async function Courses() {
             className="rounded-s-lg w-full md:w-4/5 aspect-[6/4] tab:h-4/5 my-auto ml-auto shadow-xl shadow-black/50 object-cover"
           />
         </div>
-      </Link>
+      </Link> */}
     </div>
   );
 
@@ -172,3 +277,4 @@ export function Slider({ course }: { course: any }) {
     </Carousel>
   );
 }
+
