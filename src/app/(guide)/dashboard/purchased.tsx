@@ -27,6 +27,8 @@ export default function PurchaseTabs() {
   useEffect(() => {
     // @ts-ignore
     if (session?.user?.newUser) return;
+    // @ts-ignore
+    console.log(session?.user?.courseId);
     update({ courses: true });
   }, []);
 
@@ -90,6 +92,7 @@ function Purchased({ session }: { session: Session | null }) {
     // @ts-ignore
     queryKey: [session?.user?.courseId ?? []],
     queryFn: async ({ queryKey }) => {
+      console.log("Refresh Courses");
       const courses = await refreshCourses(queryKey[0]);
       setCourses(courses.map((e: any) => e.title));
       return courses;
