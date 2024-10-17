@@ -75,15 +75,17 @@ export default function Main({
     <div>
         
       <Lifetime setOpen={setOpen} />
-      
-      <button onClick={() => {
-            setOpen(true);
-          }}
-            className="bg-prime rounded-full mt-8 px-4 text-center py-2 max-w-3xl mx-auto w-full text-2xl sm:text-3xl font-extrabold flex items-center gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase"
+    
+          
+          <a
+            href="https://tagmango.app/516e83b72e"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-prime my-3 rounded-full mt-5 px-4 text-center py-2 max-w-3xl mx-auto w-full text-2xl sm:text-3xl font-extrabold flex items-center gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase"
           >
             <CreditCard className="h-10 w-10" />
-            Join for just Rs. 5499
-          </button>
+            Join for Rs. 5499/- only
+          </a>
       <Roadmap />
       <Mentors />
     </div>
