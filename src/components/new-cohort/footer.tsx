@@ -175,12 +175,12 @@ export default function Footer() {
                 <span className="text-muted-foreground uppercase">
                   Our Info
                 </span>
-                <Link
+                {/* <Link
                   className="lg:hover:text-prime transition-all"
                   href={"/refundpolicy"}
                 >
                   Refund Policy
-                </Link>
+                </Link> */}
                 <Link
                   className="lg:hover:text-prime transition-all"
                   href={"/privacy-policy"}

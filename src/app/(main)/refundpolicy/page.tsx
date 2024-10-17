@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-
-;
+import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),
@@ -11,6 +10,8 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  return notFound();
+
   return (
     <main className="bg-white text-black py-16 px-10 min-h-[90vh] ">
       <div className="max-w-[75rem] m-auto flex flex-col gap-3">

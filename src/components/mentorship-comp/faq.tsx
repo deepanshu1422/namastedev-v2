@@ -33,10 +33,11 @@ export default function Faqs({
 }: {
   faq: { question: string; answer: string }[];
 }) {
-  let faqs: Partial<Faq>[] = [{
-    question: "What is the refund policy ?",
-    answer: "At 30DC, we strive to ensure that our users have a positive and rewarding experience with our courses.If, for any reason, you are not satisfied with your purchase, we offer a hassle - free refund policy.You can request a refund within 30 days of your purchase.To initiate a refund, please contact our support team at projectsnightlight @gmail.com with your order details.Once your request is processed, you will receive a confirmation email, and the refund will be credited to your original method of payment within 5 - 7 business days."
-  },
+  let faqs: Partial<Faq>[] = [
+  //   {
+  //   question: "What is the refund policy ?",
+  //   answer: "At 30DC, we strive to ensure that our users have a positive and rewarding experience with our courses.If, for any reason, you are not satisfied with your purchase, we offer a hassle - free refund policy.You can request a refund within 30 days of your purchase.To initiate a refund, please contact our support team at projectsnightlight @gmail.com with your order details.Once your request is processed, you will receive a confirmation email, and the refund will be credited to your original method of payment within 5 - 7 business days."
+  // },
 
   {
     question: "Do I get access to all courses ?",

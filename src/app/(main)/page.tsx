@@ -45,11 +45,11 @@ export default function Home() {
       answer:
         "Yes, you will receive a verified certificate upon successful completion of the course, which you can share on LinkedIn and include in your resume.",
     },
-    {
-      question: "What is the refund policy?",
-      answer:
-        "We offer a 30-day money-back guarantee. If you're not satisfied within this period, you can request a full refund, no questions asked.",
-    },
+    // {
+    //   question: "What is the refund policy?",
+    //   answer:
+    //     "We offer a 30-day money-back guarantee. If you're not satisfied within this period, you can request a full refund, no questions asked.",
+    // },
     {
       question: "Is this course beginner-friendly?",
       answer:
