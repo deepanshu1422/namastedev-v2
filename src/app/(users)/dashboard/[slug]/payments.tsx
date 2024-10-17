@@ -197,7 +197,7 @@ export function PaymentSheet({
         image: "/icon.png",
         name: "30DaysCoding",
         currency: res.data.currency,
-        amount: res.data.amount,
+        amount: res.data.amount/100,
         order_id: res.data.orderId,
         handler: async function (response: any) {
           sendEvent("Purchase", {

@@ -235,7 +235,7 @@ export function PaymentSheet({
         order_id: res.data.orderId,
         handler: async function (response: any) {
           sendEvent("Purchase", {
-            value: res.data.amount,
+            value: res.data.amount/100,
             currency: "INR",
             content_ids: [bundleId],
             content_type: "bundle",
@@ -249,7 +249,7 @@ export function PaymentSheet({
           });
           purchase({
             title,
-            amount: res.data.amount,
+            amount: res.data.amount/100,
             itemId: bundleId,
             itemType: "bundle",
             name: formData.name,
