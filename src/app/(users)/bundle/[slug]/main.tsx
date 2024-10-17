@@ -75,6 +75,7 @@ export default function Main({
     coursesCollection,
     pricingsCollection,
     faqCollection,
+    guidesCollection,
     learn,
     rating,
     shortDescription,
@@ -248,6 +249,7 @@ export default function Main({
         />
         <PaymentSheet
           open={open}
+          guides={guidesCollection.items}
           slug={slug}
           setOpen={setOpen}
           bundleId={bundleId}
@@ -256,6 +258,14 @@ export default function Main({
           amount={
             pricingsCollection.items.find((e) => e.countryCode == "IN")
               ?.amount ?? 0
+          }
+          bigAmount={
+            pricingsCollection.items.find((e) => e.countryCode == "IN")
+              ?.bigAmount ?? 0
+          }
+          percentage={
+            pricingsCollection.items.find((e) => e.countryCode == "IN")
+              ?.percentage ?? 0
           }
           curreny={"INR"}
           setOpenPay={setOpenPay}

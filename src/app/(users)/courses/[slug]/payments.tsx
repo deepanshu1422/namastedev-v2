@@ -89,7 +89,7 @@ export function PaymentSheet({
     email: string;
     phone: string;
     state: string;
-    gudies: string[];
+    guides: string[];
   }>({
     name: session?.user?.name ?? "",
     email: session?.user?.email ?? "",
@@ -97,7 +97,7 @@ export function PaymentSheet({
     phone: session?.user?.phone ?? "",
     // @ts-ignore
     state: session?.user?.state ?? "",
-    gudies: [],
+    guides: [],
   });
 
   const [formState, setFormState] = useState(0);
@@ -192,7 +192,7 @@ export function PaymentSheet({
           name: session?.user?.name ?? formData.name,
           state: formData.state,
           couponCode: promo.code,
-          guides: formData.gudies,
+          guides: formData.guides,
         });
       } else {
         return;
@@ -224,7 +224,7 @@ export function PaymentSheet({
         order_id: res.data.orderId,
         handler: async function (response: any) {
           sendEvent("Purchase", {
-            value: amount,
+            value: res.data.amount,
             currency: "INR",
             content_ids: [courseId],
             content_type: "course",
@@ -238,7 +238,7 @@ export function PaymentSheet({
           });
           purchase({
             title,
-            amount,
+            amount: res.data.amount,
             itemId: courseId,
             itemType: "course",
             name: formData.name,
@@ -286,7 +286,7 @@ export function PaymentSheet({
         phone: session?.user?.phone ?? "",
         // @ts-ignore
         state: session?.user?.state ?? "",
-        gudies: [],
+        guides: [],
       });
     } catch (error) {
       setIsLoading(false);
@@ -464,15 +464,15 @@ export function PaymentSheet({
                         return (
                           <div
                             onClick={() => {
-                              if (!formData.gudies?.includes(guideId))
+                              if (!formData.guides?.includes(guideId))
                                 setFormData({
                                   ...formData,
-                                  gudies: [...formData.gudies, guideId],
+                                  guides: [...formData.guides, guideId],
                                 });
                               else {
                                 setFormData({
                                   ...formData,
-                                  gudies: formData.gudies.filter(
+                                  guides: formData.guides.filter(
                                     (e) => e !== guideId
                                   ),
                                 });
@@ -480,7 +480,7 @@ export function PaymentSheet({
                             }}
                             key={i}
                             className={`flex flex-col gap-2 rounded-md border ${
-                              formData.gudies?.includes(guideId) &&
+                              formData.guides?.includes(guideId) &&
                               "bg-second/40"
                             } transition-all duration-100 border-prime/40`}
                           >
@@ -492,16 +492,16 @@ export function PaymentSheet({
                             </div>
                             <div className="flex items-center gap-3 p-2 bg-second/60">
                               <Checkbox
-                                checked={formData.gudies?.includes(guideId)}
+                                checked={formData.guides?.includes(guideId)}
                                 onCheckedChange={(checked) => {
                                   return checked
                                     ? setFormData({
                                         ...formData,
-                                        gudies: [...formData.gudies, guideId],
+                                        guides: [...formData.guides, guideId],
                                       })
                                     : setFormData({
                                         ...formData,
-                                        gudies: formData.gudies.filter(
+                                        guides: formData.guides.filter(
                                           (e) => e !== guideId
                                         ),
                                       });
@@ -538,7 +538,7 @@ export function PaymentSheet({
           >
             Buy @ INR{" "}
             {amount +
-              formData.gudies.reduce(
+              formData.guides.reduce(
                 (sum, cur) =>
                   // @ts-ignore
                   sum + guides.find((e) => e.guideId === cur)?.pricing.amount,
