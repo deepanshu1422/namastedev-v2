@@ -44,6 +44,7 @@ import { sendEvent } from "@/services/fbpixel";
 import { beginCheckout, purchase } from "@/services/gaEvents";
 
 import { Checkbox } from "@/components/ui/checkbox";
+import { BASE_URL } from "@/util/constants";
 
 export function PaymentSheet({
   title,
@@ -88,7 +89,7 @@ export function PaymentSheet({
     email: string;
     phone: string;
     state: string;
-    gudies: string[];
+    guides: string[];
   }>({
     name: session?.user?.name ?? "",
     email: session?.user?.email ?? "",
@@ -96,7 +97,7 @@ export function PaymentSheet({
     phone: session?.user?.phone ?? "",
     // @ts-ignore
     state: session?.user?.state ?? "",
-    gudies: [],
+    guides: [],
   });
 
   const [formState, setFormState] = useState(0);
@@ -191,7 +192,7 @@ export function PaymentSheet({
           name: session?.user?.name ?? formData.name,
           state: formData.state,
           couponCode: promo.code,
-          guides: formData.gudies
+          guides: formData.guides,
         });
       } else {
         return;
@@ -223,7 +224,7 @@ export function PaymentSheet({
         order_id: res.data.orderId,
         handler: async function (response: any) {
           sendEvent("Purchase", {
-            value: amount,
+            value: res.data.amount,
             currency: "INR",
             content_ids: [courseId],
             content_type: "course",
@@ -232,10 +233,12 @@ export function PaymentSheet({
             ph: sha256(formData.phone),
             fn: sha256(formData.name.split(" ")[0]),
             ln: sha256(formData.name.split(" ")[1] ?? ""),
+            num_items: 1,
+            event_source_url: `${BASE_URL}/courses/${slug}`,
           });
           purchase({
             title,
-            amount,
+            amount: res.data.amount,
             itemId: courseId,
             itemType: "course",
             name: formData.name,
@@ -245,7 +248,7 @@ export function PaymentSheet({
           });
           setOpenPay(true);
           await update({ courses: true });
-          if (session?.user?.email) router.push(`/dashboard/${slug}`);
+          router.push(`/dashboard/${slug}`);
         },
         prefill: {
           name: formData.name,
@@ -283,7 +286,7 @@ export function PaymentSheet({
         phone: session?.user?.phone ?? "",
         // @ts-ignore
         state: session?.user?.state ?? "",
-        gudies: [],
+        guides: [],
       });
     } catch (error) {
       setIsLoading(false);
@@ -429,23 +432,6 @@ export function PaymentSheet({
       title: "Order Details",
       body: (
         <div className="flex flex-col gap-5 max-sm:pt-5">
-          {/* <div className="max-sm:hidden grid sm:grid-cols-3 gap-2 pt-4">
-            <Image
-              className="rounded-md max-sm:w-full max-h-40 object-cover bg-white/20"
-              src={cover}
-              alt={title}
-              width={280}
-              height={180}
-            />
-            <div className="sm:col-span-2 flex flex-col gap-1">
-              <p className="max-sm:text-sm sm:leading-6 line-clamp-3">
-                {title}
-              </p>
-              <span className="font-extrabold text-prime">
-                {curreny} {amount}
-              </span>
-            </div>
-          </div> */}
           <section className="flex flex-col gap-3 max-sm:text-sm">
             <div className="flex justify-between">
               <span>Course Price</span>
@@ -465,7 +451,7 @@ export function PaymentSheet({
                 {curreny} {amount}
               </span>
             </div>
-            {guides.length && (
+            {Boolean(guides.length) && (
               <>
                 <hr className="mt-3" />
                 <div className="flex flex-col gap-3 justify-between">
@@ -478,15 +464,15 @@ export function PaymentSheet({
                         return (
                           <div
                             onClick={() => {
-                              if (!formData.gudies?.includes(guideId))
+                              if (!formData.guides?.includes(guideId))
                                 setFormData({
                                   ...formData,
-                                  gudies: [...formData.gudies, guideId],
+                                  guides: [...formData.guides, guideId],
                                 });
                               else {
                                 setFormData({
                                   ...formData,
-                                  gudies: formData.gudies.filter(
+                                  guides: formData.guides.filter(
                                     (e) => e !== guideId
                                   ),
                                 });
@@ -494,7 +480,7 @@ export function PaymentSheet({
                             }}
                             key={i}
                             className={`flex flex-col gap-2 rounded-md border ${
-                              formData.gudies?.includes(guideId) &&
+                              formData.guides?.includes(guideId) &&
                               "bg-second/40"
                             } transition-all duration-100 border-prime/40`}
                           >
@@ -506,16 +492,16 @@ export function PaymentSheet({
                             </div>
                             <div className="flex items-center gap-3 p-2 bg-second/60">
                               <Checkbox
-                                checked={formData.gudies?.includes(guideId)}
+                                checked={formData.guides?.includes(guideId)}
                                 onCheckedChange={(checked) => {
                                   return checked
                                     ? setFormData({
                                         ...formData,
-                                        gudies: [...formData.gudies, guideId],
+                                        guides: [...formData.guides, guideId],
                                       })
                                     : setFormData({
                                         ...formData,
-                                        gudies: formData.gudies.filter(
+                                        guides: formData.guides.filter(
                                           (e) => e !== guideId
                                         ),
                                       });
@@ -539,87 +525,6 @@ export function PaymentSheet({
                 </div>
               </>
             )}
-            {/* <span className="font-extrabold">
-                {curreny} {12}
-              </span> */}
-            {/* <hr className="mt-3" />
-            <div className="flex justify-between">
-              <span>GST @ 18%</span>
-              <span className="font-extrabold">
-                {curreny} {(amount * 0.18).toFixed(0)}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span>Platform Fee</span>
-              <span className="font-extrabold">
-                {curreny} {12}
-              </span>
-            </div>
-            <hr className="mt-3" />
-            {promo.apply ? (
-              <div className="flex flex-col gap-2">
-                <form
-                  className="flex gap-3 justify-between text-sm"
-                  onSubmit={applyCoupon}
-                >
-                  <Input
-                    disabled={submitting}
-                    name="coupon"
-                    required
-                    placeholder="Enter a promo code"
-                  />
-                  <Button
-                    disabled={submitting}
-                    className="text-prime"
-                    variant={"link"}
-                    size={"sm"}
-                  >
-                    Apply
-                  </Button>
-                </form>
-                <Button
-                  disabled={submitting}
-                  className="text-prime"
-                  onClick={() => setPromo({ ...promo, apply: false })}
-                  variant={"link"}
-                  size={"sm"}
-                >
-                  Cancel
-                </Button>
-              </div>
-            ) : promo.code ? (
-              <div className="flex gap-3 justify-between text-sm">
-                <span className="uppercase">{promo.code}</span>
-                <div className="flex gap-2">
-                  <span className="font-bold">-{promo.discount}</span>
-                  <MinusCircle
-                    onClick={() =>
-                      setPromo({ apply: false, code: null, discount: 0 })
-                    }
-                    className="h-5 w-5 cursor-pointer"
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="flex gap-3 justify-between text-sm">
-                <span>Promo Code</span>
-                <span
-                  onClick={() => setPromo({ ...promo, apply: true })}
-                  className="font-extrabold text-prime hover:underline cursor-pointer"
-                >
-                  Apply Code
-                </span>
-              </div>
-            )} */}
-            {/* <div className="flex flex-col gap-3">
-              <span>Total Pay</span>
-              <span className="font-extrabold text-prime">
-                {curreny}{" "}
-                {promo.discount
-                  ? (amount + amount * 0.18 + 12 - promo.discount).toFixed(0)
-                  : (amount + amount * 0.18 + 12).toFixed(0)}
-              </span>
-            </div> */}
           </section>
         </div>
       ),
@@ -633,7 +538,7 @@ export function PaymentSheet({
           >
             Buy @ INR{" "}
             {amount +
-              formData.gudies.reduce(
+              formData.guides.reduce(
                 (sum, cur) =>
                   // @ts-ignore
                   sum + guides.find((e) => e.guideId === cur)?.pricing.amount,
@@ -704,9 +609,7 @@ export function PaymentModal({
           <CardContent className="pt-3 pb-0 mx-auto w-full flex flex-col items-center gap-2">
             <Button
               onClick={() => {
-                if (status === "unauthenticated") {
-                  router.push(`/api/auth/signin?callbackUrl=/courses/${slug}`);
-                }
+                router.push(`/dashboard/${slug}`);
                 setOpenPay(false);
               }}
               disabled={status === "loading"}
@@ -733,6 +636,7 @@ export function PaymentModal({
 export function Floating({
   addToCart,
   price,
+  slug,
   courseId,
   setOpen,
 }: {
@@ -742,6 +646,7 @@ export function Floating({
     percentage: number;
     bigAmount: number;
   };
+  slug: string;
   courseId: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
@@ -770,6 +675,7 @@ export function Floating({
                   // @ts-ignore
                   ph: sha256(session?.user?.phone ?? ""),
                   fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
+                  event_source_url: `${BASE_URL}/courses/${slug}`
                 });
                 addToCart();
               }}

@@ -118,7 +118,7 @@ export default function Main({
     offers,
     rating,
     shortDescription,
-    guidesCollection
+    guidesCollection,
   },
 }: CourseItem) {
   const [vidIndex, setVidIndex] = useState<{
@@ -169,6 +169,7 @@ export default function Main({
     return (
       <main className="relative min-h-svh overflow-clip">
         <Hero
+          slug={slug}
           addToCart={addToCartEvent}
           courseId={courseId}
           rating={rating}
@@ -188,6 +189,7 @@ export default function Main({
         />
         <Detail
           addToCart={addToCartEvent}
+          slug={slug}
           courseId={courseId}
           modulesCollection={modulesCollection}
           image={courseImage?.url}
@@ -249,6 +251,7 @@ export default function Main({
         /> */}
         <YTModal open={openYt} setOpen={setOpenYt} url="nTAHWER3K-0" />
         <Floating
+          slug={slug}
           addToCart={addToCartEvent}
           price={
             pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {

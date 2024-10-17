@@ -19,6 +19,7 @@ import VideoSlider from "@/app/(main)/testimonials/video-slider";
 
 export default function Details({
   bundleId,
+  slug,
   image,
   coursesCollection,
   price,
@@ -31,6 +32,7 @@ export default function Details({
 }: {
   addToCart: () => void;
   bundleId: string;
+  slug: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
   courseOffer: string[];
@@ -170,6 +172,7 @@ export default function Details({
 
       <Checkout
         addToCart={addToCart}
+        slug={slug}
         // @ts-ignore
         bundleId={bundleId}
         setOpen={setOpen}

@@ -15,6 +15,17 @@ export type Courses = {
       offers: string[];
       rating: number;
       slug: string;
+      guidesCollection: {
+        items: {
+          guideId: string;
+          title: string;
+          description: string;
+          pricing: {
+            amount: number;
+            bigAmount: number;
+          };
+        }[];
+      };
       coursesCollection: {
         items: {
           title: string;
@@ -163,6 +174,17 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
             height,
         },
         slug,
+        guidesCollection{
+            items{
+              guideId,
+              title,
+              description,
+              pricing{
+                amount,
+                bigAmount
+              }
+            }
+          },
         coursesCollection{
             items{
                 title,

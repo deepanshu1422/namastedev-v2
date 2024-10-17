@@ -81,29 +81,6 @@ export default function PixelEvents() {
         },
         eventId
       );
-
-      // await sendSeverEvent({
-      //   event_name: "PageView",
-      //   event_id: eventId,
-      //   user_data: {
-      //     fbp: document.cookie
-      //       .split("; ")
-      //       .find((row) => row.startsWith("_fbp="))
-      //       ?.split("=")[1],
-      //     fbc: document.cookie
-      //       .split("; ")
-      //       .find((row) => row.startsWith("_fbc="))
-      //       ?.split("=")[1],
-      //     fb_login_id: document.cookie
-      //       .split("; ")
-      //       .find((row) => row.startsWith("_fb_login_id="))
-      //       ?.split("=")[1],
-      //     external_id: localStorage.getItem("ext-ID"),
-      //     client_user_agent: navigator.userAgent,
-      //     client_ip_address: ip.ip,
-      //   },
-      //   custom_data: {},
-      // });
     })();
   }, [pathName]);
 
@@ -125,33 +102,35 @@ export const sendEvent = async (
   const ip = await (await fetch("https://api.ipify.org/?format=json")).json();
 
   //@ts-ignore
-  // window.fbq(
-  //   "track",
-  //   name,
-  //   {
-  //     ...options,
-  //     client_user_agent: navigator.userAgent,
-  //     client_ip_address: ip.ip,
-  //     fbp: document.cookie
-  //       .split("; ")
-  //       .find((row) => row.startsWith("_fbp="))
-  //       ?.split("=")[1],
-  //     fbc: document.cookie
-  //       .split("; ")
-  //       .find((row) => row.startsWith("_fbc="))
-  //       ?.split("=")[1],
-  //     fb_login_id: document.cookie
-  //       .split("; ")
-  //       .find((row) => row.startsWith("_fb_login_id="))
-  //       ?.split("=")[1],
-  //     external_id: localStorage.getItem("ext-ID"),
-  //   },
-  //   eventId
-  // );
+  window.fbq(
+    "track",
+    name,
+    {
+      ...options,
+      action_source: "website",
+      client_user_agent: navigator.userAgent,
+      client_ip_address: ip.ip,
+      fbp: document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("_fbp="))
+        ?.split("=")[1],
+      fbc: document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("_fbc="))
+        ?.split("=")[1],
+      fb_login_id: document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("_fb_login_id="))
+        ?.split("=")[1],
+      external_id: [localStorage.getItem("ext-ID")],
+    },
+    eventId
+  );
 
   await sendSeverEvent({
     event_id: eventId,
     event_name: name,
+    event_source_url: options?.event_source_url as string,
     custom_data: {
       ...options,
     },
@@ -174,23 +153,27 @@ export const sendEvent = async (
         .split("; ")
         .find((row) => row.startsWith("_fb_login_id="))
         ?.split("=")[1],
-      external_id: localStorage.getItem("ext-ID"),
+      external_id: [localStorage.getItem("ext-ID")!],
     },
   });
 };
 
 export const sendSeverEvent = async ({
-  event_name,
   event_id,
+  event_name,
+  event_source_url,
   user_data,
   custom_data,
 }: {
-  event_name: string;
   event_id: string;
+  event_name: string;
+  event_source_url: string;
   user_data: Record<string, string | number | string[] | undefined | null>;
   custom_data: Record<string, string | number | string[] | undefined | null>;
 }) => {
   // console.log("Sent Data");
+
+  const event_time = Math.floor(Date.now() / 1000)
 
   await fetch(`https://jellyfish-app-mqgem.ondigitalocean.app/convertion-api`, {
     method: "POST",
@@ -202,12 +185,17 @@ export const sendSeverEvent = async ({
       data: {
         data: [
           {
-            event_name,
-            event_time: Math.floor(Date.now() / 1000),
-            action_source: "website",
             event_id,
+            event_name,
+            event_time,
+            event_source_url,
+            action_source: "website",
             user_data,
             custom_data,
+            original_event_data: {
+              event_name,
+              event_time
+            },
           },
         ],
       },

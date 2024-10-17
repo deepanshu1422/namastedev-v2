@@ -149,7 +149,7 @@ export function PaymentSheet({
     try {
       setIsLoading(true);
 
-      let res;
+      let res: any;
 
       if (courseId) {
         beginCheckout({
@@ -162,14 +162,15 @@ export function PaymentSheet({
           state: formData.state,
           loggedIn: status === "authenticated",
         });
-        res = await createPayments({
-          courseId: courseId,
-          email: session?.user?.email ?? formData.email.toLocaleLowerCase(),
-          contact: formData.phone,
-          name: session?.user?.name ?? formData.name,
-          state: formData.state,
-          couponCode: promo.code,
-        });
+        res = ""
+        //  await createPayments({
+        //   courseId: courseId,
+        //   email: session?.user?.email ?? formData.email.toLocaleLowerCase(),
+        //   contact: formData.phone,
+        //   name: session?.user?.name ?? formData.name,
+        //   state: formData.state,
+        //   couponCode: promo.code,
+        // });
       } else {
         return;
       }
