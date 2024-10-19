@@ -77,6 +77,7 @@ export default async function getPaymets(queryParams: {
       basePrice: true,
       courseId: true,
       bundleId: true,
+      guides: true,
       paymentStatus: true,
       email: true,
     },
@@ -93,6 +94,32 @@ export default async function getPaymets(queryParams: {
 
 export async function getRevenue() {
   const { startTime, endTime } = await ISTTime();
+
+  const guidesToday = await prisma.payments.findMany({
+    select: {
+      guides: true,
+    },
+    where: {
+      createdAt: {
+        gte: startTime,
+        lte: endTime,
+      },
+      guides: {
+        isEmpty: false,
+      },
+    },
+  });
+  
+  const guidesTotal = await prisma.payments.findMany({
+    select: {
+      guides: true,
+    },
+    where: {
+      guides: {
+        isEmpty: false,
+      },
+    },
+  });
 
   const revenueToday = await prisma.payments.aggregate({
     _sum: {
@@ -132,7 +159,7 @@ export async function getRevenue() {
     _count: true,
   });
 
-  return { revenueToday, revenueTotal, userToday, userTotal };
+  return { guidesToday, guidesTotal, revenueToday, revenueTotal, userToday, userTotal };
 }
 
 export async function getHourlyRevenue() {

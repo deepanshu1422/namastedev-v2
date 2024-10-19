@@ -28,6 +28,7 @@ export type QureyResponse = Pick<
         email: string;
         basePrice: number;
         paymentStatus: $Enums.PaymentStatus;
+        guides: string[] | null;
         courseId: string | null;
         bundleId: string | null;
         createdAt: Date;
