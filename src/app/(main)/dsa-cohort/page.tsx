@@ -6,24 +6,24 @@ import Success from "@/components/mentorship-comp/success";
 import Mentor from "@/components/new-cohort/mentor";
 
 export const metadata: Metadata = {
-    title: "Live Cohort | 30dayscoding",
+    title: "DSA Cohort | 30dayscoding",
     description:
-        "Know the secrets to cracking a 10 LPA job and crafting the perfect resume in our power-packed webinar. Upgrade your career with expert insights and practical strategies. Join us now!",
+        "Master Data Structures and Algorithms in our intensive 12-week cohort. Learn essential problem-solving skills, ace technical interviews, and boost your career in software development. Join now!",
     openGraph: {
         images: "https://i.ibb.co/513C6Jm/webinar-1.webp",
-        title: "Live Cohort | 30dayscoding",
+        title: "DSA Cohort | 30dayscoding",
         description:
-            "Know the secrets to cracking a 10 LPA job and crafting the perfect resume in our power-packed webinar. Upgrade your career with expert insights and practical strategies. Join us now!",
-        url: "https://30dayscoding.com",
+            "Master Data Structures and Algorithms in our intensive 12-week cohort. Learn essential problem-solving skills, ace technical interviews, and boost your career in software development. Join now!",
+        url: "https://30dayscoding.com/dsa-cohort",
         type: "website",
     },
-    keywords: ["30 days coding, coding, coding challenges"],
+    keywords: ["DSA", "Data Structures", "Algorithms", "Coding Interview", "30 days coding", "Programming"],
     twitter: {
         card: "summary_large_image",
         images: "https://i.ibb.co/513C6Jm/webinar-1.webp",
-        title: "Live Cohort | 30dayscoding",
+        title: "DSA Cohort | 30dayscoding",
         description:
-            "Know the secrets to cracking a 10 LPA job and crafting the perfect resume in our power-packed webinar. Upgrade your career with expert insights and practical strategies. Join us now!",
+            "Master Data Structures and Algorithms in our intensive 12-week cohort. Learn essential problem-solving skills, ace technical interviews, and boost your career in software development. Join now!",
         site: "https://30dayscoding.com",
     },
 };
@@ -154,14 +154,61 @@ export default function Webinar() {
         },
     ];
 
+    const successStories = [
+        { name: "Aditya", linkedIn: "https://www.linkedin.com/in/aditya-maheshwari-05/", jobOffer: "PayPal", salary: "35+ LPA" },
+        { name: "Nikhil", linkedIn: "https://www.linkedin.com/in/nikhil-seth9", jobOffer: "Air Canada", salary: "35+ LPA" },
+        { name: "Rojal", linkedIn: "https://www.linkedin.com/in/rojal-sapkota-787130237/", jobOffer: "Google", salary: "30+ LPA" },
+        { name: "Rishabh", linkedIn: "https://www.linkedin.com/in/rishabh5301", jobOffer: "Arrow, Google", salary: "15+ LPA" },
+        { name: "Roktim", linkedIn: "https://x.com/roktim___", jobOffer: "Luppa AI", salary: "15+ LPA" },
+    ];
     return (<main className="bg-background bg-bg min-h-svh transition-all">
         <Hero
-         title="Master the art for Cracking 10 LPA Job" 
-         desc="Know the secrets to cracking a 10 LPA job and crafting the perfect resume in our power-packed live vohort. Upgrade your career with expert insights and practical strategies. Join us now!"
-         heroImage="https://images.unsplash.com/photo-1497493292307-31c376b6e479?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+            title="Master Data Structures and Algorithms"
+            desc="Join our intensive 12-week cohort to become proficient in DSA. Learn essential problem-solving skills, ace technical interviews, and boost your career in software development. Start your journey to mastering DSA today!"
+            heroImage="https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=2728&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
         <About />
         <Course course={course} />
-        <Success />
+
+
+        {/* New section for success stories */}
+        <div className="grid place-items-center gap-4 m-auto ">
+
+            <span className="flex items-center gap-4 relative">
+                <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
+                <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
+                    Recent Success stories (100+ more)
+                </h2>
+                <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
+            </span>
+
+            <div className="overflow-x-auto">
+                <table className="w-full max-w-2xl mx-auto text-foreground/90 border-2 border-white rounded-lg overflow-hidden">
+                    <thead>
+                        <tr className="bg-prime/10">
+                            <th className="py-3 px-4 text-left border-b border-prime/30">Name</th>
+                            <th className="py-3 px-4 text-left border-b border-prime/30">Company</th>
+                            <th className="py-3 px-4 text-left border-b border-prime/30">Job Offer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {successStories.map((story, index) => (
+                            <tr key={index} className="border-b border-prime hover:bg-prime/5 transition-colors duration-200">
+                                <td className="py-3 px-4">
+                                    <a href={story.linkedIn} target="_blank" rel="noopener noreferrer" className="underline hover:text-prime transition-colors duration-200">
+                                        {story.name}
+                                    </a>
+                                </td>
+                                <td className="py-3 px-4">{story.jobOffer}</td>
+
+                                <td className="py-3 px-4">{story.salary}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        {/* <Success /> */}
         <Mentor />
     </main>)
 }

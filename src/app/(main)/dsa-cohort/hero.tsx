@@ -56,7 +56,7 @@ export default function Hero({
 function AspectRatioDemo() {
     return (
         <div className="w-full h-fit flex-1 p-4">
-            <Link href={"https://nas.io/30dc-challenges-n-hackathons"} target="_blank" className="p-9 py-12 max-w-lg bg-gradient-to-b from-head to-second/20 rounded-md flex flex-col gap-4 sm:gap-7 relative max-tab:mx-auto ml-auto shadow-lg">
+            <Link href={"https://rzp.io/l/psRXoa6"} target="_blank" className="p-9 py-12 max-w-lg bg-gradient-to-b from-head to-second/20 rounded-md flex flex-col gap-4 sm:gap-7 relative max-tab:mx-auto ml-auto shadow-lg">
                 <section className="flex justify-between">
                     <div className="flex flex-col">
                         <span className="uppercase text-white/60 sm:text-lg font-semibold">live cohort price</span>
@@ -69,7 +69,7 @@ function AspectRatioDemo() {
                         className="absolute -top-10 right-0 max-tab:h-36 max-tab:w-36" /> */}
                 </section>
                 <section className="flex flex-col gap-3">
-                    <Button size={"lg"} className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Apply Now</Button>
+                    <Button size={"lg"} className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg" >Join Now</Button>
                     <span className="flex gap-2 max-sm:text-sm items-center"><TicketPercent className="sm:w-6 sm:h-6 h-5 w-5" />Early Access starting soon.</span>
                 </section>
             </Link>
