@@ -70,6 +70,9 @@ export default function Records() {
           {!!data?.revenueToday._sum.basePrice && (
             <div className="text-2xl font-bold">
               ₹{(data?.revenueToday._sum.basePrice / 100).toFixed(2)}
+              <span className="text-prime/80">
+                ({data.guidesToday.reduce((sum, innerArray) => sum + innerArray.guides.length , 0)}<span className="text-sm">Guides</span>)
+                </span>
             </div>
           )}
           <p className="text-xs text-muted-foreground">
@@ -102,6 +105,9 @@ export default function Records() {
           {!!data?.revenueTotal._sum.basePrice && (
             <div className="text-2xl font-bold">
               ₹{(data?.revenueTotal._sum.basePrice / 100).toFixed(2)}
+              <span className="text-prime/80">
+                ({data.guidesTotal.reduce((sum, innerArray) => sum + innerArray.guides.length , 0)}<span className="text-sm">Guides</span>)
+                </span>
             </div>
           )}
           <p className="text-xs text-muted-foreground">+19% from last month</p>

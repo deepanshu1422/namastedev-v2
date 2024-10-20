@@ -224,6 +224,7 @@ export default function TableDemo({
               <TableHead className="w-[180px]">Date & Time</TableHead>
               <TableHead className="w-[120px]">Status</TableHead>
               <TableHead className="w-[150px]">Course</TableHead>
+              <TableHead className="w-[200px]">Guides</TableHead>
               <TableHead>Email</TableHead>
               <TableHead className="text-right">Amount</TableHead>
             </TableRow>
@@ -241,6 +242,7 @@ export default function TableDemo({
                     basePrice,
                     courseId,
                     bundleId,
+                    guides,
                     createdAt,
                     paymentStatus,
                   },
@@ -265,6 +267,25 @@ export default function TableDemo({
                     </TableCell>
                     <TableCell className="py-3">
                       {courseId || bundleId}
+                    </TableCell>
+                    <TableCell className="py-3 flex gap-1">
+                      {guides?.length ? (
+                        guides?.map((e, i) => (
+                          <Badge key={i}
+                            variant={"default"}
+                            className="rounded bg-prime/40 text-white gap-1 items-center"
+                          >
+                            {e}
+                          </Badge>
+                        ))
+                      ) : (
+                        <Badge
+                          variant={"secondary"}
+                          className="rounded text-white gap-1 items-center"
+                        >
+                          NULL
+                        </Badge>
+                      )}
                     </TableCell>
                     <TableCell className="py-3">{email}</TableCell>
                     <TableCell className="py-3 text-right">

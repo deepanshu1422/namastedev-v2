@@ -135,6 +135,7 @@ model Payments {
   razorpayOrderId   String?
 
   courseId     String?
+  guides       String[]
   bundleId     String?
   mentorshipId String?
 
