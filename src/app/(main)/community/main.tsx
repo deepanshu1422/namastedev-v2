@@ -5,6 +5,7 @@ import Roadmap from "./roadmap";
 import Mentors from "../mentorship/mentors";
 import { CreditCard } from "lucide-react";
 import Lifetime from "./lifetime";
+import Events from "./events";
 // import Card from "@/components/Card"; // Adjust the import based on your project structure
 // import CardContent from "@/components/CardContent"; // Adjust the import based on your project structure
 
@@ -76,16 +77,17 @@ export default function Main({
         
       <Lifetime setOpen={setOpen} />
     
-          
           <a
-            href="https://tagmango.app/516e83b72e"
+            href="https://rzp.io/l/psRXoa6"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-prime my-3 rounded-full mt-5 px-4 text-center py-2 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto w-full text-lg sm:text-xl md:text-2xl font-extrabold flex items-center gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase mb-4"
           >
             <CreditCard className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10" />
-            Join for Rs. 5499/- only
+            Join for Rs. 5499/- (lifetime)
           </a>
+
+          <Events />
       <Roadmap />
       <Mentors />
     </div>

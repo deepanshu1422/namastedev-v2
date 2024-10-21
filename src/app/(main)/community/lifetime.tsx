@@ -34,7 +34,7 @@ export const successStories = [
   { name: "Aditya", linkedIn: "https://www.linkedin.com/in/aditya-maheshwari-05/", jobOffer: "PayPal", salary: "35+ LPA" },
   { name: "Nikhil", linkedIn: "https://www.linkedin.com/in/nikhil-seth9", jobOffer: "Air Canada", salary: "35+ LPA" },
   { name: "Rojal", linkedIn: "https://www.linkedin.com/in/rojal-sapkota-787130237/", jobOffer: "Google", salary: "30+ LPA" },
-  { name: "Rishabh", linkedIn: "https://www.linkedin.com/in/rishabh5301", jobOffer: "Arrow, Google", salary: "15+ LPA" },
+  { name: "Rishabh", linkedIn: "https://www.linkedin.com/in/rishabh5301", jobOffer: "Cashify", salary: "15+ LPA" },
   { name: "Roktim", linkedIn: "https://x.com/roktim___", jobOffer: "Luppa AI", salary: "15+ LPA" },
 ];
 
@@ -47,8 +47,8 @@ export default function Lifetime({
     <div className="m-auto flex flex-col px-5 lg:px-20 pt-10 max-w-[75rem]">
       <span className="flex items-center justify-center gap-4 relative pb-4">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
-        <h1 className="font-jakarta bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight text-[3rem] sm:text-6xl font-extrabold text-center">
-        Join the 30DaysCoding community - <span className="underline decoration-white decoration-4"> lifetime deal
+        <h1 className="font-jakarta bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight text-[2.5rem] sm:text-6xl font-extrabold text-center">
+        Join live weekly classes in the <span className="underline decoration-white decoration-4"> best coding community
         </span>         
         </h1>
         
