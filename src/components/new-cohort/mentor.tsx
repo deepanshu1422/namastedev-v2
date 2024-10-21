@@ -80,7 +80,7 @@ export default function Mentor() {
     {
       name: "Deepanshu",
       profile: "/instructor2.jpg",
-      position: "Founder",
+      position: "Full stack web developer",
       link: "https://www.linkedin.com/in/deepanshu-udhwani/",
       company: [
         { name: "MakeMyTrip", path: "/makemytrip_logo.jfif" },
@@ -91,7 +91,7 @@ export default function Mentor() {
     {
       name: "Aryan Singh",
       profile: "https://i.ibb.co/YRBGz7v/instructor.jpg",
-      position: "SDE @Google",
+      position: "Full stack web developer",
       link: "https://www.linkedin.com/in/singh1aryan/",
       company: [
         { name: "Google", path: "/company3.png" },
@@ -141,22 +141,22 @@ export default function Mentor() {
     //     },
     //   ],
     // },
-    {
-      name: "Dhanush Kamath",
-      profile: "https://i.ibb.co/zPbLFjd/mentor5.jpg",
-      position: "SDE",
-      link: "https://www.linkedin.com/in/dhanushkamaths/",
-    },
+    // {
+    //   name: "Dhanush Kamath",
+    //   profile: "https://i.ibb.co/zPbLFjd/mentor5.jpg",
+    //   position: "SDE",
+    //   link: "https://www.linkedin.com/in/dhanushkamaths/",
+    // },
     {
       name: "Zayn",
       profile: "/zyan.jpg",
-      position: "SDE",
+      position: "Full stack web developer",
       link: "https://in.linkedin.com/in/noonesociedad",
     },
     {
       name: "Rakshit Raj",
       profile: "https://i.ibb.co/12yjQqS/mentor6.jpg",
-      position: "SDE",
+      position: "Full stack web developer",
       link: "https://www.linkedin.com/in/rakshit-raj/",
     },
   ];
@@ -166,7 +166,7 @@ export default function Mentor() {
       <span className="flex items-center justify-center gap-4 relative">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
         <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
-          Your Partners in Success
+          Instructors, TAs, and Mentors
         </h2>
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
       </span>

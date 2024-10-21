@@ -78,6 +78,9 @@ function CoursesFallback() {
 export function OldCourses() {
   return (
     <>
+    <p className="text-center text-xl">Phones are meant for memes, access your courses on desktop for the best experience.</p>
+    {/* <p>Welcome to 30dayscoding! We are working on updating all the video quality 
+      and adding more courses. Enjoy your courses, guides, roadmaps, and more.</p> */}
     
     <Link target="_blank" href={"https://courses.30dayscoding.com/s/store"}>
     <Alert className="border-prime/80 bg-gradient-to-b from-prime/60 to-second/60 shadow-lg">

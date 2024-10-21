@@ -43,7 +43,7 @@ export default function Course({
           </section>
           <span className="max-lg:mx-auto">
 
-            <Link href={"https://rzp.io/l/SyV8Ft2WF"} target={"_blank"}>
+            <Link href={"https://rzp.io/l/psRXoa6"} target={"_blank"}>
               <div className="group relative">
                 <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
                 <Button
@@ -64,7 +64,7 @@ export default function Course({
       </div>
       {/* </div> */}
 
-      <Link
+      {/* <Link
         className="text-sm"
         href={"/courses"}
       >
@@ -73,7 +73,7 @@ export default function Course({
         >
           Check More Courses
         </button>
-      </Link>
+      </Link> */}
     </div >
   );
 }
