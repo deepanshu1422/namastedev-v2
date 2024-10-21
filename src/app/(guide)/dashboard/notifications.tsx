@@ -18,14 +18,14 @@ export default function Notifications() {
       <div className="">
         <div className="rounded-lg border-prime border bg-card max-h-fit h-fit w-full flex flex-col gap-2 p-1">
           <Badge className="rounded bg-prime/60 hover:bg-prime/80 text-white text-center w-full">
-            🚀 Lifetime Tech Community!
+            🚀 All course bundle
           </Badge>
           <p className="text-sm px-2">
-            Join our exclusive lifetime tech community with live classes, Q&A sessions, TA support, and more!
+            Master all 17 courses with this bundle for just ₹999!
           </p>
-          <a href={"https://30dayscoding.com/lifetime"} target="_blank" 
-            className="bg-prime/80 hover:bg-prime text-white p-2 rounded text-center">
-            Join Lifetime Community
+          <a href={"https://30dayscoding.com/bundle/complete-package-all-course-bundle"} target="_blank" 
+            className="p-2 bg-prime/80 hover:bg-prime text-white rounded text-center">
+            Access the bundle
           </a>
         </div>
         {/* <Badge className="text-white gap-1 hover:bg-second/60 bg-second/40 rounded m-auto"><MessageCircleQuestion className="h-4 w-4" />No Updates Yet</Badge> */}
