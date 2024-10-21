@@ -67,9 +67,8 @@ export default function Header() {
 
   return (
     <div className="sticky top-0 z-50">
-      <Link
+      {pathName.split("/")[1] !== "dashboard" ? <Link
         href={"/bundle/complete-package-all-course-bundle"}
-        //
         className={`sticky top-0 bg-lime-400 font-bold flex items-center justify-center max-sm:text-xs text-sm text-black w-full p-2`}
       >
         <section className="flex overflow-hidden gap-20">
@@ -104,7 +103,7 @@ export default function Header() {
             </p>
           </div>
         </section>
-      </Link>
+      </Link> : <></>}
       <section className="px-3 py-2 flex justify-between bg-footer z-50">
         <Link href={"/"} className="max-md:hidden flex gap-2 items-center">
           <Image src={"/logo.png"} alt="30DC Logo" height={35} width={35} />

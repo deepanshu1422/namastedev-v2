@@ -161,13 +161,13 @@ function CourseCard({ e }: { e: any }) {
   return (
     <Link
       href={`/dashboard/${e?.slug}` || ""}
-      className="min-h-52 flex flex-col gap-3 py-2 px-3 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60 transition-all duration-300"
+      className="min-h-52 flex flex-col gap-2 p-1 border border-prime/40 rounded-md bg-second/40 hover:bg-second/60 transition-all duration-300"
     >
       <div className="flex justify-between">
-        <Image src={"/logo.png"} alt={"30DC Logo"} height={40} width={40} />
+        <Image src={e?.courseImage?.url} alt={"30DC Logo"} height={200} width={200} className="rounded aspect-[6/4] w-full" />
         {/* <Image src={"/logo.png"} alt={"30DC Logo"} height={40} width={40} /> */}
       </div>
-      <h3 className="font-semibold">{e.title}</h3>
+      <h3 className="font-semibold text-sm line-clamp-2">{e.title}</h3>
       <div className="flex flex-col gap-3 mt-auto mb-2">
         <Badge className="text-white w-fit bg-prime/20 hover:bg-prime/40 rounded">
           Continue Watching <ChevronRight className="h-3 w-3" />

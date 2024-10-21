@@ -25,7 +25,7 @@ export default function Checkout() {
   const { data: session } = useSession();
   return (
     <section className="flex flex-col md:max-w-[25%] shrink-0">
-      <div className="sticky top-28 flex flex-col gap-6 md:gap-3">
+      <div className="sticky top-20 flex flex-col gap-6 md:gap-3">
         {/* @ts-ignore */}
         {/* {!session?.user?.courseId?.includes(courseId) && (
           <div className="bg-gradient-to-b from-head/30 to-second/20 flex flex-col gap-1 rounded-md min-h-60 shadow-lg backdrop-blur-sm shadow-black/40 p-3">
