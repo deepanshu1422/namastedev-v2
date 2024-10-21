@@ -81,7 +81,7 @@ export default async function Courses() {
     <div className="flex flex-col w-full gap-7 mx-auto py-5 tab:pb-8 ">
       {/* <span className="text-xl font-bold ">Lifetime deals for 30DC members</span> */}
       
-      <div className="w-full max-w-[1200px] px-4">
+      <div className="w-full max-w-[1200px]">
         <div className="bg-second rounded-lg shadow-lg overflow-hidden">
           <div className="p-8 flex flex-col md:flex-row">
             <div className="md:w-1/2 md:pr-8 mb-6 md:mb-0">
