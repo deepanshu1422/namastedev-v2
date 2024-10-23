@@ -188,6 +188,7 @@ export default function Main({
           setYtOpen={setOpenYt}
         />
         <Detail
+          cover={courseImage?.url}
           addToCart={addToCartEvent}
           slug={slug}
           courseId={courseId}

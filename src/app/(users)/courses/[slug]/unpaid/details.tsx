@@ -14,7 +14,19 @@ import Reviews from "./reviews";
 import Guides from "./guides";
 import Mentors from "@/app/(users)/mentors";
 import VideoSlider from "@/app/(main)/testimonials/video-slider";
+import { Button } from "@/components/ui/button";
 // import Reviews from "./reviews"
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import VideoPlayer from "../player";
+import { Badge } from "@/components/ui/badge";
 
 export default function Details({
   image,
@@ -24,6 +36,7 @@ export default function Details({
   modulesCollection,
   // projectsCollection,
   price,
+  cover,
   courseOffer,
   // learn,
   setOpen,
@@ -37,6 +50,7 @@ export default function Details({
   courseOffer: string[];
   courseId: string;
   image: string;
+  cover: string;
   slug: string;
   // longDescription: React.JSX.Element;
   price: {
@@ -109,14 +123,14 @@ export default function Details({
         <section className="flex flex-col gap-4">
           <div className="flex max-sm:flex-col gap-2 sm:items-end">
             <h2 className="text-xl tab:text-2xl font-bold text-white">
-              Course content - beginner to advanced
+              Course Content - Beginner to Advanced
             </h2>
 
             <span className="flex text-sm text-white/60 items-center">
               ({modulesCollection.total} Modules)
             </span>
           </div>
-          <Chapters modulesCollection={modulesCollection} />
+          <Chapters cover={cover} modulesCollection={modulesCollection} />
         </section>
 
         {/* {!!projectsCollection.items.length && (
@@ -225,8 +239,10 @@ export default function Details({
 }
 
 export function Chapters({
+  cover,
   modulesCollection,
 }: {
+  cover: string;
   modulesCollection: {
     total: number;
     items: {
@@ -248,6 +264,12 @@ export function Chapters({
 }) {
   const [state, setState] = useState(modulesCollection.items.slice(0, 10));
 
+  const [video, setVideo] = useState({
+    title: "",
+    id: "",
+  });
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="flex flex-col gap-2">
       <Accordion
@@ -255,35 +277,60 @@ export function Chapters({
         collapsible
         className="w-full border border-prime/30"
       >
-        {state.map(({ title, chaptersCollection }, i) => (
-          <AccordionItem
-            key={i}
-            className="border-t border-prime/40"
-            value={`item-${i + 1}`}
-          >
-            <AccordionTrigger className="bg-second/40 px-5 text-start flex text-sm">
-              <div className="flex flex-col gap-1">
-                <span>{title}</span>
-                <span className="text-xs text-muted-foreground">
-                  ({chaptersCollection.total} Lessons)
-                </span>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="flex flex-col pb-0">
-              {chaptersCollection.items.map(({ title }, i) => (
-                <div
-                  key={i}
-                  className="flex items-center justify-between p-5 border-b border-prime/20"
-                >
-                  <span className="flex gap-2 items-center">
-                    <Video className="h-5 w-5 shrink-0" />
-                    {title}
-                  </span>
+        {state.map(({ title, chaptersCollection }, i) => {
+          const freeChapters = chaptersCollection.items.filter(
+            (e) => e.public
+          ).length;
+          return (
+            <AccordionItem key={i} value={`item-${i + 1}`}>
+              <AccordionTrigger className="bg-second/40 px-5 text-start flex text-sm border-b border-b-head/70">
+                <div className="flex w-full justify-between items-center">
+                  <div className="flex flex-col gap-1">
+                    <span>{title}</span>
+                    <span className="text-xs text-muted-foreground">
+                      ({chaptersCollection.total} Lessons)
+                    </span>
+                  </div>
+                  {freeChapters > 0 && (
+                    <Badge className="mr-2 text-white bg-prime/40 hover:bg-prime/60 shrink-0">
+                      {`${freeChapters} Free`}
+                    </Badge>
+                  )}
                 </div>
-              ))}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
+              </AccordionTrigger>
+              <AccordionContent className="flex flex-col pb-0">
+                {chaptersCollection.items.map(
+                  ({ title, public: free, youtubeId }, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center justify-between p-5 border-b border-prime/20"
+                    >
+                      <span className="flex gap-2 items-center">
+                        <Video className="h-5 w-5 shrink-0" />
+                        {title}
+                      </span>
+                      {free && (
+                        <Button
+                          onClick={() => {
+                            setOpen(true);
+                            setVideo({
+                              title,
+                              id: youtubeId,
+                            });
+                          }}
+                          className="py-0 h-0 text-prime"
+                          variant={"link"}
+                        >
+                          Preview
+                        </Button>
+                      )}
+                    </div>
+                  )
+                )}
+              </AccordionContent>
+            </AccordionItem>
+          );
+        })}
       </Accordion>
       {!!(modulesCollection.total - 7) &&
         !(modulesCollection.total === state.length) && (
@@ -294,6 +341,21 @@ export function Chapters({
             Load More {modulesCollection.total - 7} Modules
           </button>
         )}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-3xl">
+          <DialogHeader>
+            <VideoPlayer
+              nextVideo={() => {
+                console.log("Free Video Watched");
+                return 0;
+              }}
+              thumbnail={cover}
+              title={video.title}
+              ytId={video.id}
+            />
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
