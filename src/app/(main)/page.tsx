@@ -103,7 +103,7 @@ export default function Home() {
         ytId="enw3DVa1r5k"
       />
       <Mentors />
-      <Store />
+      {/* <Store /> */}
       <Success />
       <VideoSlider />
       <Faqs faq={faq} />

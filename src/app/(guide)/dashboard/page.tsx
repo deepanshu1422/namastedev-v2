@@ -53,7 +53,7 @@ export default async function Dashboard() {
           <PurchaseTabs />
         </div>
         <Suspense fallback={<CoursesFallback />}>
-          <Courses />
+          {/* <Courses /> */}
         </Suspense>
       </div>
       <Notifications />
