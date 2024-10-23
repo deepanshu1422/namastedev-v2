@@ -28,7 +28,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <GoogleAnalytics gaId={"G-6PWT2QJ1GP"} />
+        <GoogleAnalytics gaId={"G-4M8L4RM0LB"} />
         {/* <GoogleTagManager containerId="GTM-W4LNH7RV" /> */}
         <Script
           id="razorpay"

@@ -206,6 +206,32 @@ export function purchase({
   itemType: string;
   loggedIn: boolean;
 }) {
+
+  console.log({
+    transaction_id: Date.now().toString(),
+    currency: "INR",
+    value: amount,
+    item_id: itemId,
+    email,
+    quantity: 1,
+    items: [
+      {
+        item_name: title,
+        item_id: itemId,
+        price: amount,
+        item_category: itemType,
+        quantity: 1,
+      },
+    ],
+    user_properties: {
+      user_id: email,
+      name,
+      email,
+      state,
+      logged_in: loggedIn,
+    },
+  });
+  
   sendEnhancedEvent("purchase", {
     transaction_id: Date.now().toString(),
     currency: "INR",
