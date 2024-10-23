@@ -2,6 +2,8 @@ import React from "react";
 import { Metadata } from "next";
 import Main from "./main";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: "Online 30DC Courses | MERN, Blockchain, DSA, AI & More",
   description:
