@@ -238,7 +238,7 @@ export function PaymentSheet({
           });
           purchase({
             title,
-            amount: res.data.amount,
+            amount: res.data.amount/100,
             itemId: courseId,
             itemType: "course",
             name: formData.name,
