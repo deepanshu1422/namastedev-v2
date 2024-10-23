@@ -53,8 +53,8 @@ export default function Hero({
 }) {
   const { data } = useSession();
   const [timeLeft, setTimeLeft] = useState({
-    hours: 0,
-    minutes: 0,
+    hours: 2,
+    minutes: 30,
     seconds: 0,
   });
 
@@ -62,9 +62,9 @@ export default function Hero({
     const getEndTime = () => {
       let endTime = localStorage.getItem("offerEndTime");
       if (!endTime) {
-        // Generate a random duration between 0 and 2.5 hours (in milliseconds)
-        const randomDuration = Math.floor(Math.random() * 2.5 * 60 * 60 * 1000);
-        endTime = (Date.now() + randomDuration).toString();
+        // Set a fixed duration of 2.5 hours (in milliseconds)
+        const fixedDuration = 2.5 * 60 * 60 * 1000;
+        endTime = (Date.now() + fixedDuration).toString();
         localStorage.setItem("offerEndTime", endTime);
       }
       return parseInt(endTime);
@@ -80,22 +80,21 @@ export default function Hero({
         const seconds = Math.floor((difference % (1000 * 60)) / 1000);
         return { hours, minutes, seconds };
       }
-      return { hours: 0, minutes: 0, seconds: 0 };
+      return null; // Return null if time has expired
     };
 
     const timer = setInterval(() => {
       const newTimeLeft = calculateTimeLeft();
-      setTimeLeft(newTimeLeft);
-      if (
-        newTimeLeft.hours === 0 &&
-        newTimeLeft.minutes === 0 &&
-        newTimeLeft.seconds === 0
-      ) {
-        clearInterval(timer);
+      if (newTimeLeft) {
+        setTimeLeft(newTimeLeft);
+      } else {
+        // If time has expired, reset the offer
+        localStorage.removeItem("offerEndTime");
+        setTimeLeft({ hours: 2, minutes: 30, seconds: 0 });
       }
     }, 1000);
 
-    setTimeLeft(calculateTimeLeft());
+    setTimeLeft(calculateTimeLeft() || { hours: 2, minutes: 30, seconds: 0 });
 
     return () => clearInterval(timer);
   }, []);

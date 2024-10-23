@@ -40,9 +40,9 @@ export default function Checkout({
   useEffect(() => {
     const getEndTime = () => {
       let endTime = localStorage.getItem('offerEndTime');
-      if (!endTime) {
-        // Generate a random duration between 0 and 2.5 hours (in milliseconds)
-        const randomDuration = Math.floor(Math.random() * 2.5 * 60 * 60 * 1000);
+      if (!endTime || parseInt(endTime) <= Date.now()) {
+        // Generate a new duration between 30 minutes and 2.5 hours (in milliseconds)
+        const randomDuration = Math.floor(Math.random() * (2.5 * 60 - 30) + 30) * 60 * 1000;
         endTime = (Date.now() + randomDuration).toString();
         localStorage.setItem('offerEndTime', endTime);
       }
@@ -57,15 +57,13 @@ export default function Checkout({
         const seconds = Math.floor((difference % (1000 * 60)) / 1000);
         return { hours, minutes, seconds };
       }
-      return { hours: 0, minutes: 0, seconds: 0 };
+      // If time is up, generate a new end time
+      localStorage.removeItem('offerEndTime');
+      return calculateTimeLeft();
     };
 
     const timer = setInterval(() => {
-      const newTimeLeft = calculateTimeLeft();
-      setTimeLeft(newTimeLeft);
-      if (newTimeLeft.hours === 0 && newTimeLeft.minutes === 0 && newTimeLeft.seconds === 0) {
-        clearInterval(timer);
-      }
+      setTimeLeft(calculateTimeLeft());
     }, 1000);
 
     setTimeLeft(calculateTimeLeft());
