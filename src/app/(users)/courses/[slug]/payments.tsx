@@ -553,7 +553,7 @@ export function PaymentSheet({
             className="disabled:animate-pulse w-full hover:bg-prime/80 bg-prime/60 text-white"
             type="submit"
           >
-            Buy @ INR{" "} s
+            Buy @ INR{" "}
             {amount +
               formData.guides.reduce(
                 (sum, cur) =>
