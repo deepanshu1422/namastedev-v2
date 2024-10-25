@@ -115,8 +115,6 @@ export function PaymentSheet({
   const [isLoading, setIsLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const platformFee = curreny === "INR" ? 50 : 1.50;
-
   const states = [
     "andaman_and_nicobar_islands",
     "andhra_pradesh",
@@ -237,7 +235,7 @@ export function PaymentSheet({
         order_id: res.data.orderId,
         handler: async function (response: any) {
           sendEvent("Purchase", {
-            value: res.data.amount / 100,
+            value: res.data.amount/100,
             currency: "INR",
             content_ids: [bundleId],
             content_type: "bundle",
@@ -251,7 +249,7 @@ export function PaymentSheet({
           });
           purchase({
             title,
-            amount: res.data.amount / 100,
+            amount: res.data.amount/100,
             itemId: bundleId,
             itemType: "bundle",
             name: formData.name,
@@ -460,12 +458,12 @@ export function PaymentSheet({
       footer: (
         <div className="w-full mt-auto flex flex-col gap-2">
           <Button
-            onClick={() => setFormState(1)}
-            className="w-full mt-auto hover:bg-prime/80 bg-prime/60 text-white"
-            type="submit"
-          >
-            Proceed
-          </Button>
+          onClick={() => setFormState(1)}
+          className="w-full mt-auto hover:bg-prime/80 bg-prime/60 text-white"
+          type="submit"
+        >
+          Proceed
+        </Button>
         </div>
       ),
     },
@@ -486,25 +484,10 @@ export function PaymentSheet({
                 -{curreny} {bigAmount - amount}
               </span>
             </div>
-            <div className="text-prime font-semibold flex justify-between">
-              <span>Platform Fee</span>
-              <span className="font-extrabold">
-                {curreny} {platformFee}
-              </span>
-            </div>
             <div className="flex justify-between">
-              <span>Total</span>
+              <span>Sub Total</span>
               <span className="font-extrabold">
-                {curreny}{" "}
-                {amount +
-                  formData.guides.reduce(
-                    (sum, cur) =>
-                      sum +
-                      // @ts-ignore
-                      guides.find((e) => e.guideId === cur)?.pricing.amount,
-                    0
-                  ) +
-                  platformFee}
+                {curreny} {amount}
               </span>
             </div>
             {Boolean(guides.length) && (
@@ -599,8 +582,7 @@ export function PaymentSheet({
                   // @ts-ignore
                   sum + guides.find((e) => e.guideId === cur)?.pricing.amount,
                 0
-              ) +
-              platformFee}
+              )}
           </Button>
           <Button
             variant={"outline"}

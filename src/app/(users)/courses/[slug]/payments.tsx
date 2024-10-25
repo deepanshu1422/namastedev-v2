@@ -113,8 +113,6 @@ export function PaymentSheet({
   const [isLoading, setIsLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const platformFee = curreny === "INR" ? 50 : 1.5;
-
   const states = [
     "andaman_and_nicobar_islands",
     "andhra_pradesh",
@@ -222,11 +220,11 @@ export function PaymentSheet({
         image: "/icon.png",
         name: "30DaysCoding",
         currency: res.data.currency,
-        amount: res.data.amount / 100,
+        amount: res.data.amount/100,
         order_id: res.data.orderId,
         handler: async function (response: any) {
           sendEvent("Purchase", {
-            value: res.data.amount / 100,
+            value: res.data.amount/100,
             currency: "INR",
             content_ids: [courseId],
             content_type: "course",
@@ -240,7 +238,7 @@ export function PaymentSheet({
           });
           purchase({
             title,
-            amount: res.data.amount / 100,
+            amount: res.data.amount/100,
             itemId: courseId,
             itemType: "course",
             name: formData.name,
@@ -447,25 +445,10 @@ export function PaymentSheet({
                 -{curreny} {bigAmount - amount}
               </span>
             </div>
-            <div className="text-prime font-semibold flex justify-between">
-              <span>Platform Fee</span>
-              <span className="font-extrabold">
-                {curreny} {platformFee}
-              </span>
-            </div>
             <div className="flex justify-between">
-              <span>Total</span>
+              <span>Sub Total</span>
               <span className="font-extrabold">
-                {curreny}{" "}
-                {amount +
-                  formData.guides.reduce(
-                    (sum, cur) =>
-                      sum +
-                      // @ts-ignore
-                      guides.find((e) => e.guideId === cur)?.pricing.amount,
-                    0
-                  ) +
-                  platformFee}
+                {curreny} {amount}
               </span>
             </div>
             {Boolean(guides.length) && (
@@ -557,12 +540,10 @@ export function PaymentSheet({
             {amount +
               formData.guides.reduce(
                 (sum, cur) =>
-                  sum +
                   // @ts-ignore
-                  guides.find((e) => e.guideId === cur)?.pricing.amount,
+                  sum + guides.find((e) => e.guideId === cur)?.pricing.amount,
                 0
-              ) +
-              platformFee}
+              )}
           </Button>
           <Button
             variant={"outline"}
@@ -694,7 +675,7 @@ export function Floating({
                   // @ts-ignore
                   ph: sha256(session?.user?.phone ?? ""),
                   fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
-                  event_source_url: `${BASE_URL}/courses/${slug}`,
+                  event_source_url: `${BASE_URL}/courses/${slug}`
                 });
                 addToCart();
               }}
