@@ -7,7 +7,7 @@ import Success from "@/components/mentorship-comp/success";
 import Mentors from "./mentorship/mentors";
 import VideoSlider from "./testimonials/video-slider";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),
