@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import Main from "./main";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "Join 30DC Community | 30dayscoding",

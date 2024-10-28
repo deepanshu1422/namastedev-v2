@@ -7,6 +7,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import Link from 'next/link'
 import { interviewQuestions } from '@/util/globals'
 // import { interviewQuestions } from '@/util/globals'
+export const dynamic = "force-static";
 
 interface Question {
   question: string;

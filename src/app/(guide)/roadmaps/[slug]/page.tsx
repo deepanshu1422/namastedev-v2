@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Hero from "./hero";
 import Flow from "./flow";
 
-;
+export const dynamic = "force-static";
 
 type PageProps = {
   params: {

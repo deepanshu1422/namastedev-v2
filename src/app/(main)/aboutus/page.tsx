@@ -8,6 +8,8 @@ export const metadata: Metadata = {
     "This is a about page for our development course for 30 days coding challenge. You can reachout to use anytime. Checkout on www.courses.30dayscoding.com",
 };
 
+export const dynamic = "force-static";
+
 export default function Home() {
   return (
     <main className="bg-white text-black py-16 px-10 min-h-[90vh] ">

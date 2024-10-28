@@ -5,6 +5,8 @@ import Course from "@/components/new-cohort/course";
 import Success from "@/components/mentorship-comp/success";
 import Mentor from "@/components/new-cohort/mentor";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
     title: "Full Stack Web Development Cohort | 30dayscoding",
     description:

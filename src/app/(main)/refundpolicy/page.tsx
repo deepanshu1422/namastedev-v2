@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),

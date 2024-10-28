@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 
+export const dynamic = "force-static";
+
 const topics = [
 //   { name: 'HTML', description: 'Structure of web pages', slug: 'html' },
 //   { name: 'CSS', description: 'Styling and layout', slug: 'css' },

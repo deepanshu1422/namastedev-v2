@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import ResumeBuilder from "./main";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: "Free Resume Builder | Create Your Perfect Resume | 30dayscoding",
   description:

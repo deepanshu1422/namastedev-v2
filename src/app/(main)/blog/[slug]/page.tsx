@@ -13,6 +13,7 @@ import YoutubeEmbed from "@/components/yotube-embed";
 import { FooterAD, SquareAD } from "@/util/ads";
 
 export const dynamicParams = true;
+export const dynamic = "force-static";
 
 type PageProps = {
   params: {
@@ -53,6 +54,7 @@ export async function generateMetadata(
         title: true,
         description: true,
         author: true,
+        slug: true,
         focusKeyword: true,
         createdAt: true,
         heroImage: {
@@ -85,6 +87,7 @@ export async function generateMetadata(
       images: {
         url: item?.heroImage?.url ?? "",
       },
+      url: `https://30dayscoding.com/blog/${item?.slug}`,
     },
     keywords: item?.focusKeyword,
   };

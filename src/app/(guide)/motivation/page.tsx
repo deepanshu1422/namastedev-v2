@@ -1,6 +1,8 @@
 import { Check, ChevronUpCircle } from "lucide-react";
 import Link from "next/link";
 
+export const dynamic = "force-static";
+
 export default function Roadmap() {
 
     const motivationalSteps = [

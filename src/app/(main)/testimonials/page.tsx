@@ -9,6 +9,8 @@ import NewHero from "./new-hero";
 import VideoSlider from "./video-slider";
 import { CreditCard } from "lucide-react";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: "Testimonial | 30DaysCoding",
   description:

@@ -153,6 +153,8 @@ export async function generateMetadata(
       images: {
         url: item?.coverImage?.url ?? "",
       },
+      url: `https://30dayscoding.com/bundle/${item?.slug}`,
+      type: "website",
     },
   };
 }

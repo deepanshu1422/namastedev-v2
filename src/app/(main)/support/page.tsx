@@ -8,6 +8,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://30dayscoding.com"),
   title: "Support | 30DaysCoding",

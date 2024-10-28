@@ -189,6 +189,8 @@ export async function generateMetadata(
       images: {
         url: item?.courseImage?.url ?? "",
       },
+      url: `https://30dayscoding.com/courses/${item?.slug}`,
+      type: "website",
     },
   };
 }

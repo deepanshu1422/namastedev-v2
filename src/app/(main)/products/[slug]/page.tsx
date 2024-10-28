@@ -5,7 +5,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 
 // export const dynamicParams = true;
-;
+export const dynamic = "force-static";
 
 type PageProps = {
   params: {
