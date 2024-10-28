@@ -1,16 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  FileText,
-  GraduationCap,
-  HomeIcon,
-  Menu,
-  Network,
-  Star,
-  Eye,
-  Check,
-} from "lucide-react";
+import { FileText, GraduationCap, HomeIcon, Menu, Network, Star, Eye, Check } from "lucide-react";
 
 import {
   AlertDialog,
@@ -36,6 +27,8 @@ import {
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { signOut, useSession } from "next-auth/react";
+import { AuthDialog } from "./auth";
 
 import {
   DropdownMenu,
@@ -55,7 +48,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
-import { CertificateDialog } from "../(dashboard)/dashboard/new-user";
+import { CertificateDialog } from "./dashboard/new-user";
 import { useAtom } from "jotai";
 import { certificate, notification } from "@/lib/jotai";
 
@@ -64,6 +57,8 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const [path, setPath] = useState(pathName);
   const [logout, setLogout] = useState(false);
   const [notify, setNotify] = useState(false);
+
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     setPath(pathName);
@@ -287,9 +282,89 @@ export default function Template({ children }: { children: React.ReactNode }) {
               </SheetContent>
             </Sheet>
             <div className="flex gap-3 ml-auto h-full py-2">
-              <Link href={"/dashboard"} className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md text-sm">
-                Dashboard
-              </Link>
+              {/* <Link className="w-full" href={"/instructions"}>
+                <Button className="w-full text-white bg-prime/80 hover:bg-prime">
+                  Aceess Community
+                </Button>
+              </Link> */}
+              {status === "loading" ? (
+                <button className="font-jakarta flex items-center font-semibold gap-2 bg-prime/20 transition-all p-2 rounded-md text-sm">
+                  <svg
+                    width="32px"
+                    height="32px"
+                    viewBox="0 0 38 38"
+                    xmlns="http://www.w3.org/2000/svg"
+                    color="#878787"
+                  >
+                    <defs>
+                      <linearGradient
+                        x1="8.042%"
+                        y1="0%"
+                        x2="65.682%"
+                        y2="23.865%"
+                        id="tail-spin_svg__a_19"
+                      >
+                        <stop
+                          stop-color="currentColor"
+                          stop-opacity="0"
+                          offset="0%"
+                        ></stop>
+                        <stop
+                          stop-color="currentColor"
+                          stop-opacity=".631"
+                          offset="63.146%"
+                        ></stop>
+                        <stop stop-color="currentColor" offset="100%"></stop>
+                      </linearGradient>
+                    </defs>
+                    <g
+                      transform="translate(1 1)"
+                      fill="none"
+                      fill-rule="evenodd"
+                    >
+                      <path
+                        d="M36 18c0-9.94-8.06-18-18-18"
+                        stroke="url(#tail-spin_svg__a_19)"
+                        stroke-width="2"
+                      >
+                        <animateTransform
+                          attributeName="transform"
+                          type="rotate"
+                          from="0 18 18"
+                          to="360 18 18"
+                          dur="0.9s"
+                          repeatCount="indefinite"
+                        ></animateTransform>
+                      </path>
+                      <circle fill="#fff" cx="36" cy="18" r="1">
+                        <animateTransform
+                          attributeName="transform"
+                          type="rotate"
+                          from="0 18 18"
+                          to="360 18 18"
+                          dur="0.9s"
+                          repeatCount="indefinite"
+                        ></animateTransform>
+                      </circle>
+                    </g>
+                  </svg>
+                </button>
+              ) : status === "authenticated" ? (
+                <UserButton
+                  logout={logout}
+                  notify={notify}
+                  setLogout={setLogout}
+                  setNotify={setNotify}
+                  src={session.user?.image ?? ""}
+                  name={session.user?.name ?? session.user?.email ?? ""}
+                />
+              ) : (
+                <AuthDialog>
+                  <button className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md text-sm">
+                    Dashboard
+                  </button>
+                </AuthDialog>
+              )}
             </div>
           </div>
         </header>
@@ -299,96 +374,96 @@ export default function Template({ children }: { children: React.ReactNode }) {
   );
 }
 
-// export function UserButton({
-//   src,
-//   name,
-//   logout,
-//   notify,
-//   setLogout,
-//   setNotify,
-// }: {
-//   src: string;
-//   name: string;
-//   logout: boolean;
-//   notify: boolean;
-//   setLogout: React.Dispatch<React.SetStateAction<boolean>>;
-//   setNotify: React.Dispatch<React.SetStateAction<boolean>>;
-// }) {
-//   const [open, setOpen] = useAtom(certificate);
-//   const [notifications] = useAtom(notification);
-//   return (
-//     <div className="relative">
-//       <DropdownMenu>
-//         <DropdownMenuTrigger asChild>
-//           <Avatar className="cursor-pointer">
-//             <AvatarImage src={src} />
-//             <AvatarFallback className="uppercase text-white font-bold">
-//               {name[0]}
-//             </AvatarFallback>
-//           </Avatar>
-//         </DropdownMenuTrigger>
-//         <DropdownMenuContent className="min-w-[9rem]" align="end">
-//           <DropdownMenuLabel>My Account</DropdownMenuLabel>
-//           <DropdownMenuSeparator />
-//           <DropdownMenuItem onClick={() => setNotify(true)}>
-//             Notifications{" "}
-//             {Boolean(notifications.filter((e) => e.new === true).length) && (
-//               <Badge className="bg-red-600 text-white ml-auto flex h-5 w-5 text-xs shrink-0 items-center justify-center rounded-full">
-//                 {notifications.filter((e) => e.new === true).length}
-//               </Badge>
-//             )}
-//           </DropdownMenuItem>
-//           <Link href={"/support"}>
-//             <DropdownMenuItem>Support</DropdownMenuItem>
-//           </Link>
-//           <DropdownMenuSeparator />
-//           <DropdownMenuItem onClick={() => setLogout(true)}>
-//             Logout
-//           </DropdownMenuItem>
-//         </DropdownMenuContent>
-//       </DropdownMenu>
-//       <CertificateDialog open={open} setOpen={setOpen} />
-//       {/* <LogoutModal logout={logout} setLogout={setLogout} /> */}
-//       <NotificationSheet notify={notify} setNotify={setNotify} />
-//       {Boolean(notifications.filter((e) => e.new === true).length) && (
-//         <div className="absolute top-0 right-0 h-4 w-4 grid place-items-center font-semibold bg-red-700 text-xs rounded-full">
-//           {notifications.filter((e) => e.new === true).length}
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
+export function UserButton({
+  src,
+  name,
+  logout,
+  notify,
+  setLogout,
+  setNotify,
+}: {
+  src: string;
+  name: string;
+  logout: boolean;
+  notify: boolean;
+  setLogout: React.Dispatch<React.SetStateAction<boolean>>;
+  setNotify: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const [open, setOpen] = useAtom(certificate);
+  const [notifications] = useAtom(notification);
+  return (
+    <div className="relative">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Avatar className="cursor-pointer">
+            <AvatarImage src={src} />
+            <AvatarFallback className="uppercase text-white font-bold">
+              {name[0]}
+            </AvatarFallback>
+          </Avatar>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="min-w-[9rem]" align="end">
+          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => setNotify(true)}>
+            Notifications{" "}
+            {Boolean(notifications.filter((e) => e.new === true).length) && (
+              <Badge className="bg-red-600 text-white ml-auto flex h-5 w-5 text-xs shrink-0 items-center justify-center rounded-full">
+                {notifications.filter((e) => e.new === true).length}
+              </Badge>
+            )}
+          </DropdownMenuItem>
+          <Link href={"/support"}>
+            <DropdownMenuItem>Support</DropdownMenuItem>
+          </Link>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => setLogout(true)}>
+            Logout
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <CertificateDialog open={open} setOpen={setOpen} />
+      <LogoutModal logout={logout} setLogout={setLogout} />
+      <NotificationSheet notify={notify} setNotify={setNotify} />
+      {Boolean(notifications.filter((e) => e.new === true).length) && (
+        <div className="absolute top-0 right-0 h-4 w-4 grid place-items-center font-semibold bg-red-700 text-xs rounded-full">
+          {notifications.filter((e) => e.new === true).length}
+        </div>
+      )}
+    </div>
+  );
+}
 
-// function LogoutModal({
-//   logout,
-//   setLogout,
-// }: {
-//   logout: boolean;
-//   setLogout: React.Dispatch<React.SetStateAction<boolean>>;
-// }) {
-//   return (
-//     <AlertDialog open={logout} onOpenChange={setLogout}>
-//       <AlertDialogContent>
-//         <AlertDialogHeader>
-//           <AlertDialogTitle>Are you sure want to Sign Out?</AlertDialogTitle>
-//           <AlertDialogDescription>
-//             This action cannot be undone. This will permanently sign out your
-//             account and you need to re-login.
-//           </AlertDialogDescription>
-//         </AlertDialogHeader>
-//         <AlertDialogFooter>
-//           <AlertDialogCancel>Cancel</AlertDialogCancel>
-//           <AlertDialogAction
-//             className="bg-prime/70 hover:bg-prime/90 text-white"
-//             onClick={() => signOut({ callbackUrl: "/" })}
-//           >
-//             Sign Out
-//           </AlertDialogAction>
-//         </AlertDialogFooter>
-//       </AlertDialogContent>
-//     </AlertDialog>
-//   );
-// }
+function LogoutModal({
+  logout,
+  setLogout,
+}: {
+  logout: boolean;
+  setLogout: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  return (
+    <AlertDialog open={logout} onOpenChange={setLogout}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you sure want to Sign Out?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently sign out your
+            account and you need to re-login.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction
+            className="bg-prime/70 hover:bg-prime/90 text-white"
+            onClick={() => signOut({ callbackUrl: "/" })}
+          >
+            Sign Out
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+}
 
 function NotificationSheet({
   notify,
