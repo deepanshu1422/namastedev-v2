@@ -7,7 +7,6 @@ import loadingAnimation from "../../public/loading.json";
 export default function Loading() {
   return (
     <div className="flex flex-col gap-3 items-center justify-center w-full min-h-dvh">
-      <title>Loading...</title>
       {/* <Image
         src={"/fun-fact.jpg"}
         alt="30dc loading..."
