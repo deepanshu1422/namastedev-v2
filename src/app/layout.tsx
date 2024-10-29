@@ -17,6 +17,7 @@ import PixelEvents from "@/services/fbpixel";
 import GoogleTagManager from "@/components/tracking/GoogletagManager";
 import GoogleAds from "@/util/googleAds";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import FullStory from "@/util/fullStory";
 
 export default async function RootLayout({
   children,
@@ -57,6 +58,7 @@ export default async function RootLayout({
       {/* <Pixel /> */}
       {/* <Intercom /> */}
       <Clarity />
+      <FullStory />
 
       <PageSense />
     </html>
