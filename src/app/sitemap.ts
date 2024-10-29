@@ -13,6 +13,12 @@ const staticMaps: MetadataRoute.Sitemap = [
         priority: 1,
     },
     {
+        url: 'https://30dayscoding.com/courses',
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 1.0,
+    },
+    {
         url: 'https://30dayscoding.com/community',
         lastModified: new Date(),
         changeFrequency: 'monthly',
@@ -132,18 +138,18 @@ const staticMaps: MetadataRoute.Sitemap = [
         changeFrequency: 'monthly',
         priority: 0.5,
     },
-    {
-        url: '/courses',
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.5,
-    },
-    {
-        url: 'https://resumebldr.vercel.app/app/personal-detail',
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.5,
-    },
+    // {
+    //     url: '/courses',
+    //     lastModified: new Date(),
+    //     changeFrequency: 'monthly',
+    //     priority: 0.5,
+    // },
+    // {
+    //     url: 'https://resumebldr.vercel.app/app/personal-detail',
+    //     lastModified: new Date(),
+    //     changeFrequency: 'monthly',
+    //     priority: 0.5,
+    // },
     {
         url: 'https://courses.30dayscoding.com/products',
         lastModified: new Date(),
