@@ -85,12 +85,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
       href: "/motivation",
       selected: path === "/motivation",
     },
-    {
-      title: "Resume",
-      icon: <FileText className="h-4 w-4 md:h-5 md:w-5" />,
-      href: "/resume",
-      selected: path === "/resume",
-    },
+    // {
+    //   title: "Resume",
+    //   icon: <FileText className="h-4 w-4 md:h-5 md:w-5" />,
+    //   href: "/resume",
+    //   selected: path === "/resume",
+    // },
     {
       title: "Roadmaps",
       icon: <Star className="h-4 w-4 md:h-5 md:w-5" />,
