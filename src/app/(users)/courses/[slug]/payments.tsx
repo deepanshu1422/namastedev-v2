@@ -220,11 +220,11 @@ export function PaymentSheet({
         image: "/icon.png",
         name: "30DaysCoding",
         currency: res.data.currency,
-        amount: res.data.amount/100,
+        amount: res.data.amount / 100,
         order_id: res.data.orderId,
         handler: async function (response: any) {
           sendEvent("Purchase", {
-            value: res.data.amount/100,
+            value: res.data.amount / 100,
             currency: "INR",
             content_ids: [courseId],
             content_type: "course",
@@ -238,7 +238,7 @@ export function PaymentSheet({
           });
           purchase({
             title,
-            amount: res.data.amount/100,
+            amount: res.data.amount / 100,
             itemId: courseId,
             itemType: "course",
             name: formData.name,
@@ -420,7 +420,17 @@ export function PaymentSheet({
       ),
       footer: (
         <Button
-          onClick={() => setFormState(1)}
+          onClick={() => {
+            if (formData.name.length < 2)
+              return validationError({ message: "Name too short" });
+            if (formData.email.split("@").length !== 2)
+              return validationError({ message: "Invalid Email" });
+            if (formData.phone.length !== 10)
+              return validationError({ message: "Invalid Phone Number" });
+            if (!states.includes(formData.state))
+              return validationError({ message: "Select a State" });
+            setFormState(1);
+          }}
           className="w-full mt-auto hover:bg-prime/80 bg-prime/60 text-white"
           type="submit"
         >
@@ -675,7 +685,7 @@ export function Floating({
                   // @ts-ignore
                   ph: sha256(session?.user?.phone ?? ""),
                   fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
-                  event_source_url: `${BASE_URL}/courses/${slug}`
+                  event_source_url: `${BASE_URL}/courses/${slug}`,
                 });
                 addToCart();
               }}

@@ -57,7 +57,7 @@ export const navTitles: {
   //     },
   //     {
   //       title: "Next JS FullStack",
-  //       href: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
+  //       href: "/courses",
   //       description:
   //         "A live next js fullstack development cohort from 30 days coding. Checkout on www.courses.30dayscoding.com",
   //     },

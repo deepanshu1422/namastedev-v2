@@ -3003,7 +3003,7 @@ export const roadmapsData = [
         "slug": "next-js",
         cover: "/courses/nextjs.jpg",
         image: "/roadmaps/4.webp",
-        url: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
+        url: "/courses",
         course: [
             "Introduction to NEXT JS",
             "Setup, Git, GiHub, Deploying",

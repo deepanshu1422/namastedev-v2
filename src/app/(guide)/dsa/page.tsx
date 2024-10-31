@@ -55,7 +55,7 @@ export default async function Home() {
           {
             title: "Next JS FullStack Web Development",
             image: "/courses/nextjs.jpg",
-            link: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
+            link: "/courses",
             alt: "30 days coding nextjs fullstack web dev courses",
             description: "Master the Next.js framework with our Next JS FullStack Web Development course. Build scalable and high-performance web applications with ease. This course covers everything from basics to advanced techniques, tailored for developers aiming to enhance their skills in modern web development."
           },

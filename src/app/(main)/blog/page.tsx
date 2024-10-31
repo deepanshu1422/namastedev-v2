@@ -8,6 +8,8 @@ import { cache } from "react";
 import prisma from "@/util/prismaClient";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: "Blog | 30dayscoding",
   description:

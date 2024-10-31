@@ -30,7 +30,7 @@ export function CourseScroll() {
     {
       title: "Next JS FullStack Web Development",
       imageSrc: "/courses/nextjs.jpg",
-      href: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
+      href: "/courses",
     },
   ];
 

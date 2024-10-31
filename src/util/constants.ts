@@ -154,7 +154,7 @@ export const courses = [
         description: "Learn Next.js Full Stack Web Development with our lifetime valid, job-ready course.",
         slug: "job-ready-next-js-full-stack-web-dev-course-lifetime",
         imgSrc: "https://d502jbuhuh9wk.cloudfront.net/courses/64eebe15e4b06aa775217381/64eebe15e4b06aa775217381_scaled_cover.jpg?v=6",
-        link: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
+        link: "/courses",
         category: ["courses", "fullstack"]
     },
     {

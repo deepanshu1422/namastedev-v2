@@ -458,7 +458,17 @@ export function PaymentSheet({
       footer: (
         <div className="w-full mt-auto flex flex-col gap-2">
           <Button
-          onClick={() => setFormState(1)}
+          onClick={() => {
+            if (formData.name.length < 2)
+              return validationError({ message: "Name too short" });
+            if (formData.email.split("@").length !== 2)
+              return validationError({ message: "Invalid Email" });
+            if (formData.phone.length !== 10)
+              return validationError({ message: "Invalid Phone Number" });
+            if (!states.includes(formData.state))
+              return validationError({ message: "Select a State" });
+            setFormState(1);
+          }}
           className="w-full mt-auto hover:bg-prime/80 bg-prime/60 text-white"
           type="submit"
         >

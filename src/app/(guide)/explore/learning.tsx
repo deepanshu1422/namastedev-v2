@@ -67,7 +67,7 @@ export function Slider() {
     {
       title: "Next JS FullStack Web Development",
       imgSrc: "/courses/nextjs.jpg",
-      link: "https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381",
+      link: "/courses",
     },
     {
       title: "Complete Blockchain and Web3 course",

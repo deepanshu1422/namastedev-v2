@@ -114,30 +114,30 @@ const staticMaps: MetadataRoute.Sitemap = [
         changeFrequency: 'monthly',
         priority: 0.8,
     },
-    {
-        url: 'https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312',
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.5,
-    },
-    {
-        url: 'https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d',
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.5,
-    },
-    {
-        url: 'https://courses.30dayscoding.com/courses/NEXT-JS-full-stack-web-development-course-64eebe15e4b06aa775217381-64eebe15e4b06aa775217381',
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.5,
-    },
-    {
-        url: 'https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0',
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.5,
-    },
+    // {
+    //     url: 'https://courses.30dayscoding.com/courses/DSA-revision-placement-course-64f93394e4b0e75ce98af312',
+    //     lastModified: new Date(),
+    //     changeFrequency: 'monthly',
+    //     priority: 0.5,
+    // },
+    // {
+    //     url: 'https://courses.30dayscoding.com/courses/MERN-full-stack-web-development-64eebdb8e4b0a14befedc15d',
+    //     lastModified: new Date(),
+    //     changeFrequency: 'monthly',
+    //     priority: 0.5,
+    // },
+    // {
+    //     url: '/courses',
+    //     lastModified: new Date(),
+    //     changeFrequency: 'monthly',
+    //     priority: 0.5,
+    // },
+    // {
+    //     url: 'https://courses.30dayscoding.com/courses/All-courses-package-652a1994e4b05a145bae5cd0',
+    //     lastModified: new Date(),
+    //     changeFrequency: 'monthly',
+    //     priority: 0.5,
+    // },
     // {
     //     url: '/courses',
     //     lastModified: new Date(),
@@ -150,12 +150,12 @@ const staticMaps: MetadataRoute.Sitemap = [
     //     changeFrequency: 'monthly',
     //     priority: 0.5,
     // },
-    {
-        url: 'https://courses.30dayscoding.com/products',
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.5,
-    },
+    // {
+    //     url: 'https://courses.30dayscoding.com/products',
+    //     lastModified: new Date(),
+    //     changeFrequency: 'monthly',
+    //     priority: 0.5,
+    // },
 ]
 
 export const dynamic = 'force-dynamic'
