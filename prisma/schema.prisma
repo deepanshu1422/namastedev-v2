@@ -57,6 +57,24 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
+model Mentor {
+  mentorId     String @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  expertise    String
+  bio          String
+  price        Int
+  currency     String
+  calendlyLink String
+  imageUrl     String
+  username     String
+  password     String
+
+  Payments Payments[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Progress {
   id     String   @id @default(auto()) @map("_id") @db.ObjectId
   email  String   @unique
@@ -143,6 +161,9 @@ model Payments {
   updatedAt DateTime  @updatedAt
   User      User      @relation(fields: [email], references: [email])
   Invoices  Invoices?
+
+  Mentor   Mentor? @relation(fields: [mentorId], references: [mentorId])
+  mentorId String? @db.ObjectId
 }
 
 model Invoices {
