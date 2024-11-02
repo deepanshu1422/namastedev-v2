@@ -251,3 +251,4 @@ export default async function Home({ params: { slug } }: PageProps) {
   return <Main item={items[0]} />;
 }
 
+
