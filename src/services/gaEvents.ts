@@ -1,11 +1,5 @@
 "use client";
 
-// Since @next/third-parties/google is not found, let's use a more standard approach
-declare global {
-  interface Window {
-    gtag: (...args: any[]) => void;
-  }
-}
 
 function sendGAEvent(params: any) {
   if (typeof window !== "undefined" && window.gtag) {
@@ -32,50 +26,7 @@ function sendEnhancedEvent(eventName: string, eventParams: any) {
     console.error(`Error sending ${eventName} event:`, error);
   }
 
-  // sendServerEvents(eventName, eventParams);
-}
 
-function sendServerEvents(eventName: string, eventParams: any) {
-  if (!localStorage.getItem("ext-ID"))
-    localStorage.setItem("ext-ID", crypto.randomUUID());
-
-  // console.log({
-  //   client_id: localStorage.getItem("ext-ID"),
-  //   event_name: eventName,
-  //   event_params: {
-  //     ...eventParams,
-  //   },
-  // });
-  //
-  fetch(`https://jellyfish-app-mqgem.ondigitalocean.app/google-analytics-api`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer EAAMi1bkn4eQBOZCHsnmtxUGfi0sZCqRxIuuYf`,
-    },
-    body: JSON.stringify({
-      data: {
-        client_id: localStorage.getItem("ext-ID"),
-        event_name: eventName,
-        event_params: {
-          ...eventParams,
-        },
-      },
-    }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      // console.log("Google Data Sent");
-      // console.log("Response: ", data);
-    })
-    .catch((error) => console.error("Error:", JSON.stringify(error)));
-}
-
-export function pageView(url: string) {
-  sendEnhancedEvent("page_view", {
-    page_location: url,
-    page_title: document.title,
-  });
 }
 
 export function viewItem({
@@ -283,49 +234,3 @@ export function purchase({
   });
 }
 
-export function startCourse(courseId: string, courseName: string) {
-  sendEnhancedEvent("start_course", {
-    course_id: courseId,
-    course_name: courseName,
-  });
-}
-
-export function completeCourse(courseId: string, courseName: string) {
-  sendEnhancedEvent("complete_course", {
-    course_id: courseId,
-    course_name: courseName,
-  });
-}
-
-export function trackLessonProgress(
-  courseId: string,
-  lessonId: string,
-  progress: number
-) {
-  sendEnhancedEvent("lesson_progress", {
-    course_id: courseId,
-    lesson_id: lessonId,
-    progress_percentage: progress,
-  });
-}
-
-export function trackEngagement(action: string, label: string) {
-  sendEnhancedEvent("user_engagement", {
-    engagement_type: action,
-    engagement_label: label,
-  });
-}
-
-export function trackFormSubmission(formName: string, success: boolean) {
-  sendEnhancedEvent("form_submission", {
-    form_name: formName,
-    submission_success: success,
-  });
-}
-
-export function trackSearch(searchTerm: string, resultCount: number) {
-  sendEnhancedEvent("search", {
-    search_term: searchTerm,
-    number_of_results: resultCount,
-  });
-}
