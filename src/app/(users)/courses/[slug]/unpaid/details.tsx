@@ -262,7 +262,7 @@ export function Chapters({
     }[];
   };
 }) {
-  const [state, setState] = useState(modulesCollection.items.slice(0, 10));
+  const [state, setState] = useState(modulesCollection.items);
 
   const [video, setVideo] = useState({
     title: "",
