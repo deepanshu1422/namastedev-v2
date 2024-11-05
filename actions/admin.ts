@@ -12,7 +12,7 @@ import {
 
 const ISTTime = async () => {
   const IST = await (
-    await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata")
+    await fetch("https://timeapi.io/api/time/current/zone?timeZone=Asia%2FKolkata")
   ).json();
   const currentTime = new Date(IST.datetime);
 
