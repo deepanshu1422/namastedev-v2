@@ -1,5 +1,6 @@
 "use client";
 
+import mixpanel from 'mixpanel-browser';
 
 function sendGAEvent(params: any) {
   if (typeof window !== "undefined" && window.gtag) {
@@ -8,6 +9,15 @@ function sendGAEvent(params: any) {
     console.error("Google Analytics not initialized");
   }
 }
+
+function sendMixpanelEvent(eventName: string, params: any) {
+  try {
+    mixpanel.track(eventName, params);
+  } catch (error) {
+    console.error("Error sending Mixpanel event:", error);
+  }
+}
+
 // Generate a unique session ID
 const sessionId =
   Date.now().toString(36) + Math.random().toString(36).substr(2);
@@ -22,11 +32,10 @@ function sendEnhancedEvent(eventName: string, eventParams: any) {
   console.log(`Sending ${eventName} event`, JSON.stringify(payload, null, 2));
   try {
     sendGAEvent(payload);
+    sendMixpanelEvent(eventName, payload);
   } catch (error) {
     console.error(`Error sending ${eventName} event:`, error);
   }
-
-
 }
 
 export function viewItem({
