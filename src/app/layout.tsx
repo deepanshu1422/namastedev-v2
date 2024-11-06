@@ -15,7 +15,6 @@ import AdSense from "@/util/ads";
 import PixelEvents from "@/services/fbpixel";
 import GoogleAnalytics from '@/util/ga';
 import GoogleAds from "@/util/googleAds";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import FullStory from "@/util/fullStory";
 import GoogleTagManagerWebContainerHead from "@/components/tracking/GoogletagManagerWebContainerHead";
 import GoogleTagManagerWebContainerBody from "@/components/tracking/GoogleTagManagerWebContainerBody";
