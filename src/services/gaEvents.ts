@@ -22,6 +22,30 @@ function sendMixpanelEvent(eventName: string, params: any) {
 const sessionId =
   Date.now().toString(36) + Math.random().toString(36).substr(2);
 
+// Standardize event names for both GA and Mixpanel
+const EVENT_NAMES = {
+  VIEW_ITEM: {
+    ga: "view_item",
+    mixpanel: "Product Viewed"
+  },
+  ADD_TO_CART: {
+    ga: "add_to_cart",
+    mixpanel: "Product Added to Cart"
+  },
+  BEGIN_CHECKOUT: {
+    ga: "begin_checkout",
+    mixpanel: "Checkout Started"
+  },
+  PURCHASE: {
+    ga: "purchase",
+    mixpanel: "Purchase Completed"
+  },
+  CONVERSION: {
+    ga: "conversion_event_purchase",
+    mixpanel: "Purchase Conversion"
+  }
+};
+
 function sendEnhancedEvent(eventName: string, eventParams: any) {
   const payload = {
     event: eventName,
@@ -31,8 +55,19 @@ function sendEnhancedEvent(eventName: string, eventParams: any) {
 
   console.log(`Sending ${eventName} event`, JSON.stringify(payload, null, 2));
   try {
+    // Send GA event with original name
     sendGAEvent(payload);
-    sendMixpanelEvent(eventName, payload);
+    
+    // Send Mixpanel event with more descriptive name
+    const mixpanelEventName = Object.values(EVENT_NAMES).find(
+      names => names.ga === eventName
+    )?.mixpanel || eventName;
+    
+    sendMixpanelEvent(mixpanelEventName, {
+      ...payload,
+      distinct_id: payload.email || sessionId, // Better user identification
+      time: new Date().toISOString()
+    });
   } catch (error) {
     console.error(`Error sending ${eventName} event:`, error);
   }
