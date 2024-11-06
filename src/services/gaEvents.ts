@@ -2,6 +2,71 @@
 
 import mixpanel from 'mixpanel-browser';
 
+// Standardize event names and properties for both GA and Mixpanel
+const EVENTS = {
+  VIEW_ITEM: {
+    ga: "view_item",
+    mixpanel: "Product Viewed",
+    properties: (data: any) => ({
+      // Common properties
+      $currency: "INR",
+      $value: data.value,
+      // Product specific
+      Product_ID: data.itemId,
+      Product_Name: data.title,
+      Product_Category: data.itemType,
+      Product_Variant: data.slug,
+      Product_Price: data.value,
+    })
+  },
+  ADD_TO_CART: {
+    ga: "add_to_cart",
+    mixpanel: "Product Added",
+    properties: (data: any) => ({
+      $currency: "INR",
+      $value: data.value,
+      Product_ID: data.itemId,
+      Product_Name: data.title,
+      Product_Category: data.itemType,
+      Product_Variant: data.slug,
+      Product_Price: data.value,
+    })
+  },
+  BEGIN_CHECKOUT: {
+    ga: "begin_checkout",
+    mixpanel: "Checkout Started",
+    properties: (data: any) => ({
+      $currency: "INR",
+      $value: data.amount,
+      Product_ID: data.itemId,
+      Product_Name: data.title,
+      Product_Category: data.itemType,
+      Product_Price: data.amount,
+      User_Email: data.email,
+      User_Name: data.name,
+      User_State: data.state,
+      User_Logged_In: data.loggedIn,
+    })
+  },
+  PURCHASE: {
+    ga: "purchase",
+    mixpanel: "Purchase Completed",
+    properties: (data: any) => ({
+      $currency: "INR",
+      $value: data.amount,
+      Product_ID: data.itemId,
+      Product_Name: data.title,
+      Product_Category: data.itemType,
+      Product_Price: data.amount,
+      User_Email: data.email,
+      User_Name: data.name,
+      User_State: data.state,
+      User_Logged_In: data.loggedIn,
+      Transaction_ID: Date.now().toString(),
+    })
+  }
+};
+
 function sendGAEvent(params: any) {
   if (typeof window !== "undefined" && window.gtag) {
     window.gtag("event", params.event, params);
@@ -10,64 +75,60 @@ function sendGAEvent(params: any) {
   }
 }
 
-function sendMixpanelEvent(eventName: string, params: any) {
+function sendMixpanelEvent(eventName: string, properties: any) {
   try {
-    mixpanel.track(eventName, params);
+    // Set user identity if email is available
+    if (properties.User_Email) {
+      mixpanel.identify(properties.User_Email);
+      
+      // Set user properties
+      mixpanel.people.set({
+        $email: properties.User_Email,
+        $name: properties.User_Name,
+        state: properties.User_State,
+        logged_in: properties.User_Logged_In
+      });
+    }
+
+    // Track the event
+    mixpanel.track(eventName, {
+      ...properties,
+      time: new Date().toISOString(),
+      distinct_id: properties.User_Email || sessionId
+    });
   } catch (error) {
     console.error("Error sending Mixpanel event:", error);
   }
 }
 
 // Generate a unique session ID
-const sessionId =
-  Date.now().toString(36) + Math.random().toString(36).substr(2);
-
-// Standardize event names for both GA and Mixpanel
-const EVENT_NAMES = {
-  VIEW_ITEM: {
-    ga: "view_item",
-    mixpanel: "Product Viewed"
-  },
-  ADD_TO_CART: {
-    ga: "add_to_cart",
-    mixpanel: "Product Added to Cart"
-  },
-  BEGIN_CHECKOUT: {
-    ga: "begin_checkout",
-    mixpanel: "Checkout Started"
-  },
-  PURCHASE: {
-    ga: "purchase",
-    mixpanel: "Purchase Completed"
-  },
-  CONVERSION: {
-    ga: "conversion_event_purchase",
-    mixpanel: "Purchase Conversion"
-  }
-};
+const sessionId = Date.now().toString(36) + Math.random().toString(36).substr(2);
 
 function sendEnhancedEvent(eventName: string, eventParams: any) {
-  const payload = {
+  const eventConfig = Object.values(EVENTS).find(
+    config => config.ga === eventName
+  );
+
+  if (!eventConfig) {
+    console.error(`Unknown event: ${eventName}`);
+    return;
+  }
+
+  // Prepare GA payload
+  const gaPayload = {
     event: eventName,
     session_id: sessionId,
     ...eventParams,
   };
 
-  console.log(`Sending ${eventName} event`, JSON.stringify(payload, null, 2));
+  // Prepare Mixpanel properties
+  const mixpanelProperties = eventConfig.properties(eventParams);
+
+  console.log(`Sending ${eventName} event`, JSON.stringify(gaPayload, null, 2));
+  
   try {
-    // Send GA event with original name
-    sendGAEvent(payload);
-    
-    // Send Mixpanel event with more descriptive name
-    const mixpanelEventName = Object.values(EVENT_NAMES).find(
-      names => names.ga === eventName
-    )?.mixpanel || eventName;
-    
-    sendMixpanelEvent(mixpanelEventName, {
-      ...payload,
-      distinct_id: payload.email || sessionId, // Better user identification
-      time: new Date().toISOString()
-    });
+    sendGAEvent(gaPayload);
+    sendMixpanelEvent(eventConfig.mixpanel, mixpanelProperties);
   } catch (error) {
     console.error(`Error sending ${eventName} event:`, error);
   }
@@ -86,22 +147,12 @@ export function viewItem({
   itemType: string;
   value: number;
 }) {
-  sendEnhancedEvent("view_item", {
-    event_id: Date.now().toString(),
-    currency: "INR",
-    value: value,
-    quantity: 1,
-    item_id: itemId,
-    items: [
-      {
-        item_id: itemId,
-        item_name: title,
-        price: value,
-        item_category: itemType,
-        item_variant: slug,
-        quantity: 1,
-      },
-    ],
+  sendEnhancedEvent(EVENTS.VIEW_ITEM.ga, {
+    title,
+    slug,
+    itemId,
+    itemType,
+    value,
   });
 }
 
@@ -118,22 +169,12 @@ export function addToCart({
   itemType: string;
   value: number;
 }) {
-  sendEnhancedEvent("add_to_cart", {
-    event_id: Date.now().toString(),
-    currency: "INR",
-    value: value,
-    quantity: 1,
-    item_id: itemId,
-    items: [
-      {
-        item_id: itemId,
-        item_name: title,
-        price: value,
-        item_category: itemType,
-        item_variant: slug,
-        quantity: 1,
-      },
-    ],
+  sendEnhancedEvent(EVENTS.ADD_TO_CART.ga, {
+    title,
+    slug,
+    itemId,
+    itemType,
+    value,
   });
 }
 
@@ -156,29 +197,15 @@ export function beginCheckout({
   itemType: string;
   loggedIn: boolean;
 }) {
-  sendEnhancedEvent("begin_checkout", {
-    event_id: Date.now().toString(),
-    currency: "INR",
-    value: amount,
-    item_id: itemId,
+  sendEnhancedEvent(EVENTS.BEGIN_CHECKOUT.ga, {
+    title,
+    itemId,
+    amount,
+    itemType,
+    name,
     email,
-    quantity: 1,
-    items: [
-      {
-        item_name: title,
-        item_id: itemId,
-        price: amount,
-        item_category: itemType,
-        quantity: 1,
-      },
-    ],
-    user_properties: {
-      user_id: email,
-      name,
-      email,
-      state,
-      logged_in: loggedIn,
-    },
+    state,
+    loggedIn,
   });
 }
 
@@ -201,80 +228,15 @@ export function purchase({
   itemType: string;
   loggedIn: boolean;
 }) {
-
-  console.log({
-    transaction_id: Date.now().toString(),
-    currency: "INR",
-    value: amount,
-    item_id: itemId,
+  sendEnhancedEvent(EVENTS.PURCHASE.ga, {
+    title,
+    itemId,
+    amount,
+    itemType,
+    name,
     email,
-    quantity: 1,
-    items: [
-      {
-        item_name: title,
-        item_id: itemId,
-        price: amount,
-        item_category: itemType,
-        quantity: 1,
-      },
-    ],
-    user_properties: {
-      user_id: email,
-      name,
-      email,
-      state,
-      logged_in: loggedIn,
-    },
-  });
-  
-  sendEnhancedEvent("purchase", {
-    transaction_id: Date.now().toString(),
-    currency: "INR",
-    value: amount,
-    item_id: itemId,
-    email,
-    quantity: 1,
-    items: [
-      {
-        item_name: title,
-        item_id: itemId,
-        price: amount,
-        item_category: itemType,
-        quantity: 1,
-      },
-    ],
-    user_properties: {
-      user_id: email,
-      name,
-      email,
-      state,
-      logged_in: loggedIn,
-    },
-  });
-
-  sendEnhancedEvent("conversion_event_purchase", {
-    transaction_id: Date.now().toString(),
-    value: amount,
-    currency: "INR",
-    item_id: itemId,
-    email,
-    quantity: 1,
-    items: [
-      {
-        item_name: title,
-        item_id: itemId,
-        price: amount,
-        item_category: itemType,
-        quantity: 1,
-      },
-    ],
-    user_properties: {
-      user_id: email,
-      name,
-      email,
-      state,
-      logged_in: loggedIn,
-    },
+    state,
+    loggedIn,
   });
 }
 

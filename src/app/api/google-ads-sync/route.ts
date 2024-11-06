@@ -15,79 +15,122 @@ const mixpanelClient = Mixpanel.init(MIXPANEL_TOKEN, {
   secret: MIXPANEL_SECRET
 });
 
+// Initialize Google Ads API client with proper configuration
 const client = new GoogleAdsApi({
   client_id: GOOGLE_CLIENT_ID,
   client_secret: GOOGLE_CLIENT_SECRET,
   developer_token: GOOGLE_ADS_DEVELOPER_TOKEN
 });
 
-async function fetchGoogleAdsCampaigns() {
-  const customer = client.Customer({
-    customer_id: GOOGLE_ADS_CUSTOMER_ID,
-    refresh_token: GOOGLE_CLIENT_REFRESH_TOKEN
-  });
-
-  // Find metrics for all Google Ads campaigns that ran yesterday
-  return customer.query(`
-    SELECT
-      segments.date,
-      campaign.id,
-      campaign.name,
-      metrics.cost_micros,
-      metrics.clicks,
-      metrics.impressions
-    FROM
-      campaign
-    WHERE
-      metrics.cost_micros > 0
-    AND
-      segments.date DURING YESTERDAY
-  `);
-}
-
-function transformCampaignToEvent(campaign: any) {
-  return {
-    event: 'Ad Data',
-    properties: {
-      $insert_id: `G-${campaign.segments.date}-${campaign.campaign.id}`,
-      time: new Date(campaign.segments.date).getTime(),
-      source: 'Google',
-      campaign_id: campaign.campaign.id,
-      utm_source: "google",
-      utm_campaign: campaign.campaign.name,
-      cost: campaign.metrics.cost_micros / 1_000_000,
-      impressions: campaign.metrics.impressions,
-      clicks: campaign.metrics.clicks
-    }
-  };
-}
-
-export async function GET() {
+export async function POST(request: Request) {
   try {
-    // Get the campaign metrics
-    const campaigns = await fetchGoogleAdsCampaigns();
+    // Log all credentials (masked for security)
+    console.log('Credentials Check:', {
+      client_id: GOOGLE_CLIENT_ID?.substring(0, 5) + '...',
+      client_secret: GOOGLE_CLIENT_SECRET ? 'Set' : 'Missing',
+      refresh_token: GOOGLE_CLIENT_REFRESH_TOKEN?.substring(0, 5) + '...',
+      developer_token: GOOGLE_ADS_DEVELOPER_TOKEN?.substring(0, 5) + '...',
+      customer_id: GOOGLE_ADS_CUSTOMER_ID
+    });
 
-    // Transform campaigns to Mixpanel events
-    const events = campaigns.map(transformCampaignToEvent);
+    // Validate required credentials
+    if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET || !GOOGLE_CLIENT_REFRESH_TOKEN || 
+        !GOOGLE_ADS_DEVELOPER_TOKEN || !GOOGLE_ADS_CUSTOMER_ID) {
+      throw new Error('Missing required Google Ads credentials');
+    }
 
-    // Import to Mixpanel
-    await new Promise((resolve, reject) => {
-      mixpanelClient.import_batch(events, (err: any) => {
-        if (err) reject(err);
-        resolve(true);
+    const { startDate, endDate } = await request.json();
+    
+    console.log('Creating customer instance...');
+    const customer = client.Customer({
+      customer_id: GOOGLE_ADS_CUSTOMER_ID.replace(/-/g, ''),
+      refresh_token: GOOGLE_CLIENT_REFRESH_TOKEN
+    });
+
+    // Basic query to test connection
+    const query = `
+      SELECT
+        campaign.id,
+        campaign.name
+      FROM campaign
+      LIMIT 5
+    `;
+
+    console.log('Executing query:', query);
+    
+    try {
+      console.log('Awaiting query response...');
+      const campaigns = await customer.query(query);
+      console.log('Raw API Response:', JSON.stringify(campaigns, null, 2));
+
+      if (!campaigns) {
+        throw new Error('No response from Google Ads API');
+      }
+
+      // Transform the data for better readability
+      const transformedCampaigns = Array.isArray(campaigns) ? campaigns.map(campaign => {
+        console.log('Processing campaign raw data:', JSON.stringify(campaign, null, 2));
+        return {
+          campaignId: campaign.campaign?.id,
+          campaignName: campaign.campaign?.name
+        };
+      }) : [];
+
+      return NextResponse.json({ 
+        success: true, 
+        data: transformedCampaigns,
+        message: `Found ${transformedCampaigns.length} campaigns`,
+        query: query,
+        rawResponse: campaigns
       });
+
+    } catch (queryError: any) {
+      // Log the complete error object
+      console.error('Complete error object:', queryError);
+      
+      // Log specific error properties
+      console.error('Query execution error:', {
+        message: queryError.message,
+        name: queryError.name,
+        stack: queryError.stack,
+        response: queryError.response,
+        details: queryError.details,
+        raw: JSON.stringify(queryError, null, 2)
+      });
+      
+      return NextResponse.json({ 
+        success: false,
+        error: 'Google Ads API Query Error',
+        details: {
+          message: queryError.message || 'Unknown error',
+          code: queryError.code,
+          response: queryError.response,
+          details: queryError.details,
+          raw: JSON.stringify(queryError, null, 2)
+        }
+      }, { status: 500 });
+    }
+
+  } catch (error: any) {
+    console.error('Detailed error:', {
+      message: error.message,
+      name: error.name,
+      stack: error.stack,
+      response: error.response?.data,
+      status: error.response?.status,
+      raw: JSON.stringify(error, null, 2)
     });
 
-    return NextResponse.json({ 
-      success: true, 
-      message: `Imported ${events.length} events.` 
-    });
-
-  } catch (error) {
-    console.error('Error syncing Google Ads data:', error);
     return NextResponse.json({ 
       success: false, 
-      error: 'Failed to sync Google Ads data' 
+      error: error.message || 'Unknown error',
+      details: {
+        name: error.name,
+        message: error.message,
+        response: error.response?.data || error.response,
+        status: error.response?.status,
+        raw: JSON.stringify(error, null, 2)
+      }
     }, { status: 500 });
   }
 } 

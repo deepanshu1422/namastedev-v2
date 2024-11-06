@@ -82,4 +82,48 @@ export async function GET() {
       error: 'Failed to sync Facebook Ads data' 
     }, { status: 500 });
   }
+}
+
+// Add this new endpoint for testing
+export async function POST(request: Request) {
+  try {
+    const { startDate, endDate } = await request.json();
+    
+    const account = new AdAccount(`act_${FACEBOOK_AD_ACCOUNT_ID}`);
+    
+    // Custom date range query
+    const campaigns = await account.getInsights([
+      'campaign_id',
+      'campaign_name',
+      'spend',
+      'impressions',
+      'clicks'
+    ], {
+      level: 'campaign',
+      time_range: {
+        'since': startDate || '2024-03-01',
+        'until': endDate || '2024-03-20'
+      },
+      filtering: [
+        {
+          field: 'spend',
+          operator: 'GREATER_THAN',
+          value: 0
+        }
+      ]
+    });
+
+    return NextResponse.json({ 
+      success: true, 
+      data: campaigns,
+      message: `Found ${campaigns.length} campaigns` 
+    });
+
+  } catch (error) {
+    console.error('Error fetching Facebook Ads data:', error);
+    return NextResponse.json({ 
+      success: false, 
+      error: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 });
+  }
 } 
