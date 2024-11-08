@@ -30,7 +30,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
+        <GoogleAnalytics gaId="G-4M8L4RM0LB" />
         <MixpanelAnalytics projectToken={process.env.NEXT_PUBLIC_MIXPANEL_TOKEN!} />
          <GoogleTagManagerWebContainerHead/>
         <Script
