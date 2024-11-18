@@ -13,12 +13,12 @@ import PageSense from "@/util/pagesense";
 
 import AdSense from "@/util/ads";
 import PixelEvents from "@/services/fbpixel";
-// import GoogleAnalytics from "@/util/ga";
+import GoogleAnalytics from '@/util/ga';
 import GoogleAds from "@/util/googleAds";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import FullStory from "@/util/fullStory";
 import GoogleTagManagerWebContainerHead from "@/components/tracking/GoogletagManagerWebContainerHead";
 import GoogleTagManagerWebContainerBody from "@/components/tracking/GoogleTagManagerWebContainerBody";
+import MixpanelAnalytics from '@/util/mixpanel';
 
 export default async function RootLayout({
   children,
@@ -30,7 +30,8 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <GoogleAnalytics gaId={"G-4M8L4RM0LB"} />
+        <GoogleAnalytics gaId="G-4M8L4RM0LB" />
+        <MixpanelAnalytics projectToken={process.env.NEXT_PUBLIC_MIXPANEL_TOKEN!} />
          <GoogleTagManagerWebContainerHead/>
         <Script
           id="razorpay"

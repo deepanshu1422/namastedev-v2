@@ -37,4 +37,4 @@ next-env.d.ts
 dist*
 .env
 
-/src/components/coursessss
+/src/components/coursessssnode_modules/

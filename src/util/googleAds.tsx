@@ -7,7 +7,7 @@ export default function GoogleAds() {
         <>
             {/* Google tag (gtag.js) */}
             <Script
-                src="https://www.googletagmanager.com/gtag/js?id=AW-1001098653"
+                src="https://www.googletagmanager.com/gtag/js?id=AW-16774683894"
                 strategy="afterInteractive"
             />
             <Script
@@ -18,7 +18,7 @@ export default function GoogleAds() {
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
-                    gtag('config', 'AW-1001098653');
+                    gtag('config', 'AW-16774683894');
                 `,
                 }}
             />

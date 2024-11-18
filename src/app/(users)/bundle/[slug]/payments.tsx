@@ -227,7 +227,7 @@ export function PaymentSheet({
 
       const options = {
         key: key,
-        description: "Test Transaction",
+        description: formData.state,
         image: "/icon.png",
         name: "30DaysCoding",
         currency: res.data.currency,

@@ -10,6 +10,7 @@ import {
   Star,
   Eye,
   Check,
+  Briefcase,
 } from "lucide-react";
 
 import {
@@ -90,6 +91,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
       icon: <Network className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/motivation",
       selected: path === "/motivation",
+    },
+    {
+      title: "Journey",
+      icon: <Briefcase className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/journey",
+      selected: path === "/journey",
     },
     {
       title: "Roadmaps",
