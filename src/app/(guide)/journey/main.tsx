@@ -1,4 +1,4 @@
-import { Check, ChevronUpCircle } from "lucide-react";
+import { Check, ChevronUpCircle, CreditCard } from "lucide-react";
 import Link from "next/link";
 
 export const dynamic = "force-static";
@@ -143,6 +143,17 @@ export default function Journey() {
                         </div>
                     ))}
                 </div>
+
+                
+                <a
+                    href="https://30dayscoding.com/bundle/complete-package-all-course-bundle"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-prime my-5 rounded-full px-4 text-center py-2 max-w-3xl mx-auto w-full text-2xl sm:text-3xl font-extrabold flex items-center gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase"
+                >
+                    <CreditCard className="h-10 w-10" />
+                    Master top coding skills (90% off)
+                </a>
                 {/* <Link href={"#join-waitlist"}>
             <button className="border-4 border-prime rounded-full px-4 text-center py-2 max-w-3xl mx-auto w-full text-2xl sm:text-2xl font-extrabold flex gap-3 justify-center hover:opacity-80 transition-all duration-200 uppercase">
               <ChevronUpCircle className="h-8 w-8" />
