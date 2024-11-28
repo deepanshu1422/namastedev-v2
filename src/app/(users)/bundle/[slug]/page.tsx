@@ -105,7 +105,7 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  let item = null;
+  let item: any = null;
 
   try {
     const query = `query {

@@ -298,7 +298,7 @@ export function purchase({
   state: string;
   amount: number;
   itemType: string;
-  loggedIn: boolean;
+  loggedIn?: boolean;
 }) {
   sendEnhancedEvent(EVENTS.PURCHASE.ga, {
     title,

@@ -223,33 +223,36 @@ export function PaymentSheet({
         amount: res.data.amount / 100,
         order_id: res.data.orderId,
         handler: async function (response: any) {
-          sendEvent("Purchase", {
-            value: res.data.amount / 100,
-            currency: "INR",
-            content_ids: [courseId],
-            content_type: "course",
-            content_name: title,
-            em: sha256(formData.email), // Hashing example
-            ph: sha256(formData.phone),
-            fn: sha256(formData.name.split(" ")[0]),
-            ln: sha256(formData.name.split(" ")[1] ?? ""),
-            num_items: 1,
-            event_source_url: `${BASE_URL}/courses/${slug}`,
-          });
-          purchase({
-            title,
-            amount: res.data.amount / 100,
-            itemId: courseId,
-            itemType: "course",
-            name: formData.name,
-            email: formData.email.toLocaleLowerCase(),
-            state: formData.state,
-            loggedIn: status === "authenticated",
-          });
           setOpenPay(true);
           await update({ courses: true });
-          router.push(`/dashboard/${slug}`);
+          router.push(`/thank-you?title=${title}&value=${res.data.amount/100}&currency=INR&contentType=course&name=${formData.name}&email=${formData.email.toLocaleLowerCase()}&state=${formData.state}&phone=+91${formData.phone}&id=${courseId}&slug=${slug}`);
+
+          // sendEvent("Purchase", {
+          //   value: res.data.amount / 100,
+          //   currency: "INR",
+          //   content_ids: [courseId],
+          //   content_type: "course",
+          //   content_name: title,
+          //   em: sha256(formData.email), // Hashing example
+          //   ph: sha256(formData.phone),
+          //   fn: sha256(formData.name.split(" ")[0]),
+          //   ln: sha256(formData.name.split(" ")[1] ?? ""),
+          //   num_items: 1,
+          //   event_source_url: `${BASE_URL}/courses/${slug}`,
+          // });
+          // purchase({
+          //   title,
+          //   amount: res.data.amount / 100,
+          //   itemId: courseId,
+          //   itemType: "course",
+          //   name: formData.name,
+          //   email: formData.email.toLocaleLowerCase(),
+          //   state: formData.state,
+          //   loggedIn: status === "authenticated",
+          // });
         },
+        // callback_url: ,
+        redirect: true,
         prefill: {
           name: formData.name,
           email: formData.email.toLocaleLowerCase(),
