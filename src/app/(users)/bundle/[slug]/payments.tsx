@@ -619,7 +619,7 @@ export function PaymentSheet({
             Buy Now
           </Button>
         </SheetTrigger> */}
-        <SheetContent className="h-full w-full flex flex-col">
+        <SheetContent className="h-full w-full flex flex-col overflow-y-auto">
           <SheetHeader>
             <SheetTitle>{orderPage[formState].title}</SheetTitle>
           </SheetHeader>
