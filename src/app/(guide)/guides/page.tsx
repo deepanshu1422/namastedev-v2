@@ -2,6 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import Main from "./main";
 import Script from "next/script";
+import { getAllGuides } from "actions/getGuides";
 
 export const dynamic = "force-static";
 
@@ -29,11 +30,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  const guideData = await getAllGuides()
   return (
     <>
-      <Script defer src="https://gumroad.com/js/gumroad.js" />
-      <Main />
+      <Main guideData={guideData} />
     </>
   );
 }

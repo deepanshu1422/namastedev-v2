@@ -11,6 +11,7 @@ import {
   Eye,
   Check,
   Briefcase,
+  BookMarked,
 } from "lucide-react";
 
 import {
@@ -36,7 +37,7 @@ import {
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   DropdownMenu,
@@ -85,6 +86,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
       icon: <FileText className="h-4 w-4 md:h-5 md:w-5" />,
       href: "/courses",
       selected: path === "/courses",
+    },
+    {
+      title: "Guides",
+      icon: <BookMarked className="h-4 w-4 md:h-5 md:w-5" />,
+      href: "/guides",
+      selected: path === "/guides", 
     },
     {
       title: "Motivation",
