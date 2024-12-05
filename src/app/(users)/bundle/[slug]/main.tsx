@@ -9,6 +9,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 
 import { addToCart, viewItem } from "@/services/gaEvents";
 import { useSession } from "next-auth/react";
+import WallOfLove from "../../wall-of-love";
 
 type BundleItem = {
   item: {
@@ -286,6 +287,7 @@ export default function Main({
           bundleId={bundleId}
         />
         <PaymentModal payModal={openPay} setOpenPay={setOpenPay} />
+        <WallOfLove />
       </main>
     );
   }
