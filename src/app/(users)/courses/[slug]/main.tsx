@@ -13,7 +13,6 @@ import { UpsellModal } from "./unpaid/upsell";
 
 import { addToCart, viewItem } from "@/services/gaEvents";
 import { usePathname } from "next/navigation";
-import WallOfLove from "../../wall-of-love";
 
 type CourseItem = {
   item: {
@@ -265,7 +264,6 @@ export default function Main({
           setOpen={setOpenUpsell}
           courseId={courseId}
         />
-        <WallOfLove />
       </main>
     );
   }
