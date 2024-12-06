@@ -20,6 +20,8 @@ import GoogleTagManagerWebContainerHead from "@/components/tracking/GoogletagMan
 import GoogleTagManagerWebContainerBody from "@/components/tracking/GoogleTagManagerWebContainerBody";
 import MixpanelAnalytics from '@/util/mixpanel';
 
+import Analytics from "@vercel/analytics"
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -64,6 +66,7 @@ export default async function RootLayout({
       <FullStory />
 
       <PageSense />
+      <Analytics />
     </html>
   );
 }
