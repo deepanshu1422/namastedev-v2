@@ -19,7 +19,6 @@ import FullStory from "@/util/fullStory";
 import GoogleTagManagerWebContainerHead from "@/components/tracking/GoogletagManagerWebContainerHead";
 import GoogleTagManagerWebContainerBody from "@/components/tracking/GoogleTagManagerWebContainerBody";
 import MixpanelAnalytics from "@/util/mixpanel";
-import { Analytics } from "@vercel/analytics/next";
 
 export default async function RootLayout({
   children,
@@ -67,7 +66,6 @@ export default async function RootLayout({
       <FullStory />
 
       <PageSense />
-      <Analytics mode="production" />
     </html>
   );
 }
