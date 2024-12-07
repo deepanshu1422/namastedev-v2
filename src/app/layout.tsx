@@ -67,11 +67,7 @@ export default async function RootLayout({
       <FullStory />
 
       <PageSense />
-      <Analytics
-        mode={
-          process.env.NODE_ENV === "production" ? "production" : "development"
-        }
-      />
+      <Analytics mode="production" />
     </html>
   );
 }
