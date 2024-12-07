@@ -13,14 +13,13 @@ import PageSense from "@/util/pagesense";
 
 import AdSense from "@/util/ads";
 import PixelEvents from "@/services/fbpixel";
-import GoogleAnalytics from '@/util/ga';
+import GoogleAnalytics from "@/util/ga";
 import GoogleAds from "@/util/googleAds";
 import FullStory from "@/util/fullStory";
 import GoogleTagManagerWebContainerHead from "@/components/tracking/GoogletagManagerWebContainerHead";
 import GoogleTagManagerWebContainerBody from "@/components/tracking/GoogleTagManagerWebContainerBody";
-import MixpanelAnalytics from '@/util/mixpanel';
-
-import Analytics from "@vercel/analytics"
+import MixpanelAnalytics from "@/util/mixpanel";
+import { Analytics } from "@vercel/analytics/next";
 
 export default async function RootLayout({
   children,
@@ -33,8 +32,10 @@ export default async function RootLayout({
     <html lang="en">
       <head>
         <GoogleAnalytics gaId="G-4M8L4RM0LB" />
-        <MixpanelAnalytics projectToken={process.env.NEXT_PUBLIC_MIXPANEL_TOKEN!} />
-         <GoogleTagManagerWebContainerHead/>
+        <MixpanelAnalytics
+          projectToken={process.env.NEXT_PUBLIC_MIXPANEL_TOKEN!}
+        />
+        <GoogleTagManagerWebContainerHead />
         <Script
           id="razorpay"
           src="https://checkout.razorpay.com/v1/checkout.js"
@@ -51,7 +52,7 @@ export default async function RootLayout({
             <body
               className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
             >
-            <GoogleTagManagerWebContainerBody/>
+              <GoogleTagManagerWebContainerBody />
               <PixelEvents />
               {children}
               <Footer />
@@ -66,10 +67,11 @@ export default async function RootLayout({
       <FullStory />
 
       <PageSense />
-      <Analytics />
+      <Analytics
+        mode={
+          process.env.NODE_ENV === "production" ? "production" : "development"
+        }
+      />
     </html>
   );
 }
-
-
-
