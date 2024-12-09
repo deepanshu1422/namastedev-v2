@@ -475,7 +475,7 @@ export function PaymentSheet({
             <section className="flex flex-col gap-4">
               <h3 className="text-lg font-semibold flex items-center gap-2">
                 <span className="text-2xl">📚</span>
-                <span>Don't missout on our guides</span>
+                <span>Don&apos;t missout on our guides</span>
               </h3>
 
               <div className="flex flex-col gap-3">
