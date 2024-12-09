@@ -342,9 +342,7 @@ export function PaymentSheet({
       title: "Payments Details",
       body: (
         <div className="grid gap-4 py-4">
-           <div className="border-l-4 border-emerald-500/60 pl-4">
-            <p className="max-sm:text-sm sm:leading-6 line-clamp-3 text-white/90">{title}</p>
-          </div>
+          <p className="max-sm:text-sm sm:leading-6 line-clamp-3">{title}</p>
           <div className="grid grid-cols-5 items-center gap-4">
             <Label htmlFor="name" className="text-left">
               Name
@@ -446,101 +444,101 @@ export function PaymentSheet({
     {
       title: "Order Details",
       body: (
-        <div className="flex flex-col gap-6 max-sm:pt-5">
-          <section className="bg-second/10 rounded-lg p-4 border border-prime/20">
-            <div className="flex flex-col gap-4">
-              <div className="flex justify-between items-center">
-                <span className="text-white/80">Course Price</span>
-                <span className="font-bold text-lg">
-                  {curreny} {bigAmount}
-                </span>
-              </div>
-              <div className="text-prime flex justify-between items-center">
-                <span className="font-medium">Discount @ {percentage}%</span>
-                <span className="font-bold text-lg">
-                  -{curreny} {bigAmount - amount}
-                </span>
-              </div>
-              <div className="h-px bg-prime/20" />
-              <div className="flex justify-between items-center">
-                <span className="font-medium">Sub Total</span>
-                <span className="font-bold text-xl text-prime">
-                  {curreny} {amount}
-                </span>
-              </div>
+        <div className="flex flex-col gap-5 max-sm:pt-5">
+          <section className="flex flex-col gap-3 max-sm:text-sm">
+            <div className="flex justify-between">
+              <span>Course Price</span>
+              <span className="font-extrabold">
+                {curreny} {bigAmount}
+              </span>
             </div>
-          </section>
-
-          {Boolean(guides.length) && (
-            <section className="flex flex-col gap-4">
-              <h3 className="text-lg font-semibold flex items-center gap-2">
-                <span className="text-2xl">📚</span>
-                <span>Don&apos;t missout on our guides</span>
-              </h3>
-
-              <div className="flex flex-col gap-3">
-                {guides.map(({ description, guideId, pricing, title }, i) => (
-                  <div
-                    onClick={() => {
-                      if (!formData.guides?.includes(guideId))
-                        setFormData({
-                          ...formData,
-                          guides: [...formData.guides, guideId],
-                        });
-                      else {
-                        setFormData({
-                          ...formData,
-                          guides: formData.guides.filter((e) => e !== guideId),
-                        });
+            <div className="text-prime font-semibold flex justify-between">
+              <span>Discount @ {percentage}%</span>
+              <span className="font-extrabold">
+                -{curreny} {bigAmount - amount}
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span>Sub Total</span>
+              <span className="font-extrabold">
+                {curreny} {amount}
+              </span>
+            </div>
+            {Boolean(guides.length) && (
+              <>
+                <hr className="mt-3" />
+                <div className="flex flex-col gap-3 justify-between">
+                  <span className="font-semibold">
+                    🔔Don&apos;t missout on our guides
+                  </span>
+                  <div className="flex flex-col gap-3">
+                    {guides.map(
+                      ({ description, guideId, pricing, title }, i) => {
+                        return (
+                          <div
+                            onClick={() => {
+                              if (!formData.guides?.includes(guideId))
+                                setFormData({
+                                  ...formData,
+                                  guides: [...formData.guides, guideId],
+                                });
+                              else {
+                                setFormData({
+                                  ...formData,
+                                  guides: formData.guides.filter(
+                                    (e) => e !== guideId
+                                  ),
+                                });
+                              }
+                            }}
+                            key={i}
+                            className={`flex flex-col gap-2 rounded-md border ${
+                              formData.guides?.includes(guideId) &&
+                              "bg-second/40"
+                            } transition-all duration-100 border-prime/40`}
+                          >
+                            <div className="flex flex-col gap-1 p-2">
+                              <h3 className="font-semibold">{title}</h3>
+                              <p className="text-xs text-white/60 line-clamp-2">
+                                {description}
+                              </p>
+                            </div>
+                            <div className="flex items-center gap-3 p-2 bg-second/60">
+                              <Checkbox
+                                checked={formData.guides?.includes(guideId)}
+                                onCheckedChange={(checked) => {
+                                  return checked
+                                    ? setFormData({
+                                        ...formData,
+                                        guides: [...formData.guides, guideId],
+                                      })
+                                    : setFormData({
+                                        ...formData,
+                                        guides: formData.guides.filter(
+                                          (e) => e !== guideId
+                                        ),
+                                      });
+                                }}
+                              />
+                              <div className="flex gap-1 items-center">
+                                Add for
+                                <span className="text-lg font-semibold">
+                                  INR {pricing.amount}
+                                </span>
+                                <span className="line-through text-sm text-white/60">
+                                  INR {pricing.bigAmount}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        );
                       }
-                    }}
-                    key={i}
-                    className={`flex flex-col rounded-lg border transition-all duration-200 hover:border-prime/60 ${
-                      formData.guides?.includes(guideId)
-                        ? "bg-second/20 border-prime/40"
-                        : "border-prime/20 hover:bg-second/10"
-                    }`}
-                  >
-                    <div className="flex flex-col gap-2 p-4">
-                      <h4 className="font-semibold text-lg">{title}</h4>
-                      <p className="text-sm text-white/70 line-clamp-2">
-                        {description}
-                      </p>
-                    </div>
-
-                    <div className="flex items-center gap-4 p-4 bg-second/10 rounded-b-lg border-t border-prime/20">
-                      <Checkbox
-                        className="h-5 w-5 border-prime/40 data-[state=checked]:bg-prime data-[state=checked]:border-prime"
-                        checked={formData.guides?.includes(guideId)}
-                        onCheckedChange={(checked) => {
-                          return checked
-                            ? setFormData({
-                                ...formData,
-                                guides: [...formData.guides, guideId],
-                              })
-                            : setFormData({
-                                ...formData,
-                                guides: formData.guides.filter(
-                                  (e) => e !== guideId
-                                ),
-                              });
-                        }}
-                      />
-                      <div className="flex items-center gap-3">
-                        <span className="text-white/70">Add for</span>
-                        <span className="text-lg font-bold text-prime">
-                          INR {pricing.amount}
-                        </span>
-                        <span className="line-through text-sm text-white/40">
-                          INR {pricing.bigAmount}
-                        </span>
-                      </div>
-                    </div>
+                    )}
                   </div>
-                ))}
-              </div>
-            </section>
-          )}
+                </div>
+              </>
+            )}
+          </section>
         </div>
       ),
       footer: (
