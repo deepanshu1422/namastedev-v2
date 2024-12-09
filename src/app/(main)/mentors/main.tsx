@@ -520,7 +520,7 @@ export default function Main() {
                       <span className="mr-2">💬</span> Testimonial:
                     </h4>
                     <p className="italic bg-yellow-50 p-3 rounded-lg mt-2">
-                      "{selectedMentor.testimonial}"
+                      &quot;{selectedMentor.testimonial}&quot;
                     </p>
                     <p className="bg-blue-50 p-3 rounded-lg mt-4">
                       💰 {selectedMentor.price} {selectedMentor.currency}/30

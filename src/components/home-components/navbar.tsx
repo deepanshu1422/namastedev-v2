@@ -43,7 +43,7 @@ export default function Navbar() {
               href={pathName === "/studyabroad-mentors" ? "/mentor" : "/dashboard"}
               className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:p-2 rounded-md"
             >
-              <span className="text-sm">{pathName === "/studyabroad-mentors" ? "Mentor Login" : "/Dashboard"}</span>
+              <span className="text-sm">{pathName === "/studyabroad-mentors" ? "Mentor Login" : "Dashboard"}</span>
             </Link>
             <MobileMenu />
           </section>
