@@ -64,7 +64,7 @@ export default function Home() {
           <p className="text-prime font-semibold">#1249 , Sector no. 19 , Faridabad 121002</p>
         </div>
         <h3 className="text-2xl font-bold text-second">
-          POWERED BY NIGHT LIGHT PROJECTS
+          POWERED BY NIGHT LIGHT PROJECTS LLP
         </h3>
       </div>
     </main>

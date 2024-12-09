@@ -25,7 +25,7 @@ export default function Home() {
           </li>
         </ul>
         <h3 className="text-2xl font-bold text-second">
-          POWERED BY NIGHT LIGHT PROJECTS
+          POWERED BY NIGHT LIGHT PROJECTS LLP
         </h3>
       </div>
     </main>
