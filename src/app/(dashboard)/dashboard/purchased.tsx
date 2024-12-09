@@ -74,18 +74,22 @@ function Guides() {
 
   if (isPending) return <GuidesFallback />;
 
-  return items?.length ? (
+  return false ? (
     <div className="w-full grid sm:grid-cols-2 gap-3">
       {items.map((e, i) => {
         return <GuideTile key={i} title={e.title} src={e.source} />;
       })}
     </div>
   ) : (
-    <div className="flex w-full h-52">
-      <Badge className="text-white gap-1 py-2 hover:bg-second/60 bg-second/40 rounded m-auto">
+    <div className="flex flex-col items-center justify-center w-full h-52 gap-2">
+      <Badge className="text-white gap-1 py-2 hover:bg-second/60 bg-second/40 rounded">
         <MessageCircleQuestion className="h-4 w-4" />
         Not Purchased Yet
       </Badge>
+      <span className="text-xs flex gap-1">
+        Need Some Guides ?
+      <Link className="underline text-lime-500" href={"/guides?utm_source=dashboard&utm_medium=dashboard&utm_campaign=no_purcahse"}>Add Guides</Link>
+      </span>
     </div>
   );
 }
