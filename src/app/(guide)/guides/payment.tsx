@@ -334,7 +334,7 @@ export function PaymentSheet({
               Name
             </Label>
             <Input
-              disabled={!!session?.user?.name}
+            //   disabled={!!session?.user?.name}
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
@@ -350,7 +350,7 @@ export function PaymentSheet({
               Email
             </Label>
             <Input
-              disabled={!!session?.user?.email}
+            //   disabled={!!session?.user?.email}
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
@@ -531,18 +531,17 @@ export function PaymentModal({
           </CardHeader>
           <CardContent className="pt-3 pb-0 mx-auto w-full flex flex-col items-center gap-2">
             <Button
-              disabled={status === "loading"}
+            //   disabled={status === "loading"}
               className="w-full bg-prime/70 text-white hover:bg-prime"
             >
-              {status === "loading" ? "Adding Guide..." : "Watch Now"}
+              Watch Now
             </Button>
             <Link className="w-fit" href={"/dashboard"}>
               <Button
                 variant={"link"}
-                disabled={status === "loading"}
                 className="text-white/40 hover:text-white"
               >
-                {status === "loading" ? "loading..." : "Visit Dashboard"}
+                Visit Dashboard
               </Button>
             </Link>
           </CardContent>
