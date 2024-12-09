@@ -1,15 +1,29 @@
+"use client";
 import { HelpCircle } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 export default function Products({
   state,
   data,
+  setGuide,
+  setOpen,
 }: {
   state: string;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  setGuide: Dispatch<
+    SetStateAction<{
+      title: string;
+      amount: number;
+      bigAmount: number;
+      percentage: number;
+      curreny: string;
+      guideId: string;
+    } | null>
+  >;
   data: {
     title: string;
+    guideId: string;
     description: string;
     pricing: {
       amount: number;
@@ -21,10 +35,12 @@ export default function Products({
 }) {
   function GuideCard({
     title,
+    guideId,
     description,
     pricing,
   }: {
     title: string;
+    guideId: string;
     description: string;
     pricing: {
       amount: number;
@@ -34,15 +50,35 @@ export default function Products({
     };
   }) {
     return (
-      <Link
-        href={"#"}
+      <div
+        onClick={() => {
+          setGuide({
+            amount: pricing.amount,
+            bigAmount: pricing.bigAmount,
+            percentage: pricing.percentage,
+            curreny: pricing.currency,
+            guideId: guideId,
+            title: title,
+          });
+          setOpen(true)
+        }}
         className="p-4 sm:p-8 rounded-xl bg-second/40 flex flex-col max-h-80 group transition-all duration-200 hover:bg-second/60 hover:shadow-xl shadow-black overflow-y-hidden relative"
       >
-        <div className="flex absolute z-50 -top-2 right-3 shadow-xl p-2 rounded-lg text-lg bg-gradient-to-b from-prime/50 to-head/20"><span className="font-semibold m-auto text-lime-500 italic">{pricing.percentage}%off</span></div>
+        <div className="flex absolute z-50 -top-2 right-3 shadow-xl p-2 rounded-lg text-lg bg-gradient-to-b from-prime/50 to-head/20">
+          <span className="font-semibold m-auto text-lime-500 italic">
+            {pricing.percentage}%off
+          </span>
+        </div>
         <div className="flex flex-col items-center text-center gap-1">
           <h3 className="text-2xl font-bold text-pretty">{title}</h3>
           <p className="text-xs text-white/80 line-clamp-2">{description}</p>
-          <span className="text-2xl mt-3 text-prime font-bold">₹{pricing.amount}<span className="text-lg font-normal italic text-muted-foreground line-through"> ₹{pricing.bigAmount}</span></span>
+          <span className="text-2xl mt-3 text-prime font-bold">
+            ₹{pricing.amount}
+            <span className="text-lg font-normal italic text-muted-foreground line-through">
+              {" "}
+              ₹{pricing.bigAmount}
+            </span>
+          </span>
           <span className="text-xs italic">Buy Now*</span>
         </div>
         <div className="shadow-xl shadow-black p-1 rounded-xl bg-second/90 translate-y-6 sm:translate-y-10 sm:group-hover:translate-y-6 transition-all duration-200">
@@ -54,7 +90,7 @@ export default function Products({
             width={512}
           />
         </div>
-      </Link>
+      </div>
     );
   }
   return (
@@ -65,16 +101,18 @@ export default function Products({
               .filter((e) =>
                 e.title.toLowerCase().includes(state.toLowerCase())
               )
-              .map(({ title, description, pricing }, i) => (
+              .map(({ guideId, title, description, pricing }, i) => (
                 <GuideCard
+                guideId={guideId}
                   title={title}
                   description={description}
                   pricing={pricing}
                   key={i}
                 />
               ))
-          : data.map(({ description, title, pricing }, i) => (
+          : data.map(({ guideId, description, title, pricing }, i) => (
               <GuideCard
+              guideId={guideId}
                 title={title}
                 description={description}
                 pricing={pricing}

@@ -5,7 +5,7 @@ import prisma from "@/util/prismaClient";
 
 export async function getAllGuides() {
 
-    const query = `query { guideCollection{ items{ title, description, pricing { amount, bigAmount, percentage, currency, } }}}`;
+    const query = `query { guideCollection{ items{ guideId, title, description, pricing { amount, bigAmount, percentage, currency, } }}}`;
 
     const data = await (
         await fetch(
