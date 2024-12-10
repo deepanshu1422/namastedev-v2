@@ -74,7 +74,7 @@ function Guides() {
 
   if (isPending) return <GuidesFallback />;
 
-  return false ? (
+  return items.length ? (
     <div className="w-full grid sm:grid-cols-2 gap-3">
       {items.map((e, i) => {
         return <GuideTile key={i} title={e.title} src={e.source} />;
