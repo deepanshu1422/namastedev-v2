@@ -91,6 +91,26 @@ const navBar = [
     ],
   },
   {
+    title: "Testimonials",
+    icon: <Star className="h-4 w-4 md:h-5 md:w-5" />,
+    href: "/testimonials",
+    //   selected: path === "/interview",
+    recent: [
+      {
+        title: "Wall of Love",
+        link: "/testimonials/wall-of-love",
+      },
+      {
+        title: "Success Stories",
+        link: "/testimonials/success-stories",
+      },
+      {
+        title: "Gallery",
+        link: "/testimonials/gallery",
+      },
+    ],
+  },
+  {
     title: "Motivation",
     icon: <Network className="h-4 w-4 md:h-5 md:w-5" />,
     href: "/motivation",

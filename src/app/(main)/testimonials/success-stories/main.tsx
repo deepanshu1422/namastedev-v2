@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { PlayCircle } from "lucide-react";
+import { Heart, Image, PlayCircle } from "lucide-react";
 import Link from "next/link";
 import GridCard from "./grid-card";
 import { YTModal } from "@/app/(main)/testimonials/slider";
@@ -224,7 +224,19 @@ export default function Main() {
             Discover how people achieved their dreams through dedication and
             comprehensive learning programs.
           </p>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap justify-center gap-2">
+            <Link
+              className="text-sm underline text-green-600"
+              href={"/testimonials/gallery"}
+            >
+              <Button
+                size="default"
+                className="rounded-full text-white bg-transparent hover:bg-prime/20 border-2 border-prime/60"
+              >
+                <Image className="mr-1.5 h-5 w-5" />
+                Gallary
+              </Button>
+            </Link>
             <Link
               className="text-sm underline text-green-600"
               target="_blank"
@@ -236,8 +248,20 @@ export default function Main() {
                 size="default"
                 className="rounded-full text-white bg-prime/60 hover:bg-prime/80"
               >
-                <PlayCircle className="mr-2 h-5 w-5" />
+                <PlayCircle className="mr-1.5 h-5 w-5" />
                 Listen Us
+              </Button>
+            </Link>
+            <Link
+              className="text-sm underline text-green-600"
+              href={"/testimonials/wall-of-love"}
+            >
+              <Button
+                size="default"
+                className="rounded-full text-white bg-transparent hover:bg-prime/20 border-2 border-prime/60"
+              >
+                <Heart className="mr-1 h-5 w-5" />
+                Wall of Love
               </Button>
             </Link>
           </div>
