@@ -215,10 +215,10 @@ export default function Main() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative h-[400px] md:h-[320px] bg-gradient-to-b from-prime/20 to-background/20">
+      <section className="relative h-[280px] md:h-[320px] bg-gradient-to-b from-prime/20 to-background/20">
         <div className="mx-auto px-4 h-full flex flex-col gap-2 justify-center items-center text-center">
           <h1 className="text-3xl md:text-5xl font-bold">
-            Student Success Stories
+            Awesome Success Stories
           </h1>
           <p className="md:text-lg text-muted-foreground max-w-2xl mb-3">
             Discover how people achieved their dreams through dedication and
