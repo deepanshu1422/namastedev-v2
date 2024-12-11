@@ -14,7 +14,7 @@ import Reviews from "./reviews";
 import Guides from "./guides";
 import Courses from "./courses";
 import Mentors from "@/app/(users)/mentors";
-import VideoSlider from "@/app/(main)/testimonials/video-slider";
+import VideoSlider from "@/app/(guide)/testimonials/video-slider";
 // import Reviews from "./reviews"
 
 export default function Details({

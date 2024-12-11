@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/accordion";
 import Mentors from "../mentorship/mentors";
 import Success from "@/components/mentorship-comp/success";
-import VideoSlider from "../testimonials/video-slider";
+import VideoSlider from "@/app/(guide)/testimonials/video-slider";
 
 export default function Main({ courses }: { courses: CoursesType }) {
   const [state, setState] = useState("");

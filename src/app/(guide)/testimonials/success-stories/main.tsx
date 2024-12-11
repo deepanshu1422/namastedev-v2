@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Heart, Image, PlayCircle } from "lucide-react";
 import Link from "next/link";
 import GridCard from "./grid-card";
-import { YTModal } from "@/app/(main)/testimonials/slider";
+import { YTModal } from "@/app/(guide)/testimonials/slider";
 
 const successStories = [
   {
