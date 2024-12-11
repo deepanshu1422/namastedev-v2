@@ -1,18 +1,36 @@
 import Link from 'next/link'
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Metadata } from 'next';
 
 export const dynamic = "force-static";
 
+export const metadata: Metadata = {
+  metadataBase: new URL("https://30dayscoding.com"),
+  title: "Coding Interview Question | 30dayscoding",
+  description:
+    "Prepare for your dream job with our comprehensive collection of coding interview questions. Master algorithms, data structures, and problem-solving techniques with expert insights and detailed solutions.",
+  openGraph: {
+    images: "https://i.ibb.co/PD9S6CZ/home.webp",
+    title: "Coding Interview Question | 30dayscoding",
+    description:
+      "Prepare for your dream job with our comprehensive collection of coding interview questions. Master algorithms, data structures, and problem-solving techniques with expert insights and detailed solutions.",
+    url: "https://30dayscoding.com",
+    type: "website",
+  },
+  keywords: ["30 days coding, coding, coding challenges"],
+  twitter: {
+    card: "summary_large_image",
+    images: "https://i.ibb.co/PD9S6CZ/home.webp",
+    title: "Coding Interview Question | 30dayscoding",
+    description:
+      "Prepare for your dream job with our comprehensive collection of coding interview questions. Master algorithms, data structures, and problem-solving techniques with expert insights and detailed solutions.",
+    site: "https://30dayscoding.com",
+  },
+};
+
 const topics = [
-//   { name: 'HTML', description: 'Structure of web pages', slug: 'html' },
-//   { name: 'CSS', description: 'Styling and layout', slug: 'css' },
-//   { name: 'Python', description: 'Programming for the web', slug: 'python' },
-//   { name: 'Java', description: 'Programming for the web', slug: 'java' },
   { name: 'JavaScript', description: 'Programming for the web', slug: 'javascript' },
   { name: 'React', description: 'UI library for building interfaces', slug: 'react' },
-//   { name: 'Node.js', description: 'JavaScript runtime for server-side development', slug: 'nodejs' },
-//   { name: 'Next.js', description: 'React framework for building web applications', slug: 'nextjs' },
-//   { name: 'SQL', description: 'Structured Query Language for managing databases', slug: 'sql' },
 ]
 
 export default function InterviewDashboard() {
