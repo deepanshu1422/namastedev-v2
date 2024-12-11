@@ -131,7 +131,7 @@ export default function Main({ courses }: { courses: CoursesType }) {
         price={
           bundle?.pricingsCollection.items.find(
             (e) => e.countryCode === "IN"
-          ) ?? { amount: 999, bigAmount: 25000, percentage: 90 }
+          ) ?? { amount: 999, bigAmount: 9999, percentage: 90 }
         }
         slug={bundle?.slug ?? "complete-package-all-course-bundle"}
       />

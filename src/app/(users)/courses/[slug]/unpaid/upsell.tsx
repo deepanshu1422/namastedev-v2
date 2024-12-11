@@ -163,7 +163,7 @@ function Offer({
           <div className="flex items-end gap-2">
             <span className="text-2xl font-bold">₹999</span>
             <span className="text-xl font-medium text-muted-foreground line-through italic">
-              ₹25000
+              ₹9999
             </span>
           </div>
 
