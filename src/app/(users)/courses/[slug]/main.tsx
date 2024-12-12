@@ -8,7 +8,7 @@ import {
 } from "../../bundle/[slug]/payments";
 import { useEffect, useState } from "react";
 import Hero from "./unpaid/hero";
-import { YTModal } from "@/app/(main)/testimonials/slider";
+import { YTModal } from "@/app/(guide)/testimonials/slider";
 import { UpsellModal } from "./unpaid/upsell";
 
 import { addToCart, viewItem } from "@/services/gaEvents";

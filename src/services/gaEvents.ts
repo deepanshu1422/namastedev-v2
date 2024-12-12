@@ -1,11 +1,82 @@
 "use client";
 
-// Since @next/third-parties/google is not found, let's use a more standard approach
+import mixpanel from 'mixpanel-browser';
+
+// Add gtag type definition
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
+    gtag: (
+        command: 'event',
+        action: string,
+        params: any
+    ) => void;
   }
 }
+
+// Rest of the code remains the same...
+const EVENTS = {
+  VIEW_ITEM: {
+    ga: "view_item",
+    mixpanel: "Product Viewed",
+    properties: (data: any) => ({
+      // Common properties
+      $currency: "INR",
+      $value: data.value,
+      // Product specific
+      Product_ID: data.itemId,
+      Product_Name: data.title,
+      Product_Category: data.itemType,
+      Product_Variant: data.slug,
+      Product_Price: data.value,
+    })
+  },
+  ADD_TO_CART: {
+    ga: "add_to_cart",
+    mixpanel: "Product Added",
+    properties: (data: any) => ({
+      $currency: "INR",
+      $value: data.value,
+      Product_ID: data.itemId,
+      Product_Name: data.title,
+      Product_Category: data.itemType,
+      Product_Variant: data.slug,
+      Product_Price: data.value,
+    })
+  },
+  BEGIN_CHECKOUT: {
+    ga: "begin_checkout",
+    mixpanel: "Checkout Started",
+    properties: (data: any) => ({
+      $currency: "INR",
+      $value: data.amount,
+      Product_ID: data.itemId,
+      Product_Name: data.title,
+      Product_Category: data.itemType,
+      Product_Price: data.amount,
+      User_Email: data.email,
+      User_Name: data.name,
+      User_State: data.state,
+      User_Logged_In: data.loggedIn,
+    })
+  },
+  PURCHASE: {
+    ga: "purchase",
+    mixpanel: "Purchase Completed",
+    properties: (data: any) => ({
+      $currency: "INR",
+      $value: data.amount,
+      Product_ID: data.itemId,
+      Product_Name: data.title,
+      Product_Category: data.itemType,
+      Product_Price: data.amount,
+      User_Email: data.email,
+      User_Name: data.name,
+      User_State: data.state,
+      User_Logged_In: data.loggedIn,
+      Transaction_ID: Date.now().toString(),
+    })
+  }
+};
 
 function sendGAEvent(params: any) {
   if (typeof window !== "undefined" && window.gtag) {
@@ -14,144 +85,181 @@ function sendGAEvent(params: any) {
     console.error("Google Analytics not initialized");
   }
 }
+
+function sendMixpanelEvent(eventName: string, properties: any) {
+  try {
+    // Set user identity if email is available
+    if (properties.User_Email) {
+      mixpanel.identify(properties.User_Email);
+
+      // Set user properties
+      mixpanel.people.set({
+        $email: properties.User_Email,
+        $name: properties.User_Name,
+        state: properties.User_State,
+        logged_in: properties.User_Logged_In
+      });
+    }
+
+    // Track the event
+    mixpanel.track(eventName, {
+      ...properties,
+      time: new Date().toISOString(),
+      distinct_id: properties.User_Email || sessionId
+    });
+  } catch (error) {
+    console.error("Error sending Mixpanel event:", error);
+  }
+}
+
 // Generate a unique session ID
-const sessionId =
-  Date.now().toString(36) + Math.random().toString(36).substr(2);
+const sessionId = Date.now().toString(36) + Math.random().toString(36).substr(2);
 
 function sendEnhancedEvent(eventName: string, eventParams: any) {
-  const payload = {
+  const eventConfig = Object.values(EVENTS).find(
+      config => config.ga === eventName
+  );
+
+  if (!eventConfig) {
+    console.error(`Unknown event: ${eventName}`);
+    return;
+  }
+
+  // Prepare Mixpanel properties
+  const mixpanelProperties = eventConfig.properties(eventParams);
+
+  // Prepare GA payload based on event type
+  let gaPayload: any = {
     event: eventName,
+    event_id: Date.now().toString(),
+    currency: "INR",
     session_id: sessionId,
-    ...eventParams,
   };
 
-  console.log(`Sending ${eventName} event`, JSON.stringify(payload, null, 2));
+  // Add event-specific GA properties
+  switch (eventName) {
+    case "view_item":
+    case "add_to_cart":
+      gaPayload = {
+        ...gaPayload,
+        value: eventParams.value,
+        quantity: 1,
+        item_id: eventParams.itemId,
+        items: [{
+          item_id: eventParams.itemId,
+          item_name: eventParams.title,
+          price: eventParams.value,
+          item_category: eventParams.itemType,
+          item_variant: eventParams.slug,
+          quantity: 1,
+        }],
+      };
+      break;
+
+    case "begin_checkout":
+    case "purchase":
+      gaPayload = {
+        ...gaPayload,
+        value: eventParams.amount,
+        item_id: eventParams.itemId,
+        email: eventParams.email,
+        quantity: 1,
+        items: [{
+          item_name: eventParams.title,
+          item_id: eventParams.itemId,
+          price: eventParams.amount,
+          item_category: eventParams.itemType,
+          quantity: 1,
+        }],
+        user_properties: {
+          user_id: eventParams.email,
+          name: eventParams.name,
+          email: eventParams.email,
+          state: eventParams.state,
+          logged_in: eventParams.loggedIn,
+        },
+      };
+
+      // Add transaction ID for purchase events
+      if (eventName === "purchase") {
+        gaPayload.transaction_id = Date.now().toString();
+      }
+      break;
+  }
+
+  console.log(`Sending ${eventName} event`, JSON.stringify(gaPayload, null, 2));
+
   try {
-    sendGAEvent(payload);
+    sendGAEvent(gaPayload);
+    sendMixpanelEvent(eventConfig.mixpanel, mixpanelProperties);
+
+    // Send additional conversion event for purchases
+    if (eventName === "purchase") {
+      const conversionPayload = {
+        ...gaPayload,
+        event: "conversion_event_purchase"
+      };
+      sendGAEvent(conversionPayload);
+    }
   } catch (error) {
     console.error(`Error sending ${eventName} event:`, error);
   }
-
-  // sendServerEvents(eventName, eventParams);
-}
-
-function sendServerEvents(eventName: string, eventParams: any) {
-  if (!localStorage.getItem("ext-ID"))
-    localStorage.setItem("ext-ID", crypto.randomUUID());
-
-  // console.log({
-  //   client_id: localStorage.getItem("ext-ID"),
-  //   event_name: eventName,
-  //   event_params: {
-  //     ...eventParams,
-  //   },
-  // });
-  //
-  fetch(`https://jellyfish-app-mqgem.ondigitalocean.app/google-analytics-api`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer EAAMi1bkn4eQBOZCHsnmtxUGfi0sZCqRxIuuYf`,
-    },
-    body: JSON.stringify({
-      data: {
-        client_id: localStorage.getItem("ext-ID"),
-        event_name: eventName,
-        event_params: {
-          ...eventParams,
-        },
-      },
-    }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      // console.log("Google Data Sent");
-      // console.log("Response: ", data);
-    })
-    .catch((error) => console.error("Error:", JSON.stringify(error)));
-}
-
-export function pageView(url: string) {
-  sendEnhancedEvent("page_view", {
-    page_location: url,
-    page_title: document.title,
-  });
 }
 
 export function viewItem({
-  title,
-  slug,
-  itemId,
-  itemType,
-  value,
-}: {
+                           title,
+                           slug,
+                           itemId,
+                           itemType,
+                           value,
+                         }: {
   title: string;
   slug: string;
   itemId: string;
   itemType: string;
   value: number;
 }) {
-  sendEnhancedEvent("view_item", {
-    event_id: Date.now().toString(),
-    currency: "INR",
-    value: value,
-    quantity: 1,
-    item_id: itemId,
-    items: [
-      {
-        item_id: itemId,
-        item_name: title,
-        price: value,
-        item_category: itemType,
-        item_variant: slug,
-        quantity: 1,
-      },
-    ],
+  sendEnhancedEvent(EVENTS.VIEW_ITEM.ga, {
+    title,
+    slug,
+    itemId,
+    itemType,
+    value,
   });
 }
 
 export function addToCart({
-  title,
-  slug,
-  itemId,
-  itemType,
-  value,
-}: {
+                            title,
+                            slug,
+                            itemId,
+                            itemType,
+                            value,
+                          }: {
   title: string;
   slug: string;
   itemId: string;
   itemType: string;
   value: number;
 }) {
-  sendEnhancedEvent("add_to_cart", {
-    event_id: Date.now().toString(),
-    currency: "INR",
-    value: value,
-    quantity: 1,
-    item_id: itemId,
-    items: [
-      {
-        item_id: itemId,
-        item_name: title,
-        price: value,
-        item_category: itemType,
-        item_variant: slug,
-        quantity: 1,
-      },
-    ],
+  sendEnhancedEvent(EVENTS.ADD_TO_CART.ga, {
+    title,
+    slug,
+    itemId,
+    itemType,
+    value,
   });
 }
 
 export function beginCheckout({
-  title,
-  itemId,
-  amount,
-  itemType,
-  name,
-  email,
-  state,
-  loggedIn,
-}: {
+                                title,
+                                itemId,
+                                amount,
+                                itemType,
+                                name,
+                                email,
+                                state,
+                                loggedIn,
+                              }: {
   title: string;
   itemId: string;
   name: string;
@@ -161,42 +269,28 @@ export function beginCheckout({
   itemType: string;
   loggedIn: boolean;
 }) {
-  sendEnhancedEvent("begin_checkout", {
-    event_id: Date.now().toString(),
-    currency: "INR",
-    value: amount,
-    item_id: itemId,
+  sendEnhancedEvent(EVENTS.BEGIN_CHECKOUT.ga, {
+    title,
+    itemId,
+    amount,
+    itemType,
+    name,
     email,
-    quantity: 1,
-    items: [
-      {
-        item_name: title,
-        item_id: itemId,
-        price: amount,
-        item_category: itemType,
-        quantity: 1,
-      },
-    ],
-    user_properties: {
-      user_id: email,
-      name,
-      email,
-      state,
-      logged_in: loggedIn,
-    },
+    state,
+    loggedIn,
   });
 }
 
 export function purchase({
-  title,
-  itemId,
-  amount,
-  itemType,
-  name,
-  email,
-  state,
-  loggedIn,
-}: {
+                           title,
+                           itemId,
+                           amount,
+                           itemType,
+                           name,
+                           email,
+                           state,
+                           loggedIn,
+                         }: {
   title: string;
   itemId: string;
   name: string;
@@ -204,128 +298,16 @@ export function purchase({
   state: string;
   amount: number;
   itemType: string;
-  loggedIn: boolean;
+  loggedIn?: boolean;
 }) {
-
-  console.log({
-    transaction_id: Date.now().toString(),
-    currency: "INR",
-    value: amount,
-    item_id: itemId,
+  sendEnhancedEvent(EVENTS.PURCHASE.ga, {
+    title,
+    itemId,
+    amount,
+    itemType,
+    name,
     email,
-    quantity: 1,
-    items: [
-      {
-        item_name: title,
-        item_id: itemId,
-        price: amount,
-        item_category: itemType,
-        quantity: 1,
-      },
-    ],
-    user_properties: {
-      user_id: email,
-      name,
-      email,
-      state,
-      logged_in: loggedIn,
-    },
-  });
-  
-  sendEnhancedEvent("purchase", {
-    transaction_id: Date.now().toString(),
-    currency: "INR",
-    value: amount,
-    item_id: itemId,
-    email,
-    quantity: 1,
-    items: [
-      {
-        item_name: title,
-        item_id: itemId,
-        price: amount,
-        item_category: itemType,
-        quantity: 1,
-      },
-    ],
-    user_properties: {
-      user_id: email,
-      name,
-      email,
-      state,
-      logged_in: loggedIn,
-    },
-  });
-
-  sendEnhancedEvent("conversion_event_purchase", {
-    transaction_id: Date.now().toString(),
-    value: amount,
-    currency: "INR",
-    item_id: itemId,
-    email,
-    quantity: 1,
-    items: [
-      {
-        item_name: title,
-        item_id: itemId,
-        price: amount,
-        item_category: itemType,
-        quantity: 1,
-      },
-    ],
-    user_properties: {
-      user_id: email,
-      name,
-      email,
-      state,
-      logged_in: loggedIn,
-    },
-  });
-}
-
-export function startCourse(courseId: string, courseName: string) {
-  sendEnhancedEvent("start_course", {
-    course_id: courseId,
-    course_name: courseName,
-  });
-}
-
-export function completeCourse(courseId: string, courseName: string) {
-  sendEnhancedEvent("complete_course", {
-    course_id: courseId,
-    course_name: courseName,
-  });
-}
-
-export function trackLessonProgress(
-  courseId: string,
-  lessonId: string,
-  progress: number
-) {
-  sendEnhancedEvent("lesson_progress", {
-    course_id: courseId,
-    lesson_id: lessonId,
-    progress_percentage: progress,
-  });
-}
-
-export function trackEngagement(action: string, label: string) {
-  sendEnhancedEvent("user_engagement", {
-    engagement_type: action,
-    engagement_label: label,
-  });
-}
-
-export function trackFormSubmission(formName: string, success: boolean) {
-  sendEnhancedEvent("form_submission", {
-    form_name: formName,
-    submission_success: success,
-  });
-}
-
-export function trackSearch(searchTerm: string, resultCount: number) {
-  sendEnhancedEvent("search", {
-    search_term: searchTerm,
-    number_of_results: resultCount,
+    state,
+    loggedIn,
   });
 }

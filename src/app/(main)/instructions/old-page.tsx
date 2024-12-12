@@ -1,6 +1,7 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Notebook } from "lucide-react";
 import Link from "next/link";
+import React from "react";
 
 export default function Instructions() {
   const LinkMe = ({ title, href }: { title?: string; href: string }) => (

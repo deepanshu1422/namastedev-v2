@@ -227,39 +227,40 @@ export function PaymentSheet({
 
       const options = {
         key: key,
-        description: "Test Transaction",
+        description: formData.state,
         image: "/icon.png",
         name: "30DaysCoding",
         currency: res.data.currency,
         amount: res.data.amount,
         order_id: res.data.orderId,
         handler: async function (response: any) {
-          sendEvent("Purchase", {
-            value: res.data.amount/100,
-            currency: "INR",
-            content_ids: [bundleId],
-            content_type: "bundle",
-            content_name: title ?? "",
-            em: sha256(formData.email), // Hashing example
-            ph: sha256(formData.phone),
-            fn: sha256(formData.name.split(" ")[0]),
-            ln: sha256(formData.name.split(" ")[1] ?? ""),
-            num_items: 1,
-            event_source_url: `${BASE_URL}/bundle/${slug}`,
-          });
-          purchase({
-            title,
-            amount: res.data.amount/100,
-            itemId: bundleId,
-            itemType: "bundle",
-            name: formData.name,
-            email: formData.email.toLocaleLowerCase(),
-            state: formData.state,
-            loggedIn: status === "authenticated",
-          });
+          // sendEvent("Purchase", {
+          //   value: res.data.amount/100,
+          //   currency: "INR",
+          //   content_ids: [bundleId],
+          //   content_type: "bundle",
+          //   content_name: title ?? "",
+          //   em: sha256(formData.email), // Hashing example
+          //   ph: sha256(formData.phone),
+          //   fn: sha256(formData.name.split(" ")[0]),
+          //   ln: sha256(formData.name.split(" ")[1] ?? ""),
+          //   num_items: 1,
+          //   event_source_url: `${BASE_URL}/bundle/${slug}`,
+          // });
+          // purchase({
+          //   title,
+          //   amount: res.data.amount/100,
+          //   itemId: bundleId,
+          //   itemType: "bundle",
+          //   name: formData.name,
+          //   email: formData.email.toLocaleLowerCase(),
+          //   state: formData.state,
+          //   loggedIn: status === "authenticated",
+          // });
           setOpenPay(true);
           await update({ courses: true });
-          if (session?.user?.email) router.refresh();
+          router.push(`/thank-you?title=${title}&value=${res.data.amount/100}&currency=INR&contentType=bundle&name=${formData.name}&email=${formData.email.toLocaleLowerCase()}&state=${formData.state}&phone=+91${formData.phone}&id=${bundleId}&slug=${slug}`);
+          // if (session?.user?.email) router.refresh();
         },
         prefill: {
           name: formData.name,
@@ -618,7 +619,7 @@ export function PaymentSheet({
             Buy Now
           </Button>
         </SheetTrigger> */}
-        <SheetContent className="h-full w-full flex flex-col">
+        <SheetContent className="h-full w-full flex flex-col overflow-y-auto">
           <SheetHeader>
             <SheetTitle>{orderPage[formState].title}</SheetTitle>
           </SheetHeader>

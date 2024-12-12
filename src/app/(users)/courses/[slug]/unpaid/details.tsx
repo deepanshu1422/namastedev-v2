@@ -13,7 +13,7 @@ import Image from "next/image";
 import Reviews from "./reviews";
 import Guides from "./guides";
 import Mentors from "@/app/(users)/mentors";
-import VideoSlider from "@/app/(main)/testimonials/video-slider";
+import VideoSlider from "@/app/(guide)/testimonials/video-slider";
 import { Button } from "@/components/ui/button";
 // import Reviews from "./reviews"
 
@@ -262,7 +262,7 @@ export function Chapters({
     }[];
   };
 }) {
-  const [state, setState] = useState(modulesCollection.items.slice(0, 10));
+  const [state, setState] = useState(modulesCollection.items);
 
   const [video, setVideo] = useState({
     title: "",

@@ -105,7 +105,7 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  let item = null;
+  let item: any = null;
 
   try {
     const query = `query {
@@ -250,3 +250,5 @@ export default async function Home({ params: { slug } }: PageProps) {
 
   return <Main item={items[0]} />;
 }
+
+

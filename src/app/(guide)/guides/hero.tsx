@@ -30,7 +30,7 @@ export default function Hero({
         className="object-cover opacity-10 pointer-events-none"
       />
       <div className="relative bg-gradient-to-t from-bg from-0% to-transparent to-50%">
-        <div className="tab:pt-[10.5rem] tab:p-[2.5rem_6.75rem] max-tab:pt-[8rem] max-tab:pb-[0.5rem] m-auto max-w-[90rem] flex max-tab:flex-col text-white">
+        <div className="tab:pt-[4.5rem] tab:p-[2.5rem_2.75rem] max-tab:pt-[8rem] max-tab:pb-[0.5rem] m-auto max-w-[90rem] flex max-tab:flex-col text-white">
           <section className="grid place-content-start max-tab:px-11 max-phone:px-6">
             <h1
               className={`max-w-xl font-jakarta phone:text-[3.2rem] text-[2.5rem] font-extrabold bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight text-pretty`}

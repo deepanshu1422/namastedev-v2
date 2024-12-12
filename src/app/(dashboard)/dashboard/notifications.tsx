@@ -38,15 +38,11 @@ export default function Notifications() {
           <p className="text-sm px-2">
             Your certificate is generated. Download it from here now!
           </p>
-          <Button
-            onClick={() => {
-              setOpen(true);
-            }}
-            size={"sm"}
-            className="bg-prime/80 hover:bg-prime text-white"
+          <a href="https://senja.io/p/30-days-coding/r/AgSF4E" target="_blank"
+            className="p-2 bg-prime/80 hover:bg-prime text-white rounded text-center"
           >
             Download Certificate
-          </Button>
+          </a>
         </div>
         {/* <Badge className="text-white gap-1 hover:bg-second/60 bg-second/40 rounded m-auto"><MessageCircleQuestion className="h-4 w-4" />No Updates Yet</Badge> */}
       </div>

@@ -4,7 +4,7 @@ import Hero from "./unpaid/hero";
 import Detail from "./unpaid/details";
 import { Floating, PaymentModal, PaymentSheet } from "./payments";
 import { useEffect, useState } from "react";
-import { YTModal } from "@/app/(main)/testimonials/slider";
+import { YTModal } from "@/app/(guide)/testimonials/slider";
 import { usePathname, useSearchParams } from "next/navigation";
 
 import { addToCart, viewItem } from "@/services/gaEvents";

@@ -135,7 +135,7 @@ function Offer({
   ];
   return (
     <div className={`${className} cursor-pointer flex flex-col pb-2 gap-2`}>
-      <div className="bg-gradient-to-t to-head/80 from-second/80 p-3 rounded-md">
+      <Link href={"/bundle/complete-package-all-course-bundle?sheet=true"} className="bg-gradient-to-t to-head/80 from-second/80 p-3 rounded-md">
         <div className="flex justify-between mb-2">
           <h3 className="text-lg line-clamp-2 font-semibold">
             17 Course bundle
@@ -163,7 +163,7 @@ function Offer({
           <div className="flex items-end gap-2">
             <span className="text-2xl font-bold">₹999</span>
             <span className="text-xl font-medium text-muted-foreground line-through italic">
-              ₹25000
+              ₹9999
             </span>
           </div>
 
@@ -171,7 +171,7 @@ function Offer({
             95% off
           </Badge>
         </div>
-      </div>
+      </Link>
 
       <Link
         href={"/bundle/complete-package-all-course-bundle?sheet=true"}

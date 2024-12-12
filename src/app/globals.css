@@ -61,13 +61,13 @@
 
 /* Track */
 .horizontal-scroll::-webkit-scrollbar-track {
-  background: #ffffff20;
+  background: #ffffff10;
   height: 10px;
 }
 
 /* Handle */
 .horizontal-scroll::-webkit-scrollbar-thumb {
-  background: #ffffff60;
+  background: #ffffff40;
   height: 50px;
   width: 10px;
   cursor: pointer;

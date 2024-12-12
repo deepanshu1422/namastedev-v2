@@ -1,3 +1,5 @@
+import { Topics } from "@/app/(guide)/interview/[topic]/page";
+
 export const mentorship = {
     price: 8999,
     ogPrice: 16999,
@@ -22,6 +24,8 @@ export const community = {
 export
     const interviewQuestions: Topics = {
         javascript: {
+            title: "JavaScript Inteview Questions",
+            description: "Crack your JavaScript interview with ease! Explore our curated list of JavaScript interview questions covering ES6+, DOM manipulation, async programming, and more, with detailed answers.",
             interviewQuestions: [
                 {
                     question: "What is the difference between '==' and '===' in JavaScript?",
@@ -391,7 +395,8 @@ export
             ]
         },
         react: {
-
+            title: "React Inteview Questions",
+            description: "Excel in your React interview with our in-depth collection of React interview questions. Learn about hooks, state management, lifecycle methods, and advanced concepts with expert solutions.",
             interviewQuestions: [
                 {
                     question: "What is React and what are its main features?",
