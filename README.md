@@ -5,6 +5,8 @@ n
 
 First, run the development
 
+yu
+
 server:
 ...
 
