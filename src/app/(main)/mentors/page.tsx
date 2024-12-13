@@ -26,6 +26,60 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
-  return <Main />;
+export type Mentors = {
+  mentorsCollection: {
+    items: {
+      slug: string;
+      name: string;
+      degrees: string[];
+      colleges: string[];
+      major: string;
+      countries: string[];
+      image: {
+        url: string;
+      };
+      available: boolean
+    }[];
+  };
+};
+
+async function getMentors(): Promise<Mentors> {
+  const query = `query {
+  mentorsCollection(where: {publish: true }){
+    items{
+      slug,
+      name,
+      image{
+        url
+      },
+      degrees,
+      colleges,
+      major,
+      countries,
+      available
+    }
+  }
+}`;
+
+  const fetchedData = await fetch(
+    `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+      },
+      body: JSON.stringify({ query }),
+    }
+  );
+
+  const data = await fetchedData.json();
+
+  return data.data;
+}
+
+export default async function Home() {
+
+  const mentors = await getMentors()
+  return <Main mentorsCollection={mentors.mentorsCollection} />;
 }
