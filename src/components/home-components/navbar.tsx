@@ -5,12 +5,11 @@ import { NavMenu } from "../nav-menu";
 import Link from "next/link";
 import MobileMenu from "../mobile-menu";
 import { useSession } from "next-auth/react";
-import { AuthDialog } from "@/app/(guide)/auth";
-import { LayoutDashboard, LogIn } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
-  // const { isSignedIn } = useAuth()
-  const { data: session, status } = useSession();
+
+  const pathName = usePathname()
 
   return (
     <div className={`relative font-jakarta tab:min-h-9`}>
@@ -40,23 +39,12 @@ export default function Navbar() {
           </section>
 
           <section className="flex items-center gap-2">
-            {/* <Link
-              href={"/community"}
-              className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:py-2 rounded-md"
-            >
-              <span className="text-sm line-clamp-1">
-                Community
-              </span>
-            </Link> */}
-
             <Link
-              href={"/dashboard"}
+              href={pathName === "/studyabroad-mentors" ? "/mentor" : "/dashboard"}
               className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:p-2 rounded-md"
             >
-              <span className="text-sm">Dashboard</span>
-              {/* <LogIn className="h-5 w-5 sm:hidden" /> */}
+              <span className="text-sm">{pathName === "/studyabroad-mentors" ? "Mentor Login" : "Dashboard"}</span>
             </Link>
-
             <MobileMenu />
           </section>
         </div>
