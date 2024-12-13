@@ -211,11 +211,10 @@ export function PaymentSheet({
         order_id: res.data.orderId,
         handler: async function (response: any) {
           setOpenPay(true);
-          await update({ courses: true });
           router.push(
-            `/thank-you?title=${title}&value=${
+            `/check-mail?title=${title}&value=${
               res.data.amount / 100
-            }&currency=INR&contentType=course&name=${
+            }&currency=INR&contentType=mentor&name=${
               formData.name
             }&email=${formData.email.toLocaleLowerCase()}&state=${
               formData.state
@@ -541,7 +540,7 @@ export function PaymentModal({
               disabled={status === "loading"}
               className="w-full bg-prime/70 text-white hover:bg-prime"
             >
-              {status === "loading" ? "Adding Course..." : "Watch Now"}
+              {status === "loading" ? "Sending Mail..." : "Check Your Mail Inbox"}
             </Button>
             <Link className="w-fit" href={"/dashboard"}>
               <Button
@@ -549,7 +548,7 @@ export function PaymentModal({
                 disabled={status === "loading"}
                 className="text-white/40 hover:text-white"
               >
-                {status === "loading" ? "loading..." : "Visit Dashboard"}
+                {status === "loading" ? "loading..." : "Mail Sent"}
               </Button>
             </Link>
           </CardContent>

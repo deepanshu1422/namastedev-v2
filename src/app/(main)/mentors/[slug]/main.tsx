@@ -373,7 +373,7 @@ export default function Main({
           bigAmount={pricingCollection.items[0].bigAmount ?? 0}
           percentage={pricingCollection.items[0].percentage ?? 0}
           curreny={"INR"}
-          setOpenPay={setOpen}
+          setOpenPay={setOpenModal}
         />
         <Floating
           addToCart={addToCartEvent}
