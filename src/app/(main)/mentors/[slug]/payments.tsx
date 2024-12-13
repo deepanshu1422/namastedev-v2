@@ -79,7 +79,6 @@ export function PaymentSheet({
     email: string;
     phone: string;
     state: string;
-    guides: string[];
   }>({
     name: session?.user?.name ?? "",
     email: session?.user?.email ?? "",
@@ -87,7 +86,6 @@ export function PaymentSheet({
     phone: session?.user?.phone ?? "",
     // @ts-ignore
     state: session?.user?.state ?? "",
-    guides: [],
   });
 
   const [formState, setFormState] = useState(0);
@@ -182,7 +180,6 @@ export function PaymentSheet({
           name: session?.user?.name ?? formData.name,
           state: formData.state,
           couponCode: promo.code,
-          guides: formData.guides,
         });
       } else {
         return;
@@ -215,7 +212,15 @@ export function PaymentSheet({
         handler: async function (response: any) {
           setOpenPay(true);
           await update({ courses: true });
-          router.push(`/thank-you?title=${title}&value=${res.data.amount/100}&currency=INR&contentType=course&name=${formData.name}&email=${formData.email.toLocaleLowerCase()}&state=${formData.state}&phone=+91${formData.phone}&id=${mentorId}&slug=${slug}`);
+          router.push(
+            `/thank-you?title=${title}&value=${
+              res.data.amount / 100
+            }&currency=INR&contentType=course&name=${
+              formData.name
+            }&email=${formData.email.toLocaleLowerCase()}&state=${
+              formData.state
+            }&phone=+91${formData.phone}&id=${mentorId}&slug=${slug}`
+          );
 
           // sendEvent("Purchase", {
           //   value: res.data.amount / 100,
@@ -279,7 +284,6 @@ export function PaymentSheet({
         phone: session?.user?.phone ?? "",
         // @ts-ignore
         state: session?.user?.state ?? "",
-        guides: [],
       });
     } catch (error) {
       setIsLoading(false);
@@ -465,14 +469,7 @@ export function PaymentSheet({
             className="disabled:animate-pulse w-full hover:bg-prime/80 bg-prime/60 text-white"
             type="submit"
           >
-            Book Call @ INR{" "}
-            {amount +
-              formData.guides.reduce(
-                (sum, cur) =>
-                  // @ts-ignore
-                  sum + guides.find((e) => e.guideId === cur)?.pricing.amount,
-                0
-              )}
+            Book Call @ INR {amount}
           </Button>
           <Button
             variant={"outline"}

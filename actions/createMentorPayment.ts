@@ -11,7 +11,6 @@ export default async function createMentorPayments({
   contact,
   state,
   couponCode,
-  guides,
 }: {
   mentorId: string;
   email: string;
@@ -19,7 +18,6 @@ export default async function createMentorPayments({
   contact: string;
   state: string;
   couponCode?: string | null;
-  guides: string[];
 }) {
   // console.log(mentorId, email);
 
@@ -61,7 +59,6 @@ export default async function createMentorPayments({
       mentorId,
       gateway: "razorpay",
       countryCode: "IN",
-      guides,
     };
   } else {
     body = {
@@ -73,7 +70,6 @@ export default async function createMentorPayments({
       country: "India",
       gateway: "razorpay",
       countryCode: "IN",
-      guides,
     };
   }
 
