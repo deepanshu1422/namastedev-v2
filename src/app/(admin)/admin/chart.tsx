@@ -19,7 +19,7 @@ import {
 import { addDays, format, subDays } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import revalidatePages from "../../../../actions/revalidate-pages";
+import revalidatePages, { revalidateMentors } from "../../../../actions/revalidate-pages";
 import { getTransactions } from "../../../../actions/admin";
 
 const chartConfig = {
@@ -127,17 +127,28 @@ export function TransactionChart() {
 
   return (
     <div className="flex flex-col gap-4 sm:gap-8">
-      <section className="flex justify-between gap-4 pt-16">
+      <section className="flex max-sm:flex-col justify-between gap-4 pt-16">
         <h2 className="text-3xl md:text-4xl font-semibold">
           <span className="text-muted-foreground text-2xl">#</span>Overview
         </h2>
-        <Button
-          onClick={() => revalidatePages()}
-          size={"sm"}
-          variant={"destructive"}
-        >
-          Revalidate Pages
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            onClick={() => revalidatePages()}
+            size={"sm"}
+            variant={"destructive"}
+            className="flex-1"
+          >
+            Revalidate Pages
+          </Button>
+          <Button
+            onClick={() => revalidateMentors()}
+            size={"sm"}
+            variant={"destructive"}
+            className="flex-1 bg-lime-800/80 hover:bg-lime-800"
+          >
+            Revalidate Mentors
+          </Button>
+        </div>
         {/* <div className="flex gap-2 max-sm:w-full">
           <DatePickerWithRange generateDataArray={generateDataArray} />
         </div> */}

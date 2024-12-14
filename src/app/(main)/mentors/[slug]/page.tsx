@@ -22,7 +22,7 @@ export type Mentors = {
       states: string[];
       countries: string[];
       languages: string[];
-      available: string;
+      available: "Available" | "Coming Soon" | "Unavailable";
       insights: string[];
       image: {
         url: string;

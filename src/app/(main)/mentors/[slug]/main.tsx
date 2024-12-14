@@ -125,13 +125,23 @@ export default function Main({
             </div>
           </div>
           <Button
+            disabled={available !== "Available"}
             onClick={() => {
               setOpen(true);
               addToCartEvent();
             }}
-            className="bg-head/90 text-white font-semibold hover:bg-head"
+            className={`${
+              available === "Available" && "bg-head/90 hover:bg-head"
+            } ${
+              available === "Coming Soon" &&
+              "bg-amber-800/90 hover:bg-amber-800/90"
+            } ${
+              available === "Unavailable" && "bg-red-800/90 hover:bg-red-800/90"
+            } text-white font-semibold disabled:pointer-events-auto disabled:cursor-not-allowed disabled:opacity-70`}
           >
-            Book a Call
+            {available === "Available" && "Book a Call"}
+            {available === "Coming Soon" && available + "..."}
+            {available === "Unavailable" && "Seats already full"}
           </Button>
         </>
       );
@@ -376,6 +386,7 @@ export default function Main({
           setOpenPay={setOpenModal}
         />
         <Floating
+          available={available}
           addToCart={addToCartEvent}
           mentorId={mentorId}
           price={{

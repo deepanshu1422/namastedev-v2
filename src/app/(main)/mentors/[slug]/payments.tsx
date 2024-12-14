@@ -335,7 +335,11 @@ export function PaymentSheet({
       title: "Payments Details",
       body: (
         <div className="grid gap-4 py-4">
-          <p className="max-sm:text-sm sm:leading-6 line-clamp-3">{title}</p>
+          <div className="border-l-4 border-emerald-500/60 pl-4">
+            <p className="max-sm:text-sm sm:leading-6 line-clamp-3 text-white/90">
+              {title} - 30Min Mentor Session
+            </p>
+          </div>
           <div className="grid grid-cols-5 items-center gap-4">
             <Label htmlFor="name" className="text-left">
               Name
@@ -540,7 +544,9 @@ export function PaymentModal({
               disabled={status === "loading"}
               className="w-full bg-prime/70 text-white hover:bg-prime"
             >
-              {status === "loading" ? "Sending Mail..." : "Check Your Mail Inbox"}
+              {status === "loading"
+                ? "Sending Mail..."
+                : "Check Your Mail Inbox"}
             </Button>
             <Link className="w-fit" href={"/dashboard"}>
               <Button
@@ -560,11 +566,13 @@ export function PaymentModal({
 
 export function Floating({
   addToCart,
+  available,
   price,
   slug,
   mentorId,
   setOpen,
 }: {
+  available: "Available" | "Coming Soon" | "Unavailable";
   addToCart: () => void;
   price: {
     amount: number;
@@ -585,11 +593,12 @@ export function Floating({
   // @ts-ignore
   if (!session?.user?.mentorId?.includes(mentorId))
     return (
-      <div className="md:hidden fixed bottom-0 z-20 bg-background/40 w-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30">
+      <div className="md:hidden fixed bottom-0 z-20 border-t bg-white w-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30">
         <div className="flex flex-col gap-2 p-2">
           <div className="flex-1 group relative">
-            <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
+            {/* <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div> */}
             <Button
+              disabled={available !== "Available"}
               onClick={() => {
                 setOpen(true);
                 sendEvent("Initiate Checkout", {
@@ -605,12 +614,23 @@ export function Floating({
                 addToCart();
               }}
               variant={"outline"}
-              className={`font-semibold text-foreground/80 hover:text-foreground relative w-full p-6 text-sm gap-1`}
+              // className={`font-semibold bg-head`}
+              className={`${available === "Available" && "bg-head"} ${
+                available === "Coming Soon" && "bg-amber-800/60"
+              } ${
+                available === "Unavailable" && "bg-red-800/60"
+              } text-foreground relative w-full p-6 text-sm gap-1 font-semibold disabled:pointer-events-auto disabled:cursor-not-allowed disabled:opacity-70`}
             >
-              Book Call @ ₹{course.price}{" "}
-              <span className="text-muted-foreground line-through italic">
-                ₹{course.ogPrice}
-              </span>
+              {available === "Available" && (
+                <>
+                  Book Call @ ₹{course.price}{" "}
+                  <span className="text-foreground/80 line-through italic">
+                    ₹{course.ogPrice}
+                  </span>
+                </>
+              )}
+              {available === "Coming Soon" && available + "..."}
+              {available === "Unavailable" && "Seats already full"}
             </Button>
           </div>
         </div>
