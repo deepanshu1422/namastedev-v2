@@ -24,7 +24,7 @@ function Testimonial({
   profile,
 }: TestimonialType) {
   return (
-    <div className="lg:hover:bg-opacity-70 transition-all duration-200 flex flex-col p-6 gap-4 bg-second rounded-lg">
+    <div className="lg:hover:bg-opacity-70 transition-all duration-200 flex flex-col p-6 gap-4 bg-second rounded-lg max-w-[350px]">
       <div className="flex justify-between">
         <Link
           href={linkedin}
@@ -252,7 +252,7 @@ export default function Success() {
         <span className="text-red-500"> $55.8M in job offer value.</span>
       </p>
       
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 py-5 lg:py-10">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 py-5 lg:py-10 max-sm:place-items-center">
         {testimonials.map(
           ({ name, review, link, linkedin, pos, profile }, i) => (
             <Testimonial

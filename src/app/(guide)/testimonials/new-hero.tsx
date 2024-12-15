@@ -71,7 +71,7 @@ export default function NewHero({
         />
       ))}
       <div className="relative bg-gradient-to-t from-bg from-0% to-transparent to-50%">
-        <div className="tab:p-[10.5rem_5.5rem_3.75rem] max-tab:pt-[4rem] max-tab:pb-[2.5rem] m-auto max-w-[90rem] flex justify-center items-center text-white">
+        <div className="tab:p-[6.5rem_5.5rem_3.75rem] max-tab:pt-[4rem] max-tab:pb-[2.5rem] m-auto max-w-[90rem] flex justify-center items-center text-white">
           <section className="grid gap-4 place-items-center text-center">
             <h1
               className={`max-w-2xl font-jakarta phone:text-[3.5rem] text-[2.5rem] font-extrabold bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-[50px] max-tab:px-11 max-phone:px-6`}

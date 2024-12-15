@@ -2,7 +2,7 @@ import Image from "next/image";
 
 function TestimonyImages({ imageUrl, alt }: { imageUrl: string; alt: string }) {
   return (
-    <div className="p-1 bg-second rounded-lg relative">
+    <div className="p-1 bg-second rounded-lg relative max-w-[350px]">
       <Image
         src={imageUrl}
         alt={alt}

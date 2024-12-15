@@ -2,13 +2,12 @@ import Image from "next/image";
 
 function TestimonyImages({ imageUrl, alt }: { imageUrl: string; alt: string }) {
   return (
-    <div className="max-w-[23.75rem] w-full p-1 bg-second rounded-lg lg:min-h-72 relative">
+    <div className="max-w-[23.75rem] max-phone:h-60 max-lg:h-72 h-full w-full p-1 bg-second rounded-lg lg:min-h-72 aspect-square relative overflow-hidden">
       <Image
         src={imageUrl}
         alt={alt}
-        width={600}
-        height={600}
-        className="object-cover h-full w-full rounded-md shadow-md aspect-square"
+        fill
+        className="object-contain h-full max-w-[23.75rem] w-full rounded-md shadow-md bg-footer"
       />
     </div>
   );
