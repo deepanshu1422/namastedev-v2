@@ -39,30 +39,29 @@ export default function Main() {
         email: query.get("email").toLocaleLowerCase(),
         state: query.get("state"),
       });
-      flag = false
+      flag = false;
     }
   }, []);
 
   return (
     <main className="min-h-[90vh] flex bg-white">
-      <div className="mt-5 mx-auto p-3 flex flex-col items-center">
+      <div className="mx-auto p-3 flex flex-col items-center">
         <Image src={"/done.gif"} height={300} width={300} alt="done" />
         <CardHeader className="p-1 items-center -translate-y-10">
           <span className="flex gap-2 items-center text-3xl text-black font-extrabold">
             Thank You
           </span>
           <CardDescription className="text-center text-black max-w-2xl">
-            Thank you for joining our community! Your purchase supports our
-            mission to provide high-quality education and resources. Team 30DC
+            Thank you for your purchase! Your purchased {query.get("contentType") || "course"} will be available on <Link href={"/dashboard"} className="text-prime font-bold">30dayscoding.com/dashboard</Link>.
           </CardDescription>
         </CardHeader>
-        <CardContent className="pt-3 pb-0 mx-auto w-full flex flex-col items-center gap-2 -translate-y-10">
+        <CardContent className="p-2 pt-3 pb-0 mx-auto w-full flex flex-col items-center gap-2 -translate-y-10">
           <Link className="max-w-4xl w-full" href={"/dashboard"}>
-            <Button className="w-full bg-prime/90 hover:bg-prime text-white">
-              Watch Now
+            <Button className="w-full bg-prime/90 hover:bg-prime text-white capitalize">
+              Start your {query.get("contentType") || "Course"} now
             </Button>
           </Link>
-          <section className="flex gap-4 mt-3">
+          {/* <section className="flex gap-4 mt-3">
             <Link href={"https://www.linkedin.com/company/30dc/"}>
               <svg
                 className="h-6 w-6 fill-zinc-500 stroke-zinc-500 transition-all lg:hover:fill-prime"
@@ -104,6 +103,15 @@ export default function Main() {
                 <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
               </svg>
             </Link>
+          </section> */}
+          <section className="mt-5 flex flex-col gap-1 items-center text-center">
+            <span className="bg-white flex gap-2 items-center text-xl text-gray-800 underline font-extrabold">
+            Notice
+            </span>
+            <ol className="max-sm:text-sm text-pretty list-decimal list-inside text-gray-800 space-y-2 items-center max-w-2xl py-2">
+              <li>Please check your email to confirm your purchase. If not also check <span className="font-bold">&apos;spam&apos;</span> mails too</li>
+              <li>You can also access your course by logging in to <Link href={"/dashboard"} className="text-prime font-bold">30daycoding.com/dashboard</Link> using the email you used for the purchase.</li>
+            </ol>
           </section>
         </CardContent>
       </div>

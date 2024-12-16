@@ -145,7 +145,7 @@ export default function Hero({
                 {shortDescription}
               </p>
 
-              <div className="flex items-center gap-3 max-tab:text-xs">
+              <div className="flex flex-wrap items-center gap-3 max-tab:text-xs">
                 <section className="flex gap-1 items-center">
                   <span className="text-lime-500/70">{rating}</span>
                   {Array.from({ length: rating }).map((_, i) => (
@@ -164,14 +164,13 @@ export default function Hero({
                   </button>
                 </Reviews>
                 21,380+ Students
+                <div className="text-white/70 space-x-1 max-tab:text-xs">
+                  <span className="underline">Language:</span>
+                  <span className="font-semibold no-underline bg-prime/20 border-prime/60 border-2 border-dashed p-1 px-2 rounded-md w-fit text-sm">
+                    Hindi
+                  </span>
+                </div>
               </div>
-
-              {/* <div className="text-white/70 max-tab:text-sm">
-                Author:{" "}
-                <span className="text-white font-semibold px-1 underline">
-                  Aryan Singh
-                </span>
-              </div> */}
 
               {/* <div className="text-sm text-white/40">Updated 4 months ago</div> */}
               <div className="tab:hidden flex flex-col gap-4">
@@ -217,7 +216,7 @@ export default function Hero({
                         // @ts-ignore
                         ph: sha256(data?.user?.phone ?? ""),
                         fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
-                        event_source_url: `${BASE_URL}/courses/${slug}`
+                        event_source_url: `${BASE_URL}/courses/${slug}`,
                       });
                       addToCart();
                     }}

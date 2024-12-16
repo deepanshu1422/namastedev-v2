@@ -77,11 +77,13 @@ export function PaymentSheet({
   const [formData, setFormData] = useState<{
     name: string;
     email: string;
+    email2: string;
     phone: string;
     state: string;
   }>({
     name: session?.user?.name ?? "",
     email: session?.user?.email ?? "",
+    email2: session?.user?.email ?? "",
     // @ts-ignore
     phone: session?.user?.phone ?? "",
     // @ts-ignore
@@ -152,6 +154,8 @@ export function PaymentSheet({
       return validationError({ message: "Name too short" });
     if (formData.email.split("@").length !== 2)
       return validationError({ message: "Invalid Email" });
+    if (formData.email !== formData.email2)
+      return validationError({ message: "Confirm Email doesn't Match" });
     if (formData.phone.length !== 10)
       return validationError({ message: "Invalid Phone Number" });
     if (!states.includes(formData.state))
@@ -279,6 +283,7 @@ export function PaymentSheet({
       setFormData({
         name: session?.user?.name ?? "",
         email: session?.user?.email ?? "",
+        email2: session?.user?.email ?? "",
         // @ts-ignore
         phone: session?.user?.phone ?? "",
         // @ts-ignore
@@ -374,6 +379,22 @@ export function PaymentSheet({
             />
           </div>
           <div className="grid grid-cols-5 items-center gap-4">
+            <Label htmlFor="email" className="text-left">
+              Confirm Email
+            </Label>
+            <Input
+              value={formData.email2}
+              onChange={(e) =>
+                setFormData({ ...formData, email2: e.target.value })
+              }
+              id="email-2"
+              maxLength={40}
+              type="email"
+              placeholder="youremail@gmail.com"
+              className="col-span-4"
+            />
+          </div>
+          <div className="grid grid-cols-5 items-center gap-4">
             <Label htmlFor="phone" className="text-left">
               Phone
             </Label>
@@ -425,6 +446,8 @@ export function PaymentSheet({
               return validationError({ message: "Name too short" });
             if (formData.email.split("@").length !== 2)
               return validationError({ message: "Invalid Email" });
+            if (formData.email !== formData.email2)
+              return validationError({ message: "Confirm Email doesn't Match" });
             if (formData.phone.length !== 10)
               return validationError({ message: "Invalid Phone Number" });
             if (!states.includes(formData.state))
