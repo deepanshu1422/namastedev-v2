@@ -87,7 +87,7 @@ const navBar = [
       {
         title: "React",
         link: "/interview/react",
-      }
+      },
     ],
   },
   {
@@ -111,10 +111,19 @@ const navBar = [
     ],
   },
   {
-    title: "Motivation",
+    title: "Resources",
     icon: <Network className="h-4 w-4 md:h-5 md:w-5" />,
     href: "/motivation",
-    //   selected: path === "/motivation",
+    recent: [
+      {
+        title: "Motivation",
+        link: "/motivation",
+      },
+      {
+        title: "Journey",
+        link: "/journey",
+      },
+    ],
   },
   {
     title: "Resume",
@@ -231,7 +240,7 @@ export function MobileSidebar() {
         <Link
           key={i}
           href={href}
-          className={`mx-[-0.65rem] flex items-center gap-2 ${
+          className={`text-sm mx-[-0.65rem] flex items-center gap-2 ${
             href === path ? "bg-muted" : "text-muted-foreground"
           } rounded-xl px-3 py-1 hover:text-foreground transition-all`}
         >
@@ -240,18 +249,50 @@ export function MobileSidebar() {
         </Link>
       ))}
 
-      {navBar.map(({ href, icon, title }, i) => (
-        <Link
-          key={i}
-          href={href}
-          className={`mx-[-0.65rem] flex items-center gap-2 ${
-            href === path ? "bg-muted" : "text-muted-foreground"
-          } rounded-xl px-3 py-1 hover:text-foreground transition-all`}
-        >
-          {icon}
-          {title}
-        </Link>
-      ))}
+      <Accordion
+        type="single"
+        collapsible
+        className="w-full text-sm shrink overflow-auto horizontal-scroll h-full overflow-x-hidden"
+      >
+        {navBar.map(({ href, icon, title, recent }, i) =>
+          Boolean(recent?.length) ? (
+            <AccordionItem key={i} value={`item-${i + 1}`}>
+              <AccordionTrigger
+                className={`flex items-center gap-3 ${
+                  href === path && "bg-second/20 text-prime"
+                } rounded-lg px-0.5 py-2 text-muted-foreground`}
+              >
+                <span className="flex gap-2">
+                  {icon}
+                  <span className="">{title}</span>
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="flex flex-col py-1 ml-2.5 border-l-[2px] border-zinc-600">
+                {recent?.map(({ link, title }, i) => (
+                  <Link
+                    key={i}
+                    className="rounded-lg px-2 py-1.5 text-xs text-muted-foreground"
+                    href={link}
+                  >
+                    {title}
+                  </Link>
+                ))}
+              </AccordionContent>
+            </AccordionItem>
+          ) : (
+            <Link
+              key={i}
+              href={href}
+              className={`mx-[-0.65rem] flex items-center gap-2 ${
+                href === path ? "bg-muted" : "text-muted-foreground"
+              } rounded-xl px-3 py-1 hover:text-foreground transition-all`}
+            >
+              {icon}
+              {title}
+            </Link>
+          )
+        )}
+      </Accordion>
     </>
   );
 }
