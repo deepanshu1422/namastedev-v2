@@ -47,15 +47,6 @@ type CourseItem = {
         };
       }[];
     };
-    projectsCollection: {
-      items: {
-        title: string;
-        content: string[];
-        coverImage: {
-          url: string;
-        };
-      }[];
-    };
     courseImage: {
       description: string;
       url: string;

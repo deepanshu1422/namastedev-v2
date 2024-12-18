@@ -32,9 +32,7 @@ export default function Details({
   image,
   courseId,
   slug,
-  // longDescription,
   modulesCollection,
-  // projectsCollection,
   price,
   cover,
   courseOffer,
@@ -58,16 +56,6 @@ export default function Details({
     percentage: number;
     bigAmount: number;
   };
-  // learn: string[];
-  // projectsCollection: {
-  //   items: {
-  //     title: string;
-  //     content: string[];
-  //     coverImage: {
-  //       url: string;
-  //     };
-  //   }[];
-  // };
   modulesCollection: {
     total: number;
     items: {

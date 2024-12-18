@@ -34,15 +34,6 @@ export type Courses = {
           };
         }[];
       };
-      projectsCollection: {
-        items: {
-          title: string;
-          content: string[];
-          coverImage: {
-            url: string;
-          };
-        }[];
-      };
       courseImage: {
         description: string;
         url: string;
@@ -220,15 +211,6 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
         courseCreator{
             name,
         },
-         projectsCollection{
-            items{
-              title,
-              content,
-              coverImage{
-                url
-              }
-            }
-          },
         pricingsCollection{
             items{
             title,
