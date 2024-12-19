@@ -31,7 +31,7 @@ export default function Main({
     name,
     pricingCollection,
     slug,
-    image: { url },
+    image,
     about,
     available,
     colleges,
@@ -160,7 +160,7 @@ export default function Main({
             <div className="flex flex-1 items-center max-md:flex-col gap-2">
               <div className="relative overflow-hidden h-40 w-40 rounded-full border-2 border-black bg-white shadow-[rgb(0,_0,_0)_6px_6px_0px_0px]">
                 <Image
-                  src={url}
+                  src={image?.url || "/profile3.webp"}
                   fill
                   className="object-cover"
                   alt={`30DC ${name} Mentor`}
@@ -174,7 +174,7 @@ export default function Main({
                 <div className="flex max-md:items-center max-md:flex-col gap-2">
                   <span className="flex items-center justify-center w-fit gap-1 text-black/70 text-xs font-bold px-3 p-2 rounded-lg bg-lime-400/30">
                     <School className="h-4 w-4" />
-                    {degrees.map((e) => `${e}, `)}
+                    {degrees?.map((e) => `${e}, `)}
                   </span>
                   <span className="flex items-center justify-center w-fit gap-1 text-black/70 text-xs font-bold px-3 p-2 rounded-lg bg-sky-400/30">
                     <Trophy className="h-4 w-4" />
@@ -331,7 +331,7 @@ export default function Main({
                     <div className="flex max-md:flex-col md:justify-between gap-2 p-3 md:p-6 border-b border-border/40">
                       <span className="flex-1 font-semibold">Countries</span>
                       <div className="flex-[2] flex flex-wrap md:justify-end gap-1.5">
-                        {countries.map((e, i) => (
+                        {countries?.map((e, i) => (
                           <span
                             key={i}
                             className="text-xs p-2 px-3 rounded-md border border-border/40 font-semibold"
@@ -344,7 +344,7 @@ export default function Main({
                     <div className="flex max-md:flex-col md:justify-between gap-2 p-3 md:p-6">
                       <span className="flex-1 font-semibold">Languages</span>
                       <div className="flex-[2] flex flex-wrap md:justify-end gap-1.5">
-                        {languages.map((e, i) => (
+                        {languages?.map((e, i) => (
                           <span
                             key={i}
                             className="text-xs p-2 px-3 rounded-md border border-border/40 font-semibold"
@@ -378,7 +378,7 @@ export default function Main({
           setOpen={setOpen}
           mentorId={mentorId}
           title={name}
-          cover={url}
+          cover={image?.url || "/profile3.webp"}
           amount={pricingCollection.items[0].amount}
           bigAmount={pricingCollection.items[0].bigAmount ?? 0}
           percentage={pricingCollection.items[0].percentage ?? 0}

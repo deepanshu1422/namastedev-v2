@@ -298,7 +298,7 @@ export default function Main({ mentorsCollection }: Mentors) {
                   <div className="flex items-center mb-4">
                     <div className="w-20 h-20 relative rounded-full overflow-hidden mr-4">
                       <Image
-                        src={mentor.image.url}
+                        src={mentor.image?.url || "/profile3.webp"}
                         alt={mentor.name}
                         layout="fill"
                         objectFit="cover"
@@ -310,7 +310,7 @@ export default function Main({ mentorsCollection }: Mentors) {
                         {mentor.name}
                       </h3>
                       <p className="text-green-600 font-medium mb-1">
-                        {mentor.degrees.join(", ")}
+                        {mentor?.degrees?.join(", ")}
                       </p>
                       <p className="text-blue-600 font-medium">
                         {mentor.major}
@@ -323,7 +323,7 @@ export default function Main({ mentorsCollection }: Mentors) {
                       Countries:
                     </h4>
                     <div className="flex flex-wrap gap-2">
-                      {mentor.countries.slice(0, 3).map((country, index) => (
+                      {mentor?.countries?.slice(0, 3).map((country, index) => (
                         <span
                           key={index}
                           className="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded truncate max-w-full"
@@ -339,7 +339,7 @@ export default function Main({ mentorsCollection }: Mentors) {
                       College:
                     </h4>
                     <div className="flex flex-wrap gap-2">
-                      {mentor.colleges.slice(0, 3).map((college, index) => (
+                      {mentor?.colleges?.slice(0, 3).map((college, index) => (
                         <span
                           key={index}
                           className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded truncate max-w-full"
