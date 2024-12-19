@@ -6,6 +6,8 @@ import React from "react";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 
+export const dynamic = "force-static";
+
 export type Project = {
   slug: string;
   title: string;

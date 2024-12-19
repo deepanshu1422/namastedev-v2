@@ -330,7 +330,7 @@ export default async function LessonPage({
               href={
                 +lessonId === allLessons.total
                   ? "/dashboard"
-                  : `/project/${slug}/lesson/${+lessonId + 1}`
+                  : `/projects/${slug}/lesson/${+lessonId + 1}`
               }
             />
           )}
@@ -356,7 +356,7 @@ export default async function LessonPage({
                 href={
                   lessonId === "1"
                     ? "#"
-                    : `/project/${slug}/lesson/${+lessonId - 1}`
+                    : `/projects/${slug}/lesson/${+lessonId - 1}`
                 }
                 className="flex gap-1 text-sm font-bold py-2 px-2 sm:px-1 rounded-lg transition-all text-gray-400 hover:text-gray-300 hover:bg-gray-100/10 max-sm:bg-gray-100/10"
               >
@@ -370,7 +370,7 @@ export default async function LessonPage({
                 href={
                   +lessonId === allLessons.total
                     ? "#"
-                    : `/project/${slug}/lesson/${+lessonId + 1}`
+                    : `/projects/${slug}/lesson/${+lessonId + 1}`
                 }
                 className="flex gap-1 text-sm font-bold py-2 px-2 sm:px-1 rounded-lg transition-all text-gray-400 hover:text-gray-300 hover:bg-gray-100/10 max-sm:bg-gray-100/10"
               >
