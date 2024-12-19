@@ -32,7 +32,7 @@ export default function MentorSlider({ mentorsCollection }: MoreMentors) {
             >
               <div className="aspect-square relative w-28 rounded-md overflow-hidden shrink-0">
                 <Image
-                  src={image.url}
+                  src={image?.url || "/profile3.webp"}
                   alt={`Mentor ${name}`}
                   fill
                   className="object-cover"
@@ -42,7 +42,7 @@ export default function MentorSlider({ mentorsCollection }: MoreMentors) {
                 <div className="flex flex-col">
                   <span className="md:text-lg font-semibold">{name}</span>
                   <span className="text-xs md:text-sm text-black/70 font-semibold">
-                    {workExperience[0]}
+                    {Boolean(workExperience?.length) ? workExperience[0] : "None"}
                   </span>
                 </div>
                 <button className="p-1 text-sm w-fit bg-prime/20 px-2 py-1 rounded-md text-prime self-end">Learn More</button>
