@@ -196,19 +196,19 @@ export default function Main({ mentorsCollection }: Mentors) {
   // };
 
   return (
-    <div className="min-h-screen bg-gray-100 text-black">
+    <div className="min-h-screen bg-bg text-black">
       <main className="max-w-7xl mx-auto py-12 px-6 lg:px-8">
         <div className="text-center my-12">
-          <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          <h2 className="text-4xl font-extrabold text-green-500/90 sm:text-5xl md:text-6xl">
             Get 1:1 Guidance from Students & Alumni in the USA & Canada!
           </h2>
-          <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+          <p className="mt-3 max-w-md mx-auto text-base text-zinc-300 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
             Unlock 1:1 sessions with students and alumni from the USA and
             Canada. Whether it is about university life, assignments, or landing
             that dream internship—connect directly and get personalized help
             from the students.
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row justify-center gap-2">
+          {/* <div className="mt-8 flex flex-col sm:flex-row justify-center gap-2">
             <Link
               href="https://forms.gle/p1VCLvTCoDX9eLMaA"
               target="_blank"
@@ -223,14 +223,14 @@ export default function Main({ mentorsCollection }: Mentors) {
             >
               Join as a Mentor
             </Link>
-          </div>
+          </div> */}
         </div>
 
         <div className="mb-4">
           <input
             type="text"
             placeholder="Search mentors..."
-            className="w-full p-2 border border-gray-300 rounded-md"
+            className="w-full p-2 border rounded-md bg-zinc-900 text-white"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -238,7 +238,7 @@ export default function Main({ mentorsCollection }: Mentors) {
 
         <div className="mb-8 flex flex-wrap gap-2">
           <select
-            className="p-2 border border-gray-300 rounded-md max-phone:max-w-80"
+            className="p-2 border rounded-md max-phone:max-w-80 bg-zinc-900 text-white"
             value={expertiseFilter}
             onChange={(e) => setExpertiseFilter(e.target.value)}
           >
@@ -255,7 +255,7 @@ export default function Main({ mentorsCollection }: Mentors) {
           </select>
 
           <select
-            className="p-2 border border-gray-300 rounded-md"
+            className="p-2 border bg-zinc-900 text-white rounded-md"
             value={majorFilter}
             onChange={(e) => setMajorFilter(e.target.value)}
           >
@@ -270,7 +270,7 @@ export default function Main({ mentorsCollection }: Mentors) {
           </select>
 
           <select
-            className="p-2 border border-gray-300 rounded-md"
+            className="p-2 border bg-zinc-900 text-white rounded-md"
             value={levelFilter}
             onChange={(e) => setLevelFilter(e.target.value)}
           >
@@ -292,11 +292,11 @@ export default function Main({ mentorsCollection }: Mentors) {
             >
               <div
                 key={i}
-                className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full"
+                className="bg-zinc-800 text-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full"
               >
-                <div className="p-6 relative flex-grow">
+                <div className="p-4 relative flex-grow">
                   <div className="flex items-center mb-4">
-                    <div className="w-20 h-20 relative rounded-full overflow-hidden mr-4">
+                    <div className="w-20 h-20 relative rounded-lg overflow-hidden mr-4">
                       <Image
                         src={mentor.image?.url || "/profile3.webp"}
                         alt={mentor.name}
@@ -306,27 +306,27 @@ export default function Main({ mentorsCollection }: Mentors) {
                       />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-1">
+                      <h3 className="text-xl font-bold text-white mb-1">
                         {mentor.name}
                       </h3>
-                      <p className="text-green-600 font-medium mb-1">
+                      <p className="text-sm leading-4 text-emerald-400 font-medium mb-1">
                         {mentor?.degrees?.join(", ")}
                       </p>
-                      <p className="text-blue-600 font-medium">
+                      <p className="text-sm leading-4 text-sky-400 font-medium">
                         {mentor.major}
                       </p>
                     </div>
                   </div>
 
                   <div className="flex justify-between gap-2 mt-4">
-                    <h4 className="font-semibold text-gray-700 mb-1">
+                    <h4 className="font-semibold text-white/90 mb-1">
                       Countries:
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {mentor?.countries?.slice(0, 3).map((country, index) => (
                         <span
                           key={index}
-                          className="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded truncate max-w-full"
+                          className="bg-emerald-900 text-emerald-200 text-sm font-bold px-2.5 py-0.5 rounded truncate max-w-full"
                         >
                           {country}
                         </span>
@@ -335,14 +335,14 @@ export default function Main({ mentorsCollection }: Mentors) {
                   </div>
 
                   <div className="mt-4">
-                    <h4 className="text-sm font-semibold text-gray-700 mb-1">
+                    <h4 className="text-sm font-semibold text-white/90 mb-1">
                       College:
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {mentor?.colleges?.slice(0, 3).map((college, index) => (
                         <span
                           key={index}
-                          className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded truncate max-w-full"
+                          className="bg-sky-900 text-sky-200 text-xs font-medium px-2.5 py-0.5 rounded truncate max-w-full"
                         >
                           {college}
                         </span>
@@ -350,17 +350,17 @@ export default function Main({ mentorsCollection }: Mentors) {
                     </div>
                   </div>
                 </div>
-                <div className="p-4 bg-gray-50">
+                <div className="p-4 bg-zinc-900">
                   <div className="flex justify-center gap-4">
-                    <button className="flex-1 inline-block bg-blue-600 text-white font-medium py-2 px-4 rounded hover:bg-blue-700 transition-colors duration-300 w-1/2">
+                    <button className="flex-1 inline-block bg-sky-600 text-white font-medium py-2 px-4 rounded hover:bg-sky-700 transition-colors duration-300 w-1/2">
                       Learn More
                     </button>
 
                     <button
                       className={`flex-1 w-full inline-block font-medium py-2 px-4 rounded transition-colors duration-300 ${
                         mentor.available
-                          ? "bg-green-600 text-white hover:bg-green-700"
-                          : "bg-gray-400 text-gray-200 cursor-not-allowed"
+                          ? "bg-emerald-600 text-white hover:bg-emerald-700"
+                          : "bg-zinc-600 text-zinc-300 cursor-not-allowed"
                       }`}
                       disabled={!mentor.available}
                     >
