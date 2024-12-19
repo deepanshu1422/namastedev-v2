@@ -3,6 +3,16 @@ import Projects from "./projects";
 
 export const dynamic = "force-static";
 
+export type Project = {
+  title: string;
+  techStack: string[];
+  category: string;
+  slug: string;
+  coverImage: {
+    url: string;
+  };
+};
+
 export const metadata: Metadata = {
   title: "30DC Projects | 30dayscoding",
   description:
@@ -26,6 +36,45 @@ export const metadata: Metadata = {
   },
 };
 
+async function getAllProjects(): Promise<Project[]> {
+  const query = `query{
+  projectsCollection{
+    items{
+      title,
+      techStack,
+      category,
+      slug,
+      coverImage{
+        url
+      }
+    }
+  }
+}`;
+
+  const data = await (
+    await fetch(
+      `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+        },
+        body: JSON.stringify({ query }),
+      }
+    )
+  ).json();
+
+  const {
+    data: {
+      projectsCollection: { items },
+    },
+  } = data;
+
+  return items;
+}
 export default async function Home() {
-  return <Projects />;
+  const projects = await getAllProjects();
+
+  return <Projects projects={projects} />;
 }

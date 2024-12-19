@@ -1,4 +1,5 @@
 import {
+  Blocks,
   BookMarked,
   Check,
   Eye,
@@ -32,6 +33,12 @@ const navBar = [
     title: "Courses",
     icon: <FileText className="h-4 w-4 md:h-5 md:w-5" />,
     href: "/courses",
+    //   selected: path === "/courses",
+  },
+  {
+    title: "Projects",
+    icon: <Blocks className="h-4 w-4 md:h-5 md:w-5" />,
+    href: "/projects",
     //   selected: path === "/courses",
   },
   {
@@ -123,6 +130,18 @@ const navBar = [
         title: "Journey",
         link: "/journey",
       },
+      {
+        title: "DSA sheet",
+        // icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
+        link: "/dsa",
+        //   selected: path === "/dsa",
+      },
+      {
+        title: "DSA visualizer",
+        // icon: <Eye className="h-4 w-4 md:h-5 md:w-5" />,
+        link: "/visualizer",
+        //   selected: path === "/visualizer",
+      },
     ],
   },
   {
@@ -130,18 +149,6 @@ const navBar = [
     icon: <FileText className="h-4 w-4 md:h-5 md:w-5" />,
     href: "/resume",
     //   selected: path === "/resume",
-  },
-  {
-    title: "DSA sheet",
-    icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
-    href: "/dsa",
-    //   selected: path === "/dsa",
-  },
-  {
-    title: "DSA visualizer",
-    icon: <Eye className="h-4 w-4 md:h-5 md:w-5" />,
-    href: "/visualizer",
-    //   selected: path === "/visualizer",
   },
 ];
 

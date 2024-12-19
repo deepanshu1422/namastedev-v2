@@ -19,7 +19,7 @@ import {
 import { addDays, format, subDays } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import revalidatePages, { revalidateMentors } from "../../../../actions/revalidate-pages";
+import revalidatePages, { revalidateMentors, revalidateProjects } from "../../../../actions/revalidate-pages";
 import { getTransactions } from "../../../../actions/admin";
 
 const chartConfig = {
@@ -131,12 +131,12 @@ export function TransactionChart() {
         <h2 className="text-3xl md:text-4xl font-semibold">
           <span className="text-muted-foreground text-2xl">#</span>Overview
         </h2>
-        <div className="flex gap-2">
+        <div className="flex max-sm:flex-col gap-2">
           <Button
             onClick={() => revalidatePages()}
             size={"sm"}
             variant={"destructive"}
-            className="flex-1"
+            className="max-sm:py-2 flex-1"
           >
             Revalidate Pages
           </Button>
@@ -144,9 +144,17 @@ export function TransactionChart() {
             onClick={() => revalidateMentors()}
             size={"sm"}
             variant={"destructive"}
-            className="flex-1 bg-lime-800/80 hover:bg-lime-800"
+            className="max-sm:py-2 flex-1 bg-lime-800/80 hover:bg-lime-800"
           >
             Revalidate Mentors
+          </Button>
+          <Button
+            onClick={() => revalidateProjects()}
+            size={"sm"}
+            variant={"destructive"}
+            className="max-sm:py-2 flex-1 bg-yellow-600/80 hover:bg-yellow-700/80"
+          >
+            Revalidate Projects
           </Button>
         </div>
         {/* <div className="flex gap-2 max-sm:w-full">

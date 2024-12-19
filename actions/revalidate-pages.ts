@@ -12,3 +12,9 @@ export async function revalidateMentors() {
   revalidatePath("/(main)/mentors", "page");
   revalidatePath("/(main)/mentors/[slug]", "page");
 }
+
+export async function revalidateProjects() {
+  revalidatePath("/(guide)/projects", "page");
+  revalidatePath("/(guide)/projects/[slug]", "page");
+  revalidatePath("/(guide)/projects/[slug]/lesson/[lessonId]", "page");
+}

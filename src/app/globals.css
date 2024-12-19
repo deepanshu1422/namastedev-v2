@@ -202,9 +202,9 @@
   @apply text-foreground/90;
 }
 
-.techStack pre {
+/* .techStack pre {
   @apply horizontal-scroll break-all hidden;
-}
+} */
 
 .techStack a {
   @apply font-semibold text-prime underline underline-offset-2;
@@ -226,6 +226,6 @@
   @apply p-0.5 rounded bg-prime/40;
 }
 
-.techStack pre > code {
+.techStack div > code {
   @apply p-0 bg-transparent ;
 }
