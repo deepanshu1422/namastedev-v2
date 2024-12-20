@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Mentors } from "./page";
@@ -199,9 +199,9 @@ export default function Main({ mentorsCollection }: Mentors) {
     <div className="min-h-screen bg-bg text-black">
       <main className="max-w-7xl mx-auto py-12 px-6 lg:px-8">
         <div className="text-center my-12">
-          <h2 className="text-4xl font-extrabold text-green-500/90 sm:text-5xl md:text-6xl">
-            Get 1:1 Guidance from Students & Alumni in the USA & Canada!
-          </h2>
+          <h1 className="text-4xl font-extrabold text-green-500/90 sm:text-5xl md:text-6xl">
+            Get 1:1 Guidance from Top Tech Experts
+          </h1>
           <p className="mt-3 max-w-md mx-auto text-base text-zinc-300 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
             Unlock 1:1 sessions with students and alumni from the USA and
             Canada. Whether it is about university life, assignments, or landing
@@ -317,23 +317,6 @@ export default function Main({ mentorsCollection }: Mentors) {
                       </p>
                     </div>
                   </div>
-
-                  <div className="flex justify-between gap-2 mt-4">
-                    <h4 className="font-semibold text-white/90 mb-1">
-                      Countries:
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {mentor?.countries?.slice(0, 3).map((country, index) => (
-                        <span
-                          key={index}
-                          className="bg-emerald-900 text-emerald-200 text-sm font-bold px-2.5 py-0.5 rounded truncate max-w-full"
-                        >
-                          {country}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
                   <div className="mt-4">
                     <h4 className="text-sm font-semibold text-white/90 mb-1">
                       College:
@@ -348,6 +331,13 @@ export default function Main({ mentorsCollection }: Mentors) {
                         </span>
                       ))}
                     </div>
+                  </div>
+
+                  <div className="flex flex-col gap-1 mt-3">
+                    <h4 className="font-semibold text-white/90 mb-1">About:</h4>
+                    <p className="leading-relaxed text-sm line-clamp-3">
+                      {mentor.about}
+                    </p>
                   </div>
                 </div>
                 <div className="p-4 bg-zinc-900">

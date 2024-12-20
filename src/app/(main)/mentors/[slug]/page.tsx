@@ -140,7 +140,7 @@ export async function generateMetadata(
 
 async function getMentors({ slug }: { slug: string }): Promise<MoreMentors> {
   const query = `query {
-  mentorsCollection(where: {slug_not: "${slug}"}){
+  mentorsCollection(where: {publish: true, slug_not: "${slug}"}){
     items{
       name
       slug
