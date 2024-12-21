@@ -16,7 +16,11 @@ export default function Courses({
 }) {
   const [searchTerm, setSearchTerm] = useState("");
 
-  if (courses.courseCollection?.items.length == 0)
+  const filter = ["ai-complete-course", "data-analytics-course"]
+
+  const filteredCourses = courses?.courseCollection?.items.filter(course => !filter.includes(course?.slug))
+
+  if (filteredCourses.length == 0)
     return (
       <div className="mx-auto max-w-[90rem] w-full text-center py-10 pb-40">
         <span className="font-semibold rounded-full p-2 px-4 border-4 border-double w-fit mx-auto items-center border-prime shadow-2xl text-sm text-white/60 flex gap-1">
@@ -108,53 +112,53 @@ export default function Courses({
           data={[
             {
               title: "All Courses",
-              courses: [...courses.courseCollection.items],
+              courses: [...filteredCourses],
             },
             {
               title: "AI",
-              courses: courses.courseCollection.items.filter((e) =>
+              courses: filteredCourses.filter((e) =>
                 e.tags?.includes("ai")
               ),
             },
             {
               title: "Full Stack Development",
-              courses: courses.courseCollection.items.filter((e) =>
+              courses: filteredCourses.filter((e) =>
                 e.tags?.includes("fullstack")
               ),
             },
             {
               title: "Blockchain",
-              courses: courses.courseCollection.items.filter((e) =>
+              courses: filteredCourses.filter((e) =>
                 e.tags?.includes("blockchain")
               ),
             },
             {
               title: "DSA",
-              courses: courses.courseCollection.items.filter((e) =>
+              courses: filteredCourses.filter((e) =>
                 e.tags?.includes("dsa")
               ),
             },
             {
               title: "Data Analyst",
-              courses: courses.courseCollection.items.filter((e) =>
+              courses: filteredCourses.filter((e) =>
                 e.tags?.includes("data analytics")
               ),
             },
             {
               title: "Language",
-              courses: courses.courseCollection.items.filter((e) =>
+              courses: filteredCourses.filter((e) =>
                 e.tags?.includes("language")
               ),
             },
             {
               title: "Web Dev",
-              courses: courses.courseCollection.items.filter((e) =>
+              courses: filteredCourses.filter((e) =>
                 e.tags?.includes("web development")
               ),
             },
             {
               title: "Projects",
-              courses: courses.courseCollection.items.filter((e) =>
+              courses: filteredCourses.filter((e) =>
                 e.tags?.includes("projects")
               ),
             },

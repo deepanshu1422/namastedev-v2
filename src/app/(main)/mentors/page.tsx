@@ -33,6 +33,7 @@ export type Mentors = {
       name: string;
       about: string;
       degrees: string[];
+      workExperience: string[];
       colleges: string[];
       major: string;
       countries: string[];
@@ -51,6 +52,7 @@ async function getMentors(): Promise<Mentors> {
       slug,
       name,
       about,
+      workExperience,
       image{
         url
       },

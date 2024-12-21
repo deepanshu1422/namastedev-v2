@@ -79,7 +79,7 @@ function Card({
               {category}
             </Badge>
           </span>
-          <Link href={link} className="text-lg lg:text-xl font-semibold">
+          <Link href={link} className="line-clamp-2 text-lg lg:text-xl font-semibold">
             {title}
           </Link>
           <section className="flex flex-wrap text-sm gap-1 py-1 pb-2">

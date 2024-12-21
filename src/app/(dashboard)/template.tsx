@@ -297,11 +297,11 @@ export function UserButton({
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => setNotify(true)}>
             Notifications{" "}
-            {Boolean(notifications.filter((e) => e.new === true).length) && (
-              <Badge className="bg-red-600 text-white ml-auto flex h-5 w-5 text-xs shrink-0 items-center justify-center rounded-full">
-                {notifications.filter((e) => e.new === true).length}
-              </Badge>
-            )}
+            {/* {Boolean(notifications.filter((e) => e.new === true).length) && ( */}
+            <Badge className="bg-red-600 text-white ml-auto flex h-5 w-5 text-xs shrink-0 items-center justify-center rounded-full">
+              {notifications.filter((e) => e.new === true).length}
+            </Badge>
+            {/* )} */}
           </DropdownMenuItem>
           <Link href={"/support"}>
             <DropdownMenuItem>Support</DropdownMenuItem>
@@ -315,11 +315,11 @@ export function UserButton({
       <CertificateDialog open={open} setOpen={setOpen} />
       <LogoutModal logout={logout} setLogout={setLogout} />
       <NotificationSheet notify={notify} setNotify={setNotify} />
-      {Boolean(notifications.filter((e) => e.new === true).length) && (
-        <div className="absolute top-0 right-0 h-4 w-4 grid place-items-center font-semibold bg-red-700 text-xs rounded-full">
-          {notifications.filter((e) => e.new === true).length}
-        </div>
-      )}
+      {/* {Boolean(notifications.filter((e) => e.new === true).length) && ( */}
+      <div className="absolute top-0 right-0 h-4 w-4 grid place-items-center font-semibold bg-red-700 text-xs rounded-full">
+        {notifications.filter((e) => e.new === true).length}
+      </div>
+      {/* )} */}
     </div>
   );
 }
@@ -367,7 +367,7 @@ function NotificationSheet({
 
   return (
     <Sheet open={notify} onOpenChange={setNotify}>
-      <SheetContent>
+      <SheetContent className="overflow-auto horizontal-scroll">
         <SheetHeader>
           <SheetTitle>Notifications</SheetTitle>
           <SheetDescription>
@@ -375,30 +375,45 @@ function NotificationSheet({
             soon.
           </SheetDescription>
         </SheetHeader>
-        <div className="grid gap-4 py-4">
-          <div className="rounded-lg border-prime border bg-second/30 min-h-20 w-full flex flex-col gap-2 p-1">
-            <Badge className="rounded bg-prime/60 hover:bg-prime/80 text-white text-center w-full">
-              🎉 Certificate Ready!
-            </Badge>
-            <p className="text-sm px-2">
-              Your certificate is generated. Download it from here now!
-            </p>
-            <Button
+        <div className="grid gap-2 py-4">
+          {notfications.map((e, i) => (
+            <div
+              key={i}
               onClick={() => {
-                setNotify(false),
-                  setNotifications(
-                    notfications.map((e) =>
-                      e.id === 1 ? { ...e, new: false } : e
-                    )
-                  ),
-                  setOpen(true);
+                setNotify(false);
+                setNotifications(
+                  notfications.map((e) =>
+                    e.id === i + 1 ? { ...e, new: false } : e
+                  )
+                );
+                setOpen(true);
               }}
-              size={"sm"}
-              className="bg-prime/80 hover:bg-prime text-white"
             >
-              Download Certificate
-            </Button>
-          </div>
+              <div className="rounded-lg border-prime border bg-second/30 min-h-20 w-full flex flex-col gap-2 p-1">
+                <Badge className="rounded bg-prime/60 hover:bg-prime/80 text-white text-center w-full">
+                  {e.title}
+                </Badge>
+                <p className="text-sm px-2 line-clamp-2">{e.description}</p>
+                {Boolean(e.href) ? (
+                  <Link href={e.href}>
+                    <Button
+                      size={"sm"}
+                      className="w-full bg-prime/80 hover:bg-prime text-white"
+                    >
+                      {e?.btnText ?? "Visit Now"}
+                    </Button>
+                  </Link>
+                ) : (
+                  <Button
+                    size={"sm"}
+                    className="bg-prime/80 hover:bg-prime text-white"
+                  >
+                    {e?.btnText ?? "Visit Now"}
+                  </Button>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
         {/* <SheetFooter>
           <SheetClose asChild>

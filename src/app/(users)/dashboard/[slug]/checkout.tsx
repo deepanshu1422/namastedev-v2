@@ -2,12 +2,14 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Star, Check, ChevronRight } from "lucide-react";
+import { Star, Check, ChevronRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import React, { Children, Dispatch, SetStateAction } from "react";
 import { FAQ } from "./details";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+
+import { UpsellLinkedIn, UpsellStudyAbroad, UpsellMasterAI} from "@/components/upsell";
 
 import {
   Dialog,
@@ -117,13 +119,19 @@ export default function Checkout() {
           </div>
         </div> */}
 
+        <UpsellLinkedIn />
+        <UpsellStudyAbroad />
+        <UpsellMasterAI />
+
         <Link
           href={"/bundle/complete-package-all-course-bundle"}
           className="bg-gradient-to-b from-head/30 to-second/20 flex flex-col gap-2 rounded-md shadow-lg backdrop-blur-sm shadow-black/40 p-2"
         >
           <span className="font-bold">Get All 30DC Courses</span>
           <Image
-            src={"https://images.ctfassets.net/3pv3o0yr6pgj/70h8KSfhjqdiIecfwf6fJY/c67a069d098b3c87e0774b1db9f6f920/17_courses.jpg"}
+            src={
+              "https://images.ctfassets.net/3pv3o0yr6pgj/70h8KSfhjqdiIecfwf6fJY/c67a069d098b3c87e0774b1db9f6f920/17_courses.jpg"
+            }
             width={500}
             height={500}
             alt="30DC Completion Certificate"

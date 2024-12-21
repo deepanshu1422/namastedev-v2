@@ -18,6 +18,11 @@ import Image from "next/image";
 import Markdown from "react-markdown";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { notFound } from "next/navigation";
+import {
+  UpsellLinkedIn,
+  UpsellMasterAI,
+  UpsellStudyAbroad,
+} from "@/components/upsell";
 
 export const dynamic = "force-static";
 
@@ -247,14 +252,8 @@ export default async function LessonPage({
 
   if (!lessonData) return notFound();
 
-  const {
-    allLessons,
-    author,
-    category,
-    coverImage,
-    lesson,
-    rating,
-  } = lessonData;
+  const { allLessons, author, category, coverImage, lesson, rating } =
+    lessonData;
 
   return (
     <div className="bg-bg max-w-7xl mx-auto px-4 sm:px-8 py-6">
@@ -388,6 +387,8 @@ export default async function LessonPage({
             </p>
           </div>
 
+          <hr className="border border-white/20 " />
+
           {/* {lesson.items[0].content} */}
 
           <Markdown
@@ -409,6 +410,34 @@ export default async function LessonPage({
           >
             {lesson.items[0].content}
           </Markdown>
+
+          <div className="flex items-center gap-3 ml-auto max-sm:mx-auto">
+            <Link
+              href={
+                lessonId === "1"
+                  ? "#"
+                  : `/projects/${slug}/lesson/${+lessonId - 1}`
+              }
+              className="flex gap-1 text-sm font-bold py-2 px-2 sm:px-1 rounded-lg transition-all text-gray-400 hover:text-gray-300 hover:bg-gray-100/10 max-sm:bg-gray-100/10"
+            >
+              <ArrowLeftCircle className="w-5 h-5" />
+              Prev
+            </Link>
+            <span className="sm:hidden">
+              {lessonId} / {allLessons.total}
+            </span>
+            <Link
+              href={
+                +lessonId === allLessons.total
+                  ? "#"
+                  : `/projects/${slug}/lesson/${+lessonId + 1}`
+              }
+              className="flex gap-1 text-sm font-bold py-2 px-2 sm:px-1 rounded-lg transition-all text-gray-400 hover:text-gray-300 hover:bg-gray-100/10 max-sm:bg-gray-100/10"
+            >
+              Next
+              <ArrowRightCircle className="w-5 h-5" />
+            </Link>
+          </div>
 
           {/* <CodeSnippet>
             {
@@ -445,8 +474,8 @@ export default async function LessonPage({
         </div>
 
         {/* Right Column */}
-        <div className="rounded-2xl h-fit flex flex-col gap-3">
-          <div className="border border-white/20 rounded-lg overflow-hidden">
+        <div className="relative rounded-2xl flex flex-col gap-3 bg">
+          <div className="border border-white/20 rounded-lg">
             <div className="flex items-center justify-between p-4 bg-prime/5 px-2 border-b border-white/20">
               <h3 className="font-extrabold text-prime">Project Content</h3>
             </div>
@@ -521,6 +550,13 @@ export default async function LessonPage({
                 <span className="text-white ml-1">{author.reviews}</span>
               </div>
             </div>
+          </div>
+
+          {/* Upselling Section */}
+          <div className="sticky top-3 flex flex-col gap-3">
+            <UpsellLinkedIn />
+            <UpsellStudyAbroad />
+            <UpsellMasterAI />
           </div>
         </div>
       </div>

@@ -338,7 +338,9 @@ export default async function ProjectPage({ params: { slug } }: PageProps) {
                         <h4 className="font-semibold text-black line-clamp-1">
                           {title}
                         </h4>
-                        <span className="text-xs font-bold shrink-0">{duration}</span>
+                        <span className="text-xs font-bold shrink-0">
+                          {duration}
+                        </span>
                       </div>
                       <span className="line-clamp-2 text-sm max-sm:text-xs">
                         {description}
@@ -373,9 +375,11 @@ export default async function ProjectPage({ params: { slug } }: PageProps) {
             <p className="max-sm:text-sm text-black/80 leading-relaxed max-sm:px-4">
               {project.description}
             </p>
-            <Button className="bg-prime/80 hover:bg-prime/90 text-white flex-1 sm:flex-initial max-sm:mx-4 lg:w-fit">
-              Start Building Now
-            </Button>
+            <Link href={`/projects/${slug}/lesson/1`} className="flex-1 w-fit">
+              <Button className="bg-prime/80 hover:bg-prime/90 text-white flex-1 sm:flex-initial max-sm:mx-4 lg:w-fit">
+                Start Building Now
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

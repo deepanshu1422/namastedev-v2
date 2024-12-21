@@ -1,22 +1,55 @@
 import { atom } from "jotai";
 import { atomWithStorage, loadable } from "jotai/utils";
+import {
+  UpsellLinkedIn,
+  UpsellMasterAI,
+  UpsellStudyAbroad,
+} from "@/components/upsell";
 
 export const certificate = atom<boolean>(false);
 export const purchasedCourses = atom<string[]>([]);
 
 export const notification = atomWithStorage<
   {
-    id: number,
-    title: string;
-    description: string;
+    id: number;
+    title: string | null;
+    description: string | null;
+    href: string | null;
+    btnText: string | null;
     new: boolean;
   }[]
->("notifications", [
+>("newNotifications", [
   {
     id: 1,
     title: "🎉 Certificate Ready!",
     description: "Your certificate is generated. Download it from here now!",
+    btnText: "Download Certificate",
+    new: false,
+    href: null
+  },
+  {
+    id: 2,
+    title: "Turn Your LinkedIn Into a Job Magnet in 30 Days",
+    description: "From getting ghosted to landing interviews - even with zero responses",
+    btnText: "Visit Now",
     new: true,
+    href: "https://immigrantjobhelp.com/linkedin?utm_source=https://30dayscoding.com/dashboard&utm_medium=notification&utm_campaign=mobileNavMenu"
+  },
+  {
+    id: 3,
+    title: "Get Job Support for USA/Canada",
+    description: "Get expert guidance and support for your job search journey in North",
+    btnText: "Visit Now",
+    new: true,
+    href: "https://immigrantjobhelp.com/studyabroad?utm_source=https://30dayscoding.com/dashboard&utm_medium=notification&utm_campaign=mobileNavMenu"
+  },
+  {
+    id: 4,
+    title: "AI ISN'T THE FUTURE: It's Happening Now",
+    description: "Master AI for business, tech, coding, content creation, writing, and more. Learn tools, workflows, automations, pipelines, and everything else.",
+    btnText: "Visit Now",
+    new: true,
+    href: "https://www.skillsetmaster.com/ai?utm_source=https://30dayscoding.com/dashboard&utm_medium=notification&utm_campaign=mobileNavMenu"
   },
 ]);
 

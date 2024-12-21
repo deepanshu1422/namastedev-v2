@@ -202,11 +202,10 @@ export default function Main({ mentorsCollection }: Mentors) {
           <h1 className="text-4xl font-extrabold text-green-500/90 sm:text-5xl md:text-6xl">
             Get 1:1 Guidance from Top Tech Experts
           </h1>
-          <p className="mt-3 max-w-md mx-auto text-base text-zinc-300 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-            Unlock 1:1 sessions with students and alumni from the USA and
-            Canada. Whether it is about university life, assignments, or landing
-            that dream internship—connect directly and get personalized help
-            from the students.
+          <p className="mt-3 max-w-md mx-auto text-base text-zinc-300 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl text-pretty">
+            Unlock your tech career potential with 1:1 guidance from top
+            industry experts. Join 30DC Mentors and get personalized coaching to
+            land your dream job. Start today!
           </p>
           {/* <div className="mt-8 flex flex-col sm:flex-row justify-center gap-2">
             <Link
@@ -318,6 +317,21 @@ export default function Main({ mentorsCollection }: Mentors) {
                     </div>
                   </div>
                   <div className="mt-4">
+                    <h4 className="text-sm font-semibold text-white/90 mb-1">
+                      Work Experience:
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {mentor?.workExperience?.slice(0, 3).map((college, index) => (
+                        <span
+                          key={index}
+                          className="bg-emerald-900 text-lime-200 text-xs font-medium px-2.5 py-0.5 rounded truncate max-w-full"
+                        >
+                          {college}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="mt-3">
                     <h4 className="text-sm font-semibold text-white/90 mb-1">
                       College:
                     </h4>
