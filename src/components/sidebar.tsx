@@ -42,6 +42,11 @@ const navBar = [
     //   selected: path === "/courses",
   },
   {
+    title: "Interview",
+    icon: <Check className="h-4 w-4 md:h-5 md:w-5" />,
+    href: "/interview",
+  },
+  {
     title: "Guides",
     icon: <BookMarked className="h-4 w-4 md:h-5 md:w-5" />,
     href: "/guides",
@@ -78,22 +83,6 @@ const navBar = [
       {
         title: "Data Structures and Algorithms",
         link: "/roadmaps/data-structures-algorithm",
-      },
-    ],
-  },
-  {
-    title: "Interview",
-    icon: <Check className="h-4 w-4 md:h-5 md:w-5" />,
-    href: "/interview",
-    //   selected: path === "/interview",
-    recent: [
-      {
-        title: "JavaScript",
-        link: "/interview/javascript",
-      },
-      {
-        title: "React",
-        link: "/interview/react",
       },
     ],
   },

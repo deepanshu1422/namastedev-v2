@@ -36,17 +36,7 @@ import {
 } from "@/components/ui/card";
 
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import React from "react";
 
 import {
   Sheet,
@@ -57,7 +47,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
-import { CertificateDialog } from "../(dashboard)/dashboard/new-user";
 import { useAtom } from "jotai";
 import { certificate, notification } from "@/lib/jotai";
 import Sidebar, { MobileSidebar } from "../../components/sidebar";
