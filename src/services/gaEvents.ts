@@ -141,21 +141,21 @@ function sendEnhancedEvent(eventName: string, eventParams: any) {
     case "view_item":
       gaPayload = {
         ...gaPayload,
-        value: eventParams.value || 0,
-        quantity: eventParams.quantity || 1,
-        item_id: eventParams.itemId || "unknown",
+        value: eventParams?.value || 0,
+        quantity: eventParams?.quantity || 1,
+        item_id: eventParams?.itemId || "unknown",
         event_type: eventName,
-        event_timestamp: eventParams.eventTimestamp || Date.now(),
-        user_id: eventParams.userId || "anonymous",
-        email: eventParams.email || "unknown@example.com",
+        event_timestamp: eventParams?.eventTimestamp || Date.now(),
+        user_id: eventParams?.userId || "anonymous",
+        email: eventParams?.email || "unknown@example.com",
         items: [
           {
-            item_id: eventParams.itemId || "unknown",
-            item_name: eventParams.title || "Untitled",
-            price: eventParams.value || 0,
-            item_category: eventParams.itemType || "Uncategorized",
-            item_variant: eventParams.slug || "N/A",
-            quantity: eventParams.quantity || 1,
+            item_id: eventParams?.itemId || "unknown",
+            item_name: eventParams?.title || "Untitled",
+            price: eventParams?.value || 0,
+            item_category: eventParams?.itemType || "Uncategorized",
+            item_variant: eventParams?.slug || "N/A",
+            quantity: eventParams?.quantity || 1,
           },
         ],
       };
@@ -164,21 +164,21 @@ function sendEnhancedEvent(eventName: string, eventParams: any) {
     case "add_to_cart":
       gaPayload = {
         ...gaPayload,
-        value: eventParams.value || 0,
-        quantity: eventParams.quantity || 1,
-        item_id: eventParams.itemId || "unknown",
+        value: eventParams?.value || 0,
+        quantity: eventParams?.quantity || 1,
+        item_id: eventParams?.itemId || "unknown",
         event_type: eventName,
-        event_timestamp: eventParams.eventTimestamp || Date.now(),
-        user_id: eventParams.userId || "anonymous",
-        email: eventParams.email || "unknown@example.com",
+        event_timestamp: eventParams?.eventTimestamp || Date.now(),
+        user_id: eventParams?.userId || "anonymous",
+        email: eventParams?.email || "unknown@example.com",
         items: [
           {
-            item_id: eventParams.itemId || "unknown",
-            item_name: eventParams.title || "Untitled",
-            price: eventParams.value || 0,
-            item_category: eventParams.itemType || "Uncategorized",
-            item_variant: eventParams.slug || "N/A",
-            quantity: eventParams.quantity || 1,
+            item_id: eventParams?.itemId || "unknown",
+            item_name: eventParams?.title || "Untitled",
+            price: eventParams?.value || 0,
+            item_category: eventParams?.itemType || "Uncategorized",
+            item_variant: eventParams?.slug || "N/A",
+            quantity: eventParams?.quantity || 1,
           },
         ],
       };
@@ -187,28 +187,28 @@ function sendEnhancedEvent(eventName: string, eventParams: any) {
     case "begin_checkout":
       gaPayload = {
         ...gaPayload,
-        value: eventParams.amount || 0,
-        quantity: eventParams.quantity || 1,
-        item_id: eventParams.itemId || "unknown",
+        value: eventParams?.amount || 0,
+        quantity: eventParams?.quantity || 1,
+        item_id: eventParams?.itemId || "unknown",
         event_type: eventName,
-        event_timestamp: eventParams.eventTimestamp || Date.now(),
-        user_id: eventParams.userId || "anonymous",
-        email: eventParams.email || "unknown@example.com",
+        event_timestamp: eventParams?.eventTimestamp || Date.now(),
+        user_id: eventParams?.userId || "anonymous",
+        email: eventParams?.email || "unknown@example.com",
         items: [
           {
-            item_name: eventParams.title || "Untitled",
-            item_id: eventParams.itemId || "unknown",
-            price: eventParams.amount || 0,
-            item_category: eventParams.itemType || "Uncategorized",
-            quantity: eventParams.quantity || 1,
+            item_name: eventParams?.title || "Untitled",
+            item_id: eventParams?.itemId || "unknown",
+            price: eventParams?.amount || 0,
+            item_category: eventParams?.itemType || "Uncategorized",
+            quantity: eventParams?.quantity || 1,
           },
         ],
         user_properties: {
-          user_id: eventParams.userId || "anonymous",
-          name: eventParams.name || "Anonymous",
-          email: eventParams.email || "unknown@example.com",
-          state: eventParams.state || "Unknown",
-          logged_in: eventParams.loggedIn || false,
+          user_id: eventParams?.userId || "anonymous",
+          name: eventParams?.name || "Anonymous",
+          email: eventParams?.email || "unknown@example.com",
+          state: eventParams?.state || "Unknown",
+          logged_in: eventParams?.loggedIn || false,
         },
       };
       break;
@@ -216,30 +216,30 @@ function sendEnhancedEvent(eventName: string, eventParams: any) {
     case "purchase":
       gaPayload = {
         ...gaPayload,
-        value: eventParams.amount || 0,
-        quantity: eventParams.quantity || 1,
-        item_id: eventParams.itemId || "unknown",
+        value: eventParams?.amount || 0,
+        quantity: eventParams?.quantity || 1,
+        item_id: eventParams?.itemId || "unknown",
         event_type: eventName,
-        event_timestamp: eventParams.eventTimestamp || Date.now(),
-        user_id: eventParams.userId || "anonymous",
-        email: eventParams.email || "unknown@example.com",
+        event_timestamp: eventParams?.eventTimestamp || Date.now(),
+        user_id: eventParams?.userId || "anonymous",
+        email: eventParams?.email || "unknown@example.com",
         items: [
           {
-            item_name: eventParams.title || "Untitled",
-            item_id: eventParams.itemId || "unknown",
-            price: eventParams.amount || 0,
-            item_category: eventParams.itemType || "Uncategorized",
-            quantity: eventParams.quantity || 1,
+            item_name: eventParams?.title || "Untitled",
+            item_id: eventParams?.itemId || "unknown",
+            price: eventParams?.amount || 0,
+            item_category: eventParams?.itemType || "Uncategorized",
+            quantity: eventParams?.quantity || 1,
           },
         ],
         user_properties: {
-          user_id: eventParams.userId || "anonymous",
-          name: eventParams.name || "Anonymous",
-          email: eventParams.email || "unknown@example.com",
-          state: eventParams.state || "Unknown",
-          logged_in: eventParams.loggedIn || false,
+          user_id: eventParams?.userId || "anonymous",
+          name: eventParams?.name || "Anonymous",
+          email: eventParams?.email || "unknown@example.com",
+          state: eventParams?.state || "Unknown",
+          logged_in: eventParams?.loggedIn || false,
         },
-        transaction_id: eventParams.transactionId || Date.now().toString(),
+        transaction_id: eventParams?.transactionId || Date.now().toString(),
       };
       break;
 
@@ -254,6 +254,7 @@ function sendEnhancedEvent(eventName: string, eventParams: any) {
       console.warn(`Unhandled event name: ${eventName}`);
       break;
   }
+
 
   console.log(`Sending ${eventName} event`, JSON.stringify(gaPayload, null, 2));
 
