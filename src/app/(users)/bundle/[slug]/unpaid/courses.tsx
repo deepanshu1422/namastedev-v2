@@ -106,7 +106,7 @@ function Course({
   return (
     <Card className="select-none flex flex-col gap-2 bg-second/50 p-1 md:bg-transparent max-md:border-dashed max-md:border-2 max-md:border-prime/40 md:border-none max-md:rounded-none">
       <Link
-        href={`/courses/${slug}`}
+        href={`#`}
         className="flex md:flex-col gap-2 h-fit group"
       >
         <div className="relative bg-card/50 aspect-square md:aspect-[6/4] rounded-md overflow-hidden h-full shrink-0">
