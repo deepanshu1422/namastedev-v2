@@ -127,7 +127,7 @@ export default function Home() {
             className="font-semibold text-prime pl-1"
             href={"https://skillsetmaster.com/"}
           >
-            SkillSetMaster's
+            SkillSetMaster&apos;s
           </Link>{" "}
           services should review the specific policies on that platform.
         </p>
