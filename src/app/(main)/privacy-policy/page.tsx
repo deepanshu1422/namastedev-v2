@@ -99,7 +99,7 @@ export default function Home() {
           services should review the specific policies on that platform.
         </p>
         <h3 className="text-2xl font-bold text-second">
-          POWERED BY NIGHT LIGHT PROJECTS LLP
+          POWERED BY NIGHT LIGHT PROJECTS
         </h3>
       </div>
     </main>
