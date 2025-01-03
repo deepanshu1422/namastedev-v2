@@ -75,6 +75,29 @@ export default function Home() {
           </Link>
           .
         </p>
+        <h2 className="text-2xl font-bold pt-2">Related Platforms</h2>
+        <p>
+          30DaysCoding is associated with{" "}
+          <Link
+            target="_blank"
+            className="font-semibold text-prime pl-1"
+            href={"https://skillsetmaster.com/"}
+          >
+            SkillSetMaster
+          </Link>
+          , a platform dedicated to providing personalized skill development
+          courses for learners of all levels. While these platforms are
+          connected, they operate independently and maintain separate terms and
+          conditions. Users interested in{" "}
+          <Link
+            target="_blank"
+            className="font-semibold text-prime pl-1"
+            href={"https://skillsetmaster.com/"}
+          >
+            SkillSetMaster's
+          </Link>{" "}
+          services should review the specific policies on that platform.
+        </p>
         <h3 className="text-2xl font-bold text-second">
           POWERED BY NIGHT LIGHT PROJECTS LLP
         </h3>
