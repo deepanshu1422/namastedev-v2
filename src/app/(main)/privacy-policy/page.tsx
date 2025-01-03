@@ -69,9 +69,9 @@ export default function Home() {
           please contact us at{" "}
           <Link
             className="font-semibold text-prime"
-            href={"mailto:support@nightlightprojects.freshdesk.com"}
+            href={"mailto:support@projectsnightlight.freshdesk.com"}
           >
-            support@nightlightprojects.freshdesk.com
+            support@projectsnightlight.freshdesk.com
           </Link>
           .
         </p>

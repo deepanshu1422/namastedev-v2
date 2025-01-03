@@ -31,9 +31,9 @@ export default function Home() {
             Email:{" "}
             <Link
               className="font-semibold text-prime"
-              href={"mailto:support@nightlightprojects.freshdesk.com"}
+              href={"mailto:support@projectsnightlight.freshdesk.com"}
             >
-              support@nightlightprojects.freshdesk.com
+              support@projectsnightlight.freshdesk.com
             </Link>
           </li>
           {/* <li>Phone: +1234567890</li> */}
