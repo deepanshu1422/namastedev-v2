@@ -45,6 +45,7 @@ import { beginCheckout, purchase } from "@/services/gaEvents";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { BASE_URL } from "@/util/constants";
+import { PostHog } from "posthog-js/react";
 
 export function PaymentSheet({
   title,
@@ -55,6 +56,7 @@ export function PaymentSheet({
   courseId,
   open,
   curreny,
+  posthog,
   guides,
   setOpen,
   setOpenPay,
@@ -66,6 +68,7 @@ export function PaymentSheet({
   bigAmount: number;
   percentage: number;
   curreny: string;
+  posthog: PostHog;
   courseId: string;
   open: boolean;
   guides: {
@@ -179,6 +182,17 @@ export function PaymentSheet({
       let res;
 
       if (courseId) {
+        posthog.capture("begin_checkout", {
+          title,
+          amount,
+          itemId: courseId,
+          itemType: "course",
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          state: formData.state,
+          loggedIn: status === "authenticated",
+        })
+
         beginCheckout({
           title,
           amount,

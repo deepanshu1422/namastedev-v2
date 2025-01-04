@@ -46,6 +46,7 @@ import { sha256 } from "js-sha256";
 import { beginCheckout, purchase } from "@/services/gaEvents";
 import { BASE_URL } from "@/util/constants";
 import { Checkbox } from "@/components/ui/checkbox";
+import { PostHog } from "posthog-js/react";
 
 export function PaymentSheet({
   cover,
@@ -57,6 +58,7 @@ export function PaymentSheet({
   bundleId,
   slug,
   open,
+  posthog,
   guides,
   setOpen,
   setOpenPay,
@@ -70,6 +72,7 @@ export function PaymentSheet({
   curreny?: string;
   bundleId: string;
   open: boolean;
+  posthog: PostHog,
   guides: {
     guideId: string;
     title: string;
@@ -191,6 +194,18 @@ export function PaymentSheet({
       let res;
 
       if (bundleId) {
+
+        posthog.capture("begin_checkout", {
+          title,
+          amount,
+          itemId: bundleId,
+          itemType: "bundle",
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          state: formData.state,
+          loggedIn: status === "authenticated",
+        })
+
         beginCheckout({
           title,
           amount,

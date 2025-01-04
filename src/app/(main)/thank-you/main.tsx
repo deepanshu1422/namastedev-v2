@@ -9,14 +9,27 @@ import { sha256 } from "js-sha256";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import { usePostHog } from "posthog-js/react";
 import React, { useEffect } from "react";
 
 export default function Main() {
   const query = useSearchParams();
+  const posthog = usePostHog()
   let flag = true;
 
   useEffect(() => {
     if (flag) {
+
+      posthog.capture("purchase", {
+        title: query.get("title"),
+        amount: +query.get("value"),
+        itemId: query.get("id"),
+        itemType: query.get("contentType"),
+        name: query.get("name"),
+        email: query.get("email")?.toLocaleLowerCase(),
+        state: query.get("state"),
+      })
+
       sendEvent("Purchase", {
         value: query.get("value"),
         currency: query.get("currency"),

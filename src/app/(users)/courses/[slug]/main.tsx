@@ -13,6 +13,7 @@ import { UpsellModal } from "./unpaid/upsell";
 
 import { addToCart, viewItem } from "@/services/gaEvents";
 import { usePathname } from "next/navigation";
+import { usePostHog } from "posthog-js/react";
 
 type CourseItem = {
   item: {
@@ -131,6 +132,18 @@ export default function Main({
 
   const pathName = usePathname();
 
+  const posthog = usePostHog();
+
+  posthog?.capture("view_item", {
+    title,
+    itemId: courseId,
+    slug,
+    itemType: "course",
+    value:
+      pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
+      399,
+  });
+
   useEffect(() => {
     // @ts-ignore
     viewItem({
@@ -146,6 +159,17 @@ export default function Main({
 
   function Unpaid() {
     function addToCartEvent() {
+
+      posthog?.capture("add_to_cart", {
+        title,
+        itemId: courseId,
+        itemType: "course",
+        slug,
+        value:
+          pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
+          399,
+      });
+
       addToCart({
         itemId: courseId,
         itemType: "course",
@@ -210,6 +234,7 @@ export default function Main({
         />
         <PaymentSheet
           slug={slug}
+          posthog={posthog}
           open={open}
           setOpen={setOpen}
           courseId={courseId}
@@ -231,16 +256,6 @@ export default function Main({
           curreny={"INR"}
           setOpenPay={setOpenPay}
         />
-        {/* <BundlePaymentSheet
-          open={openBundle}
-          setOpen={setOpenBundle}
-          bundleId={"ALL30DC"}
-          amount={
-            pricingsCollection.items.find((e) => e.countryCode == "IN")
-              ?.amount ?? 0
-          }
-          setOpenPay={setOpenPayBunlde}
-        /> */}
         <YTModal open={openYt} setOpen={setOpenYt} url="nTAHWER3K-0" />
         <Floating
           slug={slug}

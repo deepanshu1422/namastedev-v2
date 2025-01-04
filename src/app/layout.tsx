@@ -19,6 +19,7 @@ import FullStory from "@/util/fullStory";
 import GoogleTagManagerWebContainerHead from "@/components/tracking/GoogletagManagerWebContainerHead";
 import GoogleTagManagerWebContainerBody from "@/components/tracking/GoogleTagManagerWebContainerBody";
 import MixpanelAnalytics from "@/util/mixpanel";
+import { PostHogProvider } from "@/util/posthog";
 
 export default async function RootLayout({
   children,
@@ -48,15 +49,17 @@ export default async function RootLayout({
       <SessionProvider session={session}>
         <QueryProvider>
           <DataProvider>
-            <body
-              className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
-            >
-              <GoogleTagManagerWebContainerBody />
-              <PixelEvents />
-              {children}
-              <Footer />
-              <Toaster richColors />
-            </body>
+            <PostHogProvider>
+              <body
+                className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
+              >
+                <GoogleTagManagerWebContainerBody />
+                <PixelEvents />
+                {children}
+                <Footer />
+                <Toaster richColors />
+              </body>
+            </PostHogProvider>
           </DataProvider>
         </QueryProvider>
       </SessionProvider>

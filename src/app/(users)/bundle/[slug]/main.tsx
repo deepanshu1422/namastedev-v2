@@ -9,6 +9,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 
 import { addToCart, viewItem } from "@/services/gaEvents";
 import { useSession } from "next-auth/react";
+import { usePostHog } from "posthog-js/react";
 
 type BundleItem = {
   item: {
@@ -92,10 +93,22 @@ export default function Main({
   const courseOffer = offers;
 
   const pathName = usePathname();
+  const posthog = usePostHog();
 
   useEffect(() => {
     // @ts-ignore
     // if (!session?.user?.bundleId?.includes(bundleId))
+
+    posthog.capture("view_item", {
+      title: bundleTitle,
+      slug,
+      itemId: bundleId,
+      itemType: "bundle",
+      value:
+        pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
+        999,
+    });
+
     viewItem({
       title: bundleTitle,
       slug,
@@ -195,6 +208,17 @@ export default function Main({
 
   function Unpaid() {
     function addToCartEvent() {
+      
+      posthog.capture("add_to_cart", {
+        title: bundleTitle,
+        slug,
+        itemId: bundleId,
+        itemType: "bundle",
+        value:
+          pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
+          999,
+      });
+
       addToCart({
         itemId: bundleId,
         itemType: "bundle",
@@ -251,6 +275,7 @@ export default function Main({
           open={open}
           guides={guidesCollection.items}
           slug={slug}
+          posthog={posthog}
           setOpen={setOpen}
           bundleId={bundleId}
           title={bundleTitle}

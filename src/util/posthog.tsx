@@ -1,0 +1,46 @@
+// app/providers.tsx
+"use client";
+
+import posthog from "posthog-js";
+import { PostHogProvider as PHProvider, usePostHog } from "posthog-js/react";
+import { usePathname, useSearchParams } from "next/navigation";
+import React, { useEffect, Suspense } from "react";
+
+export function PostHogProvider({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+      capture_pageview: false, // Disable automatic pageview capture, as we capture manually
+      capture_pageleave: true,
+    });
+  }, []);
+
+  return (
+    <PHProvider client={posthog}>
+      <Suspense fallback={null}>
+        <PostHogPageView />
+      </Suspense>
+      {children}
+    </PHProvider>
+  );
+}
+
+function PostHogPageView(): null {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const posthog = usePostHog();
+
+  // Track pageviews
+  useEffect(() => {
+    if (pathname && posthog) {
+      let url = window.origin + pathname;
+      if (searchParams.toString()) {
+        url = url + `?${searchParams.toString()}`;
+      }
+
+      posthog.capture("$pageview", { $current_url: url });
+    }
+  }, [pathname, searchParams, posthog]);
+
+  return null;
+}
