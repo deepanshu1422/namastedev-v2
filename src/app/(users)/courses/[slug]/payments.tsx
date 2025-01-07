@@ -38,7 +38,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { sha256 } from "js-sha256";
 import { sendEvent } from "@/services/fbpixel";
 import { beginCheckout, purchase } from "@/services/gaEvents";
@@ -117,6 +117,13 @@ export function PaymentSheet({
   });
   const [isLoading, setIsLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
+  const utmParams = useSearchParams();
+  const utm_source = utmParams.get("utm_source");
+  const utm_medium = utmParams.get("utm_medium");
+  const utm_campaign = utmParams.get("utm_campaign");
+  const utm_content = utmParams.get("utm_content");
+  const utm_term = utmParams.get("utm_term");
 
   const states = [
     "andaman_and_nicobar_islands",
@@ -243,7 +250,21 @@ export function PaymentSheet({
         handler: async function (response: any) {
           setOpenPay(true);
           await update({ courses: true });
-          router.push(`/thank-you?title=${title}&value=${res.data.amount/100}&currency=INR&contentType=course&name=${formData.name}&email=${formData.email.toLocaleLowerCase()}&state=${formData.state}&phone=+91${formData.phone}&id=${courseId}&slug=${slug}`);
+          router.push(
+            `/thank-you?title=${title}&value=${
+              res.data.amount / 100
+            }&currency=INR&contentType=course&name=${
+              formData.name
+            }&email=${formData.email.toLocaleLowerCase()}&state=${
+              formData.state
+            }&phone=+91${formData.phone}&id=${courseId}&slug=${slug}${
+              utm_source ? `&utm_source=${utm_source}` : ""
+            }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
+              utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
+            }${utm_content ? `&utm_content=${utm_content}` : ""}${
+              utm_term ? `&utm_term=${utm_term}` : ""
+            }`
+          );
 
           // sendEvent("Purchase", {
           //   value: res.data.amount / 100,
@@ -361,7 +382,9 @@ export function PaymentSheet({
       title: "Payments Details",
       body: (
         <div className="grid gap-4 py-4">
-          <p className="border-l-4 pl-3 border-prime max-sm:text-sm sm:leading-6 line-clamp-3">{title}</p>
+          <p className="border-l-4 pl-3 border-prime max-sm:text-sm sm:leading-6 line-clamp-3">
+            {title}
+          </p>
           <div className="grid grid-cols-5 items-center gap-4">
             <Label htmlFor="name" className="text-left">
               Name
@@ -465,7 +488,9 @@ export function PaymentSheet({
             if (formData.email.split("@").length !== 2)
               return validationError({ message: "Invalid Email" });
             if (formData.email !== formData.email2)
-              return validationError({ message: "Confirm Email doesn't Match" });
+              return validationError({
+                message: "Confirm Email doesn't Match",
+              });
             if (formData.phone.length !== 10)
               return validationError({ message: "Invalid Phone Number" });
             if (!states.includes(formData.state))

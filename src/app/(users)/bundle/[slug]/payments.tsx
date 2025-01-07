@@ -40,7 +40,7 @@ import {
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import createBundlePayment from "../../../../../actions/createBundlePayment";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { sendEvent } from "@/services/fbpixel";
 import { sha256 } from "js-sha256";
 import { beginCheckout, purchase } from "@/services/gaEvents";
@@ -72,7 +72,7 @@ export function PaymentSheet({
   curreny?: string;
   bundleId: string;
   open: boolean;
-  posthog: PostHog,
+  posthog: PostHog;
   guides: {
     guideId: string;
     title: string;
@@ -119,6 +119,13 @@ export function PaymentSheet({
   });
   const [isLoading, setIsLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
+  const utmParams = useSearchParams();
+  const utm_source = utmParams.get("utm_source");
+  const utm_medium = utmParams.get("utm_medium");
+  const utm_campaign = utmParams.get("utm_campaign");
+  const utm_content = utmParams.get("utm_content");
+  const utm_term = utmParams.get("utm_term");
 
   const states = [
     "andaman_and_nicobar_islands",
@@ -194,7 +201,6 @@ export function PaymentSheet({
       let res;
 
       if (bundleId) {
-
         posthog.capture("begin_checkout", {
           title,
           amount,
@@ -204,7 +210,7 @@ export function PaymentSheet({
           email: formData.email.toLocaleLowerCase(),
           state: formData.state,
           loggedIn: status === "authenticated",
-        })
+        });
 
         beginCheckout({
           title,
@@ -278,7 +284,21 @@ export function PaymentSheet({
           // });
           setOpenPay(true);
           await update({ courses: true });
-          router.push(`/thank-you?title=${title}&value=${res.data.amount/100}&currency=INR&contentType=bundle&name=${formData.name}&email=${formData.email.toLocaleLowerCase()}&state=${formData.state}&phone=+91${formData.phone}&id=${bundleId}&slug=${slug}`);
+          router.push(
+            `/thank-you?title=${title}&value=${
+              res.data.amount / 100
+            }&currency=INR&contentType=bundle&name=${
+              formData.name
+            }&email=${formData.email.toLocaleLowerCase()}&state=${
+              formData.state
+            }&phone=+91${formData.phone}&id=${bundleId}&slug=${slug}${
+              utm_source ? `&utm_source=${utm_source}` : ""
+            }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
+              utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
+            }${utm_content ? `&utm_content=${utm_content}` : ""}${
+              utm_term ? `&utm_term=${utm_term}` : ""
+            }`
+          );
           // if (session?.user?.email) router.refresh();
         },
         prefill: {
@@ -496,24 +516,26 @@ export function PaymentSheet({
       footer: (
         <div className="w-full mt-auto flex flex-col gap-2">
           <Button
-          onClick={() => {
-            if (formData.name.length < 2)
-              return validationError({ message: "Name too short" });
-            if (formData.email.split("@").length !== 2)
-              return validationError({ message: "Invalid Email" });
-            if (formData.email !== formData.email2)
-              return validationError({ message: "Confirm Email doesn't Match" });
-            if (formData.phone.length !== 10)
-              return validationError({ message: "Invalid Phone Number" });
-            if (!states.includes(formData.state))
-              return validationError({ message: "Select a State" });
-            setFormState(1);
-          }}
-          className="w-full mt-auto hover:bg-prime/80 bg-prime/60 text-white"
-          type="submit"
-        >
-          Proceed
-        </Button>
+            onClick={() => {
+              if (formData.name.length < 2)
+                return validationError({ message: "Name too short" });
+              if (formData.email.split("@").length !== 2)
+                return validationError({ message: "Invalid Email" });
+              if (formData.email !== formData.email2)
+                return validationError({
+                  message: "Confirm Email doesn't Match",
+                });
+              if (formData.phone.length !== 10)
+                return validationError({ message: "Invalid Phone Number" });
+              if (!states.includes(formData.state))
+                return validationError({ message: "Select a State" });
+              setFormState(1);
+            }}
+            className="w-full mt-auto hover:bg-prime/80 bg-prime/60 text-white"
+            type="submit"
+          >
+            Proceed
+          </Button>
         </div>
       ),
     },

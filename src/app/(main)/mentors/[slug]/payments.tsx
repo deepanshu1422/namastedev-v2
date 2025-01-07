@@ -38,7 +38,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { sha256 } from "js-sha256";
 import { sendEvent } from "@/services/fbpixel";
 import { beginCheckout, purchase } from "@/services/gaEvents";
@@ -102,6 +102,13 @@ export function PaymentSheet({
   });
   const [isLoading, setIsLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
+  const utmParams = useSearchParams();
+  const utm_source = utmParams.get("utm_source");
+  const utm_medium = utmParams.get("utm_medium");
+  const utm_campaign = utmParams.get("utm_campaign");
+  const utm_content = utmParams.get("utm_content");
+  const utm_term = utmParams.get("utm_term");
 
   const states = [
     "andaman_and_nicobar_islands",
@@ -222,7 +229,13 @@ export function PaymentSheet({
               formData.name
             }&email=${formData.email.toLocaleLowerCase()}&state=${
               formData.state
-            }&phone=+91${formData.phone}&id=${mentorId}&slug=${slug}`
+            }&phone=+91${formData.phone}&id=${mentorId}&slug=${slug}${
+              utm_source ? `&utm_source=${utm_source}` : ""
+            }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
+              utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
+            }${utm_content ? `&utm_content=${utm_content}` : ""}${
+              utm_term ? `&utm_term=${utm_term}` : ""
+            }`
           );
 
           // sendEvent("Purchase", {
