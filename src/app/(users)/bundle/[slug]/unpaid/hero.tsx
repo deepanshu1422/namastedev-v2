@@ -145,7 +145,7 @@ export default function Hero({
                     <Button
                       onClick={() => {
                         setOpen(true);
-                        sendEvent("Initiate Checkout", {
+                        sendEvent("InitiateCheckout", {
                           content_ids: [bundleId],
                           content_type: "bundle",
                           content_name: title,

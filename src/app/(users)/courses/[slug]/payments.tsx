@@ -743,7 +743,7 @@ export function Floating({
             <Button
               onClick={() => {
                 setOpen(true);
-                sendEvent("Initiate Checkout", {
+                sendEvent("InitiateCheckout", {
                   amount: course.price,
                   content_ids: [courseId],
                   content_type: "mentorship",

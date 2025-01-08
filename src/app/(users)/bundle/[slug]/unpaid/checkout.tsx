@@ -71,7 +71,7 @@ export default function Checkout({
               <Button
                 onClick={() => {
                   setOpen(true);
-                  sendEvent("Initiate Checkout", {
+                  sendEvent("InitiateCheckout", {
                     content_ids: [bundleId],
                     content_type: "bundle",
                     em: sha256(data?.user?.email ?? ""),

@@ -637,7 +637,7 @@ export function Floating({
               disabled={available !== "Available"}
               onClick={() => {
                 setOpen(true);
-                sendEvent("Initiate Checkout", {
+                sendEvent("InitiateCheckout", {
                   amount: course.price,
                   content_ids: [mentorId],
                   content_type: "mentorship",
