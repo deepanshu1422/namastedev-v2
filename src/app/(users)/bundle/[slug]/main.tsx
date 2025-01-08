@@ -10,6 +10,8 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { addToCart, viewItem } from "@/services/gaEvents";
 import { useSession } from "next-auth/react";
 import { usePostHog } from "posthog-js/react";
+import { sendEvent } from "@/services/fbpixel";
+import { BASE_URL } from "@/util/constants";
 
 type BundleItem = {
   item: {
@@ -94,30 +96,43 @@ export default function Main({
 
   const pathName = usePathname();
   const posthog = usePostHog();
+  let flag = true
 
   useEffect(() => {
     // @ts-ignore
     // if (!session?.user?.bundleId?.includes(bundleId))
 
-    posthog.capture("view_item", {
-      title: bundleTitle,
-      slug,
-      itemId: bundleId,
-      itemType: "bundle",
-      value:
-        pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
-        999,
-    });
-
-    viewItem({
-      title: bundleTitle,
-      slug,
-      itemId: bundleId,
-      itemType: "bundle",
-      value:
-        pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
-        999,
-    });
+    if (flag){
+      posthog.capture("view_item", {
+        title: bundleTitle,
+        slug,
+        itemId: bundleId,
+        itemType: "bundle",
+        value:
+          pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
+          999,
+      });
+  
+      viewItem({
+        title: bundleTitle,
+        slug,
+        itemId: bundleId,
+        itemType: "bundle",
+        value:
+          pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
+          999,
+      });
+  
+      sendEvent("ViewContent", {
+        amount: pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
+        399,
+        content_ids: [bundleId],
+        content_type: "course",
+        event_source_url: `${BASE_URL}/courses/${slug}`,
+      });
+      flag = false
+    }
+    
   }, [pathName]);
 
   // function Paid() {

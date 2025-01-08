@@ -14,6 +14,8 @@ import { UpsellModal } from "./unpaid/upsell";
 import { addToCart, viewItem } from "@/services/gaEvents";
 import { usePathname } from "next/navigation";
 import { usePostHog } from "posthog-js/react";
+import { sendEvent } from "@/services/fbpixel";
+import { BASE_URL } from "@/util/constants";
 
 type CourseItem = {
   item: {
@@ -133,18 +135,19 @@ export default function Main({
   const pathName = usePathname();
 
   const posthog = usePostHog();
-
-  posthog?.capture("view_item", {
-    title,
-    itemId: courseId,
-    slug,
-    itemType: "course",
-    value:
-      pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
-      399,
-  });
-
+  let flag = true
+  
   useEffect(() => {
+    if (flag){
+    posthog?.capture("view_item", {
+      title,
+      itemId: courseId,
+      slug,
+      itemType: "course",
+      value:
+        pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
+        399,
+    });
     // @ts-ignore
     viewItem({
       title,
@@ -155,19 +158,28 @@ export default function Main({
         pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
         399,
     });
+
+    sendEvent("ViewContent", {
+      amount: pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
+      399,
+      content_ids: [courseId],
+      content_type: "course",
+      event_source_url: `${BASE_URL}/courses/${slug}`,
+    });
+    flag = false
+  }
   }, [pathName]);
 
   function Unpaid() {
     function addToCartEvent() {
-
       posthog?.capture("add_to_cart", {
         title,
         itemId: courseId,
         itemType: "course",
         slug,
         value:
-          pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
-          399,
+          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            ?.amount ?? 399,
       });
 
       addToCart({
