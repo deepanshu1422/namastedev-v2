@@ -87,7 +87,7 @@ export default function PixelEvents() {
       }
 
       const ip = await (
-        await fetch("https://api.ipify.org/?format=json")
+        await fetch("https://api6.ipify.org/?format=json")
       ).json();
       // @ts-ignore
       fbq(
@@ -98,8 +98,8 @@ export default function PixelEvents() {
             .split("; ")
             .find((row) => row.startsWith("_fbp="))
             ?.split("=")[1],
-          fbclick_id: getCookie("fbclick_id"),
-          login_id: getCookie("login_id"),
+          fbc: getCookie("fbclick_id"),
+          fb_login_id: getCookie("login_id"),
           external_id: [localStorage.getItem("hashed-ext-ID")],
           client_user_agent: navigator.userAgent,
           client_ip_address: ip.ip,
@@ -131,7 +131,7 @@ export const sendEvent = async (
     setCookie("login_id", `ev_${Math.floor(Math.random() * 1000000000)}`, 7); // Expires in 7 days
   }
 
-  const ip = await (await fetch("https://api.ipify.org/?format=json")).json();
+  const ip = await (await fetch("https://api6.ipify.org/?format=json")).json();
 
   //@ts-ignore
   window.fbq(
@@ -146,8 +146,8 @@ export const sendEvent = async (
         .split("; ")
         .find((row) => row.startsWith("_fbp="))
         ?.split("=")[1],
-      fbclick_id: getCookie("fbclick_id"),
-      login_id: getCookie("login_id"),
+      fbc: getCookie("fbclick_id"),
+      fb_login_id: getCookie("login_id"),
       external_id: [localStorage.getItem("hashed-ext-ID")],
     },
     eventId
@@ -171,8 +171,8 @@ export const sendEvent = async (
         .split("; ")
         .find((row) => row.startsWith("_fbp="))
         ?.split("=")[1],
-      fbclick_id: getCookie("fbclick_id"),
-      login_id: getCookie("login_id"),
+      fbc: getCookie("fbclick_id"),
+      fb_login_id: getCookie("login_id"),
       external_id: [localStorage.getItem("hashed-ext-ID")],
     },
   });
