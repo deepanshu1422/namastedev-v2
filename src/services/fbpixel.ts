@@ -13,7 +13,21 @@ function setCookie(name: string, value: string, days: number) {
   )}; expires=${expires}; path=/`;
 }
 
-function getCookie(name) {
+function formatFbc(fbclid: string) {
+  return `fb.1.${Date.now()}.${fbclid}`;
+}
+
+function getCookie(name: string) {
+  if (name === 'fbclick_id' && typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    const fbclid = params.get('fbclid');
+    if (fbclid) {
+      const fbc = formatFbc(fbclid);
+      setCookie('fbclick_id', fbc, 7);
+      return fbc;
+    }
+  }
+
   return document.cookie.split("; ").reduce((acc, cookie) => {
     const [key, value] = cookie.split("=");
     acc[key] = decodeURIComponent(value);
@@ -71,24 +85,24 @@ export default function PixelEvents() {
     (async () => {
       // console.log(document.cookie);
 
-      if (!getCookie("fbclick_id")) {
-        setCookie(
-          "fbclick_id",
-          `ev_${Math.floor(Math.random() * 1000000000)}`,
-          7
-        ); // Expires in 7 days
-      }
-      if (!getCookie("login_id")) {
-        setCookie(
-          "login_id",
-          `ev_${Math.floor(Math.random() * 1000000000)}`,
-          7
-        ); // Expires in 7 days
+      if (!getCookie("fbclick_id") && typeof window !== 'undefined') {
+        const params = new URLSearchParams(window.location.search);
+        const fbclid = params.get('fbclid');
+        if (fbclid) {
+          setCookie("fbclick_id", formatFbc(fbclid), 7);
+        } else {
+          setCookie(
+            "fbclick_id",
+            formatFbc(`organic_${Math.floor(Math.random() * 1000000000)}`),
+            7
+          );
+        }
       }
 
       const ip = await (
         await fetch("https://api64.ipify.org/?format=json")
       ).json();
+      
       // @ts-ignore
       fbq(
         "track",
@@ -99,7 +113,9 @@ export default function PixelEvents() {
             .find((row) => row.startsWith("_fbp="))
             ?.split("=")[1],
           fbc: getCookie("fbclick_id"),
-          fb_login_id: getCookie("login_id"),
+          ...(getCookie("fb_login_id") && {
+            fb_login_id: parseInt(getCookie("fb_login_id"))
+          }),
           external_id: [localStorage.getItem("hashed-ext-ID")],
           client_user_agent: navigator.userAgent,
           client_ip_address: ip.ip,
@@ -125,13 +141,21 @@ export const sendEvent = async (
     localStorage.setItem("hashed-ext-ID", sha256(crypto.randomUUID()));
 
   if (!getCookie("fbclick_id")) {
-    setCookie("fbclick_id", `ev_${Math.floor(Math.random() * 1000000000)}`, 7); // Expires in 7 days
-  }
-  if (!getCookie("login_id")) {
-    setCookie("login_id", `ev_${Math.floor(Math.random() * 1000000000)}`, 7); // Expires in 7 days
+    const fbclid = typeof window !== 'undefined' ? 
+      new URLSearchParams(window.location.search).get('fbclid') : null;
+    
+    if (fbclid) {
+      setCookie("fbclick_id", formatFbc(fbclid), 7);
+    } else {
+      setCookie(
+        "fbclick_id",
+        formatFbc(`organic_${Math.floor(Math.random() * 1000000000)}`),
+        7
+      );
+    }
   }
 
-  const ip = await (await fetch("https://api6.ipify.org/?format=json")).json();
+  const ip = await (await fetch("https://api64.ipify.org/?format=json")).json();
 
   //@ts-ignore
   window.fbq(
@@ -147,7 +171,9 @@ export const sendEvent = async (
         .find((row) => row.startsWith("_fbp="))
         ?.split("=")[1],
       fbc: getCookie("fbclick_id"),
-      fb_login_id: getCookie("login_id"),
+      ...(getCookie("fb_login_id") && {
+        fb_login_id: parseInt(getCookie("fb_login_id"))
+      }),
       external_id: [localStorage.getItem("hashed-ext-ID")],
     },
     eventId
@@ -172,7 +198,9 @@ export const sendEvent = async (
         .find((row) => row.startsWith("_fbp="))
         ?.split("=")[1],
       fbc: getCookie("fbclick_id"),
-      fb_login_id: getCookie("login_id"),
+      ...(getCookie("fb_login_id") && {
+        fb_login_id: parseInt(getCookie("fb_login_id"))
+      }),
       external_id: [localStorage.getItem("hashed-ext-ID")],
     },
   });
