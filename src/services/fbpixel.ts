@@ -87,7 +87,7 @@ export default function PixelEvents() {
       }
 
       const ip = await (
-        await fetch("https://api6.ipify.org/?format=json")
+        await fetch("https://api64.ipify.org/?format=json")
       ).json();
       // @ts-ignore
       fbq(
