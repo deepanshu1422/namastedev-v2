@@ -114,7 +114,7 @@ export default function Checkout({
                   // @ts-ignore
                   ph: sha256(data?.user?.phone ?? ""),
                   fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
-                  event_source_url: `${BASE_URL}/courses/${slug}`
+                  event_source_url: window.location.href
                 });
                 addToCart();
               }}

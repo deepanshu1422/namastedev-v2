@@ -164,7 +164,7 @@ export default function Main({
       399,
       content_ids: [courseId],
       content_type: "course",
-      event_source_url: `${BASE_URL}/courses/${slug}`,
+      event_source_url: window.location.href,
     });
     flag = false
   }

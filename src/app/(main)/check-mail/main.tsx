@@ -28,7 +28,7 @@ export default function Main() {
         fn: sha256(query.get("name").split(" ")[0]),
         ln: sha256(query.get("name").split(" ")[1] ?? ""),
         num_items: 1,
-        event_source_url: `${BASE_URL}/courses/${query.get("slug")}`,
+        event_source_url: window.location.href,
       });
       purchase({
         title: query.get("title"),
