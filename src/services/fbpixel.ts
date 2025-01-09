@@ -108,6 +108,7 @@ export default function PixelEvents() {
         "track",
         "PageView",
         {
+          action_source: "website",
           fbp: document.cookie
             .split("; ")
             .find((row) => row.startsWith("_fbp="))
@@ -130,7 +131,7 @@ export default function PixelEvents() {
       await sendSeverEvent({
         event_id: eventId,
         event_name: "PageView",
-        event_source_url: "",
+        event_source_url: window.location.href ?? "",
         custom_data: {},
         user_data: {
           fbp: document.cookie
