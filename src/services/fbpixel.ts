@@ -122,6 +122,26 @@ export default function PixelEvents() {
         },
         eventId
       );
+
+      await sendSeverEvent({
+        event_id: eventId,
+        event_name: "PageView",
+        event_source_url: "",
+        custom_data:{},
+        user_data: {
+          fbp: document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("_fbp="))
+            ?.split("=")[1],
+          fbc: getCookie("fbclick_id"),
+          ...(getCookie("fb_login_id") && {
+            fb_login_id: parseInt(getCookie("fb_login_id"))
+          }),
+          external_id: [localStorage.getItem("hashed-ext-ID")],
+          client_user_agent: navigator.userAgent,
+          client_ip_address: ip.ip,
+        },
+      });
     })();
   }, [pathName]);
 
