@@ -18,12 +18,12 @@ function formatFbc(fbclid: string) {
 }
 
 function getCookie(name: string) {
-  if (name === 'fbclick_id' && typeof window !== 'undefined') {
+  if (name === "fbclick_id" && typeof window !== "undefined") {
     const params = new URLSearchParams(window.location.search);
-    const fbclid = params.get('fbclid');
+    const fbclid = params.get("fbclid");
     if (fbclid) {
       const fbc = formatFbc(fbclid);
-      setCookie('fbclick_id', fbc, 7);
+      setCookie("fbclick_id", fbc, 7);
       return fbc;
     }
   }
@@ -85,9 +85,9 @@ export default function PixelEvents() {
     (async () => {
       // console.log(document.cookie);
 
-      if (!getCookie("fbclick_id") && typeof window !== 'undefined') {
+      if (!getCookie("fbclick_id") && typeof window !== "undefined") {
         const params = new URLSearchParams(window.location.search);
-        const fbclid = params.get('fbclid');
+        const fbclid = params.get("fbclid");
         if (fbclid) {
           setCookie("fbclick_id", formatFbc(fbclid), 7);
         } else {
@@ -102,7 +102,7 @@ export default function PixelEvents() {
       const ip = await (
         await fetch("https://api64.ipify.org/?format=json")
       ).json();
-      
+
       // @ts-ignore
       fbq(
         "track",
@@ -112,10 +112,14 @@ export default function PixelEvents() {
             .split("; ")
             .find((row) => row.startsWith("_fbp="))
             ?.split("=")[1],
-          fbc: getCookie("fbclick_id"),
-          ...(getCookie("fb_login_id") && {
-            fb_login_id: parseInt(getCookie("fb_login_id"))
-          }),
+          fbc: document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("_fbc="))
+            ?.split("=")[1],
+          fb_login_id: document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("_fb_login_id="))
+            ?.split("=")[1],
           external_id: [localStorage.getItem("hashed-ext-ID")],
           client_user_agent: navigator.userAgent,
           client_ip_address: ip.ip,
@@ -127,16 +131,20 @@ export default function PixelEvents() {
         event_id: eventId,
         event_name: "PageView",
         event_source_url: "",
-        custom_data:{},
+        custom_data: {},
         user_data: {
           fbp: document.cookie
             .split("; ")
             .find((row) => row.startsWith("_fbp="))
             ?.split("=")[1],
-          fbc: getCookie("fbclick_id"),
-          ...(getCookie("fb_login_id") && {
-            fb_login_id: parseInt(getCookie("fb_login_id"))
-          }),
+          fbc: document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("_fbc="))
+            ?.split("=")[1],
+          fb_login_id: document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("_fb_login_id="))
+            ?.split("=")[1],
           external_id: [localStorage.getItem("hashed-ext-ID")],
           client_user_agent: navigator.userAgent,
           client_ip_address: ip.ip,
@@ -161,9 +169,11 @@ export const sendEvent = async (
     localStorage.setItem("hashed-ext-ID", sha256(crypto.randomUUID()));
 
   if (!getCookie("fbclick_id")) {
-    const fbclid = typeof window !== 'undefined' ? 
-      new URLSearchParams(window.location.search).get('fbclid') : null;
-    
+    const fbclid =
+      typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search).get("fbclid")
+        : null;
+
     if (fbclid) {
       setCookie("fbclick_id", formatFbc(fbclid), 7);
     } else {
@@ -190,10 +200,14 @@ export const sendEvent = async (
         .split("; ")
         .find((row) => row.startsWith("_fbp="))
         ?.split("=")[1],
-      fbc: getCookie("fbclick_id"),
-      ...(getCookie("fb_login_id") && {
-        fb_login_id: parseInt(getCookie("fb_login_id"))
-      }),
+      fbc: document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("_fbc="))
+        ?.split("=")[1],
+      fb_login_id: document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("_fb_login_id="))
+        ?.split("=")[1],
       external_id: [localStorage.getItem("hashed-ext-ID")],
     },
     eventId
@@ -217,10 +231,14 @@ export const sendEvent = async (
         .split("; ")
         .find((row) => row.startsWith("_fbp="))
         ?.split("=")[1],
-      fbc: getCookie("fbclick_id"),
-      ...(getCookie("fb_login_id") && {
-        fb_login_id: parseInt(getCookie("fb_login_id"))
-      }),
+      fbc: document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("_fbc="))
+        ?.split("=")[1],
+      fb_login_id: document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("_fb_login_id="))
+        ?.split("=")[1],
       external_id: [localStorage.getItem("hashed-ext-ID")],
     },
   });
