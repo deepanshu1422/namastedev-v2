@@ -6,6 +6,8 @@ export default async function revalidatePages() {
   revalidatePath("/(users)/bundle/[slug]", "page");
   revalidatePath("/(main)/courses", "page");
   revalidatePath("/(guide)/guides", "page");
+  revalidatePath("/checkout/courses/[itemId]", "page");
+  revalidatePath("/payments/courses/[itemId]", "page");
 }
 
 export async function revalidateMentors() {
