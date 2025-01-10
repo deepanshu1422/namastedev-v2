@@ -110,11 +110,11 @@ export default function Main({
           <div className="hidden lg:flex flex-col sticky top-8 h-fit">
             <div className="flex flex-col gap-4 p-7 h-full">
               <Link
-                href={"/courses"}
-                className="flex gap-2 text-xs text-white/70 hover:text-white/90"
+                href={"/dashboard"}
+                className="flex items-center gap-2 text-xs text-white/70 hover:text-white/90"
               >
                 <ChevronLeft className="h-3 w-3" />
-                Other Courses
+                Dashboard
               </Link>
 
               <div className="flex flex-col">
