@@ -1,0 +1,539 @@
+"use client";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Image from "next/image";
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePostHog } from "posthog-js/react";
+import { Courses } from "./page";
+import { useAtom } from "jotai";
+import { userInfo } from "@/lib/jotai";
+import { toast } from "sonner";
+import { beginCheckout, viewItem } from "@/services/gaEvents";
+import { sendEvent } from "@/services/fbpixel";
+import { ArrowLeft, Mail, Phone } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
+import createPayments from "actions/createPayments";
+
+export default function Main({ courseCollection: { items } }: Courses) {
+  const item = items[0];
+  const { amount, bigAmount, percentage } = item.pricingsCollection.items.find(
+    (e) => e.countryCode === "IN"
+  );
+  const currency = "₹";
+  const guides = item.guidesCollection.items;
+
+  const [info, setInfo] = useAtom(userInfo);
+
+  const router = useRouter();
+  const pathName = usePathname();
+  const posthog = usePostHog();
+  let flag = true;
+
+  const utmParams = useSearchParams();
+  const utm_source = utmParams.get("utm_source");
+  const utm_medium = utmParams.get("utm_medium");
+  const utm_campaign = utmParams.get("utm_campaign");
+  const utm_content = utmParams.get("utm_content");
+  const utm_term = utmParams.get("utm_term");
+
+  const [formData, setFormData] = useState<{
+    name: string;
+    email: string;
+    email2: string;
+    phone: string;
+    state: string;
+    guides: string[];
+  }>({
+    name: info.name,
+    email: info.email,
+    email2: info.email,
+    phone: info.phone,
+    state: info.state,
+    guides: [],
+  });
+
+  const states = [
+    "andaman_and_nicobar_islands",
+    "andhra_pradesh",
+    "arunachal_pradesh",
+    "assam",
+    "bihar",
+    "chandigarh",
+    "chhattisgarh",
+    "daman_and_diu",
+    "delhi",
+    "goa",
+    "gujarat",
+    "haryana",
+    "himachal_pradesh",
+    "jharkhand",
+    "jammu_and_kashmir",
+    "karnataka",
+    "kerala",
+    "ladakh",
+    "lakshadweep",
+    "madhya_pradesh",
+    "maharashtra",
+    "manipur",
+    "meghalaya",
+    "mizoram",
+    "nagaland",
+    "odisha",
+    "puducherry",
+    "punjab",
+    "rajasthan",
+    "sikkim",
+    "tamil_nadu",
+    "telangana",
+    "tripura",
+    "uttar_pradesh",
+    "uttarakhand",
+    "west_bengal",
+  ];
+
+  useEffect(() => {
+    setFormData({
+      name: info?.name,
+      email: info?.email,
+      email2: info?.email,
+      phone: info?.phone,
+      state: info?.state,
+      guides: [],
+    });
+  }, [info]);
+
+  useEffect(() => {
+    // @ts-ignore
+    // if (!session?.user?.bundleId?.includes(bundleId))
+
+    if (!info.email) {
+      console.log(info);
+      router.replace(
+        `/payments/courses/${item.courseId}?${
+          utm_source ? `&utm_source=${utm_source}` : ""
+        }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
+          utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
+        }${utm_content ? `&utm_content=${utm_content}` : ""}${
+          utm_term ? `&utm_term=${utm_term}` : ""
+        }`
+      );
+    }
+
+    if (flag) {
+      posthog.capture("add_payment_info", {
+        title: item.title,
+        slug: item.slug,
+        itemId: item.courseId,
+        itemType: "course",
+        value:
+          item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            ?.amount ?? 499,
+      });
+
+      viewItem({
+        title: item.title,
+        slug: item.slug,
+        itemId: item.courseId,
+        itemType: "course",
+        value:
+          item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            ?.amount ?? 499,
+      });
+
+      sendEvent("ViewContent", {
+        value:
+          item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            ?.amount ?? 399,
+        content_ids: [item.courseId],
+        content_type: "course",
+        event_source_url: window.location.href,
+      });
+
+      flag = false;
+    }
+  }, [pathName]);
+
+  function validationError({ message }: { message: string }) {
+    toast.error("Error Occured", {
+      description: message,
+      position: "bottom-center",
+    });
+  }
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [openPay, setOpenPay] = useState(false);
+
+  const makePayment = async () => {
+    if (formData.name.length < 2)
+      return validationError({ message: "Name too short" });
+    if (formData.email.split("@").length !== 2)
+      return validationError({ message: "Invalid Email" });
+    if (formData.email !== formData.email2)
+      return validationError({ message: "Confirm Email doesn't Match" });
+    if (formData.phone.length !== 10)
+      return validationError({ message: "Invalid Phone Number" });
+    if (!states.includes(formData.state))
+      return validationError({ message: "Select a State" });
+
+    try {
+      setIsLoading(true);
+
+      let res;
+
+      if (item.courseId) {
+        posthog.capture("begin_checkout", {
+          title: item.title,
+          amount,
+          itemId: item.courseId,
+          itemType: "course",
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          state: formData.state,
+        });
+
+        beginCheckout({
+          title: item.title,
+          amount,
+          itemId: item.courseId,
+          itemType: "course",
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          state: formData.state,
+          loggedIn: status === "authenticated",
+        });
+
+        res = await createPayments({
+          courseId: item.courseId,
+          email: formData.email.toLocaleLowerCase(),
+          contact: formData.phone,
+          name: formData.name,
+          state: formData.state,
+          couponCode: "",
+          guides: formData.guides,
+          domain: item.domain
+        });
+      } else {
+        return;
+      }
+      // make an endpoint to get this key
+      const key = process.env.NEXT_PUBLIC_RAZORPAY_CLIENT;
+
+      if (res.error) {
+        toast("Error Occured", {
+          position: "bottom-center",
+          description: res.message ?? JSON.stringify(res.error),
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      console.log(res.data);
+
+      const options = {
+        key: key,
+        description: formData.state,
+        image: "/icon.png",
+        name: "30DaysCoding",
+        currency: res.data.currency,
+        amount: res.data.amount / 100,
+        order_id: res.data.orderId,
+        handler: async function (response: any) {
+          setOpenPay(true);
+          router.push(
+            `/thank-you?title=${item.title}&value=${
+              res.data.amount / 100
+            }&currency=INR&contentType=course&name=${
+              formData.name
+            }&email=${formData.email.toLocaleLowerCase()}&state=${
+              formData.state
+            }&phone=+91${formData.phone}&id=${item.courseId}&slug=${item.slug}${
+              utm_source ? `&utm_source=${utm_source}` : ""
+            }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
+              utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
+            }${utm_content ? `&utm_content=${utm_content}` : ""}${
+              utm_term ? `&utm_term=${utm_term}` : ""
+            }`
+          );
+        },
+        // callback_url: ,
+        redirect: true,
+        prefill: {
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          contact: formData.phone,
+        },
+        notes: {
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          contact: formData.phone,
+          address: formData.state,
+          courseId: item.courseId,
+        },
+        theme: {
+          color: "#134543",
+        },
+      };
+
+      // @ts-ignore
+      const paymentObject = new window.Razorpay(options);
+
+      paymentObject.on("payment.captured", function (response: any) {
+        alert("Payment successful");
+        setIsLoading(false);
+      });
+
+      paymentObject.open();
+
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex w-full min-h-screen bg-gray-200">
+      <div className="flex flex-col container mx-auto px-1 sm:px-4 w-full sm:max-w-sm">
+        {/* Header with logo and title */}
+        <div className="bg-bg text-white p-6">
+          <button onClick={() => {
+            router.back()
+          }} className="mb-2 flex items-center gap-2">
+            <ArrowLeft className="w-5 h-5" />
+            <img src="/logo.png" alt="Logo" className="h-8" />
+            <span className="text-sm font-bold text-white/70">
+              30DaysCoding
+            </span>
+          </button>
+          <div className="mt-7 text-sm font-semibold text-white/70">Order Summary</div>
+          <div className="flex items-baseline gap-2 mb-5">
+            <span className="text-2xl font-bold">
+              ₹
+              {
+                item.pricingsCollection.items.find(
+                  (e) => e.countryCode === "IN"
+                ).amount
+              }
+            </span>
+            <span className="line-through text-gray-400">
+              ₹
+              {
+                item.pricingsCollection.items.find(
+                  (e) => e.countryCode === "IN"
+                ).bigAmount
+              }
+            </span>
+            {/* <span className="text-sm text-white/70 font-semibold">(Tax Included)</span> */}
+          </div>
+
+          <section className="flex flex-col gap-1 max-sm:text-sm">
+            <div className="flex justify-between">
+              <span>Course Price</span>
+              <span className="font-extrabold">
+                {currency} {bigAmount}
+              </span>
+            </div>
+            <div className="text-prime font-semibold flex justify-between">
+              <span>Discount @ {percentage}%</span>
+              <span className="font-extrabold">
+                -{currency} {bigAmount - amount}
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span>Total Amount</span>
+              <span className="font-extrabold">
+                {currency} {amount}
+              </span>
+            </div>
+          </section>
+        </div>
+
+        {/* Form section */}
+        <div className="bg-white p-6 py-2 pb-2 border border-border/20 h-full">
+          {Boolean(guides.length) && (
+            <>
+              <div className="flex flex-col gap-3 justify-between text-black">
+                <span className="font-semibold">
+                  🔔Don&apos;t missout on our guides
+                </span>
+                <div className="flex flex-col gap-3">
+                  {guides.map(({ description, guideId, pricing, title }, i) => {
+                    return (
+                      <div
+                        onClick={() => {
+                          if (!formData.guides?.includes(guideId))
+                            setFormData({
+                              ...formData,
+                              guides: [...formData.guides, guideId],
+                            });
+                          else {
+                            setFormData({
+                              ...formData,
+                              guides: formData.guides.filter(
+                                (e) => e !== guideId
+                              ),
+                            });
+                          }
+                        }}
+                        key={i}
+                        className={`flex flex-col gap-2 rounded-md border-2 ${
+                          formData.guides?.includes(guideId) &&
+                          "bg-prime text-white border-second"
+                        } transition-all duration-100 border-prime`}
+                      >
+                        <div className="flex flex-col gap-1 p-4">
+                          <h3 className="font-semibold">{title}</h3>
+                          <div className="flex items-baseline gap-2 my-1">
+                            <span className="text-xl font-bold">
+                              ₹{pricing.amount}
+                            </span>
+                            <span className="line-through">
+                              ₹{pricing.bigAmount}
+                            </span>
+                            {/* <span className="text-sm text-white/70 font-semibold">(Tax Included)</span> */}
+                          </div>
+                          <p className="text-xs text-wrap">{description}</p>
+                        </div>
+                        <div className="flex items-center gap-3 p-2 text-white bg-second">
+                          <Checkbox
+                            checked={formData.guides?.includes(guideId)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? setFormData({
+                                    ...formData,
+                                    guides: [...formData.guides, guideId],
+                                  })
+                                : setFormData({
+                                    ...formData,
+                                    guides: formData.guides.filter(
+                                      (e) => e !== guideId
+                                    ),
+                                  });
+                            }}
+                          />
+                          <div className="flex gap-1 items-center">
+                            Add to Cart
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          )}
+
+          <div className="rounded-lg border border-border/40 p-4 mt-4 text-black">
+            <div className="space-y-3 text-sm">
+              <div className="flex items-center gap-2">
+                <Mail className="w-5 h-5" />
+                <p className="text-gray-900 font-semibold">{info.email}</p>
+              </div>
+              <p className="text-gray-700 text-wrap text-xs">
+                You will get access to the content for these programs on this
+                email
+              </p>
+
+              <div className="flex items-center gap-2">
+                <Phone className="w-5 h-5" />
+                <p className="text-gray-900 font-semibold">{info.phone}</p>
+              </div>
+              <p className="text-gray-700 text-wrap text-xs">
+                We&apos;ll send you WhatsApp updates on this number
+              </p>
+
+              <button
+                onClick={() => {
+                  router.back();
+                }}
+                className="text-prime hover:underline text-sm font-bold mt-2"
+              >
+                Change
+              </button>
+            </div>
+          </div>
+
+          <button
+            disabled={isLoading}
+            onClick={makePayment}
+            className="disabled:animate-pulse w-full hover:bg-second/80 bg-second text-white my-5 py-3 rounded-lg font-medium"
+            type="submit"
+          >
+            Buy @ {currency}{" "}
+            {amount +
+              formData.guides.reduce(
+                (sum, cur) =>
+                  // @ts-ignore
+                  sum + guides.find((e) => e.guideId === cur)?.pricing.amount,
+                0
+              )}
+          </button>
+        </div>
+      </div>
+      <PaymentModal
+        payModal={openPay}
+        setOpenPay={setOpenPay}
+        slug={item.slug}
+      />
+    </div>
+  );
+}
+
+export function PaymentModal({
+  slug,
+  payModal,
+  setOpenPay,
+}: {
+  slug: string;
+  payModal: boolean;
+  setOpenPay: Dispatch<SetStateAction<boolean>>;
+}) {
+  const router = useRouter();
+
+  return (
+    <Dialog open={payModal} onOpenChange={setOpenPay}>
+      <DialogContent className="sm:max-w-[425px]">
+        <Card className="bg-background border-none flex flex-col">
+          <CardHeader className="p-1 items-center">
+            <span className="flex items-center gap-2">
+              <Image src={"/icon.png"} alt="30dc icon" height={40} width={40} />
+              <CardTitle>30DC</CardTitle>
+            </span>
+            <CardDescription className="text-center">
+              Thank you for trusting in us. Team 30DC
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-3 pb-0 mx-auto w-full flex flex-col items-center gap-2">
+            <Button
+              disabled={true}
+              onClick={() => {
+                router.push(`/dashboard/${slug}`);
+                setOpenPay(false);
+              }}
+              className="w-full bg-prime/70 text-white hover:bg-prime"
+            >
+              Watch Now
+            </Button>
+            <Button
+              variant={"link"}
+              disabled={true}
+              className="text-white/40 hover:text-white"
+            >
+              Visit Dashboard
+            </Button>
+          </CardContent>
+        </Card>
+      </DialogContent>
+    </Dialog>
+  );
+}

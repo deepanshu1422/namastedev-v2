@@ -25,36 +25,45 @@ export const notification = atomWithStorage<
     description: "Your certificate is generated. Download it from here now!",
     btnText: "Download Certificate",
     new: false,
-    href: null
+    href: null,
   },
   {
     id: 2,
     title: "Turn Your LinkedIn Into a Job Magnet in 30 Days",
-    description: "From getting ghosted to landing interviews - even with zero responses",
+    description:
+      "From getting ghosted to landing interviews - even with zero responses",
     btnText: "Visit Now",
     new: true,
-    href: "https://immigrantjobhelp.com/linkedin?utm_source=https://30dayscoding.com/dashboard&utm_medium=notification&utm_campaign=mobileNavMenu"
+    href: "https://immigrantjobhelp.com/linkedin?utm_source=https://30dayscoding.com/dashboard&utm_medium=notification&utm_campaign=mobileNavMenu",
   },
   {
     id: 3,
     title: "Get Job Support for USA/Canada",
-    description: "Get expert guidance and support for your job search journey in North",
+    description:
+      "Get expert guidance and support for your job search journey in North",
     btnText: "Visit Now",
     new: true,
-    href: "https://immigrantjobhelp.com/studyabroad?utm_source=https://30dayscoding.com/dashboard&utm_medium=notification&utm_campaign=mobileNavMenu"
+    href: "https://immigrantjobhelp.com/studyabroad?utm_source=https://30dayscoding.com/dashboard&utm_medium=notification&utm_campaign=mobileNavMenu",
   },
   {
     id: 4,
     title: "AI ISN'T THE FUTURE: It's Happening Now",
-    description: "Master AI for business, tech, coding, content creation, writing, and more. Learn tools, workflows, automations, pipelines, and everything else.",
+    description:
+      "Master AI for business, tech, coding, content creation, writing, and more. Learn tools, workflows, automations, pipelines, and everything else.",
     btnText: "Visit Now",
     new: true,
-    href: "https://www.skillsetmaster.com/ai?utm_source=https://30dayscoding.com/dashboard&utm_medium=notification&utm_campaign=mobileNavMenu"
+    href: "https://www.skillsetmaster.com/ai?utm_source=https://30dayscoding.com/dashboard&utm_medium=notification&utm_campaign=mobileNavMenu",
   },
 ]);
 
 export const geo = atomWithStorage<string>("geo", "");
 export const country = atomWithStorage<string>("country", "");
+export const userInfo = atomWithStorage<{
+  name: string;
+  email: string;
+  phone: string;
+  state: string;
+}>("userInfo", { name: "", email: "", phone: "", state: "" });
 
 export const solved = atomWithStorage<string[]>("dsa-solved", []);
 

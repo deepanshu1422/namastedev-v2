@@ -12,11 +12,13 @@ export default async function createPayments({
   state,
   couponCode,
   guides,
+  domain
 }: {
   courseId: string;
   email: string;
   name: string;
   contact: string;
+  domain?: string
   state: string;
   couponCode?: string | null;
   guides: string[];
@@ -62,6 +64,7 @@ export default async function createPayments({
       gateway: "razorpay",
       countryCode: "IN",
       guides,
+      domain: domain ?? process.env.DOMAIN,
     };
   } else {
     body = {
@@ -73,6 +76,7 @@ export default async function createPayments({
       country: "India",
       gateway: "razorpay",
       countryCode: "IN",
+      domain: domain ?? process.env.DOMAIN,
       guides,
     };
   }
