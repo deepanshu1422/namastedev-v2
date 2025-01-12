@@ -21,6 +21,7 @@ import { userInfo } from "@/lib/jotai";
 import { toast } from "sonner";
 import { viewItem } from "@/services/gaEvents";
 import { sendEvent } from "@/services/fbpixel";
+import { sha256 } from "js-sha256";
 
 export default function Main({ courseCollection: { items } }: Courses) {
   const item = items[0];
@@ -31,9 +32,10 @@ export default function Main({ courseCollection: { items } }: Courses) {
   let flag = true;
 
   let domainInfo = {
-    name: item.domain === "skillsetmaster.com" ? "SkillSetMaster" : "30DaysCoding",
-    baseColor: item.domain === "skillsetmaster.com" ? "#DBB62E" : ""
-  }
+    name:
+      item.domain === "skillsetmaster.com" ? "SkillSetMaster" : "30DaysCoding",
+    baseColor: item.domain === "skillsetmaster.com" ? "#DBB62E" : "",
+  };
 
   const utmParams = useSearchParams();
   const utm_source = utmParams.get("utm_source");
@@ -178,6 +180,18 @@ export default function Main({ courseCollection: { items } }: Courses) {
       state: formData.state,
     });
 
+    sendEvent("AddToCart", {
+      value: item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+      ?.amount ?? 399,
+      content_ids: [item.courseId],
+      content_type: "course",
+      em: sha256(formData.email ?? ""),
+      // @ts-ignore
+      ph: sha256(formData.phone ?? ""),
+      fn: sha256(formData.name?.split(" ")[0] ?? ""),
+      event_source_url: window.location.href,
+    });
+
     router.push(
       `/checkout/courses/${item.courseId}?${
         utm_source ? `&utm_source=${utm_source}` : ""
@@ -193,11 +207,23 @@ export default function Main({ courseCollection: { items } }: Courses) {
     <div className="flex w-full min-h-screen bg-gray-200">
       <div className="flex flex-col container mx-auto px-1 sm:px-4 w-full sm:max-w-sm">
         {/* Header with logo and title */}
-        <div className={`${item.domain === "skillsetmaster.com" ? `bg-[#DBB62E] text-black` : "bg-bg text-white "} p-6`}>
+        <div
+          className={`${
+            item.domain === "skillsetmaster.com"
+              ? `bg-[#DBB62E] text-black`
+              : "bg-bg text-white "
+          } p-6`}
+        >
           <div className="mb-2 flex items-center gap-2">
             {/* Add your logo here */}
             <img src="/logo.png" alt="Logo" className="h-8" />
-            <span className={`text-sm font-bold ${item.domain === "skillsetmaster.com" ? "text-gray-800" :`text-white/70`}`}>
+            <span
+              className={`text-sm font-bold ${
+                item.domain === "skillsetmaster.com"
+                  ? "text-gray-800"
+                  : `text-white/70`
+              }`}
+            >
               {domainInfo.name}
             </span>
           </div>
@@ -212,7 +238,13 @@ export default function Main({ courseCollection: { items } }: Courses) {
                 ).amount
               }
             </span>
-            <span className={`line-through ${item.domain === "skillsetmaster.com" ? "text-gray-800" :`text-white/70`}`}>
+            <span
+              className={`line-through ${
+                item.domain === "skillsetmaster.com"
+                  ? "text-gray-800"
+                  : `text-white/70`
+              }`}
+            >
               ₹
               {
                 item.pricingsCollection.items.find(
@@ -327,22 +359,47 @@ export default function Main({ courseCollection: { items } }: Courses) {
             <div className="flex flex-col gap-2 mt-auto">
               <button
                 type="submit"
-                className={`w-full py-3 rounded-lg font-medium ${item.domain === "skillsetmaster.com" ? `bg-[#edc842] text-black` : "bg-second text-white "}`}
+                className={`w-full py-3 rounded-lg font-medium ${
+                  item.domain === "skillsetmaster.com"
+                    ? `bg-[#edc842] text-black`
+                    : "bg-second text-white "
+                }`}
               >
                 Next
               </button>
 
               <p className="text-xs text-gray-500 font-semibold text-center text-wrap">
                 By proceeding you agree to our{" "}
-                <a href="/terms-condition" className={`${item.domain === "skillsetmaster.com" ? `text-[#DBB62E]` : "text-prime"}`}>
+                <a
+                  href="/terms-condition"
+                  className={`${
+                    item.domain === "skillsetmaster.com"
+                      ? `text-[#DBB62E]`
+                      : "text-prime"
+                  }`}
+                >
                   Terms
                 </a>
                 ,{" "}
-                <a href="/privacy-policy" className={`${item.domain === "skillsetmaster.com" ? `text-[#DBB62E]` : "text-prime"}`}>
+                <a
+                  href="/privacy-policy"
+                  className={`${
+                    item.domain === "skillsetmaster.com"
+                      ? `text-[#DBB62E]`
+                      : "text-prime"
+                  }`}
+                >
                   Privacy
                 </a>{" "}
                 &{" "}
-                <a href="/refund-policy" className={`${item.domain === "skillsetmaster.com" ? `text-[#DBB62E]` : "text-prime"}`}>
+                <a
+                  href="/refund-policy"
+                  className={`${
+                    item.domain === "skillsetmaster.com"
+                      ? `text-[#DBB62E]`
+                      : "text-prime"
+                  }`}
+                >
                   Refund Policy
                 </a>
               </p>
