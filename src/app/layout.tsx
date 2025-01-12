@@ -1,6 +1,5 @@
 import "./globals.css";
 import { bric, localJakarta } from "@/lib/font";
-import Footer from "@/components/new-cohort/footer";
 import Clarity from "@/util/clarity";
 import Pixel from "@/util/pixel";
 import { Toaster } from "@/components/ui/sonner";
@@ -56,7 +55,6 @@ export default async function RootLayout({
                 <GoogleTagManagerWebContainerBody />
                 <PixelEvents />
                 {children}
-                <Footer />
                 <Toaster richColors />
               </body>
             </PostHogProvider>

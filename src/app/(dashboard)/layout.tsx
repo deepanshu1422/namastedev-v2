@@ -1,6 +1,7 @@
 import { SessionProvider } from "next-auth/react";
 import Menu from "./menu";
 import { auth } from "@/auth";
+import Footer from "@/components/new-cohort/footer";
 
 export default async function GuideLayout({
   children,
@@ -12,6 +13,7 @@ export default async function GuideLayout({
   return (
     <SessionProvider session={session}>
       <div>{children}</div>
+      <Footer />
     </SessionProvider>
   );
 }
