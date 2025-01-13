@@ -136,7 +136,7 @@ export async function generateMetadata(
     const data = await fetchedData.json();
 
     item = data.data.bundleCollection.items.find(
-      (e: Record<string, string>) => e.slug === params.slug
+      (e: Record<string, string>) => e.slug === "complete-package-all-course-bundle"
     );
   } catch (err) {
     item = {

@@ -1,4 +1,4 @@
-import { Bricolage_Grotesque } from 'next/font/google'
+import { Bricolage_Grotesque, Outfit } from 'next/font/google'
 import localFont from 'next/font/local'
 
 // export const inter = Inter({
@@ -33,6 +33,13 @@ export const bric = Bricolage_Grotesque({
     variable: "--font-bric",
     display: "swap",
 });
+
+export const outfit = Outfit({
+    display: "swap",
+    subsets: ["latin"],
+    variable: "--font-outfit",
+    weight: ["100", "300", "400", "500", "600", "700"],
+  });
 
 export const localJakarta = localFont({
     src: [

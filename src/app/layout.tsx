@@ -1,5 +1,5 @@
 import "./globals.css";
-import { bric, localJakarta } from "@/lib/font";
+import { outfit, bric, localJakarta } from "@/lib/font";
 import Clarity from "@/util/clarity";
 import Pixel from "@/util/pixel";
 import { Toaster } from "@/components/ui/sonner";
@@ -50,7 +50,7 @@ export default async function RootLayout({
           <DataProvider>
             <PostHogProvider>
               <body
-                className={`${localJakarta.variable} ${bric.variable} font-jakarta bg-bg`}
+                className={`${outfit.className} ${bric.variable} bg-bg`}
               >
                 <GoogleTagManagerWebContainerBody />
                 <PixelEvents />
