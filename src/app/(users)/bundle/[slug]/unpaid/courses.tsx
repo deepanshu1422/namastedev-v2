@@ -39,8 +39,8 @@ export default function Courses({
         </p>
       </div>
 
-      <div className="md:hidden flex flex-col gap-2">
-        {coursesCollection.items.map(
+      <div className="flex flex-col gap-2">
+        {coursesCollection.items.filter(e => !["data-analytics-course", "ai-complete-course"].includes(e.slug)).map(
           ({ courseImage, slug, title, rating }, index) => (
             <Course
               key={index}
@@ -53,7 +53,7 @@ export default function Courses({
         )}
       </div>
 
-      <Carousel
+      {/* <Carousel
         className="max-md:hidden"
         opts={{
           loop: true,
@@ -85,7 +85,7 @@ export default function Courses({
         </CarouselContent>
         <CarouselPrevious className="-left-4 h-12 w-12" />
         <CarouselNext className="-right-4 h-12 w-12" />
-      </Carousel>
+      </Carousel> */}
     </section>
   );
 }
@@ -104,12 +104,12 @@ function Course({
   };
 }) {
   return (
-    <Card className="select-none flex flex-col gap-2 bg-second/50 p-1 md:bg-transparent max-md:border-dashed max-md:border-2 max-md:border-prime/40 md:border-none max-md:rounded-none">
+    <Card className="select-none flex gap-2 bg-second/50 p-1 border-dashed border-2 border-prime/40 rounded-none">
       <Link
-        href={`#`}
-        className="flex md:flex-col gap-2 h-fit group"
+        href={'#'}
+        className="flex gap-2 h-fit group"
       >
-        <div className="relative bg-card/50 aspect-square md:aspect-[6/4] rounded-md overflow-hidden h-full shrink-0">
+        <div className="relative bg-card/50 aspect-square rounded-md overflow-hidden min-h-11 h-full shrink-0">
           <Image
             src={courseImage?.url ?? ""}
             alt={title}
@@ -117,8 +117,8 @@ function Course({
             className="object-cover group-hover:scale-105 transition-all"
           />
         </div>
-        <CardFooter className="max-md:text-sm px-0 py-0 flex-col gap-0.5 items-start text-muted-foreground">
-          <h3 className="text-foreground font-semibold line-clamp-1 md:line-clamp-2">
+        <CardFooter className="text-sm px-0 py-0 flex-col gap-0.5 items-start text-muted-foreground">
+          <h3 className="text-foreground font-semibold line-clamp-1">
             {title}
           </h3>
           {/* <span className="taxt-xs tab:text-sm">Aryan Singh</span> */}
