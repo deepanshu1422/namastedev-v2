@@ -114,7 +114,7 @@ export default function Main({
           pricingsCollection?.items?.find((e) => e.countryCode == "IN")
             ?.amount ?? 399,
         content_ids: [bundleId],
-        content_type: "course",
+        content_type: "bundle",
         event_source_url: window.location.href,
       });
       flag = false;

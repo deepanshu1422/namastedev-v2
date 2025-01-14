@@ -236,7 +236,7 @@ async function getCourses({ slug }: { slug: string }): Promise<Courses> {
 }
 
 export default async function Home() {
-  const data = await getCourses({ slug: "complete-package-all-course-bundle" });
+  const data = await getCourses({ slug: "new-coding-bundle" });
 
   if (!data.bundleCollection.items.length) return notFound();
 
