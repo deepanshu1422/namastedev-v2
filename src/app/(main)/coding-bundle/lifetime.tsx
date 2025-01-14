@@ -40,7 +40,7 @@ export default function Lifetime() {
             <hr className="hidden sm:block h-1 w-20 lg:w-60 rounded bg-gradient-to-r from-transparent to-prime opacity-80" />
             <h1 className="font-jakarta text-5xl sm:text-7xl font-black text-center text-white leading-tight tracking-tight">
               Master{" "}
-              <span className="text-prime font-black">17 High-Paying</span>{" "}
+              <span className="text-prime font-black">High-Paying</span>{" "}
               Tech Skills
             </h1>
             <hr className="hidden sm:block h-1 w-20 lg:w-60 rounded bg-gradient-to-l from-transparent to-prime opacity-80" />
@@ -48,15 +48,15 @@ export default function Lifetime() {
 
           <h2 className="font-jakarta text-2xl font-bold text-center text-gray-300 max-w-4xl mx-auto mb-6 leading-snug">
             From{" "}
-            <span className="text-prime font-extrabold">DSA to AI</span> -
+            <span className="text-prime font-extrabold">DSA to Advanced Web development</span> -
             Everything You Need for a High-Impact Tech Career
           </h2>
 
           <p className="mt-6 text-xl text-center text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Get lifetime access to{" "}
+            Get LIFETIME access to{" "}
             <span className="font-extrabold text-prime">500+ videos</span>{" "}
             and{" "}
-            <span className="font-extrabold text-prime">50+ projects</span>{" "}
+            <span className="font-extrabold text-prime">25+ projects</span>{" "}
             that make you job-ready
           </p>
         </div>
