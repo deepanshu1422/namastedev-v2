@@ -76,42 +76,34 @@ export default function Feature({
         <div className="space-y-4 my-3 px-2 sm:px-4  text-white">
           {[
             {
-              text: "Complete Excel & Data Analysis Mastery",
+              text: "Complete Coding Foundation to Mastery",
               subtext: " ($199 value)",
             },
             {
-              text: "Interactive SQL Learning Platform Access",
-              subtext: " ($149 value)",
-            },
-            {
-              text: "Tableau & Power BI Dashboard Creation",
+              text: "Modern React & Next.js Development",
               subtext: " ($299 value)",
             },
             {
-              text: "Real-world Analytics Projects Portfolio",
-              subtext: " ($199 value)",
-            },
-            {
-              text: "AI-Powered Analytics Tools Training",
+              text: "Backend Development with Node.js",
               subtext: " ($249 value)",
             },
             {
-              text: "Data Visualization Best Practices Guide",
-              subtext: " ($149 value)",
+              text: "Advanced Tech Stack (Python, SQL, Web3)",
+              subtext: " ($299 value)",
             },
             {
-              text: "Statistical Analysis Fundamentals",
-              subtext: " ($199 value)",
-            },
-            {
-              text: "Industry-specific Case Studies",
+              text: "Data Structures & Algorithms",
               subtext: " ($249 value)",
             },
             {
-              text: "Interview Preparation for Analysts",
+              text: "Real-world Project Portfolio",
+              subtext: " ($249 value)",
+            },
+            {
+              text: "Technical Interview Preparation",
               subtext: " ($199 value)",
             },
-            { text: "Career Transition Roadmap", subtext: " ($149 value)" },
+            { text: "Career Transition Guide", subtext: " ($149 value)" },
             { text: "And much more...", subtext: " ($499 value)" },
           ].map((item, index) => (
             <div key={index} className="flex items-start gap-2">
@@ -133,7 +125,7 @@ export default function Feature({
         </div>
 
         <button onClick={() => setOpen(true)} className="w-full max-w-2xl mx-auto block text-center py-3 sm:py-4 px-4 sm:px-6 rounded-full bg-gradient-to-r from-head to-prime text-white text-lg sm:text-xl font-bold hover:opacity-90 transition-opacity">
-          Secure Your Seat Rs. 999{" "}
+          Secure Your Seat Rs. 1499{" "}
           <span className="line-through">Rs. 8999</span>
         </button>
 
@@ -146,7 +138,7 @@ export default function Feature({
 
           <div className="space-y-3 max-w-xl mx-auto text-white">
             {[
-              "Private Community Access",
+              "Premium notes access",
               "Interview Prep Guides",
               "Resume Templates",
               "Job Application Scripts",
@@ -169,46 +161,13 @@ export default function Feature({
             <div className="space-y-2 text-white">
               <p>No monthly fees</p>
               <p>No renewals</p>
-              <p>No upsells</p>
+              <p>No hidden charges</p>
             </div>
             <p className="text-lg text-white mt-4">
               Just pure value that gets you hired.
             </p>
           </div>
         </div>
-
-        {/* <div className="text-center my-4">
-            <p className="text-xl font-bold text-white">OR</p>
-          </div>
-  
-          <div className="space-y-4 my-6 px-2 sm:px-4">
-            {[
-              { text: "Access to Private Jobs Group Community" },
-              { text: "25+ Interview Preparation Guides" },
-              { text: "15+ Technical & Non-Technical Courses" },
-              { text: "Complete Job Hunt Strategy Course" },
-              { text: "LinkedIn & Networking Mastery Program" },
-              { text: "Expert-led Webinars and Sessions" }
-            ].map((item, index) => (
-              <div key={index} className="flex items-start gap-2">
-                <Check className="h-5 w-5 text-green-500 mt-1 flex-shrink-0" />
-                <div className="text-white">{item.text}</div>
-              </div>
-            ))}
-          </div>
-  
-          <a href="https://community.dailyaiskills.com/web/checkout/672b5adf6227eb4f31aebf2c" target="_blank"
-            className="w-full max-w-2xl mx-auto block text-center py-3 sm:py-4 px-4 sm:px-6 rounded-full bg-gradient-to-r from-green-700 to-green-500 text-white text-lg sm:text-xl font-bold hover:opacity-90 transition-opacity"
-          >
-            Join Our Private Jobs Group
-            <div className="text-sm font-normal mt-1">
-              Includes this complete DSA revision course
-            </div>
-          </a>
-  
-          <p className="text-center text-lg mt-4 text-green-500">
-            ✨ One-time payment for lifetime ✨
-          </p> */}
       </div>
 
       {/*  */}

@@ -5,63 +5,63 @@ export default function Roadmap() {
 
     const analyticsSteps = [
         {
-            title: "Module 1: Excel & Data Foundations 📊",
-            description: "Master essential Excel skills for data analysis.",
-            icon: "📈",
+            title: "Learning 1: Web Development Foundations 🌐",
+            description: "Master the core building blocks of web development",
+            icon: "💻",
             details: [
-                "Advanced Excel functions and formulas",
-                "Pivot Tables and Data Modeling",
-                "Statistical Analysis and Visualization",
-                "Data Cleaning and Validation Techniques",
-                "Business Intelligence Reporting",
+                "HTML5 structure and semantic elements",
+                "CSS3 styling, flexbox, and grid layouts",
+                "JavaScript fundamentals and ES6+ features",
+                "Responsive design and mobile-first approach",
+                "DOM manipulation and web APIs",
             ],
         },
         {
-            title: "Module 2: SQL Mastery 🗄️",
-            description: "Comprehensive coverage of SQL for data analysis.",
-            icon: "💾",
+            title: "Learning 2: Frontend Development 🎨",
+            description: "Build modern, interactive user interfaces",
+            icon: "⚛️",
             details: [
-                "Database fundamentals and SQL queries",
-                "Data manipulation and aggregation",
-                "Window functions and advanced SQL concepts",
-                "Database Design and Optimization",
-                "ETL Processes and Data Integration",
+                "React.js fundamentals and hooks",
+                "Next.js 14 and server components",
+                "State management (Context, Redux)",
+                "API integration and data fetching",
+                "Modern UI libraries and styling solutions",
             ],
         },
         {
-            title: "Module 3: Visualization Tools 📊",
-            description: "Master key visualization platforms.",
-            icon: "📈",
+            title: "Learning 3: Backend Development 🔧",
+            description: "Create robust server-side applications",
+            icon: "🖥️",
             details: [
-                "Tableau dashboard creation and storytelling",
-                "Power BI report development",
-                "Interactive visualization best practices",
-                "Advanced Chart Types and Custom Visualizations",
-                "Data-Driven Decision Making Frameworks",
+                "Node.js and Express.js fundamentals",
+                "MongoDB and Mongoose ODM",
+                "RESTful API design principles",
+                "Authentication and authorization",
+                "Database design and optimization",
             ],
         },
         {
-            title: "Module 4: Real-World Projects 🚀",
-            description: "Build your portfolio with practical projects.",
-            icon: "💼",
+            title: "Learning 4: Advanced Technologies 🚀",
+            description: "Explore cutting-edge tech stack",
+            icon: "⚡",
             details: [
-                "End-to-end analytics projects",
-                "Industry-specific case studies",
-                "Portfolio development guidance",
-                "Collaborative Project Management",
-                "Business Impact Analysis",
+                "Python programming fundamentals",
+                "SQL and database management",
+                "Blockchain development basics",
+                "Web3 and smart contracts",
+                "Cloud deployment (AWS/Vercel)",
             ],
         },
         {
-            title: "Module 5: AI & Advanced Analytics 🤖",
-            description: "Leverage AI tools for enhanced analysis.",
+            title: "Learning 5: DSA & Interview Prep 📚",
+            description: "Prepare for technical interviews",
             icon: "🎯",
             details: [
-                "AI-powered analytics tools",
-                "Predictive analytics fundamentals",
-                "Machine learning for analysts",
-                "Natural Language Processing Applications",
-                "Automated Decision Systems",
+                "Data Structures fundamentals",
+                "Algorithm analysis and problem-solving",
+                "System design principles",
+                "Technical interview strategies",
+                "Coding challenges and solutions",
             ],
         },
     ];
@@ -74,7 +74,7 @@ export default function Roadmap() {
                 {/* Course Features Section */}
                 <div className="mt-8 text-center">
                     <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Introducing the complete </h2>
-                    <h3 className="text-5xl font-bold text-blue-500 mb-8">Data Analytics Mastery Course</h3>
+                    <h3 className="text-5xl font-bold text-blue-500 mb-8">Foundation to Mastery Bundle</h3>
                 </div>
                 <div className="relative">
                     {analyticsSteps.map((step, index) => (

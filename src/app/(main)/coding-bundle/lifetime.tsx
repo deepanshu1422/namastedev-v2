@@ -214,6 +214,20 @@ export default function Lifetime() {
             </p>
           </div>
         </div>
+
+
+        <a
+              href="#feature"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .querySelector("#feature")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="w-full max-w-2xl mx-auto block text-center py-3 sm:py-4 px-4 sm:px-6 rounded-full bg-gradient-to-r from-prime to-prime/80 text-white text-lg sm:text-xl font-bold hover:opacity-90 transition-opacity"
+            >
+              Secure Your Seat 👇👇
+            </a>
       </div>
 
       {/* Final closing tags */}
