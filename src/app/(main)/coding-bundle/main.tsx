@@ -153,7 +153,7 @@ export default function Main({
 
   return (
     <div>
-      <Lifetime />
+      <Lifetime image={coverImage.url} setYtOpen={setOpenYt} />
       <Roadmap />
       <Feature setOpen={setOpen} />
       <PaymentSheet
@@ -180,7 +180,7 @@ export default function Main({
         curreny={"INR"}
         setOpenPay={setOpenPay}
       />
-      <YTModal open={openYt} setOpen={setOpenYt} url="nTAHWER3K-0" />
+      <YTModal open={openYt} setOpen={setOpenYt} url="05xRJjzcYcQ" />
       <Floating
         slug={slug}
         addToCart={addToCartEvent}

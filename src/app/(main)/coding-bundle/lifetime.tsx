@@ -12,6 +12,7 @@ import {
 import React, { Dispatch, SetStateAction, Suspense } from "react";
 // import Btn from "./btn";
 import Link from "next/link";
+import Image from "next/image";
 // import Btn from "./btn";
 
 export const benefits = [
@@ -31,7 +32,13 @@ export const mentorshipSteps = [
   "Hands-on projects and interview preparation to secure your dream job",
 ];
 
-export default function Lifetime() {
+export default function Lifetime({
+  image,
+  setYtOpen,
+}: {
+  image: string;
+  setYtOpen: Dispatch<SetStateAction<boolean>>;
+}) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0F1115] m-auto">
       <div className="px-5 lg:px-20 pt-10 max-w-[75rem] m-auto flex flex-col relative overflow-hidden">
@@ -39,8 +46,7 @@ export default function Lifetime() {
           <div className="flex items-center justify-center gap-4 mb-8">
             <hr className="hidden sm:block h-1 w-20 lg:w-60 rounded bg-gradient-to-r from-transparent to-prime opacity-80" />
             <h1 className="font-jakarta text-5xl sm:text-7xl font-black text-center text-white leading-tight tracking-tight">
-              Master{" "}
-              <span className="text-prime font-black">High-Paying</span>{" "}
+              Master <span className="text-prime font-black">High-Paying</span>{" "}
               Tech Skills
             </h1>
             <hr className="hidden sm:block h-1 w-20 lg:w-60 rounded bg-gradient-to-l from-transparent to-prime opacity-80" />
@@ -48,16 +54,17 @@ export default function Lifetime() {
 
           <h2 className="font-jakarta text-2xl font-bold text-center text-gray-300 max-w-4xl mx-auto mb-6 leading-snug">
             From{" "}
-            <span className="text-prime font-extrabold">DSA to Advanced Web development</span> -
-            Everything You Need for a High-Impact Tech Career
+            <span className="text-prime font-extrabold">
+              DSA to Advanced Web development
+            </span>{" "}
+            - Everything You Need for a High-Impact Tech Career
           </h2>
 
           <p className="mt-6 text-xl text-center text-gray-400 max-w-2xl mx-auto leading-relaxed">
             Get LIFETIME access to{" "}
-            <span className="font-extrabold text-prime">500+ videos</span>{" "}
-            and{" "}
-            <span className="font-extrabold text-prime">25+ projects</span>{" "}
-            that make you job-ready
+            <span className="font-extrabold text-prime">500+ videos</span> and{" "}
+            <span className="font-extrabold text-prime">25+ projects</span> that
+            make you job-ready
           </p>
         </div>
 
@@ -72,12 +79,28 @@ export default function Lifetime() {
           title="You have to work 10x harder as an immigrant"
         />
       </div> */}
+        <div
+          onClick={() => setYtOpen(true)}
+          className="flex flex-col relative w-full max-w-3xl mx-auto rounded-xl aspect-video"
+        >
+          <Image
+            alt="30DayCoding New Challenge"
+            src={image}
+            fill
+            className="bg-prime/20 object-cover w-full max-w-3xl"
+          />
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background/40 p-0.5 rounded-full shadow-2xl shadow-black group-hover:-translate-y-2/3 transition-transform">
+            <div className="bg-white/50 backdrop-blur-sm p-4 rounded-full">
+              <Play className="w-8 h-8 stroke-[3] fill-white" />
+            </div>
+          </div>
+        </div>
 
-        <img
-          src="https://images.ctfassets.net/3pv3o0yr6pgj/5V2eMkSHmIJ7EVmYWam3Nb/065ebf20961eb8d57b68c8e8c5f76320/bundle.jpg"
+        {/* <img
+          src=""
           alt="Data Analytics Course"
           className="w-full max-w-3xl mx-auto rounded-xl"
-        />
+        /> */}
 
         <div className="mt-5 max-w-3xl mx-auto text-center">
           {/* <h3 className="text-3xl font-bold mb-8 text-white">The Data Analytics Gold Rush:</h3> */}
@@ -215,19 +238,18 @@ export default function Lifetime() {
           </div>
         </div>
 
-
         <a
-              href="#feature"
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .querySelector("#feature")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="w-full max-w-2xl mx-auto block text-center py-3 sm:py-4 px-4 sm:px-6 rounded-full bg-gradient-to-r from-prime to-prime/80 text-white text-lg sm:text-xl font-bold hover:opacity-90 transition-opacity"
-            >
-              Secure Your Seat 👇👇
-            </a>
+          href="#feature"
+          onClick={(e) => {
+            e.preventDefault();
+            document
+              .querySelector("#feature")
+              ?.scrollIntoView({ behavior: "smooth" });
+          }}
+          className="w-full max-w-2xl mx-auto block text-center py-3 sm:py-4 px-4 sm:px-6 rounded-full bg-gradient-to-r from-prime to-prime/80 text-white text-lg sm:text-xl font-bold hover:opacity-90 transition-opacity"
+        >
+          Secure Your Seat 👇👇
+        </a>
       </div>
 
       {/* Final closing tags */}

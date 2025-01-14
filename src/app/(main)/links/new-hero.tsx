@@ -38,7 +38,7 @@ export default function Lifetime() {
         </span>
       </section>
 
-      <Btn cover="/welcome.jpg" yt="nTAHWER3K-0" />
+      <Btn cover="/welcome.jpg" yt="05xRJjzcYcQ" />
     </div>
   );
 }
