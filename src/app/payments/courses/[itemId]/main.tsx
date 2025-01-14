@@ -205,7 +205,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
 
   return (
     <div className="flex w-full min-h-screen bg-gray-200">
-      <div className="flex flex-col container mx-auto px-1 sm:px-4 w-full sm:max-w-sm">
+      <div className="flex flex-col container mx-auto sm:px-4 w-full sm:max-w-sm">
         {/* Header with logo and title */}
         <div
           className={`${

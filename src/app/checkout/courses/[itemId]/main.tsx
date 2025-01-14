@@ -328,7 +328,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
 
   return (
     <div className="flex w-full min-h-screen bg-gray-200">
-      <div className="flex flex-col container mx-auto px-1 sm:px-4 w-full sm:max-w-sm">
+      <div className="flex flex-col container mx-auto sm:px-4 w-full sm:max-w-sm">
         {/* Header with logo and title */}
         <div
           className={`${
@@ -382,7 +382,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
             {/* <span className="text-sm text-white/70 font-semibold">(Tax Included)</span> */}
           </div>
 
-          <section className="flex flex-col gap-1 max-sm:text-sm">
+          <section className="flex flex-col gap-1">
             <div className="flex justify-between">
               <span>Course Price</span>
               <span className="font-extrabold">

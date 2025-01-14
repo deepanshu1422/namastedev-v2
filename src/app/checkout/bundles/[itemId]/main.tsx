@@ -143,7 +143,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
         title: item.bundleTitle,
         slug: item.slug,
         itemId: item.bundleId,
-        itemType: "course",
+        itemType: "bundle",
         value:
           item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
             ?.amount ?? 499,
@@ -153,7 +153,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
         title: item.bundleTitle,
         slug: item.slug,
         itemId: item.bundleId,
-        itemType: "course",
+        itemType: "bundle",
         value:
           item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
             ?.amount ?? 499,
@@ -164,7 +164,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
           item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
             ?.amount ?? 399,
         content_ids: [item.bundleId],
-        content_type: "course",
+        content_type: "bundle",
         em: sha256(formData.email ?? ""),
         // @ts-ignore
         ph: sha256(formData.phone ?? ""),
@@ -302,7 +302,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
           email: formData.email.toLocaleLowerCase(),
           contact: formData.phone,
           address: formData.state,
-          courseId: item.bundleId,
+          bundleId: item.bundleId,
         },
         theme: {
           color: item.domain === "skillsetmaster.com" ? "#DBB62E" : "#134543",
@@ -327,7 +327,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
 
   return (
     <div className="flex w-full min-h-screen bg-gray-200">
-      <div className="flex flex-col container mx-auto px-1 sm:px-4 w-full sm:max-w-sm">
+      <div className="flex flex-col container mx-auto sm:px-4 w-full sm:max-w-sm">
         {/* Header with logo and title */}
         <div
           className={`${
@@ -381,9 +381,9 @@ export default function Main({ bundleCollection: { items } }: Courses) {
             {/* <span className="text-sm text-white/70 font-semibold">(Tax Included)</span> */}
           </div>
 
-          <section className="flex flex-col gap-1 max-sm:text-sm">
+          <section className="flex flex-col gap-1">
             <div className="flex justify-between">
-              <span>Course Price</span>
+              <span>Bundle Price</span>
               <span className="font-extrabold">
                 {currency} {bigAmount}
               </span>
