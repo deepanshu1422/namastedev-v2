@@ -190,7 +190,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
   };
 
   return (
-    <div className="flex w-full min-h-screen bg-gray-200">
+    <div className="flex w-full min-h-[100dvh] bg-gray-200">
       <div className="flex flex-col container mx-auto px-1 sm:px-4 w-full sm:max-w-sm">
         {/* Header with logo and title */}
         <div className={`${item.domain === "skillsetmaster.com" ? `bg-[#DBB62E] text-black` : "bg-bg text-white "} p-6`}>
