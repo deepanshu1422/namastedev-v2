@@ -53,7 +53,8 @@ export default function Main({ courseCollection: { items } }: Courses) {
   const utm_campaign = utmParams.get("utm_campaign");
   const utm_content = utmParams.get("utm_content");
   const utm_term = utmParams.get("utm_term");
-
+  
+  const [read, setRead] = useState(false);
   const [formData, setFormData] = useState<{
     name: string;
     email: string;
@@ -420,7 +421,6 @@ export default function Main({ courseCollection: { items } }: Courses) {
                 <div className="flex flex-col gap-3">
                   {guides.map(
                     ({ description, guideId, pricing, title, offers }, i) => {
-                      const [read, setRead] = useState(false);
                       return (
                         <div
                           key={i}
