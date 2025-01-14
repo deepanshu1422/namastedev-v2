@@ -20,12 +20,13 @@ import { userInfo } from "@/lib/jotai";
 import { toast } from "sonner";
 import { beginCheckout, viewItem } from "@/services/gaEvents";
 import { sendEvent } from "@/services/fbpixel";
-import { ArrowLeft, Mail, Phone } from "lucide-react";
+import { ArrowLeft, Check, CheckCheck, Mail, Phone } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import createPayments from "actions/createPayments";
+import createBundlePayment from "actions/createBundlePayment";
+import { sha256 } from "js-sha256";
 
-export default function Main({ courseCollection: { items } }: Courses) {
+export default function Main({ bundleCollection: { items } }: Courses) {
   const item = items[0];
   const { amount, bigAmount, percentage } = item.pricingsCollection.items.find(
     (e) => e.countryCode === "IN"
@@ -39,6 +40,12 @@ export default function Main({ courseCollection: { items } }: Courses) {
   const pathName = usePathname();
   const posthog = usePostHog();
   let flag = true;
+
+  let domainInfo = {
+    name:
+      item.domain === "skillsetmaster.com" ? "SkillSetMaster" : "30DaysCoding",
+    baseColor: item.domain === "skillsetmaster.com" ? "#DBB62E" : "",
+  };
 
   const utmParams = useSearchParams();
   const utm_source = utmParams.get("utm_source");
@@ -120,7 +127,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
     if (!info.email) {
       console.log(info);
       router.replace(
-        `/payments/courses/${item.courseId}?${
+        `/payments/bundles/${item.bundleId}?${
           utm_source ? `&utm_source=${utm_source}` : ""
         }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
           utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
@@ -132,9 +139,9 @@ export default function Main({ courseCollection: { items } }: Courses) {
 
     if (flag) {
       posthog.capture("add_payment_info", {
-        title: item.title,
+        title: item.bundleTitle,
         slug: item.slug,
-        itemId: item.courseId,
+        itemId: item.bundleId,
         itemType: "course",
         value:
           item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
@@ -142,21 +149,25 @@ export default function Main({ courseCollection: { items } }: Courses) {
       });
 
       viewItem({
-        title: item.title,
+        title: item.bundleTitle,
         slug: item.slug,
-        itemId: item.courseId,
+        itemId: item.bundleId,
         itemType: "course",
         value:
           item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
             ?.amount ?? 499,
       });
 
-      sendEvent("ViewContent", {
+      sendEvent("AddPaymentInfo", {
         value:
           item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
             ?.amount ?? 399,
-        content_ids: [item.courseId],
+        content_ids: [item.bundleId],
         content_type: "course",
+        em: sha256(formData.email ?? ""),
+        // @ts-ignore
+        ph: sha256(formData.phone ?? ""),
+        fn: sha256(formData.name?.split(" ")[0] ?? ""),
         event_source_url: window.location.href,
       });
 
@@ -191,37 +202,49 @@ export default function Main({ courseCollection: { items } }: Courses) {
 
       let res;
 
-      if (item.courseId) {
+      if (item.bundleId) {
         posthog.capture("begin_checkout", {
-          title: item.title,
+          title: item.bundleTitle,
           amount,
-          itemId: item.courseId,
-          itemType: "course",
+          itemId: item.bundleId,
+          itemType: "bundle",
           name: formData.name,
           email: formData.email.toLocaleLowerCase(),
           state: formData.state,
         });
 
         beginCheckout({
-          title: item.title,
+          title: item.bundleTitle,
           amount,
-          itemId: item.courseId,
-          itemType: "course",
+          itemId: item.bundleId,
+          itemType: "bundle",
           name: formData.name,
           email: formData.email.toLocaleLowerCase(),
           state: formData.state,
           loggedIn: status === "authenticated",
         });
 
-        res = await createPayments({
-          courseId: item.courseId,
+        sendEvent("InitiateCheckout", {
+          value:
+            item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+              ?.amount ?? 399,
+          content_ids: [item.bundleId],
+          content_type: "bundle",
+          em: sha256(formData.email ?? ""),
+          // @ts-ignore
+          ph: sha256(formData.phone ?? ""),
+          fn: sha256(formData.name?.split(" ")[0] ?? ""),
+          event_source_url: window.location.href,
+        });
+
+        res = await createBundlePayment({
+          bundleId: item.bundleId,
           email: formData.email.toLocaleLowerCase(),
           contact: formData.phone,
           name: formData.name,
           state: formData.state,
           couponCode: "",
           guides: formData.guides,
-          domain: item.domain
         });
       } else {
         return;
@@ -244,20 +267,20 @@ export default function Main({ courseCollection: { items } }: Courses) {
         key: key,
         description: formData.state,
         image: "/icon.png",
-        name: "30DaysCoding",
+        name: domainInfo.name,
         currency: res.data.currency,
         amount: res.data.amount / 100,
         order_id: res.data.orderId,
         handler: async function (response: any) {
           setOpenPay(true);
           router.push(
-            `/thank-you?title=${item.title}&value=${
+            `https://${item.domain}/thank-you?title=${item.bundleTitle}&value=${
               res.data.amount / 100
-            }&currency=INR&contentType=course&name=${
+            }&currency=INR&contentType=bundle&name=${
               formData.name
             }&email=${formData.email.toLocaleLowerCase()}&state=${
               formData.state
-            }&phone=+91${formData.phone}&id=${item.courseId}&slug=${item.slug}${
+            }&phone=+91${formData.phone}&id=${item.bundleId}&slug=${item.slug}${
               utm_source ? `&utm_source=${utm_source}` : ""
             }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
               utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
@@ -278,10 +301,10 @@ export default function Main({ courseCollection: { items } }: Courses) {
           email: formData.email.toLocaleLowerCase(),
           contact: formData.phone,
           address: formData.state,
-          courseId: item.courseId,
+          courseId: item.bundleId,
         },
         theme: {
-          color: "#134543",
+          color: item.domain === "skillsetmaster.com" ? "#DBB62E" : "#134543",
         },
       };
 
@@ -305,17 +328,32 @@ export default function Main({ courseCollection: { items } }: Courses) {
     <div className="flex w-full min-h-screen bg-gray-200">
       <div className="flex flex-col container mx-auto px-1 sm:px-4 w-full sm:max-w-sm">
         {/* Header with logo and title */}
-        <div className="bg-bg text-white p-6">
-          <button onClick={() => {
-            router.back()
-          }} className="mb-2 flex items-center gap-2">
+        <div
+          className={`${
+            item.domain === "skillsetmaster.com"
+              ? `bg-[#DBB62E] text-black`
+              : "bg-bg text-white "
+          } p-6`}
+        >
+          <button
+            onClick={() => {
+              router.back();
+            }}
+            className="mb-2 flex items-center gap-2"
+          >
             <ArrowLeft className="w-5 h-5" />
             <img src="/logo.png" alt="Logo" className="h-8" />
-            <span className="text-sm font-bold text-white/70">
-              30DaysCoding
+            <span
+              className={`text-sm font-bold ${
+                item.domain === "skillsetmaster.com"
+                  ? "text-gray-800"
+                  : `text-white/70`
+              }`}
+            >
+              {domainInfo.name}
             </span>
           </button>
-          <div className="mt-7 text-sm font-semibold text-white/70">Order Summary</div>
+          <div className="mt-7 text-sm font-semibold">Order Summary</div>
           <div className="flex items-baseline gap-2 mb-5">
             <span className="text-2xl font-bold">
               ₹
@@ -325,7 +363,13 @@ export default function Main({ courseCollection: { items } }: Courses) {
                 ).amount
               }
             </span>
-            <span className="line-through text-gray-400">
+            <span
+              className={`line-through ${
+                item.domain === "skillsetmaster.com"
+                  ? "text-gray-800"
+                  : `text-white/70`
+              }`}
+            >
               ₹
               {
                 item.pricingsCollection.items.find(
@@ -343,7 +387,13 @@ export default function Main({ courseCollection: { items } }: Courses) {
                 {currency} {bigAmount}
               </span>
             </div>
-            <div className="text-prime font-semibold flex justify-between">
+            <div
+              className={`${
+                item.domain === "skillsetmaster.com"
+                  ? `text-white`
+                  : "text-prime"
+              } font-semibold flex justify-between`}
+            >
               <span>Discount @ {percentage}%</span>
               <span className="font-extrabold">
                 -{currency} {bigAmount - amount}
@@ -367,67 +417,158 @@ export default function Main({ courseCollection: { items } }: Courses) {
                   🔔Don&apos;t missout on our guides
                 </span>
                 <div className="flex flex-col gap-3">
-                  {guides.map(({ description, guideId, pricing, title }, i) => {
-                    return (
-                      <div
-                        onClick={() => {
-                          if (!formData.guides?.includes(guideId))
-                            setFormData({
-                              ...formData,
-                              guides: [...formData.guides, guideId],
-                            });
-                          else {
-                            setFormData({
-                              ...formData,
-                              guides: formData.guides.filter(
-                                (e) => e !== guideId
-                              ),
-                            });
-                          }
-                        }}
-                        key={i}
-                        className={`flex flex-col gap-2 rounded-md border-2 ${
-                          formData.guides?.includes(guideId) &&
-                          "bg-prime text-white border-second"
-                        } transition-all duration-100 border-prime`}
-                      >
-                        <div className="flex flex-col gap-1 p-4">
-                          <h3 className="font-semibold">{title}</h3>
-                          <div className="flex items-baseline gap-2 my-1">
-                            <span className="text-xl font-bold">
-                              ₹{pricing.amount}
-                            </span>
-                            <span className="line-through">
-                              ₹{pricing.bigAmount}
-                            </span>
-                            {/* <span className="text-sm text-white/70 font-semibold">(Tax Included)</span> */}
-                          </div>
-                          <p className="text-xs text-wrap">{description}</p>
-                        </div>
-                        <div className="flex items-center gap-3 p-2 text-white bg-second">
-                          <Checkbox
-                            checked={formData.guides?.includes(guideId)}
-                            onCheckedChange={(checked) => {
-                              return checked
-                                ? setFormData({
-                                    ...formData,
-                                    guides: [...formData.guides, guideId],
-                                  })
-                                : setFormData({
-                                    ...formData,
-                                    guides: formData.guides.filter(
-                                      (e) => e !== guideId
-                                    ),
-                                  });
+                  {guides.map(
+                    ({ description, guideId, pricing, title, offers }, i) => {
+                      const [read, setRead] = useState(false);
+                      return (
+                        <div
+                          key={i}
+                          className={`flex flex-col gap-2 rounded-md border-2 cursor-pointer hover:shadow-lg transition-all duration-200 ${
+                            formData.guides?.includes(guideId) &&
+                            `bg-yellow-500/50 text-black border-yellow-600`
+                          } transition-all duration-100 ${
+                            item.domain === "skillsetmaster.com"
+                              ? `border-yellow-900`
+                              : "border-yellow-500"
+                          }`}
+                        >
+                          <div
+                            onClick={() => {
+                              if (!formData.guides?.includes(guideId))
+                                setFormData({
+                                  ...formData,
+                                  guides: [...formData.guides, guideId],
+                                });
+                              else {
+                                setFormData({
+                                  ...formData,
+                                  guides: formData.guides.filter(
+                                    (e) => e !== guideId
+                                  ),
+                                });
+                              }
                             }}
-                          />
-                          <div className="flex gap-1 items-center">
-                            Add to Cart
+                            className={`flex flex-col gap-1 ${
+                              formData.guides?.includes(guideId)
+                                ? "text-black"
+                                : "text-yellow-800"
+                            }`}
+                          >
+                            <h3 className="p-4 py-2 rounded-t bg-[#131313] font-bold text-lg text-white">
+                              {title}
+                            </h3>
+                            <div className="px-4 flex items-baseline gap-2 my-2">
+                              <span className={`text-2xl font-bold`}>
+                                ₹{pricing.amount}
+                              </span>
+                              <span className="line-through">
+                                ₹{pricing.bigAmount}
+                              </span>
+                              <span className="text-sm font-semibold">
+                                Save{" "}
+                                {Math.round(
+                                  (1 - pricing.amount / pricing.bigAmount) * 100
+                                )}
+                                %
+                              </span>
+                            </div>
+                            <p className="px-4 text-sm text-wrap">
+                              {description}
+                            </p>
+
+                            {Boolean(offers.length) && (
+                              <div className="px-4 flex flex-col gap-1">
+                                <span className="font-semibold">
+                                  What you&apos;ll get:
+                                </span>
+                                <ul className="flex flex-col gap-0.5 text-sm">
+                                  {read
+                                    ? offers.map((e, i) => (
+                                        <li
+                                          key={i}
+                                          className="text-wrap flex gap-1 text-black"
+                                        >
+                                          <CheckCheck className="mt-1 h-4 w-4 shrink-0" />
+                                          {e}
+                                        </li>
+                                      ))
+                                    : offers.slice(0, 2).map((e, i) => (
+                                        <li
+                                          key={i}
+                                          className="text-wrap flex gap-1 text-black"
+                                        >
+                                          <CheckCheck className="mt-1 h-4 w-4 shrink-0" />
+                                          <span className="line-clamp-1">{e}</span>
+                                        </li>
+                                      ))}
+                                </ul>
+                              </div>
+                            )}
+                          </div>
+
+                          <button
+                            onClick={() => {
+                              setRead(!read);
+                            }}
+                            className="text-left px-4 py-3 text-black font-semibold"
+                          >
+                            {read ? "Read Less" : "Read More"}
+                          </button>
+
+                          <div
+                            onClick={() => {
+                              if (!formData.guides?.includes(guideId))
+                                setFormData({
+                                  ...formData,
+                                  guides: [...formData.guides, guideId],
+                                });
+                              else {
+                                setFormData({
+                                  ...formData,
+                                  guides: formData.guides.filter(
+                                    (e) => e !== guideId
+                                  ),
+                                });
+                              }
+                            }}
+                            className={`flex items-center justify-between gap-3 p-3 text-black ${
+                              item.domain === "skillsetmaster.com"
+                                ? `bg-yellow-300`
+                                : "bg-yellow-400"
+                            }`}
+                          >
+                            <div className="flex items-center gap-2">
+                              <Checkbox
+                                className={`h-5 w-5 border-yellow-600 data-[state=checked]:bg-black data-[state=checked]:text-white`}
+                                checked={formData.guides?.includes(guideId)}
+                                onCheckedChange={(checked) => {
+                                  return checked
+                                    ? setFormData({
+                                        ...formData,
+                                        guides: [...formData.guides, guideId],
+                                      })
+                                    : setFormData({
+                                        ...formData,
+                                        guides: formData.guides.filter(
+                                          (e) => e !== guideId
+                                        ),
+                                      });
+                                }}
+                              />
+                              <span className="font-medium">
+                                {formData.guides?.includes(guideId)
+                                  ? "Added to Cart"
+                                  : "Add to Cart"}
+                              </span>
+                            </div>
+                            <span className="text-sm text-white animate-pulse font-medium bg-black px-2 py-1 rounded-full">
+                              Limited Time Offer!
+                            </span>
                           </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    }
+                  )}
                 </div>
               </div>
             </>
@@ -456,7 +597,11 @@ export default function Main({ courseCollection: { items } }: Courses) {
                 onClick={() => {
                   router.back();
                 }}
-                className="text-prime hover:underline text-sm font-bold mt-2"
+                className={`${
+                  item.domain === "skillsetmaster.com"
+                    ? `text-[#DBB62E]`
+                    : "text-prime"
+                } underline text-sm font-bold mt-2`}
               >
                 Change
               </button>
@@ -466,7 +611,11 @@ export default function Main({ courseCollection: { items } }: Courses) {
           <button
             disabled={isLoading}
             onClick={makePayment}
-            className="disabled:animate-pulse w-full hover:bg-second/80 bg-second text-white my-5 py-3 rounded-lg font-medium"
+            className={`disabled:animate-pulse w-full ${
+              item.domain === "skillsetmaster.com"
+                ? `hover:bg-[#edc842] bg-[#DBB62E] text-black`
+                : "hover:bg-second/80 bg-second text-white"
+            } my-5 py-3 rounded-lg font-medium`}
             type="submit"
           >
             Buy @ {currency}{" "}

@@ -1,13 +1,22 @@
 import { notFound } from "next/navigation";
 import Main from "./main"
+import { Metadata, ResolvingMetadata } from "next/types";
+import React from "react";
+
+export const metadata: Metadata = {
+  title: "Payment Page"
+}
 
 export type Courses = {
-  courseCollection: {
+  bundleCollection: {
     items: {
-      title: string;
-      courseId: string;
-      domain: string;
+      bundleId: string;
+      bundleTitle: string;
       shortDescription: string;
+      domain: string;
+      learn: string[];
+      offers: string[];
+      rating: number;
       slug: string;
       guidesCollection: {
         items: {
@@ -20,6 +29,22 @@ export type Courses = {
           };
         }[];
       };
+      coursesCollection: {
+        items: {
+          title: string;
+          slug: string;
+          rating: number;
+          courseImage: {
+            url: string;
+          };
+        }[];
+      };
+      coverImage: {
+        description: string;
+        url: string;
+        width: number;
+        height: number;
+      };
       pricingsCollection: {
         items: {
           title: string;
@@ -27,6 +52,13 @@ export type Courses = {
           percentage: number;
           bigAmount: number;
           countryCode: string;
+          currencyCode: string;
+        }[];
+      };
+      faqCollection: {
+        items: {
+          question: string;
+          answer: string;
         }[];
       };
     }[];
@@ -44,14 +76,23 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-async function getCourses({ itemId }: { itemId: string }): Promise<Courses> {
+async function getBundle({ itemId }: { itemId: string }): Promise<Courses> {
   const query = `query {
-    courseCollection(where: {courseId: "${itemId}", publish: true},limit:1){
+    bundleCollection(where: {bundleId: "${itemId}", publish: true},limit:1){
         items{
-        title,
-        courseId,
-        domain,
+        bundleId,
+        bundleTitle,
         shortDescription,
+        domain,
+        learn,
+        rating,
+        offers,
+        coverImage{   
+            description,
+            url,
+            width,
+            height,
+        },
         slug,
         guidesCollection{
             items{
@@ -64,6 +105,18 @@ async function getCourses({ itemId }: { itemId: string }): Promise<Courses> {
               }
             }
           },
+        coursesCollection{
+            items{
+                title,
+                slug,
+                rating,
+                courseImage{
+                    url,
+                    width,
+                    height
+                    },
+                }
+            },
         pricingsCollection{
             items{
             title,
@@ -73,6 +126,12 @@ async function getCourses({ itemId }: { itemId: string }): Promise<Courses> {
             countryCode,
             }
         },
+         faqCollection{
+        items{
+          question,
+          answer
+        }
+      }
             }
         }
     }`;
@@ -86,10 +145,10 @@ async function getCourses({ itemId }: { itemId: string }): Promise<Courses> {
         Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
       },
       body: JSON.stringify({ query }),
-      cache: "force-cache",
-      next: {
-        revalidate: 3600 * 24,
-      },
+      // cache: "force-cache",
+      // next: {
+      //   revalidate: 3600 * 24,
+      // },
     }
   );
 
@@ -99,11 +158,11 @@ async function getCourses({ itemId }: { itemId: string }): Promise<Courses> {
 }
 
 export default async function PaymentPage({ params: { itemId } }: PageProps) {
-  const item = await getCourses({ itemId });
+  const item = await getBundle({ itemId });
 
   // console.log(JSON.stringify(item.courseCollection.items[0]));
 
-  if (!(item.courseCollection.items[0]?.title)) return notFound()
+  if (!(item.bundleCollection.items[0]?.bundleTitle)) return notFound()
 
-  return <Main courseCollection={item.courseCollection} />
+  return <Main bundleCollection={item.bundleCollection} />
 }

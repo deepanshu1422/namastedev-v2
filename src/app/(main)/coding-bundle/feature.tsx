@@ -1,11 +1,20 @@
+import VideoSlider from "@/app/(guide)/testimonials/video-slider";
+import Faqs from "@/components/mentorship-comp/faq";
 import { Check } from "lucide-react";
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 export default function Feature({
-  setOpen,
+  handleAddToCart,
+  faqCollection
 }: {
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  handleAddToCart: () => void;
+  faqCollection:{
+    items:{
+      question: string;
+      answer: string;
+    }[]
+  }
 }) {
   const [timeLeft, setTimeLeft] = useState({
     days: 3,
@@ -124,7 +133,10 @@ export default function Feature({
           ))}
         </div>
 
-        <button onClick={() => setOpen(true)} className="w-full max-w-2xl mx-auto block text-center py-3 sm:py-4 px-4 sm:px-6 rounded-full bg-gradient-to-r from-head to-prime text-white text-lg sm:text-xl font-bold hover:opacity-90 transition-opacity">
+        <button
+          onClick={handleAddToCart}
+          className="w-full max-w-2xl mx-auto block text-center py-3 sm:py-4 px-4 sm:px-6 rounded-full bg-gradient-to-r from-head to-prime text-white text-lg sm:text-xl font-bold hover:opacity-90 transition-opacity"
+        >
           Secure Your Seat Rs. 1499{" "}
           <span className="line-through">Rs. 8999</span>
         </button>
@@ -170,7 +182,8 @@ export default function Feature({
         </div>
       </div>
 
-      {/*  */}
+      <VideoSlider />
+      <Faqs faq={faqCollection.items} />
     </div>
   );
 }

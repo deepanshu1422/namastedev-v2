@@ -22,7 +22,7 @@ import { toast } from "sonner";
 import { viewItem } from "@/services/gaEvents";
 import { sendEvent } from "@/services/fbpixel";
 
-export default function Main({ courseCollection: { items } }: Courses) {
+export default function Main({ bundleCollection: { items } }: Courses) {
   const item = items[0];
   const [info, setInfo] = useAtom(userInfo);
   const router = useRouter();
@@ -120,20 +120,20 @@ export default function Main({ courseCollection: { items } }: Courses) {
 
     if (flag) {
       posthog.capture("view_item", {
-        title: item.title,
+        title: item.bundleTitle,
         slug: item.slug,
-        itemId: item.courseId,
-        itemType: "course",
+        itemId: item.bundleId,
+        itemType: "bundle",
         value:
           item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
             ?.amount ?? 499,
       });
 
       viewItem({
-        title: item.title,
+        title: item.bundleTitle,
         slug: item.slug,
-        itemId: item.courseId,
-        itemType: "course",
+        itemId: item.bundleId,
+        itemType: "bundle",
         value:
           item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
             ?.amount ?? 499,
@@ -143,8 +143,8 @@ export default function Main({ courseCollection: { items } }: Courses) {
         value:
           item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
             ?.amount ?? 399,
-        content_ids: [item.courseId],
-        content_type: "course",
+        content_ids: [item.bundleId],
+        content_type: "bundle",
         event_source_url: window.location.href,
       });
 
@@ -179,7 +179,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
     });
 
     router.push(
-      `/checkout/courses/${item.courseId}?${
+      `/checkout/bundles/${item.bundleId}?${
         utm_source ? `&utm_source=${utm_source}` : ""
       }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
         utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
@@ -201,7 +201,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
               {domainInfo.name}
             </span>
           </div>
-          <h1 className="text-sm mb-2 text-wrap line-clamp-2">{item.title}</h1>
+          <h1 className="text-sm mb-2 text-wrap line-clamp-2">{item.bundleTitle}</h1>
           {/* <p className="text-wrap">{JSON.stringify(info)}</p> */}
           <div className="flex items-baseline gap-2">
             <span className="text-2xl font-bold">
@@ -209,7 +209,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
               {
                 item.pricingsCollection.items.find(
                   (e) => e.countryCode === "IN"
-                ).amount
+                )?.amount
               }
             </span>
             <span className={`line-through ${item.domain === "skillsetmaster.com" ? "text-gray-800" :`text-white/70`}`}>
@@ -217,7 +217,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
               {
                 item.pricingsCollection.items.find(
                   (e) => e.countryCode === "IN"
-                ).bigAmount
+                )?.bigAmount
               }
             </span>
             {/* <span className="text-sm text-white/70 font-semibold">(Tax Included)</span> */}

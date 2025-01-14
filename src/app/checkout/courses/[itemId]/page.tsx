@@ -19,6 +19,7 @@ export type Courses = {
           guideId: string;
           title: string;
           description: string;
+          offers: string[];
           pricing: {
             amount: number;
             bigAmount: number;
@@ -63,6 +64,7 @@ async function getCourses({ itemId }: { itemId: string }): Promise<Courses> {
               guideId,
               title,
               description,
+              offers,
               pricing{
                 amount,
                 bigAmount

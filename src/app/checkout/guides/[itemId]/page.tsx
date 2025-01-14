@@ -1,5 +1,10 @@
 import { notFound } from "next/navigation";
 import Main from "./main"
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Checkout Page"
+}
 
 export type Courses = {
   courseCollection: {
@@ -86,10 +91,10 @@ async function getCourses({ itemId }: { itemId: string }): Promise<Courses> {
         Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
       },
       body: JSON.stringify({ query }),
-      cache: "force-cache",
-      next: {
-        revalidate: 3600 * 24,
-      },
+      cache: "no-cache",
+      // next: {
+      //   revalidate: 3600 * 24,
+      // },
     }
   );
 

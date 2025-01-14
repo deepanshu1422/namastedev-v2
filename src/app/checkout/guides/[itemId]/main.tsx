@@ -24,6 +24,7 @@ import { ArrowLeft, Mail, Phone } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import createPayments from "actions/createPayments";
+import { sha256 } from "js-sha256";
 
 export default function Main({ courseCollection: { items } }: Courses) {
   const item = items[0];
@@ -39,6 +40,12 @@ export default function Main({ courseCollection: { items } }: Courses) {
   const pathName = usePathname();
   const posthog = usePostHog();
   let flag = true;
+
+  let domainInfo = {
+    name:
+      item.domain === "skillsetmaster.com" ? "SkillSetMaster" : "30DaysCoding",
+    baseColor: item.domain === "skillsetmaster.com" ? "#DBB62E" : "",
+  };
 
   const utmParams = useSearchParams();
   const utm_source = utmParams.get("utm_source");
@@ -151,12 +158,16 @@ export default function Main({ courseCollection: { items } }: Courses) {
             ?.amount ?? 499,
       });
 
-      sendEvent("ViewContent", {
+      sendEvent("AddPaymentInfo", {
         value:
           item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
             ?.amount ?? 399,
         content_ids: [item.courseId],
         content_type: "course",
+        em: sha256(formData.email ?? ""),
+        // @ts-ignore
+        ph: sha256(formData.phone ?? ""),
+        fn: sha256(formData.name?.split(" ")[0] ?? ""),
         event_source_url: window.location.href,
       });
 
@@ -213,6 +224,19 @@ export default function Main({ courseCollection: { items } }: Courses) {
           loggedIn: status === "authenticated",
         });
 
+        sendEvent("InitiateCheckout", {
+          value:
+            item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+              ?.amount ?? 399,
+          content_ids: [item.courseId],
+          content_type: "course",
+          em: sha256(formData.email ?? ""),
+          // @ts-ignore
+          ph: sha256(formData.phone ?? ""),
+          fn: sha256(formData.name?.split(" ")[0] ?? ""),
+          event_source_url: window.location.href,
+        });
+
         res = await createPayments({
           courseId: item.courseId,
           email: formData.email.toLocaleLowerCase(),
@@ -221,7 +245,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
           state: formData.state,
           couponCode: "",
           guides: formData.guides,
-          domain: item.domain
+          domain: item.domain,
         });
       } else {
         return;
@@ -244,14 +268,14 @@ export default function Main({ courseCollection: { items } }: Courses) {
         key: key,
         description: formData.state,
         image: "/icon.png",
-        name: "30DaysCoding",
+        name: domainInfo.name,
         currency: res.data.currency,
         amount: res.data.amount / 100,
         order_id: res.data.orderId,
         handler: async function (response: any) {
           setOpenPay(true);
           router.push(
-            `/thank-you?title=${item.title}&value=${
+            `https://${item.domain}/thank-you?title=${item.title}&value=${
               res.data.amount / 100
             }&currency=INR&contentType=course&name=${
               formData.name
@@ -281,7 +305,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
           courseId: item.courseId,
         },
         theme: {
-          color: "#134543",
+          color: item.domain === "skillsetmaster.com" ? "#DBB62E" : "#134543",
         },
       };
 
@@ -305,17 +329,32 @@ export default function Main({ courseCollection: { items } }: Courses) {
     <div className="flex w-full min-h-screen bg-gray-200">
       <div className="flex flex-col container mx-auto px-1 sm:px-4 w-full sm:max-w-sm">
         {/* Header with logo and title */}
-        <div className="bg-bg text-white p-6">
-          <button onClick={() => {
-            router.back()
-          }} className="mb-2 flex items-center gap-2">
+        <div
+          className={`${
+            item.domain === "skillsetmaster.com"
+              ? `bg-[#DBB62E] text-black`
+              : "bg-bg text-white "
+          } p-6`}
+        >
+          <button
+            onClick={() => {
+              router.back();
+            }}
+            className="mb-2 flex items-center gap-2"
+          >
             <ArrowLeft className="w-5 h-5" />
             <img src="/logo.png" alt="Logo" className="h-8" />
-            <span className="text-sm font-bold text-white/70">
-              30DaysCoding
+            <span
+              className={`text-sm font-bold ${
+                item.domain === "skillsetmaster.com"
+                  ? "text-gray-800"
+                  : `text-white/70`
+              }`}
+            >
+              {domainInfo.name}
             </span>
           </button>
-          <div className="mt-7 text-sm font-semibold text-white/70">Order Summary</div>
+          <div className="mt-7 text-sm font-semibold">Order Summary</div>
           <div className="flex items-baseline gap-2 mb-5">
             <span className="text-2xl font-bold">
               ₹
@@ -325,7 +364,13 @@ export default function Main({ courseCollection: { items } }: Courses) {
                 ).amount
               }
             </span>
-            <span className="line-through text-gray-400">
+            <span
+              className={`line-through ${
+                item.domain === "skillsetmaster.com"
+                  ? "text-gray-800"
+                  : `text-white/70`
+              }`}
+            >
               ₹
               {
                 item.pricingsCollection.items.find(
@@ -343,7 +388,13 @@ export default function Main({ courseCollection: { items } }: Courses) {
                 {currency} {bigAmount}
               </span>
             </div>
-            <div className="text-prime font-semibold flex justify-between">
+            <div
+              className={`${
+                item.domain === "skillsetmaster.com"
+                  ? `text-white`
+                  : "text-prime"
+              } font-semibold flex justify-between`}
+            >
               <span>Discount @ {percentage}%</span>
               <span className="font-extrabold">
                 -{currency} {bigAmount - amount}
@@ -388,8 +439,16 @@ export default function Main({ courseCollection: { items } }: Courses) {
                         key={i}
                         className={`flex flex-col gap-2 rounded-md border-2 ${
                           formData.guides?.includes(guideId) &&
-                          "bg-prime text-white border-second"
-                        } transition-all duration-100 border-prime`}
+                          `${
+                            item.domain === "skillsetmaster.com"
+                              ? `bg-[#edc842] text-black`
+                              : "bg-prime text-white border-second"
+                          }`
+                        } transition-all duration-100 ${
+                          item.domain === "skillsetmaster.com"
+                            ? `border-[#0F1115]`
+                            : "border-prime"
+                        }`}
                       >
                         <div className="flex flex-col gap-1 p-4">
                           <h3 className="font-semibold">{title}</h3>
@@ -404,8 +463,19 @@ export default function Main({ courseCollection: { items } }: Courses) {
                           </div>
                           <p className="text-xs text-wrap">{description}</p>
                         </div>
-                        <div className="flex items-center gap-3 p-2 text-white bg-second">
+                        <div
+                          className={`flex items-center gap-3 p-2 text-white ${
+                            item.domain === "skillsetmaster.com"
+                              ? `bg-[#0F1115]`
+                              : "bg-second"
+                          }`}
+                        >
                           <Checkbox
+                            className={`${
+                              item.domain === "skillsetmaster.com"
+                                ? `border-[#DBB62E] data-[state=checked]:bg-[#DBB62E] data-[state=checked]:text-black`
+                                : "border-prime"
+                            }`}
                             checked={formData.guides?.includes(guideId)}
                             onCheckedChange={(checked) => {
                               return checked
@@ -456,7 +526,11 @@ export default function Main({ courseCollection: { items } }: Courses) {
                 onClick={() => {
                   router.back();
                 }}
-                className="text-prime hover:underline text-sm font-bold mt-2"
+                className={`${
+                  item.domain === "skillsetmaster.com"
+                    ? `text-[#DBB62E]`
+                    : "text-prime"
+                } underline text-sm font-bold mt-2`}
               >
                 Change
               </button>
@@ -466,7 +540,11 @@ export default function Main({ courseCollection: { items } }: Courses) {
           <button
             disabled={isLoading}
             onClick={makePayment}
-            className="disabled:animate-pulse w-full hover:bg-second/80 bg-second text-white my-5 py-3 rounded-lg font-medium"
+            className={`disabled:animate-pulse w-full ${
+              item.domain === "skillsetmaster.com"
+                ? `hover:bg-[#edc842] bg-[#DBB62E] text-black`
+                : "hover:bg-second/80 bg-second text-white"
+            } my-5 py-3 rounded-lg font-medium`}
             type="submit"
           >
             Buy @ {currency}{" "}
