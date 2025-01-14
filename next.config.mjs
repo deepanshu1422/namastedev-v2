@@ -3,6 +3,7 @@ import createMDX from "@next/mdx";
 const nextConfig = {
   images: {
     domains: [
+      "i3.ytimg.com",
       "img.freepik.com",
       "ik.imagekit.io",
       "assets-global.website-files.com",

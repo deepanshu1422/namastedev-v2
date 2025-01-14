@@ -84,10 +84,97 @@ function VideoCarousel() {
   );
 }
 
+function NewVideoCarousel() {
+  const vids = [
+    { ytId: "zA_jXlo_3YE" },
+    { ytId: "F2OsMQ7nz3k" },
+    { ytId: "HQG9ZCSTtr0" },
+    { ytId: "6lP2w6MLYXk" },
+    { ytId: "iHWCA-qckII" },
+    { ytId: "YJKnBut4qYg" },
+    { ytId: "wSlRs8EQubI" },
+    { ytId: "X8iGoKglP2c" },
+    { ytId: "KhwbMajuuKY" },
+    { ytId: "U8bf4-tsw9k" },
+    { ytId: "5rU6ZfXs9YY" },
+    { ytId: "nnEaMT93mTU" },
+    { ytId: "c_RbgqTQVIk" },
+    { ytId: "67pe9efDWic" },
+    { ytId: "soVJa7l9SRA" },
+    { ytId: "85_B4czAZrY" },
+    { ytId: "mWSZmMidGFM" },
+    { ytId: "aSP4X_lP0EM" },
+    { ytId: "um0L6w0FFZg" },
+    { ytId: "FbySzm0Igk8" },
+    { ytId: "QEIRTiQCD3c" },
+    { ytId: "hcxQFmavLOg" },
+    { ytId: "pHZhfQrJcQg" },
+    { ytId: "eeoDuEdOqpQ" },
+    { ytId: "Zv7PRNFUmuA" },
+  ];
+
+  const [vidId, setVidId] = useState("zA_jXlo_3YE");
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Carousel
+        plugins={[
+          Autoplay({
+            delay: 1200,
+            stopOnFocusIn: false,
+            stopOnMouseEnter: true,
+            stopOnInteraction: false,
+          }),
+        ]}
+        opts={{
+          loop: true,
+          align: "center",
+        }}
+        className="w-full pt-5"
+      >
+        <CarouselContent className="">
+          {vids.map(({ ytId }, index) => (
+            <CarouselItem
+              onClick={() => {
+                setOpen(true);
+                setVidId(ytId);
+              }}
+              className="basis-1/2 md:basis-1/3 xl:basis-1/5"
+              key={index}
+            >
+              <Card className="overflow-hidden cursor-pointer">
+                <CardContent className="group relative flex w-full aspect-[10/16] items-center justify-center p-6">
+                  <Image
+                    src={`https://i3.ytimg.com/vi/${ytId}/maxresdefault.jpg`}
+                    fill
+                    className="object-cover scale-[1.2]"
+                    alt={`30DC Testimonials Part ${index + 1}`}
+                  />
+                  <div className="absolute right-3 bottom-3 bg-background/40 p-0.5 rounded-full shadow-2xl shadow-black group-active:opacity-70 group-hover:shadow-prime group-hover:scale-110 transition-all">
+                    <div className="bg-white/50 backdrop-blur-sm p-4 rounded-full">
+                      <Play className="w-6 h-6 stroke-[3] fill-white" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="-left-4 h-12 w-12 top-1/2" />
+        <CarouselNext className="-right-4 h-12 w-12 top-1/2" />
+      </Carousel>
+      <YTModal open={open} setOpen={setOpen} url={vidId} />
+    </>
+  );
+}
+
 export default function VideoSlider() {
   return (
     <div
-      className={"grid grid-cols-1 gap-1 w-full max-w-[75rem] m-auto px-6 lg:px-10"}
+      className={
+        "grid grid-cols-1 gap-1 w-full max-w-[75rem] m-auto px-6 lg:px-10"
+      }
     >
       <span className="flex items-center justify-center gap-4 relative">
         <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
@@ -102,6 +189,7 @@ export default function VideoSlider() {
       </p>
 
       <VideoCarousel />
+      <NewVideoCarousel />
     </div>
   );
 }
