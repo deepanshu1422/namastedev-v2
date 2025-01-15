@@ -11,8 +11,8 @@ import Hero from "./unpaid/hero";
 import { YTModal } from "@/app/(guide)/testimonials/slider";
 import { UpsellModal } from "./unpaid/upsell";
 
-import { addToCart, viewItem } from "@/services/gaEvents";
-import { usePathname } from "next/navigation";
+import { addToCart, viewItem, viewItemPage } from "@/services/gaEvents";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { usePostHog } from "posthog-js/react";
 import { sendEvent } from "@/services/fbpixel";
 import { BASE_URL } from "@/util/constants";
@@ -135,69 +135,90 @@ export default function Main({
   const pathName = usePathname();
 
   const posthog = usePostHog();
-  let flag = true
-  
-  useEffect(() => {
-    if (flag){
-    posthog?.capture("view_item", {
-      title,
-      itemId: courseId,
-      slug,
-      itemType: "course",
-      value:
-        pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
-        399,
-    });
-    // @ts-ignore
-    viewItem({
-      title,
-      slug,
-      itemId: courseId,
-      itemType: "course",
-      value:
-        pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
-        399,
-    });
+  let flag = true;
 
-    sendEvent("ViewContent", {
-      amount: pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
-      399,
-      content_ids: [courseId],
-      content_type: "course",
-      event_source_url: window.location.href,
-    });
-    flag = false
-  }
+  useEffect(() => {
+    if (flag) {
+      posthog?.capture("view_item_page", {
+        title,
+        itemId: courseId,
+        slug,
+        itemType: "course",
+        value:
+          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            ?.amount ?? 399,
+      });
+      // @ts-ignore
+      viewItemPage({
+        title,
+        slug,
+        itemId: courseId,
+        itemType: "course",
+        value:
+          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            ?.amount ?? 399,
+      });
+
+      // sendEvent("ViewContent", {
+      //   amount: pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
+      //   399,
+      //   content_ids: [courseId],
+      //   content_type: "course",
+      //   event_source_url: window.location.href,
+      // });
+      flag = false;
+    }
   }, [pathName]);
 
-  function Unpaid() {
-    function addToCartEvent() {
-      posthog?.capture("add_to_cart", {
-        title,
-        itemId: courseId,
-        itemType: "course",
-        slug,
-        value:
-          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
-            ?.amount ?? 399,
-      });
+  const router = useRouter();
+  const utmParams = useSearchParams();
+  const utm_source = utmParams.get("utm_source");
+  const utm_medium = utmParams.get("utm_medium");
+  const utm_campaign = utmParams.get("utm_campaign");
+  const utm_content = utmParams.get("utm_content");
+  const utm_term = utmParams.get("utm_term");
 
-      addToCart({
-        itemId: courseId,
-        itemType: "course",
-        slug,
-        title,
-        value:
-          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
-            ?.amount ?? 399,
-      });
-    }
+  async function addToCartEvent() {
+    router.push(
+      `/payments/courses/${courseId}?${
+        utm_source ? `&utm_source=${utm_source}` : ""
+      }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
+        utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
+      }${utm_content ? `&utm_content=${utm_content}` : ""}${
+        utm_term ? `&utm_term=${utm_term}` : ""
+      }`
+    );
+  }
+
+  function Unpaid() {
+    // function addToCartEvent() {
+    //   // posthog?.capture("add_to_cart", {
+    //   //   title,
+    //   //   itemId: courseId,
+    //   //   itemType: "course",
+    //   //   slug,
+    //   //   value:
+    //   //     pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+    //   //       ?.amount ?? 399,
+    //   // });
+
+    //   // addToCart({
+    //   //   itemId: courseId,
+    //   //   itemType: "course",
+    //   //   slug,
+    //   //   title,
+    //   //   value:
+    //   //     pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+    //   //       ?.amount ?? 399,
+    //   // });
+
+    //   handleAddToCart()
+    // }
 
     return (
       <main className="relative min-h-svh overflow-clip">
         <Hero
           slug={slug}
-          addToCart={addToCartEvent}
           courseId={courseId}
           rating={rating}
           title={title ?? "NULL"}
@@ -216,7 +237,6 @@ export default function Main({
         />
         <Detail
           cover={courseImage?.url}
-          addToCart={addToCartEvent}
           slug={slug}
           courseId={courseId}
           modulesCollection={modulesCollection}
@@ -234,17 +254,11 @@ export default function Main({
           faqs={faqCollection.items}
         />
         <UpsellModal
-          title={upsellBundle?.bundleTitle}
-          slug={upsellBundle?.slug}
-          amount={upsellBundle?.pricingsCollection[0]?.items?.amount}
-          bigAmount={upsellBundle?.pricingsCollection[0]?.items?.bigAmount}
-          percentage={upsellBundle?.pricingsCollection[0]?.items?.percentage}
+          addToCart={addToCartEvent}
           open={openUpsell}
           setOpen={setOpenUpsell}
-          setPaymentOpen={setOpen}
-          setBundelPaymentOpen={setOpenBundle}
         />
-        <PaymentSheet
+        {/* <PaymentSheet
           slug={slug}
           posthog={posthog}
           open={open}
@@ -267,11 +281,10 @@ export default function Main({
           }
           curreny={"INR"}
           setOpenPay={setOpenPay}
-        />
+        /> */}
         <YTModal open={openYt} setOpen={setOpenYt} url="05xRJjzcYcQ" />
         <Floating
           slug={slug}
-          addToCart={addToCartEvent}
           price={
             pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
               amount: 0,

@@ -15,6 +15,21 @@ declare global {
 
 // Rest of the code remains the same...
 const EVENTS = {
+  VIEW_ITEM_PAGE: {
+    ga: "view_item_page",
+    mixpanel: "Product Page Viewed",
+    properties: (data: any) => ({
+      // Common properties
+      $currency: "INR",
+      $value: data.value,
+      // Product specific
+      Product_ID: data.itemId,
+      Product_Name: data.title,
+      Product_Category: data.itemType,
+      Product_Variant: data.slug,
+      Product_Price: data.value,
+    })
+  },
   VIEW_ITEM: {
     ga: "view_item",
     mixpanel: "Product Viewed",
@@ -273,6 +288,28 @@ function sendEnhancedEvent(eventName: string, eventParams: any) {
   } catch (error) {
     console.error(`Error sending ${eventName} event:`, error);
   }
+}
+
+export function viewItemPage({
+                           title,
+                           slug,
+                           itemId,
+                           itemType,
+                           value,
+                         }: {
+  title: string;
+  slug: string;
+  itemId: string;
+  itemType: string;
+  value: number;
+}) {
+  sendEnhancedEvent(EVENTS.VIEW_ITEM_PAGE.ga, {
+    title,
+    slug,
+    itemId,
+    itemType,
+    value,
+  });
 }
 
 export function viewItem({

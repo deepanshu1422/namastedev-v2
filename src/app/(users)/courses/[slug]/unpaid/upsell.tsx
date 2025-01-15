@@ -29,25 +29,13 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 
 export function UpsellModal({
-  title = "Job Ready Bundle - Full Stack, DSA, Interview Prep",
-  slug = "job-ready-bundle-full-stack-dsa-interview-prep",
-  amount = "999",
-  bigAmount = "9999",
-  percentage = "90",
   open,
   setOpen,
-  setPaymentOpen,
-  setBundelPaymentOpen,
+  addToCart
 }: {
-  title?: string;
-  slug?: string;
-  amount?: string;
-  bigAmount?: string;
-  percentage?: string;
   open: boolean;
-  setPaymentOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setBundelPaymentOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  addToCart: () => void;
 }) {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
@@ -64,17 +52,7 @@ export function UpsellModal({
             <DialogTitle>{info.title}</DialogTitle>
             <DialogDescription>{info.desc}</DialogDescription>
           </DialogHeader>
-          <Offer
-            title={title}
-            slug={slug}
-            amount={amount}
-            bigAmount={bigAmount}
-            percentage={percentage}
-            setOpen={setOpen}
-            setPaymentOpen={setPaymentOpen}
-            setOpenBundle={setBundelPaymentOpen}
-            className=""
-          />
+          <Offer addToCart={addToCart} className="" />
         </DialogContent>
       </Dialog>
     );
@@ -89,42 +67,18 @@ export function UpsellModal({
             {info.desc}
           </DrawerDescription>
         </DrawerHeader>
-        <Offer
-          title={title}
-          slug={slug}
-          amount={amount}
-          bigAmount={bigAmount}
-          percentage={percentage}
-          setOpen={setOpen}
-          setPaymentOpen={setPaymentOpen}
-          setOpenBundle={setBundelPaymentOpen}
-          className="mx-4"
-        />
+        <Offer addToCart={addToCart} className="mx-4" />
       </DrawerContent>
     </Drawer>
   );
 }
 
 function Offer({
-  title = "Job Ready Bundle - Full Stack, DSA, Interview Prep",
-  slug = "job-ready-bundle-full-stack-dsa-interview-prep",
-  amount = "999",
-  bigAmount = "9999",
-  percentage = "90",
   className,
-  setOpen,
-  setPaymentOpen,
-  setOpenBundle,
+  addToCart,
 }: {
-  title?: string;
-  slug?: string;
-  amount?: string;
-  bigAmount?: string;
-  percentage?: string;
   className: string;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setPaymentOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setOpenBundle: React.Dispatch<React.SetStateAction<boolean>>;
+  addToCart: () => void;
 }) {
   const courses = [
     "Full Stack Mastery Course",
@@ -135,7 +89,10 @@ function Offer({
   ];
   return (
     <div className={`${className} cursor-pointer flex flex-col pb-2 gap-2`}>
-      <Link href={"/bundle/complete-package-all-course-bundle?sheet=true"} className="bg-gradient-to-t to-head/80 from-second/80 p-3 rounded-md">
+      <Link
+        href={"/bundle/complete-package-all-course-bundle?sheet=true"}
+        className="bg-gradient-to-t to-head/80 from-second/80 p-3 rounded-md"
+      >
         <div className="flex justify-between mb-2">
           <h3 className="text-lg line-clamp-2 font-semibold">
             17 Course bundle
@@ -185,8 +142,9 @@ function Offer({
       <div className="flex flex-col gap-3">
         <Button
           onClick={() => {
-            setOpen(false);
-            setPaymentOpen(true);
+            addToCart();
+            // setOpen(false);
+            // setPaymentOpen(true);
           }}
           className="w-full text-wrap"
           variant={"secondary"}

@@ -772,16 +772,16 @@ export function Floating({
             <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
             <Button
               onClick={() => {
-                setOpen(true);
-                sendEvent("InitiateCheckout", {
-                  content_ids: [bundleId],
-                  content_type: "bundle",
-                  em: sha256(session?.user?.email ?? ""),
-                  // @ts-ignore
-                  ph: sha256(session?.user?.phone ?? ""),
-                  fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
-                  event_source_url: window.location.href,
-                });
+                // setOpen(true);
+                // sendEvent("InitiateCheckout", {
+                //   content_ids: [bundleId],
+                //   content_type: "bundle",
+                //   em: sha256(session?.user?.email ?? ""),
+                //   // @ts-ignore
+                //   ph: sha256(session?.user?.phone ?? ""),
+                //   fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
+                //   event_source_url: window.location.href,
+                // });
                 addToCart();
               }}
               variant={"outline"}

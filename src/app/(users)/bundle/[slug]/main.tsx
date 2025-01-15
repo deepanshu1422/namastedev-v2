@@ -5,9 +5,9 @@ import Detail from "./unpaid/details";
 import { Floating, PaymentModal, PaymentSheet } from "./payments";
 import { useEffect, useState } from "react";
 import { YTModal } from "@/app/(guide)/testimonials/slider";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import { addToCart, viewItem } from "@/services/gaEvents";
+import { addToCart, viewItem, viewItemPage} from "@/services/gaEvents";
 import { useSession } from "next-auth/react";
 import { usePostHog } from "posthog-js/react";
 import { sendEvent } from "@/services/fbpixel";
@@ -96,44 +96,64 @@ export default function Main({
 
   const pathName = usePathname();
   const posthog = usePostHog();
-  let flag = true
+  let flag = true;
 
   useEffect(() => {
     // @ts-ignore
     // if (!session?.user?.bundleId?.includes(bundleId))
 
-    if (flag){
-      posthog.capture("view_item", {
+    if (flag) {
+      posthog.capture("view_item_page", {
         title: bundleTitle,
         slug,
         itemId: bundleId,
         itemType: "bundle",
         value:
-          pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
-          999,
+          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            ?.amount ?? 999,
       });
-  
-      viewItem({
+
+      viewItemPage({
         title: bundleTitle,
         slug,
         itemId: bundleId,
         itemType: "bundle",
         value:
-          pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
-          999,
+          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            ?.amount ?? 999,
       });
-  
-      sendEvent("ViewContent", {
-        amount: pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
-        399,
-        content_ids: [bundleId],
-        content_type: "course",
-        event_source_url: window.location.href,
-      });
-      flag = false
+
+      // sendEvent("ViewContent", {
+      //   amount:
+      //     pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+      //       ?.amount ?? 399,
+      //   content_ids: [bundleId],
+      //   content_type: "course",
+      //   event_source_url: window.location.href,
+      // });
+      flag = false;
     }
-    
   }, [pathName]);
+
+  const router = useRouter();
+  const utmParams = useSearchParams();
+  const utm_source = utmParams.get("utm_source");
+  const utm_medium = utmParams.get("utm_medium");
+  const utm_campaign = utmParams.get("utm_campaign");
+  const utm_content = utmParams.get("utm_content");
+  const utm_term = utmParams.get("utm_term");
+
+  async function addToCartEvent() {
+    router.push(
+      `/payments/bundles/${bundleId}?${
+        utm_source ? `&utm_source=${utm_source}` : ""
+      }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
+        utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
+      }${utm_content ? `&utm_content=${utm_content}` : ""}${
+        utm_term ? `&utm_term=${utm_term}` : ""
+      }`
+    );
+  }
 
   // function Paid() {
   //   return (
@@ -222,29 +242,6 @@ export default function Main({
   // }
 
   function Unpaid() {
-    function addToCartEvent() {
-      
-      posthog.capture("add_to_cart", {
-        title: bundleTitle,
-        slug,
-        itemId: bundleId,
-        itemType: "bundle",
-        value:
-          pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
-          999,
-      });
-
-      addToCart({
-        itemId: bundleId,
-        itemType: "bundle",
-        slug,
-        title: bundleTitle,
-        value:
-          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
-            ?.amount ?? 999,
-      });
-    }
-
     return (
       <main className="relative min-h-svh overflow-clip">
         <Hero
@@ -286,7 +283,7 @@ export default function Main({
           setYtOpen={setOpenYt}
           faqs={faqCollection.items}
         />
-        <PaymentSheet
+        {/* <PaymentSheet
           open={open}
           guides={guidesCollection.items}
           slug={slug}
@@ -309,7 +306,7 @@ export default function Main({
           }
           curreny={"INR"}
           setOpenPay={setOpenPay}
-        />
+        /> */}
         <YTModal open={openYt} setOpen={setOpenYt} url="05xRJjzcYcQ" />
         <Floating
           slug={slug}

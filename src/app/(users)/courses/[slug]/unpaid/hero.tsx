@@ -33,11 +33,9 @@ export default function Hero({
   courseOffer,
   setYtOpen,
   setOpen,
-  addToCart,
 }: {
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
-  addToCart: () => void;
   slug: string;
   title: string;
   courseId: string;
@@ -208,17 +206,16 @@ export default function Hero({
                   <Button
                     onClick={() => {
                       setOpen(true);
-                      sendEvent("InitiateCheckout", {
-                        amount: price.amount,
-                        content_ids: [courseId],
-                        content_type: "course",
-                        em: sha256(data?.user?.email ?? ""),
-                        // @ts-ignore
-                        ph: sha256(data?.user?.phone ?? ""),
-                        fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
-                        event_source_url: window.location.href,
-                      });
-                      addToCart();
+                      // sendEvent("InitiateCheckout", {
+                      //   amount: price.amount,
+                      //   content_ids: [courseId],
+                      //   content_type: "course",
+                      //   em: sha256(data?.user?.email ?? ""),
+                      //   // @ts-ignore
+                      //   ph: sha256(data?.user?.phone ?? ""),
+                      //   fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
+                      //   event_source_url: window.location.href,
+                      // });
                     }}
                     size={"lg"}
                     className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"

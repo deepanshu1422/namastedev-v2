@@ -710,13 +710,11 @@ export function PaymentModal({
 }
 
 export function Floating({
-  addToCart,
   price,
   slug,
   courseId,
   setOpen,
 }: {
-  addToCart: () => void;
   price: {
     amount: number;
     percentage: number;
@@ -743,17 +741,16 @@ export function Floating({
             <Button
               onClick={() => {
                 setOpen(true);
-                sendEvent("InitiateCheckout", {
-                  amount: course.price,
-                  content_ids: [courseId],
-                  content_type: "mentorship",
-                  em: sha256(session?.user?.email ?? ""),
-                  // @ts-ignore
-                  ph: sha256(session?.user?.phone ?? ""),
-                  fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
-                  event_source_url: window.location.href,
-                });
-                addToCart();
+                // sendEvent("InitiateCheckout", {
+                //   amount: course.price,
+                //   content_ids: [courseId],
+                //   content_type: "mentorship",
+                //   em: sha256(session?.user?.email ?? ""),
+                //   // @ts-ignore
+                //   ph: sha256(session?.user?.phone ?? ""),
+                //   fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
+                //   event_source_url: window.location.href,
+                // });
               }}
               variant={"outline"}
               className={`font-semibold text-foreground/80 hover:text-foreground relative w-full p-6 text-sm gap-1`}

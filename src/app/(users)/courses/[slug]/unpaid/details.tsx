@@ -39,12 +39,10 @@ export default function Details({
   // learn,
   setOpen,
   setYtOpen,
-  addToCart,
   faqs,
 }: {
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
-  addToCart: () => void;
   courseOffer: string[];
   courseId: string;
   image: string;
@@ -212,7 +210,6 @@ export default function Details({
       </div>
 
       <Checkout
-        addToCart={addToCart}
         slug={slug}
         setOpen={setOpen}
         setYtOpen={setYtOpen}

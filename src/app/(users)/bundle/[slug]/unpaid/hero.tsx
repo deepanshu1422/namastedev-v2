@@ -144,17 +144,17 @@ export default function Hero({
                   <div className="flex flex-col gap-2 py-1">
                     <Button
                       onClick={() => {
-                        setOpen(true);
-                        sendEvent("InitiateCheckout", {
-                          content_ids: [bundleId],
-                          content_type: "bundle",
-                          content_name: title,
-                          em: sha256(data?.user?.email ?? ""),
-                          // @ts-ignore
-                          ph: sha256(data?.user?.phone ?? ""),
-                          fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
-                          event_source_url: window.location.href,
-                        });
+                        // setOpen(true);
+                        // sendEvent("InitiateCheckout", {
+                        //   content_ids: [bundleId],
+                        //   content_type: "bundle",
+                        //   content_name: title,
+                        //   em: sha256(data?.user?.email ?? ""),
+                        //   // @ts-ignore
+                        //   ph: sha256(data?.user?.phone ?? ""),
+                        //   fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
+                        //   event_source_url: window.location.href,
+                        // });
                         addToCart();
                       }}
                       size={"lg"}
