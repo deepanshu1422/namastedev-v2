@@ -32,6 +32,14 @@ export const mentorshipSteps = [
   "Hands-on projects and interview preparation to secure your dream job",
 ];
 
+export const successStories = [
+  { name: "Aditya", linkedIn: "https://www.linkedin.com/in/aditya-maheshwari-05/", jobOffer: "PayPal", salary: "35+ LPA" },
+  { name: "Nikhil", linkedIn: "https://www.linkedin.com/in/nikhil-seth9", jobOffer: "Air Canada", salary: "35+ LPA" },
+  { name: "Rojal", linkedIn: "https://www.linkedin.com/in/rojal-sapkota-787130237/", jobOffer: "Google", salary: "30+ LPA" },
+  { name: "Rishabh", linkedIn: "https://www.linkedin.com/in/rishabh5301", jobOffer: "Cashify", salary: "15+ LPA" },
+  { name: "Roktim", linkedIn: "https://x.com/roktim___", jobOffer: "Luppa AI", salary: "15+ LPA" },
+];
+
 export default function Lifetime({
   image,
   setYtOpen,
@@ -57,15 +65,18 @@ export default function Lifetime({
             <span className="text-prime font-extrabold">
               DSA to Advanced Web development
             </span>{" "}
-            - Everything You Need for a High-Impact Tech Career
+            - Everything You Need for a High-Impact Tech Career. Get LIFETIME access to{" "}
+            <span className="font-extrabold text-prime">500+ videos</span> and{" "}
+            <span className="font-extrabold text-prime">25+ projects</span> that
+            make you job-ready
           </h2>
 
-          <p className="mt-6 text-xl text-center text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          {/* <p className="mt-6 text-xl text-center text-gray-400 max-w-2xl mx-auto leading-relaxed">
             Get LIFETIME access to{" "}
             <span className="font-extrabold text-prime">500+ videos</span> and{" "}
             <span className="font-extrabold text-prime">25+ projects</span> that
             make you job-ready
-          </p>
+          </p> */}
         </div>
 
         {/*  */}
@@ -102,15 +113,15 @@ export default function Lifetime({
           className="w-full max-w-3xl mx-auto rounded-xl"
         /> */}
 
-        <div className="mt-5 max-w-3xl mx-auto text-center">
+        <div className="mt-10 max-w-3xl mx-auto text-center">
           {/* <h3 className="text-3xl font-bold mb-8 text-white">The Data Analytics Gold Rush:</h3> */}
           <div className="grid gap-6 text-lg text-gray-300">
             <div className="p-6 bg-gradient-to-r from-prime/20 to-prime/10 rounded-xl">
               <div className="text-4xl font-bold text-green-400 mb-2">
-                $107,000
+                ₹12,00,000
               </div>
               <div className="text-gray-300">
-                Average Data Analyst Salary in 2024
+                Average Software Developer Salary in 2025
               </div>
               <div className="text-sm text-gray-400 mt-1">
                 Source: Glassdoor
@@ -120,16 +131,16 @@ export default function Lifetime({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="p-6 bg-white/5 rounded-xl">
                 <div className="text-3xl font-bold text-red-500 mb-2">
-                  650,000+
+                  12 Lacs +
                 </div>
                 <div className="text-gray-300">
-                  Open Data Analytics Positions
+                  Open Software Development Positions
                 </div>
                 <div className="text-sm text-gray-400 mt-1">LinkedIn Jobs</div>
               </div>
 
               <div className="p-6 bg-white/5 rounded-xl">
-                <div className="text-3xl font-bold text-blue-300 mb-2">35%</div>
+                <div className="text-3xl font-bold text-blue-300 mb-2">25%</div>
                 <div className="text-gray-300">Industry Growth Rate</div>
                 <div className="text-sm text-gray-400 mt-1">
                   Bureau of Labor Statistics
@@ -158,30 +169,29 @@ export default function Lifetime({
                 {[
                   {
                     source: "Forbes",
-                    text: "⚠️ Data Analytics Skills Gap Widens as Demand Soars",
+                    text: "⚠️ Software Development Skills Gap Continues to Grow in 2025",
                   },
                   {
                     source: "Bloomberg",
-                    text: "⚠️ Companies Struggling to Fill Data Analytics Roles",
+                    text: "⚠️ Tech Companies Competing for Top Programming Talent",
                   },
                   {
                     source: "TechCrunch",
-                    text: "⚠️ Data Analysts Among Most In-Demand Tech Jobs",
+                    text: "⚠️ Full-Stack Developers Among Highest-Paid Tech Roles",
                   },
                   {
                     source: "Wall Street Journal",
-                    text: "⚠️ AI Boom Drives Unprecedented Demand for Data Analysts",
+                    text: "⚠️ AI and Web3 Creating Surge in Developer Demand",
                   },
                   {
                     source: "Business Insider",
-                    text: "⚠️ Companies Offering Premium Salaries for Data Analytics Expertise",
+                    text: "⚠️ Remote Work Revolution Drives Global Developer Opportunities",
                   },
                 ].map((headline, index) => (
                   <li
                     key={index}
                     className="flex items-start gap-3 text-gray-300 hover:text-blue-300 transition-colors"
                   >
-                    {/* <span className="text-blue-400 mt-1">▸</span> */}
                     <div>
                       <span className="font-medium text-white">
                         {headline.text}
@@ -198,7 +208,7 @@ export default function Lifetime({
         </div>
 
         {/* Success Story Section */}
-        <div className="mt-5 mb-12 text-center">
+        <div className="mt-5 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-lime-300 to-green-600 text-transparent bg-clip-text">
             We have Cracked The Code That 15,000+ Students From:
           </h2>
@@ -232,11 +242,44 @@ export default function Lifetime({
               ))}
             </div>
 
-            <p className="text-lg text-gray-300">
+            {/* <p className="text-lg text-gray-300">
               And dozens more Fortune 500 companies
-            </p>
+            </p> */}
           </div>
         </div>
+
+
+      <div className="">
+        <h2 className="font-jakarta text-2xl font-semibold text-center text-white mb-4">
+           <span className="decoration-red-500 underline decoration-4">Recent Success stories</span> (100+ more)
+        </h2>
+        <div className="overflow-x-auto">
+          <table className="w-full max-w-2xl mx-auto text-foreground/90 border-2 border-white rounded-lg overflow-hidden">
+            <thead>
+              <tr className="bg-prime/10">
+                <th className="py-3 px-4 text-left border-b border-prime/30">Name</th>
+                <th className="py-3 px-4 text-left border-b border-prime/30">Company</th>
+                <th className="py-3 px-4 text-left border-b border-prime/30">Job Offer</th>
+              </tr>
+            </thead>
+            <tbody>
+              {successStories.map((story, index) => (
+                <tr key={index} className="border-b border-prime hover:bg-prime/5 transition-colors duration-200">
+                  <td className="py-3 px-4">
+                    {/* <a href={story.linkedIn} target="_blank" rel="noopener noreferrer" className="underline hover:text-prime transition-colors duration-200">
+                      {story.name}
+                    </a> */}
+                    {story.name}
+                  </td>
+                  <td className="py-3 px-4">{story.jobOffer}</td>
+                  
+                  <td className="py-3 px-4">{story.salary}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
         <a
           href="#feature"

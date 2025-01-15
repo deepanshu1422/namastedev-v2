@@ -86,34 +86,34 @@ export default function Feature({
           {[
             {
               text: "Complete Coding Foundation to Mastery",
-              subtext: " ($199 value)",
+              subtext: " (₹16,499 value)",
             },
             {
               text: "Modern React & Next.js Development",
-              subtext: " ($299 value)",
+              subtext: " (₹24,799 value)",
             },
             {
               text: "Backend Development with Node.js",
-              subtext: " ($249 value)",
+              subtext: " (₹20,699 value)",
             },
             {
               text: "Advanced Tech Stack (Python, SQL, Web3)",
-              subtext: " ($299 value)",
+              subtext: " (₹24,799 value)",
             },
             {
               text: "Data Structures & Algorithms",
-              subtext: " ($249 value)",
+              subtext: " (₹20,699 value)",
             },
             {
               text: "Real-world Project Portfolio",
-              subtext: " ($249 value)",
+              subtext: " (₹20,699 value)",
             },
             {
               text: "Technical Interview Preparation",
-              subtext: " ($199 value)",
+              subtext: " (₹16,499 value)",
             },
-            { text: "Career Transition Guide", subtext: " ($149 value)" },
-            { text: "And much more...", subtext: " ($499 value)" },
+            { text: "Career Transition Guide", subtext: " (₹12,399 value)" },
+            { text: "And much more...", subtext: " (₹41,499 value)" },
           ].map((item, index) => (
             <div key={index} className="flex items-start gap-2">
               <Check className="h-5 w-5 text-prime mt-1 flex-shrink-0" />
@@ -137,7 +137,7 @@ export default function Feature({
           onClick={handleAddToCart}
           className="w-full max-w-2xl mx-auto block text-center py-3 sm:py-4 px-4 sm:px-6 rounded-full bg-gradient-to-r from-head to-prime text-white text-lg sm:text-xl font-bold hover:opacity-90 transition-opacity"
         >
-          Secure Your Seat Rs. 1499{" "}
+          Secure Your Seat Rs. 1999{" "}
           <span className="line-through">Rs. 8999</span>
         </button>
 
