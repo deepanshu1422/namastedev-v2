@@ -56,16 +56,16 @@ export default function Hero({
       <div className={`w-full grid bg-zinc-950/60 shadow`}>
         <div className="tab:px-20 tab:pt-14 tab:pb-3 max-tab:pt-[1rem] max-tab:pb-5 m-auto max-tab:max-w-xl max-w-[80rem] flex flex-auto max-tab:flex-col w-full justify-between text-white gap-3 sm:gap-7 h-full">
           <section className="grid gap-5 h-fit tab:max-w-[60%]">
-            <Link
+            {/* <Link
               className="px-6 flex gap-1 items-center text-sm text-muted-foreground hover:text-foreground w-fit"
               href={"/courses"}
             >
               <ChevronLeft className="h-4 w-4" />
               <span>Courses</span>
-            </Link>
+            </Link> */}
 
             <div
-              onClick={() => setYtOpen(true)}
+              // onClick={() => setYtOpen(true)}
               className="tab:hidden flex flex-col gap-4 relative max-tab:mx-auto"
             >
               <Image
@@ -73,13 +73,13 @@ export default function Hero({
                 src={image}
                 height={800}
                 width={1200}
-                className="bg-prime/20 object-cover aspect-[6/4]"
+                className="bg-prime/20 object-cover"
               />
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background/40 p-0.5 rounded-full shadow-2xl shadow-black group-hover:-translate-y-2/3 transition-transform">
+              {/* <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background/40 p-0.5 rounded-full shadow-2xl shadow-black group-hover:-translate-y-2/3 transition-transform">
                 <div className="bg-white/50 backdrop-blur-sm p-4 rounded-full">
                   <Play className="w-8 h-8 stroke-[3] fill-white" />
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="flex flex-col px-6 gap-3">

@@ -87,7 +87,7 @@ export default function Lifetime({
         />
       </div> */}
         <div
-          onClick={() => setYtOpen(true)}
+          // onClick={() => setYtOpen(true)}
           className="flex flex-col relative w-full max-w-3xl mx-auto rounded-xl aspect-video"
         >
           <Image
@@ -96,11 +96,11 @@ export default function Lifetime({
             fill
             className="bg-prime/20 object-cover w-full max-w-3xl"
           />
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background/40 p-0.5 rounded-full shadow-2xl shadow-black group-hover:-translate-y-2/3 transition-transform">
+          {/* <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background/40 p-0.5 rounded-full shadow-2xl shadow-black group-hover:-translate-y-2/3 transition-transform">
             <div className="bg-white/50 backdrop-blur-sm p-4 rounded-full">
               <Play className="w-8 h-8 stroke-[3] fill-white" />
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* <img
