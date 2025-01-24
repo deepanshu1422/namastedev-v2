@@ -532,7 +532,7 @@ export function PaymentSheet({
                 <hr className="mt-3" />
                 <div className="flex flex-col gap-3 justify-between">
                   <span className="font-semibold">
-                    🔔Don&apos;t missout on our guides
+                    🔔Don&apos;t miss out on our guides
                   </span>
                   <div className="flex flex-col gap-3">
                     {guides.map(

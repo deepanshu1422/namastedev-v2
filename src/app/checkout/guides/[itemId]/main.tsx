@@ -415,7 +415,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
             <>
               <div className="flex flex-col gap-3 justify-between text-black">
                 <span className="font-semibold">
-                  🔔Don&apos;t missout on our guides
+                  🔔Don&apos;t miss out on our guides
                 </span>
                 <div className="flex flex-col gap-3">
                   {guides.map(({ description, guideId, pricing, title }, i) => {

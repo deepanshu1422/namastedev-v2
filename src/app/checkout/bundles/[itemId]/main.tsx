@@ -410,12 +410,12 @@ export default function Main({ bundleCollection: { items } }: Courses) {
         </div>
 
         {/* Form section */}
-        <div className="bg-white p-6 py-2 pb-2 border border-border/20 h-full">
+        <div className="bg-white p-6 py-2 pb-20 border border-border/20 h-full">
           {Boolean(guides.length) && (
             <>
               <div className="flex flex-col gap-3 justify-between text-black">
                 <span className="font-semibold">
-                  🔔Don&apos;t missout on our guides
+                  🔔Don&apos;t miss out on our guides
                 </span>
                 <div className="flex flex-col gap-3">
                   {guides.map(
@@ -423,7 +423,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
                       return (
                         <div
                           key={i}
-                          className={`flex flex-col gap-2 rounded-md border-2 cursor-pointer hover:shadow-lg transition-all duration-200 ${
+                          className={`flex flex-col gap-1 rounded-md border cursor-pointer hover:shadow-lg transition-all duration-200 ${
                             formData.guides?.includes(guideId) &&
                             `bg-yellow-500/50 text-black border-yellow-600`
                           } transition-all duration-100 ${
@@ -448,74 +448,72 @@ export default function Main({ bundleCollection: { items } }: Courses) {
                                 });
                               }
                             }}
-                            className={`flex flex-col gap-1 ${
+                            className={`flex flex-col mb-2 gap-0.5 ${
                               formData.guides?.includes(guideId)
                                 ? "text-black"
                                 : "text-yellow-800"
                             }`}
                           >
-                            <h3 className="p-4 py-2 rounded-t bg-[#131313] font-bold text-lg text-white">
+                            <h3 className="p-3 py-1.5 rounded-t bg-[#131313] font-bold text-base text-white">
                               {title}
                             </h3>
-                            <div className="px-4 flex items-baseline gap-2 my-2">
-                              <span className={`text-2xl font-bold`}>
+                            <div className="px-3 flex items-baseline gap-1.5 my-1">
+                              <span className="text-xl font-bold">
                                 ₹{pricing.amount}
                               </span>
-                              <span className="line-through">
+                              <span className="line-through text-sm">
                                 ₹{pricing.bigAmount}
                               </span>
-                              <span className="text-sm font-semibold">
-                                Save{" "}
-                                {Math.round(
-                                  (1 - pricing.amount / pricing.bigAmount) * 100
-                                )}
-                                %
+                              <span className="text-xs font-semibold">
+                                Save {Math.round((1 - pricing.amount / pricing.bigAmount) * 100)}%
                               </span>
                             </div>
-                            <p className="px-4 text-sm text-wrap">
+                            <p className="px-3 text-xs text-wrap">
                               {description}
                             </p>
 
                             {Boolean(offers.length) && (
-                              <div className="px-4 flex flex-col gap-1">
-                                <span className="font-semibold">
+                              <div className="px-3 flex flex-col gap-0.5">
+                                <span className="font-semibold text-sm">
                                   What you&apos;ll get:
                                 </span>
-                                <ul className="flex flex-col gap-0.5 text-sm">
-                                  {read
-                                    ? offers.map((e, i) => (
+                                <ul className="flex flex-col gap-0.5">
+                                  {
+                                  // read ? 
+                                  offers.map((e, i) => (
                                         <li
                                           key={i}
-                                          className="text-wrap flex gap-1 text-black"
+                                          className="text-wrap flex gap-1 text-black text-xs"
                                         >
-                                          <CheckCheck className="mt-1 h-4 w-4 shrink-0" />
+                                          <CheckCheck className="mt-0.5 h-3 w-3 shrink-0" />
                                           {e}
                                         </li>
                                       ))
-                                    : offers.slice(0, 2).map((e, i) => (
-                                        <li
-                                          key={i}
-                                          className="text-wrap flex gap-1 text-black"
-                                        >
-                                          <CheckCheck className="mt-1 h-4 w-4 shrink-0" />
-                                          <span className="line-clamp-1">
-                                            {e}
-                                          </span>
-                                        </li>
-                                      ))}
+                                    // : offers.slice(0, 2).map((e, i) => (
+                                    //     <li
+                                    //       key={i}
+                                    //       className="text-wrap flex gap-1 text-black text-xs"
+                                    //     >
+                                    //       <CheckCheck className="mt-0.5 h-3 w-3 shrink-0" />
+                                    //       <span className="line-clamp-1">
+                                    //         {e}
+                                    //       </span>
+                                    //     </li>
+                                    //   ))
+                                    }
                                 </ul>
                               </div>
                             )}
                           </div>
 
-                          <button
+                          {/* <button
                             onClick={() => {
                               setRead(!read);
                             }}
-                            className="text-left px-4 py-3 text-black font-semibold"
+                            className="text-left px-3 py-2 text-black text-xs font-semibold"
                           >
                             {read ? "Read Less" : "Read More"}
-                          </button>
+                          </button> */}
 
                           <div
                             onClick={() => {
@@ -533,15 +531,15 @@ export default function Main({ bundleCollection: { items } }: Courses) {
                                 });
                               }
                             }}
-                            className={`flex items-center justify-between gap-3 p-3 text-black ${
+                            className={`flex items-center justify-between gap-2 p-2 text-black ${
                               item.domain === "skillsetmaster.com"
                                 ? `bg-yellow-300`
                                 : "bg-yellow-400"
                             }`}
                           >
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1.5">
                               <Checkbox
-                                className={`h-5 w-5 border-yellow-600 data-[state=checked]:bg-black data-[state=checked]:text-white`}
+                                className={`h-4 w-4 border-yellow-600 data-[state=checked]:bg-black data-[state=checked]:text-white`}
                                 checked={formData.guides?.includes(guideId)}
                                 onCheckedChange={(checked) => {
                                   return checked
@@ -557,13 +555,13 @@ export default function Main({ bundleCollection: { items } }: Courses) {
                                       });
                                 }}
                               />
-                              <span className="font-medium">
+                              <span className="font-medium text-sm">
                                 {formData.guides?.includes(guideId)
                                   ? "Added to Cart"
                                   : "Add to Cart"}
                               </span>
                             </div>
-                            <span className="text-sm text-white animate-pulse font-medium bg-black px-2 py-1 rounded-full">
+                            <span className="text-xs text-white animate-pulse font-medium bg-black px-2 py-0.5 rounded-full">
                               Limited Offer!
                             </span>
                           </div>

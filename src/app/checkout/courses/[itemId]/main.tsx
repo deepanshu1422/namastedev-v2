@@ -411,206 +411,204 @@ export default function Main({ courseCollection: { items } }: Courses) {
         </div>
 
         {/* Form section */}
-        <div className="bg-white p-6 py-2 pb-2 border border-border/20 h-full">
-          {Boolean(guides.length) && (
-            <>
-              <div className="flex flex-col gap-3 justify-between text-black">
-                <span className="font-semibold">
-                  🔔Don&apos;t missout on our guides
-                </span>
-                <div className="flex flex-col gap-3">
-                  {guides.map(
-                    ({ description, guideId, pricing, title, offers }, i) => {
-                      return (
-                        <div
-                          key={i}
-                          className={`flex flex-col gap-2 rounded-md border-2 cursor-pointer hover:shadow-lg transition-all duration-200 ${
-                            formData.guides?.includes(guideId) &&
-                            `bg-yellow-500/50 text-black border-yellow-600`
-                          } transition-all duration-100 ${
-                            item.domain === "skillsetmaster.com"
-                              ? `border-yellow-900`
-                              : "border-yellow-500"
-                          }`}
-                        >
-                          <div
-                            onClick={() => {
-                              if (!formData.guides?.includes(guideId))
-                                setFormData({
-                                  ...formData,
-                                  guides: [...formData.guides, guideId],
-                                });
-                              else {
-                                setFormData({
-                                  ...formData,
-                                  guides: formData.guides.filter(
-                                    (e) => e !== guideId
-                                  ),
-                                });
-                              }
-                            }}
-                            className={`flex flex-col gap-1 ${
-                              formData.guides?.includes(guideId)
-                                ? "text-black"
-                                : "text-yellow-800"
-                            }`}
-                          >
-                            <h3 className="p-4 py-2 rounded-t bg-[#131313] font-bold text-lg text-white">
-                              {title}
-                            </h3>
-                            <div className="px-4 flex items-baseline gap-2 my-2">
-                              <span className={`text-2xl font-bold`}>
-                                ₹{pricing.amount}
-                              </span>
-                              <span className="line-through">
-                                ₹{pricing.bigAmount}
-                              </span>
-                              <span className="text-sm font-semibold">
-                                Save{" "}
-                                {Math.round(
-                                  (1 - pricing.amount / pricing.bigAmount) * 100
-                                )}
-                                %
-                              </span>
-                            </div>
-                            <p className="px-4 text-sm text-wrap">
-                              {description}
-                            </p>
-
-                            {Boolean(offers.length) && (
-                              <div className="px-4 flex flex-col gap-1">
-                                <span className="font-semibold">
-                                  What you&apos;ll get:
-                                </span>
-                                <ul className="flex flex-col gap-0.5 text-sm">
-                                  {read
-                                    ? offers.map((e, i) => (
-                                        <li
-                                          key={i}
-                                          className="text-wrap flex gap-1 text-black"
-                                        >
-                                          <CheckCheck className="mt-1 h-4 w-4 shrink-0" />
-                                          {e}
-                                        </li>
-                                      ))
-                                    : offers.slice(0, 2).map((e, i) => (
-                                        <li
-                                          key={i}
-                                          className="text-wrap flex gap-1 text-black"
-                                        >
-                                          <CheckCheck className="mt-1 h-4 w-4 shrink-0" />
-                                          <span className="line-clamp-1">
-                                            {e}
-                                          </span>
-                                        </li>
-                                      ))}
-                                </ul>
-                              </div>
-                            )}
-                          </div>
-
-                          <button
-                            onClick={() => {
-                              setRead(!read);
-                            }}
-                            className="text-left px-4 py-3 text-black font-semibold"
-                          >
-                            {read ? "Read Less" : "Read More"}
-                          </button>
-
-                          <div
-                            onClick={() => {
-                              if (!formData.guides?.includes(guideId))
-                                setFormData({
-                                  ...formData,
-                                  guides: [...formData.guides, guideId],
-                                });
-                              else {
-                                setFormData({
-                                  ...formData,
-                                  guides: formData.guides.filter(
-                                    (e) => e !== guideId
-                                  ),
-                                });
-                              }
-                            }}
-                            className={`flex items-center justify-between gap-3 p-3 text-black ${
-                              item.domain === "skillsetmaster.com"
-                                ? `bg-yellow-300`
-                                : "bg-yellow-400"
-                            }`}
-                          >
-                            <div className="flex items-center gap-2">
-                              <Checkbox
-                                className={`h-5 w-5 border-yellow-600 data-[state=checked]:bg-black data-[state=checked]:text-white`}
-                                checked={formData.guides?.includes(guideId)}
-                                onCheckedChange={(checked) => {
-                                  return checked
-                                    ? setFormData({
-                                        ...formData,
-                                        guides: [...formData.guides, guideId],
-                                      })
-                                    : setFormData({
-                                        ...formData,
-                                        guides: formData.guides.filter(
-                                          (e) => e !== guideId
-                                        ),
-                                      });
-                                }}
-                              />
-                              <span className="font-medium">
-                                {formData.guides?.includes(guideId)
-                                  ? "Added to Cart"
-                                  : "Add to Cart"}
-                              </span>
-                            </div>
-                            <span className="text-sm text-white animate-pulse font-medium bg-black px-2 py-1 rounded-full">
-                              Limited Offer!
-                            </span>
-                          </div>
+        <div className="bg-white p-6 py-2 pb-20 border border-border/20 h-full">
+                  {Boolean(guides.length) && (
+                    <>
+                      <div className="flex flex-col gap-3 justify-between text-black">
+                        <span className="font-semibold">
+                          🔔Don&apos;t miss out on our guides
+                        </span>
+                        <div className="flex flex-col gap-3">
+                          {guides.map(
+                            ({ description, guideId, pricing, title, offers }, i) => {
+                              return (
+                                <div
+                                  key={i}
+                                  className={`flex flex-col gap-1 rounded-md border cursor-pointer hover:shadow-lg transition-all duration-200 ${
+                                    formData.guides?.includes(guideId) &&
+                                    `bg-yellow-500/50 text-black border-yellow-600`
+                                  } transition-all duration-100 ${
+                                    item.domain === "skillsetmaster.com"
+                                      ? `border-yellow-900`
+                                      : "border-yellow-500"
+                                  }`}
+                                >
+                                  <div
+                                    onClick={() => {
+                                      if (!formData.guides?.includes(guideId))
+                                        setFormData({
+                                          ...formData,
+                                          guides: [...formData.guides, guideId],
+                                        });
+                                      else {
+                                        setFormData({
+                                          ...formData,
+                                          guides: formData.guides.filter(
+                                            (e) => e !== guideId
+                                          ),
+                                        });
+                                      }
+                                    }}
+                                    className={`flex flex-col mb-2 gap-0.5 ${
+                                      formData.guides?.includes(guideId)
+                                        ? "text-black"
+                                        : "text-yellow-800"
+                                    }`}
+                                  >
+                                    <h3 className="p-3 py-1.5 rounded-t bg-[#131313] font-bold text-base text-white">
+                                      {title}
+                                    </h3>
+                                    <div className="px-3 flex items-baseline gap-1.5 my-1">
+                                      <span className="text-xl font-bold">
+                                        ₹{pricing.amount}
+                                      </span>
+                                      <span className="line-through text-sm">
+                                        ₹{pricing.bigAmount}
+                                      </span>
+                                      <span className="text-xs font-semibold">
+                                        Save {Math.round((1 - pricing.amount / pricing.bigAmount) * 100)}%
+                                      </span>
+                                    </div>
+                                    <p className="px-3 text-xs text-wrap">
+                                      {description}
+                                    </p>
+        
+                                    {Boolean(offers.length) && (
+                                      <div className="px-3 flex flex-col gap-0.5">
+                                        <span className="font-semibold text-sm">
+                                          What you&apos;ll get:
+                                        </span>
+                                        <ul className="flex flex-col gap-0.5">
+                                          {
+                                          // read ? 
+                                          offers.map((e, i) => (
+                                                <li
+                                                  key={i}
+                                                  className="text-wrap flex gap-1 text-black text-xs"
+                                                >
+                                                  <CheckCheck className="mt-0.5 h-3 w-3 shrink-0" />
+                                                  {e}
+                                                </li>
+                                              ))
+                                            // : offers.slice(0, 2).map((e, i) => (
+                                            //     <li
+                                            //       key={i}
+                                            //       className="text-wrap flex gap-1 text-black text-xs"
+                                            //     >
+                                            //       <CheckCheck className="mt-0.5 h-3 w-3 shrink-0" />
+                                            //       <span className="line-clamp-1">
+                                            //         {e}
+                                            //       </span>
+                                            //     </li>
+                                            //   ))
+                                            }
+                                        </ul>
+                                      </div>
+                                    )}
+                                  </div>
+        
+                                  {/* <button
+                                    onClick={() => {
+                                      setRead(!read);
+                                    }}
+                                    className="text-left px-3 py-2 text-black text-xs font-semibold"
+                                  >
+                                    {read ? "Read Less" : "Read More"}
+                                  </button> */}
+        
+                                  <div
+                                    onClick={() => {
+                                      if (!formData.guides?.includes(guideId))
+                                        setFormData({
+                                          ...formData,
+                                          guides: [...formData.guides, guideId],
+                                        });
+                                      else {
+                                        setFormData({
+                                          ...formData,
+                                          guides: formData.guides.filter(
+                                            (e) => e !== guideId
+                                          ),
+                                        });
+                                      }
+                                    }}
+                                    className={`flex items-center justify-between gap-2 p-2 text-black ${
+                                      item.domain === "skillsetmaster.com"
+                                        ? `bg-yellow-300`
+                                        : "bg-yellow-400"
+                                    }`}
+                                  >
+                                    <div className="flex items-center gap-1.5">
+                                      <Checkbox
+                                        className={`h-4 w-4 border-yellow-600 data-[state=checked]:bg-black data-[state=checked]:text-white`}
+                                        checked={formData.guides?.includes(guideId)}
+                                        onCheckedChange={(checked) => {
+                                          return checked
+                                            ? setFormData({
+                                                ...formData,
+                                                guides: [...formData.guides, guideId],
+                                              })
+                                            : setFormData({
+                                                ...formData,
+                                                guides: formData.guides.filter(
+                                                  (e) => e !== guideId
+                                                ),
+                                              });
+                                        }}
+                                      />
+                                      <span className="font-medium text-sm">
+                                        {formData.guides?.includes(guideId)
+                                          ? "Added to Cart"
+                                          : "Add to Cart"}
+                                      </span>
+                                    </div>
+                                    <span className="text-xs text-white animate-pulse font-medium bg-black px-2 py-0.5 rounded-full">
+                                      Limited Offer!
+                                    </span>
+                                  </div>
+                                </div>
+                              );
+                            }
+                          )}
                         </div>
-                      );
-                    }
+                      </div>
+                    </>
                   )}
+        
+                  <div className="rounded-lg border border-border/40 p-4 mt-4 text-black">
+                    <div className="space-y-3 text-sm">
+                      <div className="flex items-center gap-2">
+                        <Mail className="w-5 h-5" />
+                        <p className="text-gray-900 font-semibold">{info.email}</p>
+                      </div>
+                      <p className="text-gray-700 text-wrap text-xs">
+                        You will get access to the content for these programs on this
+                        email
+                      </p>
+        
+                      <div className="flex items-center gap-2">
+                        <Phone className="w-5 h-5" />
+                        <p className="text-gray-900 font-semibold">{info.phone}</p>
+                      </div>
+                      <p className="text-gray-700 text-wrap text-xs">
+                        We&apos;ll send you WhatsApp updates on this number
+                      </p>
+        
+                      <button
+                        onClick={() => {
+                          router.back();
+                        }}
+                        className={`${
+                          item.domain === "skillsetmaster.com"
+                            ? `text-[#DBB62E]`
+                            : "text-prime"
+                        } underline text-sm font-bold mt-2`}
+                      >
+                        Change
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </>
-          )}
-
-          <div className="rounded-lg border border-border/40 p-4 mt-4 text-black">
-            <div className="space-y-3 text-sm">
-              <div className="flex items-center gap-2">
-                <Mail className="w-5 h-5" />
-                <p className="text-gray-900 font-semibold">{info.email}</p>
-              </div>
-              <p className="text-gray-700 text-wrap text-xs">
-                You will get access to the content for these programs on this
-                email
-              </p>
-
-              <div className="flex items-center gap-2">
-                <Phone className="w-5 h-5" />
-                <p className="text-gray-900 font-semibold">{info.phone}</p>
-              </div>
-              <p className="text-gray-700 text-wrap text-xs">
-                We&apos;ll send you WhatsApp updates on this number
-              </p>
-
-              <button
-                onClick={() => {
-                  router.back();
-                }}
-                className={`${
-                  item.domain === "skillsetmaster.com"
-                    ? `text-[#DBB62E]`
-                    : "text-prime"
-                } underline text-sm font-bold mt-2`}
-              >
-                Change
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
       <div className="fixed w-full flex backdrop-blur-sm bg-white/5 bottom-0">
         <div className="sm:max-w-sm mx-auto w-[85dvw] sm:w-full sm:px-4">
