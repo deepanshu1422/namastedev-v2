@@ -14,25 +14,25 @@ import Image from "next/image";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { usePostHog } from "posthog-js/react";
-import { Courses } from "./page";
+import { Product } from "./page";
 import { useAtom } from "jotai";
 import { userInfo } from "@/lib/jotai";
 import { toast } from "sonner";
-import { beginCheckout } from "@/services/gaEvents";
+import { beginCheckout, viewItem } from "@/services/gaEvents";
 import { sendEvent } from "@/services/fbpixel";
-import { ArrowLeft, Check, CheckCheck, Mail, Phone } from "lucide-react";
+import { ArrowLeft, CheckCheck, Mail, Phone } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import createBundlePayment from "actions/createBundlePayment";
+import createProductPayment from "actions/createProductPayment";
 import { sha256 } from "js-sha256";
 
-export default function Main({ bundleCollection: { items } }: Courses) {
+export default function Main({ productCollection: { items } }: Product) {
   const item = items[0];
-  const { amount, bigAmount, percentage } = item.pricingsCollection.items.find(
+  const { amount, bigAmount, percentage } = item.pricingCollection.items.find(
     (e) => e.countryCode === "IN"
   );
   const currency = "₹";
-  const guides = item.guidesCollection.items;
+  const guides = []
 
   const [info, setInfo] = useAtom(userInfo);
 
@@ -42,9 +42,8 @@ export default function Main({ bundleCollection: { items } }: Courses) {
   let flag = true;
 
   let domainInfo = {
-    name:
-      item.domain === "skillsetmaster.com" ? "SkillSetMaster" : "30DaysCoding",
-    baseColor: item.domain === "skillsetmaster.com" ? "#DBB62E" : "",
+    name: "CareerToolsAI",
+    baseColor: "#2a5cad",
   };
 
   const utmParams = useSearchParams();
@@ -53,7 +52,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
   const utm_campaign = utmParams.get("utm_campaign");
   const utm_content = utmParams.get("utm_content");
   const utm_term = utmParams.get("utm_term");
-
+  
   const [read, setRead] = useState(false);
   const [formData, setFormData] = useState<{
     name: string;
@@ -128,7 +127,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
     if (!info.email) {
       console.log(info);
       router.replace(
-        `/payments/bundles/${item.bundleId}?${
+        `/payments/products/${item.productId}?${
           utm_source ? `&utm_source=${utm_source}` : ""
         }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
           utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
@@ -140,31 +139,31 @@ export default function Main({ bundleCollection: { items } }: Courses) {
 
     if (flag) {
       posthog.capture("add_payment_info", {
-        title: item.bundleTitle,
-        slug: item.slug,
-        itemId: item.bundleId,
-        itemType: "bundle",
+        title: item.title,
+        // slug: item.slug,
+        itemId: item.productId,
+        itemType: "course",
         value:
-          item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+          item.pricingCollection?.items?.find((e) => e.countryCode == "IN")
             ?.amount ?? 499,
       });
 
       // viewItem({
-      //   title: item.bundleTitle,
+      //   title: item.title,
       //   slug: item.slug,
-      //   itemId: item.bundleId,
-      //   itemType: "bundle",
+      //   itemId: item.productId,
+      //   itemType: "course",
       //   value:
-      //     item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+      //     item.pricingCollection?.items?.find((e) => e.countryCode == "IN")
       //       ?.amount ?? 499,
       // });
 
       sendEvent("AddPaymentInfo", {
         value:
-          item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+          item.pricingCollection?.items?.find((e) => e.countryCode == "IN")
             ?.amount ?? 399,
-        content_ids: [item.bundleId],
-        content_type: "bundle",
+        content_ids: [item.productId],
+        content_type: "course",
         em: sha256(formData.email ?? ""),
         // @ts-ignore
         ph: sha256(formData.phone ?? ""),
@@ -203,22 +202,22 @@ export default function Main({ bundleCollection: { items } }: Courses) {
 
       let res;
 
-      if (item.bundleId) {
+      if (item.productId) {
         posthog.capture("begin_checkout", {
-          title: item.bundleTitle,
+          title: item.title,
           amount,
-          itemId: item.bundleId,
-          itemType: "bundle",
+          itemId: item.productId,
+          itemType: "course",
           name: formData.name,
           email: formData.email.toLocaleLowerCase(),
           state: formData.state,
         });
 
         beginCheckout({
-          title: item.bundleTitle,
+          title: item.title,
           amount,
-          itemId: item.bundleId,
-          itemType: "bundle",
+          itemId: item.productId,
+          itemType: "course",
           name: formData.name,
           email: formData.email.toLocaleLowerCase(),
           state: formData.state,
@@ -227,10 +226,10 @@ export default function Main({ bundleCollection: { items } }: Courses) {
 
         sendEvent("InitiateCheckout", {
           value:
-            item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            item.pricingCollection?.items?.find((e) => e.countryCode == "IN")
               ?.amount ?? 399,
-          content_ids: [item.bundleId],
-          content_type: "bundle",
+          content_ids: [item.productId],
+          content_type: "course",
           em: sha256(formData.email ?? ""),
           // @ts-ignore
           ph: sha256(formData.phone ?? ""),
@@ -238,14 +237,13 @@ export default function Main({ bundleCollection: { items } }: Courses) {
           event_source_url: window.location.href,
         });
 
-        res = await createBundlePayment({
-          bundleId: item.bundleId,
+        res = await createProductPayment({
+          productId: item.productId,
           email: formData.email.toLocaleLowerCase(),
           contact: formData.phone,
           name: formData.name,
           state: formData.state,
-          couponCode: "",
-          guides: formData.guides,
+          domain: item.domain,
         });
       } else {
         return;
@@ -275,13 +273,13 @@ export default function Main({ bundleCollection: { items } }: Courses) {
         handler: async function (response: any) {
           setOpenPay(true);
           router.push(
-            `https://${item.domain}/thank-you?title=${item.bundleTitle}&value=${
+            `https://${item.domain}/thank-you?title=${item.title}&value=${
               res.data.amount / 100
-            }&currency=INR&contentType=bundle&name=${
+            }&currency=INR&contentType=course&name=${
               formData.name
             }&email=${formData.email.toLocaleLowerCase()}&state=${
               formData.state
-            }&phone=+91${formData.phone}&id=${item.bundleId}&slug=${item.slug}${
+            }&phone=+91${formData.phone}&id=${item.productId}&slug=${
               utm_source ? `&utm_source=${utm_source}` : ""
             }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
               utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
@@ -302,7 +300,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
           email: formData.email.toLocaleLowerCase(),
           contact: formData.phone,
           address: formData.state,
-          bundleId: item.bundleId,
+          productId: item.productId,
         },
         theme: {
           color: item.domain === "skillsetmaster.com" ? "#DBB62E" : "#134543",
@@ -330,11 +328,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
       <div className="flex flex-col mx-auto sm:px-4 w-full sm:max-w-sm">
         {/* Header with logo and title */}
         <div
-          className={`${
-            item.domain === "skillsetmaster.com"
-              ? `bg-[#DBB62E] text-black`
-              : "bg-bg text-white "
-          } p-6`}
+          className={`bg-[#0d2459] text-white p-6`}
         >
           <button
             onClick={() => {
@@ -359,7 +353,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
             <span className="text-2xl font-bold">
               ₹
               {
-                item.pricingsCollection.items.find(
+                item.pricingCollection.items.find(
                   (e) => e.countryCode === "IN"
                 )?.amount
               }
@@ -373,7 +367,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
             >
               ₹
               {
-                item.pricingsCollection.items.find(
+                item.pricingCollection.items.find(
                   (e) => e.countryCode === "IN"
                 )?.bigAmount
               }
@@ -383,17 +377,13 @@ export default function Main({ bundleCollection: { items } }: Courses) {
 
           <section className="flex flex-col gap-1">
             <div className="flex justify-between">
-              <span>Bundle Price</span>
+              <span>Course Price</span>
               <span className="font-extrabold">
                 {currency} {bigAmount}
               </span>
             </div>
             <div
-              className={`${
-                item.domain === "skillsetmaster.com"
-                  ? `text-white`
-                  : "text-prime"
-              } font-semibold flex justify-between`}
+              className={`text-[#3B82F6] font-semibold flex justify-between`}
             >
               <span>Discount @ {percentage}%</span>
               <span className="font-extrabold">
@@ -498,9 +488,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
                                           className="text-wrap flex gap-1 text-black"
                                         >
                                           <CheckCheck className="mt-1 h-4 w-4 shrink-0" />
-                                          <span className="line-clamp-1">
-                                            {e}
-                                          </span>
+                                          <span className="line-clamp-1">{e}</span>
                                         </li>
                                       ))}
                                 </ul>
@@ -564,7 +552,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
                               </span>
                             </div>
                             <span className="text-sm text-white animate-pulse font-medium bg-black px-2 py-1 rounded-full">
-                              Limited Offer!
+                              Limited Time Offer!
                             </span>
                           </div>
                         </div>
@@ -599,28 +587,17 @@ export default function Main({ bundleCollection: { items } }: Courses) {
                 onClick={() => {
                   router.back();
                 }}
-                className={`${
-                  item.domain === "skillsetmaster.com"
-                    ? `text-[#DBB62E]`
-                    : "text-prime"
-                } underline text-sm font-bold mt-2`}
+                className={`text-[#2a5cad] underline text-sm font-bold mt-2`}
               >
                 Change
               </button>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="fixed w-full flex backdrop-blur-sm bg-white/5 bottom-0">
-        <div className="sm:max-w-sm mx-auto w-[85dvw] sm:w-full sm:px-4">
+
           <button
             disabled={isLoading}
             onClick={makePayment}
-            className={`disabled:animate-pulse w-full ${
-              item.domain === "skillsetmaster.com"
-                ? `hover:bg-[#edc842] bg-[#DBB62E] text-black`
-                : "hover:bg-second/80 bg-second text-white"
-            } my-2 py-3 rounded-lg font-medium`}
+            className={`disabled:animate-pulse w-full hover:bg-[#2a5cad]/80 bg-[#2a5cad] text-white my-5 py-3 rounded-lg font-medium`}
             type="submit"
           >
             Buy @ {currency}{" "}
@@ -637,22 +614,18 @@ export default function Main({ bundleCollection: { items } }: Courses) {
       <PaymentModal
         payModal={openPay}
         setOpenPay={setOpenPay}
-        slug={item.slug}
       />
     </div>
   );
 }
 
 export function PaymentModal({
-  slug,
   payModal,
   setOpenPay,
 }: {
-  slug: string;
   payModal: boolean;
   setOpenPay: Dispatch<SetStateAction<boolean>>;
 }) {
-  const router = useRouter();
 
   return (
     <Dialog open={payModal} onOpenChange={setOpenPay}>
@@ -670,10 +643,6 @@ export function PaymentModal({
           <CardContent className="pt-3 pb-0 mx-auto w-full flex flex-col items-center gap-2">
             <Button
               disabled={true}
-              onClick={() => {
-                router.push(`/dashboard/${slug}`);
-                setOpenPay(false);
-              }}
               className="w-full bg-prime/70 text-white hover:bg-prime"
             >
               Watch Now

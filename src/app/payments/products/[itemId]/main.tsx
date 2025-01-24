@@ -1,5 +1,5 @@
 "use client";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,7 +15,7 @@ import {
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { usePostHog } from "posthog-js/react";
-import { Courses } from "./page";
+import { Product } from "./page";
 import { useAtom } from "jotai";
 import { userInfo } from "@/lib/jotai";
 import { toast } from "sonner";
@@ -23,7 +23,7 @@ import { viewItem } from "@/services/gaEvents";
 import { sendEvent } from "@/services/fbpixel";
 import { sha256 } from "js-sha256";
 
-export default function Main({ courseCollection: { items } }: Courses) {
+export default function Main({ productCollection: { items } }: Product) {
   const item = items[0];
   const [info, setInfo] = useAtom(userInfo);
   const router = useRouter();
@@ -32,9 +32,8 @@ export default function Main({ courseCollection: { items } }: Courses) {
   let flag = true;
 
   let domainInfo = {
-    name:
-      item.domain === "skillsetmaster.com" ? "SkillSetMaster" : "30DaysCoding",
-    baseColor: item.domain === "skillsetmaster.com" ? "#DBB62E" : "",
+    name: "CareerToolsAI",
+    baseColor: "#2a5cad",
   };
 
   const utmParams = useSearchParams();
@@ -123,30 +122,30 @@ export default function Main({ courseCollection: { items } }: Courses) {
     if (flag) {
       posthog.capture("view_item", {
         title: item.title,
-        slug: item.slug,
-        itemId: item.courseId,
-        itemType: "course",
+        // slug: item.slug,
+        itemId: item.productId,
+        itemType: "product",
         value:
-          item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+          item.pricingCollection?.items?.find((e) => e.countryCode == "IN")
             ?.amount ?? 499,
       });
 
       viewItem({
         title: item.title,
-        slug: item.slug,
-        itemId: item.courseId,
-        itemType: "course",
+        slug: window.location.href,
+        itemId: item.productId,
+        itemType: "product",
         value:
-          item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+          item.pricingCollection?.items?.find((e) => e.countryCode == "IN")
             ?.amount ?? 499,
       });
 
       sendEvent("ViewContent", {
         value:
-          item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+          item.pricingCollection?.items?.find((e) => e.countryCode == "IN")
             ?.amount ?? 399,
-        content_ids: [item.courseId],
-        content_type: "course",
+        content_ids: [item.productId],
+        content_type: "product",
         event_source_url: window.location.href,
       });
 
@@ -181,10 +180,11 @@ export default function Main({ courseCollection: { items } }: Courses) {
     });
 
     sendEvent("AddToCart", {
-      value: item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
-      ?.amount ?? 399,
-      content_ids: [item.courseId],
-      content_type: "course",
+      value:
+        item.pricingCollection?.items?.find((e) => e.countryCode == "IN")
+          ?.amount ?? 399,
+      content_ids: [item.productId],
+      content_type: "product",
       em: sha256(formData.email ?? ""),
       // @ts-ignore
       ph: sha256(formData.phone ?? ""),
@@ -193,7 +193,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
     });
 
     router.push(
-      `/checkout/courses/${item.courseId}?${
+      `/checkout/products/${item.productId}?${
         utm_source ? `&utm_source=${utm_source}` : ""
       }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
         utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
@@ -205,24 +205,16 @@ export default function Main({ courseCollection: { items } }: Courses) {
 
   return (
     <div className="flex w-full min-h-screen bg-gray-200">
-      <div className="flex flex-col mx-auto sm:px-4 w-full sm:max-w-sm">
+      <div className="flex flex-col  mx-auto sm:px-4 w-full sm:max-w-sm">
         {/* Header with logo and title */}
         <div
-          className={`${
-            item.domain === "skillsetmaster.com"
-              ? `bg-[#DBB62E] text-black`
-              : "bg-bg text-white "
-          } p-6`}
+          className={`bg-[#0d2459] p-6`}
         >
           <div className="mb-2 flex items-center gap-2">
             {/* Add your logo here */}
             <img src="/logo.png" alt="Logo" className="h-8" />
             <span
-              className={`text-sm font-bold ${
-                item.domain === "skillsetmaster.com"
-                  ? "text-gray-800"
-                  : `text-white/70`
-              }`}
+              className={`text-sm font-bold text-white/70`}
             >
               {domainInfo.name}
             </span>
@@ -233,9 +225,8 @@ export default function Main({ courseCollection: { items } }: Courses) {
             <span className="text-2xl font-bold">
               ₹
               {
-                item.pricingsCollection.items.find(
-                  (e) => e.countryCode === "IN"
-                ).amount
+                item.pricingCollection.items.find((e) => e.countryCode === "IN")
+                  ?.amount
               }
             </span>
             <span
@@ -247,9 +238,8 @@ export default function Main({ courseCollection: { items } }: Courses) {
             >
               ₹
               {
-                item.pricingsCollection.items.find(
-                  (e) => e.countryCode === "IN"
-                ).bigAmount
+                item.pricingCollection.items.find((e) => e.countryCode === "IN")
+                  ?.bigAmount
               }
             </span>
             {/* <span className="text-sm text-white/70 font-semibold">(Tax Included)</span> */}
@@ -359,11 +349,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
             <div className="flex flex-col gap-2 mt-auto">
               <button
                 type="submit"
-                className={`w-full py-3 rounded-lg font-medium ${
-                  item.domain === "skillsetmaster.com"
-                    ? `bg-[#edc842] text-black`
-                    : "bg-second text-white "
-                }`}
+                className={`w-full py-3 rounded-lg font-medium text-white bg-[#2a5cad]`}
               >
                 Next
               </button>
@@ -372,33 +358,21 @@ export default function Main({ courseCollection: { items } }: Courses) {
                 By proceeding you agree to our{" "}
                 <a
                   href="/terms-condition"
-                  className={`${
-                    item.domain === "skillsetmaster.com"
-                      ? `text-[#DBB62E]`
-                      : "text-prime"
-                  }`}
+                  className={`text-[#2a5cad]`}
                 >
                   Terms
                 </a>
                 ,{" "}
                 <a
                   href="/privacy-policy"
-                  className={`${
-                    item.domain === "skillsetmaster.com"
-                      ? `text-[#DBB62E]`
-                      : "text-prime"
-                  }`}
-                >
+                  className={`text-[#2a5cad]`}
+                  >
                   Privacy
                 </a>{" "}
                 &{" "}
                 <a
                   href="/refund-policy"
-                  className={`${
-                    item.domain === "skillsetmaster.com"
-                      ? `text-[#DBB62E]`
-                      : "text-prime"
-                  }`}
+                  className={`text-[#2a5cad]`}
                 >
                   Refund Policy
                 </a>

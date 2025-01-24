@@ -50,7 +50,7 @@ let companyImg2 = [
 function NewImage({ src = "/company1.png" }: { src?: string }) {
   return (
     <Image
-      className="invert opacity-60 dark:invert-0"
+      className="opacity-60 invert-0"
       alt="company"
       src={src}
       width={100}
@@ -62,16 +62,15 @@ function NewImage({ src = "/company1.png" }: { src?: string }) {
 export default function Companies() {
   return (
     <div className={"grid grid-cols-1 gap-3"}>
-      <Reveal>
+      {/* <Reveal>
         <span className="flex gap-4 lg:justify-center items-center">
           <hr className="h-1 max-lg:w-full max-lg:hidden w-20 rounded bg-primary/40" />
           <h2 className={"font-jakarta text-4xl"}>
             Top Companies Where Our Students Work
           </h2>
           <hr className="h-1 max-lg:w-full max-lg:hidden w-20 rounded bg-primary/40" />
-          {/* <hr className="h-1 max-lg:w-full w-20 rounded bg-primary/40" /> */}
         </span>
-      </Reveal>
+      </Reveal> */}
 
       <div className="py-12 relative flex flex-col gap-7 overflow-hidden bg-gradient-to-tr">
         <Reveal>
@@ -88,7 +87,7 @@ export default function Companies() {
             ))}
           </div>
         </Reveal>
-        <div className="h-full w-full absolute z-10 bg-gradient-to-r dark:from-bg from-background max-lg:from-0% from-5% dark:via-bg/10 via-background/10 via-50% dark:to-bg to-background max-lg:to-100% to-95%"></div>
+        <div className="h-full w-full absolute z-10 bg-gradient-to-r from-bg max-lg:from-0% from-5% via-bg/10 via-50% to-bg max-lg:to-100% to-95%"></div>
       </div>
     </div>
   );

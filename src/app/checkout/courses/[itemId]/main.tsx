@@ -18,7 +18,7 @@ import { Courses } from "./page";
 import { useAtom } from "jotai";
 import { userInfo } from "@/lib/jotai";
 import { toast } from "sonner";
-import { beginCheckout, viewItem } from "@/services/gaEvents";
+import { beginCheckout } from "@/services/gaEvents";
 import { sendEvent } from "@/services/fbpixel";
 import { ArrowLeft, CheckCheck, Mail, Phone } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -53,7 +53,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
   const utm_campaign = utmParams.get("utm_campaign");
   const utm_content = utmParams.get("utm_content");
   const utm_term = utmParams.get("utm_term");
-  
+
   const [read, setRead] = useState(false);
   const [formData, setFormData] = useState<{
     name: string;
@@ -149,15 +149,15 @@ export default function Main({ courseCollection: { items } }: Courses) {
             ?.amount ?? 499,
       });
 
-      viewItem({
-        title: item.title,
-        slug: item.slug,
-        itemId: item.courseId,
-        itemType: "course",
-        value:
-          item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
-            ?.amount ?? 499,
-      });
+      // viewItem({
+      //   title: item.title,
+      //   slug: item.slug,
+      //   itemId: item.courseId,
+      //   itemType: "course",
+      //   value:
+      //     item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+      //       ?.amount ?? 499,
+      // });
 
       sendEvent("AddPaymentInfo", {
         value:
@@ -328,7 +328,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
 
   return (
     <div className="flex w-full min-h-screen bg-gray-200">
-      <div className="flex flex-col container mx-auto sm:px-4 w-full sm:max-w-sm">
+      <div className="flex flex-col mx-auto sm:px-4 w-full sm:max-w-sm">
         {/* Header with logo and title */}
         <div
           className={`${
@@ -499,7 +499,9 @@ export default function Main({ courseCollection: { items } }: Courses) {
                                           className="text-wrap flex gap-1 text-black"
                                         >
                                           <CheckCheck className="mt-1 h-4 w-4 shrink-0" />
-                                          <span className="line-clamp-1">{e}</span>
+                                          <span className="line-clamp-1">
+                                            {e}
+                                          </span>
                                         </li>
                                       ))}
                                 </ul>
@@ -563,7 +565,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
                               </span>
                             </div>
                             <span className="text-sm text-white animate-pulse font-medium bg-black px-2 py-1 rounded-full">
-                              Limited Time Offer!
+                              Limited Offer!
                             </span>
                           </div>
                         </div>
@@ -608,7 +610,10 @@ export default function Main({ courseCollection: { items } }: Courses) {
               </button>
             </div>
           </div>
-
+        </div>
+      </div>
+      <div className="fixed w-full flex backdrop-blur-sm bg-white/5 bottom-0">
+        <div className="sm:max-w-sm mx-auto w-[85dvw] sm:w-full sm:px-4">
           <button
             disabled={isLoading}
             onClick={makePayment}
@@ -616,7 +621,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
               item.domain === "skillsetmaster.com"
                 ? `hover:bg-[#edc842] bg-[#DBB62E] text-black`
                 : "hover:bg-second/80 bg-second text-white"
-            } my-5 py-3 rounded-lg font-medium`}
+            } my-2 py-3 rounded-lg font-medium`}
             type="submit"
           >
             Buy @ {currency}{" "}

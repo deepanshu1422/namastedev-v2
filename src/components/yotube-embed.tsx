@@ -7,7 +7,7 @@ import { YTModal } from "@/app/(guide)/testimonials/slider";
 const YoutubeEmbed = ({ embedId }: { embedId: string }) => {
   return (
     <div
-      className={`relative flex-1 overflow-hidden aspect-video bg-background/20 max-w-[700px] w-full rounded-xl shadow-inner transition-all duration-500 mt-7`}
+      className={`relative flex-1 overflow-hidden aspect-video bg-background/20 max-w-[700px] w-full rounded-xl shadow-inner transition-all duration-500`}
     >
       <iframe
         className="h-full w-full left-0 top-0 absolute"
