@@ -410,7 +410,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
         </div>
 
         {/* Form section */}
-        <div className="bg-white p-6 py-2 pb-20 border border-border/20 h-full">
+        <div className="bg-white p-6 py-2 pb-24 border border-border/20 h-full">
           {Boolean(guides.length) && (
             <>
               <div className="flex flex-col gap-3 justify-between text-black">
@@ -609,7 +609,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
           </div>
         </div>
       </div>
-      <div className="fixed w-full flex backdrop-blur-sm bg-white/5 bottom-0">
+      <div className="fixed w-full flex backdrop-blur-sm bg-white/5 bottom-5">
         <div className="sm:max-w-sm mx-auto w-[85dvw] sm:w-full sm:px-4">
           <button
             disabled={isLoading}
