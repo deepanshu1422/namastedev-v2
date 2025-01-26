@@ -138,7 +138,7 @@ export default function Main({ courses }: { courses: CoursesType }) {
       <Courses state={state} courses={courses} />
       <VideoSlider />
       {/* <Reviews /> */}
-      <Success />
+      {/* <Success /> */}
       <Mentors />
       <div className="my-5"></div>
       <Faqs faq={faq} />

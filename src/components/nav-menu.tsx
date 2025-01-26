@@ -120,10 +120,10 @@ export const navTitles: {
   //     },
   //   ],
   // },
-  {
-    title: "Mentors",
-    href: "/mentors",
-  },
+  // {
+  //   title: "Mentors",
+  //   href: "/mentors",
+  // },
   {
     title: "Courses",
     href: "/courses",

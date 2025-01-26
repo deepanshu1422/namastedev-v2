@@ -104,7 +104,7 @@ export default function Home() {
       />
       <Mentors />
       {/* <Store /> */}
-      <Success />
+      {/* <Success /> */}
       <VideoSlider />
       <Faqs faq={faq} />
     </main>
