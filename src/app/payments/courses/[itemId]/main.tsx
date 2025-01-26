@@ -204,7 +204,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
   };
 
   return (
-    <div className="flex w-full min-h-screen bg-gray-200">
+    <div className="flex w-full min-h-dvh bg-gray-200">
       <div className="flex flex-col mx-auto sm:px-4 w-full sm:max-w-sm">
         {/* Header with logo and title */}
         <div
@@ -278,7 +278,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
                   maxLength={30}
                   id="name"
                   placeholder="John Doe"
-                  className="bg-white border-border/40 focus-visible:ring-prime/20 focus-visible:ring-1 focus-visible:ring-offset-1"
+                  className="bg-white border-border/40 focus-visible:ring-prime/20 focus-visible:ring-1 focus-visible:ring-offset-1 max-md:text-base"
                 />
               </div>
               <div className="grid items-center gap-2">
@@ -294,7 +294,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
                   maxLength={40}
                   type="email"
                   placeholder="youremail@gmail.com"
-                  className="bg-white border-border/40 focus-visible:ring-prime/20 focus-visible:ring-1 focus-visible:ring-offset-1"
+                  className="bg-white border-border/40 focus-visible:ring-prime/20 focus-visible:ring-1 focus-visible:ring-offset-1 max-md:text-base"
                 />
               </div>
               <div className="grid items-center gap-2">
@@ -310,7 +310,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
                   maxLength={40}
                   type="email"
                   placeholder="youremail@gmail.com"
-                  className="bg-white border-border/40 focus-visible:ring-prime/20 focus-visible:ring-1 focus-visible:ring-offset-1"
+                  className="bg-white border-border/40 focus-visible:ring-prime/20 focus-visible:ring-1 focus-visible:ring-offset-1 max-md:text-base"
                 />
               </div>
               <div className="grid items-center gap-2">
@@ -326,7 +326,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
                     }
                     type="number"
                     id="phone"
-                    className="pl-9 bg-white border-border/40 focus-visible:ring-prime/20 focus-visible:ring-1 focus-visible:ring-offset-1"
+                    className="pl-9 bg-white border-border/40 focus-visible:ring-prime/20 focus-visible:ring-1 focus-visible:ring-offset-1 max-md:text-base"
                     maxLength={10}
                   />
                 </div>
@@ -339,7 +339,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
                   value={formData.state}
                   onValueChange={(e) => setFormData({ ...formData, state: e })}
                 >
-                  <SelectTrigger className="bg-white border-border/40 focus-visible:ring-prime/20 focus-visible:ring-1 focus-visible:ring-offset-1 w-full col-span-4 capitalize">
+                  <SelectTrigger className="bg-white border-border/40 focus-visible:ring-prime/20 focus-visible:ring-1 focus-visible:ring-offset-1 max-md:text-base w-full col-span-4 capitalize">
                     <SelectValue placeholder="Select State" />
                   </SelectTrigger>
                   <SelectContent>
