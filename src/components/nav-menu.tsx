@@ -2,8 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-
-import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -13,6 +11,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -146,71 +145,65 @@ export const navTitles: {
   // },
 ];
 
-export function NavMenu() {
+interface NavItem {
+  title: string;
+  href: string;
+  description: string;
+}
+
+interface NavSection {
+  title: string;
+  items: NavItem[];
+}
+
+const ListItem = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
+>(({ className, title, children, href, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <Link
+          ref={ref}
+          href={href ?? "#"}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className
+          )}
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+        </Link>
+      </NavigationMenuLink>
+    </li>
+  );
+});
+ListItem.displayName = "ListItem";
+
+export function NavMenu({ items }: { items: NavSection[] }) {
   const pathName = usePathname();
 
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        {navTitles.map(({ title, href }, i) => (
-          <NavigationMenuItem key={i}>
-            {typeof href === "string" ? (
-              <Link href={href} legacyBehavior passHref>
-                <NavigationMenuLink
-                  className={`${navigationMenuTriggerStyle()} ${
-                    pathName === href && "hidden"
-                  }`}
-                >
-                  {title}
-                </NavigationMenuLink>
-              </Link>
-            ) : (
-              <>
-                <NavigationMenuTrigger>{title}</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="bg-head/20 grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                    {href.map((component) => (
-                      <ListItem
-                        key={component.title}
-                        title={component.title}
-                        href={component.href}
-                      >
-                        {component.description}
-                      </ListItem>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </>
-            )}
+        {items.map((section) => (
+          <NavigationMenuItem key={section.title}>
+            <NavigationMenuTrigger>{section.title}</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                {section.items.map((item) => (
+                  <ListItem key={item.title} title={item.title} href={item.href}>
+                    {item.description}
+                  </ListItem>
+                ))}
+              </ul>
+            </NavigationMenuContent>
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>
     </NavigationMenu>
   );
 }
-
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "flex justify-between items-center select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-prime/30 hover:text-accent-foreground focus:bg-prime/30 focus:text-accent-foreground"
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <ChevronRight className="w-3 h-3" />
-          {/* <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p> */}
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
-ListItem.displayName = "ListItem";
