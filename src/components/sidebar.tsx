@@ -8,6 +8,8 @@ import {
   HomeIcon,
   Network,
   Star,
+  Code2,
+  BookOpen,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -31,38 +33,53 @@ const userMenu = [
 const navBar = [
   {
     title: "Courses",
-    icon: <FileText className="h-4 w-4 md:h-5 md:w-5" />,
+    icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
     href: "/courses",
-    //   selected: path === "/courses",
+    recent: [],
   },
   {
     title: "Projects",
-    icon: <Blocks className="h-4 w-4 md:h-5 md:w-5" />,
+    icon: <Code2 className="h-4 w-4 md:h-5 md:w-5" />,
     href: "/projects",
-    //   selected: path === "/courses",
-  },
-  {
-    title: "Interview",
-    icon: <Check className="h-4 w-4 md:h-5 md:w-5" />,
-    href: "/interview",
-  },
-  {
-    title: "Guides",
-    icon: <BookMarked className="h-4 w-4 md:h-5 md:w-5" />,
-    href: "/guides",
-    //   selected: path === "/guides",
     recent: [
       {
-        title: "20+ Tech Job Guides",
-        link: "/guides",
+        title: "Real-time Chat App",
+        link: "/projects/create-a-real-time-chat-application-with-mern-stack",
       },
       {
-        title: "25 Full-Stack Projects Guide",
-        link: "/guides",
+        title: "E-commerce App",
+        link: "/projects/e-commerce-application-with-react-redux-toolkit-tailwind-css-and-firebase",
       },
       {
-        title: "11+ AI Guides",
-        link: "/guides",
+        title: "Expense Tracker",
+        link: "/projects/build-expense-tracker-app-with-mern-stack",
+      },
+    ],
+  },
+  {
+    title: "Interview Prep",
+    icon: <BookOpen className="h-4 w-4 md:h-5 md:w-5" />,
+    href: "/interview",
+    recent: [
+      {
+        title: "JavaScript",
+        link: "/interview/javascript",
+      },
+      {
+        title: "React",
+        link: "/interview/react",
+      },
+      {
+        title: "Python",
+        link: "/interview/python",
+      },
+      {
+        title: "SQL",
+        link: "/interview/sql",
+      },
+      {
+        title: "Node.js",
+        link: "/interview/nodejs",
       },
     ],
   },
@@ -112,24 +129,24 @@ const navBar = [
     href: "/motivation",
     recent: [
       {
-        title: "Motivation",
+        title: "Daily Motivation",
         link: "/motivation",
       },
       {
-        title: "Journey",
+        title: "Success Journey",
         link: "/journey",
       },
       {
-        title: "DSA sheet",
-        // icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
+        title: "DSA Sheet",
         link: "/dsa",
-        //   selected: path === "/dsa",
       },
       {
-        title: "DSA visualizer",
-        // icon: <Eye className="h-4 w-4 md:h-5 md:w-5" />,
+        title: "DSA Visualizer",
         link: "/visualizer",
-        //   selected: path === "/visualizer",
+      },
+      {
+        title: "Resume Builder",
+        link: "/resume",
       },
     ],
   },
