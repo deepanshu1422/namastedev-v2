@@ -30,11 +30,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
+        <GoogleTagManagerWebContainerHead />
         <GoogleAnalytics gaId="G-4M8L4RM0LB" />
         <MixpanelAnalytics
           projectToken={process.env.NEXT_PUBLIC_MIXPANEL_TOKEN!}
         />
-        <GoogleTagManagerWebContainerHead />
         <Script
           id="razorpay"
           src="https://checkout.razorpay.com/v1/checkout.js"
