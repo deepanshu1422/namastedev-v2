@@ -65,6 +65,7 @@ type BundleItem = {
         answer: string;
       }[];
     };
+    domain: string;
   };
 };
 
@@ -82,6 +83,7 @@ export default function Main({
     learn,
     rating,
     shortDescription,
+    domain,
   },
 }: BundleItem) {
   const sheet = useSearchParams().get("sheet");
@@ -245,13 +247,10 @@ export default function Main({
     return (
       <main className="relative min-h-svh overflow-clip">
         <Hero
-          // addToCart={addToCartEvent}
           bundleId={bundleId}
           rating={rating}
-          slug={slug}
-          title={bundleTitle ?? "NULL"}
+          title={bundleTitle}
           image={coverImage?.url}
-          shortDescription={shortDescription ?? "NULL"}
           price={
             pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
               amount: 0,
@@ -259,16 +258,15 @@ export default function Main({
               percentage: 0,
             }
           }
+          shortDescription={shortDescription}
           courseOffer={courseOffer}
-          setOpen={setOpen}
-          setYtOpen={setOpenYt}
+          videoId="hOcTPtZYTto"
+          domain={process.env.NEXT_PUBLIC_DOMAIN ?? "30dayscoding.com"}
         />
         <Detail
           slug={slug}
-          // addToCart={addToCartEvent}
           bundleId={bundleId}
           coursesCollection={coursesCollection}
-          // longDescription={mdx}
           image={coverImage?.url}
           price={
             pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
@@ -310,7 +308,6 @@ export default function Main({
         <YTModal open={openYt} setOpen={setOpenYt} url="hOcTPtZYTto" />
         <Floating
           slug={slug}
-          // addToCart={addToCartEvent}
           price={
             pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
               amount: 0,

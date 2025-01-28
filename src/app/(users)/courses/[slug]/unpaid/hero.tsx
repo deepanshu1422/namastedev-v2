@@ -21,6 +21,8 @@ import { sendEvent } from "@/services/fbpixel";
 import { sha256 } from "js-sha256";
 import { useSession } from "next-auth/react";
 import { BASE_URL } from "@/util/constants";
+import { useRouter, useSearchParams } from "next/navigation";
+import { getPaymentUrl } from "@/lib/payment";
 
 export default function Hero({
   title,
@@ -31,11 +33,8 @@ export default function Hero({
   rating,
   shortDescription,
   courseOffer,
-  setYtOpen,
-  setOpen,
+  domain,
 }: {
-  setOpen: Dispatch<SetStateAction<boolean>>;
-  setYtOpen: Dispatch<SetStateAction<boolean>>;
   slug: string;
   title: string;
   courseId: string;
@@ -48,8 +47,11 @@ export default function Hero({
   rating: number;
   shortDescription: string;
   courseOffer: string[];
+  domain: string;
 }) {
   const { data } = useSession();
+  const router = useRouter();
+  const utmParams = useSearchParams();
   const [timeLeft, setTimeLeft] = useState({
     hours: 2,
     minutes: 30,
@@ -96,6 +98,23 @@ export default function Hero({
 
     return () => clearInterval(timer);
   }, []);
+
+  const handleEnrollClick = () => {
+    const paymentUrl = getPaymentUrl({
+      title,
+      amount: price.amount,
+      itemId: courseId,
+      itemType: "course",
+      domain,
+      utm_source: utmParams.get("utm_source"),
+      utm_medium: utmParams.get("utm_medium"),
+      utm_campaign: utmParams.get("utm_campaign"),
+      utm_content: utmParams.get("utm_content"),
+      utm_term: utmParams.get("utm_term"),
+    });
+    router.push(paymentUrl);
+  };
+
   return (
     <>
       <div className={`w-full grid bg-zinc-950/60 shadow`}>
@@ -204,19 +223,7 @@ export default function Hero({
 
                 <div className="flex flex-col gap-2 py-1">
                   <Button
-                    onClick={() => {
-                      setOpen(true);
-                      // sendEvent("InitiateCheckout", {
-                      //   amount: price.amount,
-                      //   content_ids: [courseId],
-                      //   content_type: "course",
-                      //   em: sha256(data?.user?.email ?? ""),
-                      //   // @ts-ignore
-                      //   ph: sha256(data?.user?.phone ?? ""),
-                      //   fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
-                      //   event_source_url: window.location.href,
-                      // });
-                    }}
+                    onClick={handleEnrollClick}
                     size={"lg"}
                     className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
                   >

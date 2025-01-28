@@ -5,6 +5,8 @@ import { useState, useEffect, Suspense } from "react";
 import { Reviews } from "../checkout";
 import dynamic from 'next/dynamic';
 import { motion } from "framer-motion";
+import { useRouter, useSearchParams } from "next/navigation";
+import { getPaymentUrl } from "@/lib/payment";
 
 // Lazy load the curriculum component
 const CourseCurriculum = dynamic(() => import("./curriculum"), {
@@ -20,12 +22,28 @@ export default function ProfessionalHero({
   price,
   shortDescription,
   courseOffer,
-  setOpen,
   videoId,
+  domain,
+}: {
+  bundleId: string;
+  title: string;
+  image: string;
+  rating: number;
+  price: {
+    amount: number;
+    bigAmount: number;
+    percentage: number;
+  };
+  shortDescription: string;
+  courseOffer: string[];
+  videoId: string;
+  domain: string;
 }) {
   const [isPlaying] = useState(true);
   const [seatsLeft, setSeatsLeft] = useState(30);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const router = useRouter();
+  const utmParams = useSearchParams();
 
   // Only keep the seats decrease effect
   useEffect(() => {
@@ -35,6 +53,22 @@ export default function ProfessionalHero({
 
     return () => clearInterval(randomDecrease);
   }, []);
+
+  const handleEnrollClick = () => {
+    const paymentUrl = getPaymentUrl({
+      title,
+      amount: price.amount,
+      itemId: bundleId,
+      itemType: "bundle",
+      domain,
+      utm_source: utmParams.get("utm_source"),
+      utm_medium: utmParams.get("utm_medium"),
+      utm_campaign: utmParams.get("utm_campaign"),
+      utm_content: utmParams.get("utm_content"),
+      utm_term: utmParams.get("utm_term"),
+    });
+    router.push(paymentUrl);
+  };
 
   return (
     <>
@@ -96,16 +130,16 @@ export default function ProfessionalHero({
           <div className="flex flex-col items-center gap-3 mt-8 mb-12">
             <div className="flex items-baseline gap-3">
               <span className="text-4xl font-bold bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
-                ₹999
+                ₹{price.amount}
               </span>
-              <span className="text-lg text-emerald-100/60 line-through">₹4999</span>
+              <span className="text-lg text-emerald-100/60 line-through">₹{price.bigAmount}</span>
               <span className="text-sm px-2 py-1 bg-emerald-500/10 rounded-md text-emerald-400 font-medium border border-emerald-500/20">
-                80% OFF
+                {price.percentage}% OFF
               </span>
             </div>
             <div className="flex items-center gap-2 text-emerald-300/80">
               <Sparkles className="w-4 h-4 text-yellow-400 animate-pulse" />
-              <span className="text-sm font-medium">Limited Time Offer - Save ₹4000 Today!</span>
+              <span className="text-sm font-medium">Limited Time Offer - Save ₹{price.bigAmount - price.amount} Today!</span>
             </div>
           </div>
 
@@ -120,15 +154,14 @@ export default function ProfessionalHero({
           <div className="flex flex-col items-center gap-6 mt-12">
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
-                onClick={() => setOpen(true)}
+                onClick={handleEnrollClick}
                 size="lg"
                 className="group relative px-8 py-3 bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 rounded-xl"
               >
                 <span className="absolute inset-0 bg-white/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative flex items-center">
                   <BookOpen className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                  <span>Enroll Now at ₹999</span>
-                  
+                  <span>Enroll Now at ₹{price.amount}</span>
                 </div>
               </Button>
 
@@ -155,7 +188,7 @@ export default function ProfessionalHero({
       </Suspense>
 
       {/* Add Sticky Price Bar */}
-      <StickyPriceBar price={999} originalPrice={4999} setOpen={setOpen} />
+      <StickyPriceBar price={price.amount} originalPrice={price.bigAmount} handleEnrollClick={handleEnrollClick} />
     </>
   );
 }
@@ -180,7 +213,7 @@ function StatCard({ icon, value, label }) {
 }
 
 // Sticky Price Bar Component
-function StickyPriceBar({ price, originalPrice, setOpen }) {
+function StickyPriceBar({ price, originalPrice, handleEnrollClick }) {
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-[#0A1A1A]/80 border-t border-emerald-500/20 backdrop-blur-md z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -192,7 +225,7 @@ function StickyPriceBar({ price, originalPrice, setOpen }) {
               </span>
               <span className="text-base text-emerald-100/60 line-through">₹{originalPrice}</span>
               <span className="text-xs px-2 py-1 bg-emerald-500/10 rounded-md text-emerald-400 font-medium border border-emerald-500/20">
-                80% OFF
+                {Math.round((1 - price/originalPrice) * 100)}% OFF
               </span>
             </div>
             <div className="hidden sm:flex items-center gap-2 text-emerald-300/80">
@@ -201,7 +234,7 @@ function StickyPriceBar({ price, originalPrice, setOpen }) {
             </div>
           </div>
           <Button
-            onClick={() => setOpen(true)}
+            onClick={handleEnrollClick}
             size="lg"
             className="group relative px-6 py-2 bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 rounded-xl"
           >

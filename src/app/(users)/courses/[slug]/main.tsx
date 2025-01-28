@@ -96,6 +96,7 @@ type CourseItem = {
         };
       }[];
     };
+    domain: string;
   };
 };
 
@@ -113,6 +114,7 @@ export default function Main({
     rating,
     shortDescription,
     guidesCollection,
+    domain,
   },
 }: CourseItem) {
   const [vidIndex, setVidIndex] = useState<{
@@ -232,8 +234,7 @@ export default function Main({
             }
           }
           courseOffer={courseOffer}
-          setOpen={setOpenUpsell}
-          setYtOpen={setOpenYt}
+          domain={process.env.NEXT_PUBLIC_DOMAIN ?? "30dayscoding.com"}
         />
         <Detail
           cover={courseImage?.url}
