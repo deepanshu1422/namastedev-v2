@@ -30,7 +30,7 @@ export default function Details({
   addToCart,
   faqs,
 }: {
-  addToCart: () => void;
+  addToCart?: () => void;
   bundleId: string;
   slug: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -171,7 +171,7 @@ export default function Details({
       </div>
 
       <Checkout
-        addToCart={addToCart}
+        // addToCart={addToCart}
         slug={slug}
         // @ts-ignore
         bundleId={bundleId}

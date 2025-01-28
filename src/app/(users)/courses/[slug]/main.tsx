@@ -159,13 +159,13 @@ export default function Main({
             ?.amount ?? 399,
       });
 
-      // sendEvent("ViewContent", {
-      //   amount: pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
-      //   399,
-      //   content_ids: [courseId],
-      //   content_type: "course",
-      //   event_source_url: window.location.href,
-      // });
+      sendEvent("ViewContent", {
+        amount: pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ??
+        399,
+        content_ids: [courseId],
+        content_type: "course",
+        event_source_url: window.location.href,
+      });
       flag = false;
     }
   }, [pathName]);
@@ -178,17 +178,17 @@ export default function Main({
   const utm_content = utmParams.get("utm_content");
   const utm_term = utmParams.get("utm_term");
 
-  async function addToCartEvent() {
-    router.push(
-      `/payments/courses/${courseId}?${
-        utm_source ? `&utm_source=${utm_source}` : ""
-      }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
-        utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
-      }${utm_content ? `&utm_content=${utm_content}` : ""}${
-        utm_term ? `&utm_term=${utm_term}` : ""
-      }`
-    );
-  }
+  // async function addToCartEvent() {
+  //   router.push(
+  //     `/payments/courses/${courseId}?${
+  //       utm_source ? `&utm_source=${utm_source}` : ""
+  //     }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
+  //       utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
+  //     }${utm_content ? `&utm_content=${utm_content}` : ""}${
+  //       utm_term ? `&utm_term=${utm_term}` : ""
+  //     }`
+  //   );
+  // }
 
   function Unpaid() {
     // function addToCartEvent() {
@@ -254,11 +254,12 @@ export default function Main({
           faqs={faqCollection.items}
         />
         <UpsellModal
-          addToCart={addToCartEvent}
+          // addToCart={addToCartEvent}
           open={openUpsell}
+          setPaymentOpen={setOpen}
           setOpen={setOpenUpsell}
         />
-        {/* <PaymentSheet
+        <PaymentSheet
           slug={slug}
           posthog={posthog}
           open={open}
@@ -281,7 +282,7 @@ export default function Main({
           }
           curreny={"INR"}
           setOpenPay={setOpenPay}
-        /> */}
+        />
         <YTModal open={openYt} setOpen={setOpenYt} url="05xRJjzcYcQ" />
         <Floating
           slug={slug}

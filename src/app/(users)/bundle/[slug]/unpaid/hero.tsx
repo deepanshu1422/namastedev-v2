@@ -36,7 +36,7 @@ export default function Hero({
 }: {
   setOpen: Dispatch<SetStateAction<boolean>>;
   setYtOpen: Dispatch<SetStateAction<boolean>>;
-  addToCart: () => void;
+  addToCart?: () => void;
   bundleId: string;
   rating: number;
   title: string;
@@ -144,18 +144,18 @@ export default function Hero({
                   <div className="flex flex-col gap-2 py-1">
                     <Button
                       onClick={() => {
-                        // setOpen(true);
-                        // sendEvent("InitiateCheckout", {
-                        //   content_ids: [bundleId],
-                        //   content_type: "bundle",
-                        //   content_name: title,
-                        //   em: sha256(data?.user?.email ?? ""),
-                        //   // @ts-ignore
-                        //   ph: sha256(data?.user?.phone ?? ""),
-                        //   fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
-                        //   event_source_url: window.location.href,
-                        // });
-                        addToCart();
+                        setOpen(true);
+                        sendEvent("InitiateCheckout", {
+                          content_ids: [bundleId],
+                          content_type: "bundle",
+                          content_name: title,
+                          em: sha256(data?.user?.email ?? ""),
+                          // @ts-ignore
+                          ph: sha256(data?.user?.phone ?? ""),
+                          fn: sha256(data?.user?.name?.split(" ")[0] ?? ""),
+                          event_source_url: window.location.href,
+                        });
+                        // addToCart();
                       }}
                       size={"lg"}
                       className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"

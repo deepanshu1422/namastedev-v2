@@ -3,7 +3,7 @@
 import Hero from "./unpaid/hero";
 import Detail from "./unpaid/details";
 import { Floating, PaymentModal, PaymentSheet } from "./payments";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { YTModal } from "@/app/(guide)/testimonials/slider";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -123,14 +123,14 @@ export default function Main({
             ?.amount ?? 999,
       });
 
-      // sendEvent("ViewContent", {
-      //   amount:
-      //     pricingsCollection?.items?.find((e) => e.countryCode == "IN")
-      //       ?.amount ?? 399,
-      //   content_ids: [bundleId],
-      //   content_type: "course",
-      //   event_source_url: window.location.href,
-      // });
+      sendEvent("ViewContent", {
+        amount:
+          pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            ?.amount ?? 399,
+        content_ids: [bundleId],
+        content_type: "course",
+        event_source_url: window.location.href,
+      });
       flag = false;
     }
   }, [pathName]);
@@ -143,17 +143,17 @@ export default function Main({
   const utm_content = utmParams.get("utm_content");
   const utm_term = utmParams.get("utm_term");
 
-  async function addToCartEvent() {
-    router.push(
-      `/payments/bundles/${bundleId}?${
-        utm_source ? `&utm_source=${utm_source}` : ""
-      }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
-        utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
-      }${utm_content ? `&utm_content=${utm_content}` : ""}${
-        utm_term ? `&utm_term=${utm_term}` : ""
-      }`
-    );
-  }
+  // async function addToCartEvent() {
+  //   router.push(
+  //     `/payments/bundles/${bundleId}?${
+  //       utm_source ? `&utm_source=${utm_source}` : ""
+  //     }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
+  //       utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
+  //     }${utm_content ? `&utm_content=${utm_content}` : ""}${
+  //       utm_term ? `&utm_term=${utm_term}` : ""
+  //     }`
+  //   );
+  // }
 
   // function Paid() {
   //   return (
@@ -245,7 +245,7 @@ export default function Main({
     return (
       <main className="relative min-h-svh overflow-clip">
         <Hero
-          addToCart={addToCartEvent}
+          // addToCart={addToCartEvent}
           bundleId={bundleId}
           rating={rating}
           slug={slug}
@@ -265,7 +265,7 @@ export default function Main({
         />
         <Detail
           slug={slug}
-          addToCart={addToCartEvent}
+          // addToCart={addToCartEvent}
           bundleId={bundleId}
           coursesCollection={coursesCollection}
           // longDescription={mdx}
@@ -283,7 +283,7 @@ export default function Main({
           setYtOpen={setOpenYt}
           faqs={faqCollection.items}
         />
-        {/* <PaymentSheet
+        <PaymentSheet
           open={open}
           guides={guidesCollection.items}
           slug={slug}
@@ -306,11 +306,11 @@ export default function Main({
           }
           curreny={"INR"}
           setOpenPay={setOpenPay}
-        /> */}
+        />
         <YTModal open={openYt} setOpen={setOpenYt} url="05xRJjzcYcQ" />
         <Floating
           slug={slug}
-          addToCart={addToCartEvent}
+          // addToCart={addToCartEvent}
           price={
             pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
               amount: 0,
