@@ -283,7 +283,7 @@ export default async function LessonPage({
                 </span>
               </div>
             </div>
-            <div className="flex flex-wrap gap-3 text-sm text-gray-400 font-medium">
+            {/* <div className="flex flex-wrap gap-3 text-sm text-gray-400 font-medium">
               <span className="flex items-center gap-2">
                 <PlayCircle className="h-4 w-4 text-prime" />
                 {lessonId} out of {allLessons.total} lessons
@@ -296,7 +296,7 @@ export default async function LessonPage({
                 <Star className="w-4 h-4 text-prime" />
                 {rating} Rating
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -336,7 +336,7 @@ export default async function LessonPage({
 
           {/* Tabs */}
           <div className="flex max-sm:flex-col-reverse justify-between gap-3">
-            <div className="flex gap-3 max-sm:mx-auto">
+            {/* <div className="flex gap-3 max-sm:mx-auto">
               {["Overview", "About", "FAQ", "Reviews"].map((tab) => (
                 <button
                   key={tab}
@@ -349,7 +349,7 @@ export default async function LessonPage({
                   {tab}
                 </button>
               ))}
-            </div>
+            </div> */}
             <div className="flex items-center gap-3 max-sm:mx-auto">
               <Link
                 href={
@@ -516,47 +516,91 @@ export default async function LessonPage({
             </div>
           </div>
 
-          {/* Author Section */}
-          <div className="border border-white/20 rounded-lg p-4">
-            <h2 className="font-medium text-white mb-4">Author</h2>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-green-700 rounded-full relative overflow-hidden">
-                <Image
-                  src={author.profilePic.url}
-                  alt={author.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="font-medium text-white">{author.name}</h3>
-                  <svg
-                    className="w-4 h-4 text-prime"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <p className="text-sm text-gray-400">SDE @ Google</p>
-              </div>
-              <div className="ml-auto flex gap-1 items-center">
-                <Star className="w-5 h-5 fill-prime/40 text-prime" />
-                <span className="text-white ml-1">{author.reviews}</span>
-              </div>
-            </div>
-          </div>
-
           {/* Upselling Section */}
-          <div className="sticky top-3 flex flex-col gap-3">
-            <UpsellLinkedIn />
-            <UpsellStudyAbroad />
-            <UpsellMasterAI />
+          <div className="sticky top-3 flex flex-col gap-4">
+            {/* Master Development */}
+            <div className="group border border-white/20 rounded-xl p-5 hover:bg-white/5 transition-all hover:border-prime/50">
+              <Link 
+                href="/bundle/complete-package-all-course-bundle" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col gap-3"
+              >
+                <div className="flex justify-between items-start">
+                  <h3 className="font-bold text-prime text-lg flex items-center gap-2 pb-1 border-b border-white">
+                    Master Development
+                    <span className="animate-bounce">🚀</span>
+                  </h3>
+                  <span className="bg-prime/20 text-prime px-3 py-1 rounded-full text-xs font-bold">90% off</span>
+                </div>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  Access 500+ videos, 50+ projects covering DSA, Full Stack, MERN, NextJS, and more!
+                </p>
+                <div className="flex items-center gap-3">
+                  <span className="line-through text-gray-500 text-sm">₹9,999</span>
+                  <span className="text-white font-bold text-xl">₹999</span>
+                  <span className="ml-auto text-prime group-hover:translate-x-1 transition-transform">
+                    Learn More →
+                  </span>
+                </div>
+              </Link>
+            </div>
+
+            {/* Master AI */}
+            <div className="group border border-white/20 rounded-xl p-5 hover:bg-white/5 transition-all hover:border-prime/50">
+              <Link 
+                href="https://www.skillsetmaster.com/ai" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col gap-3"
+              >
+                <div className="flex justify-between items-start">
+                  <h3 className="font-bold text-prime text-lg flex items-center gap-2 pb-1 border-b border-white">
+                    Master AI
+                    <span className="animate-pulse">🤖</span>
+                  </h3>
+                  <span className="bg-prime/20 text-prime px-3 py-1 rounded-full text-xs font-bold">70% off</span>
+                </div>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  Build AI automations, master prompt engineering, and create AI-powered applications.
+                </p>
+                <div className="flex items-center gap-3">
+                  <span className="line-through text-gray-500 text-sm">₹14,999</span>
+                  <span className="text-white font-bold text-xl">₹1,499</span>
+                  <span className="ml-auto text-prime group-hover:translate-x-1 transition-transform">
+                    Learn More →
+                  </span>
+                </div>
+              </Link>
+            </div>
+
+            {/* Master Data Analytics */}
+            <div className="group border border-white/20 rounded-xl p-5 hover:bg-white/5 transition-all hover:border-prime/50">
+              <Link 
+                href="https://www.skillsetmaster.com/data-analyst" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col gap-3"
+              >
+                <div className="flex justify-between items-start">
+                  <h3 className="font-bold text-prime text-lg flex items-center gap-2 pb-1 border-b border-white">
+                    Master Data Analytics
+                    <span className="animate-pulse">📊</span>
+                  </h3>
+                  <span className="bg-prime/20 text-prime px-3 py-1 rounded-full text-xs font-bold">70% off</span>
+                </div>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  Learn SQL, Python, Power BI & Tableau with real-world projects and case studies.
+                </p>
+                <div className="flex items-center gap-3">
+                  <span className="line-through text-gray-500 text-sm">₹14,899</span>
+                  <span className="text-white font-bold text-xl">₹1,499</span>
+                  <span className="ml-auto text-prime group-hover:translate-x-1 transition-transform">
+                    Learn More →
+                  </span>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

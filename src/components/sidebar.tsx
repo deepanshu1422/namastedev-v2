@@ -45,14 +45,20 @@ const navBar = [
       {
         title: "Real-time Chat App",
         link: "/projects/create-a-real-time-chat-application-with-mern-stack",
+        image: "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?q=80&w=1200&auto=format&fit=crop",
+        description: "Build a complete real-time chat application using MERN stack"
       },
       {
         title: "E-commerce App",
         link: "/projects/e-commerce-application-with-react-redux-toolkit-tailwind-css-and-firebase",
+        image: "https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=1200&auto=format&fit=crop",
+        description: "Create a full-featured e-commerce platform with React and Firebase"
       },
       {
         title: "Expense Tracker",
         link: "/projects/build-expense-tracker-app-with-mern-stack",
+        image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1200&auto=format&fit=crop",
+        description: "Develop an expense tracking application using MERN stack"
       },
     ],
   },
