@@ -10,6 +10,7 @@ import { usePostHog } from "posthog-js/react";
 import { addToCart, viewItem } from "@/services/gaEvents";
 import { sendEvent } from "@/services/fbpixel";
 import { YTModal } from "@/app/(guide)/testimonials/slider";
+import StickyBar from "./sticky-bar";
 
 type BundleItem = {
   item: {
@@ -145,7 +146,9 @@ export default function Main({
       <Lifetime image={coverImage.url} setYtOpen={setOpenYt} />
       <Roadmap />
       <Feature handleAddToCart={handleAddToCart} faqCollection={faqCollection} />
+
       <YTModal open={openYt} setOpen={setOpenYt} url="05xRJjzcYcQ" />
+      <StickyBar handleAddToCart={handleAddToCart} />
     </div>
   );
 }
