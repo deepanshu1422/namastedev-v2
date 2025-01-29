@@ -19,12 +19,19 @@ import { Courses } from "./page";
 import { useAtom } from "jotai";
 import { userInfo } from "@/lib/jotai";
 import { toast } from "sonner";
-import { viewItem } from "@/services/gaEvents";
+import { beginCheckout, viewItem } from "@/services/gaEvents";
 import { sendEvent } from "@/services/fbpixel";
 import { sha256 } from "js-sha256";
+import createPayments from "actions/createPayments";
 
 export default function Main({ courseCollection: { items } }: Courses) {
   const item = items[0];
+
+  const { amount, bigAmount, percentage } = item.pricingsCollection.items.find(
+    (e) => e.countryCode === "IN"
+  );
+  const currency = "₹";
+
   const [info, setInfo] = useAtom(userInfo);
   const router = useRouter();
   const pathName = usePathname();
@@ -161,7 +168,53 @@ export default function Main({ courseCollection: { items } }: Courses) {
     });
   }
 
-  const proceedPayment = () => {
+  // const proceedPayment = () => {
+  //   if (formData.name.length < 2)
+  //     return validationError({ message: "Name too short" });
+  //   if (formData.email.split("@").length !== 2)
+  //     return validationError({ message: "Invalid Email" });
+  //   if (formData.email !== formData.email2)
+  //     return validationError({ message: "Confirm Email doesn't Match" });
+  //   if (formData.phone.length !== 10)
+  //     return validationError({ message: "Invalid Phone Number" });
+  //   if (!states.includes(formData.state))
+  //     return validationError({ message: "Select a State" });
+
+  //   setInfo({
+  //     email: formData.email,
+  //     name: formData.name,
+  //     phone: formData.phone,
+  //     state: formData.state,
+  //   });
+
+  //   sendEvent("AddToCart", {
+  //     value:
+  //       item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+  //         ?.amount ?? 399,
+  //     content_ids: [item.courseId],
+  //     content_type: "course",
+  //     em: sha256(formData.email ?? ""),
+  //     // @ts-ignore
+  //     ph: sha256(formData.phone ?? ""),
+  //     fn: sha256(formData.name?.split(" ")[0] ?? ""),
+  //     event_source_url: window.location.href,
+  //   });
+
+  //   router.push(
+  //     `/checkout/courses/${item.courseId}?${
+  //       utm_source ? `&utm_source=${utm_source}` : ""
+  //     }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
+  //       utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
+  //     }${utm_content ? `&utm_content=${utm_content}` : ""}${
+  //       utm_term ? `&utm_term=${utm_term}` : ""
+  //     }`
+  //   );
+  // };
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [openPay, setOpenPay] = useState(false);
+
+  const makePayment = async () => {
     if (formData.name.length < 2)
       return validationError({ message: "Name too short" });
     if (formData.email.split("@").length !== 2)
@@ -173,34 +226,132 @@ export default function Main({ courseCollection: { items } }: Courses) {
     if (!states.includes(formData.state))
       return validationError({ message: "Select a State" });
 
-    setInfo({
-      email: formData.email,
-      name: formData.name,
-      phone: formData.phone,
-      state: formData.state,
-    });
+    try {
+      setIsLoading(true);
 
-    sendEvent("AddToCart", {
-      value: item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
-      ?.amount ?? 399,
-      content_ids: [item.courseId],
-      content_type: "course",
-      em: sha256(formData.email ?? ""),
+      let res;
+
+      if (item.courseId) {
+        posthog.capture("begin_checkout", {
+          title: item.title,
+          amount,
+          itemId: item.courseId,
+          itemType: "course",
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          state: formData.state,
+        });
+
+        beginCheckout({
+          title: item.title,
+          amount,
+          itemId: item.courseId,
+          itemType: "course",
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          state: formData.state,
+          loggedIn: status === "authenticated",
+        });
+
+        sendEvent("InitiateCheckout", {
+          value:
+            item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+              ?.amount ?? 399,
+          content_ids: [item.courseId],
+          content_type: "course",
+          em: sha256(formData.email ?? ""),
+          // @ts-ignore
+          ph: sha256(formData.phone ?? ""),
+          fn: sha256(formData.name?.split(" ")[0] ?? ""),
+          event_source_url: window.location.href,
+        });
+
+        res = await createPayments({
+          courseId: item.courseId,
+          email: formData.email.toLocaleLowerCase(),
+          contact: formData.phone,
+          name: formData.name,
+          state: formData.state,
+          couponCode: "",
+          guides: [],
+          domain: item.domain,
+        });
+      } else {
+        return;
+      }
+      // make an endpoint to get this key
+      const key = process.env.NEXT_PUBLIC_RAZORPAY_CLIENT;
+
+      if (res.error) {
+        toast("Error Occured", {
+          position: "bottom-center",
+          description: res.message ?? JSON.stringify(res.error),
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      console.log(res.data);
+
+      const options = {
+        key: key,
+        description: formData.state,
+        image: "/icon.png",
+        name: domainInfo.name,
+        currency: res.data.currency,
+        amount: res.data.amount / 100,
+        order_id: res.data.orderId,
+        handler: async function (response: any) {
+          setOpenPay(true);
+          router.push(
+            `https://${item.domain}/thank-you?title=${item.title}&value=${
+              res.data.amount / 100
+            }&currency=INR&contentType=course&name=${
+              formData.name
+            }&email=${formData.email.toLocaleLowerCase()}&state=${
+              formData.state
+            }&phone=+91${formData.phone}&id=${item.courseId}&slug=${item.slug}${
+              utm_source ? `&utm_source=${utm_source}` : ""
+            }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
+              utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
+            }${utm_content ? `&utm_content=${utm_content}` : ""}${
+              utm_term ? `&utm_term=${utm_term}` : ""
+            }`
+          );
+        },
+        // callback_url: ,
+        redirect: true,
+        prefill: {
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          contact: formData.phone,
+        },
+        notes: {
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          contact: formData.phone,
+          address: formData.state,
+          courseId: item.courseId,
+        },
+        theme: {
+          color: item.domain === "skillsetmaster.com" ? "#DBB62E" : "#134543",
+        },
+      };
+
       // @ts-ignore
-      ph: sha256(formData.phone ?? ""),
-      fn: sha256(formData.name?.split(" ")[0] ?? ""),
-      event_source_url: window.location.href,
-    });
+      const paymentObject = new window.Razorpay(options);
 
-    router.push(
-      `/checkout/courses/${item.courseId}?${
-        utm_source ? `&utm_source=${utm_source}` : ""
-      }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
-        utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
-      }${utm_content ? `&utm_content=${utm_content}` : ""}${
-        utm_term ? `&utm_term=${utm_term}` : ""
-      }`
-    );
+      paymentObject.on("payment.captured", function (response: any) {
+        alert("Payment successful");
+        setIsLoading(false);
+      });
+
+      paymentObject.open();
+
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -227,15 +378,16 @@ export default function Main({ courseCollection: { items } }: Courses) {
               {domainInfo.name}
             </span>
           </div>
-          <h1 className="text-sm mb-2 text-wrap line-clamp-2">{item.title}</h1>
+          {/* <h1 className="text-sm mb-2 text-wrap line-clamp-2">{}</h1> */}
           {/* <p className="text-wrap">{JSON.stringify(info)}</p> */}
-          <div className="flex items-baseline gap-2">
+          <h1 className="mt-1 text-sm text-wrap line-clamp-2 font-semibold">{item.title}</h1>
+          <div className="flex items-baseline gap-2 mb-2">
             <span className="text-2xl font-bold">
               ₹
               {
                 item.pricingsCollection.items.find(
                   (e) => e.countryCode === "IN"
-                ).amount
+                )?.amount
               }
             </span>
             <span
@@ -249,11 +401,38 @@ export default function Main({ courseCollection: { items } }: Courses) {
               {
                 item.pricingsCollection.items.find(
                   (e) => e.countryCode === "IN"
-                ).bigAmount
+                )?.bigAmount
               }
             </span>
             {/* <span className="text-sm text-white/70 font-semibold">(Tax Included)</span> */}
           </div>
+
+          {/* <section className="flex flex-col gap-1">
+            <div className="flex justify-between">
+              <span>Course Price</span>
+              <span className="font-extrabold">
+                {currency} {bigAmount}
+              </span>
+            </div>
+            <div
+              className={`${
+                item.domain === "skillsetmaster.com"
+                  ? `text-white`
+                  : "text-prime"
+              } font-semibold flex justify-between`}
+            >
+              <span>Discount @ {percentage}%</span>
+              <span className="font-extrabold">
+                -{currency} {bigAmount - amount}
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span>Total Amount</span>
+              <span className="font-extrabold">
+                {currency} {amount}
+              </span>
+            </div>
+          </section> */}
         </div>
 
         {/* Form section */}
@@ -261,7 +440,7 @@ export default function Main({ courseCollection: { items } }: Courses) {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              proceedPayment();
+              makePayment();
             }}
             className="text-black flex flex-col gap-6 h-full"
           >
@@ -358,14 +537,15 @@ export default function Main({ courseCollection: { items } }: Courses) {
 
             <div className="flex flex-col gap-2 mt-auto">
               <button
-                type="submit"
-                className={`w-full py-3 rounded-lg font-medium ${
+                disabled={isLoading}
+                className={`disabled:animate-pulse w-full ${
                   item.domain === "skillsetmaster.com"
-                    ? `bg-[#edc842] text-black`
-                    : "bg-second text-white "
-                }`}
+                    ? `hover:bg-[#edc842] bg-[#DBB62E] text-black`
+                    : "hover:bg-second/80 bg-second text-white"
+                } my-2 py-3 rounded-lg font-medium`}
+                type="submit"
               >
-                Next
+                Buy @ {currency} {amount}
               </button>
 
               <p className="text-xs text-gray-500 font-semibold text-center text-wrap">
