@@ -39,7 +39,7 @@ export default function Checkout({
     <div className="max-tab:hidden w-[500px] h-fit sticky -translate-y-[330px] top-[28rem]">
       <div className="max-w-sm bg-gradient-to-b from-head to-second/20 flex flex-col gap-4 relative max-tab:mx-auto ml-auto shadow-lg backdrop-blur-sm shadow-black/40 overflow-hidden p-0.5">
         <div
-          // onClick={() => setYtOpen(true)}
+          onClick={() => setYtOpen(true)}
           className="group relative cursor-pointer hover:opacity-90 transition-opacity duration-300"
         >
           <Image
@@ -49,11 +49,11 @@ export default function Checkout({
             width={1200}
             className="bg-prime/20 shadow-lg shadow-black/30"
           />
-          {/* <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background/40 p-0.5 rounded-full shadow-2xl shadow-black group-active:-translate-y-[58%] group-hover:-translate-y-2/3 transition-transform">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background/40 p-0.5 rounded-full shadow-2xl shadow-black group-active:-translate-y-[58%] group-hover:-translate-y-2/3 transition-transform">
             <div className="bg-white/50 backdrop-blur-sm p-4 rounded-full">
               <Play className="w-8 h-8 stroke-[3] fill-white" />
             </div>
-          </div> */}
+          </div>
         </div>
         <div className="flex flex-col gap-3 px-4 py-5">
           <>
