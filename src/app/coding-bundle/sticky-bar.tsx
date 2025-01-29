@@ -3,9 +3,25 @@
 import { Button } from "@/components/ui/button";
 import { CreditCard } from "lucide-react";
 import { useEffect, useState } from "react";
+import { addToCart } from "@/services/gaEvents";
+import { sendEvent } from "@/services/fbpixel";
+import { usePostHog } from "posthog-js/react";
 
-export default function StickyBar({ handleAddToCart }: { handleAddToCart: () => void }) {
+export default function StickyBar({ 
+  handleAddToCart,
+  bundleTitle,
+  bundleId,
+  amount = 999,
+  slug = ""
+}: { 
+  handleAddToCart: () => void;
+  bundleTitle?: string;
+  bundleId?: string;
+  amount?: number;
+  slug?: string;
+}) {
   const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 30, seconds: 0 });
+  const posthog = usePostHog();
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -43,15 +59,43 @@ export default function StickyBar({ handleAddToCart }: { handleAddToCart: () => 
     return () => clearInterval(timer);
   }, []);
 
+  const handleClick = async () => {
+    if (bundleId && bundleTitle) {
+      posthog.capture("add_to_cart", {
+        title: bundleTitle,
+        itemId: bundleId,
+        itemType: "bundle",
+        value: amount
+      });
+
+      addToCart({
+        title: bundleTitle,
+        itemId: bundleId,
+        itemType: "bundle",
+        value: amount,
+        slug
+      });
+
+      sendEvent("AddToCart", {
+        content_ids: [bundleId],
+        content_type: "bundle",
+        value: amount,
+        currency: "INR"
+      });
+    }
+
+    handleAddToCart();
+  };
+
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-t border-green-900/30">
       <div className="flex flex-col gap-2 p-3">
         <button
-          onClick={handleAddToCart}
+          onClick={handleClick}
           className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-gradient-to-r from-green-500 to-green-700 text-white font-bold hover:shadow-lg hover:shadow-green-500/20 transform hover:-translate-y-0.5 transition-all duration-300"
         >
           <CreditCard className="h-5 w-5" />
-          <span>Pay ₹999</span>
+          <span>Pay ₹{amount}</span>
           <span className="text-sm line-through opacity-75">₹9999</span>
         </button>
         

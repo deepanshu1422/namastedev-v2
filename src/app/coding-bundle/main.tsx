@@ -148,7 +148,13 @@ export default function Main({
       <Feature handleAddToCart={handleAddToCart} faqCollection={faqCollection} />
 
       <YTModal open={openYt} setOpen={setOpenYt} url="05xRJjzcYcQ" />
-      <StickyBar handleAddToCart={handleAddToCart} />
+      <StickyBar 
+        handleAddToCart={handleAddToCart}
+        bundleTitle={bundleTitle}
+        bundleId={bundleId}
+        amount={pricingsCollection?.items?.find((e) => e.countryCode == "IN")?.amount ?? 999}
+        slug={slug}
+      />
     </div>
   );
 }
