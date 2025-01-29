@@ -19,11 +19,17 @@ import { Courses } from "./page";
 import { useAtom } from "jotai";
 import { userInfo } from "@/lib/jotai";
 import { toast } from "sonner";
-import { viewItem } from "@/services/gaEvents";
+import { beginCheckout, viewItem } from "@/services/gaEvents";
 import { sendEvent } from "@/services/fbpixel";
+import createBundlePayment from "actions/createBundlePayment";
+import { sha256 } from "js-sha256";
 
 export default function Main({ bundleCollection: { items } }: Courses) {
   const item = items[0];
+  const { amount, bigAmount, percentage } = item.pricingsCollection.items.find(
+    (e) => e.countryCode === "IN"
+  );
+  const currency = "₹";
   const [info, setInfo] = useAtom(userInfo);
   const router = useRouter();
   const pathName = usePathname();
@@ -31,9 +37,10 @@ export default function Main({ bundleCollection: { items } }: Courses) {
   let flag = true;
 
   let domainInfo = {
-    name: item.domain === "skillsetmaster.com" ? "SkillSetMaster" : "30DaysCoding",
-    baseColor: item.domain === "skillsetmaster.com" ? "#DBB62E" : ""
-  }
+    name:
+      item.domain === "skillsetmaster.com" ? "SkillSetMaster" : "30DaysCoding",
+    baseColor: item.domain === "skillsetmaster.com" ? "#DBB62E" : "",
+  };
 
   const utmParams = useSearchParams();
   const utm_source = utmParams.get("utm_source");
@@ -152,6 +159,9 @@ export default function Main({ bundleCollection: { items } }: Courses) {
     }
   }, [pathName]);
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [openPay, setOpenPay] = useState(false);
+
   function validationError({ message }: { message: string }) {
     toast.error("Error Occured", {
       description: message,
@@ -159,7 +169,37 @@ export default function Main({ bundleCollection: { items } }: Courses) {
     });
   }
 
-  const proceedPayment = () => {
+  // const proceedPayment = () => {
+  //   if (formData.name.length < 2)
+  //     return validationError({ message: "Name too short" });
+  //   if (formData.email.split("@").length !== 2)
+  //     return validationError({ message: "Invalid Email" });
+  //   if (formData.email !== formData.email2)
+  //     return validationError({ message: "Confirm Email doesn't Match" });
+  //   if (formData.phone.length !== 10)
+  //     return validationError({ message: "Invalid Phone Number" });
+  //   if (!states.includes(formData.state))
+  //     return validationError({ message: "Select a State" });
+
+  //   setInfo({
+  //     email: formData.email,
+  //     name: formData.name,
+  //     phone: formData.phone,
+  //     state: formData.state,
+  //   });
+
+  //   router.push(
+  //     `/checkout/bundles/${item.bundleId}?${
+  //       utm_source ? `&utm_source=${utm_source}` : ""
+  //     }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
+  //       utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
+  //     }${utm_content ? `&utm_content=${utm_content}` : ""}${
+  //       utm_term ? `&utm_term=${utm_term}` : ""
+  //     }`
+  //   );
+  // };
+
+  const makePayment = async () => {
     if (formData.name.length < 2)
       return validationError({ message: "Name too short" });
     if (formData.email.split("@").length !== 2)
@@ -171,37 +211,160 @@ export default function Main({ bundleCollection: { items } }: Courses) {
     if (!states.includes(formData.state))
       return validationError({ message: "Select a State" });
 
-    setInfo({
-      email: formData.email,
-      name: formData.name,
-      phone: formData.phone,
-      state: formData.state,
-    });
+    try {
+      setIsLoading(true);
 
-    router.push(
-      `/checkout/bundles/${item.bundleId}?${
-        utm_source ? `&utm_source=${utm_source}` : ""
-      }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
-        utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
-      }${utm_content ? `&utm_content=${utm_content}` : ""}${
-        utm_term ? `&utm_term=${utm_term}` : ""
-      }`
-    );
+      let res;
+
+      if (item.bundleId) {
+        posthog.capture("begin_checkout", {
+          title: item.bundleTitle,
+          amount,
+          itemId: item.bundleId,
+          itemType: "bundle",
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          state: formData.state,
+        });
+
+        beginCheckout({
+          title: item.bundleTitle,
+          amount,
+          itemId: item.bundleId,
+          itemType: "bundle",
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          state: formData.state,
+          loggedIn: status === "authenticated",
+        });
+
+        sendEvent("InitiateCheckout", {
+          value:
+            item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+              ?.amount ?? 399,
+          content_ids: [item.bundleId],
+          content_type: "bundle",
+          em: sha256(formData.email ?? ""),
+          // @ts-ignore
+          ph: sha256(formData.phone ?? ""),
+          fn: sha256(formData.name?.split(" ")[0] ?? ""),
+          event_source_url: window.location.href,
+        });
+
+        res = await createBundlePayment({
+          bundleId: item.bundleId,
+          email: formData.email.toLocaleLowerCase(),
+          contact: formData.phone,
+          name: formData.name,
+          state: formData.state,
+          couponCode: "",
+          guides: [],
+        });
+      } else {
+        return;
+      }
+      // make an endpoint to get this key
+      const key = process.env.NEXT_PUBLIC_RAZORPAY_CLIENT;
+
+      if (res.error) {
+        toast("Error Occured", {
+          position: "bottom-center",
+          description: res.message ?? JSON.stringify(res.error),
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      console.log(res.data);
+
+      const options = {
+        key: key,
+        description: formData.state,
+        image: "/icon.png",
+        name: domainInfo.name,
+        currency: res.data.currency,
+        amount: res.data.amount / 100,
+        order_id: res.data.orderId,
+        handler: async function (response: any) {
+          setOpenPay(true);
+          router.push(
+            `https://${item.domain}/thank-you?title=${item.bundleTitle}&value=${
+              res.data.amount / 100
+            }&currency=INR&contentType=bundle&name=${
+              formData.name
+            }&email=${formData.email.toLocaleLowerCase()}&state=${
+              formData.state
+            }&phone=+91${formData.phone}&id=${item.bundleId}&slug=${item.slug}${
+              utm_source ? `&utm_source=${utm_source}` : ""
+            }${utm_medium ? `&utm_medium=${utm_medium}` : ""}${
+              utm_campaign ? `&utm_campaign=${utm_campaign}` : ""
+            }${utm_content ? `&utm_content=${utm_content}` : ""}${
+              utm_term ? `&utm_term=${utm_term}` : ""
+            }`
+          );
+        },
+        // callback_url: ,
+        redirect: true,
+        prefill: {
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          contact: formData.phone,
+        },
+        notes: {
+          name: formData.name,
+          email: formData.email.toLocaleLowerCase(),
+          contact: formData.phone,
+          address: formData.state,
+          bundleId: item.bundleId,
+        },
+        theme: {
+          color: item.domain === "skillsetmaster.com" ? "#DBB62E" : "#134543",
+        },
+      };
+
+      // @ts-ignore
+      const paymentObject = new window.Razorpay(options);
+
+      paymentObject.on("payment.captured", function (response: any) {
+        alert("Payment successful");
+        setIsLoading(false);
+      });
+
+      paymentObject.open();
+
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="flex w-full min-h-dvh bg-gray-200">
       <div className="flex flex-col mx-auto sm:px-4 w-full sm:max-w-sm">
         {/* Header with logo and title */}
-        <div className={`${item.domain === "skillsetmaster.com" ? `bg-[#DBB62E] text-black` : "bg-bg text-white "} p-6`}>
+        <div
+          className={`${
+            item.domain === "skillsetmaster.com"
+              ? `bg-[#DBB62E] text-black`
+              : "bg-bg text-white "
+          } p-6`}
+        >
           <div className="mb-2 flex items-center gap-2">
             {/* Add your logo here */}
             <img src="/logo.png" alt="Logo" className="h-8" />
-            <span className={`text-sm font-bold ${item.domain === "skillsetmaster.com" ? "text-gray-800" :`text-white/70`}`}>
+            <span
+              className={`text-sm font-bold ${
+                item.domain === "skillsetmaster.com"
+                  ? "text-gray-800"
+                  : `text-white/70`
+              }`}
+            >
               {domainInfo.name}
             </span>
           </div>
-          <h1 className="text-sm mb-2 text-wrap line-clamp-2">{item.bundleTitle}</h1>
+          <h1 className="text-sm mb-2 text-wrap line-clamp-2">
+            {item.bundleTitle}
+          </h1>
           {/* <p className="text-wrap">{JSON.stringify(info)}</p> */}
           <div className="flex items-baseline gap-2">
             <span className="text-2xl font-bold">
@@ -212,7 +375,13 @@ export default function Main({ bundleCollection: { items } }: Courses) {
                 )?.amount
               }
             </span>
-            <span className={`line-through ${item.domain === "skillsetmaster.com" ? "text-gray-800" :`text-white/70`}`}>
+            <span
+              className={`line-through ${
+                item.domain === "skillsetmaster.com"
+                  ? "text-gray-800"
+                  : `text-white/70`
+              }`}
+            >
               ₹
               {
                 item.pricingsCollection.items.find(
@@ -229,7 +398,7 @@ export default function Main({ bundleCollection: { items } }: Courses) {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              proceedPayment();
+              makePayment();
             }}
             className="text-black flex flex-col gap-6 h-full"
           >
@@ -326,23 +495,50 @@ export default function Main({ bundleCollection: { items } }: Courses) {
 
             <div className="flex flex-col gap-2 mt-auto">
               <button
+                disabled={isLoading}
+                onClick={makePayment}
+                className={`disabled:animate-pulse w-full ${
+                  item.domain === "skillsetmaster.com"
+                    ? `hover:bg-[#edc842] bg-[#DBB62E] text-black`
+                    : "hover:bg-second/80 bg-second text-white"
+                } my-2 py-3 rounded-lg font-medium`}
                 type="submit"
-                className={`w-full py-3 rounded-lg font-medium ${item.domain === "skillsetmaster.com" ? `bg-[#edc842] text-black` : "bg-second text-white "}`}
               >
-                Next
+                Buy @ {currency} {amount}
               </button>
 
               <p className="text-xs text-gray-500 font-semibold text-center text-wrap">
                 By proceeding you agree to our{" "}
-                <a href="/terms-condition" className={`${item.domain === "skillsetmaster.com" ? `text-[#DBB62E]` : "text-prime"}`}>
+                <a
+                  href="/terms-condition"
+                  className={`${
+                    item.domain === "skillsetmaster.com"
+                      ? `text-[#DBB62E]`
+                      : "text-prime"
+                  }`}
+                >
                   Terms
                 </a>
                 ,{" "}
-                <a href="/privacy-policy" className={`${item.domain === "skillsetmaster.com" ? `text-[#DBB62E]` : "text-prime"}`}>
+                <a
+                  href="/privacy-policy"
+                  className={`${
+                    item.domain === "skillsetmaster.com"
+                      ? `text-[#DBB62E]`
+                      : "text-prime"
+                  }`}
+                >
                   Privacy
                 </a>{" "}
                 &{" "}
-                <a href="/refund-policy" className={`${item.domain === "skillsetmaster.com" ? `text-[#DBB62E]` : "text-prime"}`}>
+                <a
+                  href="/refund-policy"
+                  className={`${
+                    item.domain === "skillsetmaster.com"
+                      ? `text-[#DBB62E]`
+                      : "text-prime"
+                  }`}
+                >
                   Refund Policy
                 </a>
               </p>

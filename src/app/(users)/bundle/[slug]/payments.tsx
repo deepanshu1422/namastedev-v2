@@ -516,25 +516,19 @@ export function PaymentSheet({
       footer: (
         <div className="w-full mt-auto flex flex-col gap-2">
           <Button
-            onClick={() => {
-              if (formData.name.length < 2)
-                return validationError({ message: "Name too short" });
-              if (formData.email.split("@").length !== 2)
-                return validationError({ message: "Invalid Email" });
-              if (formData.email !== formData.email2)
-                return validationError({
-                  message: "Confirm Email doesn't Match",
-                });
-              if (formData.phone.length !== 10)
-                return validationError({ message: "Invalid Phone Number" });
-              if (!states.includes(formData.state))
-                return validationError({ message: "Select a State" });
-              setFormState(1);
-            }}
-            className="w-full mt-auto hover:bg-prime/80 bg-prime/60 text-white"
+            disabled={isLoading}
+            onClick={makePayment}
+            className="disabled:animate-pulse w-full hover:bg-prime/80 bg-prime/60 text-white"
             type="submit"
           >
-            Proceed
+            Buy @ INR{" "}
+            {amount +
+              formData.guides.reduce(
+                (sum, cur) =>
+                  // @ts-ignore
+                  sum + guides.find((e) => e.guideId === cur)?.pricing.amount,
+                0
+              )}
           </Button>
         </div>
       ),
