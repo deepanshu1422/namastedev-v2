@@ -47,9 +47,31 @@ export default function Notifications() {
             </a>
           </div>
         </div>
-        <UpsellLinkedIn />
+        
+        <div className="">
+          <div className="rounded-lg border-prime border bg-card max-h-fit h-fit w-full flex flex-col gap-2 p-1">
+            <Badge className="rounded bg-prime/60 hover:bg-prime/80 text-white text-center w-full">
+              📚 Course Updates
+            </Badge>
+            <ul className="text-sm px-2 list-disc list-inside">
+              <li>50+ New videos added</li>
+              <li>10+ projects uploaded</li>
+              <li>Course materials updated</li>
+            </ul>
+            <a
+              href="https://docs.google.com/document/d/1Z1uKHBU5Shb3UeFYWkuAu2rHACU-uOx-1sYsyrX7meM/edit"
+              target="_blank"
+              className="p-2 bg-prime/80 hover:bg-prime text-white rounded text-center"
+            >
+              All guides for you
+            </a>
+          </div>
+        </div>
+        
+
+        {/* <UpsellLinkedIn />
         <UpsellStudyAbroad />
-        <UpsellMasterAI />
+        <UpsellMasterAI /> */}
       </div>
     </div>
   );
