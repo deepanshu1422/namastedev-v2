@@ -13,6 +13,10 @@ import {
   PlayCircle,
   Briefcase,
   MessageSquare,
+  User,
+  Notebook,
+  Activity,
+  Settings,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -212,7 +216,34 @@ const navBar = [
         link: "/resume",
       },
     ],
-  }
+  },
+  // {
+  //   title: "Profile",
+  //   icon: <User className="h-4 w-4 md:h-5 md:w-5" />,
+  //   href: "/dashboard/profile",
+  //   recent: [
+  //     {
+  //       title: "My Notes",
+  //       link: "/dashboard/profile/notes",
+  //       icon: <Notebook className="h-4 w-4" />
+  //     },
+  //     {
+  //       title: "Saved Items",
+  //       link: "/dashboard/profile/saved",
+  //       icon: <BookMarked className="h-4 w-4" />
+  //     },
+  //     {
+  //       title: "Course Progress",
+  //       link: "/dashboard/profile/progress",
+  //       icon: <Activity className="h-4 w-4" />
+  //     },
+  //     {
+  //       title: "Settings",
+  //       link: "/dashboard/profile/settings",
+  //       icon: <Settings className="h-4 w-4" />
+  //     },
+  //   ],
+  // },
 ];
 
 export default function Sidebar() {
