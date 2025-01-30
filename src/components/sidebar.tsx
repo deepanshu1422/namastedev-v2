@@ -10,6 +10,8 @@ import {
   Star,
   Code2,
   BookOpen,
+  PlayCircle,
+  Briefcase,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -20,6 +22,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 const userMenu = [
   {
@@ -157,11 +160,35 @@ const navBar = [
     ],
   },
   {
-    title: "Resume",
-    icon: <FileText className="h-4 w-4 md:h-5 md:w-5" />,
-    href: "/resume",
-    //   selected: path === "/resume",
+    title: "Interactive",
+    icon: <PlayCircle className="h-4 w-4 md:h-5 md:w-5" />,
+    href: "/interactive",
+    recent: [
+      {
+        title: "JavaScript Fundamentals",
+        link: "/interactive/javascript",
+      },
+      {
+        title: "React Essentials",
+        link: "/interactive/react",
+      },
+      {
+        title: "Node.js & Express",
+        link: "/interactive/nodejs",
+      }
+    ],
   },
+  {
+    title: "Career Tools",
+    icon: <Briefcase className="h-4 w-4 md:h-5 md:w-5" />,
+    href: "/bundle",
+    recent: [
+      {
+        title: "Resume Builder",
+        link: "/resume",
+      },
+    ],
+  }
 ];
 
 export default function Sidebar() {
