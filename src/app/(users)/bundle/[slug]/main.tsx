@@ -307,7 +307,7 @@ export default function Main({
           curreny={"INR"}
           setOpenPay={setOpenPay}
         />
-        <YTModal open={openYt} setOpen={setOpenYt} url="m9VqXLiX-1o" />
+        <YTModal open={openYt} setOpen={setOpenYt} url="hOcTPtZYTto" />
         <Floating
           slug={slug}
           // addToCart={addToCartEvent}

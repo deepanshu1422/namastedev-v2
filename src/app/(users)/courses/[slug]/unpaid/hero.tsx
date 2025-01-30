@@ -110,7 +110,7 @@ export default function Hero({
             </Link>
 
             <div
-              // onClick={() => setYtOpen(true)}
+              onClick={() => setYtOpen(true)}
               className="tab:hidden flex flex-col gap-4 relative max-tab:mx-auto"
             >
               <Image
@@ -120,11 +120,11 @@ export default function Hero({
                 width={1200}
                 className="bg-prime/20 aspect-[6/4]"
               />
-              {/* <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background/40 p-0.5 rounded-full shadow-2xl shadow-black group-hover:-translate-y-2/3 transition-transform">
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background/40 p-0.5 rounded-full shadow-2xl shadow-black group-hover:-translate-y-2/3 transition-transform">
                 <div className="bg-white/50 backdrop-blur-sm p-4 rounded-full">
                   <Play className="w-8 h-8 stroke-[3] fill-white" />
                 </div>
-              </div> */}
+              </div>
             </div>
 
             <div className="flex flex-col px-6 gap-3">
