@@ -12,6 +12,7 @@ import {
   BookOpen,
   PlayCircle,
   Briefcase,
+  MessageSquare,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -114,7 +115,7 @@ const navBar = [
   },
   {
     title: "Testimonials",
-    icon: <Star className="h-4 w-4 md:h-5 md:w-5" />,
+    icon: <MessageSquare className="h-4 w-4 md:h-5 md:w-5" />,
     href: "/testimonials",
     //   selected: path === "/interview",
     recent: [
@@ -175,6 +176,29 @@ const navBar = [
       {
         title: "Node.js & Express",
         link: "/interactive/nodejs",
+      }
+    ],
+  },
+  {
+    title: "Examples",
+    icon: <Code2 className="h-4 w-4 md:h-5 md:w-5" />,
+    href: "/examples",
+    recent: [
+      {
+        title: "AI Integration",
+        link: "/examples#ai-integration",
+      },
+      {
+        title: "Frontend Patterns",
+        link: "/examples#frontend",
+      },
+      {
+        title: "Backend Patterns",
+        link: "/examples#backend",
+      },
+      {
+        title: "Testing Patterns",
+        link: "/examples#testing",
       }
     ],
   },

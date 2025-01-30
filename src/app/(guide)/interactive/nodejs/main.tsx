@@ -15,7 +15,8 @@ import {
   MessageSquare,
   Layers,
   Gauge,
-  Cloud
+  Cloud,
+  Sparkles
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -252,9 +253,17 @@ export default function Main() {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
+      {/* New notification banner */}
+      <div className="bg-muted/50 border rounded-lg p-3 mb-6 text-sm text-muted-foreground flex items-center gap-2">
+        <Sparkles className="h-4 w-4 text-primary" />
+        <p>We're constantly adding new lessons and updating existing ones to keep you up to date with the latest practices.</p>
+      </div>
+
       <div className="flex items-center gap-4 mb-8">
-        <Link href="/interactive" className="hover:text-primary">
-          <ArrowLeft className="h-6 w-6" />
+        <Link href="/interactive">
+          <Button variant="ghost" size="icon">
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
         </Link>
         <div>
           <h1 className="text-3xl font-bold mb-2">Node.js & Express Interactive Learning</h1>

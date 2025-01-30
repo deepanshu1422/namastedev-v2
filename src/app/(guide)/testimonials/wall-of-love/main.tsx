@@ -88,7 +88,7 @@ export default function Main() {
                 className="rounded-full text-white bg-transparent hover:bg-prime/20 border-2 border-prime/60"
               >
                 <Image className="mr-1.5 h-5 w-5" />
-                Gallary
+                Gallery
               </Button>
             </Link>
             <Link
