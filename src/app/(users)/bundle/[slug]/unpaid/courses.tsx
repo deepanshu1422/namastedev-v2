@@ -106,8 +106,8 @@ function Course({
   return (
     <Card className="select-none flex gap-2 bg-second/50 p-1 border-dashed border-2 border-prime/40 rounded-none">
       <Link
-        href={'#'}
-        className="flex gap-2 h-fit group"
+        href={`/courses/${slug}`}
+        className="flex gap-2 h-fit group w-full"
       >
         <div className="relative bg-card/50 aspect-square rounded-md overflow-hidden min-h-11 h-full shrink-0">
           <Image
