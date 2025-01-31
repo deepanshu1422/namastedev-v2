@@ -19,6 +19,7 @@ import {
   Sparkles
 } from "lucide-react";
 import Link from "next/link";
+import React from 'react';
 import { cn } from "@/lib/utils";
 
 const lessons = [

@@ -172,8 +172,6 @@ export default function Details({
     queryFn: async ({ queryKey }) => {
       const mdx = await getChapterData({ id: queryKey[0] });
 
-      // console.log(JSON.stringify(mdx.mdx));
-
       const mdxSource = await serialize({
         source: mdx.mdx,
       });

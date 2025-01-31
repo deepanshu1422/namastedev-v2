@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-import Main from "./main";
+import Main from "../main";
+import React from 'react';
 
 type Props = {
   params: {
@@ -15,5 +16,5 @@ export function generateMetadata({ params }: Props): Metadata {
 }
 
 export default function Page({ params: { slug } }: Props) {
-  return <Main slug={slug} />;
+  return <Main />;
 } 

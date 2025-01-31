@@ -19,7 +19,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -41,6 +41,7 @@ import { serialize } from "next-mdx-remote-client/serialize";
 import { Badge } from "@/components/ui/badge";
 // import { courseProgress } from "@/lib/jotai";
 import { useAtom } from "jotai";
+import { getProgress, updateChapterProgress } from "../../../../../actions/updateProgress";
 
 const CodeSnippet = ({ children }: { children: string }) => (
   <div className="md:max-w-full horizontal-scroll w-full bg-slate-500 max-sm:w-[90dvw] font-semibold shrink">
@@ -105,7 +106,7 @@ export default function Details({
         1 && module === modulesCollection.total - 1;
 
   function prevVideo() {
-    if (vidIndex.chapterIndex === 0 && vidIndex.modIndex === 0) return 0;
+    if (vidIndex.chapterIndex === 0 && vidIndex.modIndex === 0) return;
     if (vidIndex.chapterIndex === 0 && vidIndex.modIndex !== 0) {
       setVidIndex({
         modIndex: vidIndex.modIndex - 1,
@@ -127,7 +128,7 @@ export default function Details({
           1 &&
       vidIndex.modIndex === modulesCollection.total - 1
     )
-      return 0;
+      return;
 
     if (
       vidIndex.chapterIndex ===
@@ -177,13 +178,19 @@ export default function Details({
           nextVideo={nextVideo}
           thumbnail={courseImage.url}
           title={
-            modulesCollection.items[module]?.chaptersCollection.items[chapter]
-              ?.title
+            modulesCollection.items[vidIndex.modIndex]?.chaptersCollection.items[
+              vidIndex.chapterIndex
+            ]?.title
           }
           ytId={
-            modulesCollection.items[module]?.chaptersCollection.items[chapter]
-              .youtubeId
+            modulesCollection.items[vidIndex.modIndex]?.chaptersCollection.items[
+              vidIndex.chapterIndex
+            ].youtubeId
           }
+          courseId={courseId}
+          chapterId={modulesCollection.items[vidIndex.modIndex].chaptersCollection.items[
+            vidIndex.chapterIndex
+          ].sys.id}
         />
         <div className="lg:hidden flex flex-col gap-1">
           <span className="flex gap-0.5 w-full">
@@ -191,7 +198,6 @@ export default function Details({
               onClick={() => prevVideo()}
               disabled={disabledPrev}
               variant={"outline"}
-              // size={"sm"}
               className="rounded-xl w-full"
             >
               <ChevronLeft className="h-4 w-4" />
@@ -201,7 +207,6 @@ export default function Details({
               onClick={() => nextVideo()}
               disabled={disabledNext}
               variant={"outline"}
-              // size={"sm"}
               className="rounded-xl w-full"
             >
               Next Video
@@ -271,10 +276,36 @@ export function Publisher({
   src: string;
   disabledPrev: boolean;
   disabledNext: boolean;
-  nextVideo(): 0 | undefined;
-  prevVideo(): 0 | undefined;
+  nextVideo: () => 0 | void;
+  prevVideo: () => 0 | void;
 }) {
-  // const [progress, setProgress] = useAtom(courseProgress);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const loadProgress = async () => {
+      const { completedChapters } = await getProgress(courseId);
+      setIsCompleted(completedChapters.includes(chapterId));
+    };
+    loadProgress();
+  }, [courseId, chapterId]);
+
+  const onComplete = async () => {
+    try {
+      setIsLoading(true);
+      const { success } = await updateChapterProgress(courseId, chapterId);
+      if (success) {
+        setIsCompleted(true);
+        if (!disabledNext) {
+          nextVideo();
+        }
+      }
+    } catch (error) {
+      console.error("Error marking as complete:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <section className="flex w-full gap-1 justify-between mt-1">
@@ -313,36 +344,28 @@ export function Publisher({
           size={"sm"}
           className="rounded-md"
         >
-          Next Video
+          Next video
           <ChevronRight className="h-4 w-4 translate-y-0.5" />
         </Button>
+        <Button
+          onClick={onComplete}
+          disabled={isCompleted || isLoading}
+          variant="default"
+          size={"sm"}
+          className={`${isCompleted ? "bg-green-600 hover:bg-green-700" : ""} rounded-md`}
+        >
+          {isCompleted ? (
+            <>
+              <CheckCircle2 className="h-4 w-4 mr-2" />
+              Completed
+            </>
+          ) : isLoading ? (
+            "Marking..."
+          ) : (
+            "Mark as Complete"
+          )}
+        </Button>
       </div>
-
-      {/* <Button
-        onClick={() => {
-          console.log(progress);
-          setProgress(
-            progress
-              .find((e) => e.courseId === courseId)
-              ?.chapterIds.includes(chapterId)
-              ? progress.filter((e) => {
-                  if (e.courseId === courseId)
-                    return e.chapterIds.filter((e) => e !== chapterId);
-                  return e;
-                })
-              : progress.map((e) => {
-                  if (e.courseId === courseId)
-                    return { ...e, chapterIds: [...e.chapterIds, chapterId] };
-                  return e;
-                })
-          );
-        }}
-        variant={"outline"}
-        className="gap-1 p-2 rounded-3xl"
-      >
-        <CheckCircle2 className="w-5 h-5" />
-        <span className="line-clamp-1">Mark Complete</span>
-      </Button> */}
     </section>
   );
 }

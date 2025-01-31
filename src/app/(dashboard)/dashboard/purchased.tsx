@@ -4,10 +4,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import refreshCourses from "../../../../actions/refreshCourses";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ChevronRightCircle, BookMarked, ChevronRight, MessageCircleQuestion, ReceiptText, StepForward } from "lucide-react";
+import { ChevronRightCircle, BookMarked, ChevronRight, MessageCircleQuestion, ReceiptText, StepForward, CheckCircle2 } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
+import { getProgress } from "../../../../actions/updateProgress";
+import getCourseLength from "../../../../actions/getCourseLength";
 
 import {
   DefaultTabsTrigger,
@@ -30,7 +33,6 @@ export default function PurchaseTabs() {
     // @ts-ignore
     if (session?.user?.newUser) return;
     // @ts-ignore
-    console.log(session?.user?.courseId);
     update({ courses: true });
   }, []);
 
@@ -196,6 +198,30 @@ function InvoiceTile({
 }
 
 function CourseCard({ e }: { e: any }) {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const loadProgress = async () => {
+      try {
+        const [{ completedChapters }, { totalChapters }] = await Promise.all([
+          getProgress(e.courseId),
+          getCourseLength(e.courseId)
+        ]);
+        const progressPercentage = totalChapters > 0 
+          ? (completedChapters.length / totalChapters) * 100 
+          : 0;
+        setProgress(progressPercentage);
+      } catch (error) {
+        console.error("Error loading progress:", error);
+        console.error("Error details:", {
+          courseId: e.courseId,
+          error: error instanceof Error ? error.message : error
+        });
+      }
+    };
+    loadProgress();
+  }, [e.courseId]);
+
   return (
     <Link
       href={`/dashboard/${e?.slug}` || ""}
@@ -209,17 +235,25 @@ function CourseCard({ e }: { e: any }) {
           width={200}
           className="rounded aspect-[6/4] w-full"
         />
-        {/* <Image src={"/logo.png"} alt={"30DC Logo"} height={40} width={40} /> */}
       </div>
       <h3 className="font-semibold text-sm line-clamp-2">{e.title}</h3>
       <div className="flex flex-col gap-3 mt-auto mb-2">
-        <Badge className="text-white w-fit bg-prime/20 hover:bg-prime/40 rounded">
-          Continue Watching <ChevronRight className="h-3 w-3" />
-        </Badge>
-        {/* <Progress value={0} className="h-1 bg-bg" /> */}
-        {/* <span className="flex items-center text-xs text-muted-foreground">
-          Continue Watching <ChevronRight className="h-3 w-3" />
-        </span> */}
+        <div className="flex items-center justify-between">
+          <Badge className="text-white w-fit bg-prime/20 hover:bg-prime/40 rounded">
+            {progress === 100 ? (
+              <>
+                <CheckCircle2 className="h-3 w-3 mr-1" />
+                Completed
+              </>
+            ) : (
+              <>
+                Continue Watching <ChevronRight className="h-3 w-3" />
+              </>
+            )}
+          </Badge>
+          <span className="text-xs text-white/70">{Math.round(progress)}% completed</span>
+        </div>
+        <Progress value={progress} className="h-1 bg-bg" />
       </div>
     </Link>
   );
