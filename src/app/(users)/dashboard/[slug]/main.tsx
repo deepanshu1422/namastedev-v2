@@ -5,10 +5,11 @@ import Checkout from "./checkout";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import CourseList from "./courses";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { getProgress } from "actions/updateProgress";
 
 type CourseItem = {
   session: Session | null;
@@ -84,12 +85,7 @@ type CourseItem = {
 
 export default function Main({
   session,
-  item: {
-    title,
-    courseId,
-    courseImage,
-    modulesCollection,
-  },
+  item: { title, courseId, courseImage, modulesCollection },
 }: CourseItem) {
   const [vidIndex, setVidIndex] = useState<{
     modIndex: number;
@@ -98,6 +94,96 @@ export default function Main({
     modIndex: 0,
     chapterIndex: 0,
   });
+
+  function loadLastChapter(
+    data: {
+      total: number;
+      items: {
+        title: string;
+        duration: string;
+        chaptersCollection: {
+          total: number;
+          items: [
+            {
+              sys: {
+                id: string;
+              };
+              public: boolean;
+              title: string;
+              duration: string;
+              youtubeId: string;
+            }
+          ];
+        };
+      }[];
+    },
+    chapterId
+  ) {
+    for (let modIndex = 0; modIndex < data.items.length; modIndex++) {
+      let chapters = data.items[modIndex].chaptersCollection.items;
+      for (
+        let chapterIndex = 0;
+        chapterIndex < chapters.length;
+        chapterIndex++
+      ) {
+        if (chapters[chapterIndex].sys.id === chapterId) {
+          if (
+            chapterIndex ===
+              modulesCollection.items[modulesCollection.items.length - 1]
+                .chaptersCollection.items.length -
+                1 &&
+            modIndex === modulesCollection.total - 1
+          )
+            return;
+
+          if (
+            chapterIndex ===
+              modulesCollection.items[modIndex].chaptersCollection
+                .total -
+                1 &&
+            modIndex !== modulesCollection.total - 1
+          ) {
+            setVidIndex({
+              modIndex: modIndex + 1,
+              chapterIndex: 0,
+            });
+            return;
+          }
+          if (
+            chapterIndex !==
+            modulesCollection.items[modIndex].chaptersCollection.total - 1
+          ) {
+            setVidIndex({
+              modIndex,
+              chapterIndex: (chapterIndex += 1),
+            });
+            return;
+          }
+        }
+      }
+    }
+  }
+
+  useEffect(() => {
+    const loadProgress = async () => {
+      try {
+        const { completedChapters } = await getProgress(courseId);
+        loadLastChapter(
+          modulesCollection,
+          completedChapters[completedChapters.length - 1]
+        );
+        console.log(vidIndex);
+        // setVidIndex(result);
+      } catch (error) {
+        console.error("Error loading progress:", error);
+        console.error("Error details:", {
+          courseId,
+          error: error instanceof Error ? error.message : error,
+        });
+      }
+    };
+    loadProgress();
+  }, [session]);
 
   // @ts-ignore
   if (!session?.user?.courseId?.includes(courseId))
