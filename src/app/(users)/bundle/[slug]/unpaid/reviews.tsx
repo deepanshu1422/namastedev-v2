@@ -115,8 +115,8 @@ export default function Reviews() {
         </p>
       </div>
       <TestimonyVideo />
-      <Slider />
-      <MobileSlider />
+      {/* <Slider />
+      <MobileSlider /> */}
     </section>
   );
 }
