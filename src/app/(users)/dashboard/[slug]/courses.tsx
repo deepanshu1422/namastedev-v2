@@ -7,12 +7,28 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
-import { courseProgress } from "@/lib/jotai";
-import { useAtom } from "jotai";
+import { getProgress } from "../../../../../actions/updateProgress";
 import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { Dispatch, SetStateAction, useCallback } from "react";
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+
+const CompletedCheckmark = () => (
+  <motion.div
+    initial={{ scale: 0 }}
+    animate={{ scale: 1 }}
+    className="shrink-0 h-6 w-6 text-green-500"
+  >
+    <CheckCircle2 className="h-full w-full" />
+  </motion.div>
+);
+
+const ChapterNumber = ({ number }: { number: number }) => (
+  <div className="shrink-0 h-6 w-6 border-[1.5px] border-white/40 rounded-full grid place-items-center">
+    {number}
+  </div>
+);
 
 export default function CourseList({
   modules,
@@ -54,8 +70,15 @@ export default function CourseList({
     }[];
   };
 }) {
+  const [completedChapters, setCompletedChapters] = useState<string[]>([]);
 
-  const [progress, setProgress] = useAtom(courseProgress);
+  useEffect(() => {
+    const fetchProgress = async () => {
+      const { completedChapters } = await getProgress(courseId);
+      setCompletedChapters(completedChapters);
+    };
+    fetchProgress();
+  }, [courseId]);
 
   return (
     <Accordion
@@ -71,7 +94,20 @@ export default function CourseList({
               module === i && "text-white"
             }`}
           >
-            <span className="max-md:line-clamp-1">{title}</span>
+            <div className="flex items-center justify-between w-full">
+              <span className="max-md:line-clamp-1">{title}</span>
+              {chaptersCollection.items.every(chapter => 
+                completedChapters.includes(chapter.sys.id)
+              ) && (
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="text-green-500"
+                >
+                  <CheckCircle2 className="h-4 w-4" />
+                </motion.div>
+              )}
+            </div>
           </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-3 text-xs py-2">
             {chaptersCollection.items.map(
@@ -82,27 +118,31 @@ export default function CourseList({
                     setVidIndex({ modIndex: i, chapterIndex });
                   }}
                   key={chapterIndex}
-                  className={`flex gap-2 items-center justify-between hover:text-white/70 text-white/40`}
+                  className={`flex gap-2 items-center justify-between hover:text-white/70 text-white/40 group transition-all duration-300`}
                 >
                   <div className="flex gap-2 items-center text-start">
-                    {false ? <CheckCircle2 className="shrink-0 h-6 w-6" /> : <div className="shrink-0 h-6 w-6 border-[1.5px] border-white/40 rounded-full grid place-items-center">
-                      {chapterIndex + 1}
-                    </div>}
+                    {completedChapters.includes(id) ? (
+                      <CompletedCheckmark />
+                    ) : (
+                      <ChapterNumber number={chapterIndex + 1} />
+                    )}
                     <span
                       className={`line-clamp-1 ${
                         module == i && chapter == chapterIndex
                           ? "text-white"
+                          : completedChapters.includes(id)
+                          ? "text-green-500"
                           : null
                       }`}
                     >
                       {title}
                     </span>
                   </div>
-                  {/* {free && (
-                    <Badge className="px-1 py-0 text-[10px] font-normal text-white w-fit bg-prime/30 hover:bg-prime/30 rounded">
-                      Free
+                  {completedChapters.includes(id) && (
+                    <Badge className="px-1 py-0 text-[10px] font-normal text-green-500 w-fit bg-green-500/10 hover:bg-green-500/20 rounded">
+                      Completed
                     </Badge>
-                  )} */}
+                  )}
                 </button>
               )
             )}

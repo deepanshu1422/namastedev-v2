@@ -3,14 +3,14 @@
 import Details from "./details";
 import Checkout from "./checkout";
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, CheckCircle } from "lucide-react";
 import CourseList from "./courses";
 import { useEffect, useState } from "react";
 import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { getProgress } from "actions/updateProgress";
-
+import { getProgress } from "../../../../../actions/updateProgress";
+import { motion } from "framer-motion";
 type CourseItem = {
   session: Session | null;
   item: {
@@ -81,6 +81,33 @@ type CourseItem = {
       }[];
     };
   };
+};
+
+const CompletionIndicator = ({ courseId, modules }: { courseId: string, modules: CourseItem["item"]["modulesCollection"] }) => {
+  const [isCompleted, setIsCompleted] = useState(false);
+
+  useEffect(() => {
+    const checkCompletion = async () => {
+      const { completedChapters } = await getProgress(courseId);
+      const allChapterIds = modules.items.flatMap(module => 
+        module.chaptersCollection.items.map(chapter => chapter.sys.id)
+      );
+      setIsCompleted(
+        allChapterIds.every(id => completedChapters.includes(id))
+      );
+    };
+    checkCompletion();
+  }, [courseId, modules]);
+
+  return isCompleted ? (
+    <motion.div
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      className="absolute right-3 top-3"
+    >
+      <CheckCircle className="w-5 h-5 text-green-500" />
+    </motion.div>
+  ) : null;
 };
 
 export default function Main({
@@ -194,7 +221,7 @@ export default function Main({
       <main className="bg-footer">
         <section className="relative grid lg:grid-cols-[260px_1fr]">
           <div className="hidden lg:flex flex-col sticky top-8 h-fit">
-            <div className="flex flex-col gap-4 p-7 h-full">
+            <div className="flex flex-col gap-4 p-7 h-full relative">
               <Link
                 href={"/dashboard"}
                 className="flex items-center gap-2 text-xs text-white/70 hover:text-white/90"
@@ -203,9 +230,13 @@ export default function Main({
                 Dashboard
               </Link>
 
-              <div className="flex flex-col">
+              <div className="flex flex-col relative">
                 <span className="text-[11px] text-white/70">Course</span>
                 <span className="text-sm font-semibold">{title}</span>
+                <CompletionIndicator 
+                  courseId={courseId}
+                  modules={modulesCollection}
+                />
               </div>
             </div>
 
