@@ -36,15 +36,20 @@ const userMenu = [
     href: "/dashboard",
     //   selected: path === "/dashboard",
   },
+  {
+    title: "Getting Started",
+    icon: <BookOpen className="h-4 w-4 md:h-5 md:w-5" />,
+    href: "/getting-started",
+  },
 ];
 
 const navBar = [
-  {
-    title: "Courses",
-    icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
-    href: "/courses",
-    recent: [],
-  },
+  // {
+  //   title: "Courses",
+  //   icon: <GraduationCap className="h-4 w-4 md:h-5 md:w-5" />,
+  //   href: "/courses",
+  //   recent: [],
+  // },
   {
     title: "Projects",
     icon: <Code2 className="h-4 w-4 md:h-5 md:w-5" />,
