@@ -17,6 +17,7 @@ import {
   Notebook,
   Activity,
   Settings,
+  ChevronDown,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -254,10 +255,26 @@ const navBar = [
 export default function Sidebar() {
   const pathName = usePathname();
   const [path, setPath] = useState(pathName);
+  const [expandedSections, setExpandedSections] = useState<string[]>([]);
 
   useEffect(() => {
     setPath(pathName);
+    // Auto-expand section containing current path
+    const currentSection = navBar.find(section => 
+      section.recent?.some(item => item.link === pathName)
+    );
+    if (currentSection && !expandedSections.includes(currentSection.title)) {
+      setExpandedSections(prev => [...prev, currentSection.title]);
+    }
   }, [pathName]);
+
+  const toggleSection = (title: string) => {
+    setExpandedSections(prev => 
+      prev.includes(title) 
+        ? prev.filter(t => t !== title)
+        : [...prev, title]
+    );
+  };
 
   return (
     <Accordion
@@ -287,47 +304,57 @@ export default function Sidebar() {
             ----
           </span>
         </div>
-        {navBar.map(({ href, icon, title, recent }, i) =>
-          Boolean(recent?.length) ? (
-            <AccordionItem key={i} value={`item-${i + 1}`}>
-              <AccordionTrigger
-                className={`flex items-center gap-3 ${
-                  href === path && "bg-second/20 text-prime"
-                } rounded-lg px-3 max-lg:py-3 lg:py-2 text-muted-foreground transition-all hover:text-prime hover:bg-second/20`}
+        {navBar.map(({ href, icon, title, recent }, i) => {
+          const isExpanded = expandedSections.includes(title);
+          const isCurrentSection = recent?.some(item => item.link === path);
+          
+          return (
+            <div key={i}>
+              <button
+                onClick={() => toggleSection(title)}
+                className={cn(
+                  "flex items-center justify-between w-full p-2 rounded-lg transition-colors",
+                  isCurrentSection 
+                    ? "bg-primary/10 text-primary" 
+                    : "hover:bg-muted/50 text-muted-foreground hover:text-foreground"
+                )}
               >
-                <span className="flex gap-3">
+                <div className="flex items-center gap-2">
                   {icon}
-                  <span className="hidden lg:block">{title}</span>
-                </span>
-              </AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-1 px-3 max-lg:py-2 lg:py-1 ml-5 border-l-[1.5px] border-zinc-600">
-                {recent?.map(({ link, title }, i) => (
-                  <Link
-                    key={i}
-                    className="rounded-lg px-2 py-1.5 text-xs text-muted-foreground transition-all hover:text-prime hover:bg-second/20"
-                    href={link}
-                  >
-                    {title}
-                  </Link>
-                ))}
-              </AccordionContent>
-            </AccordionItem>
-          ) : (
-            // </Link>
-            <Link
-              key={i}
-              href={href}
-              className={`flex items-center gap-3 ${
-                href === path && "bg-second/20 text-prime"
-              } rounded-lg px-3 max-lg:py-3 lg:py-2 text-muted-foreground transition-all hover:text-prime hover:bg-second/20`}
-            >
-              {icon}
-              <span className="hidden lg:block">{title}</span>
-            </Link>
-          )
-        )}
+                  <span className="font-medium">{title}</span>
+                </div>
+                <ChevronDown 
+                  className={`h-4 w-4 transition-transform ${
+                    isExpanded ? 'transform rotate-180' : ''
+                  }`} 
+                />
+              </button>
+
+              {isExpanded && recent && (
+                <div className="ml-6 mt-2 space-y-2">
+                  {recent.map(({ link, title }, i) => (
+                    <Link
+                      key={i}
+                      className={cn(
+                        "block p-2 text-sm rounded-lg transition-colors",
+                        path === link 
+                          ? "bg-primary/10 text-primary font-medium" 
+                          : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                      )}
+                      href={link}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
+                      {title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </nav>
-      {/* </div> */}
     </Accordion>
   );
 }
@@ -335,10 +362,19 @@ export default function Sidebar() {
 export function MobileSidebar() {
   const pathName = usePathname();
   const [path, setPath] = useState(pathName);
+  const [expandedSections, setExpandedSections] = useState<string[]>([]);
 
   useEffect(() => {
     setPath(pathName);
   }, [pathName]);
+
+  const toggleSection = (title: string) => {
+    setExpandedSections(prev => 
+      prev.includes(title) 
+        ? prev.filter(t => t !== title)
+        : [...prev, title]
+    );
+  };
 
   return (
     <>
@@ -360,44 +396,45 @@ export function MobileSidebar() {
         collapsible
         className="w-full text-sm shrink overflow-auto horizontal-scroll h-full overflow-x-hidden"
       >
-        {navBar.map(({ href, icon, title, recent }, i) =>
-          Boolean(recent?.length) ? (
-            <AccordionItem key={i} value={`item-${i + 1}`}>
-              <AccordionTrigger
-                className={`flex items-center gap-3 ${
-                  href === path && "bg-second/20 text-prime"
-                } rounded-lg px-0.5 py-2 text-muted-foreground`}
+        {navBar.map(({ href, icon, title, recent }, i) => {
+          const isExpanded = expandedSections.includes(title);
+          
+          return (
+            <div key={i}>
+              <button
+                onClick={() => toggleSection(title)}
+                className="flex items-center justify-between w-full p-2 rounded-lg hover:bg-muted/50 transition-colors"
               >
-                <span className="flex gap-2">
+                <div className="flex items-center gap-2">
                   {icon}
-                  <span className="">{title}</span>
-                </span>
-              </AccordionTrigger>
-              <AccordionContent className="flex flex-col py-1 ml-2.5 border-l-[2px] border-zinc-600">
-                {recent?.map(({ link, title }, i) => (
-                  <Link
-                    key={i}
-                    className="rounded-lg px-2 py-1.5 text-xs text-muted-foreground"
-                    href={link}
-                  >
-                    {title}
-                  </Link>
-                ))}
-              </AccordionContent>
-            </AccordionItem>
-          ) : (
-            <Link
-              key={i}
-              href={href}
-              className={`mx-[-0.65rem] flex items-center gap-2 ${
-                href === path ? "bg-muted" : "text-muted-foreground"
-              } rounded-xl px-3 py-1 hover:text-foreground transition-all`}
-            >
-              {icon}
-              {title}
-            </Link>
-          )
-        )}
+                  <span className="font-medium">{title}</span>
+                </div>
+                <ChevronDown 
+                  className={`h-4 w-4 transition-transform ${
+                    isExpanded ? 'transform rotate-180' : ''
+                  }`} 
+                />
+              </button>
+
+              {isExpanded && recent && (
+                <div className="ml-6 mt-2 space-y-2">
+                  {recent.map(({ link, title }, i) => (
+                    <Link
+                      key={i}
+                      className="block p-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      href={link}
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent closing when clicking link
+                      }}
+                    >
+                      {title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </Accordion>
     </>
   );
