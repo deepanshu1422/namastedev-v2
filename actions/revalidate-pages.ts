@@ -2,6 +2,7 @@
 import { revalidatePath } from "next/cache";
 
 export default async function revalidatePages() {
+  revalidatePath("/(users)/dashboard/[slug]", "page");
   revalidatePath("/(users)/courses/[slug]", "page");
   revalidatePath("/(users)/bundle/[slug]", "page");
   revalidatePath("/(main)/courses", "page");
