@@ -63,6 +63,7 @@ import { CertificateDialog } from "./dashboard/new-user";
 import { useAtom } from "jotai";
 import { certificate, notification } from "@/lib/jotai";
 import Sidebar, { MobileSidebar } from "../../components/sidebar";
+import { StreakDisplay } from "../../components/StreakDisplay";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const [logout, setLogout] = useState(false);
@@ -177,6 +178,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
               </SheetContent>
             </Sheet>
             <div className="flex gap-3 ml-auto h-full py-2">
+              <StreakDisplay />
               {status === "loading" ? (
                 <button className="font-jakarta flex items-center font-semibold gap-2 bg-prime/20 transition-all p-2 rounded-md text-sm">
                   <svg

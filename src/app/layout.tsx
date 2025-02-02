@@ -19,6 +19,7 @@ import GoogleTagManagerWebContainerHead from "@/components/tracking/GoogletagMan
 import GoogleTagManagerWebContainerBody from "@/components/tracking/GoogleTagManagerWebContainerBody";
 import MixpanelAnalytics from "@/util/mixpanel";
 import { PostHogProvider } from "@/util/posthog";
+import { StreakTracker } from '../components/StreakTracker';
 
 export default async function RootLayout({
   children,
@@ -54,6 +55,7 @@ export default async function RootLayout({
               >
                 <GoogleTagManagerWebContainerBody />
                 <PixelEvents />
+                <StreakTracker />
                 {children}
                 <Toaster richColors />
               </body>

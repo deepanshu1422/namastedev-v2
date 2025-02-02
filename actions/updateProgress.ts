@@ -1,7 +1,7 @@
-
 'use server'
 import prisma from "../src/util/prismaClient";
 import { auth } from "../src/auth"
+import { updateStreak } from "./updateStreak";
 
 export async function updateChapterProgress(courseId: string, chapterId: string) {
   try {
@@ -26,6 +26,8 @@ export async function updateChapterProgress(courseId: string, chapterId: string)
           }]
         }
       })
+      // Update streak for new progress
+      await updateStreak();
       return { success: true, progress }
     }
 
@@ -46,6 +48,8 @@ export async function updateChapterProgress(courseId: string, chapterId: string)
             )
           }
         })
+        // Update streak when new chapter is completed
+        await updateStreak();
         return { success: true, progress }
       }
       return { success: true, progress: existingProgress }
@@ -64,6 +68,8 @@ export async function updateChapterProgress(courseId: string, chapterId: string)
           ]
         }
       })
+      // Update streak for new course progress
+      await updateStreak();
       return { success: true, progress }
     }
   } catch (error) {
@@ -99,3 +105,4 @@ export async function getProgress(courseId: string) {
     return { completedChapters: [] }
   }
 }
+
