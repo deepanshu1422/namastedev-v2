@@ -5,7 +5,6 @@ import { NavMenu } from "../nav-menu";
 import Link from "next/link";
 import MobileMenu from "../mobile-menu";
 import { usePathname } from "next/navigation";
-import { StreakDisplay } from "../StreakDisplay";
 import React from "react";
 
 const navItems = [
@@ -100,7 +99,6 @@ export default function Navbar() {
           </section>
 
           <section className="flex items-center gap-4">
-            <StreakDisplay />
             <Link
               href={pathName === "/studyabroad-mentors" ? "/mentor" : "/dashboard"}
               className="font-jakarta flex items-center font-semibold gap-2 hover:bg-prime bg-prime/80 transition-all px-4 py-3 max-sm:p-2 rounded-md"

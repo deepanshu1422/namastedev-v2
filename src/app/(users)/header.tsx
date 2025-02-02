@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { AuthDialog } from "../(guide)/auth";
 import Link from "next/link";
-import { StreakDisplay } from "../../components/StreakDisplay";
+import React from "react";
 import {
   Braces,
   Compass,
@@ -176,8 +176,6 @@ export default function Header() {
         </Sheet>
 
         <div className="flex gap-4 items-center">
-          {/* Display the Streak Icon and current streak */}
-          <StreakDisplay />
 
           <Link href="/courses">
             <Button variant="link" size="sm" className="text-white">

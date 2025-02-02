@@ -58,14 +58,37 @@ export function StreakDisplay() {
   }
 
   return (
-    <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-emerald-900/80 hover:bg-emerald-800/90 transition-colors duration-200">
-      <Flame className="w-3.5 h-3.5 text-orange-400" />
-      <span className="text-white text-sm font-medium">
-        streak {streakData.currentStreak}
-        <span className="text-emerald-100/80 text-xs ml-1">
-          {streakData.currentStreak !== 1 ? "days" : "day"}
-        </span>
-      </span>
+    <div className="flex items-center gap-3 px-3 py-2 rounded-lg bg-gradient-to-r from-emerald-900/90 to-emerald-800/90 hover:from-emerald-800/90 hover:to-emerald-700/90 transition-all duration-200 shadow-lg group">
+      {/* Current Streak */}
+      <div className="flex items-center gap-1.5" title="Current Streak">
+        <Flame className="w-4 h-4 text-orange-400 group-hover:animate-bounce" />
+        <div className="flex flex-col">
+          <span className="text-white text-sm font-medium">
+            {streakData.currentStreak}
+            <span className="text-emerald-100/80 text-xs ml-1">
+              {streakData.currentStreak !== 1 ? "days" : "day"}
+            </span>
+          </span>
+          <span className="text-emerald-200/60 text-xs">Current</span>
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="h-8 w-px bg-emerald-700/50"></div>
+
+      {/* Longest Streak */}
+      <div className="flex items-center gap-1.5" title="Longest Streak">
+        <Flame className="w-4 h-4 text-yellow-500" />
+        <div className="flex flex-col">
+          <span className="text-white text-sm font-medium">
+            {streakData.longestStreak}
+            <span className="text-emerald-100/80 text-xs ml-1">
+              {streakData.longestStreak !== 1 ? "days" : "day"}
+            </span>
+          </span>
+          <span className="text-emerald-200/60 text-xs">Best</span>
+        </div>
+      </div>
     </div>
   );
 }

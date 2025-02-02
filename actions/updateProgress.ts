@@ -26,7 +26,7 @@ export async function updateChapterProgress(courseId: string, chapterId: string)
           }]
         }
       })
-      // Update streak for new progress
+  
       await updateStreak();
       return { success: true, progress }
     }
@@ -48,7 +48,7 @@ export async function updateChapterProgress(courseId: string, chapterId: string)
             )
           }
         })
-        // Update streak when new chapter is completed
+      
         await updateStreak();
         return { success: true, progress }
       }
@@ -68,7 +68,7 @@ export async function updateChapterProgress(courseId: string, chapterId: string)
           ]
         }
       })
-      // Update streak for new course progress
+     
       await updateStreak();
       return { success: true, progress }
     }

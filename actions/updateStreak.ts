@@ -20,7 +20,7 @@ export async function updateStreak() {
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    
+
     if (!currentStreak) {
        await prisma.streak.create({
         data: {
@@ -33,7 +33,7 @@ export async function updateStreak() {
       return { currentStreak: 1, longestStreak: 1, lastActivityDate: today };
     }
 
-    // If already updated today, don't update again
+   
     const lastActivity = new Date(currentStreak.lastActivityDate);
     lastActivity.setHours(0, 0, 0, 0);
     
@@ -46,7 +46,7 @@ export async function updateStreak() {
       };
     }
 
-    // Check if the streak is broken (more than 1 day gap)
+   
     const yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
     
@@ -55,26 +55,10 @@ export async function updateStreak() {
     let newCurrentStreak = currentStreak.currentStreak;
     
     if (lastActivity.getTime() < yesterday.getTime()) {
-      // Streak broken
-      console.log('Streak broken - resetting to 1');
-      console.log('Last activity:', lastActivity.toISOString());
-      console.log('Yesterday:', yesterday.toISOString());
       newCurrentStreak = 1;
     } else if (lastActivity.getTime() === yesterday.getTime()) {
-      // Streak continues
-      console.log('Streak continues - incrementing');
-      console.log('Last activity:', lastActivity.toISOString());
-      console.log('Yesterday:', yesterday.toISOString());
       newCurrentStreak += 1;
     }
-
-    console.log("Updating streak with new values:", {
-      lastActivityDate: today,
-      currentStreak: newCurrentStreak,
-      longestStreak: Math.max(newCurrentStreak, currentStreak.longestStreak)
-    });
-
-    // Update the streak in database
     const updatedStreak = await prisma.streak.update({
       where: { email },
       data: {
@@ -83,8 +67,6 @@ export async function updateStreak() {
         longestStreak: Math.max(newCurrentStreak, currentStreak.longestStreak)
       }
     });
-
-    console.log('Updated streak:', JSON.stringify(updatedStreak, null, 2));
 
     return {
       currentStreak: updatedStreak.currentStreak,
