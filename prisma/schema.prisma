@@ -50,12 +50,13 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
-  Payments Payments[]
-  Progress Progress?
+  Payments      Payments[]
+  Progress      Progress?
   streak        Streak?
   StarredVideos StarredVideos[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  VideoNotes    VideoNotes[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model Mentor {
@@ -241,4 +242,24 @@ model StarredVideos {
 type StarredCourse {
   courseId  String
   videoIds  String[]
+}
+
+model VideoNotes {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  courses   CourseNotes[]
+  user      User     @relation(fields: [email], references: [email], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+type CourseNotes {
+  courseId  String
+  notes     ChapterNote[]
+}
+
+type ChapterNote {
+  chapterId String
+  notes     String
+  updatedAt DateTime
 }

@@ -10,12 +10,21 @@ import {
   defaultLayoutIcons,
 } from "@vidstack/react/player/layouts/default";
 import { Button } from "@/components/ui/button";
-import { Check, Star, Loader2 } from "lucide-react";
+import { Check, Star, Loader2, StickyNote, Save, Clock } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getProgress, updateChapterProgress } from "../../../../../actions/updateProgress";
 import { starVideo, unstarVideo, isVideoStarred } from "../../../../../actions/starredVideos";
+import { saveVideoNotes, getVideoNotes } from "../../../../../actions/videoNotes";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { toast } from "sonner";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { useSession } from "next-auth/react";
 
 export default function VideoPlayer({
   title,
@@ -32,10 +41,16 @@ export default function VideoPlayer({
   chapterId: string;
   nextVideo(): 0 | void;
 }) {
+  const { data: session } = useSession();
   const [isCompleted, setIsCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isStarred, setIsStarred] = useState(false);
   const [isStarLoading, setIsStarLoading] = useState(false);
+  const [isNotesOpen, setIsNotesOpen] = useState(false);
+  const [notes, setNotes] = useState("");
+  const [hasNotes, setHasNotes] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const [isNotesLoading, setIsNotesLoading] = useState(false);
 
   useEffect(() => {
     const loadProgress = async () => {
@@ -48,9 +63,23 @@ export default function VideoPlayer({
       const starred = await isVideoStarred(ytId, courseId);
       setIsStarred(starred);
     };
+    const loadNotes = async () => {
+      if (!session?.user?.email || !courseId || !chapterId) return;
+      try {
+        const { success, notes, lastUpdated } = await getVideoNotes(session.user.email, courseId, chapterId);
+        if (success) {
+          setNotes(notes);
+          setHasNotes(!!notes);
+          setLastUpdated(lastUpdated ? new Date(lastUpdated) : null);
+        }
+      } catch (error) {
+        console.error("Error loading notes:", error);
+      }
+    };
     loadProgress();
     loadStarredStatus();
-  }, [courseId, chapterId, ytId]);
+    loadNotes();
+  }, [courseId, chapterId, ytId, session?.user?.email]);
 
   const onComplete = async () => {
     if (!courseId || !chapterId) return;
@@ -88,6 +117,28 @@ export default function VideoPlayer({
       toast.error("Something went wrong");
     } finally {
       setIsStarLoading(false);
+    }
+  };
+
+  const handleSaveNotes = async () => {
+    if (!session?.user?.email || !courseId || !chapterId) {
+      toast.error("Please sign in to save notes");
+      return;
+    }
+    try {
+      setIsNotesLoading(true);
+      const { success, error } = await saveVideoNotes(session.user.email, courseId, chapterId, notes);
+      if (success) {
+        toast.success("Notes saved successfully");
+        setIsNotesOpen(false);
+      } else {
+        toast.error(error || "Failed to save notes");
+      }
+    } catch (error) {
+      console.error("Error saving notes:", error);
+      toast.error("Something went wrong");
+    } finally {
+      setIsNotesLoading(false);
     }
   };
 
@@ -146,6 +197,35 @@ export default function VideoPlayer({
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    onClick={() => setIsNotesOpen(true)}
+                    variant="ghost"
+                    size="icon"
+                    className={`relative ${
+                      hasNotes 
+                        ? "text-blue-400 hover:text-blue-500 hover:bg-blue-500/10" 
+                        : "text-muted-foreground hover:text-foreground hover:bg-foreground/10"
+                    } transition-all duration-200 ease-in-out`}
+                  >
+                    <StickyNote 
+                      className={`h-5 w-5 transform transition-transform ${
+                        hasNotes ? "scale-110" : "scale-100"
+                      }`}
+                      fill={hasNotes ? "currentColor" : "none"}
+                    />
+                    {hasNotes && (
+                      <span className="absolute -top-1 -right-1 w-2 h-2 bg-blue-400 rounded-full" />
+                    )}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                  <p>{hasNotes ? "Edit Notes" : "Add Notes"}</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
           <Button
             onClick={onComplete}
@@ -175,6 +255,59 @@ export default function VideoPlayer({
           </Button>
         </div>
       )}
+
+      <Dialog open={isNotesOpen} onOpenChange={setIsNotesOpen}>
+        <DialogContent className="sm:max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold">Video Notes</DialogTitle>
+            {lastUpdated && (
+              <DialogDescription className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Clock className="h-4 w-4" />
+                Last updated: {lastUpdated.toLocaleString()}
+              </DialogDescription>
+            )}
+          </DialogHeader>
+          <div className="flex flex-col gap-4">
+            <div className="relative">
+              <textarea
+                placeholder="Write your notes here..."
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                className="w-full min-h-[300px] p-4 rounded-lg border border-input bg-background text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring"
+              />
+              <div className="absolute bottom-4 right-4 text-xs text-muted-foreground">
+                {notes.length} characters
+              </div>
+            </div>
+            <div className="flex justify-end gap-2">
+              <Button
+                variant="outline"
+                onClick={() => setIsNotesOpen(false)}
+                className="w-24"
+              >
+                Cancel
+              </Button>
+              <Button 
+                onClick={handleSaveNotes}
+                disabled={isNotesLoading}
+                className="w-24"
+              >
+                {isNotesLoading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Saving
+                  </>
+                ) : (
+                  <>
+                    <Save className="h-4 w-4 mr-2" />
+                    Save
+                  </>
+                )}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
