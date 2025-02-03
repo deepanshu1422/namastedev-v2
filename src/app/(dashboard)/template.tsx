@@ -297,13 +297,14 @@ export function UserButton({
         <DropdownMenuContent className="min-w-[9rem]" align="end">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
+          <Link href="/profile">
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+          </Link>
           <DropdownMenuItem onClick={() => setNotify(true)}>
             Notifications{" "}
-            {/* {Boolean(notifications.filter((e) => e.new === true).length) && ( */}
             <Badge className="bg-red-600 text-white ml-auto flex h-5 w-5 text-xs shrink-0 items-center justify-center rounded-full">
               {notifications.filter((e) => e.new === true).length}
             </Badge>
-            {/* )} */}
           </DropdownMenuItem>
           <Link href={"/support"}>
             <DropdownMenuItem>Support</DropdownMenuItem>
@@ -317,11 +318,9 @@ export function UserButton({
       <CertificateDialog open={open} setOpen={setOpen} />
       <LogoutModal logout={logout} setLogout={setLogout} />
       <NotificationSheet notify={notify} setNotify={setNotify} />
-      {/* {Boolean(notifications.filter((e) => e.new === true).length) && ( */}
       <div className="absolute top-0 right-0 h-4 w-4 grid place-items-center font-semibold bg-red-700 text-xs rounded-full">
         {notifications.filter((e) => e.new === true).length}
       </div>
-      {/* )} */}
     </div>
   );
 }
@@ -417,11 +416,6 @@ function NotificationSheet({
             </div>
           ))}
         </div>
-        {/* <SheetFooter>
-          <SheetClose asChild>
-            <Button type="submit">Save changes</Button>
-          </SheetClose>
-        </SheetFooter> */}
       </SheetContent>
     </Sheet>
   );

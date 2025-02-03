@@ -3,7 +3,7 @@
 import Details from "./details";
 import Checkout from "./checkout";
 import Link from "next/link";
-import { ChevronLeft, CheckCircle } from "lucide-react";
+import { ChevronLeft, CheckCircle, ChevronRight } from "lucide-react";
 import CourseList from "./courses";
 import { useEffect, useState } from "react";
 import { Session } from "next-auth";
@@ -11,6 +11,19 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { getProgress } from "../../../../../actions/updateProgress";
 import { motion } from "framer-motion";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
+import { Dispatch, SetStateAction } from "react";
+
 type CourseItem = {
   session: Session | null;
   item: {
@@ -109,6 +122,83 @@ const CompletionIndicator = ({ courseId, modules }: { courseId: string, modules:
     </motion.div>
   ) : null;
 };
+
+function CourseDrawer({
+  module,
+  chapter,
+  modules,
+  vidIndex,
+  setVidIndex,
+  courseId
+}: {
+  module: number;
+  chapter: number;
+  vidIndex: { modIndex: number; chapterIndex: number };
+  setVidIndex: Dispatch<
+    SetStateAction<{
+      modIndex: number;
+      chapterIndex: number;
+    }>
+  >;
+  courseId: string;
+  modules: {
+    total: number;
+    items: {
+      title: string;
+      duration: string;
+      chaptersCollection: {
+        total: number;
+        items: [
+          {
+            sys: {
+              id: string;
+            };
+            public: boolean;
+            title: string;
+            duration: string;
+            youtubeId: string;
+          }
+        ];
+      };
+    }[];
+  };
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>
+        <Button variant={"outline"} className="flex-1 rounded-xl">
+          Course Content
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Course List</DrawerTitle>
+          <DrawerDescription>
+            This is a list of current course.
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="px-6 py-1">
+          <CourseList
+            setOpen={setOpen}
+            setVidIndex={setVidIndex}
+            chapter={vidIndex.chapterIndex}
+            module={vidIndex.modIndex}
+            courseId={courseId}
+            modules={modules}
+          />
+        </div>
+        <DrawerFooter>
+          <DrawerClose>
+            <Button className="w-full" variant="outline">
+              Close
+            </Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
+}
 
 export default function Main({
   session,
@@ -217,6 +307,55 @@ export default function Main({
     return redirect(`/dashboard`);
 
   function Paid() {
+    const [disabledPrev, setDisabledPrev] = useState(false);
+    const [disabledNext, setDisabledNext] = useState(false);
+
+    useEffect(() => {
+      // Check if we're at the first video
+      setDisabledPrev(vidIndex.modIndex === 0 && vidIndex.chapterIndex === 0);
+
+      // Check if we're at the last video
+      const lastModule = modulesCollection.items[modulesCollection.items.length - 1];
+      const isLastModule = vidIndex.modIndex === modulesCollection.items.length - 1;
+      const isLastChapter = vidIndex.chapterIndex === lastModule.chaptersCollection.items.length - 1;
+      setDisabledNext(isLastModule && isLastChapter);
+    }, [vidIndex, modulesCollection]);
+
+    function prevVideo() {
+      if (vidIndex.modIndex === 0 && vidIndex.chapterIndex === 0) return;
+
+      if (vidIndex.chapterIndex === 0 && vidIndex.modIndex > 0) {
+        const prevModule = modulesCollection.items[vidIndex.modIndex - 1];
+        setVidIndex({
+          modIndex: vidIndex.modIndex - 1,
+          chapterIndex: prevModule.chaptersCollection.items.length - 1,
+        });
+      } else {
+        setVidIndex({
+          ...vidIndex,
+          chapterIndex: vidIndex.chapterIndex - 1,
+        });
+      }
+    }
+
+    function nextVideo() {
+      const currentModule = modulesCollection.items[vidIndex.modIndex];
+      const isLastChapterInModule = vidIndex.chapterIndex === currentModule.chaptersCollection.items.length - 1;
+      const isLastModule = vidIndex.modIndex === modulesCollection.items.length - 1;
+
+      if (isLastChapterInModule && !isLastModule) {
+        setVidIndex({
+          modIndex: vidIndex.modIndex + 1,
+          chapterIndex: 0,
+        });
+      } else if (!isLastChapterInModule) {
+        setVidIndex({
+          ...vidIndex,
+          chapterIndex: vidIndex.chapterIndex + 1,
+        });
+      }
+    }
+
     return (
       <main className="bg-footer">
         <section className="relative grid lg:grid-cols-[260px_1fr]">
@@ -264,6 +403,37 @@ export default function Main({
               />
               <Checkout />
             </section>
+          </div>
+
+          <div className="lg:hidden flex flex-col gap-1">
+            <span className="flex gap-0.5 w-full">
+              <Button
+                onClick={prevVideo}
+                disabled={disabledPrev}
+                variant={"outline"}
+                className="rounded-xl w-full"
+              >
+                <ChevronLeft className="h-4 w-4" />
+                Prev Video
+              </Button>
+              <Button
+                onClick={nextVideo}
+                disabled={disabledNext}
+                variant={"outline"}
+                className="rounded-xl w-full"
+              >
+                Next Video
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </span>
+            <CourseDrawer
+              vidIndex={vidIndex}
+              setVidIndex={setVidIndex}
+              module={vidIndex.modIndex}
+              chapter={vidIndex.chapterIndex}
+              modules={modulesCollection}
+              courseId={courseId}
+            />
           </div>
         </section>
       </main>

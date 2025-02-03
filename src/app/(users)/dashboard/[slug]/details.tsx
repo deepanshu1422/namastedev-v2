@@ -327,6 +327,7 @@ export function Publisher({
       </div>
 
       <div className="lg:flex hidden gap-0.5">
+        
         <Button
           onClick={() => prevVideo()}
           disabled={disabledPrev}
@@ -365,6 +366,8 @@ export function Publisher({
             "Mark as Complete"
           )}
         </Button>
+
+        
       </div>
     </section>
   );

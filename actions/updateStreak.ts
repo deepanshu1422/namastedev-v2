@@ -76,9 +76,6 @@ export async function updateStreak() {
 
   } catch (error) {
     console.error("Error updating streak:", error);
-    console.error("Error details:", error instanceof Error ? error.message : error);
-    console.error("Error stack:", error instanceof Error ? error.stack : 'No stack trace');
-    console.error("Full error object:", JSON.stringify(error, Object.getOwnPropertyNames(error), 2));
     throw error;
   }
 }

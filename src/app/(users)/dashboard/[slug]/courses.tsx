@@ -8,11 +8,11 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { getProgress } from "../../../../../actions/updateProgress";
-import { CheckCircle2 } from "lucide-react";
-import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { CheckCircle2, Star } from "lucide-react";
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { getProfileData } from "../../../../../actions/getProfileData";
+import React from "react";
 
 const CompletedCheckmark = () => (
   <motion.div
@@ -71,14 +71,43 @@ export default function CourseList({
   };
 }) {
   const [completedChapters, setCompletedChapters] = useState<string[]>([]);
+  const [starredVideos, setStarredVideos] = useState<string[]>([]);
+
+  const fetchData = useCallback(async () => {
+    const { completedChapters } = await getProgress(courseId);
+    setCompletedChapters(completedChapters);
+
+    try {
+      const profileData = await getProfileData();
+      const starredVideoIds = profileData.starredVideos.map(video => video?.youtubeId);
+      setStarredVideos(starredVideoIds);
+    } catch (error) {
+      console.error("Error fetching starred videos:", error);
+    }
+  }, [courseId]);
 
   useEffect(() => {
-    const fetchProgress = async () => {
-      const { completedChapters } = await getProgress(courseId);
-      setCompletedChapters(completedChapters);
+    fetchData();
+  }, [fetchData]);
+
+  // Add event listener for custom events
+  useEffect(() => {
+    const handleStarUpdate = () => {
+      fetchData();
     };
-    fetchProgress();
-  }, [courseId]);
+
+    const handleProgressUpdate = () => {
+      fetchData();
+    };
+
+    window.addEventListener('videoStarUpdated', handleStarUpdate);
+    window.addEventListener('progressUpdated', handleProgressUpdate);
+    
+    return () => {
+      window.removeEventListener('videoStarUpdated', handleStarUpdate);
+      window.removeEventListener('progressUpdated', handleProgressUpdate);
+    };
+  }, [fetchData]);
 
   return (
     <Accordion
@@ -111,7 +140,7 @@ export default function CourseList({
           </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-3 text-xs py-2">
             {chaptersCollection.items.map(
-              ({ title, public: free, sys: {id} }, chapterIndex) => (
+              ({ title, public: free, sys: {id}, youtubeId }, chapterIndex) => (
                 <button
                   onClick={() => {
                     if (setOpen) setOpen(false);
@@ -121,6 +150,15 @@ export default function CourseList({
                   className={`flex gap-2 items-center justify-between hover:text-white/70 text-white/40 group transition-all duration-300`}
                 >
                   <div className="flex gap-2 items-center text-start">
+                    {starredVideos.includes(youtubeId) && (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="text-yellow-500"
+                      >
+                        <Star className="h-4 w-4 fill-yellow-500" />
+                      </motion.div>
+                    )}
                     {completedChapters.includes(id) ? (
                       <CompletedCheckmark />
                     ) : (
@@ -138,11 +176,13 @@ export default function CourseList({
                       {title}
                     </span>
                   </div>
-                  {completedChapters.includes(id) && (
-                    <Badge className="px-1 py-0 text-[10px] font-normal text-green-500 w-fit bg-green-500/10 hover:bg-green-500/20 rounded">
-                      Completed
-                    </Badge>
-                  )}
+                  <div className="flex items-center gap-2">
+                    {completedChapters.includes(id) && (
+                      <Badge className="px-1 py-0 text-[10px] font-normal text-green-500 w-fit bg-green-500/10 hover:bg-green-500/20 rounded">
+                        Completed
+                      </Badge>
+                    )}
+                  </div>
                 </button>
               )
             )}
