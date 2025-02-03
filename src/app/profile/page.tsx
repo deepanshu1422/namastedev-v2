@@ -212,7 +212,7 @@ export default function ProfilePage() {
               profileData.starredVideos.slice(0, 3).map((video) => (
                 <Link 
                   key={video.id} 
-                  href={`${video.href}?video=${video.youtubeId}`}
+                  href={`${video.href}`}
                 >
                   <Card className="group hover:shadow-lg hover:shadow-prime/5 transition-all border-prime/10 hover:bg-prime/5">
                     <CardHeader>
