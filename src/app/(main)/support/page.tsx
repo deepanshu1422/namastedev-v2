@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 
 export const dynamic = "force-static";
 
@@ -22,6 +23,11 @@ export default function Home() {
     <main className="bg-white text-black py-16 px-10 min-h-[90vh] ">
       <div className="max-w-[75rem] m-auto flex flex-col gap-3">
         <h1 className="text-3xl font-bold">Support</h1>
+        <h2 className="text-2xl font-bold pt-2">Unable to find email ??</h2>
+        <p>Find your email associated with your account </p>
+        <Link className="font-semibold text-prime" href={"/find-my-email"}>
+          <Button className="text-white bg-prime/90 hover:bg-prime max-sm:w-full"> Find My Email</Button>
+        </Link>
         <h2 className="text-2xl font-bold pt-2">Contact Information</h2>
         <p>
           For any support inquiries or assistance, please feel free to contact
@@ -69,14 +75,16 @@ export default function Home() {
               find ?
             </AccordionTrigger>
             <AccordionContent>
-              If you purchased courses before September 1st, You can find all your purchased course on
+              If you purchased courses before September 1st, You can find all
+              your purchased course on
               <Link
                 target="_blank"
                 className="font-semibold text-prime pl-2"
                 href={"https://courses.30dayscoding.com/s/store"}
               >
                 https://courses.30dayscoding.com/s/store
-              </Link>. Visit here to get the access.
+              </Link>
+              . Visit here to get the access.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-1" className="border p-2">
@@ -84,26 +92,29 @@ export default function Home() {
               I am facing login issues
             </AccordionTrigger>
             <AccordionContent>
-              Please visit  <Link
+              Please visit{" "}
+              <Link
                 target="_blank"
                 className="font-semibold text-prime pl-2"
                 href={"https://30dayscoding.com/dashboard"}
               >
                 https://30dayscoding.com/dashboard
-              </Link>  and see if you have the course access. If you purchased courses before September 1st, 
-              You can find all your purchased course on
+              </Link>{" "}
+              and see if you have the course access. If you purchased courses
+              before September 1st, You can find all your purchased course on
               <Link
                 target="_blank"
                 className="font-semibold text-prime pl-2"
                 href={"https://courses.30dayscoding.com/s/store"}
               >
                 https://courses.30dayscoding.com/s/store
-              </Link>. Visit here to get the access.
+              </Link>
+              . Visit here to get the access.
             </AccordionContent>
           </AccordionItem>
         </Accordion>
 
-         <h2 className="text-2xl font-bold pt-2">Related Platforms</h2>
+        <h2 className="text-2xl font-bold pt-2">Related Platforms</h2>
         <p>
           30DaysCoding is associated with{" "}
           <Link
@@ -125,7 +136,8 @@ export default function Home() {
             SkillSetMaster&apos;s
           </Link>{" "}
           services should review the specific policies on that platform.
-        </p><h3 className="text-2xl font-bold text-second">
+        </p>
+        <h3 className="text-2xl font-bold text-second">
           POWERED BY NIGHT LIGHT PROJECTS
         </h3>
       </div>
