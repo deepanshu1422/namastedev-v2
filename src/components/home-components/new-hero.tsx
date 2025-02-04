@@ -1,8 +1,7 @@
-import Btn from "@/app/(main)/mentorship/btn";
-import Button from "@/components/home-components/button";
-import { ArrowRight, GraduationCap, School, Star } from "lucide-react";
+import { ArrowRight, GraduationCap, School, Star, Users, Target, Sparkles, CheckCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 function Video({
   title,
@@ -57,59 +56,96 @@ export default function Hero({
 }) {
   return (
     <>
-      <div className={`w-full grid min-h-96 relative`}>
+      <div className="w-full relative overflow-hidden bg-gradient-to-b from-background to-background/50 min-h-[90vh]">
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
+        
+        {/* Hero Image */}
         <Image
           src={heroImage ?? ""}
           alt="30dc homepage"
           fill
-          className="opacity-40"
+          className="opacity-20 object-cover"
+          priority
         />
-        <div className="relative tab:p-[6.5rem_2.5rem_6.75rem] max-tab:pt-[5rem] max-tab:pb-[4.5rem] m-auto max-w-4xl grid gap-5 place-items-center max-phone:place-items-start phone:text-center text-white">
-          <h1
-            className={`font-jakarta phone:text-[3.7rem] text-[2.5rem] font-extrabold bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight px-2 max-phone:px-6 max-w-3xl`}
-          >
-            {title}
-          </h1>
 
-          <p className="tab:max-w-2xl max-tab:px-11 max-phone:px-6 text-xl max-tab:text-[1.05rem] max-tab:leading-6 tracking-wider">
-            {desc}
-          </p>
+        <div className="relative max-w-7xl mx-auto px-4 pt-20 pb-16 sm:px-6 lg:px-8 flex flex-col items-center">
+          {/* Main Heading */}
+          <div className="text-center space-y-8 max-w-4xl mx-auto">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 px-4 py-2 rounded-full">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium text-primary">Project-Based Learning Platform</span>
+            </div>
 
-          <ul className="grid gap-2 tab:grid-cols-2 list-inside list-disc max-tab:px-11 max-phone:px-6 lg:text-lg">
-            <li className="list-item">1,500+ Engaging Video Lessons</li>
-            <li className="list-item">250+ Real Interview Questions</li>
-            <li className="list-item">25+ Comprehensive Guides</li>
-            <li className="list-item">Lifetime Access & Certifications</li>
-          </ul>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-lime-300 to-green-800 text-transparent bg-clip-text leading-tight">
+              Become a Highly Paid{" "}
+              <span className="block mt-2">Software Developer</span>
+            </h1>
 
-          <div className="p-[.5rem_1.00rem_.5rem_1.00rem] rounded-[3.125rem] flex max-lg:flex-col max-lg:w-full lg:flex-wrap items-center justify-center max-w-xl gap-5 my-2 mb-1">
-            <Link
-              href={"/courses"}
-              className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
-            >
-              <span className="text-sm">All Courses</span>
-              <School className="max-lg:hidden w-4 h-4" />
-              <ArrowRight className="lg:hidden w-4 h-4" />
-            </Link>
-            <Link
-              href={"/dsa"}
-              className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
-            >
-              <span className="text-sm">DSA sheet</span>
-              <GraduationCap className="max-lg:hidden w-4 h-4" />
-              <ArrowRight className="lg:hidden w-4 h-4" />
-            </Link>
-            <Link
-              href={"/roadmaps"}
-              className={`font-jakarta flex items-center justify-between font-semibold gap-3 hover:bg-prime/80 bg-prime/35 border-2 border-prime/60 transition-all px-4 py-3 rounded-full max-lg:w-full`}
-            >
-              <span className="text-sm">Roadmaps</span>
-              <Star className="max-lg:hidden w-4 h-4" />
-              <ArrowRight className="lg:hidden w-4 h-4" />
-            </Link>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Master in-demand skills through hands-on projects and real-world applications. Get structured roadmaps and interview preparation to land high-paying tech roles.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap justify-center gap-4 mb-12">
+              <Link href="/bundle/complete-package-all-course-bundle" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary hover:bg-primary/90 text-white font-semibold transition-all">
+                Start Learning
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="/projects" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-secondary hover:bg-secondary/90 text-white font-semibold transition-all">
+                Explore Projects
+                <Target className="h-4 w-4" />
+              </Link>
+            </div>
+
+            {/* YouTube Video Section */}
+            <div className="w-full max-w-4xl mx-auto mt-8 rounded-xl overflow-hidden bg-secondary/5 border border-primary/10">
+              <div className="relative pb-[56.25%] h-0">
+                <iframe
+                  src={`https://www.youtube.com/embed/hOcTPtZYTto`}
+                  title="Introduction Video"
+                  className="absolute top-0 left-0 w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </div>
           </div>
-          {/* <Btn cover="/new-mentorship.jpg" yt="2cZ_7LuxEQI" /> */}
-          
+
+          {/* Social Proof */}
+          <div className="mt-12 grid grid-cols-3 gap-4 md:gap-8 max-w-3xl mx-auto w-full">
+            <div className="flex flex-col items-center p-4 rounded-lg bg-secondary/10 backdrop-blur">
+              <Users className="h-6 w-6 text-primary mb-2" />
+              <span className="text-2xl font-bold">25,000+</span>
+              <span className="text-sm text-muted-foreground">Active Learners</span>
+            </div>
+            <div className="flex flex-col items-center p-4 rounded-lg bg-secondary/10 backdrop-blur">
+              <Star className="h-6 w-6 text-yellow-500 mb-2" />
+              <span className="text-2xl font-bold">4.9/5</span>
+              <span className="text-sm text-muted-foreground">Student Rating</span>
+            </div>
+            <div className="flex flex-col items-center p-4 rounded-lg bg-secondary/10 backdrop-blur">
+              <School className="h-6 w-6 text-primary mb-2" />
+              <span className="text-2xl font-bold">15+</span>
+              <span className="text-sm text-muted-foreground">Pro Courses</span>
+            </div>
+          </div>
+
+          {/* Key Features */}
+          <div className="mt-12 flex flex-wrap justify-center gap-6 max-w-3xl mx-auto">
+            {[
+              "Industry-Ready Projects",
+              "Interview Preparation",
+              "Lifetime Access",
+            ].map((feature) => (
+              <div key={feature} className="flex items-center gap-2 text-sm bg-secondary/5 px-4 py-2 rounded-full">
+                <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+                <span>{feature}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

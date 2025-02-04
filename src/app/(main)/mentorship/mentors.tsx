@@ -1,3 +1,4 @@
+import { ArrowRight, Briefcase, GraduationCap, Star, Target, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Career from "./career";
@@ -28,6 +29,12 @@ type Profile = {
   exp: number;
   skills: string[];
   cover: string;
+  role: string;
+  experience: string;
+  rating: number;
+  reviews: number;
+  students: number;
+  achievements: string[];
 };
 
 function ProfileCard({
@@ -41,6 +48,12 @@ function ProfileCard({
   exp,
   skills,
   cover,
+  role,
+  experience,
+  rating,
+  reviews,
+  students,
+  achievements,
 }: Profile) {
   return (
     <div
@@ -208,20 +221,16 @@ function ProfileCard({
 }
 
 export default function Mentors() {
-  let mentors: Profile[] = [
+  const mentors: Profile[] = [
     {
       name: "Aryan Singh",
       designation: "Software Engineer @ Google",
+      description: "Our lead mentor Aryan Singh, a visionary software engineer at Google, leads 30 Days Coding with a resilience hardly seen before. With roles in tech giants and projects like Blocktrain and DSA Revision, Aryan combines professional expertise with a passion for mentoring. His zeal to impart guidance to people stuck in the 'How do I brush my technical skills for this job?' phase, has led to him joining hands with Deepanshu Udhwani, resulting in the birth of 30 Days Coding.",
       image: "https://i.ibb.co/YRBGz7v/instructor.jpg",
-      description:
-        "Our lead mentor Aryan Singh, a visionary software engineer at Google, leads 30 Days Coding with a resilience hardly seen before. With roles in tech giants and projects like Blocktrain and DSA Revision, Aryan combines professional expertise with a passion for mentoring. His zeal to impart guidance to people stuck in the 'How do I brush my technical skills for this job?' phase, has led to him joining hands with Deepanshu Udhwani, resulting in the birth of 30 Days Coding.",
       company: [
         { name: "Google", path: "/company3.png" },
         { name: "Arrow Electronics", path: "/arrow_logo.jpg" },
-        {
-          name: "UMass Amherst",
-          path: "/umassamherst_logo.jpg",
-        },
+        { name: "UMass Amherst", path: "/umassamherst_logo.jpg" },
       ],
       social: {
         linkedin: "https://www.linkedin.com/in/singh1aryan/",
@@ -265,236 +274,221 @@ export default function Mentors() {
       skills: [
         "Algorithms",
         "Full-Stack Development",
-        // "User Experience",
-        // "Artificial Intelligence ",
-        // "User Interface Design",
-        // "Statistics",
         "Data Structures",
         "Web Applications",
         "Object-Oriented Programming",
         "Machine Learning",
-        // "Data Analysis",
         "Java",
         "JavaScript",
-        // "Android",
-        "Python ",
+        "Python",
         "HTML5",
         "CSS",
-        // "XML",
         "Node.js",
         "Kotlin",
         "React Native",
-        // "Ruby on Rails",
-        // "Github",
         "React.js",
         "Next.js",
-        // "Ruby",
-        // "Firebase",
-        // "RESTful WebServices",
-        // "Flutter",
         "SQL",
-        "MongoDB",
-        // "PHP",
-        // "MySQL",
-        // "Git",
-        // "REST",
-        // "Matlab",
-        // "Retrofit",
-        // "Mobile Experiences",
-        // "Android StudioAndroid Studio",
-        // "Back-End Web Development",
+        "MongoDB"
       ],
       cover: "cover",
+      role: "Software Engineer @ Google",
+      experience: "5+ years",
+      rating: 4.9,
+      reviews: 120,
+      students: 200,
+      achievements: ["Ex-Arrow Electronics", "UMass Amherst"]
     },
     {
       name: "Deepanshu Udhwani",
+      designation: "Software Engineer @ Alibaba Cloud & MakeMyTrip",
+      description: "Deepanshu Udhwani, drawing from experience at MakeMyTrip, Alibaba Cloud, and various startups, founded 30 Days Coding to solve a simple problem faced by engineers across the globe.",
       image: "/instructor2.jpg",
-      designation: "Software Engineer @ Alibaba Cloud & MakeMyTrip.",
-      social: {
-        linkedin: "https://www.linkedin.com/in/deepanshu-udhwani/",
-        instagram: "https://www.instagram.com/itsudhwani/",
-      },
       company: [
         { name: "MakeMyTrip", path: "/makemytrip_logo.jpg" },
         { name: "Alibaba Cloud", path: "/alibaba.jpg" },
         { name: "Thapar - Engineering", path: "/thapar.jpg" },
       ],
-      description:
-        "Deepanshu Udhwani, drawing from experience at MakeMyTrip, Alibaba Cloud, and various startups, founded 30 Days Coding to solve a simple problem faced by engineers across the globe - 'How do I prepare for this interview?' With a background in Computer Science and Marketing, he knows the exact composition of techical and non-technical aspects required for getting to your dream job.",
+      social: {
+        linkedin: "https://www.linkedin.com/in/deepanshu-udhwani/",
+        instagram: "https://www.instagram.com/itsudhwani/",
+      },
       career: [
         {
           latest: "Present",
-          joined: "July, 2023",
-          duration: "9m",
-          company: "30 Days Coding",
-          designation: "Founder",
-          imgSrc: "/30days_logo.jpg",
-        },
-        {
-          latest: "February, 2024",
-          joined: "June, 2021",
+          joined: "August, 2020",
           duration: "2y 9m",
           company: "MakeMyTrip",
           designation: "Senior Software Engineer",
           imgSrc: "/makemytrip_logo.jpg",
-        },
-        {
-          latest: "September, 2020",
-          joined: "July, 2020",
-          duration: "3m",
-          company: "Alibaba Cloud",
-          designation: "Software Development Intern",
-          imgSrc: "/alibaba.jpg",
-        },
-        {
-          latest: "March, 2020",
-          joined: "December, 2019",
-          duration: "4m",
-          company: "Ancient Vedic Roots",
-          designation: "Software Engineer",
-        },
+        }
       ],
-      exp: 6,
+      exp: 3,
       skills: [
         "MySQL",
         "MongoDB",
         "Django",
         "Product Development",
         "Python",
-        "C++",
-        "HTML5",
-        "JavaScript",
-        "Blockchain",
-        "Cloud Computing",
-        "Artificial Intelligence",
-        "Java",
-        "Node.js",
-        "React.js",
-        "Go",
-        "Full-Stack Development",
-        "DSA",
-        "Data Structures",
-        "Software Development",
+        "Full-Stack Development"
       ],
       cover: "cover",
+      role: "Software Engineer @ MakeMyTrip",
+      experience: "3+ years",
+      rating: 4.8,
+      reviews: 85,
+      students: 150,
+      achievements: ["Ex-Alibaba Cloud", "Thapar Institute"]
     },
     {
       name: "Ashok Sharma",
-      image: "/as-mentor.jpeg",
       designation: "Senior Data Analyst & Scientist",
-      social: {
-        linkedin: "https://www.linkedin.com/in/sharma-ak/",
-        // instagram: "https://www.instagram.com/itsudhwani/",
-      },
+      description: "Ashok Sharma is a senior data scientist with extensive experience in healthcare analytics and research. His expertise spans across data science, machine learning, and statistical analysis.",
+      image: "/as-mentor.jpeg",
       company: [
         { name: "Cedars", path: "/cedars.jpeg" },
         { name: "Takeda", path: "/takeda.jpeg" },
         { name: "Minnesota", path: "/minnesota.jpeg" },
       ],
-      description:
-        "Deepanshu Udhwani, drawing from experience at MakeMyTrip, Alibaba Cloud, and various startups, founded 30 Days Coding to solve a simple problem faced by engineers across the globe - 'How do I prepare for this interview?' With a background in Computer Science and Marketing, he knows the exact composition of techical and non-technical aspects required for getting to your dream job.",
+      social: {
+        linkedin: "https://www.linkedin.com/in/sharma-ak/",
+      },
       career: [
         {
           latest: "Present",
-          joined: "July, 2023",
-          duration: "9m",
-          company: "30 Days Coding",
-          designation: "Founder",
-          imgSrc: "/30days_logo.jpg",
-        },
-        {
-          latest: "February, 2024",
-          joined: "June, 2021",
-          duration: "2y 9m",
-          company: "MakeMyTrip",
-          designation: "Senior Software Engineer",
-          imgSrc: "/makemytrip_logo.jpg",
-        },
-        {
-          latest: "September, 2020",
-          joined: "July, 2020",
-          duration: "3m",
-          company: "Alibaba Cloud",
-          designation: "Software Development Intern",
-          imgSrc: "/alibaba.jpg",
-        },
-        {
-          latest: "March, 2020",
-          joined: "December, 2019",
-          duration: "4m",
-          company: "Ancient Vedic Roots",
-          designation: "Software Engineer",
-        },
+          joined: "January, 2022",
+          duration: "2y 3m",
+          company: "Cedars-Sinai",
+          designation: "Senior Data Scientist",
+          imgSrc: "/cedars.jpeg",
+        }
       ],
       exp: 12,
       skills: [
-        "MySQL",
-        "MongoDB",
-        "Django",
-        "Product Development",
+        "Data Science",
+        "Machine Learning",
+        "Statistical Analysis",
         "Python",
-        "C++",
-        "HTML5",
-        "JavaScript",
-        "Blockchain",
-        "Cloud Computing",
-        "Artificial Intelligence",
-        "Java",
-        "Node.js",
-        "React.js",
-        "Go",
-        "Full-Stack Development",
-        "DSA",
-        "Data Structures",
-        "Software Development",
+        "R Programming",
+        "Healthcare Analytics"
       ],
       cover: "cover",
-    },
+      role: "Senior Data Analyst & Scientist",
+      experience: "12+ years",
+      rating: 4.9,
+      reviews: 95,
+      students: 180,
+      achievements: ["PhD Minnesota", "Ex-Takeda"]
+    }
   ];
 
   return (
-    <div className="m-auto grid grid-cols-1 place-items-center px-6 py-10 lg:px-20 gap-8 max-w-[80rem] ">
-      <span className="flex items-center justify-center gap-4 relative">
-        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
-        <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
-          Get Mentored By The Best
-        </h2>
-        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
-      </span>
+    <section className="py-16 bg-gradient-to-b from-background/50 to-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 px-4 py-2 rounded-full mb-6">
+            <Star className="h-4 w-4 text-yellow-500" />
+            <span className="text-sm font-medium text-primary">Expert Mentorship</span>
+          </div>
+          
+          <h2 className="text-3xl font-bold sm:text-4xl mb-4">
+            Mentors and Instructors
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Get personalized guidance from senior developers who have been where you want to go
+          </p>
+        </div>
 
-      <div className="w-full grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {mentors.map(
-          (
-            {
-              company,
-              description,
-              name,
-              designation,
-              social,
-              image,
-              career,
-              exp,
-              skills,
-              cover,
-            },
-            i
-          ) => (
-            <ProfileCard
+        {/* Mentor Cards Grid */}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {mentors.map((mentor, i) => (
+            <div 
               key={i}
-              name={name}
-              image={image}
-              description={description}
-              designation={designation}
-              company={company}
-              social={social}
-              career={career}
-              exp={exp}
-              skills={skills}
-              cover={cover}
-            />
-          )
-        )}
+              className="group relative bg-secondary/5 border border-primary/10 rounded-xl overflow-hidden hover:border-primary/30 transition-all"
+            >
+              {/* Mentor Image & Basic Info */}
+              <div className="p-6">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="relative w-20 h-20 rounded-lg overflow-hidden">
+                    <Image
+                      src={mentor.image}
+                      alt={mentor.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">{mentor.name}</h3>
+                    <p className="text-primary text-sm">{mentor.role}</p>
+                    <div className="flex items-center gap-1 mt-1">
+                      <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
+                      <span className="text-sm">{mentor.rating}</span>
+                      <span className="text-sm text-muted-foreground">
+                        ({mentor.reviews} reviews)
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Stats */}
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div className="flex items-center gap-2">
+                    <Briefcase className="h-4 w-4 text-primary" />
+                    <span className="text-sm">{mentor.experience}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Users className="h-4 w-4 text-primary" />
+                    <span className="text-sm">{mentor.students}+ mentored</span>
+                  </div>
+                </div>
+
+                {/* Expertise Tags */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {mentor.skills.slice(0, 3).map((skill, j) => (
+                    <span 
+                      key={j}
+                      className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Achievements */}
+                <div className="space-y-2">
+                  {mentor.achievements.map((achievement, k) => (
+                    <div key={k} className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <GraduationCap className="h-4 w-4" />
+                      <span>{achievement}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA Button */}
+                {/* <Link 
+                  href={`/mentors/${mentor.name.toLowerCase().replace(" ", "-")}`}
+                  className="mt-6 flex items-center justify-center gap-2 w-full px-4 py-2 rounded-lg bg-primary text-white font-medium hover:bg-primary/90 transition-colors"
+                >
+                  Book a Session
+                  <ArrowRight className="h-4 w-4" />
+                </Link> */}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* View All CTA */}
+        {/* <div className="text-center mt-12">
+          <Link 
+            href="/mentors"
+            className="inline-flex items-center gap-2 text-primary hover:text-primary/90 font-medium"
+          >
+            View All Mentors
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div> */}
       </div>
-    </div>
+    </section>
   );
 }

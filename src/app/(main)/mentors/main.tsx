@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Mentors } from "./page";
+import { Star, Code2, Target, Trophy, Users } from "lucide-react";
 
 export default function Main({ mentorsCollection }: Mentors) {
   // const { items } = mentorsCollection;
@@ -198,31 +199,85 @@ export default function Main({ mentorsCollection }: Mentors) {
   return (
     <div className="min-h-screen bg-bg text-black">
       <main className="max-w-7xl mx-auto py-12 px-6 lg:px-8">
-        <div className="text-center my-12">
-          <h1 className="text-4xl font-extrabold text-green-500/90 sm:text-5xl md:text-6xl">
-            Get 1:1 Guidance from Top Tech Experts
+        {/* Hero Section */}
+        <div className="text-center my-12 relative">
+          {/* Background Effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-3xl blur-3xl -z-10" />
+          
+          <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 px-4 py-2 rounded-full mb-6">
+            <Star className="h-4 w-4 text-yellow-500" />
+            <span className="text-sm font-medium text-primary">Learn from Industry Veterans</span>
+          </div>
+
+          <h1 className="text-4xl font-extrabold sm:text-5xl md:text-6xl bg-gradient-to-r from-primary to-primary/70 text-transparent bg-clip-text">
+            Accelerate Your Tech Career
+            <span className="block mt-2">With 1:1 Expert Mentorship</span>
           </h1>
-          <p className="mt-3 max-w-md mx-auto text-base text-zinc-300 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl text-pretty">
-            Unlock your tech career potential with 1:1 guidance from top
-            industry experts. Join 30DC Mentors and get personalized coaching to
-            land your dream job. Start today!
+
+          <p className="mt-6 max-w-3xl mx-auto text-lg text-zinc-300 leading-relaxed">
+            Get personalized guidance from senior developers at top tech companies. 
+            Our mentors have helped 1000+ developers land jobs at companies like Google, 
+            Microsoft, and Amazon.
           </p>
-          {/* <div className="mt-8 flex flex-col sm:flex-row justify-center gap-2">
-            <Link
-              href="https://forms.gle/p1VCLvTCoDX9eLMaA"
-              target="_blank"
-              className="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-300"
-            >
-              Request a Mentor
-            </Link>
-            <Link
-              href="https://forms.immigrantjobhelp.com/form/8A6DW5XhnKiq93M3esviyB"
-              target="_blank"
-              className="bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700 transition-colors duration-300"
-            >
-              Join as a Mentor
-            </Link>
-          </div> */}
+
+          {/* Key Benefits */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12 max-w-6xl mx-auto">
+            {[
+              {
+                stat: "8+ Years",
+                label: "Average Experience",
+                icon: Code2,
+              },
+              {
+                stat: "₹40 LPA+",
+                label: "Average Mentor CTC",
+                icon: Target,
+              },
+              {
+                stat: "92%",
+                label: "Success Rate",
+                icon: Trophy,
+              },
+              {
+                stat: "1000+",
+                label: "Students Mentored",
+                icon: Users,
+              }
+            ].map((item, i) => (
+              <div key={i} className="flex flex-col items-center p-6 rounded-xl bg-secondary/5 border border-primary/10 hover:border-primary/30 transition-all">
+                <item.icon className="h-8 w-8 text-primary mb-4" />
+                <span className="text-2xl font-bold text-white">{item.stat}</span>
+                <span className="text-sm text-zinc-400">{item.label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Mentor Value Props */}
+          <div className="mt-16 grid md:grid-cols-3 gap-8 text-left">
+            {[
+              {
+                title: "Personalized Learning Path",
+                description: "Get a customized roadmap based on your goals and current skill level",
+                icon: Target,
+              },
+              {
+                title: "Mock Interviews",
+                description: "Practice with real interview questions from top tech companies",
+                icon: Users,
+              },
+              {
+                title: "Code Reviews & Projects",
+                description: "Build a strong portfolio with expert guidance and feedback",
+                icon: Code2,
+              },
+            ].map((item, i) => (
+              <div key={i} className="p-6 rounded-xl bg-secondary/5 border border-primary/10">
+                <item.icon className="h-6 w-6 text-primary mb-4" />
+                <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
+                <p className="text-zinc-400">{item.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="mb-4">

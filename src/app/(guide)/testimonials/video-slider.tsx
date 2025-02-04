@@ -173,7 +173,7 @@ export default function VideoSlider() {
   return (
     <div
       className={
-        "grid grid-cols-1 gap-1 w-full max-w-[75rem] m-auto px-6 lg:px-10"
+        "grid grid-cols-1 gap-1 w-full max-w-[75rem] m-auto px-6 lg:px-10 mt-5"
       }
     >
       <span className="flex items-center justify-center gap-4 relative">
