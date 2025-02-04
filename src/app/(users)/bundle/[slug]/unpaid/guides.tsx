@@ -22,7 +22,7 @@ export default function Guides() {
     <section className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
         <h2 className="font-bold text-xl tab:text-2xl">
-          Premium Interview Guides Included ✨
+          Guides worth Rs.8499 included ✨
         </h2>
         <p className="text-sm text-pretty text-muted-foreground">
           These projects mentioned below with clean code so that you can make

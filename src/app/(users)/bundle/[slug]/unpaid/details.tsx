@@ -63,8 +63,9 @@ export default function Details({
       <div className="flex flex-col w-full gap-6 px-6 overflow-hidden">
         <Courses coursesCollection={coursesCollection} />
 
+        <Guides />
         <Mentors />
-        <section className="flex flex-col gap-1">
+        {/* <section className="flex flex-col gap-1">
           <div className="flex flex-col gap-3 border-prime/80 border bg-second/30 pt-5 p-4">
             <span className="text-2xl font-bold">What you&apos;ll learn</span>
             <div className="grid phone:grid-cols-2 gap-5 py-3">
@@ -86,7 +87,7 @@ export default function Details({
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* <section className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
@@ -166,7 +167,6 @@ export default function Details({
         <VideoSlider />
 
         <Reviews />
-        <Guides />
         <FAQ faqs={faqs} />
       </div>
 

@@ -33,7 +33,7 @@ export default function Courses({
   return (
     <section className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
-        <h2 className="font-bold text-xl tab:text-2xl">Bundle Content</h2>
+        <h2 className="font-bold text-xl tab:text-2xl">Lifetime Access to 15+ Courses</h2>
         <p className="text-sm text-pretty text-muted-foreground">
           This bundle contains all these complete courses❤️
         </p>
