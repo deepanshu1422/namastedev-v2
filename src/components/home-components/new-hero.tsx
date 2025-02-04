@@ -1,7 +1,10 @@
-import { ArrowRight, GraduationCap, School, Star, Users, Target, Sparkles, CheckCircle } from "lucide-react";
+"use client";
+
+import { ArrowRight, GraduationCap, School, Star, Users, Target, Sparkles, CheckCircle, Code2, BookOpen, Brain, FileCode, Bot, Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 function Video({
   title,
@@ -39,6 +42,78 @@ function Video({
   );
 }
 
+// Add MobileMenu component
+function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const menuItems = [
+    {
+      title: "Learning Programs",
+      items: [
+        { name: "Complete Package", href: "/bundle/complete-package-all-course-bundle", icon: Star },
+        { name: "MERN Stack", href: "/courses/complete-mern-stack-course", icon: Code2 },
+        { name: "DSA course", href: "/courses/dsa-complete-course", icon: FileCode },
+      ]
+    },
+    {
+      title: "Resources",
+      items: [
+        { name: "All Courses", href: "/bundle/complete-package-all-course-bundle", icon: BookOpen },
+        { name: "Roadmaps", href: "/roadmaps", icon: Target },
+        { name: "Projects", href: "/projects", icon: Code2 },
+        { name: "Interactive Learning", href: "/interactive", icon: Users },
+        { name: "Code Examples", href: "/examples", icon: FileCode },
+        { name: "DSA Mastery", href: "/dsa", icon: Bot },
+      ]
+    },
+  ];
+
+  return (
+    <div className={cn(
+      "fixed inset-0 bg-background/95 backdrop-blur-sm z-50 transform transition-transform duration-300",
+      isOpen ? "translate-x-0" : "-translate-x-full"
+    )}>
+      <div className="h-full w-full max-w-sm bg-background border-r border-primary/10">
+        <div className="p-4 border-b border-primary/10">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-2">
+              <Image src="/30days_logo.jpg" alt="30 Days Coding" width={40} height={40} className="rounded-full" />
+              <span className="font-bold text-lg">30 Days Coding</span>
+            </Link>
+            <button onClick={onClose} className="p-2 hover:bg-secondary/20 rounded-lg transition-colors">
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <div className="py-6 px-4 space-y-8 overflow-y-auto max-h-[calc(100vh-80px)]">
+          {menuItems.map((section, i) => (
+            <div key={i}>
+              <h3 className="text-sm font-semibold text-primary mb-3">{section.title}</h3>
+              <div className="space-y-1">
+                {section.items.map((item, j) => {
+                  const Icon = item.icon;
+                  return (
+                    <Link
+                      key={j}
+                      href={item.href}
+                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-secondary/20 transition-colors"
+                      onClick={onClose}
+                    >
+                      <Icon className="h-5 w-5 text-muted-foreground" />
+                      <span className="text-sm">{item.name}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Hero({
   title,
   desc,
@@ -54,8 +129,20 @@ export default function Hero({
   ytId: string;
   heroImage?: string;
 }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <>
+      <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
+      
+      {/* Add mobile menu button */}
+      <button 
+        onClick={() => setIsMobileMenuOpen(true)}
+        className="fixed top-4 right-4 p-2 rounded-lg bg-secondary/10 border border-primary/20 lg:hidden z-50"
+      >
+        <Menu className="h-6 w-6" />
+      </button>
+
       <div className="w-full relative overflow-hidden bg-gradient-to-b from-background to-background/50 min-h-[90vh]">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px]" />
