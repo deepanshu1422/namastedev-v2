@@ -3233,111 +3233,547 @@ export const interviewQuestions = [
     description:
       "SQL (Structured Query Language) is used for managing and manipulating relational databases, including querying, inserting, updating, and deleting data.",
     imgSrc: "https://img.icons8.com/?size=500&id=UFF3hmipmJ2V&format=png&color=000000",
+    
     interviewQuestions: [
       {
-        question: "What is SQL?",
-        answer:
-          "SQL is a domain-specific language used for managing and querying relational databases.",
+        "question": "What is SQL?",
+        "answer": "SQL is a domain-specific language used for managing and querying relational databases."
       },
       {
-        question:
-          "What is the difference between `INNER JOIN` and `LEFT JOIN`?",
-        answer:
-          "`INNER JOIN` returns only matching rows from both tables, while `LEFT JOIN` returns all rows from the left table and matching rows from the right table.",
+        "question": "What is the difference between `INNER JOIN` and `LEFT JOIN`?",
+        "answer": "`INNER JOIN` returns only matching rows from both tables, while `LEFT JOIN` returns all rows from the left table and matching rows from the right table."
       },
       {
-        question: "What are primary keys and foreign keys?",
-        answer:
-          "A primary key uniquely identifies each record in a table, while a foreign key is a field in one table that links to the primary key of another table.",
+        "question": "What are primary keys and foreign keys?",
+        "answer": "A primary key uniquely identifies each record in a table, while a foreign key is a field in one table that links to the primary key of another table."
       },
       {
-        question: "What is normalization?",
-        answer:
-          "Normalization is the process of organizing database tables to reduce redundancy and dependency by dividing large tables into smaller, related tables.",
+        "question": "What is normalization?",
+        "answer": "Normalization is the process of organizing database tables to reduce redundancy and dependency by dividing large tables into smaller, related tables."
       },
       {
-        question: "What is a subquery in SQL?",
-        answer:
-          "A subquery is a query nested inside another query, often used to retrieve data for comparison or filtering.",
+        "question": "What is a subquery in SQL?",
+        "answer": "A subquery is a query nested inside another query, often used to retrieve data for comparison or filtering."
       },
       {
-        question: "What is the difference between `GROUP BY` and `ORDER BY`?",
-        answer:
-          "`GROUP BY` groups rows that have the same values into summary rows, while `ORDER BY` sorts the result set based on one or more columns.",
+        "question": "What is the difference between `GROUP BY` and `ORDER BY`?",
+        "answer": "`GROUP BY` groups rows that have the same values into summary rows, while `ORDER BY` sorts the result set based on one or more columns."
       },
       {
-        question: "What is a `JOIN` operation in SQL?",
-        answer:
-          "A `JOIN` operation combines rows from two or more tables based on a related column, such as a primary and foreign key.",
+        "question": "What is a `JOIN` operation in SQL?",
+        "answer": "A `JOIN` operation combines rows from two or more tables based on a related column, such as a primary and foreign key."
       },
       {
-        question: "What is an index in SQL?",
-        answer:
-          "An index is a database object that improves the speed of data retrieval operations on a table by creating a structured reference to the data.",
+        "question": "What is an index in SQL?",
+        "answer": "An index is a database object that improves the speed of data retrieval operations on a table by creating a structured reference to the data."
       },
       {
-        question: "What is the difference between `WHERE` and `HAVING`?",
-        answer:
-          "`WHERE` is used to filter rows before aggregation, while `HAVING` is used to filter groups after aggregation.",
+        "question": "What is the difference between `WHERE` and `HAVING`?",
+        "answer": "`WHERE` is used to filter rows before aggregation, while `HAVING` is used to filter groups after aggregation."
       },
       {
-        question: "What are the ACID properties in SQL?",
-        answer:
-          "ACID stands for Atomicity, Consistency, Isolation, and Durability, which ensure reliable processing of database transactions.",
-      },
-    ],
-    takeHomeProjects: [
-      {
-        question: "Design a database for a library system.",
-        answer:
-          "Create tables for books, authors, and patrons, and implement queries for borrowing, returning, and tracking books.",
+        "question": "What are the ACID properties in SQL?",
+        "answer": "ACID stands for Atomicity, Consistency, Isolation, and Durability, which ensure reliable processing of database transactions."
       },
       {
-        question: "Build a customer order management system.",
-        answer:
-          "Design tables for customers, orders, and products, and implement queries for retrieving customer orders and order details.",
+        "question": "What is the difference between `DELETE`, `TRUNCATE`, and `DROP`?",
+        "answer": "`DELETE` removes specific rows, `TRUNCATE` removes all rows but keeps the structure, and `DROP` deletes the table completely."
       },
       {
-        question: "Create a movie rental database.",
-        answer:
-          "Design a database with tables for movies, customers, and rentals, and implement queries for tracking movie rentals and returns.",
-      },
-    ],
-    bigCompanyQuestions: [
-      {
-        question: "How would you optimize a slow SQL query?",
-        answer:
-          "To optimize slow SQL queries, you can create indexes, avoid SELECT *, use proper joins, and analyze the execution plan for bottlenecks.",
+        "question": "What is a stored procedure?",
+        "answer": "A stored procedure is a precompiled SQL code that can be executed multiple times to perform a specific task."
       },
       {
-        question: "What is a stored procedure in SQL?",
-        answer:
-          "A stored procedure is a precompiled collection of SQL statements that can be executed as a single unit, often used for repetitive tasks or complex logic.",
+        "question": "What is a trigger in SQL?",
+        "answer": "A trigger is a stored procedure that automatically executes when a specified event occurs in the database."
       },
       {
-        question: "What is the difference between `DELETE` and `TRUNCATE`?",
-        answer:
-          "`DELETE` removes rows one by one and can be rolled back, while `TRUNCATE` removes all rows and cannot be rolled back.",
-      },
-    ],
-    simpleProjects: [
-      {
-        question: "Create a table for employee data.",
-        answer:
-          "Design a table with columns for employee ID, name, department, and salary, and write queries to insert and retrieve data.",
+        "question": "What is the difference between `UNION` and `UNION ALL`?",
+        "answer": "`UNION` combines result sets and removes duplicates, whereas `UNION ALL` includes all records, including duplicates."
       },
       {
-        question: "Write a query to find the second highest salary.",
-        answer:
-          "Use a subquery or `LIMIT` with `ORDER BY` to find the second highest salary from the employee table.",
+        "question": "What is a composite key?",
+        "answer": "A composite key is a primary key made up of two or more columns to uniquely identify a record."
       },
       {
-        question:
-          "Create a query to count the number of orders for each customer.",
-        answer:
-          "Use the `GROUP BY` clause with the `COUNT()` function to calculate the number of orders for each customer.",
+        "question": "What are views in SQL?",
+        "answer": "A view is a virtual table that is based on the result of a SELECT query and does not store data permanently."
       },
-    ],
+      {
+        "question": "What is the difference between `CHAR` and `VARCHAR`?",
+        "answer": "`CHAR` is a fixed-length data type, while `VARCHAR` is a variable-length data type that saves storage."
+      },
+      {
+        "question": "What is a cursor in SQL?",
+        "answer": "A cursor is a database object used to retrieve and manipulate data row by row."
+      },
+      {
+        "question": "What is database denormalization?",
+        "answer": "Denormalization is the process of adding redundancy to improve read performance by reducing joins."
+      },
+      {
+        "question": "What is a self-join?",
+        "answer": "A self-join is a join where a table is joined with itself to compare rows within the same table."
+      },
+      {
+        "question": "What is a correlated subquery?",
+        "answer": "A correlated subquery depends on the outer query and is executed once for each row processed by the outer query."
+      },
+      {
+        "question": "What is the difference between `RANK()`, `DENSE_RANK()`, and `ROW_NUMBER()`?",
+        "answer": "`RANK()` assigns rankings with gaps, `DENSE_RANK()` assigns rankings without gaps, and `ROW_NUMBER()` assigns a unique number to each row."
+      },
+      {
+        "question": "What are common table expressions (CTEs)?",
+        "answer": "A CTE is a temporary result set defined within the execution of a `WITH` clause for easier readability and recursion."
+      },
+      {
+        "question": "What is a clustered index?",
+        "answer": "A clustered index determines the physical order of data in a table, meaning there can be only one per table."
+      },
+      {
+        "question": "What is a non-clustered index?",
+        "answer": "A non-clustered index does not affect the physical order of data but maintains a separate structure for faster lookups."
+      },
+      {
+        "question": "What is a foreign key constraint?",
+        "answer": "A foreign key constraint ensures that a value in one table references an existing value in another table."
+      },
+      {
+        "question": "What is the difference between `ANY` and `ALL` operators?",
+        "answer": "`ANY` returns true if any condition matches, while `ALL` requires all conditions to match."
+      },
+      {
+        "question": "What is the purpose of the `COALESCE()` function?",
+        "answer": "`COALESCE()` returns the first non-null value from a list of arguments."
+      },
+      {
+        "question": "What is the `CASE` statement in SQL?",
+        "answer": "The `CASE` statement is used to perform conditional logic in SQL queries."
+      },
+      {
+        "question": "What is the difference between `EXISTS` and `IN`?",
+        "answer": "`EXISTS` returns true if a subquery returns any rows, while `IN` checks if a value matches a list of values."
+      },
+      {
+        "question": "What is an SQL injection?",
+        "answer": "SQL injection is a security vulnerability that allows attackers to execute malicious SQL statements by manipulating user inputs."
+      },
+      {
+        "question": "How can SQL injection be prevented?",
+        "answer": "Use prepared statements, parameterized queries, input validation, and proper access controls."
+      },
+      {
+        "question": "What is a materialized view?",
+        "answer": "A materialized view stores the results of a query physically for faster retrieval and can be refreshed periodically."
+      },
+      {
+        "question": "What is sharding in databases?",
+        "answer": "Sharding is a technique that splits large databases into smaller, faster, and more manageable parts across multiple servers."
+      },
+      {
+        "question": "What is the difference between OLAP and OLTP?",
+        "answer": "OLTP (Online Transaction Processing) is optimized for transaction speed, while OLAP (Online Analytical Processing) is designed for complex queries and reporting."
+      },
+      {
+        "question": "What is the `LAG()` and `LEAD()` function?",
+        "answer": "`LAG()` fetches the previous row's value, while `LEAD()` fetches the next row's value."
+      },
+      {
+        "question": "What is a deadlock in SQL?",
+        "answer": "A deadlock occurs when two transactions wait indefinitely for each other to release locks."
+      },
+      {
+        "question": "What is partitioning in SQL databases?",
+        "answer": "Partitioning is the process of dividing a table into smaller parts to improve query performance and manageability."
+      }
+],
+takeHomeProjects: [
+  {
+    "question": "Design a simple employee database.",
+    "answer": "Create tables for employees, departments, and salaries with appropriate primary and foreign keys."
+  },
+  {
+    "question": "Build a student management system.",
+    "answer": "Design tables for students, courses, enrollments, and grades, and write queries to retrieve student performance data."
+  },
+  {
+    "question": "Create a library management system.",
+    "answer": "Develop tables for books, authors, members, and transactions to track book checkouts and returns."
+  },
+  {
+    "question": "Design a hotel booking system.",
+    "answer": "Create tables for rooms, customers, reservations, and payments, and write queries to check room availability."
+  },
+  {
+    "question": "Implement a banking system database.",
+    "answer": "Design tables for customers, accounts, transactions, and loans, and write queries to calculate account balances."
+  },
+  {
+    "question": "Develop an e-commerce database.",
+    "answer": "Create tables for users, products, orders, payments, and reviews, and write queries to retrieve purchase history."
+  },
+  {
+    "question": "Create an online food ordering system database.",
+    "answer": "Design tables for customers, restaurants, menus, orders, and deliveries, and implement queries to track orders."
+  },
+  {
+    "question": "Build a social media platform database.",
+    "answer": "Create tables for users, posts, comments, likes, and friendships, and write queries to get a user's activity feed."
+  },
+  {
+    "question": "Implement an inventory management system.",
+    "answer": "Develop tables for products, suppliers, stock levels, and transactions, and write queries for restocking alerts."
+  },
+  {
+    "question": "Create a movie rental system.",
+    "answer": "Design tables for movies, customers, rentals, and payments, and implement queries to check rental history."
+  },
+  {
+    "question": "Develop a hospital management system.",
+    "answer": "Create tables for patients, doctors, appointments, treatments, and bills, and write queries to retrieve patient records."
+  },
+  {
+    "question": "Build a transport management system.",
+    "answer": "Design tables for vehicles, drivers, trips, passengers, and payments, and implement queries for route analysis."
+  },
+  {
+    "question": "Create a job portal database.",
+    "answer": "Develop tables for employers, job seekers, job postings, applications, and interviews, and write queries for job matching."
+  },
+  {
+    "question": "Design a subscription-based service database.",
+    "answer": "Create tables for users, plans, subscriptions, and payments, and implement queries to track renewals and cancellations."
+  },
+  {
+    "question": "Build an event management system.",
+    "answer": "Develop tables for events, attendees, tickets, and venues, and write queries to check seat availability."
+  },
+  {
+    "question": "Implement a vehicle parking system.",
+    "answer": "Create tables for parking slots, vehicles, customers, and payments, and implement queries to track available slots."
+  },
+  {
+    "question": "Develop a flight booking system.",
+    "answer": "Design tables for flights, passengers, bookings, and payments, and implement queries to check seat availability."
+  },
+  {
+    "question": "Create a university course management system.",
+    "answer": "Develop tables for professors, students, courses, enrollments, and grades, and write queries for GPA calculations."
+  },
+  {
+    "question": "Build a digital wallet system.",
+    "answer": "Create tables for users, transactions, and balances, and implement queries to track spending habits."
+  },
+  {
+    "question": "Develop a real estate listing system.",
+    "answer": "Design tables for properties, agents, buyers, and transactions, and write queries to find properties within a budget."
+  },
+  {
+    "question": "Create a music streaming service database.",
+    "answer": "Develop tables for users, songs, playlists, and artists, and write queries to track top trending songs."
+  },
+  {
+    "question": "Implement a crowdfunding platform database.",
+    "answer": "Create tables for projects, users, pledges, and rewards, and write queries to track funding progress."
+  },
+  {
+    "question": "Build a weather data tracking system.",
+    "answer": "Develop tables for locations, temperature records, and forecasts, and implement queries to analyze trends."
+  },
+  {
+    "question": "Create a messaging application database.",
+    "answer": "Design tables for users, messages, conversations, and attachments, and write queries to retrieve chat history."
+  },
+  {
+    "question": "Develop a quiz application database.",
+    "answer": "Create tables for quizzes, questions, answers, and users, and write queries to track scores and performance."
+  },
+  {
+    "question": "Build a hotel feedback and rating system.",
+    "answer": "Develop tables for hotels, users, reviews, and ratings, and implement queries to find top-rated hotels."
+  },
+  {
+    "question": "Implement a bus ticket booking system.",
+    "answer": "Create tables for buses, routes, schedules, passengers, and payments, and write queries to check seat availability."
+  },
+  {
+    "question": "Design a pharmacy inventory and sales system.",
+    "answer": "Develop tables for medicines, suppliers, customers, and sales, and implement queries to track stock levels."
+  },
+  {
+    "question": "Create a personal finance tracking system.",
+    "answer": "Build tables for users, income, expenses, categories, and budgets, and implement queries to generate financial reports."
+  },
+  {
+    "question": "Develop an AI chatbot conversation storage database.",
+    "answer": "Create tables for users, messages, timestamps, and chatbot responses, and implement queries to analyze interactions."
+  },
+  {
+    "question": "Build a document management system.",
+    "answer": "Design tables for users, documents, versions, and permissions, and write queries to manage access control."
+  },
+  {
+    "question": "Create a smart home automation system database.",
+    "answer": "Develop tables for devices, users, schedules, and logs, and write queries to analyze device usage."
+  },
+  {
+    "question": "Develop a fitness tracking system.",
+    "answer": "Create tables for users, workouts, goals, and progress, and implement queries to analyze fitness trends."
+  },
+  {
+    "question": "Build an online auction platform.",
+    "answer": "Design tables for users, items, bids, and transactions, and write queries to track auction winners."
+  },
+  {
+    "question": "Implement a loyalty rewards program database.",
+    "answer": "Create tables for customers, purchases, points, and redemptions, and implement queries to track customer rewards."
+  }
+]
+,
+bigCompanyQuestions: [
+  {
+    "question": "What are Common Table Expressions (CTEs), and how do they differ from subqueries?",
+    "answer": "CTEs provide a temporary named result set that improves readability and maintainability, whereas subqueries are nested within a query and do not persist beyond execution."
+  },
+  {
+    "question": "Explain the differences between OLTP and OLAP databases.",
+    "answer": "OLTP (Online Transaction Processing) is optimized for fast transactions, while OLAP (Online Analytical Processing) is optimized for complex queries and reporting."
+  },
+  {
+    "question": "How would you optimize a slow SQL query?",
+    "answer": "Techniques include using indexes, avoiding SELECT *, optimizing joins, partitioning large tables, and using EXPLAIN plans to analyze performance."
+  },
+  {
+    "question": "What is database partitioning, and when should it be used?",
+    "answer": "Partitioning splits a table into smaller parts to improve performance and manageability, useful for handling large datasets and improving query efficiency."
+  },
+  {
+    "question": "Explain the concept of sharding in databases.",
+    "answer": "Sharding is a horizontal partitioning method that distributes data across multiple databases or servers to improve scalability and performance."
+  },
+  {
+    "question": "What are the different types of indexes in SQL?",
+    "answer": "Common types include clustered, non-clustered, unique, full-text, and composite indexes, each serving different optimization purposes."
+  },
+  {
+    "question": "How does indexing improve query performance?",
+    "answer": "Indexes store sorted references to data, reducing the number of rows scanned and improving lookup speed, especially for large tables."
+  },
+  {
+    "question": "What is a covering index?",
+    "answer": "A covering index contains all columns required by a query, allowing it to be resolved entirely from the index without accessing the main table."
+  },
+  {
+    "question": "How do you handle deadlocks in SQL databases?",
+    "answer": "Use techniques like proper indexing, shorter transactions, lock timeouts, and deadlock detection to minimize conflicts and improve concurrency."
+  },
+  {
+    "question": "What is database normalization, and what are the different normal forms?",
+    "answer": "Normalization organizes data to reduce redundancy. Normal forms include 1NF (atomic columns), 2NF (removing partial dependencies), 3NF (removing transitive dependencies), and beyond."
+  },
+  {
+    "question": "When would you denormalize a database?",
+    "answer": "Denormalization is used to improve read performance by reducing joins, often in analytics, reporting, or high-read applications."
+  },
+  {
+    "question": "What is the difference between a clustered and a non-clustered index?",
+    "answer": "A clustered index sorts and stores rows in a table physically, while a non-clustered index creates a separate structure pointing to the rows."
+  },
+  {
+    "question": "Explain the differences between a primary key, unique key, and foreign key.",
+    "answer": "A primary key uniquely identifies each row, a unique key ensures unique values in a column, and a foreign key enforces referential integrity between tables."
+  },
+  {
+    "question": "What is a materialized view, and how is it different from a regular view?",
+    "answer": "A materialized view stores query results physically and needs to be refreshed, while a regular view is a virtual table that retrieves data dynamically."
+  },
+  {
+    "question": "How do you optimize complex joins in SQL?",
+    "answer": "Use proper indexing, optimize join order, filter early, use hash or merge joins, and avoid unnecessary joins."
+  },
+  {
+    "question": "What are window functions in SQL, and when should they be used?",
+    "answer": "Window functions perform calculations across a set of rows related to the current row, useful for ranking, running totals, and moving averages."
+  },
+  {
+    "question": "What is an execution plan, and how do you analyze it?",
+    "answer": "An execution plan shows how SQL queries are executed, helping identify performance bottlenecks like full table scans or missing indexes."
+  },
+  {
+    "question": "What is a recursive CTE, and when is it useful?",
+    "answer": "A recursive CTE allows self-referencing queries, useful for hierarchical data like organization charts or category trees."
+  },
+  {
+    "question": "What are the differences between stored procedures and functions?",
+    "answer": "Stored procedures can perform multiple operations and modify data, while functions return a single value or table and cannot modify data."
+  },
+  {
+    "question": "What is the difference between `HAVING` and `WHERE`?",
+    "answer": "`WHERE` filters rows before aggregation, while `HAVING` filters aggregated results after `GROUP BY`."
+  },
+  {
+    "question": "How do you implement soft deletes in SQL?",
+    "answer": "Use a `deleted_at` timestamp column instead of deleting records, allowing data recovery and historical tracking."
+  },
+  {
+    "question": "What is row-level security in SQL databases?",
+    "answer": "Row-level security restricts access to specific rows in a table based on user roles or conditions."
+  },
+  {
+    "question": "What are database transactions, and what are their properties?",
+    "answer": "A transaction is a sequence of operations treated as a single unit. Transactions follow ACID properties: Atomicity, Consistency, Isolation, and Durability."
+  },
+  {
+    "question": "What is a phantom read in SQL, and how can you prevent it?",
+    "answer": "A phantom read occurs when new rows appear during a transaction. Use `SERIALIZABLE` isolation level to prevent it."
+  },
+  {
+    "question": "Explain the difference between UNION and UNION ALL.",
+    "answer": "`UNION` removes duplicates, while `UNION ALL` includes all rows, including duplicates, improving performance."
+  },
+  {
+    "question": "What is a surrogate key, and why is it used?",
+    "answer": "A surrogate key is an artificial unique identifier (like an auto-incremented ID) used instead of a natural key to simplify joins and indexing."
+  },
+  {
+    "question": "How do you optimize queries for large datasets?",
+    "answer": "Use indexing, partitioning, query caching, avoiding unnecessary columns, and using proper data types to improve performance."
+  },
+  {
+    "question": "What are lateral joins in SQL, and when should they be used?",
+    "answer": "LATERAL joins allow subqueries to reference columns from preceding tables, useful for complex filtering and aggregation."
+  },
+  {
+    "question": "How do you handle NULL values in SQL queries?",
+    "answer": "Use functions like `COALESCE()`, `ISNULL()`, or `NULLIF()` to handle NULL values properly in calculations and conditions."
+  }
+]
+,
+simpleProjects: [
+  {
+    "question": "Create a database for a library management system.",
+    "answer": "Design tables for books, authors, members, and transactions with appropriate relationships."
+  },
+  {
+    "question": "Write a query to find employees earning above the average salary.",
+    "answer": "Use `AVG()` to calculate the average salary and `WHERE` to filter employees earning above it."
+  },
+  {
+    "question": "Build a table for student records.",
+    "answer": "Include columns for student ID, name, age, class, and GPA, and write queries to insert and retrieve data."
+  },
+  {
+    "question": "Write a query to fetch the top 5 customers by order value.",
+    "answer": "Use `ORDER BY` with `SUM(order_amount)` and `LIMIT` to get the top customers."
+  },
+  {
+    "question": "Create a query to list all products without orders.",
+    "answer": "Use a `LEFT JOIN` between the `products` and `orders` tables and filter with `IS NULL`."
+  },
+  {
+    "question": "Write a query to update a customer’s address.",
+    "answer": "Use the `UPDATE` statement with `WHERE` to modify the address for a specific customer."
+  },
+  {
+    "question": "Create a database for a hospital management system.",
+    "answer": "Design tables for patients, doctors, appointments, and treatments with relationships."
+  },
+  {
+    "question": "Write a query to delete customers with no orders.",
+    "answer": "Use `DELETE` with a subquery or `LEFT JOIN` to remove customers without order history."
+  },
+  {
+    "question": "Create a sales report showing total sales by month.",
+    "answer": "Use `GROUP BY` with the `MONTH()` function on the order date column."
+  },
+  {
+    "question": "Find duplicate email addresses in a user table.",
+    "answer": "Use `GROUP BY email HAVING COUNT(email) > 1` to identify duplicates."
+  },
+  {
+    "question": "Design a movie database.",
+    "answer": "Create tables for movies, actors, genres, and ratings with appropriate foreign keys."
+  },
+  {
+    "question": "Write a query to calculate the age of each customer.",
+    "answer": "Use the `DATEDIFF()` or `TIMESTAMPDIFF()` function to compute age from birthdate."
+  },
+  {
+    "question": "List all employees who have not been assigned a department.",
+    "answer": "Use `LEFT JOIN` between employees and departments and filter with `IS NULL`."
+  },
+  {
+    "question": "Create a trigger to log deleted records.",
+    "answer": "Write an `AFTER DELETE` trigger to insert deleted row data into a log table."
+  },
+  {
+    "question": "Write a stored procedure to get customer details by ID.",
+    "answer": "Create a procedure with a parameter for customer ID and use `SELECT` to fetch details."
+  },
+  {
+    "question": "Find the total revenue generated by each product.",
+    "answer": "Use `SUM(price * quantity)` with `GROUP BY product_id`."
+  },
+  {
+    "question": "Retrieve the most recent orders for each customer.",
+    "answer": "Use `ORDER BY order_date DESC` with `LIMIT 1` in a subquery."
+  },
+  {
+    "question": "List employees hired in the last 6 months.",
+    "answer": "Use `WHERE hire_date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)`."
+  },
+  {
+    "question": "Create a bank transactions table.",
+    "answer": "Include columns for transaction ID, account number, amount, type (credit/debit), and date."
+  },
+  {
+    "question": "Find customers who have placed orders in both 2023 and 2024.",
+    "answer": "Use `INTERSECT` or a `HAVING COUNT(DISTINCT year(order_date)) = 2` query."
+  },
+  {
+    "question": "Create a shopping cart schema.",
+    "answer": "Design tables for users, products, carts, and cart items with relationships."
+  },
+  {
+    "question": "Write a query to get the first and last orders of each customer.",
+    "answer": "Use `MIN(order_date)` and `MAX(order_date)` with `GROUP BY customer_id`."
+  },
+  {
+    "question": "Create a hotel booking database.",
+    "answer": "Include tables for guests, rooms, reservations, and payments."
+  },
+  {
+    "question": "Write a query to get the top-selling product category.",
+    "answer": "Use `SUM(sales_amount)` with `GROUP BY category_id` and `ORDER BY DESC`."
+  },
+  {
+    "question": "Find employees with salaries in the top 10%.",
+    "answer": "Use a subquery with `PERCENT_RANK()` or `WHERE salary > (SELECT PERCENTILE_CONT(0.9) FROM employees).`"
+  },
+  {
+    "question": "Write a query to check if a given username already exists.",
+    "answer": "Use `SELECT COUNT(*)` with a `WHERE` clause to check for the username."
+  },
+  {
+    "question": "Create a product inventory system.",
+    "answer": "Design tables for products, stock levels, suppliers, and purchases."
+  },
+  {
+    "question": "Retrieve all employees who have worked on more than 3 projects.",
+    "answer": "Use `COUNT(project_id) > 3` with `GROUP BY employee_id`."
+  },
+  {
+    "question": "List customers who have not placed an order in the last year.",
+    "answer": "Use `WHERE last_order_date < DATE_SUB(CURDATE(), INTERVAL 1 YEAR).`"
+  },
+  {
+    "question": "Create a social media database structure.",
+    "answer": "Include tables for users, posts, likes, comments, and friendships."
+  }
+]
+
+
   },
   {
     title: "MongoDB",
