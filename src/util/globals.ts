@@ -3772,8 +3772,6 @@ simpleProjects: [
     "answer": "Include tables for users, posts, likes, comments, and friendships."
   }
 ]
-
-
   },
   {
     title: "MongoDB",
