@@ -7,11 +7,7 @@ import Image from "next/image";
 
 type NavItem = {
   title: string;
-  items: {
-    title: string;
-    href: string;
-    description: string;
-  }[];
+  href: string;
 };
 
 export default function MobileMenu({ items }: { items: NavItem[] }) {
@@ -40,27 +36,15 @@ export default function MobileMenu({ items }: { items: NavItem[] }) {
 
           {/* Navigation */}
           <div className="flex-1 overflow-y-auto">
-            <div className="p-4 space-y-6">
-              {items.map((section, i) => (
-                <div key={i} className="space-y-3">
-                  <h3 className="text-sm font-semibold text-primary">
-                    {section.title}
-                  </h3>
-                  <div className="space-y-1">
-                    {section.items.map((item, j) => (
-                      <Link
-                        key={j}
-                        href={item.href}
-                        className="block p-2 text-sm rounded-lg hover:bg-secondary/20 transition-colors"
-                      >
-                        <div className="font-medium">{item.title}</div>
-                        <div className="text-xs text-muted-foreground">
-                          {item.description}
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
+            <div className="p-4 space-y-2">
+              {items.map((item) => (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  className="block p-2 text-sm rounded-lg hover:bg-secondary/20 transition-colors"
+                >
+                  {item.title}
+                </Link>
               ))}
             </div>
           </div>
@@ -68,10 +52,10 @@ export default function MobileMenu({ items }: { items: NavItem[] }) {
           {/* Footer */}
           <div className="p-4 border-t border-border">
             <Link
-              href="/bundle/complete-package-all-course-bundle"
+              href="/dashboard"
               className="block w-full py-2 px-4 text-center text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded-lg transition-colors"
             >
-              Enroll Now
+              Dashboard
             </Link>
           </div>
         </div>

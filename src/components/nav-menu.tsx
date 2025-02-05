@@ -9,16 +9,14 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 
-type NavSection = {
+type NavItem = {
   title: string;
-  items: {
-    title: string;
-    href: string;
-    description: string;
-  }[];
+  href: string;
+  description: string;
 };
 
 const ListItem = React.forwardRef<
@@ -48,15 +46,17 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = "ListItem";
 
-export function NavMenu({ title, items }: NavSection) {
+export function NavMenu({ title, items }: { title: string; items: NavItem[] }) {
   return (
-    <NavigationMenu>
+    <NavigationMenu className="z-50">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>{title}</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-              {items?.map((item) => (
+          <NavigationMenuTrigger className="h-9 px-4 py-2 hover:bg-accent hover:text-accent-foreground">
+            {title}
+          </NavigationMenuTrigger>
+          <NavigationMenuContent className="z-[60]">
+            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-background border rounded-lg shadow-lg">
+              {items.map((item) => (
                 <ListItem key={item.title} title={item.title} href={item.href}>
                   {item.description}
                 </ListItem>
@@ -65,6 +65,7 @@ export function NavMenu({ title, items }: NavSection) {
           </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>
+      <NavigationMenuViewport className="origin-top-center absolute w-full" />
     </NavigationMenu>
   );
 }

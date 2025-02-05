@@ -229,3 +229,26 @@
 .techStack div > code {
   @apply p-0 bg-transparent ;
 }
+
+@layer components {
+  .NavigationMenuContent {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 100;
+    margin-top: 0.5rem;
+  }
+
+  .NavigationMenuViewport {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    transform-origin: top center;
+    z-index: 100;
+  }
+
+  .NavigationMenu {
+    position: relative;
+  }
+}

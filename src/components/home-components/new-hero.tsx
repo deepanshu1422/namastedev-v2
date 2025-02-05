@@ -157,7 +157,7 @@ export default function Hero({
           priority
         />
 
-        <div className="relative max-w-7xl mx-auto px-4 pt-20 pb-16 sm:px-6 lg:px-8 flex flex-col items-center">
+        <div className="relative max-w-7xl mx-auto px-4 pt-10 pb-16 sm:px-6 lg:px-8 flex flex-col items-center">
           {/* Main Heading */}
           <div className="text-center space-y-8 max-w-4xl mx-auto">
             {/* Badge */}
