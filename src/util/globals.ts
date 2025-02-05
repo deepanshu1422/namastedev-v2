@@ -229,46 +229,46 @@ export const interviewQuestions = [
         "answer":
           "Currying is the technique of translating a function that takes multiple arguments into a sequence of functions, each with a single argument. It allows you to partially apply a function, creating new functions with some of the arguments already set.",
       },
-        {
-          "question": "What is the difference between `deep copy` and `shallow copy` in JavaScript?",
-          "answer": "A shallow copy creates a new object but copies only the references to nested objects, meaning changes to nested objects affect both the original and the copy. A deep copy creates a completely independent copy of the original object and all nested objects, ensuring no shared references."
-        },
-        {
-          "question": "What is the purpose of the `void` operator in JavaScript?",
-          "answer": "The `void` operator evaluates an expression and returns `undefined`. It is often used to prevent navigation when clicking on links (e.g., `javascript:void(0)`) or to ensure an expression has no return value."
-        },
-        {
-          "question": "What is the difference between `Object.freeze()` and `Object.seal()`?",
-          "answer": "`Object.freeze()` makes an object immutable, preventing new properties from being added, existing properties from being removed, or existing properties from being modified. `Object.seal()` prevents new properties from being added and existing properties from being removed, but allows modification of existing properties."
-        },
-        {
-          "question": "What is the purpose of the `Array.prototype.some()` method?",
-          "answer": "The `some()` method tests whether at least one element in the array passes the provided test function. It returns `true` if any element satisfies the condition, otherwise `false`."
-        },
-        {
-          "question": "What is the difference between `Event.preventDefault()` and `Event.stopPropagation()`?",
-          "answer": "`Event.preventDefault()` prevents the default behavior of an event (e.g., preventing a form submission). `Event.stopPropagation()` stops the event from bubbling up the DOM tree, preventing parent elements from handling the event."
-        },
-        {
-          "question": "What is the purpose of the `Array.prototype.every()` method?",
-          "answer": "The `every()` method tests whether all elements in the array pass the provided test function. It returns `true` if all elements satisfy the condition, otherwise `false`."
-        },
-        {
-          "question": "What is the difference between `Map` and `Object` in JavaScript?",
-          "answer": "`Map` allows keys of any type (including objects), maintains insertion order, and provides methods like `set()`, `get()`, and `delete()`. `Object` only allows string or symbol keys, does not guarantee order, and lacks built-in methods for iteration and size tracking."
-        },
-        {
-          "question": "What is the purpose of the `Array.prototype.find()` method?",
-          "answer": "The `find()` method returns the first element in the array that satisfies the provided test function. If no element satisfies the condition, it returns `undefined`."
-        },
-        {
-          "question": "What is the difference between `async` functions and generator functions?",
-          "answer": "`async` functions are used to handle asynchronous operations and always return a Promise. Generator functions (`function*`) use `yield` to pause and resume execution, allowing for custom iteration and asynchronous patterns, but they do not return Promises by default."
-        },
-        {
-          "question": "What is the purpose of the `Array.prototype.includes()` method?",
-          "answer": "The `includes()` method checks if an array contains a specific value and returns `true` if the value is found, otherwise `false`. It is case-sensitive and uses the SameValueZero algorithm for comparison."
-        }
+      {
+        "question": "What is the difference between `deep copy` and `shallow copy` in JavaScript?",
+        "answer": "A shallow copy creates a new object but copies only the references to nested objects, meaning changes to nested objects affect both the original and the copy. A deep copy creates a completely independent copy of the original object and all nested objects, ensuring no shared references."
+      },
+      {
+        "question": "What is the purpose of the `void` operator in JavaScript?",
+        "answer": "The `void` operator evaluates an expression and returns `undefined`. It is often used to prevent navigation when clicking on links (e.g., `javascript:void(0)`) or to ensure an expression has no return value."
+      },
+      {
+        "question": "What is the difference between `Object.freeze()` and `Object.seal()`?",
+        "answer": "`Object.freeze()` makes an object immutable, preventing new properties from being added, existing properties from being removed, or existing properties from being modified. `Object.seal()` prevents new properties from being added and existing properties from being removed, but allows modification of existing properties."
+      },
+      {
+        "question": "What is the purpose of the `Array.prototype.some()` method?",
+        "answer": "The `some()` method tests whether at least one element in the array passes the provided test function. It returns `true` if any element satisfies the condition, otherwise `false`."
+      },
+      {
+        "question": "What is the difference between `Event.preventDefault()` and `Event.stopPropagation()`?",
+        "answer": "`Event.preventDefault()` prevents the default behavior of an event (e.g., preventing a form submission). `Event.stopPropagation()` stops the event from bubbling up the DOM tree, preventing parent elements from handling the event."
+      },
+      {
+        "question": "What is the purpose of the `Array.prototype.every()` method?",
+        "answer": "The `every()` method tests whether all elements in the array pass the provided test function. It returns `true` if all elements satisfy the condition, otherwise `false`."
+      },
+      {
+        "question": "What is the difference between `Map` and `Object` in JavaScript?",
+        "answer": "`Map` allows keys of any type (including objects), maintains insertion order, and provides methods like `set()`, `get()`, and `delete()`. `Object` only allows string or symbol keys, does not guarantee order, and lacks built-in methods for iteration and size tracking."
+      },
+      {
+        "question": "What is the purpose of the `Array.prototype.find()` method?",
+        "answer": "The `find()` method returns the first element in the array that satisfies the provided test function. If no element satisfies the condition, it returns `undefined`."
+      },
+      {
+        "question": "What is the difference between `async` functions and generator functions?",
+        "answer": "`async` functions are used to handle asynchronous operations and always return a Promise. Generator functions (`function*`) use `yield` to pause and resume execution, allowing for custom iteration and asynchronous patterns, but they do not return Promises by default."
+      },
+      {
+        "question": "What is the purpose of the `Array.prototype.includes()` method?",
+        "answer": "The `includes()` method checks if an array contains a specific value and returns `true` if the value is found, otherwise `false`. It is case-sensitive and uses the SameValueZero algorithm for comparison."
+      }
     ],
     takeHomeProjects: [
       {
@@ -589,106 +589,106 @@ export const interviewQuestions = [
         answer:
           "Here's an implementation: function binarySearch(arr, target) { let left = 0, right = arr.length - 1; while (left <= right) { let mid = Math.floor((left + right) / 2); if (arr[mid] === target) return mid; if (arr[mid] < target) left = mid + 1; else right = mid - 1; } return -1; }",
       },
-        {
-          "question": "Explain the difference between `==` and `===` with examples.",
-          "answer": "`==` performs type coercion before comparison, while `===` checks both value and type. Example: `5 == '5'` (true) vs `5 === '5'` (false). Always prefer `===` for predictable comparisons."
-        },
-        {
-          "question": "Implement a function to reverse a linked list.",
-          "answer": "function reverseLinkedList(head) {\n  let prev = null;\n  while(head) {\n    const next = head.next;\n    head.next = prev;\n    prev = head;\n    head = next;\n  }\n  return prev;\n}"
-        },
-        {
-          "question": "Explain how `this` works in arrow functions compared to regular functions.",
-          "answer": "Arrow functions don't have their own `this` binding. They inherit `this` from the enclosing lexical context, unlike regular functions which determine `this` based on how they're called."
-        },
-        {
-          "question": "Implement a polyfill for `Promise.all`.",
-          "answer": "Promise.all = function(promises) {\n  return new Promise((resolve, reject) => {\n    const results = [];\n    let completed = 0;\n    promises.forEach((promise, i) => {\n      Promise.resolve(promise)\n        .then(res => {\n          results[i] = res;\n          if(++completed === promises.length) resolve(results);\n        })\n        .catch(reject);\n    });\n  });\n};"
-        },
-        {
-          "question": "Explain the Web Workers API and its limitations.",
-          "answer": "Web Workers enable multithreading in JavaScript by running scripts in background threads. Limitations: No DOM access, limited communication via postMessage, and same-origin policy restrictions."
-        },
-        {
-          "question": "Implement a function to detect a cycle in a linked list.",
-          "answer": "function hasCycle(head) {\n  let slow = head, fast = head;\n  while(fast && fast.next) {\n    slow = slow.next;\n    fast = fast.next.next;\n    if(slow === fast) return true;\n  }\n  return false;\n}"
-        },
-        {
-          "question": "Explain the difference between `Object.freeze()` and `Object.seal()`.",
-          "answer": "`Object.seal()` prevents adding/removing properties but allows modifying existing ones. `Object.freeze()` prevents any changes to the object (including property values). Both prevent prototype changes."
-        },
-        {
-          "question": "Implement a function to find the first non-repeating character in a string.",
-          "answer": "function firstNonRepeatingChar(str) {\n  const count = {};\n  for(const char of str) count[char] = (count[char] || 0) + 1;\n  for(const char of str) if(count[char] === 1) return char;\n  return null;\n}"
-        },
-        {
-          "question": "Explain the phases of the Event Loop in Node.js.",
-          "answer": "1. Timers (executes setTimeout/setInterval callbacks)\n2. Pending callbacks (executes I/O callbacks)\n3. Poll (retrieve new I/O events)\n4. Check (execute setImmediate callbacks)\n5. Close callbacks (execute close event callbacks)"
-        },
-        {
-          "question": "Implement a currying function that supports both `sum(a,b,c)` and `sum(a)(b)(c)` syntax.",
-          "answer": "function curry(fn) {\n  return function curried(...args) {\n    if(args.length >= fn.length) return fn.apply(this, args);\n    return (...args2) => curried.apply(this, args.concat(args2));\n  };\n}"
-        },
-        {
-          "question": "Explain the difference between `null` and `undefined` in JavaScript.",
-          "answer": "`undefined` means a variable has been declared but not assigned a value. `null` is an assignment value representing intentional absence of any object value. typeof null => 'object', typeof undefined => 'undefined'."
-        },
-        {
-          "question": "Implement a Singleton pattern in JavaScript.",
-          "answer": "class Singleton {\n  constructor() {\n    if(!Singleton.instance) {\n      Singleton.instance = this;\n    }\n    return Singleton.instance;\n  }\n}\n// Usage: const instance = new Singleton();"
-        },
-        {
-          "question": "Explain the Temporal Dead Zone (TDZ) in ES6.",
-          "answer": "The TDZ is the period between entering scope and variable declaration where accessing a let/const variable throws a ReferenceError. Variables are in TDZ from the start of the block until declaration is executed."
-        },
-        {
-          "question": "Implement a polyfill for `Function.prototype.bind`.",
-          "answer": "Function.prototype.bind = function(context, ...args) {\n  const fn = this;\n  return function(...innerArgs) {\n    return fn.apply(context, args.concat(innerArgs));\n  };\n};"
-        },
-        {
-          "question": "Explain how async/await works under the hood with generators.",
-          "answer": "Async/await is syntactic sugar over generators and promises. The async function returns a promise, and await pauses execution similar to yield. A generator function with yield statements is automatically wrapped in a promise chain."
-        },
-        {
-          "question": "Implement a function to check if two objects are deep equal.",
-          "answer": "function deepEqual(a, b) {\n  if(a === b) return true;\n  if(typeof a !== 'object' || a === null || typeof b !== 'object' || b === null) return false;\n  const keysA = Object.keys(a), keysB = Object.keys(b);\n  if(keysA.length !== keysB.length) return false;\n  return keysA.every(key => deepEqual(a[key], b[key]));\n}"
-        },
-        {
-          "question": "Explain the difference between `for...in` and `for...of` loops.",
-          "answer": "`for...in` iterates over enumerable properties (including prototype chain), best for objects. `for...of` iterates over iterable values (arrays, strings, maps), using the [Symbol.iterator] method."
-        },
-        {
-          "question": "Implement a memoized Fibonacci function.",
-          "answer": "const memoFib = (() => {\n  const cache = {};\n  return function fib(n) {\n    if(n in cache) return cache[n];\n    if(n <= 1) return n;\n    return cache[n] = fib(n-1) + fib(n-2);\n  };\n})();"
-        },
-        {
-          "question": "Explain the difference between microtasks and macrotasks in the event loop.",
-          "answer": "Microtasks (Promise callbacks, queueMicrotask) execute immediately after current task, before rendering. Macrotasks (setTimeout, I/O) execute in next event loop iteration. Microtasks have higher priority."
-        },
-        {
-          "question": "Implement a function to detect if CSS is being injected at runtime (CSS-in-JS pattern).",
-          "answer": "function isRuntimeCSS() {\n  const style = document.createElement('style');\n  document.head.appendChild(style);\n  const injected = style.sheet.cssRules.length > 0;\n  document.head.removeChild(style);\n  return injected;\n}"
-        },
-        {
-          "question": "Explain how to handle memory leaks in JavaScript applications.",
-          "answer": "1. Remove event listeners\n2. Clear timers/intervals\n3. Avoid global variables\n4. Use WeakMap/WeakSet\n5. Nullify DOM references\n6. Use Chrome DevTools Memory Profiler\n7. Avoid circular references"
-        },
-        {
-          "question": "Implement a function to check if an object is empty.",
-          "answer": "function isEmpty(obj) {\n  return Object.keys(obj).length === 0 && obj.constructor === Object;\n}"
-        },
-        {
-          "question": "Explain the concept of property descriptors in JavaScript.",
-          "answer": "Property descriptors define attributes of object properties:\n- value: The property's value\n- writable: Can be changed\n- enumerable: Shows up in for...in\n- configurable: Can be deleted or modified\nAccessed via Object.getOwnPropertyDescriptor()"
-        },
-        {
-          "question": "Implement a function to handle circular references in JSON.stringify.",
-          "answer": "function safeStringify(obj) {\n  const seen = new WeakSet();\n  return JSON.stringify(obj, (key, value) => {\n    if(typeof value === 'object' && value !== null) {\n      if(seen.has(value)) return '[Circular]';\n      seen.add(value);\n    }\n    return value;\n  });\n}"
-        },
-        {
-          "question": "Explain the use cases for ES6 Proxy.",
-          "answer": "Proxies enable:\n1. Validation/formatting of property values\n2. Observable patterns\n3. Virtual properties\n4. Operation logging\n5. Access control\n6. Caching/memoization\n7. Revocable references"
-        }
+      {
+        "question": "Explain the difference between `==` and `===` with examples.",
+        "answer": "`==` performs type coercion before comparison, while `===` checks both value and type. Example: `5 == '5'` (true) vs `5 === '5'` (false). Always prefer `===` for predictable comparisons."
+      },
+      {
+        "question": "Implement a function to reverse a linked list.",
+        "answer": "function reverseLinkedList(head) {\n  let prev = null;\n  while(head) {\n    const next = head.next;\n    head.next = prev;\n    prev = head;\n    head = next;\n  }\n  return prev;\n}"
+      },
+      {
+        "question": "Explain how `this` works in arrow functions compared to regular functions.",
+        "answer": "Arrow functions don't have their own `this` binding. They inherit `this` from the enclosing lexical context, unlike regular functions which determine `this` based on how they're called."
+      },
+      {
+        "question": "Implement a polyfill for `Promise.all`.",
+        "answer": "Promise.all = function(promises) {\n  return new Promise((resolve, reject) => {\n    const results = [];\n    let completed = 0;\n    promises.forEach((promise, i) => {\n      Promise.resolve(promise)\n        .then(res => {\n          results[i] = res;\n          if(++completed === promises.length) resolve(results);\n        })\n        .catch(reject);\n    });\n  });\n};"
+      },
+      {
+        "question": "Explain the Web Workers API and its limitations.",
+        "answer": "Web Workers enable multithreading in JavaScript by running scripts in background threads. Limitations: No DOM access, limited communication via postMessage, and same-origin policy restrictions."
+      },
+      {
+        "question": "Implement a function to detect a cycle in a linked list.",
+        "answer": "function hasCycle(head) {\n  let slow = head, fast = head;\n  while(fast && fast.next) {\n    slow = slow.next;\n    fast = fast.next.next;\n    if(slow === fast) return true;\n  }\n  return false;\n}"
+      },
+      {
+        "question": "Explain the difference between `Object.freeze()` and `Object.seal()`.",
+        "answer": "`Object.seal()` prevents adding/removing properties but allows modifying existing ones. `Object.freeze()` prevents any changes to the object (including property values). Both prevent prototype changes."
+      },
+      {
+        "question": "Implement a function to find the first non-repeating character in a string.",
+        "answer": "function firstNonRepeatingChar(str) {\n  const count = {};\n  for(const char of str) count[char] = (count[char] || 0) + 1;\n  for(const char of str) if(count[char] === 1) return char;\n  return null;\n}"
+      },
+      {
+        "question": "Explain the phases of the Event Loop in Node.js.",
+        "answer": "1. Timers (executes setTimeout/setInterval callbacks)\n2. Pending callbacks (executes I/O callbacks)\n3. Poll (retrieve new I/O events)\n4. Check (execute setImmediate callbacks)\n5. Close callbacks (execute close event callbacks)"
+      },
+      {
+        "question": "Implement a currying function that supports both `sum(a,b,c)` and `sum(a)(b)(c)` syntax.",
+        "answer": "function curry(fn) {\n  return function curried(...args) {\n    if(args.length >= fn.length) return fn.apply(this, args);\n    return (...args2) => curried.apply(this, args.concat(args2));\n  };\n}"
+      },
+      {
+        "question": "Explain the difference between `null` and `undefined` in JavaScript.",
+        "answer": "`undefined` means a variable has been declared but not assigned a value. `null` is an assignment value representing intentional absence of any object value. typeof null => 'object', typeof undefined => 'undefined'."
+      },
+      {
+        "question": "Implement a Singleton pattern in JavaScript.",
+        "answer": "class Singleton {\n  constructor() {\n    if(!Singleton.instance) {\n      Singleton.instance = this;\n    }\n    return Singleton.instance;\n  }\n}\n// Usage: const instance = new Singleton();"
+      },
+      {
+        "question": "Explain the Temporal Dead Zone (TDZ) in ES6.",
+        "answer": "The TDZ is the period between entering scope and variable declaration where accessing a let/const variable throws a ReferenceError. Variables are in TDZ from the start of the block until declaration is executed."
+      },
+      {
+        "question": "Implement a polyfill for `Function.prototype.bind`.",
+        "answer": "Function.prototype.bind = function(context, ...args) {\n  const fn = this;\n  return function(...innerArgs) {\n    return fn.apply(context, args.concat(innerArgs));\n  };\n};"
+      },
+      {
+        "question": "Explain how async/await works under the hood with generators.",
+        "answer": "Async/await is syntactic sugar over generators and promises. The async function returns a promise, and await pauses execution similar to yield. A generator function with yield statements is automatically wrapped in a promise chain."
+      },
+      {
+        "question": "Implement a function to check if two objects are deep equal.",
+        "answer": "function deepEqual(a, b) {\n  if(a === b) return true;\n  if(typeof a !== 'object' || a === null || typeof b !== 'object' || b === null) return false;\n  const keysA = Object.keys(a), keysB = Object.keys(b);\n  if(keysA.length !== keysB.length) return false;\n  return keysA.every(key => deepEqual(a[key], b[key]));\n}"
+      },
+      {
+        "question": "Explain the difference between `for...in` and `for...of` loops.",
+        "answer": "`for...in` iterates over enumerable properties (including prototype chain), best for objects. `for...of` iterates over iterable values (arrays, strings, maps), using the [Symbol.iterator] method."
+      },
+      {
+        "question": "Implement a memoized Fibonacci function.",
+        "answer": "const memoFib = (() => {\n  const cache = {};\n  return function fib(n) {\n    if(n in cache) return cache[n];\n    if(n <= 1) return n;\n    return cache[n] = fib(n-1) + fib(n-2);\n  };\n})();"
+      },
+      {
+        "question": "Explain the difference between microtasks and macrotasks in the event loop.",
+        "answer": "Microtasks (Promise callbacks, queueMicrotask) execute immediately after current task, before rendering. Macrotasks (setTimeout, I/O) execute in next event loop iteration. Microtasks have higher priority."
+      },
+      {
+        "question": "Implement a function to detect if CSS is being injected at runtime (CSS-in-JS pattern).",
+        "answer": "function isRuntimeCSS() {\n  const style = document.createElement('style');\n  document.head.appendChild(style);\n  const injected = style.sheet.cssRules.length > 0;\n  document.head.removeChild(style);\n  return injected;\n}"
+      },
+      {
+        "question": "Explain how to handle memory leaks in JavaScript applications.",
+        "answer": "1. Remove event listeners\n2. Clear timers/intervals\n3. Avoid global variables\n4. Use WeakMap/WeakSet\n5. Nullify DOM references\n6. Use Chrome DevTools Memory Profiler\n7. Avoid circular references"
+      },
+      {
+        "question": "Implement a function to check if an object is empty.",
+        "answer": "function isEmpty(obj) {\n  return Object.keys(obj).length === 0 && obj.constructor === Object;\n}"
+      },
+      {
+        "question": "Explain the concept of property descriptors in JavaScript.",
+        "answer": "Property descriptors define attributes of object properties:\n- value: The property's value\n- writable: Can be changed\n- enumerable: Shows up in for...in\n- configurable: Can be deleted or modified\nAccessed via Object.getOwnPropertyDescriptor()"
+      },
+      {
+        "question": "Implement a function to handle circular references in JSON.stringify.",
+        "answer": "function safeStringify(obj) {\n  const seen = new WeakSet();\n  return JSON.stringify(obj, (key, value) => {\n    if(typeof value === 'object' && value !== null) {\n      if(seen.has(value)) return '[Circular]';\n      seen.add(value);\n    }\n    return value;\n  });\n}"
+      },
+      {
+        "question": "Explain the use cases for ES6 Proxy.",
+        "answer": "Proxies enable:\n1. Validation/formatting of property values\n2. Observable patterns\n3. Virtual properties\n4. Operation logging\n5. Access control\n6. Caching/memoization\n7. Revocable references"
+      }
     ],
     simpleProjects: [
       {
@@ -816,46 +816,46 @@ export const interviewQuestions = [
         answer:
           "Implement a basic calendar application that allows users to view dates, add events, and navigate between months.",
       },
-        {
-          "question": "Build a random quote generator",
-          "answer": "Create an app that displays random inspirational quotes. Use a free quotes API or a local array of quotes. Include a button to generate new quotes."
-        },
-        {
-          "question": "Create a BMI calculator",
-          "answer": "Develop a tool that calculates Body Mass Index (BMI) based on user-input height and weight. Display the result with a simple interpretation (underweight, normal, etc.)."
-        },
-        {
-          "question": "Develop a unit converter for measurements",
-          "answer": "Build a converter that converts between units like kilometers/miles, kilograms/pounds, or liters/gallons. Use dropdowns for unit selection."
-        },
-        {
-          "question": "Create an age calculator",
-          "answer": "Build a tool that calculates a user's exact age in years, months, and days based on their birthdate input."
-        },
-        {
-          "question": "Implement a tip calculator",
-          "answer": "Develop an app that calculates tip amounts based on bill total and percentage. Include options to split the bill among multiple people."
-        },
-        {
-          "question": "Build a digital clock",
-          "answer": "Create a real-time digital clock that displays hours, minutes, and seconds. Update the time every second using JavaScript."
-        },
-        {
-          "question": "Develop a simple to-do list with drag-and-drop",
-          "answer": "Enhance a basic to-do list by allowing users to reorder tasks via drag-and-drop functionality using HTML5 Drag and Drop API."
-        },
-        {
-          "question": "Create a hangman game",
-          "answer": "Build a word-guessing game where players guess letters to complete a hidden word. Track remaining attempts and display guessed letters."
-        },
-        {
-          "question": "Implement a random number generator",
-          "answer": "Create a tool that generates random numbers within a user-specified range. Include copy-to-clipboard functionality for the result."
-        },
-        {
-          "question": "Develop a recipe book app",
-          "answer": "Build an app to store and organize favorite recipes. Include features to add recipes with ingredients/instructions and filter by category."
-        }
+      {
+        "question": "Build a random quote generator",
+        "answer": "Create an app that displays random inspirational quotes. Use a free quotes API or a local array of quotes. Include a button to generate new quotes."
+      },
+      {
+        "question": "Create a BMI calculator",
+        "answer": "Develop a tool that calculates Body Mass Index (BMI) based on user-input height and weight. Display the result with a simple interpretation (underweight, normal, etc.)."
+      },
+      {
+        "question": "Develop a unit converter for measurements",
+        "answer": "Build a converter that converts between units like kilometers/miles, kilograms/pounds, or liters/gallons. Use dropdowns for unit selection."
+      },
+      {
+        "question": "Create an age calculator",
+        "answer": "Build a tool that calculates a user's exact age in years, months, and days based on their birthdate input."
+      },
+      {
+        "question": "Implement a tip calculator",
+        "answer": "Develop an app that calculates tip amounts based on bill total and percentage. Include options to split the bill among multiple people."
+      },
+      {
+        "question": "Build a digital clock",
+        "answer": "Create a real-time digital clock that displays hours, minutes, and seconds. Update the time every second using JavaScript."
+      },
+      {
+        "question": "Develop a simple to-do list with drag-and-drop",
+        "answer": "Enhance a basic to-do list by allowing users to reorder tasks via drag-and-drop functionality using HTML5 Drag and Drop API."
+      },
+      {
+        "question": "Create a hangman game",
+        "answer": "Build a word-guessing game where players guess letters to complete a hidden word. Track remaining attempts and display guessed letters."
+      },
+      {
+        "question": "Implement a random number generator",
+        "answer": "Create a tool that generates random numbers within a user-specified range. Include copy-to-clipboard functionality for the result."
+      },
+      {
+        "question": "Develop a recipe book app",
+        "answer": "Build an app to store and organize favorite recipes. Include features to add recipes with ingredients/instructions and filter by category."
+      }
     ],
   },
   {
@@ -993,6 +993,87 @@ export const interviewQuestions = [
         answer:
           "Pure Components in React are similar to regular components, except they automatically implement shouldComponentUpdate() with a shallow prop and state comparison. This can provide a performance boost in some cases by reducing the number of renders.",
       },
+      {
+        "question": "What is React Fiber and how does it improve rendering performance?",
+        "answer": "React Fiber is a complete reimplementation of React's reconciliation algorithm. It breaks the rendering work into small, incremental units, allowing React to pause, resume, or abandon work based on priority. This results in smoother animations, better responsiveness, and improved handling of asynchronous rendering."
+      },
+      {
+        "question": "Explain the useCallback hook and its role in optimizing React applications.",
+        "answer": "The useCallback hook returns a memoized version of a callback function that only changes if one of its dependencies changes. This prevents unnecessary re-creation of functions during re-renders, reducing wasted processing and helping child components avoid unnecessary re-rendering."
+      },
+      {
+        "question": "What is the useMemo hook and how does it reduce unnecessary re-renders?",
+        "answer": "useMemo memoizes the result of an expensive calculation and only recomputes it when its dependencies change. This helps in reducing the computations during re-renders by caching values, so that components do not need to recalculate values unnecessarily."
+      },
+      {
+        "question": "What are custom hooks in React and how do you create one?",
+        "answer": "Custom hooks are functions that start with the prefix 'use' and allow you to extract and reuse stateful logic across multiple components. They are created by combining other hooks (like useState, useEffect) into a reusable function that encapsulates specific behavior."
+      },
+      {
+        "question": "How do you implement error boundaries in React, and why are they important?",
+        "answer": "Error boundaries are implemented using class components that define the static method getDerivedStateFromError and the lifecycle method componentDidCatch. They catch JavaScript errors anywhere in their child component tree, log the errors, and display a fallback UI, preventing the entire app from crashing."
+      },
+      {
+        "question": "What is React Suspense and how does it work with code splitting?",
+        "answer": "React Suspense is a component that lets you delay rendering part of your component tree until some condition, like data fetching or code loading, is met. It works with code splitting by displaying a fallback UI while components loaded via React.lazy are being fetched asynchronously."
+      },
+      {
+        "question": "How does React.lazy facilitate dynamic importing of components?",
+        "answer": "React.lazy allows you to define a component that is loaded asynchronously with a dynamic import(). When paired with Suspense, React.lazy splits your code into separate bundles, loading the component only when it is needed, thereby reducing the initial load time."
+      },
+      {
+        "question": "How does the forwardRef API work in React and when would you use it?",
+        "answer": "forwardRef is used to pass a ref through a component to one of its children. It allows parent components to reference a child’s DOM node or component instance directly, which is useful for accessing imperative methods or managing focus."
+      },
+      {
+        "question": "Explain the concept of render props and how it differs from higher-order components.",
+        "answer": "Render props is a pattern where a component accepts a function as a prop to determine what to render, thus allowing dynamic sharing of code. Unlike higher-order components that wrap and enhance existing components by injecting props, render props provide flexible composition by letting the child decide how to render content based on the provided function."
+      },
+      {
+        "question": "How does React's synthetic event system work and what are its advantages over native DOM events?",
+        "answer": "React’s synthetic event system is a cross-browser wrapper around the browser's native event system. It provides a consistent API for events across different browsers and leverages event pooling to improve performance by reducing memory overhead."
+      },
+      {
+        "question": "What is concurrent mode in React and what problems does it solve?",
+        "answer": "Concurrent mode is an experimental set of features in React that makes rendering interruptible. It allows React to prioritize urgent updates, pause work in progress, and work on multiple tasks concurrently, leading to a more responsive UI during heavy computational or rendering tasks."
+      },
+      {
+        "question": "How do you optimize rendering performance in React lists, such as using virtualization?",
+        "answer": "Performance in large lists can be optimized by using windowing or virtualization techniques. Libraries like react-window or react-virtualized render only the visible portion of the list in the viewport, significantly reducing the number of DOM nodes and improving performance."
+      },
+      {
+        "question": "What strategies do you use to avoid unnecessary re-renders in React components?",
+        "answer": "Strategies include using React.memo for functional components, implementing shouldComponentUpdate in class components, and leveraging hooks like useCallback and useMemo to memoize functions and computed values. Additionally, keeping state minimal and structuring components to isolate frequently changing data helps prevent unnecessary re-renders."
+      },
+      {
+        "question": "How can you migrate from class components to functional components with hooks?",
+        "answer": "Migrating involves replacing class-based lifecycle methods with hooks such as useState, useEffect, and others. You refactor lifecycle methods like componentDidMount, componentDidUpdate, and componentWillUnmount into useEffect, and replace state management using this.state and this.setState with useState, often simplifying and streamlining the component’s logic."
+      },
+      {
+        "question": "What approaches can be used for handling side effects in React, particularly with asynchronous operations?",
+        "answer": "Side effects in React, such as data fetching and subscriptions, are managed using the useEffect hook in functional components. For complex asynchronous operations, you can use middleware solutions in state management libraries or incorporate async/await patterns within useEffect along with proper cleanup functions."
+      },
+      {
+        "question": "How do you implement programmatic navigation in a React application using React Router?",
+        "answer": "Programmatic navigation is achieved by accessing the history object. In React Router v5, you can use the useHistory hook to push or replace routes; in React Router v6, the useNavigate hook serves the same purpose, enabling you to navigate to different routes without relying on link clicks."
+      },
+      {
+        "question": "What is the significance of React Portal and when should it be used?",
+        "answer": "React Portal provides a way to render children into a DOM node outside the parent component's hierarchy. This is useful for UI elements like modals, tooltips, or overlays that require a different stacking context or need to bypass CSS overflow rules in their parent containers."
+      },
+      {
+        "question": "How do you test React components effectively, and what testing tools are commonly used?",
+        "answer": "Effective testing of React components typically involves using Jest for unit tests and the React Testing Library for integration and behavior tests, which focus on how users interact with components. Tools like Enzyme are also used for component-level testing by rendering components and inspecting their output."
+      },
+      {
+        "question": "What is the Context API in React, and what are its benefits and limitations compared to Redux?",
+        "answer": "The Context API allows you to share state across a component tree without passing props manually at every level. It simplifies the sharing of 'global' data like themes or user settings. However, for large-scale state management and complex data flows, Redux offers more structure, middleware support, and debugging tools, albeit with additional overhead."
+      },
+      {
+        "question": "How can you integrate TypeScript in a React project, and what benefits does it provide?",
+        "answer": "TypeScript can be integrated into a React project by setting up the TypeScript compiler, typically using Create React App with a TypeScript template or configuring webpack manually. It provides static type checking, improved IDE support, and early detection of bugs, thus leading to more maintainable and robust code."
+      }
+
     ],
     takeHomeProjects: [
       {
@@ -1121,6 +1202,98 @@ export const interviewQuestions = [
         answer:
           "Create a web-based code editor that supports multiple programming languages. Implement features like syntax highlighting, code execution, and the ability to save and share code snippets.",
       },
+      {
+        "question": "Develop an interactive data grid with inline editing",
+        "answer": "Create a data grid component that allows users to view, sort, and edit rows directly in the table. Use React hooks for state management and implement features like inline validation and dynamic updates."
+      },
+      {
+        "question": "Build a calendar scheduling application with drag-and-drop events",
+        "answer": "Develop a scheduling app that displays events in a calendar view. Integrate drag-and-drop functionality to allow users to reschedule events and implement real-time updates using React state."
+      },
+      {
+        "question": "Create a multiplayer game lobby with real-time interactions",
+        "answer": "Build a lobby system using React and Socket.io that allows multiple users to join, chat, and prepare for multiplayer gaming sessions. Focus on real-time communication and dynamic user lists."
+      },
+      {
+        "question": "Develop a forum application with nested commenting and thread discussions",
+        "answer": "Design a forum app where users can create posts, start threads, and comment in nested structures. Implement features like voting, pagination, and dynamic content loading."
+      },
+      {
+        "question": "Build a file upload and management application integrated with cloud storage",
+        "answer": "Create an app that enables users to upload, view, and manage files. Integrate with cloud storage services such as AWS S3 or Firebase Storage to handle file persistence."
+      },
+      {
+        "question": "Create a contact management system with advanced search and filtering",
+        "answer": "Develop a contacts app where users can add, update, and delete contacts. Implement search, filtering, and sorting features along with persistent storage using a backend API or local storage."
+      },
+      {
+        "question": "Build a virtual whiteboard for real-time collaborative drawing",
+        "answer": "Develop a whiteboard application that supports multi-user real-time drawing. Integrate a canvas element with drawing tools and use websockets to synchronize changes across clients."
+      },
+      {
+        "question": "Develop a customizable dashboard with widgets and user-defined layouts",
+        "answer": "Create a dashboard that allows users to add, remove, and rearrange widgets. Use a drag-and-drop library to support layout customization and persist user settings locally or via an API."
+      },
+      {
+        "question": "Create a booking system for appointments or reservations",
+        "answer": "Build a booking app where users can schedule appointments. Include features like calendar integration, time slot selection, and real-time availability checks."
+      },
+      {
+        "question": "Develop an expense sharing and bill splitting application",
+        "answer": "Create an app that helps users split bills and track shared expenses. Implement calculations for individual contributions and provide visual summaries of all expenses."
+      },
+      {
+        "question": "Build an RSS feed aggregator with subscription and filtering capabilities",
+        "answer": "Develop a web app that aggregates RSS feeds from various sources. Allow users to subscribe to feeds, filter content by tags or keywords, and display articles with pagination."
+      },
+      {
+        "question": "Create a media gallery with image and video upload, editing, and tagging",
+        "answer": "Develop a media gallery app that supports uploading images and videos. Add features such as live editing, tagging, and categorization to enhance media organization."
+      },
+      {
+        "question": "Develop an interactive e-learning platform with video lessons and quizzes",
+        "answer": "Build an education platform where users can watch video lessons, participate in quizzes, and track their progress. Implement features for user authentication and content protection."
+      },
+      {
+        "question": "Build a sentiment analysis dashboard integrating a sentiment analysis API",
+        "answer": "Create a dashboard that fetches data from a sentiment analysis API to display moods or opinions on topics. Use various charts and graphs to visualize trends over time."
+      },
+      {
+        "question": "Create a blockchain explorer interface using public blockchain APIs",
+        "answer": "Develop a UI to explore blockchain data, such as transactions and addresses. Integrate with public APIs to fetch real-time blockchain information and present it in an interactive format."
+      },
+      {
+        "question": "Develop a live sports score and statistics dashboard",
+        "answer": "Build an application that displays live scores, player statistics, and match updates. Use sports APIs for data and focus on real-time updates and data visualization."
+      },
+      {
+        "question": "Create an online survey and polling application",
+        "answer": "Develop a survey tool that allows users to create polls, collect responses, and display results in real time. Implement features like different question types and dynamic result charts."
+      },
+      {
+        "question": "Build a CRM dashboard for customer relationship management",
+        "answer": "Design a CRM system that tracks customer interactions, sales data, and support tickets. Integrate filtering and search capabilities, along with dynamic charts for data analysis."
+      },
+      {
+        "question": "Develop a live code collaboration tool with real-time editing",
+        "answer": "Create a web-based code editor where multiple users can collaborate simultaneously. Use websockets to enable real-time editing and implement features like syntax highlighting and version control."
+      },
+      {
+        "question": "Build a virtualized infinite scroll product listing application",
+        "answer": "Design a product listing app that handles large datasets efficiently with infinite scroll and virtualization techniques. Focus on performance optimization and smooth user experience."
+      },
+      {
+        "question": "Create an AI-powered chatbot interface",
+        "answer": "Develop a chatbot UI using React that interacts with an AI backend via APIs. Implement message handling, user session management, and natural language processing for improved conversations."
+      },
+      {
+        "question": "Build a secure password manager UI with local encryption",
+        "answer": "Develop a password manager that lets users store and retrieve credentials securely. Use encryption libraries to encrypt data locally and design a clean, intuitive interface."
+      },
+      {
+        "question": "Develop a dynamic form builder with drag-and-drop and conditional logic",
+        "answer": "Create an application that allows users to build custom forms by dragging and dropping form elements. Implement conditional display logic and enable saving/loading of form configurations."
+      }
     ],
     bigCompanyQuestions: [
       {
@@ -1192,6 +1365,67 @@ export const interviewQuestions = [
         answer:
           "Here's a custom modal hook: const useModal = () => { const [isOpen, setIsOpen] = useState(false); const toggle = () => setIsOpen(!isOpen); return { isOpen, toggle }; }; // Usage: const Modal = ({ children, isOpen, toggle }) => { if (!isOpen) return null; return ( <div className='modal'> <div className='modal-content'> {children} <button onClick={toggle}>Close</button> </div> </div> ); };",
       },
+          {
+            "question": "Implement a Higher-Order Component (HOC) for Error Boundaries in React.",
+            "answer": "Create an HOC that wraps any component and catches JavaScript errors in its child component tree. Inside the HOC, use componentDidCatch (or getDerivedStateFromError in class components) to log errors and display a fallback UI. This pattern prevents the entire app from crashing due to an error in a single component."
+          },
+          {
+            "question": "Integrate React Profiler to Measure Component Performance.",
+            "answer": "Utilize React's built-in Profiler component to wrap parts of your application. Provide an onRender callback to log render timings, the actual time spent rendering, and notify when re-renders are expensive. This helps identify components that need optimization."
+          },
+          {
+            "question": "Implement useTransition for Concurrent UI Updates in React.",
+            "answer": "Use the useTransition hook to mark state updates as non-urgent—enabling smoother and more responsive UIs during heavy updates. Wrap state updates that are not critical with startTransition, and display fallback UI components if needed while the transition is pending."
+          },
+          {
+            "question": "Implement a Custom Hook to Debounce Input Values.",
+            "answer": "Build a hook called useDebounce that takes an input value and a delay as parameters. Use useState to store the debounced value and useEffect to update the state only after the delay has elapsed. This minimizes expensive operations (like API calls) triggered by rapid input changes."
+          },
+          {
+            "question": "Implement React Suspense for Handling Asynchronous Data Fetching.",
+            "answer": "Wrap components that rely on asynchronous data with React.Suspense. Create a resource that throws a promise until data is ready. Once the promise resolves, React renders the component tree. This results in a more declarative data fetching mechanism where a fallback UI is automatically displayed while loading."
+          },
+          {
+            "question": "Develop a Custom Hook for Managing WebSocket Connections.",
+            "answer": "Design a hook (e.g., useWebSocket) that establishes a WebSocket connection on mount, manages event listeners (for open, message, error, and close events) via useEffect, and provides functions to send messages and disconnect. This encapsulates real-time communication logic cleanly."
+          },
+          {
+            "question": "Implement a Custom Hook to Throttle Event Handler Calls in React.",
+            "answer": "Build a hook called useThrottle that takes a callback and a delay. Use useRef to store the last execution time and useCallback to wrap the original function so that it executes at most once per specified delay period. This prevents performance issues with rapidly firing events."
+          },
+          {
+            "question": "Develop a Custom Hook for Toggling Dark Mode in a React Application.",
+            "answer": "Create a hook (e.g., useDarkMode) that manages a theme state and toggles between dark and light modes. Synchronize the theme with local storage so that the user's preference persists across sessions. Use useEffect to add or remove CSS class names to the document body based on the theme state."
+          },
+          {
+            "question": "Implement a Custom Hook for Undo/Redo Functionality in State Management.",
+            "answer": "Design a hook (e.g., useUndoRedo) that maintains a history stack of state values. Provide functions to set new state, undo to a previous state, and redo to a later state. Manage two stacks (past and future) so that users can navigate backward and forward through state changes."
+          },
+          {
+            "question": "Develop a Custom Hook to Synchronize State Across Multiple Browser Tabs.",
+            "answer": "Create a hook (e.g., useSyncedState) that uses localStorage as the source of truth. Listen for the storage event on window to update the component state whenever the value changes in another tab. This ensures that state (such as theme or user session) remains consistent across tabs."
+          },
+          {
+            "question": "Implement a Simple Internationalization (i18n) Mechanism Using React Context.",
+            "answer": "Set up a Context to hold the current language and its translation messages. Create a provider component that wraps your app and passes down functions to switch languages. Build a custom hook (e.g., useTranslation) to retrieve translated strings based on keys, allowing components to render localized content."
+          },
+          {
+            "question": "Describe Strategies for Testing React Components Using Jest and React Testing Library.",
+            "answer": "Focus on testing component behavior rather than implementation details. Use React Testing Library to render components and emulate user interactions. Validate that the UI updates correctly based on state changes or mock API calls. Combine with Jest for assertions and snapshot tests."
+          },
+          {
+            "question": "Explain How to Design a Plugin Architecture in a React Application Using Dynamic Imports.",
+            "answer": "Architect your application to load feature modules on demand via dynamic import() calls. Combine React.lazy with Suspense to load plugins asynchronously. Design a registration mechanism—possibly via context—to allow plugins to register components, routes, or additional functionality without modifying the core app."
+          },
+          {
+            "question": "Implement a Custom Hook to Manage Focus for Accessibility in React Components.",
+            "answer": "Develop a hook (e.g., useFocus) that uses useRef to reference a DOM element alongside useEffect to focus the element when certain conditions are met. This hook can improve accessibility by managing focus transitions for modals, dialogs, or dynamic content areas."
+          },
+          {
+            "question": "Explain Strategies to Optimize Re-Rendering in React Components Using Memoization Techniques.",
+            "answer": "Discuss methods such as using React.memo to prevent re-rendering of functional components when props haven't changed, utilizing useMemo to cache expensive computations, and useCallback to memoize functions passed as props. These techniques collectively reduce unnecessary renders and enhance performance in large-scale applications."
+          }
+      
     ],
     simpleProjects: [
       {
@@ -1319,6 +1553,86 @@ export const interviewQuestions = [
         answer:
           "Create a simple file explorer interface with a tree view of folders and files.",
       },
+          {
+            "question": "Build a basic currency converter",
+            "answer": "Create an app that fetches exchange rates from a public API and converts an amount from one currency to another. Use state and effects to manage API data and input changes."
+          },
+          {
+            "question": "Develop a simple tip calculator",
+            "answer": "Implement a tip calculator that allows users to input a bill amount and tip percentage, then calculates the tip and total amount. Use state to capture and update the values."
+          },
+          {
+            "question": "Create a basic BMI calculator",
+            "answer": "Build a BMI calculator where users can input their weight and height. Compute the Body Mass Index and display the result along with a category (underweight, normal, overweight)."
+          },
+          {
+            "question": "Build a random quote generator",
+            "answer": "Develop a simple app that randomly displays quotes from a predefined list or fetched from an API. Allow users to click a button to see a new quote."
+          },
+          {
+            "question": "Develop an image slider carousel",
+            "answer": "Create a responsive image carousel that cycles through a set of images. Implement navigation buttons to move between slides and use state to track the current image index."
+          },
+          {
+            "question": "Create a text-to-speech converter",
+            "answer": "Utilize the Web Speech API to build an app that converts written text into spoken words. Include input for text and controls to play, pause, or stop the speech."
+          },
+          {
+            "question": "Build a password strength checker",
+            "answer": "Implement a tool that evaluates the strength of a user-entered password. Provide real-time feedback on password quality based on length, character variety, and common patterns."
+          },
+          {
+            "question": "Develop an accessibility color contrast checker",
+            "answer": "Build an app where users can input foreground and background colors (or select them using a color picker) and receive feedback on the contrast ratio to meet accessibility standards."
+          },
+          {
+            "question": "Create a user profile card component",
+            "answer": "Design a simple static user profile card that displays a photo, name, and brief bio. Include props to make the component reusable with different user data."
+          },
+          {
+            "question": "Build a digital clock with alarm functionality",
+            "answer": "Implement a digital clock that shows the current time and allows users to set an alarm. Use state to manage time updates and trigger an alert or sound when the alarm time is reached."
+          },
+          {
+            "question": "Develop a minimal productivity dashboard",
+            "answer": "Create a small dashboard that aggregates widgets like a clock, weather summary, and a task counter. Use simple components and state to display dynamic data."
+          },
+          {
+            "question": "Create a search autocomplete component",
+            "answer": "Build an autocomplete input field that suggests possible matches as a user types. Use a static list or fetch suggestions from an API and update the display dynamically."
+          },
+          {
+            "question": "Develop a drag-and-drop file uploader UI",
+            "answer": "Implement a simple interface that allows users to drag files into a drop zone. Display the list of selected files and simulate upload progress without actual backend integration."
+          },
+          {
+            "question": "Build a GIF search application using the Giphy API",
+            "answer": "Create an app that fetches and displays GIFs based on the user's search query from the Giphy API. Manage input state and render the resulting GIFs in a grid layout."
+          },
+          {
+            "question": "Create a basic character counter for text inputs",
+            "answer": "Develop a component that counts and displays the number of characters entered into a textarea or input field. Update the counter in real time as the user types."
+          },
+          {
+            "question": "Build a modal dialog showcase app",
+            "answer": "Implement a reusable modal component that can be triggered by a button. Focus on styling and simple open/close state management to display content in an overlay."
+          },
+          {
+            "question": "Develop a multi-step form wizard",
+            "answer": "Create a form that is divided into several steps. Use state to manage the current step and form data, and include navigation buttons to move forward and backward through the form."
+          },
+          {
+            "question": "Create a responsive sidebar navigation menu",
+            "answer": "Build a sidebar menu that collapses on smaller screens and expands on larger ones. Use CSS media queries and React state to toggle the menu's visibility."
+          },
+          {
+            "question": "Build a mouse tracking visualizer",
+            "answer": "Develop an app that tracks the user's mouse movements within a specified area. Display the coordinates or a visual trail using state updates and event listeners."
+          },
+          {
+            "question": "Develop a responsive grid layout visualizer",
+            "answer": "Implement a tool that displays a grid overlay on a webpage to help visualize responsive design. Provide toggles to adjust grid size and spacing using CSS and state management."
+          }
     ],
   },
   {
