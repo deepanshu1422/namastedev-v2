@@ -36,124 +36,239 @@ export const interviewQuestions = [
           "'==' is the equality operator that compares values after performing type coercion if necessary. '===' is the strict equality operator that compares both value and type without performing type coercion.",
       },
       {
-        question: "Explain closures in JavaScript.",
-        answer:
+        "question": "What is the difference between `let` and `const`?",
+        "answer": "`let` allows you to declare variables that can be reassigned, while `const` is used for variables that cannot be reassigned after initialization. Both are block-scoped."
+      },
+      {
+        "question": "What is the purpose of the `Array.prototype.reduce()` method?",
+        "answer": "The `reduce()` method executes a reducer function on each element of the array, resulting in a single output value. It is often used to accumulate values or transform arrays."
+      },
+      {
+        "question": "What is the difference between `null` and `undefined`?",
+        "answer": "`undefined` means a variable has been declared but not assigned a value, while `null` is an intentional absence of any object value."
+      },
+      {
+        "question": "What is the difference between `call()`, `apply()`, and `bind()`?",
+        "answer": "`call()` and `apply()` invoke a function immediately with a specified `this` value and arguments. `call()` takes arguments individually, while `apply()` takes them as an array. `bind()` returns a new function with a bound `this` value, but does not invoke it immediately."
+      },
+      {
+        "question": "What is the difference between `slice()` and `splice()`?",
+        "answer": "`slice()` returns a shallow copy of a portion of an array without modifying the original array. `splice()` changes the contents of an array by removing, replacing, or adding elements."
+      },
+      {
+        "question": "What is the purpose of the `new` keyword?",
+        "answer": "The `new` keyword creates an instance of a user-defined object type or a built-in constructor function (e.g., `Array`, `Date`). It creates a new object and sets the prototype of the object to the constructor's prototype."
+      },
+      {
+        "question": "What is the difference between `Object.keys()` and `Object.getOwnPropertyNames()`?",
+        "answer": "`Object.keys()` returns an array of an object's own enumerable property names. `Object.getOwnPropertyNames()` returns an array of all own property names, including non-enumerable ones."
+      },
+      {
+        "question": "What is the difference between `==` and `Object.is()`?",
+        "answer": "`==` performs type coercion before comparison, while `Object.is()` does not. `Object.is()` also treats `NaN` and `-0` differently (`Object.is(NaN, NaN)` is `true`, and `Object.is(-0, 0)` is `false`)."
+      },
+      {
+        "question": "What is the purpose of the `Symbol` data type?",
+        "answer": "`Symbol` is a primitive data type used to create unique and immutable identifiers. It is often used as object property keys to avoid naming collisions."
+      },
+      {
+        "question": "What is the difference between `async/await` and Promises?",
+        "answer": "`async/await` is syntactic sugar built on top of Promises, making asynchronous code look more like synchronous code. It simplifies error handling and chaining compared to raw Promises."
+      },
+      {
+        "question": "What is the difference between `for...in` and `for...of` loops?",
+        "answer": "`for...in` iterates over enumerable property names of an object, including inherited ones. `for...of` iterates over iterable objects (e.g., arrays, strings) and provides their values."
+      },
+      {
+        "question": "What is the purpose of the `Proxy` object?",
+        "answer": "The `Proxy` object allows you to define custom behavior for fundamental operations (e.g., property lookup, assignment, enumeration) on an object. It is often used for validation, logging, or interception."
+      },
+      {
+        "question": "What is the difference between `setTimeout()` and `setInterval()`?",
+        "answer": "`setTimeout()` executes a function once after a specified delay. `setInterval()` repeatedly executes a function at specified intervals until it is cleared."
+      },
+      {
+        "question": "What is the purpose of the `WeakMap` and `WeakSet` objects?",
+        "answer": "`WeakMap` and `WeakSet` are collections that hold weak references to their keys or values. They allow garbage collection of unused objects, preventing memory leaks."
+      },
+      {
+        "question": "What is the difference between `JSON.stringify()` and `JSON.parse()`?",
+        "answer": "`JSON.stringify()` converts a JavaScript object or value to a JSON string. `JSON.parse()` converts a JSON string back into a JavaScript object or value."
+      },
+      {
+        "question": "What is the purpose of the `Array.prototype.flat()` method?",
+        "answer": "The `flat()` method creates a new array with all sub-array elements concatenated into it recursively up to the specified depth. It is useful for flattening nested arrays."
+      },
+      {
+        "question": "What is the difference between `localStorage` and `sessionStorage`?",
+        "answer": "`localStorage` stores data with no expiration time, persisting even after the browser is closed. `sessionStorage` stores data only for the duration of the page session, clearing when the tab or browser is closed."
+      },
+      {
+        "question": "What is the purpose of the `fetch()` API?",
+        "answer": "The `fetch()` API is used to make network requests (e.g., HTTP requests) and handle responses. It returns a Promise that resolves to the `Response` object representing the response to the request."
+      },
+      {
+        "question": "What is the difference between `class` and `prototype` in JavaScript?",
+        "answer": "`class` is syntactic sugar for creating constructor functions and managing inheritance in a more intuitive way. `prototype` is the underlying mechanism for inheritance in JavaScript, where objects inherit properties and methods from their prototype."
+      },
+      {
+        "question": "What is the purpose of the `Intl` object?",
+        "answer": "The `Intl` object provides language-sensitive string comparison, number formatting, and date and time formatting. It is used for internationalization and localization in JavaScript."
+      },
+      {
+        "question": "Explain closures in JavaScript.",
+        "answer":
           "A closure is a function that has access to variables in its outer (enclosing) lexical scope, even after the outer function has returned. It allows for data privacy and the creation of function factories.",
       },
       {
-        question: "How does prototypal inheritance work?",
-        answer:
+        "question": "How does prototypal inheritance work?",
+        "answer":
           "Prototypal inheritance is a method by which an object can inherit properties and methods from another object. Objects have an internal link to another object called its prototype. When trying to access a property that does not exist in an object, JavaScript will look for it in the prototype chain.",
       },
       {
-        question: "What is the event loop in JavaScript?",
-        answer:
+        "question": "What is the event loop in JavaScript?",
+        "answer":
           "The event loop is a mechanism that allows JavaScript to perform non-blocking operations despite being single-threaded. It continuously checks the call stack and callback queue, pushing callbacks from the queue to the stack when it's empty.",
       },
       {
-        question: "Explain the concept of hoisting.",
-        answer:
+        "question": "Explain the concept of hoisting.",
+        "answer":
           "Hoisting is JavaScript's default behavior of moving declarations to the top of their respective scopes during compilation. This means variable and function declarations are processed before any code is executed, allowing them to be used before they are declared in the source code.",
       },
       {
-        question: "What are the differences between var, let, and const?",
-        answer:
+        "question": "What are the differences between var, let, and const?",
+        "answer":
           "var is function-scoped and can be redeclared and updated. let is block-scoped, can be updated but not redeclared. const is block-scoped and cannot be updated or redeclared.",
       },
       {
-        question: "How does the 'this' keyword work in JavaScript?",
-        answer:
+        "question": "How does the 'this' keyword work in JavaScript?",
+        "answer":
           "The value of 'this' depends on how a function is called. In a method, 'this' refers to the object. In a regular function, it refers to the global object (or undefined in strict mode). In an arrow function, it retains the 'this' value of the enclosing lexical scope.",
       },
       {
-        question: "What is the purpose of the 'use strict' directive?",
-        answer:
+        "question": "What is the purpose of the 'use strict' directive?",
+        "answer":
           "'use strict' enables strict mode in JavaScript, which catches common coding errors and prevents the use of certain error-prone features. It helps write cleaner and more secure code.",
       },
       {
-        question:
+        "question":
           "Explain the difference between synchronous and asynchronous code in JavaScript.",
-        answer:
+        "answer":
           "Synchronous code executes sequentially, blocking further execution until the current operation completes. Asynchronous code allows operations to run in the background without blocking the main thread, using callbacks, Promises, or async/await to handle results.",
       },
       {
-        question: "What are Promises and how do they work?",
-        answer:
+        "question": "What are Promises and how do they work?",
+        "answer":
           "Promises are objects representing the eventual completion or failure of an asynchronous operation. They provide a cleaner way to handle asynchronous operations compared to callbacks. Promises have three states: pending, fulfilled, or rejected.",
       },
       {
-        question: "How does the async/await syntax work?",
-        answer:
+        "question": "How does the async/await syntax work?",
+        "answer":
           "async/await is syntactic sugar built on top of Promises, making asynchronous code look and behave more like synchronous code. An async function always returns a Promise, and the await keyword can be used inside it to wait for a Promise to resolve before continuing execution.",
       },
       {
-        question: "What is the difference between null and undefined?",
-        answer:
-          "undefined means a variable has been declared but has not yet been assigned a value. null is an assignment value that represents a deliberate non-value or absence of any object value.",
-      },
-      {
-        question: "Explain the concept of callback functions.",
-        answer:
+        "question": "Explain the concept of callback functions.",
+        "answer":
           "A callback function is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action. They are often used to continue code execution after an asynchronous operation has completed.",
       },
       {
-        question: "What is the difference between forEach() and map()?",
-        answer:
+        "question": "What is the difference between forEach() and map()?",
+        "answer":
           "forEach() iterates over an array and executes a provided function for each element, but it doesn't return anything. map() creates a new array with the results of calling a provided function on every element in the calling array.",
       },
       {
-        question: "How do you handle errors in JavaScript?",
-        answer:
+        "question": "How do you handle errors in JavaScript?",
+        "answer":
           "Errors can be handled using try...catch blocks. The try block contains the code that might throw an error, and the catch block handles the error. Finally block can be used to execute code regardless of the result. Custom errors can be created using the Error constructor.",
       },
       {
-        question: "What is the purpose of the bind() method?",
-        answer:
+        "question": "What is the purpose of the bind() method?",
+        "answer":
           "The bind() method creates a new function that, when called, has its 'this' keyword set to the provided value. It's often used to maintain the correct context for 'this' when methods are passed as callbacks.",
       },
       {
-        question: "Explain the concept of event bubbling and capturing.",
-        answer:
+        "question": "Explain the concept of event bubbling and capturing.",
+        "answer":
           "Event bubbling is the process where an event triggers on the deepest target element, then bubbles up through its ancestors. Event capturing is the opposite, where the event is first captured by the outermost element and propagated to the inner elements.",
       },
       {
-        question:
+        "question":
           "What is memoization and how can it be implemented in JavaScript?",
-        answer:
+        "answer":
           "Memoization is an optimization technique that speeds up applications by storing the results of expensive function calls and returning the cached result when the same inputs occur again. It can be implemented using closures and objects to cache results.",
       },
       {
-        question:
+        "question":
           "What are arrow functions and how do they differ from regular functions?",
-        answer:
+        "answer":
           "Arrow functions provide a concise syntax for writing function expressions. They don't have their own 'this', arguments, super, or new.target. They are always anonymous and can't be used as constructors.",
       },
       {
-        question: "Explain the concept of debouncing and throttling.",
-        answer:
+        "question": "Explain the concept of debouncing and throttling.",
+        "answer":
           "Debouncing and throttling are techniques to control how many times we allow a function to be executed over time. Debouncing ensures that a function is only executed after a certain amount of time has passed since its last invocation. Throttling ensures that a function is called at most once in a specified time period.",
       },
       {
-        question:
+        "question":
           "What is the difference between Object.create() and the constructor pattern?",
-        answer:
+        "answer":
           "Object.create() creates a new object with the specified prototype object and properties. The constructor pattern uses a function as a blueprint to create objects with the same properties and methods.",
       },
       {
-        question: "How does the module pattern work in JavaScript?",
-        answer:
+        "question": "How does the module pattern work in JavaScript?",
+        "answer":
           "The module pattern uses closures to create private and public methods and variables, providing a way of encapsulating functionality to protect it from the global scope. It helps in organizing code and creating self-contained, reusable pieces of code.",
       },
       {
-        question: "What are generator functions and how are they used?",
-        answer:
+        "question": "What are generator functions and how are they used?",
+        "answer":
           "Generator functions allow you to define an iterative algorithm by writing a single function whose execution is not continuous. They are written using the function* syntax and use yield to pause and resume execution. They're useful for working with iterators and implementing asynchronous programming patterns.",
       },
       {
-        question: "Explain the concept of currying in JavaScript.",
-        answer:
+        "question": "Explain the concept of currying in JavaScript.",
+        "answer":
           "Currying is the technique of translating a function that takes multiple arguments into a sequence of functions, each with a single argument. It allows you to partially apply a function, creating new functions with some of the arguments already set.",
       },
+        {
+          "question": "What is the difference between `deep copy` and `shallow copy` in JavaScript?",
+          "answer": "A shallow copy creates a new object but copies only the references to nested objects, meaning changes to nested objects affect both the original and the copy. A deep copy creates a completely independent copy of the original object and all nested objects, ensuring no shared references."
+        },
+        {
+          "question": "What is the purpose of the `void` operator in JavaScript?",
+          "answer": "The `void` operator evaluates an expression and returns `undefined`. It is often used to prevent navigation when clicking on links (e.g., `javascript:void(0)`) or to ensure an expression has no return value."
+        },
+        {
+          "question": "What is the difference between `Object.freeze()` and `Object.seal()`?",
+          "answer": "`Object.freeze()` makes an object immutable, preventing new properties from being added, existing properties from being removed, or existing properties from being modified. `Object.seal()` prevents new properties from being added and existing properties from being removed, but allows modification of existing properties."
+        },
+        {
+          "question": "What is the purpose of the `Array.prototype.some()` method?",
+          "answer": "The `some()` method tests whether at least one element in the array passes the provided test function. It returns `true` if any element satisfies the condition, otherwise `false`."
+        },
+        {
+          "question": "What is the difference between `Event.preventDefault()` and `Event.stopPropagation()`?",
+          "answer": "`Event.preventDefault()` prevents the default behavior of an event (e.g., preventing a form submission). `Event.stopPropagation()` stops the event from bubbling up the DOM tree, preventing parent elements from handling the event."
+        },
+        {
+          "question": "What is the purpose of the `Array.prototype.every()` method?",
+          "answer": "The `every()` method tests whether all elements in the array pass the provided test function. It returns `true` if all elements satisfy the condition, otherwise `false`."
+        },
+        {
+          "question": "What is the difference between `Map` and `Object` in JavaScript?",
+          "answer": "`Map` allows keys of any type (including objects), maintains insertion order, and provides methods like `set()`, `get()`, and `delete()`. `Object` only allows string or symbol keys, does not guarantee order, and lacks built-in methods for iteration and size tracking."
+        },
+        {
+          "question": "What is the purpose of the `Array.prototype.find()` method?",
+          "answer": "The `find()` method returns the first element in the array that satisfies the provided test function. If no element satisfies the condition, it returns `undefined`."
+        },
+        {
+          "question": "What is the difference between `async` functions and generator functions?",
+          "answer": "`async` functions are used to handle asynchronous operations and always return a Promise. Generator functions (`function*`) use `yield` to pause and resume execution, allowing for custom iteration and asynchronous patterns, but they do not return Promises by default."
+        },
+        {
+          "question": "What is the purpose of the `Array.prototype.includes()` method?",
+          "answer": "The `includes()` method checks if an array contains a specific value and returns `true` if the value is found, otherwise `false`. It is case-sensitive and uses the SameValueZero algorithm for comparison."
+        }
     ],
     takeHomeProjects: [
       {
@@ -162,126 +277,226 @@ export const interviewQuestions = [
           "Create a web app that allows users to add, edit, and delete tasks. Use local storage to persist data between sessions. Focus on UI/UX and efficient state management.",
       },
       {
-        question: "Create a weather app using a public API",
-        answer:
+        "question": "Create a weather app using a public API",
+        "answer":
           "Use a public API to fetch weather data and display it on a web page. Focus on handling asynchronous operations, error handling, and presenting data in a user-friendly manner.",
       },
       {
-        question:
+        "question":
           "Develop a simple e-commerce product page with a shopping cart",
-        answer:
+        "answer":
           "Build a simple e-commerce product page with a shopping cart. Focus on handling product variations, cart functionality, and state management.",
       },
       {
-        question: "Implement a chat application using WebSockets",
-        answer:
+        "question": "Implement a chat application using WebSockets",
+        "answer":
           "Create a real-time chat application using WebSockets. Focus on handling real-time communication, user authentication, and message persistence.",
       },
       {
-        question: "Build a markdown editor with preview",
-        answer:
+        "question": "Build a markdown editor with preview",
+        "answer":
           "Develop a markdown editor that allows users to write markdown and see a live preview. Focus on parsing markdown and updating the preview in real-time.",
       },
       {
-        question: "Create a kanban board for project management",
-        answer:
+        "question": "Create a kanban board for project management",
+        "answer":
           "Build a kanban board application for managing projects. Include features like drag and drop, task creation, and board customization.",
       },
       {
-        question: "Develop a recipe management application",
-        answer:
+        "question": "Develop a recipe management application",
+        "answer":
           "Create an app for managing recipes, including features like recipe creation, categorization, and search functionality.",
       },
       {
-        question: "Build a personal finance tracker",
-        answer:
+        "question": "Build a personal finance tracker",
+        "answer":
           "Develop an application for tracking personal finances, including income, expenses, and budget planning.",
       },
       {
-        question: "Create a social media dashboard",
-        answer:
+        "question": "Create a social media dashboard",
+        "answer":
           "Build a dashboard that aggregates data from various social media platforms using their APIs. Focus on data visualization and real-time updates.",
       },
       {
-        question: "Implement a URL shortener service",
-        answer:
+        "question": "Implement a URL shortener service",
+        "answer":
           "Develop a service that shortens long URLs and redirects users. Include features like custom short URLs and click tracking.",
       },
       {
-        question: "Build a collaborative drawing application",
-        answer:
+        "question": "Build a collaborative drawing application",
+        "answer":
           "Create a web-based drawing application that allows multiple users to draw on the same canvas in real-time.",
       },
       {
-        question: "Develop a podcast player application",
-        answer:
+        "question": "Develop a podcast player application",
+        "answer":
           "Build a podcast player that allows users to subscribe to podcasts, download episodes, and track listening progress.",
       },
       {
-        question: "Create a habit tracker application",
-        answer:
+        "question": "Create a habit tracker application",
+        "answer":
           "Develop an application for tracking daily habits, including streak counting and progress visualization.",
       },
       {
-        question: "Implement a file sharing service",
-        answer:
+        "question": "Implement a file sharing service",
+        "answer":
           "Build a service that allows users to upload and share files securely. Include features like file encryption and expiring links.",
       },
       {
-        question: "Develop a code snippet manager",
-        answer:
+        "question": "Develop a code snippet manager",
+        "answer":
           "Create an application for developers to store and organize code snippets. Include features like syntax highlighting and tagging.",
       },
       {
-        question: "Build a multiplayer game",
-        answer:
+        "question": "Build a multiplayer game",
+        "answer":
           "Develop a simple multiplayer game (like Tic Tac Toe or Snake) using real-time communication technologies.",
       },
       {
-        question: "Create a data visualization dashboard",
-        answer:
+        "question": "Create a data visualization dashboard",
+        "answer":
           "Build a dashboard that visualizes complex datasets using various chart types. Focus on interactivity and performance with large datasets.",
       },
       {
-        question: "Implement a note-taking application with rich text editing",
-        answer:
+        "question": "Implement a note-taking application with rich text editing",
+        "answer":
           "Develop a note-taking app with features like rich text editing, note organization, and search functionality.",
       },
       {
-        question: "Build a job board application",
-        answer:
+        "question": "Build a job board application",
+        "answer":
           "Create a job board where companies can post jobs and job seekers can apply. Include features like job search and application tracking.",
       },
       {
-        question: "Develop a personal portfolio website builder",
-        answer:
+        "question": "Develop a personal portfolio website builder",
+        "answer":
           "Build a tool that allows users to create and customize their own portfolio websites without coding knowledge.",
       },
       {
-        question: "Create a music streaming service frontend",
-        answer:
+        "question": "Create a music streaming service frontend",
+        "answer":
           "Develop the frontend for a music streaming service. Focus on playlist management, search functionality, and audio playback.",
       },
       {
-        question: "Implement a booking system for a small business",
-        answer:
+        "question": "Implement a booking system for a small business",
+        "answer":
           "Build a booking system suitable for a small business like a hair salon or a gym. Include features like appointment scheduling and reminders.",
       },
       {
-        question: "Develop a personal knowledge base application",
-        answer:
+        "question": "Develop a personal knowledge base application",
+        "answer":
           "Create an application for organizing personal knowledge, including features like note-taking, linking between notes, and visualization of connections.",
       },
       {
-        question: "Build a cryptocurrency portfolio tracker",
-        answer:
+        "question": "Build a cryptocurrency portfolio tracker",
+        "answer":
           "Develop an application that allows users to track their cryptocurrency investments, including real-time price updates and portfolio analysis.",
       },
       {
-        question: "Create a language learning application",
-        answer:
+        "question": "Create a language learning application",
+        "answer":
           "Build an application to help users learn a new language, including features like flashcards, quizzes, and progress tracking.",
       },
+      {
+        "question": "Build a memory card matching game",
+        "answer": "Create a memory game where users flip cards to find matching pairs. Use JavaScript to handle game logic, card flipping, and win conditions."
+      },
+      {
+        "question": "Develop a typing speed test application",
+        "answer": "Build an app that tests a user's typing speed by displaying a random text and calculating words per minute (WPM). Use JavaScript to track keystrokes and time."
+      },
+      {
+        "question": "Create a Pomodoro timer",
+        "answer": "Develop a Pomodoro timer that alternates between work and break intervals. Use JavaScript to handle the timer logic and notifications."
+      },
+      {
+        "question": "Build a random color generator",
+        "answer": "Create an app that generates random colors and displays their HEX or RGB values. Use JavaScript to dynamically update the background color."
+      },
+      {
+        "question": "Develop a simple dice roller",
+        "answer": "Build an app that simulates rolling dice. Use JavaScript to generate random numbers and display the result visually."
+      },
+      {
+        "question": "Create a word counter tool",
+        "answer": "Develop a tool that counts the number of words and characters in a given text. Use JavaScript to process the input in real-time."
+      },
+      {
+        "question": "Build a simple image gallery with lightbox",
+        "answer": "Create an image gallery where users can click on thumbnails to view larger images in a lightbox. Use JavaScript to handle the lightbox functionality."
+      },
+      {
+        "question": "Develop a basic quiz app with a timer",
+        "answer": "Build a quiz app where users answer questions within a time limit. Use JavaScript to handle the timer, score calculation, and question transitions."
+      },
+      {
+        "question": "Create a simple password strength checker",
+        "answer": "Develop a tool that checks the strength of a password based on criteria like length, special characters, and numbers. Use JavaScript to evaluate the password."
+      },
+      {
+        "question": "Build a basic analog clock",
+        "answer": "Create an analog clock that displays the current time using hour, minute, and second hands. Use JavaScript to update the clock in real-time."
+      },
+      {
+        "question": "Develop a simple to-do list with drag-and-drop functionality",
+        "answer": "Build a to-do list where users can reorder tasks using drag-and-drop. Use JavaScript to handle the drag-and-drop interactions."
+      },
+      {
+        "question": "Create a random meal generator",
+        "answer": "Develop an app that suggests random meals or recipes. Use JavaScript to fetch data from an API or a static list."
+      },
+      {
+        "question": "Build a simple expense splitter",
+        "answer": "Create a tool that helps users split expenses among friends. Use JavaScript to calculate each person's share based on the total amount."
+      },
+      {
+        "question": "Develop a basic music player",
+        "answer": "Build a simple music player with play, pause, and skip functionality. Use JavaScript to control audio playback."
+      },
+      {
+        "question": "Create a simple count-up timer",
+        "answer": "Develop a timer that starts counting up from zero when activated. Use JavaScript to handle the timer logic and display."
+      },
+      {
+        "question": "Build a basic form validator",
+        "answer": "Create a form validator that checks for required fields, valid email formats, and password matching. Use JavaScript to provide real-time feedback."
+      },
+      {
+        "question": "Develop a simple currency converter with dropdowns",
+        "answer": "Build a currency converter that allows users to select currencies from dropdowns and convert amounts. Use JavaScript to handle the conversion logic."
+      },
+      {
+        "question": "Create a random number generator with range selection",
+        "answer": "Develop a tool that generates random numbers within a user-specified range. Use JavaScript to handle the range input and random number generation."
+      },
+      {
+        "question": "Build a simple text-to-speech app",
+        "answer": "Create an app that converts text to speech using the Web Speech API. Use JavaScript to handle the text input and speech synthesis."
+      },
+      {
+        "question": "Develop a basic age calculator",
+        "answer": "Build a tool that calculates a user's age based on their birthdate. Use JavaScript to handle the date calculation and display the result."
+      },
+      {
+        "question": "Create a simple dark mode toggle",
+        "answer": "Develop a feature that allows users to toggle between light and dark modes. Use JavaScript to switch CSS styles dynamically."
+      },
+      {
+        "question": "Build a basic infinite scroll page",
+        "answer": "Create a webpage that loads more content as the user scrolls down. Use JavaScript to fetch and append new data dynamically."
+      },
+      {
+        "question": "Develop a simple progress bar",
+        "answer": "Build a progress bar that updates based on user input or a timer. Use JavaScript to handle the progress updates and animations."
+      },
+      {
+        "question": "Create a basic emoji picker",
+        "answer": "Develop a tool that allows users to select and insert emojis into a text field. Use JavaScript to handle the emoji selection and insertion."
+      },
+      {
+        "question": "Build a simple sticky notes app",
+        "answer": "Create an app where users can add, edit, and delete sticky notes. Use JavaScript to handle the notes' CRUD operations and local storage for persistence."
+      }
     ],
     bigCompanyQuestions: [
       {
@@ -374,6 +589,106 @@ export const interviewQuestions = [
         answer:
           "Here's an implementation: function binarySearch(arr, target) { let left = 0, right = arr.length - 1; while (left <= right) { let mid = Math.floor((left + right) / 2); if (arr[mid] === target) return mid; if (arr[mid] < target) left = mid + 1; else right = mid - 1; } return -1; }",
       },
+        {
+          "question": "Explain the difference between `==` and `===` with examples.",
+          "answer": "`==` performs type coercion before comparison, while `===` checks both value and type. Example: `5 == '5'` (true) vs `5 === '5'` (false). Always prefer `===` for predictable comparisons."
+        },
+        {
+          "question": "Implement a function to reverse a linked list.",
+          "answer": "function reverseLinkedList(head) {\n  let prev = null;\n  while(head) {\n    const next = head.next;\n    head.next = prev;\n    prev = head;\n    head = next;\n  }\n  return prev;\n}"
+        },
+        {
+          "question": "Explain how `this` works in arrow functions compared to regular functions.",
+          "answer": "Arrow functions don't have their own `this` binding. They inherit `this` from the enclosing lexical context, unlike regular functions which determine `this` based on how they're called."
+        },
+        {
+          "question": "Implement a polyfill for `Promise.all`.",
+          "answer": "Promise.all = function(promises) {\n  return new Promise((resolve, reject) => {\n    const results = [];\n    let completed = 0;\n    promises.forEach((promise, i) => {\n      Promise.resolve(promise)\n        .then(res => {\n          results[i] = res;\n          if(++completed === promises.length) resolve(results);\n        })\n        .catch(reject);\n    });\n  });\n};"
+        },
+        {
+          "question": "Explain the Web Workers API and its limitations.",
+          "answer": "Web Workers enable multithreading in JavaScript by running scripts in background threads. Limitations: No DOM access, limited communication via postMessage, and same-origin policy restrictions."
+        },
+        {
+          "question": "Implement a function to detect a cycle in a linked list.",
+          "answer": "function hasCycle(head) {\n  let slow = head, fast = head;\n  while(fast && fast.next) {\n    slow = slow.next;\n    fast = fast.next.next;\n    if(slow === fast) return true;\n  }\n  return false;\n}"
+        },
+        {
+          "question": "Explain the difference between `Object.freeze()` and `Object.seal()`.",
+          "answer": "`Object.seal()` prevents adding/removing properties but allows modifying existing ones. `Object.freeze()` prevents any changes to the object (including property values). Both prevent prototype changes."
+        },
+        {
+          "question": "Implement a function to find the first non-repeating character in a string.",
+          "answer": "function firstNonRepeatingChar(str) {\n  const count = {};\n  for(const char of str) count[char] = (count[char] || 0) + 1;\n  for(const char of str) if(count[char] === 1) return char;\n  return null;\n}"
+        },
+        {
+          "question": "Explain the phases of the Event Loop in Node.js.",
+          "answer": "1. Timers (executes setTimeout/setInterval callbacks)\n2. Pending callbacks (executes I/O callbacks)\n3. Poll (retrieve new I/O events)\n4. Check (execute setImmediate callbacks)\n5. Close callbacks (execute close event callbacks)"
+        },
+        {
+          "question": "Implement a currying function that supports both `sum(a,b,c)` and `sum(a)(b)(c)` syntax.",
+          "answer": "function curry(fn) {\n  return function curried(...args) {\n    if(args.length >= fn.length) return fn.apply(this, args);\n    return (...args2) => curried.apply(this, args.concat(args2));\n  };\n}"
+        },
+        {
+          "question": "Explain the difference between `null` and `undefined` in JavaScript.",
+          "answer": "`undefined` means a variable has been declared but not assigned a value. `null` is an assignment value representing intentional absence of any object value. typeof null => 'object', typeof undefined => 'undefined'."
+        },
+        {
+          "question": "Implement a Singleton pattern in JavaScript.",
+          "answer": "class Singleton {\n  constructor() {\n    if(!Singleton.instance) {\n      Singleton.instance = this;\n    }\n    return Singleton.instance;\n  }\n}\n// Usage: const instance = new Singleton();"
+        },
+        {
+          "question": "Explain the Temporal Dead Zone (TDZ) in ES6.",
+          "answer": "The TDZ is the period between entering scope and variable declaration where accessing a let/const variable throws a ReferenceError. Variables are in TDZ from the start of the block until declaration is executed."
+        },
+        {
+          "question": "Implement a polyfill for `Function.prototype.bind`.",
+          "answer": "Function.prototype.bind = function(context, ...args) {\n  const fn = this;\n  return function(...innerArgs) {\n    return fn.apply(context, args.concat(innerArgs));\n  };\n};"
+        },
+        {
+          "question": "Explain how async/await works under the hood with generators.",
+          "answer": "Async/await is syntactic sugar over generators and promises. The async function returns a promise, and await pauses execution similar to yield. A generator function with yield statements is automatically wrapped in a promise chain."
+        },
+        {
+          "question": "Implement a function to check if two objects are deep equal.",
+          "answer": "function deepEqual(a, b) {\n  if(a === b) return true;\n  if(typeof a !== 'object' || a === null || typeof b !== 'object' || b === null) return false;\n  const keysA = Object.keys(a), keysB = Object.keys(b);\n  if(keysA.length !== keysB.length) return false;\n  return keysA.every(key => deepEqual(a[key], b[key]));\n}"
+        },
+        {
+          "question": "Explain the difference between `for...in` and `for...of` loops.",
+          "answer": "`for...in` iterates over enumerable properties (including prototype chain), best for objects. `for...of` iterates over iterable values (arrays, strings, maps), using the [Symbol.iterator] method."
+        },
+        {
+          "question": "Implement a memoized Fibonacci function.",
+          "answer": "const memoFib = (() => {\n  const cache = {};\n  return function fib(n) {\n    if(n in cache) return cache[n];\n    if(n <= 1) return n;\n    return cache[n] = fib(n-1) + fib(n-2);\n  };\n})();"
+        },
+        {
+          "question": "Explain the difference between microtasks and macrotasks in the event loop.",
+          "answer": "Microtasks (Promise callbacks, queueMicrotask) execute immediately after current task, before rendering. Macrotasks (setTimeout, I/O) execute in next event loop iteration. Microtasks have higher priority."
+        },
+        {
+          "question": "Implement a function to detect if CSS is being injected at runtime (CSS-in-JS pattern).",
+          "answer": "function isRuntimeCSS() {\n  const style = document.createElement('style');\n  document.head.appendChild(style);\n  const injected = style.sheet.cssRules.length > 0;\n  document.head.removeChild(style);\n  return injected;\n}"
+        },
+        {
+          "question": "Explain how to handle memory leaks in JavaScript applications.",
+          "answer": "1. Remove event listeners\n2. Clear timers/intervals\n3. Avoid global variables\n4. Use WeakMap/WeakSet\n5. Nullify DOM references\n6. Use Chrome DevTools Memory Profiler\n7. Avoid circular references"
+        },
+        {
+          "question": "Implement a function to check if an object is empty.",
+          "answer": "function isEmpty(obj) {\n  return Object.keys(obj).length === 0 && obj.constructor === Object;\n}"
+        },
+        {
+          "question": "Explain the concept of property descriptors in JavaScript.",
+          "answer": "Property descriptors define attributes of object properties:\n- value: The property's value\n- writable: Can be changed\n- enumerable: Shows up in for...in\n- configurable: Can be deleted or modified\nAccessed via Object.getOwnPropertyDescriptor()"
+        },
+        {
+          "question": "Implement a function to handle circular references in JSON.stringify.",
+          "answer": "function safeStringify(obj) {\n  const seen = new WeakSet();\n  return JSON.stringify(obj, (key, value) => {\n    if(typeof value === 'object' && value !== null) {\n      if(seen.has(value)) return '[Circular]';\n      seen.add(value);\n    }\n    return value;\n  });\n}"
+        },
+        {
+          "question": "Explain the use cases for ES6 Proxy.",
+          "answer": "Proxies enable:\n1. Validation/formatting of property values\n2. Observable patterns\n3. Virtual properties\n4. Operation logging\n5. Access control\n6. Caching/memoization\n7. Revocable references"
+        }
     ],
     simpleProjects: [
       {
@@ -501,6 +816,46 @@ export const interviewQuestions = [
         answer:
           "Implement a basic calendar application that allows users to view dates, add events, and navigate between months.",
       },
+        {
+          "question": "Build a random quote generator",
+          "answer": "Create an app that displays random inspirational quotes. Use a free quotes API or a local array of quotes. Include a button to generate new quotes."
+        },
+        {
+          "question": "Create a BMI calculator",
+          "answer": "Develop a tool that calculates Body Mass Index (BMI) based on user-input height and weight. Display the result with a simple interpretation (underweight, normal, etc.)."
+        },
+        {
+          "question": "Develop a unit converter for measurements",
+          "answer": "Build a converter that converts between units like kilometers/miles, kilograms/pounds, or liters/gallons. Use dropdowns for unit selection."
+        },
+        {
+          "question": "Create an age calculator",
+          "answer": "Build a tool that calculates a user's exact age in years, months, and days based on their birthdate input."
+        },
+        {
+          "question": "Implement a tip calculator",
+          "answer": "Develop an app that calculates tip amounts based on bill total and percentage. Include options to split the bill among multiple people."
+        },
+        {
+          "question": "Build a digital clock",
+          "answer": "Create a real-time digital clock that displays hours, minutes, and seconds. Update the time every second using JavaScript."
+        },
+        {
+          "question": "Develop a simple to-do list with drag-and-drop",
+          "answer": "Enhance a basic to-do list by allowing users to reorder tasks via drag-and-drop functionality using HTML5 Drag and Drop API."
+        },
+        {
+          "question": "Create a hangman game",
+          "answer": "Build a word-guessing game where players guess letters to complete a hidden word. Track remaining attempts and display guessed letters."
+        },
+        {
+          "question": "Implement a random number generator",
+          "answer": "Create a tool that generates random numbers within a user-specified range. Include copy-to-clipboard functionality for the result."
+        },
+        {
+          "question": "Develop a recipe book app",
+          "answer": "Build an app to store and organize favorite recipes. Include features to add recipes with ingredients/instructions and filter by category."
+        }
     ],
   },
   {
