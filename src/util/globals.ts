@@ -1365,67 +1365,67 @@ export const interviewQuestions = [
         answer:
           "Here's a custom modal hook: const useModal = () => { const [isOpen, setIsOpen] = useState(false); const toggle = () => setIsOpen(!isOpen); return { isOpen, toggle }; }; // Usage: const Modal = ({ children, isOpen, toggle }) => { if (!isOpen) return null; return ( <div className='modal'> <div className='modal-content'> {children} <button onClick={toggle}>Close</button> </div> </div> ); };",
       },
-          {
-            "question": "Implement a Higher-Order Component (HOC) for Error Boundaries in React.",
-            "answer": "Create an HOC that wraps any component and catches JavaScript errors in its child component tree. Inside the HOC, use componentDidCatch (or getDerivedStateFromError in class components) to log errors and display a fallback UI. This pattern prevents the entire app from crashing due to an error in a single component."
-          },
-          {
-            "question": "Integrate React Profiler to Measure Component Performance.",
-            "answer": "Utilize React's built-in Profiler component to wrap parts of your application. Provide an onRender callback to log render timings, the actual time spent rendering, and notify when re-renders are expensive. This helps identify components that need optimization."
-          },
-          {
-            "question": "Implement useTransition for Concurrent UI Updates in React.",
-            "answer": "Use the useTransition hook to mark state updates as non-urgent—enabling smoother and more responsive UIs during heavy updates. Wrap state updates that are not critical with startTransition, and display fallback UI components if needed while the transition is pending."
-          },
-          {
-            "question": "Implement a Custom Hook to Debounce Input Values.",
-            "answer": "Build a hook called useDebounce that takes an input value and a delay as parameters. Use useState to store the debounced value and useEffect to update the state only after the delay has elapsed. This minimizes expensive operations (like API calls) triggered by rapid input changes."
-          },
-          {
-            "question": "Implement React Suspense for Handling Asynchronous Data Fetching.",
-            "answer": "Wrap components that rely on asynchronous data with React.Suspense. Create a resource that throws a promise until data is ready. Once the promise resolves, React renders the component tree. This results in a more declarative data fetching mechanism where a fallback UI is automatically displayed while loading."
-          },
-          {
-            "question": "Develop a Custom Hook for Managing WebSocket Connections.",
-            "answer": "Design a hook (e.g., useWebSocket) that establishes a WebSocket connection on mount, manages event listeners (for open, message, error, and close events) via useEffect, and provides functions to send messages and disconnect. This encapsulates real-time communication logic cleanly."
-          },
-          {
-            "question": "Implement a Custom Hook to Throttle Event Handler Calls in React.",
-            "answer": "Build a hook called useThrottle that takes a callback and a delay. Use useRef to store the last execution time and useCallback to wrap the original function so that it executes at most once per specified delay period. This prevents performance issues with rapidly firing events."
-          },
-          {
-            "question": "Develop a Custom Hook for Toggling Dark Mode in a React Application.",
-            "answer": "Create a hook (e.g., useDarkMode) that manages a theme state and toggles between dark and light modes. Synchronize the theme with local storage so that the user's preference persists across sessions. Use useEffect to add or remove CSS class names to the document body based on the theme state."
-          },
-          {
-            "question": "Implement a Custom Hook for Undo/Redo Functionality in State Management.",
-            "answer": "Design a hook (e.g., useUndoRedo) that maintains a history stack of state values. Provide functions to set new state, undo to a previous state, and redo to a later state. Manage two stacks (past and future) so that users can navigate backward and forward through state changes."
-          },
-          {
-            "question": "Develop a Custom Hook to Synchronize State Across Multiple Browser Tabs.",
-            "answer": "Create a hook (e.g., useSyncedState) that uses localStorage as the source of truth. Listen for the storage event on window to update the component state whenever the value changes in another tab. This ensures that state (such as theme or user session) remains consistent across tabs."
-          },
-          {
-            "question": "Implement a Simple Internationalization (i18n) Mechanism Using React Context.",
-            "answer": "Set up a Context to hold the current language and its translation messages. Create a provider component that wraps your app and passes down functions to switch languages. Build a custom hook (e.g., useTranslation) to retrieve translated strings based on keys, allowing components to render localized content."
-          },
-          {
-            "question": "Describe Strategies for Testing React Components Using Jest and React Testing Library.",
-            "answer": "Focus on testing component behavior rather than implementation details. Use React Testing Library to render components and emulate user interactions. Validate that the UI updates correctly based on state changes or mock API calls. Combine with Jest for assertions and snapshot tests."
-          },
-          {
-            "question": "Explain How to Design a Plugin Architecture in a React Application Using Dynamic Imports.",
-            "answer": "Architect your application to load feature modules on demand via dynamic import() calls. Combine React.lazy with Suspense to load plugins asynchronously. Design a registration mechanism—possibly via context—to allow plugins to register components, routes, or additional functionality without modifying the core app."
-          },
-          {
-            "question": "Implement a Custom Hook to Manage Focus for Accessibility in React Components.",
-            "answer": "Develop a hook (e.g., useFocus) that uses useRef to reference a DOM element alongside useEffect to focus the element when certain conditions are met. This hook can improve accessibility by managing focus transitions for modals, dialogs, or dynamic content areas."
-          },
-          {
-            "question": "Explain Strategies to Optimize Re-Rendering in React Components Using Memoization Techniques.",
-            "answer": "Discuss methods such as using React.memo to prevent re-rendering of functional components when props haven't changed, utilizing useMemo to cache expensive computations, and useCallback to memoize functions passed as props. These techniques collectively reduce unnecessary renders and enhance performance in large-scale applications."
-          }
-      
+      {
+        "question": "Implement a Higher-Order Component (HOC) for Error Boundaries in React.",
+        "answer": "Create an HOC that wraps any component and catches JavaScript errors in its child component tree. Inside the HOC, use componentDidCatch (or getDerivedStateFromError in class components) to log errors and display a fallback UI. This pattern prevents the entire app from crashing due to an error in a single component."
+      },
+      {
+        "question": "Integrate React Profiler to Measure Component Performance.",
+        "answer": "Utilize React's built-in Profiler component to wrap parts of your application. Provide an onRender callback to log render timings, the actual time spent rendering, and notify when re-renders are expensive. This helps identify components that need optimization."
+      },
+      {
+        "question": "Implement useTransition for Concurrent UI Updates in React.",
+        "answer": "Use the useTransition hook to mark state updates as non-urgent—enabling smoother and more responsive UIs during heavy updates. Wrap state updates that are not critical with startTransition, and display fallback UI components if needed while the transition is pending."
+      },
+      {
+        "question": "Implement a Custom Hook to Debounce Input Values.",
+        "answer": "Build a hook called useDebounce that takes an input value and a delay as parameters. Use useState to store the debounced value and useEffect to update the state only after the delay has elapsed. This minimizes expensive operations (like API calls) triggered by rapid input changes."
+      },
+      {
+        "question": "Implement React Suspense for Handling Asynchronous Data Fetching.",
+        "answer": "Wrap components that rely on asynchronous data with React.Suspense. Create a resource that throws a promise until data is ready. Once the promise resolves, React renders the component tree. This results in a more declarative data fetching mechanism where a fallback UI is automatically displayed while loading."
+      },
+      {
+        "question": "Develop a Custom Hook for Managing WebSocket Connections.",
+        "answer": "Design a hook (e.g., useWebSocket) that establishes a WebSocket connection on mount, manages event listeners (for open, message, error, and close events) via useEffect, and provides functions to send messages and disconnect. This encapsulates real-time communication logic cleanly."
+      },
+      {
+        "question": "Implement a Custom Hook to Throttle Event Handler Calls in React.",
+        "answer": "Build a hook called useThrottle that takes a callback and a delay. Use useRef to store the last execution time and useCallback to wrap the original function so that it executes at most once per specified delay period. This prevents performance issues with rapidly firing events."
+      },
+      {
+        "question": "Develop a Custom Hook for Toggling Dark Mode in a React Application.",
+        "answer": "Create a hook (e.g., useDarkMode) that manages a theme state and toggles between dark and light modes. Synchronize the theme with local storage so that the user's preference persists across sessions. Use useEffect to add or remove CSS class names to the document body based on the theme state."
+      },
+      {
+        "question": "Implement a Custom Hook for Undo/Redo Functionality in State Management.",
+        "answer": "Design a hook (e.g., useUndoRedo) that maintains a history stack of state values. Provide functions to set new state, undo to a previous state, and redo to a later state. Manage two stacks (past and future) so that users can navigate backward and forward through state changes."
+      },
+      {
+        "question": "Develop a Custom Hook to Synchronize State Across Multiple Browser Tabs.",
+        "answer": "Create a hook (e.g., useSyncedState) that uses localStorage as the source of truth. Listen for the storage event on window to update the component state whenever the value changes in another tab. This ensures that state (such as theme or user session) remains consistent across tabs."
+      },
+      {
+        "question": "Implement a Simple Internationalization (i18n) Mechanism Using React Context.",
+        "answer": "Set up a Context to hold the current language and its translation messages. Create a provider component that wraps your app and passes down functions to switch languages. Build a custom hook (e.g., useTranslation) to retrieve translated strings based on keys, allowing components to render localized content."
+      },
+      {
+        "question": "Describe Strategies for Testing React Components Using Jest and React Testing Library.",
+        "answer": "Focus on testing component behavior rather than implementation details. Use React Testing Library to render components and emulate user interactions. Validate that the UI updates correctly based on state changes or mock API calls. Combine with Jest for assertions and snapshot tests."
+      },
+      {
+        "question": "Explain How to Design a Plugin Architecture in a React Application Using Dynamic Imports.",
+        "answer": "Architect your application to load feature modules on demand via dynamic import() calls. Combine React.lazy with Suspense to load plugins asynchronously. Design a registration mechanism—possibly via context—to allow plugins to register components, routes, or additional functionality without modifying the core app."
+      },
+      {
+        "question": "Implement a Custom Hook to Manage Focus for Accessibility in React Components.",
+        "answer": "Develop a hook (e.g., useFocus) that uses useRef to reference a DOM element alongside useEffect to focus the element when certain conditions are met. This hook can improve accessibility by managing focus transitions for modals, dialogs, or dynamic content areas."
+      },
+      {
+        "question": "Explain Strategies to Optimize Re-Rendering in React Components Using Memoization Techniques.",
+        "answer": "Discuss methods such as using React.memo to prevent re-rendering of functional components when props haven't changed, utilizing useMemo to cache expensive computations, and useCallback to memoize functions passed as props. These techniques collectively reduce unnecessary renders and enhance performance in large-scale applications."
+      }
+
     ],
     simpleProjects: [
       {
@@ -1553,86 +1553,86 @@ export const interviewQuestions = [
         answer:
           "Create a simple file explorer interface with a tree view of folders and files.",
       },
-          {
-            "question": "Build a basic currency converter",
-            "answer": "Create an app that fetches exchange rates from a public API and converts an amount from one currency to another. Use state and effects to manage API data and input changes."
-          },
-          {
-            "question": "Develop a simple tip calculator",
-            "answer": "Implement a tip calculator that allows users to input a bill amount and tip percentage, then calculates the tip and total amount. Use state to capture and update the values."
-          },
-          {
-            "question": "Create a basic BMI calculator",
-            "answer": "Build a BMI calculator where users can input their weight and height. Compute the Body Mass Index and display the result along with a category (underweight, normal, overweight)."
-          },
-          {
-            "question": "Build a random quote generator",
-            "answer": "Develop a simple app that randomly displays quotes from a predefined list or fetched from an API. Allow users to click a button to see a new quote."
-          },
-          {
-            "question": "Develop an image slider carousel",
-            "answer": "Create a responsive image carousel that cycles through a set of images. Implement navigation buttons to move between slides and use state to track the current image index."
-          },
-          {
-            "question": "Create a text-to-speech converter",
-            "answer": "Utilize the Web Speech API to build an app that converts written text into spoken words. Include input for text and controls to play, pause, or stop the speech."
-          },
-          {
-            "question": "Build a password strength checker",
-            "answer": "Implement a tool that evaluates the strength of a user-entered password. Provide real-time feedback on password quality based on length, character variety, and common patterns."
-          },
-          {
-            "question": "Develop an accessibility color contrast checker",
-            "answer": "Build an app where users can input foreground and background colors (or select them using a color picker) and receive feedback on the contrast ratio to meet accessibility standards."
-          },
-          {
-            "question": "Create a user profile card component",
-            "answer": "Design a simple static user profile card that displays a photo, name, and brief bio. Include props to make the component reusable with different user data."
-          },
-          {
-            "question": "Build a digital clock with alarm functionality",
-            "answer": "Implement a digital clock that shows the current time and allows users to set an alarm. Use state to manage time updates and trigger an alert or sound when the alarm time is reached."
-          },
-          {
-            "question": "Develop a minimal productivity dashboard",
-            "answer": "Create a small dashboard that aggregates widgets like a clock, weather summary, and a task counter. Use simple components and state to display dynamic data."
-          },
-          {
-            "question": "Create a search autocomplete component",
-            "answer": "Build an autocomplete input field that suggests possible matches as a user types. Use a static list or fetch suggestions from an API and update the display dynamically."
-          },
-          {
-            "question": "Develop a drag-and-drop file uploader UI",
-            "answer": "Implement a simple interface that allows users to drag files into a drop zone. Display the list of selected files and simulate upload progress without actual backend integration."
-          },
-          {
-            "question": "Build a GIF search application using the Giphy API",
-            "answer": "Create an app that fetches and displays GIFs based on the user's search query from the Giphy API. Manage input state and render the resulting GIFs in a grid layout."
-          },
-          {
-            "question": "Create a basic character counter for text inputs",
-            "answer": "Develop a component that counts and displays the number of characters entered into a textarea or input field. Update the counter in real time as the user types."
-          },
-          {
-            "question": "Build a modal dialog showcase app",
-            "answer": "Implement a reusable modal component that can be triggered by a button. Focus on styling and simple open/close state management to display content in an overlay."
-          },
-          {
-            "question": "Develop a multi-step form wizard",
-            "answer": "Create a form that is divided into several steps. Use state to manage the current step and form data, and include navigation buttons to move forward and backward through the form."
-          },
-          {
-            "question": "Create a responsive sidebar navigation menu",
-            "answer": "Build a sidebar menu that collapses on smaller screens and expands on larger ones. Use CSS media queries and React state to toggle the menu's visibility."
-          },
-          {
-            "question": "Build a mouse tracking visualizer",
-            "answer": "Develop an app that tracks the user's mouse movements within a specified area. Display the coordinates or a visual trail using state updates and event listeners."
-          },
-          {
-            "question": "Develop a responsive grid layout visualizer",
-            "answer": "Implement a tool that displays a grid overlay on a webpage to help visualize responsive design. Provide toggles to adjust grid size and spacing using CSS and state management."
-          }
+      {
+        "question": "Build a basic currency converter",
+        "answer": "Create an app that fetches exchange rates from a public API and converts an amount from one currency to another. Use state and effects to manage API data and input changes."
+      },
+      {
+        "question": "Develop a simple tip calculator",
+        "answer": "Implement a tip calculator that allows users to input a bill amount and tip percentage, then calculates the tip and total amount. Use state to capture and update the values."
+      },
+      {
+        "question": "Create a basic BMI calculator",
+        "answer": "Build a BMI calculator where users can input their weight and height. Compute the Body Mass Index and display the result along with a category (underweight, normal, overweight)."
+      },
+      {
+        "question": "Build a random quote generator",
+        "answer": "Develop a simple app that randomly displays quotes from a predefined list or fetched from an API. Allow users to click a button to see a new quote."
+      },
+      {
+        "question": "Develop an image slider carousel",
+        "answer": "Create a responsive image carousel that cycles through a set of images. Implement navigation buttons to move between slides and use state to track the current image index."
+      },
+      {
+        "question": "Create a text-to-speech converter",
+        "answer": "Utilize the Web Speech API to build an app that converts written text into spoken words. Include input for text and controls to play, pause, or stop the speech."
+      },
+      {
+        "question": "Build a password strength checker",
+        "answer": "Implement a tool that evaluates the strength of a user-entered password. Provide real-time feedback on password quality based on length, character variety, and common patterns."
+      },
+      {
+        "question": "Develop an accessibility color contrast checker",
+        "answer": "Build an app where users can input foreground and background colors (or select them using a color picker) and receive feedback on the contrast ratio to meet accessibility standards."
+      },
+      {
+        "question": "Create a user profile card component",
+        "answer": "Design a simple static user profile card that displays a photo, name, and brief bio. Include props to make the component reusable with different user data."
+      },
+      {
+        "question": "Build a digital clock with alarm functionality",
+        "answer": "Implement a digital clock that shows the current time and allows users to set an alarm. Use state to manage time updates and trigger an alert or sound when the alarm time is reached."
+      },
+      {
+        "question": "Develop a minimal productivity dashboard",
+        "answer": "Create a small dashboard that aggregates widgets like a clock, weather summary, and a task counter. Use simple components and state to display dynamic data."
+      },
+      {
+        "question": "Create a search autocomplete component",
+        "answer": "Build an autocomplete input field that suggests possible matches as a user types. Use a static list or fetch suggestions from an API and update the display dynamically."
+      },
+      {
+        "question": "Develop a drag-and-drop file uploader UI",
+        "answer": "Implement a simple interface that allows users to drag files into a drop zone. Display the list of selected files and simulate upload progress without actual backend integration."
+      },
+      {
+        "question": "Build a GIF search application using the Giphy API",
+        "answer": "Create an app that fetches and displays GIFs based on the user's search query from the Giphy API. Manage input state and render the resulting GIFs in a grid layout."
+      },
+      {
+        "question": "Create a basic character counter for text inputs",
+        "answer": "Develop a component that counts and displays the number of characters entered into a textarea or input field. Update the counter in real time as the user types."
+      },
+      {
+        "question": "Build a modal dialog showcase app",
+        "answer": "Implement a reusable modal component that can be triggered by a button. Focus on styling and simple open/close state management to display content in an overlay."
+      },
+      {
+        "question": "Develop a multi-step form wizard",
+        "answer": "Create a form that is divided into several steps. Use state to manage the current step and form data, and include navigation buttons to move forward and backward through the form."
+      },
+      {
+        "question": "Create a responsive sidebar navigation menu",
+        "answer": "Build a sidebar menu that collapses on smaller screens and expands on larger ones. Use CSS media queries and React state to toggle the menu's visibility."
+      },
+      {
+        "question": "Build a mouse tracking visualizer",
+        "answer": "Develop an app that tracks the user's mouse movements within a specified area. Display the coordinates or a visual trail using state updates and event listeners."
+      },
+      {
+        "question": "Develop a responsive grid layout visualizer",
+        "answer": "Implement a tool that displays a grid overlay on a webpage to help visualize responsive design. Provide toggles to adjust grid size and spacing using CSS and state management."
+      }
     ],
   },
   {
@@ -1693,59 +1693,482 @@ export const interviewQuestions = [
         answer:
           "Lambda functions are anonymous functions defined using the `lambda` keyword for short, single-expression functions.",
       },
+      {
+        "question": "What is the difference between a list and a tuple in Python?",
+        "answer": "Lists are mutable and defined using square brackets, allowing modifications such as adding or removing elements. Tuples, on the other hand, are immutable and defined using parentheses, ensuring that their content remains constant after creation."
+      },
+      {
+        "question": "What are pickling and unpickling in Python?",
+        "answer": "Pickling is the process of serializing a Python object into a byte stream, while unpickling is the inverse process—converting the byte stream back into a Python object. This is useful for saving objects to files or sending them over a network."
+      },
+      {
+        "question": "What is PEP 8 and why is it important?",
+        "answer": "PEP 8 is the Python Enhancement Proposal that provides guidelines and best practices for writing Python code. It ensures code readability, consistency, and helps developers maintain a common coding style."
+      },
+      {
+        "question": "Explain Python's exception handling mechanism.",
+        "answer": "Python uses try, except, else, and finally blocks for exception handling. The try block contains code that might raise an exception, the except block catches and handles the error, else executes if no errors occur, and finally runs regardless of whether an exception was raised."
+      },
+      {
+        "question": "What is a generator in Python and how does it work?",
+        "answer": "A generator is a special type of iterator that yields items one at a time using the 'yield' keyword instead of returning them all at once. It enables efficient memory usage when iterating over large datasets by generating values on the fly."
+      },
+      {
+        "question": "Explain the concept of closures in Python.",
+        "answer": "A closure occurs when a nested function captures variables from its enclosing scope, allowing the function to access these variables even after the outer function has finished executing. This is useful for creating function factories or maintaining state."
+      },
+      {
+        "question": "What are *args and **kwargs in Python?",
+        "answer": "The *args and **kwargs syntax allows a function to accept an arbitrary number of positional and keyword arguments respectively. *args collects extra positional arguments as a tuple, while **kwargs collects extra keyword arguments as a dictionary."
+      },
+      {
+        "question": "What is a metaclass in Python?",
+        "answer": "A metaclass is a class of a class that defines how a class behaves. In Python, metaclasses allow you to modify class creation, typically by overriding the __new__ or __init__ methods of the metaclass. They are used for advanced object-oriented programming and framework design."
+      },
+      {
+        "question": "How do you handle file I/O in Python?",
+        "answer": "File I/O in Python is commonly managed using the built-in open() function to read or write files. It's best practice to use the 'with' statement to open files, ensuring proper resource management and automatic file closure after operations are completed."
+      },
+      {
+        "question": "What is the purpose of the __init__ method in Python classes?",
+        "answer": "The __init__ method is a constructor used to initialize a newly created object's attributes. It is automatically invoked when an instance of the class is created, setting up the initial state of the object."
+      },
+      {
+        "question": "How does Python's garbage collection work?",
+        "answer": "Python primarily uses reference counting to keep track of objects in memory and automatically deallocates memory when an object's reference count reaches zero. It also employs a cyclic garbage collector to detect and break reference cycles that reference counting alone cannot handle."
+      },
+      {
+        "question": "How do you create and manage virtual environments in Python?",
+        "answer": "Virtual environments are created using tools like venv or virtualenv. They allow you to isolate project-specific dependencies and Python interpreter settings, ensuring that projects do not interfere with each other and work with defined package versions."
+      },
+      {
+        "question": "What is the difference between modules and packages in Python?",
+        "answer": "A module is a single Python file containing code, while a package is a collection of modules organized within a directory that contains an __init__.py file. Packages allow for a hierarchical structuring of the module namespace."
+      },
+      {
+        "question": "What is monkey patching in Python and when is it used?",
+        "answer": "Monkey patching refers to the dynamic modification of a module, class, or method at runtime. It is often used in testing scenarios or to modify third-party libraries temporarily, but it should be used with caution as it can lead to code that is hard to maintain."
+      },
+      {
+        "question": "How do you differentiate between Python 2 and Python 3?",
+        "answer": "Key differences include the treatment of the print statement (Python 2 uses print without parentheses while Python 3 uses print() as a function), integer division behavior, improved Unicode support in Python 3, and various syntax changes that make Python 3 more consistent and easier to use."
+      },
+      {
+        "question": "What does the slice notation [::-1] do in Python?",
+        "answer": "The slicing notation [::-1] reverses a sequence, such as a list or string. It works by creating a slice that starts from the end of the sequence and steps backwards by one, effectively reversing the order of the elements."
+      },
+      {
+        "question": "What is the use of the pass statement in Python?",
+        "answer": "The pass statement is a null operation used as a placeholder in code blocks where a statement is syntactically required but no action is needed. It allows developers to write minimal code that compiles without errors while leaving the block for future implementation."
+      },
+      {
+        "question": "Explain the concept of recursion with an example in Python.",
+        "answer": "Recursion is a programming technique where a function calls itself to solve a smaller instance of a problem. A common example is the calculation of a factorial, where the factorial of n is defined as n multiplied by the factorial of n-1, with a base case of factorial(0) = 1."
+      },
+      {
+        "question": "How can you merge two dictionaries in Python?",
+        "answer": "In Python 3.5 and later, you can merge two dictionaries using the unpacking operator: merged_dict = {**dict1, **dict2}. Alternatively, you can use dict.update() to update one dictionary with key-value pairs from another."
+      },
+      {
+        "question": "What is the meaning of __name__ == '__main__' in Python?",
+        "answer": "The __name__ == '__main__' condition checks if a Python script is being run directly, rather than being imported as a module into another script. Code within this condition is executed only when the script is run directly."
+      },
+      {
+        "question": "What are iterators in Python and how are they implemented?",
+        "answer": "Iterators are objects that allow traversal through all elements of a collection one at a time. They are implemented using the __iter__() method to return an iterator and the __next__() method to fetch the next element in the sequence. When there are no more elements, __next__() raises a StopIteration exception."
+      },
+      {
+        "question": "What is the purpose of the zip() function in Python?",
+        "answer": "The zip() function aggregates elements from multiple iterables (like lists or tuples) into tuples. It pairs elements based on their positions, and is useful for iterating over multiple sequences in parallel."
+      }
+
     ],
     takeHomeProjects: [
       {
-        question: "Build a simple web scraper.",
-        answer:
-          "Use Python's `requests` and `BeautifulSoup` libraries to extract data from a website.",
+        "question": "Build a simple web scraper.",
+        "answer": "Use Python's `requests` and `BeautifulSoup` libraries to extract data from a website."
       },
       {
-        question: "Create a basic chatbot.",
-        answer:
-          "Use Python's string manipulation and conditional logic to simulate a chatbot.",
+        "question": "Create a basic chatbot.",
+        "answer": "Use Python's string manipulation and conditional logic to simulate a chatbot."
       },
       {
-        question: "Develop a personal finance tracker.",
-        answer:
-          "Build a command-line application to track expenses and generate summaries using Python.",
+        "question": "Develop a personal finance tracker.",
+        "answer": "Build a command-line application to track expenses and generate summaries using Python."
       },
+      {
+        "question": "Build a Number Guessing Game.",
+        "answer": "Implement a command-line game where the program randomly selects a number within a range and the user tries to guess it with hints provided after each attempt."
+      },
+      {
+        "question": "Develop a Rock, Paper, Scissors Game.",
+        "answer": "Create a simple game where the user plays against the computer using random choices and conditional logic to determine the winner."
+      },
+      {
+        "question": "Create a Hangman Game.",
+        "answer": "Develop a command-line Hangman game that selects a random word and allows the user to guess letters within a limited number of incorrect attempts."
+      },
+      {
+        "question": "Build a Password Generator.",
+        "answer": "Construct a tool that takes user input for desired length and character types, then outputs a random, secure password."
+      },
+      {
+        "question": "Create a QR Code Encoder/Decoder.",
+        "answer": "Use libraries like `qrcode` and `Pillow` (for encoding) and `OpenCV` (for decoding) to generate and interpret QR codes."
+      },
+      {
+        "question": "Develop a Tic-Tac-Toe Game.",
+        "answer": "Implement the classic Tic-Tac-Toe game in either a command-line interface or a basic GUI, with options for player vs. player or player vs. computer."
+      },
+      {
+        "question": "Build a Minesweeper Game.",
+        "answer": "Develop a simplified version of Minesweeper that includes grid generation, mine placement, and interactive cell revealing or flagging."
+      },
+      {
+        "question": "Develop a Countdown Timer.",
+        "answer": "Create an app that allows users to set a countdown duration, displaying the remaining time and notifying the user when time is up."
+      },
+      {
+        "question": "Build a Pomodoro Timer.",
+        "answer": "Design a timer that adheres to the Pomodoro Technique by alternating work and break intervals, complete with notifications."
+      },
+      {
+        "question": "Create a GIF Creator.",
+        "answer": "Allow users to select multiple images and compile them into an animated GIF using libraries like `MoviePy`."
+      },
+      {
+        "question": "Develop a Currency Converter.",
+        "answer": "Build an application that fetches live exchange rates from a public API and converts amounts between different currencies."
+      },
+      {
+        "question": "Create a Weather Application.",
+        "answer": "Fetch current and forecast weather data from a public API based on user input for location, then display the results in a user-friendly format."
+      },
+      {
+        "question": "Build a Twitter Bot.",
+        "answer": "Utilize the `Tweepy` library to create a bot that automates tweeting, retweeting, or responding based on defined criteria."
+      },
+      {
+        "question": "Create a Reddit Bot.",
+        "answer": "Develop a bot using the `PRAW` library that can comment on posts, moderate content, or interact with users on Reddit."
+      },
+      {
+        "question": "Develop a URL Shortener.",
+        "answer": "Construct a web application using Flask that accepts long URLs and returns a shortened version, storing mappings in a database."
+      },
+      {
+        "question": "Build a File Renamer Utility.",
+        "answer": "Create a script that renames multiple files in a directory based on user-defined patterns or naming conventions."
+      },
+      {
+        "question": "Develop a Text Encryption/Decryption Tool.",
+        "answer": "Implement a utility that encrypts and decrypts text using algorithms like the Caesar cipher, allowing user-defined keys."
+      },
+      {
+        "question": "Create a Stock Price Tracker.",
+        "answer": "Design an application that retrieves and displays real-time stock data from an API, along with trends and alerts."
+      },
+      {
+        "question": "Build a News Aggregator.",
+        "answer": "Use web scraping or news APIs to collect headlines from multiple sources and present them in a consolidated, organized format."
+      },
+      {
+        "question": "Develop a Discord Bot.",
+        "answer": "Utilize the `discord.py` library to create a bot that can manage server tasks, respond to commands, or interact with users."
+      },
+      {
+        "question": "Create an Automated Email Sender.",
+        "answer": "Using Python's `smtplib` and `email` libraries, build a script that sends emails automatically based on user-defined triggers."
+      }
     ],
     bigCompanyQuestions: [
       {
-        question: "Explain Python's `asyncio` module.",
-        answer:
-          "The `asyncio` module provides tools for asynchronous programming, enabling concurrency without multi-threading.",
+        "question": "Explain Python's `asyncio` module.",
+        "answer": "The `asyncio` module provides tools for asynchronous programming, enabling concurrency without multi-threading."
       },
       {
-        question: "How would you optimize a Python program for performance?",
-        answer:
-          "Use techniques like profiling, algorithm optimization, using libraries like NumPy, and leveraging built-in functions.",
+        "question": "How would you optimize a Python program for performance?",
+        "answer": "Use techniques like profiling, algorithm optimization, leveraging libraries such as NumPy for heavy computations, and using built-in functions to reduce overhead."
       },
       {
-        question:
-          "What is the difference between mutable and immutable objects in Python?",
-        answer:
-          "Mutable objects can be changed after creation (e.g., lists), while immutable objects cannot (e.g., tuples).",
+        "question": "What is the difference between mutable and immutable objects in Python?",
+        "answer": "Mutable objects can be changed after creation (e.g., lists, dictionaries) while immutable objects (e.g., tuples, strings) cannot be altered once created."
       },
+      {
+        "question": "Explain the Global Interpreter Lock (GIL) and its impact on multi-threading in Python.",
+        "answer": "The GIL is a mutex that allows only one native thread to execute Python bytecode at a time, which can limit parallel execution in CPU-bound programs but does not affect I/O-bound tasks."
+      },
+      {
+        "question": "How is memory managed in Python?",
+        "answer": "Python manages memory through an automatic garbage collection system that uses reference counting and cyclic garbage collectors to reclaim unused memory."
+      },
+      {
+        "question": "What is a Python decorator and how is it used?",
+        "answer": "A decorator is a design pattern in Python that allows you to modify the behavior of functions or classes without changing their code by wrapping them in another function."
+      },
+      {
+        "question": "Explain Python's list and dictionary comprehensions.",
+        "answer": "Comprehensions provide a concise way to create lists, dictionaries, or sets using a single readable expression, often involving an iterable and optional conditional logic."
+      },
+      {
+        "question": "What is type hinting in Python and how does it improve code quality?",
+        "answer": "Type hinting allows developers to annotate variables and function signatures with expected data types, aiding in code readability, maintainability, and enabling static type checking with tools like MyPy."
+      },
+      {
+        "question": "How does exception handling work in Python?",
+        "answer": "Python uses try-except blocks to catch and handle exceptions, with optional else and finally clauses to manage code that should run when no exceptions occur or regardless of exceptions."
+      },
+      {
+        "question": "Explain the concept of context managers and how to create one.",
+        "answer": "Context managers in Python manage resource allocation and release using the `with` statement. They are created by implementing the `__enter__` and `__exit__` methods in a class."
+      },
+      {
+        "question": "What is monkey patching in Python and when might it be used?",
+        "answer": "Monkey patching is the dynamic modification of a class or module at runtime, often used in testing or to temporarily alter behaviors in third-party libraries."
+      },
+      {
+        "question": "How do you handle concurrency in Python beyond threading?",
+        "answer": "Concurrency can be managed with multi-processing, asynchronous programming with `asyncio`, or using libraries such as concurrent.futures to run tasks in parallel."
+      },
+      {
+        "question": "What are generators in Python and how do they differ from iterators?",
+        "answer": "Generators are a type of iterator that yield items one at a time using the `yield` keyword, allowing lazy evaluation and reduced memory usage compared to generating all items at once."
+      },
+      {
+        "question": "Explain the difference between shallow copy and deep copy in Python.",
+        "answer": "A shallow copy creates a new object but does not create copies of nested objects, whereas a deep copy recursively copies all nested objects, resulting in completely independent objects."
+      },
+      {
+        "question": "How do you implement unit testing in Python?",
+        "answer": "Unit testing is typically implemented using frameworks such as unittest, pytest, or nose, which help in writing test cases that validate individual units of code to ensure they work as expected."
+      },
+      {
+        "question": "What are some key differences between Python 2 and Python 3?",
+        "answer": "Python 3 introduced changes such as the print() function, division behavior, Unicode support, and improvements to standard libraries, making it more consistent and forward-looking compared to Python 2."
+      },
+      {
+        "question": "Describe how metaclasses work in Python.",
+        "answer": "Metaclasses are 'classes of classes' that define how classes are created. They allow developers to customize class instantiation and behavior by overriding methods like __new__ or __init__ in a metaclass."
+      },
+      {
+        "question": "How do decorators modify function behavior in Python?",
+        "answer": "Decorators wrap a function and allow modification of its behavior before or after the execution of the function, without permanently modifying the original function's code."
+      },
+      {
+        "question": "How does Python's garbage collection mechanism work?",
+        "answer": "Python uses reference counting for immediate deallocation of objects and a cyclic garbage collector to handle reference cycles that cannot be cleaned up by reference counting alone."
+      },
+      {
+        "question": "What are lambda functions and when should you use them?",
+        "answer": "Lambda functions are small anonymous functions defined with the lambda keyword, suitable for short, throwaway functions or as arguments to higher-order functions."
+      },
+      {
+        "question": "How do you achieve dependency injection in Python?",
+        "answer": "Dependency injection in Python can be achieved by passing dependencies as parameters to functions or constructors, or by using frameworks that support inversion of control."
+      },
+      {
+        "question": "Describe how you would create a RESTful API using Flask or Django.",
+        "answer": "Using Flask, you can define routes with decorators to handle HTTP methods and use JSON for data exchange. Django offers Django REST Framework which provides serializers, viewsets, and routers to efficiently build RESTful APIs."
+      },
+      {
+        "question": "What is the significance of PEP 8 in Python development?",
+        "answer": "PEP 8 is the Python style guide that promotes code readability and consistency across Python codebases, helping developers write clean and standardized code."
+      },
+      {
+        "question": "How can static type checking be used to minimize errors in Python code?",
+        "answer": "Static type checking can be performed using type hints along with tools such as MyPy, which analyze the code for type inconsistencies before runtime, reducing bugs and improving code clarity."
+      },
+      {
+        "question": "What are the advantages of using virtual environments in Python?",
+        "answer": "Virtual environments isolate project dependencies, ensuring that different projects do not conflict with each other and allowing for reproducible builds with specific package versions."
+      },
+      {
+        "question": "What is the role of the __init__ method in Python classes?",
+        "answer": "The __init__ method is a constructor that initializes a new object's attributes when a class instance is created, setting up its initial state."
+      },
+      {
+        "question": "How do you work with file I/O in Python and what best practices should you follow?",
+        "answer": "File I/O in Python is handled with the open() function and typically managed using context managers (the with statement) to ensure files are properly closed after operations."
+      },
+      {
+        "question": "What are modules and packages in Python, and how do you structure a large codebase?",
+        "answer": "Modules are individual Python files and packages are collections of modules within a directory containing an __init__.py file. Structuring a large codebase involves organizing code into logical packages and modules to improve maintainability and reusability."
+      },
+      {
+        "question": "How do you implement data serialization in Python?",
+        "answer": "Data serialization in Python can be achieved using libraries such as pickle for Python objects, json for JSON data, or more specialized formats like XML or YAML depending on application needs."
+      },
+      {
+        "question": "How would you handle API rate limiting in a Python application?",
+        "answer": "API rate limiting can be managed by implementing exponential backoff, using third-party libraries like 'ratelimit', or managing requests with a queue system to ensure compliance with API usage policies."
+      },
+      {
+        "question": "Explain the concept of immutability and its importance in concurrent programming.",
+        "answer": "Immutability means that once an object is created, it cannot be altered. This is important in concurrent programming because immutable objects can be shared freely between threads without the need for locks or synchronization."
+      },
+      {
+        "question": "How do you debug and profile a Python application?",
+        "answer": "Debugging can be done using tools like pdb, IDE debuggers, or logging, while profiling can be achieved with cProfile, line_profiler, or memory_profiler to diagnose performance bottlenecks."
+      },
+      {
+        "question": "What are effective ways to secure a Python web application?",
+        "answer": "Securing a Python web application involves practices like input validation, using HTTPS, proper error handling, securing dependencies, and employing frameworks’ security features to prevent common vulnerabilities such as SQL injection and XSS."
+      },
+      {
+        "question": "Explain the differences between multi-threading and multi-processing in Python.",
+        "answer": "Multi-threading involves running multiple threads within a single process, which can be limited by the GIL for CPU-bound tasks, whereas multi-processing runs separate processes that can utilize multiple CPU cores fully, bypassing the GIL."
+      },
+      {
+        "question": "How can decorators be used to enforce access control in Python?",
+        "answer": "Decorators can wrap functions or methods to check user credentials or permissions before execution, thereby enforcing access control policies without modifying the underlying business logic."
+      },
+      {
+        "question": "What techniques would you use to handle logging in a production-level Python application?",
+        "answer": "Effective logging can be implemented using Python's built-in logging module, configuring handlers, formatters, and log levels for different environments, and integrating with centralized logging systems for monitoring and analysis."
+      }
     ],
     simpleProjects: [
       {
-        question: "Create a number guessing game.",
-        answer:
-          "Write a Python script where the user guesses a randomly generated number.",
+        "question": "Create a number guessing game.",
+        "answer": "Python script where the user guesses a randomly generated number."
       },
       {
-        question: "Develop a basic calculator.",
-        answer:
-          "Build a command-line calculator that performs addition, subtraction, multiplication, and division.",
+        "question": "Develop a basic calculator.",
+        "answer": "Build a command-line calculator that performs addition, subtraction, multiplication, and division."
       },
       {
-        question: "Create a text-based adventure game.",
-        answer:
-          "Use Python to build a simple game with choices leading to different outcomes.",
+        "question": "Create a text-based adventure game.",
+        "answer": "Use Python to build a simple game with choices leading to different outcomes."
       },
-    ],
+      {
+        "question": "Build a command-line to-do list application.",
+        "answer": "Create an app that allows users to add, view, and delete tasks, storing them in a file or in memory."
+      },
+      {
+        "question": "Design a simple address book.",
+        "answer": "Develop a program to store, search, and update contact information using dictionaries or files."
+      },
+      {
+        "question": "Develop a basic quiz game.",
+        "answer": "Create a quiz game that asks multiple-choice questions and tracks the user's score."
+      },
+      {
+        "question": "Create a countdown timer.",
+        "answer": "Build a simple countdown timer that accepts a duration and displays the remaining time."
+      },
+      {
+        "question": "Develop a digital clock.",
+        "answer": "Write a program that displays the current time in real-time using Python's time module."
+      },
+      {
+        "question": "Make a currency converter.",
+        "answer": "Build a converter that transforms amounts between different currencies using fixed or API-fetched exchange rates."
+      },
+      {
+        "question": "Create a simple password generator.",
+        "answer": "Develop a tool that generates random passwords based on user-specified criteria like length and character types."
+      },
+      {
+        "question": "Build a palindrome checker.",
+        "answer": "Write a program to check if a given string is a palindrome, ignoring spaces and punctuation."
+      },
+      {
+        "question": "Develop a word frequency counter.",
+        "answer": "Create a script that reads a text file and counts the occurrence of each word."
+      },
+      {
+        "question": "Build a file organizer.",
+        "answer": "Develop a utility to group and move files into directories based on their file extensions."
+      },
+      {
+        "question": "Create a Hangman game.",
+        "answer": "Implement the classic Hangman game where the user guesses letters to identify a hidden word."
+      },
+      {
+        "question": "Develop a simple stopwatch.",
+        "answer": "Build an application that allows users to start, pause, and reset a stopwatch."
+      },
+      {
+        "question": "Build a factorial calculator.",
+        "answer": "Write a program that computes the factorial of a given number using recursion or iteration."
+      },
+      {
+        "question": "Create a Fibonacci sequence generator.",
+        "answer": "Develop a script that prints out the Fibonacci sequence up to a specified number of terms."
+      },
+      {
+        "question": "Develop a simple interest calculator.",
+        "answer": "Create a tool that computes simple interest based on principal, rate, and time inputs."
+      },
+      {
+        "question": "Create a BMI calculator.",
+        "answer": "Build an application that calculates Body Mass Index from height and weight inputs and categorizes the result."
+      },
+      {
+        "question": "Develop a basic contact manager.",
+        "answer": "Build a command-line application to add, update, delete, and search for contacts."
+      },
+      {
+        "question": "Implement a maze generator.",
+        "answer": "Write a program that generates a simple maze using random algorithms and displays it in the console."
+      },
+      {
+        "question": "Build a Rock, Paper, Scissors game.",
+        "answer": "Create a simple game where a user plays Rock, Paper, Scissors against the computer using random choices."
+      },
+      {
+        "question": "Create a simple web request tester.",
+        "answer": "Develop a program that sends HTTP requests using the requests library and displays the responses."
+      },
+      {
+        "question": "Build a command-line diary application.",
+        "answer": "Write an app that lets users add daily journal entries and saves them to a text file."
+      },
+      {
+        "question": "Develop an encryption/decryption tool using a Caesar cipher.",
+        "answer": "Implement a script that shifts characters in a string to encode and decode messages."
+      },
+      {
+        "question": "Create a prime number checker.",
+        "answer": "Write a program that tests if a given number is prime and returns the result."
+      },
+      {
+        "question": "Build a matrix calculator.",
+        "answer": "Develop a utility that performs addition, subtraction, and multiplication of matrices input by the user."
+      },
+      {
+        "question": "Implement a unit conversion tool.",
+        "answer": "Create a program to convert between various units (e.g., temperature, length, weight) based on user input."
+      },
+      {
+        "question": "Develop a server ping tool.",
+        "answer": "Write a script that uses the os or subprocess module to ping a server and report the response time."
+      },
+      {
+        "question": "Create a password strength checker.",
+        "answer": "Build a tool that evaluates a password's strength based on length, complexity, and character variety."
+      },
+      {
+        "question": "Develop a recipe finder using a text dataset.",
+        "answer": "Write a program that searches a collection of recipes stored in a file or list based on ingredient keywords."
+      },
+      {
+        "question": "Build a text file merger.",
+        "answer": "Create a utility that concatenates multiple text files into one, with options to add separators between contents."
+      },
+      {
+        "question": "Implement a basic data visualizer for CSV files.",
+        "answer": "Develop a script that reads CSV data and generates simple plots using libraries like matplotlib."
+      },
+      {
+        "question": "Create a simple log file analyzer.",
+        "answer": "Build a program that reads log files, extracts useful information, and presents summary statistics."
+      },
+      {
+        "question": "Develop a random joke generator.",
+        "answer": "Write a script that selects and displays a random joke from a predefined list each time it is run."
+      }
+    ]
   },
   {
     title: "Data Structures",
@@ -1980,110 +2403,605 @@ export const interviewQuestions = [
     imgSrc: "https://img.icons8.com/?size=500&id=hsPbhkOH4FMe&format=png&color=000000",
     interviewQuestions: [
       {
-        question: "What is Node.js?",
-        answer:
-          "Node.js is an open-source, cross-platform runtime environment that executes JavaScript code outside a web browser, built on Chrome's V8 engine.",
+        question: "What is the purpose of the `process` object in Node.js?",
+        answer: "The `process` object provides information about the current Node.js process and allows you to interact with it, such as reading environment variables and handling signals.",
       },
       {
-        question: "What are the key features of Node.js?",
-        answer:
-          "Key features include asynchronous and event-driven architecture, non-blocking I/O, scalability, and a rich ecosystem via npm.",
+        question: "What are the different types of streams in Node.js?",
+        answer: "The different types of streams include Readable, Writable, Duplex, and Transform streams, each serving specific purposes for data handling.",
       },
       {
-        question:
-          "What is the difference between `process.nextTick()` and `setImmediate()`?",
-        answer:
-          "`process.nextTick()` executes callbacks at the end of the current operation, while `setImmediate()` schedules them for the next iteration of the event loop.",
+        question: "How do you handle errors in Node.js?",
+        answer: "Errors in Node.js can be handled using try-catch blocks for synchronous code and error-first callbacks or promises for asynchronous operations.",
       },
       {
-        question: "What is the purpose of middleware in Node.js?",
-        answer:
-          "Middleware functions in Node.js handle requests, responses, and routing in applications, often used in frameworks like Express.",
+        question: "What is the purpose of the `npm` command?",
+        answer: "The `npm` command is used to manage packages in Node.js applications, allowing developers to install, update, and manage dependencies easily.",
       },
       {
-        question: "What is the event loop in Node.js?",
-        answer:
-          "The event loop is a mechanism in Node.js that handles asynchronous operations by processing callbacks in an event-driven manner.",
-      },
-      {
-        question: "What are streams in Node.js?",
-        answer:
-          "Streams are objects that enable reading or writing data piece by piece, making them memory-efficient for large data handling.",
-      },
-      {
-        question:
-          "What is the difference between `require` and `import` in Node.js?",
-        answer:
-          "`require` is used in CommonJS modules, while `import` is used in ES modules for loading dependencies.",
-      },
-      {
-        question: "How does Node.js handle file system operations?",
-        answer:
-          "Node.js uses the `fs` module to perform synchronous and asynchronous file system operations like reading, writing, and deleting files.",
-      },
-      {
-        question: "What is clustering in Node.js?",
-        answer:
-          "Clustering allows Node.js to utilize multiple CPU cores by creating child processes that share the same server port.",
-      },
-      {
-        question: "What is the purpose of the `package.json` file?",
-        answer:
-          "The `package.json` file contains metadata about a Node.js project, including dependencies, scripts, and version information.",
-      },
-    ],
-    takeHomeProjects: [
-      {
-        question: "Build a RESTful API.",
-        answer:
-          "Create an API using Express.js to handle CRUD operations for a simple resource like users or products.",
-      },
-      {
-        question: "Develop a real-time chat application.",
-        answer:
-          "Use Node.js with WebSocket or Socket.IO to enable real-time communication between users.",
-      },
-      {
-        question: "Create a file upload service.",
-        answer:
-          "Implement a server to handle file uploads using the `multer` middleware in Node.js.",
-      },
-    ],
-    bigCompanyQuestions: [
-      {
-        question:
-          "How would you optimize a Node.js application for performance?",
-        answer:
-          "Use techniques like clustering, caching, load balancing, and monitoring tools like PM2 or New Relic.",
+        question: "What are Promises in Node.js?",
+        answer: "Promises are objects that represent the eventual completion (or failure) of an asynchronous operation, providing a cleaner alternative to callback functions.",
       },
       {
         question: "Explain the concept of middleware in Express.js.",
-        answer:
-          "Middleware functions in Express.js process incoming requests, perform operations like authentication or logging, and pass control to the next middleware or route handler.",
+        answer: "Middleware functions in Express.js are functions that have access to the request object, response object, and next middleware function, allowing for request processing and response handling.",
       },
       {
-        question: "How does Node.js handle concurrency?",
-        answer:
-          "Node.js handles concurrency using the event loop and non-blocking I/O, allowing it to manage multiple connections efficiently.",
+        question: "What is a callback hell and how can it be avoided?",
+        answer: "Callback hell refers to deeply nested callbacks that make code hard to read; it can be avoided using Promises or async/await syntax.",
       },
+      {
+        question: "What is the role of the `EventEmitter` class in Node.js?",
+        answer: "The `EventEmitter` class allows objects to emit events and register listeners for those events, facilitating an event-driven architecture.",
+      },
+      {
+        question: "How can you create a simple HTTP server in Node.js?",
+        answer: "A simple HTTP server can be created using the `http` module with `http.createServer()` method to handle incoming requests.",
+      },
+      {
+        question: "What is the difference between synchronous and asynchronous programming?",
+        answer: "Synchronous programming executes tasks sequentially while asynchronous programming allows tasks to run concurrently without blocking execution.",
+      },
+      {
+        question: "How do you implement routing in Express.js?",
+        answer: "Routing in Express.js is implemented by defining routes using methods like `app.get()`, `app.post()`, etc., to handle different HTTP requests.",
+      },
+      {
+        question: "What is CORS and how can it be enabled in a Node.js application?",
+        answer: "CORS (Cross-Origin Resource Sharing) is a security feature that restricts web pages from making requests to a different domain; it can be enabled using middleware like `cors`.",
+      },
+      {
+        question: "What are environment variables and how are they used in Node.js?",
+        answer: "Environment variables store configuration settings outside of code; they can be accessed in Node.js using `process.env`.",
+      },
+      {
+        question: "Explain what clustering is in Node.js.",
+        answer: "Clustering allows multiple instances of a Node.js application to run on different CPU cores, improving performance by handling more requests simultaneously.",
+      },
+      {
+        question: "What is the purpose of the `package-lock.json` file?",
+        answer: "The `package-lock.json` file locks down the versions of dependencies installed, ensuring consistent installations across environments.",
+      },
+      {
+        question: "How does Node.js handle child processes?",
+        answer: "Node.js uses the `child_process` module to spawn child processes that can run concurrently with the main process.",
+      },
+      {
+        question: "What is a buffer in Node.js?",
+        answer: "A buffer is a temporary storage area for binary data; it allows manipulation of raw binary data directly.",
+      },
+      {
+        question: "How do you manage sessions in a Node.js application?",
+        answer: "Sessions can be managed using middleware like `express-session`, which stores session data on the server side.",
+      },
+      {
+        question: "What is the role of `async/await` in Node.js?",
+        answer: "`async/await` provides a way to write asynchronous code that looks synchronous, improving readability and error handling.",
+      },
+      {
+        question: "Explain what WebSockets are and their use case with Node.js.",
+        answer: "WebSockets provide full-duplex communication channels over a single TCP connection, commonly used for real-time applications like chat apps or live notifications.",
+      },
+      {
+        question: "How does garbage collection work in Node.js?",
+        answer: "Garbage collection automatically frees up memory by removing objects that are no longer referenced by the application.",
+      },
+      {
+        question: "What are template engines and how are they used with Node.js?",
+        answer: "Template engines like EJS or Pug allow dynamic generation of HTML pages by embedding JavaScript code within HTML templates.",
+      },
+      {
+        question: "What is rate limiting and how can it be implemented in a Node.js app?",
+        answer: "Rate limiting restricts the number of requests a user can make within a certain timeframe; it can be implemented using middleware like `express-rate-limit`.",
+      },
+      {
+        question: "How do you set up HTTPS in a Node.js server?",
+        answer: "HTTPS can be set up by creating an HTTPS server using the `https` module along with SSL certificates for secure communication.",
+      },
+      {
+        question: "What are some common security practices for a Node.js application?",
+        answer: "Common security practices include validating user input, sanitizing data, using HTTPS, implementing authentication mechanisms, and keeping dependencies updated.",
+      },
+      {
+        question: "Explain what JSON Web Tokens (JWT) are and their purpose.",
+        answer: "JWTs are compact tokens used for securely transmitting information between parties as JSON objects; they are commonly used for authentication.",
+      },
+      {
+        question: "How do you connect to a MongoDB database from a Node.js application?",
+        answer: "Connection to MongoDB can be established using libraries like Mongoose or MongoDB native driver with connection strings specifying database details.",
+      },
+      {
+        question: "What is dotenv and how does it work with Node.js applications?",
+        answer: "Dotenv is a module that loads environment variables from a `.env` file into `process.env`, simplifying configuration management.",
+      },
+      {
+        question: "Explain what API versioning is and why it's important.",
+        answer: "API versioning allows developers to make changes to an API without breaking existing clients; it's important for maintaining backward compatibility.",
+      },
+      {
+        question: "How do you implement pagination in an API built with Express.js?",
+        answer: "Pagination can be implemented by accepting query parameters for page number and limit, then querying databases accordingly to return subsets of data.",
+      },
+      {
+        question: "What role does TypeScript play in enhancing JavaScript development within Node.js applications?",
+        answer: "TypeScript adds static typing to JavaScript which helps catch errors at compile time rather than runtime, improving code quality and maintainability."
+      },
+      {
+        question: "Describe how you would set up continuous integration/continuous deployment (CI/CD) for a Node.js application.",
+        answer: "CI/CD can be set up using tools like Jenkins or GitHub Actions that automate testing, building, and deploying applications whenever changes are made to the codebase."
+      },
+      {
+        "question": "What is the difference between `setImmediate()` and `process.nextTick()` in Node.js?",
+        "answer": "`setImmediate()` executes a callback after I/O events in the next event loop iteration, while `process.nextTick()` executes callbacks immediately after the current operation completes, before the event loop continues."
+      },
+      {
+        "question": "How does the event loop work in Node.js?",
+        "answer": "The event loop in Node.js handles asynchronous operations by executing tasks in phases such as timers, I/O callbacks, idle/prepare, poll, check, and close callbacks."
+      },
+      {
+        "question": "What is the difference between `fs.readFile()` and `fs.createReadStream()`?",
+        "answer": "`fs.readFile()` reads the entire file into memory before processing, whereas `fs.createReadStream()` reads the file in chunks, making it more memory-efficient for large files."
+      },
+      {
+        "question": "How do you handle file uploads in a Node.js application?",
+        "answer": "File uploads can be handled using middleware like `multer` in Express.js, which processes multipart form data and stores uploaded files on the server."
+      },
+      {
+        "question": "What is the difference between `require` and `import` in Node.js?",
+        "answer": "`require` is used in CommonJS modules, while `import` is used in ES Modules (ESM). ES Modules provide better static analysis and tree shaking."
+      },
+      {
+        "question": "How does the `cluster` module improve Node.js performance?",
+        "answer": "The `cluster` module enables multi-core utilization by forking multiple worker processes that share the same server port, improving application scalability."
+      },
+      {
+        "question": "What is an example of using WebSockets in a Node.js application?",
+        "answer": "A WebSocket server can be created using the `ws` package in Node.js, enabling real-time communication for applications like chat apps and live updates."
+      },
+      {
+        "question": "What are some common memory leaks in Node.js and how do you prevent them?",
+        "answer": "Common memory leaks include global variable usage, unclosed database connections, event listener leaks, and large objects stored in memory. They can be prevented using proper resource cleanup, weak references, and monitoring tools."
+      },
+      {
+        "question": "What is the difference between `app.use()` and route-specific methods in Express.js?",
+        "answer": "`app.use()` is used for applying middleware globally, while route-specific methods (`app.get()`, `app.post()`) handle specific HTTP methods and endpoints."
+      },
+      {
+        "question": "How does Node.js handle concurrency?",
+        "answer": "Node.js handles concurrency through its event-driven, non-blocking I/O model, utilizing the event loop and worker threads when necessary."
+      },
+      {
+        "question": "What is the purpose of the `crypto` module in Node.js?",
+        "answer": "The `crypto` module provides cryptographic functionality like hashing, encryption, and key generation to enhance security in Node.js applications."
+      },
+      {
+        "question": "What is the difference between blocking and non-blocking code in Node.js?",
+        "answer": "Blocking code stops further execution until a task completes, while non-blocking code allows other operations to continue while a task is being processed."
+      },
+      {
+        "question": "What is the role of middleware in Express.js?",
+        "answer": "Middleware functions process requests before they reach the final route handler, enabling logging, authentication, and request modifications."
+      },
+      {
+        "question": "How do you implement authentication in a Node.js application?",
+        "answer": "Authentication can be implemented using libraries like `passport.js` for session-based authentication or `jsonwebtoken` (JWT) for token-based authentication."
+      },
+      {
+        "question": "What are the benefits of using TypeScript with Node.js?",
+        "answer": "TypeScript provides static typing, better code maintainability, and improved developer tooling, reducing runtime errors in Node.js applications."
+      },
+      {
+        "question": "How does Node.js integrate with Redis?",
+        "answer": "Node.js integrates with Redis using the `ioredis` or `redis` package to perform caching, session storage, and pub/sub messaging."
+      },
+      {
+        "question": "How do you optimize a Node.js application for performance?",
+        "answer": "Optimizations include using asynchronous operations, caching, clustering, load balancing, and profiling with tools like `node --prof`."
+      },
+      {
+        "question": "What is `Helmet.js` and how does it improve security?",
+        "answer": "`Helmet.js` is a middleware for Express.js that enhances security by setting various HTTP headers to prevent common vulnerabilities."
+      },
+      {
+        "question": "What is the purpose of `compression` middleware in Express.js?",
+        "answer": "The `compression` middleware reduces the size of response bodies using Gzip or Brotli, improving performance by minimizing data transfer."
+      },
+      {
+        "question": "What are sticky sessions in Node.js?",
+        "answer": "Sticky sessions ensure that requests from the same client are routed to the same server instance, often used in load-balanced environments."
+      },
+      {
+        "question": "How do you deploy a Node.js application?",
+        "answer": "Node.js applications can be deployed using cloud platforms like AWS, Heroku, or DigitalOcean, often managed with process managers like PM2 or Docker."
+      },
+      {
+        "question": "What is the purpose of the `worker_threads` module?",
+        "answer": "The `worker_threads` module enables multithreading in Node.js by running JavaScript code in parallel across multiple threads."
+      },
+      {
+        "question": "What is the difference between `sessionStorage`, `localStorage`, and cookies?",
+        "answer": "`sessionStorage` stores data for a session, `localStorage` persists data indefinitely, and cookies store small amounts of data sent with HTTP requests."
+      },
+      {
+        "question": "How do you monitor and debug a Node.js application in production?",
+        "answer": "Monitoring tools like PM2, New Relic, and Datadog help track performance and logs, while `node --inspect` enables debugging."
+      },
+      {
+        "question": "How does `stream.pipe()` work in Node.js?",
+        "answer": "`stream.pipe()` automatically manages the flow of data from a readable stream to a writable stream, preventing memory overload."
+      },
+      {
+        "question": "What is the purpose of the `morgan` middleware in Express.js?",
+        "answer": "`morgan` logs HTTP requests in Express.js applications, helping with debugging and monitoring request activity."
+      },
+      {
+        "question": "How do you handle large file uploads efficiently in Node.js?",
+        "answer": "Large file uploads can be handled efficiently using streaming, chunked uploads, and libraries like `busboy` or `multer`."
+      },
+      {
+        "question": "What is an example of using the `os` module in Node.js?",
+        "answer": "The `os` module provides system-related utilities like retrieving CPU information, memory usage, and platform details."
+      },
+      {
+        "question": "How do you implement request validation in an Express.js API?",
+        "answer": "Request validation can be implemented using libraries like `express-validator` or `joi` to ensure proper request formats."
+      },
+      {
+        "question": "What are some best practices for writing scalable Node.js applications?",
+        "answer": "Best practices include modularizing code, using async patterns, caching, optimizing database queries, and leveraging microservices where necessary."
+      },
+      {
+        "question": "How can you implement WebRTC in a Node.js application?",
+        "answer": "WebRTC can be implemented using libraries like `socket.io` and `simple-peer` for real-time peer-to-peer communication in web applications."
+      }
+    ],
+    takeHomeProjects: [
+      {
+        "question": "Build a URL shortener.",
+        "answer": "Develop a service that shortens long URLs and redirects users when they visit the shortened link."
+      },
+      {
+        "question": "Create a notes-taking application.",
+        "answer": "Build a full-stack app with Node.js and a database to allow users to create, edit, and delete notes."
+      },
+      {
+        "question": "Develop a weather API.",
+        "answer": "Fetch real-time weather data from an external API and serve it through an Express.js API."
+      },
+      {
+        "question": "Build a task manager.",
+        "answer": "Develop a task management system with user authentication and the ability to add, edit, and delete tasks."
+      },
+      {
+        "question": "Implement a JWT-based authentication system.",
+        "answer": "Create a secure authentication system using JSON Web Tokens (JWT) for user login and authorization."
+      },
+      {
+        "question": "Create a blog platform.",
+        "answer": "Develop a blogging system with user authentication, post creation, comments, and categories."
+      },
+      {
+        "question": "Build a simple e-commerce backend.",
+        "answer": "Implement product listing, cart management, and order processing using Node.js and a database."
+      },
+      {
+        "question": "Develop a cryptocurrency price tracker.",
+        "answer": "Fetch live cryptocurrency prices from an API and display them using a Node.js backend."
+      },
+      {
+        "question": "Create a REST API for a movie database.",
+        "answer": "Develop an API to manage movies, directors, and ratings using Node.js and MongoDB."
+      },
+      {
+        "question": "Build a polling application.",
+        "answer": "Create an app where users can create polls, vote, and view poll results in real time."
+      },
+      {
+        "question": "Develop a URL monitoring service.",
+        "answer": "Build a system to check the uptime of websites and notify users if a site is down."
+      },
+      {
+        "question": "Implement role-based access control (RBAC).",
+        "answer": "Create a user management system where different roles have different levels of access."
+      },
+      {
+        "question": "Create an email sending service.",
+        "answer": "Develop an API to send emails using a service like SendGrid, Resend, or Nodemailer."
+      },
+      {
+        "question": "Build a stock market dashboard.",
+        "answer": "Fetch and display real-time stock market prices using an external financial API."
+      },
+      {
+        "question": "Develop a booking system.",
+        "answer": "Implement a reservation system for appointments, hotels, or events with scheduling features."
+      },
+      {
+        "question": "Create a social media API.",
+        "answer": "Develop an API with features like user profiles, posts, likes, and comments."
+      },
+      {
+        "question": "Build an expense tracker.",
+        "answer": "Develop a system for users to track their income and expenses, with categories and reports."
+      },
+      {
+        "question": "Develop a quiz application.",
+        "answer": "Create an interactive quiz system with multiple-choice questions and a scoring mechanism."
+      },
+      {
+        "question": "Build a podcast streaming service.",
+        "answer": "Develop an API that allows users to upload, stream, and manage podcasts."
+      },
+      {
+        "question": "Implement a two-factor authentication (2FA) system.",
+        "answer": "Add 2FA to a login system using an OTP sent via email or SMS."
+      },
+      {
+        "question": "Create a job board API.",
+        "answer": "Build an API where users can post jobs, apply, and search for job listings."
+      },
+      {
+        "question": "Develop a PDF generation service.",
+        "answer": "Create a Node.js service that generates PDFs from HTML templates using a library like Puppeteer."
+      },
+      {
+        "question": "Build a web scraping tool.",
+        "answer": "Use Puppeteer or Cheerio to scrape data from websites and store it in a database."
+      },
+      {
+        "question": "Develop a live sports score tracker.",
+        "answer": "Fetch live sports scores from an API and display them in real time."
+      },
+      {
+        "question": "Create a news aggregator API.",
+        "answer": "Fetch news articles from various sources and serve them through an API."
+      },
+      {
+        "question": "Build a translation API.",
+        "answer": "Use a translation service like Google Translate to provide multi-language text translation."
+      },
+      {
+        "question": "Develop a habit tracking application.",
+        "answer": "Allow users to track their daily habits, set goals, and view progress over time."
+      },
+      {
+        "question": "Create a collaborative document editing tool.",
+        "answer": "Implement a real-time document editor using WebSockets or Firebase."
+      },
+      {
+        "question": "Build an AI chatbot.",
+        "answer": "Develop a chatbot that responds to user queries using OpenAI's API or a custom NLP model."
+      },
+      {
+        "question": "Implement a GraphQL API.",
+        "answer": "Build a GraphQL API as an alternative to REST, allowing flexible data fetching."
+      }
+    ],
+    bigCompanyQuestions: [
+      {
+        "question": "How do you prevent memory leaks in a Node.js application?",
+        "answer": "Avoid global variables, use proper event listener management, employ weak maps for caching, and utilize memory profiling tools like Chrome DevTools or Node.js heap snapshots."
+      },
+      {
+        "question": "What are the key differences between cluster mode and worker threads in Node.js?",
+        "answer": "Cluster mode creates multiple child processes to share server load, while worker threads run lightweight parallel tasks within the same process."
+      },
+      {
+        "question": "How would you debug performance bottlenecks in a Node.js application?",
+        "answer": "Use tools like Node.js Profiler, Chrome DevTools, `clinic.js`, or `0x` to analyze CPU usage, memory leaks, and event loop delays."
+      },
+      {
+        "question": "How does the event loop work internally in Node.js?",
+        "answer": "The event loop processes phases (timers, I/O callbacks, idle, poll, check, close), handling asynchronous operations using a single-threaded, non-blocking architecture."
+      },
+      {
+        "question": "What are the trade-offs between using Redis and in-memory caching in a Node.js app?",
+        "answer": "Redis provides persistent, distributed caching, while in-memory caching (e.g., LRU cache) is faster but limited to a single instance and lost on restart."
+      },
+      {
+        "question": "How does Node.js handle backpressure in streams?",
+        "answer": "Node.js manages backpressure by using the `highWaterMark` option, the `pause()` and `resume()` methods, and piping data efficiently between readable and writable streams."
+      },
+      {
+        "question": "Explain the importance of process.nextTick() and setImmediate().",
+        "answer": "`process.nextTick()` schedules callbacks at the end of the current event loop iteration, while `setImmediate()` executes in the check phase of the next cycle."
+      },
+      {
+        "question": "How would you design a rate limiter for an API in Node.js?",
+        "answer": "Use `express-rate-limit` middleware or implement Redis-based counters to track request counts per user/IP and enforce limits within a given timeframe."
+      },
+      {
+        "question": "What is a worker pool, and how does it help in Node.js performance?",
+        "answer": "A worker pool allows CPU-intensive tasks to be offloaded to separate threads using the Worker Threads API, improving performance for computational tasks."
+      },
+      {
+        "question": "How does Node.js handle SSL termination and security best practices?",
+        "answer": "Use a reverse proxy like Nginx for SSL termination, enforce HTTPS with `helmet`, and manage secure headers and TLS configurations."
+      },
+      {
+        "question": "What are the differences between HTTP/1.1, HTTP/2, and HTTP/3 in the context of Node.js?",
+        "answer": "HTTP/2 enables multiplexing and server push, HTTP/3 introduces QUIC for lower latency, while HTTP/1.1 relies on persistent connections and request queuing."
+      },
+      {
+        "question": "How do you prevent SQL injection and NoSQL injection in a Node.js app?",
+        "answer": "Use parameterized queries with SQL databases, sanitize inputs for NoSQL databases, and apply security libraries like `express-validator`."
+      },
+      {
+        "question": "How would you optimize database queries in a large-scale Node.js application?",
+        "answer": "Use indexing, query optimization techniques, connection pooling, caching strategies, and monitoring tools like New Relic or PM2."
+      },
+      {
+        "question": "What is the role of a reverse proxy in a microservices architecture?",
+        "answer": "A reverse proxy handles load balancing, request routing, SSL termination, and security filtering for microservices-based applications."
+      },
+      {
+        "question": "How do you ensure zero downtime deployments in a Node.js application?",
+        "answer": "Use blue-green deployments, rolling updates, feature flags, and load balancers to gradually shift traffic between old and new versions."
+      },
+      {
+        "question": "Explain the differences between synchronous and asynchronous logging in Node.js.",
+        "answer": "Synchronous logging blocks execution, while asynchronous logging (e.g., using `pino` or `winston`) buffers logs and writes them efficiently to storage."
+      },
+      {
+        "question": "What strategies would you use to handle high traffic in a Node.js application?",
+        "answer": "Implement caching, load balancing, horizontal scaling, microservices architecture, and efficient database indexing."
+      },
+      {
+        "question": "How does Node.js handle long-running tasks, and what are the best practices?",
+        "answer": "Offload heavy computations to worker threads, background queues (e.g., BullMQ), or microservices instead of blocking the event loop."
+      },
+      {
+        "question": "What are the security risks of using third-party packages in a Node.js application?",
+        "answer": "Risks include supply chain attacks, vulnerabilities in dependencies, and outdated packages; mitigate by using `npm audit`, `snyk`, and regular updates."
+      },
+      {
+        "question": "How would you handle millions of concurrent WebSocket connections in a Node.js server?",
+        "answer": "Use horizontal scaling with multiple WebSocket servers, Redis Pub/Sub for message broadcasting, and optimized event-driven architecture."
+      },
+      {
+        "question": "What are the differences between monolithic and microservices architectures?",
+        "answer": "Monolithic applications are a single codebase, while microservices break functionality into independent services communicating over APIs."
+      },
+      {
+        "question": "How does service discovery work in a microservices-based Node.js system?",
+        "answer": "Service discovery uses tools like Consul, Eureka, or Kubernetes to dynamically locate and route requests to available services."
+      },
+      {
+        "question": "What is gRPC, and how does it compare to REST in Node.js?",
+        "answer": "gRPC is a high-performance RPC framework using Protocol Buffers, offering better efficiency and streaming capabilities than REST-based APIs."
+      },
+      {
+        "question": "How do you handle distributed logging in a multi-service Node.js application?",
+        "answer": "Use centralized logging solutions like ELK Stack, Loki, or CloudWatch, along with structured logs and correlation IDs."
+      },
+      {
+        "question": "What is GraphQL, and how does it improve over REST?",
+        "answer": "GraphQL allows clients to query only the needed data, reducing over-fetching and under-fetching issues common in REST APIs."
+      },
+      {
+        "question": "How do you handle API versioning in large-scale applications?",
+        "answer": "Use URL versioning (`/v1/`), request header versioning, or GraphQL schema versioning strategies to maintain backward compatibility."
+      },
+      {
+        "question": "What are the benefits and drawbacks of using Serverless with Node.js?",
+        "answer": "Serverless reduces infrastructure management but introduces cold start latency and vendor lock-in; best suited for event-driven workloads."
+      },
+      {
+        "question": "How do you implement feature toggles in a Node.js application?",
+        "answer": "Use tools like LaunchDarkly or build a toggle system using environment variables and a database for dynamic feature flagging."
+      },
+      {
+        "question": "What are the key principles of event-driven architecture in Node.js?",
+        "answer": "Event-driven architecture enables decoupled services using message brokers like Kafka, RabbitMQ, or AWS SNS/SQS for asynchronous processing."
+      }
     ],
     simpleProjects: [
       {
-        question: "Create a simple HTTP server.",
-        answer:
-          "Use Node.js's `http` module to create a basic server that responds to client requests.",
+        "question": "Create a simple HTTP server.",
+        "answer": "Use Node.js's `http` module to create a basic server that responds to client requests."
       },
       {
-        question: "Build a command-line tool.",
-        answer:
-          "Develop a CLI tool using Node.js to perform tasks like file conversion or text manipulation.",
+        "question": "Build a command-line tool.",
+        "answer": "Develop a CLI tool using Node.js to perform tasks like file conversion or text manipulation."
       },
       {
-        question: "Develop a JSON file reader.",
-        answer:
-          "Write a Node.js script to read and parse a JSON file, displaying its contents in the console.",
+        "question": "Develop a JSON file reader.",
+        "answer": "Write a Node.js script to read and parse a JSON file, displaying its contents in the console."
       },
-    ],
+      {
+        "question": "Create a basic REST API.",
+        "answer": "Use Express.js to build a simple API with endpoints for handling GET and POST requests."
+      },
+      {
+        "question": "Build a URL shortener.",
+        "answer": "Use Express and a database (like MongoDB) to create a simple URL shortening service."
+      },
+      {
+        "question": "Create a to-do list application.",
+        "answer": "Develop a simple app using Node.js and a database to store tasks with CRUD functionality."
+      },
+      {
+        "question": "Develop a weather information fetcher.",
+        "answer": "Use an external API (like OpenWeatherMap) to fetch and display weather data based on user input."
+      },
+      {
+        "question": "Build a file system explorer.",
+        "answer": "Use Node.js's `fs` module to list and navigate through directories and files in the system."
+      },
+      {
+        "question": "Create a basic chatbot.",
+        "answer": "Develop a simple chatbot using Node.js and an AI API like OpenAI or Dialogflow."
+      },
+      {
+        "question": "Build a Markdown converter.",
+        "answer": "Use the `marked` package to convert Markdown files into HTML and display them."
+      },
+      {
+        "question": "Develop a simple web scraper.",
+        "answer": "Use `cheerio` or `puppeteer` to scrape content from a website and display it in JSON format."
+      },
+      {
+        "question": "Create a random password generator.",
+        "answer": "Build a CLI tool that generates secure random passwords of various lengths."
+      },
+      {
+        "question": "Build an email sender.",
+        "answer": "Use `nodemailer` to send emails from a Node.js application with SMTP settings."
+      },
+      {
+        "question": "Develop a JSON formatter.",
+        "answer": "Write a CLI tool that formats and pretty-prints JSON data from a file or API."
+      },
+      {
+        "question": "Create a stock price tracker.",
+        "answer": "Use an API like Alpha Vantage to fetch and display real-time stock prices."
+      },
+      {
+        "question": "Build a currency converter.",
+        "answer": "Fetch exchange rates from an API like ExchangeRate-API and convert currencies."
+      },
+      {
+        "question": "Create a simple polling app.",
+        "answer": "Develop an app where users can create and vote on polls with real-time results."
+      },
+      {
+        "question": "Build a text-to-speech tool.",
+        "answer": "Use the `say` package or an external API to convert text input into speech."
+      },
+      {
+        "question": "Develop a notes-taking app.",
+        "answer": "Build a simple app where users can create, update, and delete text notes."
+      },
+      {
+        "question": "Create a CLI-based calculator.",
+        "answer": "Write a command-line tool that performs basic arithmetic operations."
+      },
+      {
+        "question": "Build an image resizer.",
+        "answer": "Use the `sharp` package to resize and optimize images in various formats."
+      },
+      {
+        "question": "Develop a countdown timer.",
+        "answer": "Create a CLI tool that takes user input and counts down to zero with alerts."
+      },
+      {
+        "question": "Create a basic file encryption tool.",
+        "answer": "Use Node.js's `crypto` module to encrypt and decrypt files with a password."
+      },
+      {
+        "question": "Build a local storage key-value store.",
+        "answer": "Develop a simple key-value database using JSON files for storage."
+      },
+      {
+        "question": "Create a terminal-based dictionary.",
+        "answer": "Fetch word definitions from an API and display them in the terminal."
+      },
+      {
+        "question": "Build a simple portfolio website generator.",
+        "answer": "Use Node.js and EJS to generate a static portfolio website from user input."
+      }
+]
+
   },
   {
     title: "HTML",
