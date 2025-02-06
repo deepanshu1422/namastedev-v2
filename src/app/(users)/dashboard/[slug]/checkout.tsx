@@ -28,7 +28,7 @@ export default function Checkout() {
   return (
     <section className="flex flex-col md:max-w-[25%] shrink-0">
       <div className="sticky top-20 flex flex-col gap-6 md:gap-3 max-md:hidden">
-        <UpsellLinkedIn />
+        {/* <UpsellLinkedIn />
         <UpsellStudyAbroad />
         <UpsellMasterAI />
 
@@ -53,7 +53,58 @@ export default function Checkout() {
           >
             Buy @ ₹999/-
           </Button>
-        </Link>
+        </Link> */}
+        <div className="">
+          <div className="rounded-lg border-prime border bg-card max-h-fit h-fit w-full flex flex-col gap-2 p-1">
+            <Badge className="rounded bg-prime/60 hover:bg-prime/80 text-white text-center w-full">
+              🎉 Certificate Ready!
+            </Badge>
+            <p className="text-sm px-2">
+              Your certificate is generated. Download it from here now!
+            </p>
+            <a
+              href="https://senja.io/p/30-days-coding/r/AgSF4E"
+              target="_blank"
+              className="p-2 bg-prime/80 hover:bg-prime text-white rounded text-center"
+            >
+              Download Certificate
+            </a>
+          </div>
+        </div>
+        
+        <div className="">
+          <div className="rounded-lg border-prime border bg-card max-h-fit h-fit w-full flex flex-col gap-2 p-1">
+            <Badge className="rounded bg-prime/60 hover:bg-prime/80 text-white text-center w-full">
+              📚 Course Updates
+            </Badge>
+            <ul className="text-sm px-2 list-disc list-inside">
+              <li>50+ New videos added</li>
+              <li>10+ projects uploaded</li>
+              <li>Course materials updated</li>
+            </ul>
+            <a
+              href="https://docs.google.com/document/d/1Z1uKHBU5Shb3UeFYWkuAu2rHACU-uOx-1sYsyrX7meM/edit"
+              target="_blank"
+              className="p-2 bg-prime/80 hover:bg-prime text-white rounded text-center"
+            >
+              All guides for you
+            </a>
+          </div>
+        </div>
+        
+        <div className="mt-5">
+          <div className="rounded-lg border-prime border bg-card max-h-fit h-fit w-full flex flex-col gap-2 p-1">
+            <Badge className="rounded bg-prime/60 hover:bg-prime/80 text-white text-center w-full">
+              🔗 Quick Resources
+            </Badge>
+            <ul className="text-sm px-2 list-disc list-inside">
+              <li><a href="/playground" className="hover:text-prime">Code Playground</a></li>
+              <li><a href="/projects" className="hover:text-prime">Practice Projects</a></li>
+              <li><a href="/interview" className="hover:text-prime">Interview Prep</a></li>
+              <li><a href="/roadmaps" className="hover:text-prime">Learning Roadmaps</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   );
