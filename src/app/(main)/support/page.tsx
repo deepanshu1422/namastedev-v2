@@ -38,11 +38,12 @@ export default function Home() {
             Email:{" "}
             <Link
               className="font-semibold text-prime"
-              href={"mailto:projectsnightlight@gmail.com"}
+              href={"mailto:support@projectsnightlight.freshdesk.com "}
             >
-              projectsnightlight@gmail.com
+              support@projectsnightlight.freshdesk.com 
             </Link>
           </li>
+          <li>Refer to this doc: <Link className="font-semibold text-prime" href={"https://docs.google.com/document/d/19vTDbF3tNO7WZemOKWoWERuZiVVeQoL4rJEGYPOMAWc/edit?tab=t.0#heading=h.3t0874i8ofbf"}>Support doc</Link></li>
           {/* <li>Phone: +1234567890</li> */}
           {/* <li>
             DM Chats:{" "}
