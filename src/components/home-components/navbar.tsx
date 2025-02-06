@@ -18,6 +18,14 @@ const navItems = [
     title: "Interview",
     href: "/interview",
   },
+  {
+    title: "Playground",
+    href: "/playground/sql",
+  },
+  {
+    title: "DSA",
+    href: "/dsa",
+  }
 ];
 
 export default function Navbar() {

@@ -18,6 +18,7 @@ import {
   Activity,
   Settings,
   ChevronDown,
+  Binary,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -170,25 +171,25 @@ const navBar = [
       },
     ],
   },
-  {
-    title: "Interactive",
-    icon: <PlayCircle className="h-4 w-4 md:h-5 md:w-5" />,
-    href: "/interactive",
-    recent: [
-      {
-        title: "JavaScript Fundamentals",
-        link: "/interactive/javascript",
-      },
-      {
-        title: "React Essentials",
-        link: "/interactive/react",
-      },
-      {
-        title: "Node.js & Express",
-        link: "/interactive/nodejs",
-      }
-    ],
-  },
+  // {
+  //   title: "Interactive",
+  //   icon: <PlayCircle className="h-4 w-4 md:h-5 md:w-5" />,
+  //   href: "/interactive",
+  //   recent: [
+  //     {
+  //       title: "JavaScript Fundamentals",
+  //       link: "/interactive/javascript",
+  //     },
+  //     {
+  //       title: "React Essentials",
+  //       link: "/interactive/react",
+  //     },
+  //     {
+  //       title: "Node.js & Express",
+  //       link: "/interactive/nodejs",
+  //     }
+  //   ],
+  // },
   {
     title: "Examples",
     icon: <Code2 className="h-4 w-4 md:h-5 md:w-5" />,
@@ -221,6 +222,45 @@ const navBar = [
         title: "Resume Builder",
         link: "/resume",
       },
+    ],
+  },
+  {
+    title: "Playground",
+    icon: <Code2 className="h-4 w-4 md:h-5 md:w-5" />,
+    href: "/playground",
+    recent: [
+      {
+        title: "HTML Practice",
+        link: "/playground/html",
+        description: "Practice HTML with interactive examples and live preview"
+      },
+      {
+        title: "JavaScript Practice",
+        link: "/playground/javascript",
+        description: "Write and run JavaScript code with live console output"
+      },
+      {
+        title: "SQL Practice",
+        link: "/playground/sql",
+        description: "Write and execute SQL queries with instant feedback"
+      }
+    ],
+  },
+  {
+    title: "DSA",
+    icon: <Binary className="h-4 w-4 md:h-5 md:w-5" />,
+    href: "/dsa",
+    recent: [
+      {
+        title: "Problem Sheet",
+        link: "/dsa",
+        description: "Curated DSA problems with solutions"
+      },
+      {
+        title: "Visualizer",
+        link: "/visualizer",
+        description: "Interactive algorithm visualization tool"
+      }
     ],
   },
   // {
