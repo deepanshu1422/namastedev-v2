@@ -68,6 +68,19 @@ export default function Notifications() {
           </div>
         </div>
         
+        <div className="mt-5">
+          <div className="rounded-lg border-prime border bg-card max-h-fit h-fit w-full flex flex-col gap-2 p-1">
+            <Badge className="rounded bg-prime/60 hover:bg-prime/80 text-white text-center w-full">
+              🔗 Quick Resources
+            </Badge>
+            <ul className="text-sm px-2 list-disc list-inside">
+              <li><a href="/playground" className="hover:text-prime">Code Playground</a></li>
+              <li><a href="/projects" className="hover:text-prime">Practice Projects</a></li>
+              <li><a href="/interview" className="hover:text-prime">Interview Prep</a></li>
+              <li><a href="/roadmaps" className="hover:text-prime">Learning Roadmaps</a></li>
+            </ul>
+          </div>
+        </div>
 
         {/* <UpsellLinkedIn />
         <UpsellStudyAbroad />
