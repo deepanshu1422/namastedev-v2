@@ -78,7 +78,7 @@ function CoursesFallback() {
 export function OldCourses() {
   return (
     <>
-    <p className="text-center text-xl">Phones are meant for memes, access your courses on desktop for the best experience.</p>
+    <p className="md:hidden text-center text-xl">Phones are meant for memes, access your courses on desktop for the best experience.</p>
     {/* <p>Welcome to 30dayscoding! We are working on updating all the video quality 
       and adding more courses. Enjoy your courses, guides, roadmaps, and more.</p> */}
     
