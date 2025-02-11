@@ -1,10 +1,12 @@
-"use client";
 
+
+"use client";
+import { X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Star, Check, ChevronRight } from "lucide-react";
+import { Star, Check, ChevronRight, Users } from "lucide-react";
 import Image from "next/image";
-import React, { Children, Dispatch, SetStateAction } from "react";
+import React, { Children, Dispatch, SetStateAction, useState } from "react";
 import { FAQ } from "./details";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -20,6 +22,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
 
 export default function Checkout({
   amount,
@@ -234,6 +237,8 @@ export default function Checkout({
   );
 }
 
+
+
 export function Reviews({ children }: { children: React.ReactNode }) {
   const testimonials = [
     {
@@ -407,27 +412,81 @@ export function Reviews({ children }: { children: React.ReactNode }) {
     },
     { src: "https://i.ibb.co/8KN7nys/16.webp", alt: "30dayscoding dsa course" },
   ];
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-6xl">
+      <DialogContent className="sm:max-w-7xl max-h-[90vh] overflow-hidden">
         <DialogHeader>
-          <DialogTitle>Course Review</DialogTitle>
-          <DialogDescription>
-            These are the screenshoots of the original reviews sent by the
-            students.
+          <DialogTitle className="text-3xl font-bold text-gradient bg-gradient-to-r from-prime to-green-400 bg-clip-text text-transparent">
+            Student Success Stories
+          </DialogTitle>
+          <DialogDescription className="text-lg font-medium text-foreground/80">
+            Join 100,000+ students who transformed their careers �
           </DialogDescription>
         </DialogHeader>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 max-h-96 w-full overflow-auto justify-center horizontal-scroll">
-          {testimonials.map(({ alt, src }, i) => (
-            <Card className="w-full bg-slate-400 overflow-hidden h-60 sm:h-40" key={i}>
-              <CardContent className="flex relative items-center justify-center bg-slate-800 h-full">
-                <Image src={src} alt={alt} fill className="object-contain" />
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+
+        {!selectedImage ? (
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4 max-h-[70vh] overflow-auto">
+            {testimonials.map(({ alt, src }, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05 }}
+                className="relative group/card h-60 w-full cursor-pointer"
+                onClick={() => setSelectedImage(src)}
+              >
+                <Card className="h-full w-full rounded-xl border-2 border-head/20 hover:border-prime/50 transition-all duration-300 shadow-lg hover:shadow-prime/20">
+                  <CardContent className="p-0 h-full bg-gradient-to-br from-head/5 to-second/10 relative overflow-hidden">
+                    <Image 
+                      src={src}
+                      alt={alt}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover/card:scale-105"
+                      quality={100}
+                    />
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        ) : (
+          <div className="relative h-[70vh] w-full flex items-center justify-center bg-black/10 rounded-xl">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="relative w-full h-full"
+            >
+              <Image
+                src={selectedImage}
+                alt="Enlarged testimonial"
+                fill
+                className="object-contain p-4"
+                quality={100}
+              />
+              <Button
+                onClick={() => setSelectedImage(null)}
+                variant="ghost"
+                size="icon"
+                className="absolute top-4 right-4 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg"
+              >
+                <X className="h-6 w-6 text-black" />
+              </Button>
+            </motion.div>
+          </div>
+        )}
+
+        <DialogFooter className="border-t pt-4">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+            <span className="font-semibold">4.9/5 Average Rating</span>
+            <span className="mx-2">•</span>
+            <Users className="w-5 h-5 text-prime" />
+            <span className="font-semibold">1,200+ Daily Reviews</span>
+          </div>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

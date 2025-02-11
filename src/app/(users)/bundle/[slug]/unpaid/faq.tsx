@@ -1,4 +1,6 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+'use client';
+import React from 'react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../../../../components/ui/accordion";
 
 export default function FAQ({
     faqs,
@@ -15,10 +17,10 @@ export default function FAQ({
           <Accordion className="flex flex-col gap-3" type="single" collapsible>
             {faqs.map(({ answer, question }, i) => (
               <AccordionItem key={i} value={`item-${i}`}>
-                <AccordionTrigger className="text-sm bg-second/80 rounded-xl p-4 font-semibold text-start text-white/90">
+                <AccordionTrigger className="text-lg bg-gray-800 rounded-xl p-4 font-semibold text-start text-white">
                   {question}
                 </AccordionTrigger>
-                <AccordionContent className="text-xs bg-second/30 rounded-b-xl p-4 items-start text-foreground/70">
+                <AccordionContent className="text-base bg-gray-50 rounded-b-xl p-4 text-gray-700">
                   {answer}
                 </AccordionContent>
               </AccordionItem>

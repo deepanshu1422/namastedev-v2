@@ -37,7 +37,7 @@ export default function Checkout({
   const { data } = useSession();
   return (
     <div className="max-tab:hidden w-[500px] h-fit sticky -translate-y-[330px] top-[28rem]">
-      <div className="max-w-sm bg-gradient-to-b from-head to-second/20 flex flex-col gap-4 relative max-tab:mx-auto ml-auto shadow-lg backdrop-blur-sm shadow-black/40 overflow-hidden p-0.5">
+      <div className="max-w-sm bg-white shadow-md rounded-xl border border-gray-200 flex flex-col gap-4 relative max-tab:mx-auto ml-auto p-4">
         <div
           onClick={() => setYtOpen(true)}
           className="group relative cursor-pointer hover:opacity-90 transition-opacity duration-300"

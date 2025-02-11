@@ -19,14 +19,13 @@ export default function Guides() {
   ];
 
   return (
-    <section className="flex flex-col gap-4">
+    <section className="flex flex-col gap-4 bg-white p-6 rounded-xl shadow-sm border border-gray-200">
       <div className="flex flex-col gap-1">
-        <h2 className="font-bold text-xl tab:text-2xl">
+        <h2 className="font-bold text-xl tab:text-2xl text-gray-900">
           Guides worth Rs.8499 included ✨
         </h2>
-        <p className="text-sm text-pretty text-muted-foreground">
-          These projects mentioned below with clean code so that you can make
-          you protfoilio look great.❤️
+        <p className="text-sm text-gray-600">
+          Explore our comprehensive guide collection, professionally designed to elevate your portfolio.
         </p>
       </div>
       <Slider guides={guides} />
@@ -71,7 +70,7 @@ function Slider({ guides }: { guides: string[] }) {
             <Image
               src={`/guides/${e}.jpg`}
               alt="30DC project image"
-              className="w-full aspect-square object-cover object-top shadow-lg"
+              className="w-full aspect-square object-cover object-top rounded-lg border border-gray-200 shadow-md"
               height={600}
               width={900}
             />

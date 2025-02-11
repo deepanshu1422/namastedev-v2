@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Check, Video } from "lucide-react";
+import { Check, Video, Award } from "lucide-react";
 import Checkout from "./checkout";
 import { Dispatch, SetStateAction, useState } from "react";
 import Image from "next/image";
@@ -15,6 +15,7 @@ import Guides from "./guides";
 import Courses from "./courses";
 import Mentors from "@/app/(users)/mentors";
 import VideoSlider from "@/app/(guide)/testimonials/video-slider";
+import { Badge } from "@/components/ui/badge";
 // import Reviews from "./reviews"
 
 export default function Details({
@@ -59,130 +60,72 @@ export default function Details({
   }[];
 }) {
   return (
-    <div className="tab:px-20 tab:py-6 max-tab:pt-4 max-tab:pb-10 m-auto max-tab:max-w-2xl max-w-[80rem] flex w-full">
-      <div className="flex flex-col w-full gap-6 px-6 overflow-hidden">
+   <div>
+     <div className="relative tab:px-20 tab:py-6 max-tab:pt-4 max-tab:pb-10 m-auto max-tab:max-w-2xl max-w-[80rem] flex w-full">
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-prime/5 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-prime/5 rounded-full blur-3xl -z-10" />
+
+      <div className="flex flex-col w-full gap-12 px-6 overflow-hidden">
         <Courses coursesCollection={coursesCollection} />
 
-        <Guides />
-        <Mentors />
-        {/* <section className="flex flex-col gap-1">
-          <div className="flex flex-col gap-3 border-prime/80 border bg-second/30 pt-5 p-4">
-            <span className="text-2xl font-bold">What you&apos;ll learn</span>
-            <div className="grid phone:grid-cols-2 gap-5 py-3">
-              {learn.map((e, i) => (
-                <span key={i} className="flex gap-3 items-start text-sm">
-                  <Check className="h-5 w-5 translate-y-1 text-prime shrink-0" />
-                  <p className="">
-                    {e.split(":").map((e, i) =>
-                      i === 0 ? (
-                        <span key={i} className="bg-lime-500/40">
-                          {e}:
-                        </span>
-                      ) : (
-                        e
-                      )
-                    )}
-                  </p>
-                </span>
-              ))}
-            </div>
-          </div>
-        </section> */}
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-radial from-second/40 to-transparent -z-10" />
+          <Guides />
+        </div>
 
-        {/* <section className="flex flex-col gap-4">
-          <div className="flex flex-col gap-1">
-            <h2 className="font-bold text-xl tab:text-2xl">
-              What you&apos;ll make
-            </h2>
-            <p className="text-sm text-pretty text-muted-foreground">
-              Add more creative value to your portfolio💡
-            </p>
-          </div>
-          <div className="grid tab:grid-cols-2 gap-3 bg-second/30 rounded-lg py-6 pl-6">
-            <div className="max-tab:order-last flex flex-col gap-3">
-              <h3 className="font-bold text-xl tab:text-2xl">
-                Project&apos;s Title
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-radial from-prime/5 to-transparent -z-10" />
+          <Mentors />
+        </div>
+
+        <section className="flex flex-col gap-6">
+          <div className="grid tab:grid-cols-2 gap-8 p-8 shadow-xl rounded-2xl border-prime/20 border bg-second/30 backdrop-blur-sm">
+            <div className="m-auto flex flex-col gap-4 max-tab:text-center">
+              <Badge variant="outline" className="w-fit bg-prime/10 text-prime border-prime/20 px-3 py-1">
+                <Award className="w-4 h-4 mr-1" />
+                Professional Certificate
+              </Badge>
+              <h3 className="font-bold text-2xl md:text-4xl bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+                Boost Your Resume with Industry Recognition 🎖️
               </h3>
-              <div className="flex flex-col gap-1 pr-5">
-                {project.map((e, i) => (
-                  <span key={i} className="flex gap-2 items-center text-sm">
-                    <CheckCheck className="h-5 w-5 text-prime shrink-0" />
-                    {e}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <Image
-              src={image}
-              alt={"30DC Project Preview"}
-              height={600}
-              width={900}
-              className="rounded-s-lg w-full tab:h-4/5 my-auto shadow-xl shadow-black/50 object-cover"
-            />
-          </div>
-        </section> */}
-
-        {/* <div>
-          <section
-            className={`flex flex-col ${
-              !expand && "max-h-96"
-            } gap-3 overflow-hidden`}
-          >
-            <h2 className="text-xl tab:text-2xl font-bold text-white">
-              Overview
-            </h2>
-          </section>
-          <div className="flex w-full h-16 bg-gradient-to-b from-10% to-90% -translate-y-12 from-transparent to-bg">
-            <Button
-              onClick={() => setExpand(!expand)}
-              variant={"outline"}
-              className="mx-auto translate-y-16"
-            >
-              <ChevronDown className={`h-4 w-4 ${expand && "rotate-180"}`} />
-              View More
-            </Button>
-          </div>
-        </div> */}
-
-        <section className="flex flex-col gap-4">
-          <div className="grid tab:grid-cols-2 gap-5 p-3 tab:p-6 shadow-xl border-prime/80 border bg-second/30">
-            <div className="m-auto flex flex-col gap-2 max-tab:text-center">
-              <h3 className="font-bold text-xl text-pretty tab:text-3xl">
-                Course Completion Certificate🎖️
-              </h3>
-              <p className="text-sm text-pretty">
-                Make your resume outstand among other&apos;s.
+              <p className="text-base text-foreground/70">
+                Stand out in the job market with our professionally accredited certification. Join thousands of successful graduates who have transformed their careers.
               </p>
             </div>
-            <Image
-              src={"/certificate.jpg"}
-              alt={"30DC Project Preview"}
-              height={600}
-              width={900}
-              className="rounded-sm aspect-video max-w-xl w-full m-auto shadow-xl shadow-black/50 object-cover"
-            />
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-prime/50 to-prime/30 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-1000" />
+              <Image
+                src={"/certificate.jpg"}
+                alt={"30DC Project Preview"}
+                height={600}
+                width={900}
+                className="relative rounded-xl aspect-video w-full shadow-2xl object-cover group-hover:scale-[1.01] transition duration-300"
+              />
+            </div>
           </div>
         </section>
 
-        <VideoSlider />
+        
 
         <Reviews />
-        <FAQ faqs={faqs} />
+        
+        
+
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-radial from-prime/5 to-transparent -z-10" />
+          <FAQ faqs={faqs} />
+        </div>
       </div>
 
-      <Checkout
-        // addToCart={addToCart}
-        slug={slug}
-        // @ts-ignore
-        bundleId={bundleId}
-        setOpen={setOpen}
-        setYtOpen={setYtOpen}
-        courseOffer={courseOffer}
-        price={price}
-        image={image}
-        checkout="909"
-      />
     </div>
+    <div className="relative w-full ">
+          <div className="absolute inset-0 bg-gradient-radial from-prime/5 to-transparent -z-10" />
+          <div className="max-w-7xl mx-auto">
+            <VideoSlider />
+          </div>
+        </div>
+   </div>
   );
 }
 
@@ -282,10 +225,10 @@ function FAQ({
         <Accordion className="flex flex-col gap-3" type="single" collapsible>
           {faqs.map(({ answer, question }, i) => (
             <AccordionItem key={i} value={`item-${i}`}>
-              <AccordionTrigger className="text-sm bg-second/80 rounded-xl p-4 font-semibold text-start text-white/90">
+              <AccordionTrigger className="text-base bg-second/80 rounded-xl p-4 font-semibold text-start text-white/90">
                 {question}
               </AccordionTrigger>
-              <AccordionContent className="text-xs bg-second/30 rounded-b-xl p-4 items-start text-foreground/70">
+              <AccordionContent className="text-sm bg-second/30 rounded-b-xl p-4 items-start text-foreground/70">
                 {answer}
               </AccordionContent>
             </AccordionItem>
