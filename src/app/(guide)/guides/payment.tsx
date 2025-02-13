@@ -347,176 +347,130 @@ export function PaymentSheet({
       title: "Payments Details",
       body: (
         <div className="grid gap-4 py-4">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="relative rounded-xl overflow-hidden mb-6"
-          >
-            <div className="relative h-[200px] w-full">
-              <div className="absolute inset-0 bg-gradient-to-r from-prime/20 to-emerald-500/20 rounded-xl" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
-                <div className="space-y-2">
-                  <h3 className="font-semibold text-xl text-white">{title}</h3>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-3xl font-bold text-white">{curreny} {amount}</span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-base line-through text-white/70">{curreny} {bigAmount}</span>
-                      <span className="bg-prime/60 text-white text-xs px-2.5 py-1 rounded-full">
-                        {percentage}% OFF
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          <div className="border-l-4 border-emerald-500/60 pl-4 mb-4">
-            <p className="max-sm:text-sm sm:leading-6 text-white/90">{title}</p>
+          <div className="border-l-4 border-emerald-500/60 pl-4">
+            <p className="max-sm:text-sm sm:leading-6 line-clamp-3 text-white/90">{title}</p>
           </div>
-
-          <div className="space-y-4">
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="grid gap-2"
-            >
-              <Label htmlFor="name">Full Name</Label>
+          <div className="grid grid-cols-5 items-center gap-4">
+            <Label htmlFor="name" className="text-left">
+              Name
+            </Label>
+            <Input
+              //   disabled={!!session?.user?.name}
+              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+              maxLength={30}
+              id="name"
+              placeholder="John Doe"
+              className="col-span-4"
+            />
+          </div>
+          <div className="grid grid-cols-5 items-center gap-4">
+            <Label htmlFor="email" className="text-left">
+              Email
+            </Label>
+            <Input
+              //   disabled={!!session?.user?.email}
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+              id="email"
+              maxLength={40}
+              type="email"
+              placeholder="youremail@gmail.com"
+              className="col-span-4"
+            />
+          </div>
+          <div className="grid grid-cols-5 items-center gap-4">
+            <Label htmlFor="email" className="text-left">
+              Confirm Email
+            </Label>
+            <Input
+              value={formData.email2}
+              onChange={(e) =>
+                setFormData({ ...formData, email2: e.target.value })
+              }
+              id="email-2"
+              maxLength={40}
+              type="email"
+              placeholder="youremail@gmail.com"
+              className="col-span-4"
+            />
+          </div>
+          <div className="grid grid-cols-5 items-center gap-4">
+            <Label htmlFor="phone" className="text-left">
+              Phone
+            </Label>
+            <div className="relative col-span-4">
+              <span className="absolute left-2 top-2 text-muted-foreground">
+                +91
+              </span>
               <Input
-                disabled={!!session?.user?.name}
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                maxLength={30}
-                id="name"
-                placeholder="John Doe"
-                className="border-prime/40 bg-bg/40 focus:border-prime"
+                value={formData.phone}
+                onChange={(e) =>
+                  setFormData({ ...formData, phone: e.target.value })
+                }
+                type="number"
+                id="phone"
+                className="pl-9"
+                maxLength={10}
               />
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1 }}
-              className="grid gap-2"
+            </div>
+          </div>
+          <div className="grid grid-cols-5 items-center gap-4">
+            <Label htmlFor="username" className="text-left">
+              State
+            </Label>
+            <Select
+              value={formData.state}
+              onValueChange={(e) => setFormData({ ...formData, state: e })}
             >
-              <Label htmlFor="email">Email</Label>
-              <Input
-                disabled={!!session?.user?.email}
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                id="email"
-                maxLength={40}
-                type="email"
-                placeholder="youremail@gmail.com"
-                className="border-prime/40 bg-bg/40 focus:border-prime"
-              />
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="grid gap-2"
-            >
-              <Label htmlFor="email2">Confirm Email</Label>
-              <Input
-                value={formData.email2}
-                onChange={(e) => setFormData({ ...formData, email2: e.target.value })}
-                id="email2"
-                maxLength={40}
-                type="email"
-                placeholder="youremail@gmail.com"
-                className="border-prime/40 bg-bg/40 focus:border-prime"
-              />
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-              className="grid gap-2"
-            >
-              <Label htmlFor="phone">Phone</Label>
-              <div className="relative">
-                <span className="absolute left-2 top-2 text-muted-foreground">+91</span>
-                <Input
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  type="number"
-                  id="phone"
-                  className="pl-9 border-prime/40 bg-bg/40 focus:border-prime"
-                  maxLength={10}
-                />
-              </div>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 }}
-              className="grid gap-2"
-            >
-              <Label htmlFor="state">State</Label>
-              <Select
-                value={formData.state}
-                onValueChange={(e) => setFormData({ ...formData, state: e })}
-              >
-                <SelectTrigger className="border-prime/40 bg-bg/40 focus:border-prime">
-                  <SelectValue placeholder="Select State" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>States</SelectLabel>
-                    {states.map((e, i) => (
-                      <SelectItem className="capitalize" key={i} value={e}>
-                        {e.split("_").join(" ")}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </motion.div>
+              <SelectTrigger className="border-prime/40 bg-bg w-full col-span-4 capitalize">
+                <SelectValue placeholder="Select State" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>States</SelectLabel>
+                  {states.map((e, i) => (
+                    <SelectItem className="capitalize" key={i} value={e}>
+                      {e.split("_").join(" ")}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
         </div>
       ),
       footer: (
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="w-full mt-auto"
+        <Button
+          onClick={() => {
+            if (formData.name.length < 2)
+              return validationError({ message: "Name too short" });
+            if (formData.email.split("@").length !== 2)
+              return validationError({ message: "Invalid Email" });
+            if (formData.email !== formData.email2)
+              return validationError({ message: "Confirm Email doesn't Match" });
+            if (formData.phone.length !== 10)
+              return validationError({ message: "Invalid Phone Number" });
+            if (!states.includes(formData.state))
+              return validationError({ message: "Select a State" });
+            setFormState(1);
+          }}
+          className="w-full mt-auto hover:bg-prime/80 bg-prime/60 text-white"
+          type="submit"
         >
-          <Button
-            onClick={() => {
-              if (formData.name.length < 2)
-                return validationError({ message: "Name too short" });
-              if (formData.email.split("@").length !== 2)
-                return validationError({ message: "Invalid Email" });
-              if (formData.email !== formData.email2)
-                return validationError({ message: "Confirm Email doesn't Match" });
-              if (formData.phone.length !== 10)
-                return validationError({ message: "Invalid Phone Number" });
-              if (!states.includes(formData.state))
-                return validationError({ message: "Select a State" });
-              setFormState(1);
-            }}
-            className="w-full hover:bg-prime/80 bg-prime/60 text-white transition-all duration-200 transform hover:scale-[1.02]"
-          >
-            Continue to Payment
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-        </motion.div>
+          Proceed
+        </Button>
       ),
     },
     {
       title: "Order Details",
       body: (
         <div className="flex flex-col gap-6 max-sm:pt-5">
-          <motion.section 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-second/10 rounded-lg p-4 border border-prime/20"
-          >
+          <section className="bg-second/10 rounded-lg p-4 border border-prime/20">
             <div className="flex flex-col gap-4">
               <div className="flex justify-between items-center">
                 <span className="text-white/80">Guide Price</span>
@@ -532,29 +486,13 @@ export function PaymentSheet({
               </div>
               <div className="h-px bg-prime/20" />
               <div className="flex justify-between items-center">
-                <span className="font-medium">Total Amount</span>
+                <span className="font-medium">Sub Total</span>
                 <span className="font-bold text-xl text-prime">
                   {curreny} {amount}
                 </span>
               </div>
             </div>
-          </motion.section>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex items-center justify-between text-sm"
-          >
-            <div className="flex items-center text-prime">
-              <CheckCircle2 className="h-4 w-4 mr-1" />
-              Secure Payment
-            </div>
-            <div className="flex items-center text-prime">
-              <CreditCard className="h-4 w-4 mr-1" />
-              Instant Access
-            </div>
-          </motion.div>
+          </section>
         </div>
       ),
       footer: (
@@ -562,23 +500,24 @@ export function PaymentSheet({
           <Button
             disabled={isLoading}
             onClick={makePayment}
-            className="w-full hover:bg-prime/80 bg-prime/60 text-white transition-all duration-200 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="disabled:animate-pulse w-full hover:bg-prime/80 bg-prime/60 text-white"
+            type="submit"
           >
-            {isLoading ? (
-              <div className="flex items-center justify-center">
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2" />
-                Processing...
-              </div>
-            ) : (
-              <>Pay {curreny} {amount}</>
-            )}
+            Buy @ INR{" "}
+            {amount +
+              formData.guides.reduce(
+                (sum, cur) =>
+                  // @ts-ignore
+                  sum + guides.find((e) => e.guideId === cur)?.pricing.amount,
+                0
+              )}
           </Button>
           <Button
             variant={"outline"}
             onClick={() => setFormState(0)}
-            className="w-full border-prime/40 text-foreground/80 hover:text-foreground"
+            className="w-full"
+            type="submit"
           >
-            <ArrowRight className="mr-2 h-4 w-4 rotate-180" />
             Back
           </Button>
         </div>

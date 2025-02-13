@@ -425,26 +425,7 @@ export function PaymentSheet({
             </div>
           </motion.div>
 
-          <div className="grid gap-3 p-4 bg-bg/40 rounded-xl border border-prime/40">
-            <h4 className="font-semibold text-lg text-foreground">What's Included:</h4>
-            <div className="grid gap-2.5 text-sm">
-              {courseOffer.map((e, i) => (
-                <motion.div 
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  key={i} 
-                  className="flex items-center gap-3 text-foreground/80"
-                >
-                  <div className="h-5 w-5 rounded-full bg-prime/20 flex items-center justify-center flex-shrink-0">
-                    <Check className="h-3 w-3 text-prime" />
-                  </div>
-                  <p className="leading-tight">{e}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
+          
           <div className="space-y-4">
             <div className="grid gap-2">
               <Label htmlFor="name">Full Name</Label>
@@ -668,7 +649,7 @@ export function PaymentSheet({
                 {amount +
                   formData.guides.reduce(
                     (sum, cur) =>
-                      sum + guides.find((e) => e.guideId === cur)?.pricing.amount ?? 0,
+                      sum + (guides.find((e) => e.guideId === cur)?.pricing.amount ?? 0),
                     0
                   )}
               </>
