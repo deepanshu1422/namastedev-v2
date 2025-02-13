@@ -11,7 +11,8 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import { useState } from "react";
-import { Play } from "lucide-react";
+import { Play, Star, Quote, ChevronRight, Users } from "lucide-react";
+import { motion } from "framer-motion";
 
 function VideoCarousel() {
   const testimonials = [
@@ -92,56 +93,89 @@ function VideoCarousel() {
   const [activeVideo, setActiveVideo] = useState("");
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto px-4">
-      {testimonials.map(({ id, name, company, text, profilePic, thumbnail }, index) => (
-        <div key={index} className="flex flex-col gap-6 bg-second/30 p-4 rounded-lg">
-          <div className="relative aspect-video rounded-lg overflow-hidden">
-            {activeVideo === id ? (
-              <iframe
-                src={`https://www.youtube.com/embed/${id}?autoplay=1`}
-                className="absolute inset-0 w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            ) : (
-              <div 
-                onClick={() => setActiveVideo(id)}
-                className="relative w-full h-full cursor-pointer group"
-              >
-                <Image
-                  src={thumbnail}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  alt={`${company} Testimonial`}
-                />
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-all flex items-center justify-center">
-                  <div className="bg-white/10 backdrop-blur-sm p-4 rounded-full transform group-hover:scale-110 transition-all">
-                    <Play className="w-12 h-12 fill-white" />
+    <div className="relative">
+      {/* Futuristic Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.05)_1px,transparent_1px)] bg-[size:24px_24px]" />
+        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-emerald-500/20 rounded-full blur-[100px] animate-pulse-slow" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-emerald-500/20 rounded-full blur-[100px] animate-pulse-slower" />
+      </div>
+
+      <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto px-4">
+        {testimonials.map(({ id, name, company, text, profilePic, thumbnail }, index) => (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            key={index}
+            className="group relative"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            <div className="relative flex flex-col gap-6 bg-[#112121] p-6 rounded-xl border border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300">
+              <div className="relative aspect-video rounded-lg overflow-hidden">
+                {activeVideo === id ? (
+                  <iframe
+                    src={`https://www.youtube.com/embed/${id}?autoplay=1`}
+                    className="absolute inset-0 w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                ) : (
+                  <div 
+                    onClick={() => setActiveVideo(id)}
+                    className="relative w-full h-full cursor-pointer group/play"
+                  >
+                    <Image
+                      src={thumbnail}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover/play:scale-105"
+                      alt={`${company} Testimonial`}
+                    />
+                    <div className="absolute inset-0 bg-black/40 group-hover/play:bg-black/30 transition-colors">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                    </div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="relative p-4 rounded-full bg-emerald-500/20 backdrop-blur-sm border border-emerald-500/30 transform group-hover/play:scale-110 transition-all duration-300">
+                        <div className="absolute inset-0 bg-emerald-500/20 rounded-full blur-md animate-pulse" />
+                        <Play className="relative w-8 h-8 text-white fill-white" />
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-4">
+                <div className="flex items-start gap-4">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full blur-md opacity-40" />
+                    <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-emerald-500/20">
+                      <Image
+                        src={profilePic}
+                        fill
+                        className="object-cover"
+                        alt={name}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-col">
+                    <h3 className="font-semibold text-xl bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+                      {name}
+                    </h3>
+                    <p className="text-sm text-emerald-300/70">{company}</p>
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-4">
-            <div className="flex items-start gap-4">
-              <div className="relative w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-white/10">
-                <Image
-                  src={profilePic}
-                  fill
-                  className="object-cover"
-                  alt={name}
-                />
-              </div>
-              <div className="flex flex-col">
-                <h3 className="font-semibold text-xl">{name}</h3>
-                <p className="text-sm text-white/70">{company}</p>
+                <div className="relative">
+                  <Quote className="absolute -top-2 -left-2 w-6 h-6 text-emerald-500/20" />
+                  <blockquote className="text-base text-emerald-100/80 italic pl-6">
+                    {text}
+                  </blockquote>
+                </div>
               </div>
             </div>
-            <blockquote className="text-base text-white/80 italic">"{text}"</blockquote>
-          </div>
-        </div>
-      ))}
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -182,17 +216,34 @@ function NewVideoCarousel() {
   const [activeVideo, setActiveVideo] = useState("");
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 py-16">
-      <div className="flex flex-col gap-8">
-        <div className="flex flex-col gap-2">
-          <h2 className="text-2xl font-bold text-center">More Student Stories</h2>
-          <p className="text-white/70 text-center">Watch more success stories from our students</p>
-        </div>
+    <div className="relative w-full max-w-7xl mx-auto px-4 py-16">
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(-45deg,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:32px_32px]" />
+      </div>
+
+      <div className="relative flex flex-col gap-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex flex-col gap-4 text-center"
+        >
+          <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 backdrop-blur-sm mx-auto">
+            <Star className="w-4 h-4 text-emerald-400" />
+            <span className="text-emerald-300 text-sm font-medium">More Success Stories</span>
+          </div>
+          
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-emerald-400 via-green-300 to-emerald-200 bg-clip-text text-transparent">
+            Student Testimonials
+          </h2>
+          <p className="text-emerald-100/80 max-w-2xl mx-auto">
+            Watch inspiring stories from our successful students
+          </p>
+        </motion.div>
         
         <Carousel
           plugins={[
             Autoplay({
-              delay: 3000,
+              delay: 4000,
               stopOnFocusIn: true,
               stopOnMouseEnter: true,
               stopOnInteraction: false,
@@ -207,49 +258,60 @@ function NewVideoCarousel() {
           <CarouselContent className="-ml-4">
             {testimonialVideos.map(({ ytId, title, views }, index) => (
               <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-                <Card className="overflow-hidden bg-second/30 border-prime/20 hover:border-prime/40 transition-colors">
-                  <CardContent className="p-0">
-                    <div className="relative aspect-video overflow-hidden">
-                      {activeVideo === ytId ? (
-                        <iframe
-                          src={`https://www.youtube.com/embed/${ytId}?autoplay=1`}
-                          className="absolute inset-0 w-full h-full"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        />
-                      ) : (
-                        <div 
-                          onClick={() => setActiveVideo(ytId)}
-                          className="group cursor-pointer w-full h-full"
-                        >
-                          <Image
-                            src={`https://i3.ytimg.com/vi/${ytId}/maxresdefault.jpg`}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            alt={title}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                >
+                  <Card className="group relative overflow-hidden bg-[#112121] border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300">
+                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    <CardContent className="relative p-0">
+                      <div className="relative aspect-video overflow-hidden">
+                        {activeVideo === ytId ? (
+                          <iframe
+                            src={`https://www.youtube.com/embed/${ytId}?autoplay=1`}
+                            className="absolute inset-0 w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
                           />
-                          <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                            <div className="bg-white/10 backdrop-blur-sm p-3 rounded-full transform group-hover:scale-110 transition-all">
-                              <Play className="w-8 h-8 fill-white" />
+                        ) : (
+                          <div 
+                            onClick={() => setActiveVideo(ytId)}
+                            className="group/play cursor-pointer w-full h-full"
+                          >
+                            <Image
+                              src={`https://i3.ytimg.com/vi/${ytId}/maxresdefault.jpg`}
+                              fill
+                              className="object-cover transition-transform duration-500 group-hover/play:scale-105"
+                              alt={title}
+                            />
+                            <div className="absolute inset-0 bg-black/40 group-hover/play:bg-black/30 transition-colors">
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                            </div>
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className="relative p-3 rounded-full bg-emerald-500/20 backdrop-blur-sm border border-emerald-500/30 transform group-hover/play:scale-110 transition-all duration-300">
+                                <div className="absolute inset-0 bg-emerald-500/20 rounded-full blur-md animate-pulse" />
+                                <Play className="relative w-6 h-6 text-white fill-white" />
+                              </div>
                             </div>
                           </div>
-                          
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-medium text-sm line-clamp-2 mb-1 group-hover:text-prime transition-colors">
-                        {title}
-                      </h3>
-                      <p className="text-xs text-white/60">{views}</p>
-                    </div>
-                  </CardContent>
-                </Card>
+                        )}
+                      </div>
+                      <div className="relative p-4">
+                        <h3 className="font-medium text-sm line-clamp-2 mb-1 text-emerald-100 group-hover:text-emerald-300 transition-colors">
+                          {title}
+                        </h3>
+                        <p className="text-xs text-emerald-300/60">{views}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="-left-4 h-12 w-12" />
-          <CarouselNext className="-right-4 h-12 w-12" />
+          <CarouselPrevious className="-left-4 h-12 w-12 bg-emerald-500/10 border-emerald-500/20 hover:bg-emerald-500/20 hover:border-emerald-500/40" />
+          <CarouselNext className="-right-4 h-12 w-12 bg-emerald-500/10 border-emerald-500/20 hover:bg-emerald-500/20 hover:border-emerald-500/40" />
         </Carousel>
       </div>
     </div>
@@ -258,23 +320,66 @@ function NewVideoCarousel() {
 
 export default function VideoSlider() {
   return (
-    <div className="w-full p-2">
-      <div className="max-w-7xl mx-auto px-4 mb-16 text-center">
-      <span className="flex items-center justify-center gap-4 relative">
-        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-r from-0% from-transparent to-100% to-prime" />
-        <h2 className="font-jakarta phone:shrink-0 text-[2rem] font-extrabold text-center">
-          Hear it from our students!
-        </h2>
-        <hr className="max-phone:hidden h-0.5 max-lg:w-20 w-60 max-w-60 rounded bg-gradient-to-l from-0% from-transparent to-100% to-prime" />
-      </span>
-      <p className="max-w-2xl text-center mx-auto text-sm text-white/70 px-10 line-clamp-2 text-balance">
-        The love we get from our students can&apos;t go unnoticeable and
-        unforgottable, here are some featured once.
-      </p>
-
+    <div className="relative w-full py-24 overflow-hidden">
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
       </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center space-y-4"
+        >
+          <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 backdrop-blur-sm">
+            <Users className="w-4 h-4 text-emerald-400" />
+            <span className="text-emerald-300 text-sm font-medium">Student Success Stories</span>
+          </div>
+
+          <h2 className="text-4xl sm:text-5xl font-bold">
+            <span className="relative">
+              <span className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 to-green-500/20 blur-xl" />
+              <span className="relative bg-gradient-to-r from-emerald-400 via-green-300 to-emerald-200 bg-clip-text text-transparent">
+                Hear it from our students!
+              </span>
+            </span>
+          </h2>
+
+          <p className="text-lg text-emerald-100/80 max-w-2xl mx-auto">
+            The love we get from our students can't go unnoticed. Here are some of their inspiring stories.
+          </p>
+
+          <div className="w-px h-12 bg-gradient-to-b from-emerald-500 to-transparent mx-auto" />
+        </motion.div>
+      </div>
+
       <VideoCarousel />
       <NewVideoCarousel />
     </div>
   );
+}
+
+// Add animations
+const style = `
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.2); }
+  }
+  @keyframes pulse-slower {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+  .animate-pulse-slow {
+    animation: pulse-slow 8s ease-in-out infinite;
+  }
+  .animate-pulse-slower {
+    animation: pulse-slower 12s ease-in-out infinite;
+  }
+`;
+
+// Add the style tag to the document
+if (typeof document !== 'undefined') {
+  const styleElement = document.createElement('style');
+  styleElement.textContent = style;
+  document.head.appendChild(styleElement);
 }

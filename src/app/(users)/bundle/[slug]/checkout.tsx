@@ -423,7 +423,7 @@ export function Reviews({ children }: { children: React.ReactNode }) {
             Student Success Stories
           </DialogTitle>
           <DialogDescription className="text-lg font-medium text-foreground/80">
-            Join 100,000+ students who transformed their careers �
+            Join thousands of students who transformed their careers
           </DialogDescription>
         </DialogHeader>
 

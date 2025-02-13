@@ -13,6 +13,7 @@ const nextConfig = {
       "d2dmyh35ffsxbl.cloudfront.net",
       "lh7-us.googleusercontent.com",
       "d502jbuhuh9wk.cloudfront.net",
+      "upload.wikimedia.org"
     ],
   },
   typescript: {

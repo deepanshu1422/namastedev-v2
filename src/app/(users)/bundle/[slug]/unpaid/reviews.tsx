@@ -17,7 +17,6 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { testimonials } from "@/components/mentorship-comp/success";
-import TestimonyVideo from "@/app/(users)/testimony-video";
 import Image from "next/image";
 
 type TestimonialType = {
@@ -106,15 +105,8 @@ function Testimonial({
 export default function Reviews() {
   return (
     <section className="flex flex-col gap-4">
-      <div className="flex flex-col gap-1">
-        <h2 className="font-bold text-xl tab:text-2xl">
-          1000+ student success stories
-        </h2>
-        <p className="text-sm text-pretty text-muted-foreground">
-          Get started with 20,000+ students learning from 10+ countries
-        </p>
-      </div>
-      <TestimonyVideo />
+      
+     
       {/* <Slider />
       <MobileSlider /> */}
     </section>

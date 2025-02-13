@@ -77,8 +77,6 @@ function Slider({ guides }: { guides: string[] }) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="-left-4 h-12 w-12" />
-      <CarouselNext className="-right-4 h-12 w-12" />
     </Carousel>
   );
 }

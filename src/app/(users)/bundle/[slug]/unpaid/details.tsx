@@ -16,6 +16,7 @@ import Courses from "./courses";
 import Mentors from "@/app/(users)/mentors";
 import VideoSlider from "@/app/(guide)/testimonials/video-slider";
 import { Badge } from "@/components/ui/badge";
+import Comparison from "./comparison";
 // import Reviews from "./reviews"
 
 export default function Details({
@@ -110,12 +111,8 @@ export default function Details({
 
         <Reviews />
         
-        
 
-        <div className="relative">
-          <div className="absolute inset-0 bg-gradient-radial from-prime/5 to-transparent -z-10" />
-          <FAQ faqs={faqs} />
-        </div>
+        <Comparison />
       </div>
 
     </div>
@@ -124,6 +121,12 @@ export default function Details({
           <div className="max-w-7xl mx-auto">
             <VideoSlider />
           </div>
+        </div>
+        <div className="relative w-full mb-5 p-2">
+          <div className="absolute inset-0 bg-gradient-radial from-prime/5 to-transparent -z-10" />
+         <div className="max-w-5xl mx-auto">
+         <FAQ faqs={faqs} />
+         </div>
         </div>
    </div>
   );
