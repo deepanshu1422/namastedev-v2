@@ -12,15 +12,10 @@ interface ComparisonFeature {
 export default function Comparison() {
   const features: ComparisonFeature[] = [
     { feature: "Structured Learning", others: true, airtribe: true },
-    { feature: "Personalised Mentorship", others: "Offered by few", airtribe: true },
     { feature: "Job Assistance", others: "Offered by few", airtribe: true },
     { feature: "Hands-on Real-World Projects", others: "Offered by few", airtribe: true },
-    { feature: "Exclusive Sessions with CXOs", others: false, airtribe: true },
-    { feature: "Mock Interviews", others: false, airtribe: true },
     { feature: "System Design Module", others: false, airtribe: true },
     { feature: "DSA module", others: "Offered by few", airtribe: true },
-    { feature: "Soft-Skill Coaching", others: false, airtribe: true },
-    { feature: "Exclusive Community", others: false, airtribe: true },
     { feature: "Interview Preparation", others: "Offered by few", airtribe: true },
   ];
 

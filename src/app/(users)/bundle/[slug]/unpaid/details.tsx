@@ -70,10 +70,7 @@ export default function Details({
       <div className="flex flex-col w-full gap-12 px-6 overflow-hidden">
         <Courses coursesCollection={coursesCollection} />
 
-        <div className="relative">
-          <div className="absolute inset-0 bg-gradient-radial from-second/40 to-transparent -z-10" />
-          <Guides />
-        </div>
+       
 
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-radial from-prime/5 to-transparent -z-10" />

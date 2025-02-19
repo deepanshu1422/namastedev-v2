@@ -52,18 +52,10 @@ export default function ProfessionalHero({
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-12">
-          {/* FOMO Section - Only Seats */}
-          <div className="flex flex-col items-center gap-4 mb-8">
-            <div className="flex items-center gap-2 px-4 py-2 bg-red-500/10 backdrop-blur-sm rounded-full border border-red-500/20">
-              <Sparkles className="w-4 h-4 text-red-400 animate-pulse" />
-              <span className="text-red-300 font-medium">
-                Only {seatsLeft} seats remaining at this price ₹999
-              </span>
-            </div>
-          </div>
+         
 
           {/* Title Section - No animation */}
-          <div className="text-center space-y-6 max-w-4xl mx-auto mb-12">
+          <div className="text-center  max-w-3xl mx-auto mb-8">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
               <span className="bg-gradient-to-r from-emerald-400 via-green-300 to-emerald-200 bg-clip-text text-transparent">
                 Master Modern Tech Stack
@@ -78,7 +70,7 @@ export default function ProfessionalHero({
           </div>
 
           {/* Video Section with lazy loading */}
-          <div className="relative max-w-5xl mx-auto">
+          <div className="relative max-w-3xl mx-auto">
             <div className="relative rounded-2xl overflow-hidden border-2 border-emerald-500/20 shadow-2xl shadow-emerald-500/10">
               <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-green-500/10 mix-blend-overlay" />
               <div className="relative pb-[56.25%] h-0">
@@ -161,6 +153,9 @@ export default function ProfessionalHero({
       <Suspense fallback={null}>
         <CourseCurriculum />
       </Suspense>
+
+      {/* Add Sticky Price Bar */}
+      <StickyPriceBar price={999} originalPrice={4999} setOpen={setOpen} />
     </>
   );
 }
@@ -178,6 +173,44 @@ function StatCard({ icon, value, label }) {
         </div>
         <div className="text-emerald-300/80">
           {label}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Sticky Price Bar Component
+function StickyPriceBar({ price, originalPrice, setOpen }) {
+  return (
+    <div className="fixed bottom-0 left-0 right-0 bg-[#0A1A1A]/80 border-t border-emerald-500/20 backdrop-blur-md z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="flex items-baseline gap-2">
+              <span className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+                ₹{price}
+              </span>
+              <span className="text-base text-emerald-100/60 line-through">₹{originalPrice}</span>
+              <span className="text-xs px-2 py-1 bg-emerald-500/10 rounded-md text-emerald-400 font-medium border border-emerald-500/20">
+                80% OFF
+              </span>
+            </div>
+            <div className="hidden sm:flex items-center gap-2 text-emerald-300/80">
+              <Sparkles className="w-4 h-4 text-yellow-400 animate-pulse" />
+              <span className="text-sm font-medium">Limited Time Offer</span>
+            </div>
+          </div>
+          <Button
+            onClick={() => setOpen(true)}
+            size="lg"
+            className="group relative px-6 py-2 bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 rounded-xl"
+          >
+            <span className="absolute inset-0 bg-white/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="relative flex items-center">
+              <BookOpen className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+              <span>Enroll Now</span>
+            </div>
+          </Button>
         </div>
       </div>
     </div>

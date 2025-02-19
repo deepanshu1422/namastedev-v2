@@ -69,9 +69,9 @@ export default function Header() {
     <div className="sticky top-0 z-50">
       {pathName.split("/")[1] !== "dashboard" ? <Link
         href={"/bundle/complete-package-all-course-bundle"}
-        className={`sticky top-0 bg-lime-400 font-bold flex items-center justify-center max-sm:text-xs text-sm text-black w-full p-2`}
+        // className={`sticky top-0 bg-lime-400 font-bold flex items-center justify-center max-sm:text-xs text-sm text-black w-full p-2`}
       >
-        <section className="flex overflow-hidden gap-20">
+        {/* <section className="flex overflow-hidden gap-20">
           <div className="flex flex-nowrap gap-4 tracking-wide text-center text-pretty [animation:loop-scroll_20s_linear_infinite] w-full">
             <p className="text-nowrap">
               Access all courses for 999/- Lifetime Valid
@@ -102,7 +102,7 @@ export default function Header() {
               <span className="underline mx-2">Claim now!</span>
             </p>
           </div>
-        </section>
+        </section> */}
       </Link> : <></>}
       <section className=" px-3 py-2 flex justify-between bg-footer z-50">
         <Link href={"/"} className="max-md:hidden flex gap-2 items-center">

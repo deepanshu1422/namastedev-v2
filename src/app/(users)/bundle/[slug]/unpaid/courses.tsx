@@ -147,14 +147,8 @@ function Course({
               {title}
             </h3>
             <div className="flex items-center justify-between text-emerald-300/70 mt-auto">
-              <div className="flex items-center gap-1.5">
-                <Clock className="h-4 w-4 text-emerald-400" />
-                <span className="text-sm">8 weeks</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <BookOpenText className="h-4 w-4 text-emerald-400" />
-                <span className="text-sm">12 modules</span>
-              </div>
+             
+              
             </div>
             <div className="mt-4 flex items-center justify-between text-emerald-400 text-sm font-medium">
               <span>View Course</span>

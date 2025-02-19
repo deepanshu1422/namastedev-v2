@@ -18,34 +18,7 @@ export default function Guides() {
     "resume-cold-email-guides",
   ];
 
-  return (
-    <section className="flex flex-col gap-4 bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-      <div className="flex flex-col gap-1">
-        <h2 className="font-bold text-xl tab:text-2xl text-gray-900">
-          Guides worth Rs.8499 included ✨
-        </h2>
-        <p className="text-sm text-gray-600">
-          Explore our comprehensive guide collection, professionally designed to elevate your portfolio.
-        </p>
-      </div>
-      <Slider guides={guides} />
-    </section>
-  );
-
-  return (
-    <section className="flex w-full bg-footer/60 mb-6">
-      <div className="mx-auto max-w-[75rem] tab:p-[1.5rem_5.5rem_3.75rem] px-6 flex flex-col tab:items-center gap-2 py-5 tab:py-10">
-        <h3 className="text-xl tab:text-2xl font-bold">
-          Premium Interview Guides Included
-        </h3>
-        <p className="max-w-2xl tab:text-center text-sm text-white/70 tab:px-10 line-clamp-2 text-pretty">
-          These projects mentioned below with clean code so that you can make
-          you protfoilio look great.
-        </p>
-        <Slider guides={guides} />
-      </div>
-    </section>
-  );
+  
 }
 
 function Slider({ guides }: { guides: string[] }) {
