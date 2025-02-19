@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import Image from "next/image";
@@ -43,9 +43,6 @@ import { beginCheckout, purchase } from "@/services/gaEvents";
 import { Checkbox } from "@/components/ui/checkbox";
 import { BASE_URL } from "@/util/constants";
 import createGuidePayments from "../../../../actions/createGuidePayment";
-
-import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, CreditCard } from "lucide-react";
 
 export function PaymentSheet({
   title,
@@ -347,7 +344,7 @@ export function PaymentSheet({
       title: "Payments Details",
       body: (
         <div className="grid gap-4 py-4">
-          <div className="border-l-4 border-emerald-500/60 pl-4">
+           <div className="border-l-4 border-emerald-500/60 pl-4">
             <p className="max-sm:text-sm sm:leading-6 line-clamp-3 text-white/90">{title}</p>
           </div>
           <div className="grid grid-cols-5 items-center gap-4">
@@ -355,7 +352,7 @@ export function PaymentSheet({
               Name
             </Label>
             <Input
-              //   disabled={!!session?.user?.name}
+            //   disabled={!!session?.user?.name}
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
@@ -371,7 +368,7 @@ export function PaymentSheet({
               Email
             </Label>
             <Input
-              //   disabled={!!session?.user?.email}
+            //   disabled={!!session?.user?.email}
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })

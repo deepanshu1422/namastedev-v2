@@ -4,7 +4,6 @@ import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import createPayments from "../../../../../actions/createPayments";
-import getCoupons from "../../../../../actions/getCoupon";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -46,8 +45,7 @@ import { beginCheckout, purchase } from "@/services/gaEvents";
 import { Checkbox } from "@/components/ui/checkbox";
 import { BASE_URL } from "@/util/constants";
 import { PostHog } from "posthog-js/react";
-import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, ArrowRight, CreditCard } from "lucide-react";
+import React from "react";
 
 export function PaymentSheet({
   title,
@@ -62,7 +60,6 @@ export function PaymentSheet({
   guides,
   setOpen,
   setOpenPay,
-  cover,
 }: {
   cover: string;
   title: string;
@@ -632,184 +629,25 @@ export function PaymentSheet({
   ];
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      <SheetContent className="h-full w-full flex flex-col overflow-y-auto bg-background">
-        <SheetHeader>
-          <SheetTitle className="text-2xl font-bold text-foreground">
-            Complete Your Purchase
-          </SheetTitle>
-        </SheetHeader>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-6 flex-1 flex flex-col"
-        >
-          <div className="relative rounded-xl overflow-hidden mb-6 shadow-lg">
-            <Image
-              src={cover || "/course-placeholder.jpg"}
-              alt={title}
-              width={400}
-              height={200}
-              className="w-full h-48 object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className="absolute bottom-4 left-4 text-white">
-              <h3 className="font-semibold text-lg">{title}</h3>
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold">{curreny} {amount}</span>
-                <span className="text-sm line-through opacity-75">{curreny} {bigAmount}</span>
-                <span className="bg-prime/60 text-white text-xs px-2 py-1 rounded-full">
-                  {percentage}% OFF
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <motion.div
-            className="space-y-6 flex-1"
-            initial={false}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+    <>
+      <Sheet open={open} onOpenChange={setOpen}>
+        {/* <SheetTrigger asChild>
+          <Button
+            size={"lg"}
+            className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
           >
-            {formState === 0 ? (
-              <motion.div
-                initial={{ x: -20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                className="space-y-4"
-              >
-                <div className="grid gap-4">
-                  <div className="grid gap-2">
-                    <Label htmlFor="name">Full Name</Label>
-                    <Input
-                      id="name"
-                      placeholder="John Doe"
-                      value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
-                      className="border-prime/40 bg-bg focus:border-prime"
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      placeholder="youremail@gmail.com"
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                      className="border-prime/40 bg-bg focus:border-prime"
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="email2">Confirm Email</Label>
-                    <Input
-                      id="email2"
-                      placeholder="youremail@gmail.com"
-                      value={formData.email2}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email2: e.target.value })
-                      }
-                      className="border-prime/40 bg-bg focus:border-prime"
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="phone">Phone</Label>
-                    <div className="relative">
-                      <span className="absolute left-2 top-2 text-muted-foreground">
-                        +91
-                      </span>
-                      <Input
-                        id="phone"
-                        placeholder="+91"
-                        value={formData.phone}
-                        onChange={(e) =>
-                          setFormData({ ...formData, phone: e.target.value })
-                        }
-                        className="pl-9 border-prime/40 bg-bg focus:border-prime"
-                      />
-                    </div>
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="state">State</Label>
-                    <Select
-                      value={formData.state}
-                      onValueChange={(e) => setFormData({ ...formData, state: e })}
-                    >
-                      <SelectTrigger className="border-prime/40 bg-bg focus:border-prime">
-                        <SelectValue placeholder="Select State" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectLabel>States</SelectLabel>
-                          {states.map((e, i) => (
-                            <SelectItem className="capitalize" key={i} value={e}>
-                              {e.split("_").join(" ")}
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <Button 
-                  onClick={() => setFormState(1)}
-                  className="w-full hover:bg-prime/80 bg-prime/60 text-white transition-all duration-200 transform hover:scale-[1.02]"
-                >
-                  Continue to Payment
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </motion.div>
-            ) : (
-              <motion.div
-                initial={{ x: 20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                className="space-y-4"
-              >
-                <div className="bg-bg p-6 rounded-xl border border-prime/40">
-                  <div className="flex items-center space-x-4 mb-4">
-                    <CreditCard className="h-6 w-6 text-prime" />
-                    <h3 className="text-lg font-semibold">Payment Details</h3>
-                  </div>
-                  
-                  <Button
-                    onClick={makePayment}
-                    disabled={isLoading}
-                    className="w-full hover:bg-prime/80 bg-prime/60 text-white transition-all duration-200 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isLoading ? (
-                      <div className="flex items-center justify-center">
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2" />
-                        Processing...
-                      </div>
-                    ) : (
-                      <>Pay {curreny} {amount}</>
-                    )}
-                  </Button>
-                </div>
-
-                <div className="flex items-center justify-between text-sm">
-                  <button
-                    onClick={() => setFormState(0)}
-                    className="flex items-center text-prime hover:text-prime/80"
-                  >
-                    <ArrowRight className="mr-1 h-4 w-4 rotate-180" />
-                    Back
-                  </button>
-                  <div className="flex items-center text-prime">
-                    <CheckCircle2 className="h-4 w-4 mr-1" />
-                    Secure Payment
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </motion.div>
-        </motion.div>
-      </SheetContent>
-    </Sheet>
+            Buy Now
+          </Button>
+        </SheetTrigger> */}
+        <SheetContent className="h-full w-full flex flex-col overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle>{orderPage[formState].title}</SheetTitle>
+          </SheetHeader>
+          {orderPage[formState].body}
+          {orderPage[formState].footer}
+        </SheetContent>
+      </Sheet>
+    </>
   );
 }
 
@@ -880,39 +718,43 @@ export function Floating({
   courseId: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
-  return (
-    <motion.div
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      className="fixed bottom-0 left-0 right-0 p-4 bg-background/40 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30 border-t border-prime/40 z-50"
-    >
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="flex flex-col">
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-foreground">₹{price.amount}</span>
-                <span className="text-base text-muted-foreground line-through">₹{price.bigAmount}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="bg-prime/60 text-white text-xs px-2.5 py-0.5 rounded-full">
-                  {price.percentage}% OFF
-                </span>
-                <span className="text-sm text-muted-foreground">Limited time offer</span>
-              </div>
-            </div>
+  let course = {
+    price: price.amount,
+    ogPrice: price.bigAmount,
+    discount: price.percentage,
+  };
+  const { data: session } = useSession();
+  // @ts-ignore
+  if (!session?.user?.courseId?.includes(courseId))
+    return (
+      <div className="md:hidden fixed bottom-0 z-20 bg-background/40 w-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30">
+        <div className="flex flex-col gap-2 p-2">
+          <div className="flex-1 group relative">
+            <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-[200%_auto] animate-[gradient_2s_linear_infinite] opacity-75 blur group-hover:opacity-100"></div>
+            <Button
+              onClick={() => {
+                setOpen(true);
+                // sendEvent("InitiateCheckout", {
+                //   amount: course.price,
+                //   content_ids: [courseId],
+                //   content_type: "mentorship",
+                //   em: sha256(session?.user?.email ?? ""),
+                //   // @ts-ignore
+                //   ph: sha256(session?.user?.phone ?? ""),
+                //   fn: sha256(session?.user?.name?.split(" ")[0] ?? ""),
+                //   event_source_url: window.location.href,
+                // });
+              }}
+              variant={"outline"}
+              className={`font-semibold text-foreground/80 hover:text-foreground relative w-full p-6 text-sm gap-1`}
+            >
+              Buy Now @ ₹{course.price}{" "}
+              <span className="text-muted-foreground line-through italic">
+                ₹{course.ogPrice}
+              </span>
+            </Button>
           </div>
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => setOpen(true)}
-            className="hover:bg-prime/80 bg-prime/60 text-white font-medium py-3 px-8 rounded-lg transition-all duration-200 flex items-center gap-2"
-          >
-            Enroll Now
-            <ArrowRight className="h-5 w-5" />
-          </motion.button>
         </div>
       </div>
-    </motion.div>
-  );
+    );
 }

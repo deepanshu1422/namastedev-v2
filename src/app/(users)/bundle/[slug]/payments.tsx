@@ -3,7 +3,6 @@
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
-import createPayments from "../../../../../actions/createPayments";
 import getCoupons from "../../../../../actions/getCoupon";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
@@ -15,7 +14,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import React from "react";
 import {
   Select,
   SelectContent,
@@ -47,8 +45,6 @@ import { beginCheckout, purchase } from "@/services/gaEvents";
 import { BASE_URL } from "@/util/constants";
 import { Checkbox } from "@/components/ui/checkbox";
 import { PostHog } from "posthog-js/react";
-import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, ArrowRight, CreditCard } from "lucide-react";
 
 export function PaymentSheet({
   cover,
@@ -390,298 +386,301 @@ export function PaymentSheet({
 
   const orderPage = [
     {
-      title: "Complete Your Purchase",
+      title: "Payments Details",
       body: (
-        <div className="grid gap-4 py-4">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="relative rounded-xl overflow-hidden mb-6"
-          >
-            <div className="relative h-[200px] w-full">
-              <Image
-                className="object-cover"
-                src={cover ?? "/course-placeholder.jpg"}
-                alt={title ?? ""}
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
+        <div className="grid gap-2 py-4">
+          <div className="grid sm:grid-cols-3 gap-2">
+            <Image
+              className="max-sm:hidden rounded-md max-sm:w-full max-h-40 object-contain bg-white/20"
+              src={cover ?? ""}
+              alt={title ?? ""}
+              width={280}
+              height={180}
+            />
+            <div className="sm:col-span-2 flex flex-col gap-1">
+              <p className="line-clamp-2">{title}</p>
+              <span className="font-extrabold text-prime">
+                {curreny} {amount}
+              </span>
             </div>
-            <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
-              <div className="space-y-2">
-                <h3 className="font-semibold text-xl text-white"></h3>
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-3xl font-bold text-white">{curreny} {amount}</span>
-                  <div className="flex items-center gap-2">
-                    <span className="text-base line-through text-white/70">{curreny} {bigAmount}</span>
-                    <span className="bg-prime/60 text-white text-xs px-2.5 py-1 rounded-full">
-                      {percentage}% OFF
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          
-          <div className="space-y-4">
-            <div className="grid gap-2">
-              <Label htmlFor="name">Full Name</Label>
+          </div>
+          <div className="grid gap-1 text-xs mb-2">
+            {courseOffer.map((e, i) => (
+              <span key={i} className="flex gap-1">
+                <Check className="text-primary h-4 w-3" />
+                <p>{e}</p>
+              </span>
+            ))}
+            {/* <span className="flex gap-1">
+                <Plus className="text-primary h-4 w-3" />
+                <p>12 More Courses</p>
+              </span> */}
+          </div>
+          <div className="grid grid-cols-5 items-center gap-4">
+            <Label htmlFor="name" className="text-left">
+              Name
+            </Label>
+            <Input
+              disabled={!!session?.user?.name}
+              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+              maxLength={30}
+              id="name"
+              placeholder="John Doe"
+              className="col-span-4"
+            />
+          </div>
+          <div className="grid grid-cols-5 items-center gap-4">
+            <Label htmlFor="email" className="text-left">
+              Email
+            </Label>
+            <Input
+              disabled={!!session?.user?.email}
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+              id="email"
+              maxLength={40}
+              type="email"
+              placeholder="youremail@gmail.com"
+              className="col-span-4"
+            />
+          </div>
+          <div className="grid grid-cols-5 items-center gap-4">
+            <Label htmlFor="email" className="text-left">
+              Confirm Email
+            </Label>
+            <Input
+              disabled={!!session?.user?.email}
+              value={formData.email2}
+              onChange={(e) =>
+                setFormData({ ...formData, email2: e.target.value })
+              }
+              id="email-2"
+              maxLength={40}
+              type="email"
+              placeholder="youremail@gmail.com"
+              className="col-span-4"
+            />
+          </div>
+          <div className="grid grid-cols-5 items-center gap-4">
+            <Label htmlFor="phone" className="text-left">
+              Phone
+            </Label>
+            <div className="relative col-span-4">
+              <span className="absolute left-2 top-2 text-muted-foreground">
+                +91
+              </span>
               <Input
-                disabled={!!session?.user?.name}
-                value={formData.name}
+                value={formData.phone}
                 onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
+                  setFormData({ ...formData, phone: e.target.value })
                 }
-                maxLength={30}
-                id="name"
-                placeholder="John Doe"
-                className="border-prime/40 bg-bg focus:border-prime"
+                type="number"
+                id="phone"
+                className="pl-9"
+                maxLength={10}
               />
             </div>
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                disabled={!!session?.user?.email}
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                id="email"
-                maxLength={40}
-                type="email"
-                placeholder="youremail@gmail.com"
-                className="border-prime/40 bg-bg focus:border-prime"
-              />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="email2">Confirm Email</Label>
-              <Input
-                disabled={!!session?.user?.email}
-                value={formData.email2}
-                onChange={(e) =>
-                  setFormData({ ...formData, email2: e.target.value })
-                }
-                id="email-2"
-                maxLength={40}
-                type="email"
-                placeholder="youremail@gmail.com"
-                className="border-prime/40 bg-bg focus:border-prime"
-              />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="phone">Phone</Label>
-              <div className="relative">
-                <span className="absolute left-2 top-2 text-muted-foreground">
-                  +91
-                </span>
-                <Input
-                  value={formData.phone}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phone: e.target.value })
-                  }
-                  type="number"
-                  id="phone"
-                  className="pl-9 border-prime/40 bg-bg focus:border-prime"
-                  maxLength={10}
-                />
-              </div>
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="state">State</Label>
-              <Select
-                value={formData.state}
-                onValueChange={(e) => setFormData({ ...formData, state: e })}
-              >
-                <SelectTrigger className="border-prime/40 bg-bg focus:border-prime">
-                  <SelectValue placeholder="Select State" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>States</SelectLabel>
-                    {states.map((e, i) => (
-                      <SelectItem className="capitalize" key={i} value={e}>
-                        {e.split("_").join(" ")}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
+          </div>
+          <div className="grid grid-cols-5 items-center gap-4">
+            <Label htmlFor="username" className="text-left">
+              State
+            </Label>
+            <Select
+              value={formData.state}
+              onValueChange={(e) => setFormData({ ...formData, state: e })}
+            >
+              <SelectTrigger className="border-prime/40 bg-bg w-full col-span-4 capitalize">
+                <SelectValue placeholder="Select State" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>States</SelectLabel>
+                  {states.map((e, i) => (
+                    <SelectItem className="capitalize" key={i} value={e}>
+                      {e.split("_").join(" ")}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
         </div>
       ),
       footer: (
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="w-full mt-auto"
-        >
-          <Button
-            disabled={isLoading}
-            onClick={() => setFormState(1)}
-            className="w-full hover:bg-prime/80 bg-prime/60 text-white transition-all duration-200 transform hover:scale-[1.02]"
-          >
-            Continue to Payment
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-        </motion.div>
-      ),
-    },
-    {
-      title: "Review Order",
-      body: (
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="flex flex-col gap-5 py-4"
-        >
-          <div className="bg-bg/40 rounded-xl border border-prime/40 p-4">
-            <div className="flex flex-col gap-3">
-              <div className="flex justify-between items-center">
-                <span className="text-foreground/80">Course Price</span>
-                <span className="font-bold text-foreground">
-                  {curreny} {bigAmount}
-                </span>
-              </div>
-              <div className="flex justify-between items-center text-prime">
-                <span>Discount ({percentage}% OFF)</span>
-                <span className="font-bold">
-                  -{curreny} {bigAmount - amount}
-                </span>
-              </div>
-              <div className="pt-2 border-t border-prime/20 flex justify-between items-center">
-                <span className="font-medium">Total Amount</span>
-                <span className="text-xl font-bold text-foreground">
-                  {curreny} {amount}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {Boolean(guides.length) && (
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="space-y-3"
-            >
-              <h3 className="font-semibold flex items-center gap-2">
-                <span className="text-prime">🎁</span>
-                Additional Guides
-              </h3>
-              <div className="space-y-3">
-                {guides.map(({ description, guideId, pricing, title }, i) => (
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                    key={i}
-                    onClick={() => {
-                      if (!formData.guides?.includes(guideId))
-                        setFormData({
-                          ...formData,
-                          guides: [...formData.guides, guideId],
-                        });
-                      else {
-                        setFormData({
-                          ...formData,
-                          guides: formData.guides.filter((e) => e !== guideId),
-                        });
-                      }
-                    }}
-                    className={`group cursor-pointer rounded-lg border ${
-                      formData.guides?.includes(guideId)
-                        ? "bg-prime/20 border-prime"
-                        : "border-prime/40 hover:border-prime/60"
-                    } transition-all duration-200`}
-                  >
-                    <div className="p-3 space-y-1">
-                      <div className="flex items-center justify-between">
-                        <h4 className="font-medium">{title}</h4>
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm line-through text-foreground/60">
-                            {curreny} {pricing.bigAmount}
-                          </span>
-                          <span className="font-bold text-prime">
-                            {curreny} {pricing.amount}
-                          </span>
-                        </div>
-                      </div>
-                      <p className="text-sm text-foreground/60">{description}</p>
-                    </div>
-                    <div className="px-3 py-2 border-t border-prime/20 flex items-center justify-between">
-                      <Checkbox
-                        checked={formData.guides?.includes(guideId)}
-                        className="text-prime border-prime/40"
-                      />
-                      <span className="text-sm text-foreground/60">
-                        Click to {formData.guides?.includes(guideId) ? "remove" : "add"}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </motion.div>
-      ),
-      footer: (
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="w-full mt-auto space-y-2"
-        >
+        <div className="w-full mt-auto flex flex-col gap-2">
           <Button
             disabled={isLoading}
             onClick={makePayment}
-            className="w-full hover:bg-prime/80 bg-prime/60 text-white transition-all duration-200 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="disabled:animate-pulse w-full hover:bg-prime/80 bg-prime/60 text-white"
+            type="submit"
           >
-            {isLoading ? (
-              <div className="flex items-center justify-center">
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2" />
-                Processing...
-              </div>
-            ) : (
+            Buy @ INR{" "}
+            {amount +
+              formData.guides.reduce(
+                (sum, cur) =>
+                  // @ts-ignore
+                  sum + guides.find((e) => e.guideId === cur)?.pricing.amount,
+                0
+              )}
+          </Button>
+        </div>
+      ),
+    },
+    {
+      title: "Order Details",
+      body: (
+        <div className="flex flex-col gap-5 max-sm:pt-5">
+          <section className="flex flex-col gap-3 max-sm:text-sm">
+            <div className="flex justify-between">
+              <span>Course Price</span>
+              <span className="font-extrabold">
+                {curreny} {bigAmount}
+              </span>
+            </div>
+            <div className="text-prime font-semibold flex justify-between">
+              <span>Discount @ {percentage}%</span>
+              <span className="font-extrabold">
+                -{curreny} {bigAmount - amount}
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span>Sub Total</span>
+              <span className="font-extrabold">
+                {curreny} {amount}
+              </span>
+            </div>
+            {Boolean(guides.length) && (
               <>
-                Pay {curreny} {" "}
-                {amount +
-                  formData.guides.reduce(
-                    (sum, cur) =>
-                      sum + (guides.find((e) => e.guideId === cur)?.pricing.amount ?? 0),
-                    0
-                  )}
+                <hr className="mt-3" />
+                <div className="flex flex-col gap-3 justify-between">
+                  <span className="font-semibold">
+                    🔔Don&apos;t miss out on our guides
+                  </span>
+                  <div className="flex flex-col gap-3">
+                    {guides.map(
+                      ({ description, guideId, pricing, title }, i) => {
+                        return (
+                          <div
+                            onClick={() => {
+                              if (!formData.guides?.includes(guideId))
+                                setFormData({
+                                  ...formData,
+                                  guides: [...formData.guides, guideId],
+                                });
+                              else {
+                                setFormData({
+                                  ...formData,
+                                  guides: formData.guides.filter(
+                                    (e) => e !== guideId
+                                  ),
+                                });
+                              }
+                            }}
+                            key={i}
+                            className={`flex flex-col gap-2 rounded-md border ${
+                              formData.guides?.includes(guideId) &&
+                              "bg-second/40"
+                            } transition-all duration-100 border-prime/40`}
+                          >
+                            <div className="flex flex-col gap-1 p-2">
+                              <h3 className="font-semibold">{title}</h3>
+                              <p className="text-xs text-white/60 line-clamp-2">
+                                {description}
+                              </p>
+                            </div>
+                            <div className="flex items-center gap-3 p-2 bg-second/60">
+                              <Checkbox
+                                checked={formData.guides?.includes(guideId)}
+                                onCheckedChange={(checked) => {
+                                  return checked
+                                    ? setFormData({
+                                        ...formData,
+                                        guides: [...formData.guides, guideId],
+                                      })
+                                    : setFormData({
+                                        ...formData,
+                                        guides: formData.guides.filter(
+                                          (e) => e !== guideId
+                                        ),
+                                      });
+                                }}
+                              />
+                              <div className="flex gap-1 items-center">
+                                Add for
+                                <span className="text-lg font-semibold">
+                                  INR {pricing.amount}
+                                </span>
+                                <span className="line-through text-sm text-white/60">
+                                  INR {pricing.bigAmount}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      }
+                    )}
+                  </div>
+                </div>
               </>
             )}
+          </section>
+        </div>
+      ),
+      footer: (
+        <div className="w-full mt-auto flex flex-col gap-2">
+          <Button
+            disabled={isLoading}
+            onClick={makePayment}
+            className="disabled:animate-pulse w-full hover:bg-prime/80 bg-prime/60 text-white"
+            type="submit"
+          >
+            Buy @ INR{" "}
+            {amount +
+              formData.guides.reduce(
+                (sum, cur) =>
+                  // @ts-ignore
+                  sum + guides.find((e) => e.guideId === cur)?.pricing.amount,
+                0
+              )}
           </Button>
           <Button
             variant={"outline"}
             onClick={() => setFormState(0)}
-            className="w-full border-prime/40 text-foreground/80 hover:text-foreground"
+            className="w-full"
+            type="submit"
           >
-            <ArrowRight className="mr-2 h-4 w-4 rotate-180" />
             Back
           </Button>
-        </motion.div>
+        </div>
       ),
     },
   ];
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      <SheetContent className="h-full w-full flex flex-col overflow-y-auto bg-background">
-        <SheetHeader>
-          <SheetTitle className="text-2xl font-bold text-foreground">
-            {orderPage[formState].title}
-          </SheetTitle>
-        </SheetHeader>
-        <div className="flex-1 flex flex-col">
+    <>
+      <Sheet open={open} onOpenChange={setOpen}>
+        {/* <SheetTrigger asChild>
+          <Button
+            size={"lg"}
+            className="font-jakarta flex items-center font-semibold gap-1 hover:bg-prime/80 bg-prime/60 transition-all px-4 py-3 rounded-md text-white text-lg"
+          >
+            Buy Now
+          </Button>
+        </SheetTrigger> */}
+        <SheetContent className="h-full w-full flex flex-col overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle>{orderPage[formState].title}</SheetTitle>
+          </SheetHeader>
           {orderPage[formState].body}
           {orderPage[formState].footer}
-        </div>
-      </SheetContent>
-    </Sheet>
+        </SheetContent>
+      </Sheet>
+    </>
   );
 }
 
