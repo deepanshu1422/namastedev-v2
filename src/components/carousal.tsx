@@ -10,17 +10,18 @@ import { Testimonial, testimonials } from "./course-components/testimonials";
 
 export default function Carousal() {
   return (
-    <div className={`md:hidden grid grid-cols-1 gap-3`}>
+    <div className="w-full px-4">
       <Carousel
         plugins={[
           Autoplay({
             delay: 2000,
           }),
         ]}
+        className="w-full"
       >
         <CarouselContent>
           {testimonials.map((e, i) => (
-            <CarouselItem key={i}>
+            <CarouselItem key={i} className="flex justify-center">
               <Testimonial
                 name={e.name}
                 review={e.review}

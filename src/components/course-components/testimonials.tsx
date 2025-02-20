@@ -1,3 +1,4 @@
+import React from 'react';
 import Carousal from "@/components/carousal";
 import Reveal from "@/components/framer/reveal";
 import Image from "next/image";
@@ -104,41 +105,38 @@ export function Testimonial({
 
   return (
     <Reveal>
-      <div className="flex flex-col bg-background p-4 rounded-md shadow-md">
-        <section className="flex justify-between">
+      <div className="flex flex-col bg-background p-4 rounded-md shadow-md w-full max-w-[400px] mx-auto">
+        <section className="flex justify-between items-center">
           <div className="flex gap-3">
             <Reveal>
               <Image
-                alt=""
+                alt={`${name}'s profile`}
                 src={`${profile}`}
-                className="w-14 h-14 rounded-full object-cover"
+                className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover"
                 width={50}
                 height={50}
               />
             </Reveal>
 
             <Reveal>
-              <div className="flex flex-col gap-0">
-                <span className={`text-xl font-semibold`}>{name}</span>
-                <span
-                  className={`font-spaceMono text-sm font-bold text-lime-600`}
-                >
+              <div className="flex flex-col">
+                <span className={`text-lg sm:text-xl font-semibold`}>{name}</span>
+                <span className={`font-spaceMono text-xs sm:text-sm font-bold text-lime-600`}>
                   Customer
                 </span>
-                {/* <span className="text-orange-600 text-xs">Cognizant</span> */}
               </div>
             </Reveal>
           </div>
 
           <Reveal>
-            <Link href={link} >
+            <Link href={link}>
               <Social />
             </Link>
           </Reveal>
         </section>
 
         <Reveal>
-          <p className="text-foreground/70 text-sm font-semibold leading-5 px-5 py-3">
+          <p className="text-foreground/70 text-sm sm:text-base font-semibold leading-5 px-3 sm:px-5 py-3">
             {review}
           </p>
         </Reveal>
@@ -153,12 +151,13 @@ export default function Testimonials() {
       <Reveal>
         <span className="flex gap-4 lg:justify-center items-center mb-5">
           <hr className="h-1 max-lg:w-full max-lg:hidden w-20 rounded bg-primary/40" />
-          <h2 className={`font-jakarta text-4xl`}>Our Testimonials</h2>
+          <h2 className={`font-jakarta text-4xl max-sm:text-3xl text-center`}>Our Testimonials</h2>
           <hr className="h-1 w-20 rounded bg-primary/40" />
         </span>
       </Reveal>
 
-      <div className="grid grid-cols-3 max-xl:grid-cols-2 max-md:hidden gap-6">
+      {/* Desktop and Tablet Grid */}
+      <div className="hidden md:grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         {testimonials.map((e, i) => (
           <Testimonial
             key={i}
@@ -171,7 +170,10 @@ export default function Testimonials() {
         ))}
       </div>
 
-      <Carousal />
+      {/* Mobile Carousel */}
+      <div className="md:hidden w-full">
+        <Carousal />
+      </div>
     </div>
   );
 }
