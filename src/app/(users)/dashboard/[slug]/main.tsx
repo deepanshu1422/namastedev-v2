@@ -3,9 +3,9 @@
 import Details from "./details";
 import Checkout from "./checkout";
 import Link from "next/link";
-import { ChevronLeft, CheckCircle, ChevronRight } from "lucide-react";
+import { ChevronLeft, CheckCircle, ChevronRight, PlaySquare } from "lucide-react";
 import CourseList from "./courses";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
@@ -164,33 +164,156 @@ function CourseDrawer({
   };
 }) {
   const [open, setOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const [drawerWidth, setDrawerWidth] = useState(1000);
+  const isResizing = useRef(false);
+  const startX = useRef(0);
+  const startWidth = useRef(0);
+  
+  const totalChapters = modules.items.reduce(
+    (acc, module) => acc + module.chaptersCollection.total,
+    0
+  );
+
+  // Initialize state after component mounts
+  useEffect(() => {
+    setIsClient(true);
+    const screenWidth = window.innerWidth;
+    const defaultWidth = Math.min(Math.max(screenWidth * 0.8, 800), 1400);
+    const savedWidth = parseInt(localStorage.getItem('courseDrawerWidth') || defaultWidth.toString());
+    setDrawerWidth(Math.min(Math.max(savedWidth, 800), screenWidth - 48));
+  }, []);
+
+  const startResizing = useCallback((e: React.MouseEvent) => {
+    isResizing.current = true;
+    startX.current = e.pageX;
+    startWidth.current = drawerWidth;
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+  }, [drawerWidth]);
+
+  const stopResizing = useCallback(() => {
+    isResizing.current = false;
+    document.body.style.cursor = '';
+    document.body.style.userSelect = '';
+  }, []);
+
+  const resize = useCallback((e: MouseEvent) => {
+    if (!isResizing.current) return;
+
+    const newWidth = startWidth.current + (startX.current - e.pageX) * 2;
+    const screenWidth = window.innerWidth;
+    const minWidth = Math.min(800, screenWidth * 0.5);
+    const maxWidth = Math.min(1600, screenWidth - 48);
+
+    if (newWidth >= minWidth && newWidth <= maxWidth) {
+      setDrawerWidth(newWidth);
+      localStorage.setItem('courseDrawerWidth', newWidth.toString());
+    }
+  }, []);
+
+  useEffect(() => {
+    if (open) {
+      document.addEventListener('mousemove', resize);
+      document.addEventListener('mouseup', stopResizing);
+
+      // When drawer opens, ensure active module is in view with a slight delay
+      setTimeout(() => {
+        const drawerContent = document.getElementById('course-drawer-content');
+        const activeModule = document.querySelector(`[data-module="${module}"]`);
+        if (drawerContent && activeModule) {
+          const drawerRect = drawerContent.getBoundingClientRect();
+          const moduleRect = activeModule.getBoundingClientRect();
+          const padding = 100;
+
+          // Calculate the scroll position to center the active module
+          const scrollTop = moduleRect.top - drawerRect.top + drawerContent.scrollTop - (drawerRect.height - moduleRect.height) / 2 + padding;
+          
+          // Smooth scroll to the position
+          drawerContent.scrollTo({
+            top: scrollTop,
+            behavior: 'smooth'
+          });
+        }
+      }, 100); // Small delay to ensure content is rendered
+    }
+    return () => {
+      document.removeEventListener('mousemove', resize);
+      document.removeEventListener('mouseup', stopResizing);
+    };
+  }, [open, resize, stopResizing, module]);
+
+  // Add window resize handler for drawer
+  useEffect(() => {
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+      const drawerMaxWidth = Math.min(1600, screenWidth - 16);
+      const drawerMinWidth = Math.min(screenWidth - 16, 800);
+      
+      if (drawerWidth > drawerMaxWidth) {
+        setDrawerWidth(drawerMaxWidth);
+        localStorage.setItem('courseDrawerWidth', drawerMaxWidth.toString());
+      } else if (drawerWidth < drawerMinWidth) {
+        setDrawerWidth(drawerMinWidth);
+        localStorage.setItem('courseDrawerWidth', drawerMinWidth.toString());
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [drawerWidth]);
+
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant={"outline"} className="flex-1 rounded-xl">
+        <Button 
+          variant={"default"} 
+          className="flex-1 rounded-xl bg-prime hover:bg-prime/90 text-white font-medium py-4 sm:py-6 text-sm sm:text-base gap-2 shadow-lg shadow-prime/20 border border-prime/50 relative overflow-hidden group"
+        >
+          <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+          <PlaySquare className="h-4 w-4 sm:h-5 sm:w-5" />
           Course Content
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle>Course List</DrawerTitle>
-          <DrawerDescription>
-            This is a list of current course.
+      <DrawerContent 
+        className="mx-auto rounded-t-2xl h-[85vh] flex flex-col overflow-hidden relative max-h-[85vh]" 
+        style={{ 
+          width: isClient ? `${drawerWidth}px` : '100%',
+          maxWidth: 'min(calc(100vw - 1rem), 1600px)',
+          minWidth: 'min(calc(100vw - 1rem), 800px)',
+          resize: 'both'
+        }}
+      >
+        <DrawerHeader className="border-b border-white/10 pb-4 px-4 sm:px-6 flex-shrink-0">
+          <div className="absolute left-0 top-0 bottom-0 w-1 cursor-col-resize bg-transparent hover:bg-white/10 transition-colors"
+               onMouseDown={startResizing}
+          />
+          <DrawerTitle className="text-xl sm:text-2xl font-bold flex items-center gap-3">
+            <PlaySquare className="h-6 w-6 sm:h-7 sm:w-7 text-prime" />
+            Course Content
+          </DrawerTitle>
+          <DrawerDescription className="text-sm sm:text-base text-white/60 flex items-center gap-2 mt-2">
+            {modules.total} Modules • {totalChapters} Chapters
           </DrawerDescription>
         </DrawerHeader>
-        <div className="px-6 py-1">
-          <CourseList
-            setOpen={setOpen}
-            setVidIndex={setVidIndex}
-            chapter={vidIndex.chapterIndex}
-            module={vidIndex.modIndex}
-            courseId={courseId}
-            modules={modules}
-          />
+        <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 sm:py-6 min-h-0">
+          <div className="px-7 max-h-[65dvh] overflow-hidden overflow-y-auto horizontal-scroll" id="course-drawer-content">
+            <CourseList
+              setOpen={setOpen}
+              setVidIndex={setVidIndex}
+              chapter={vidIndex.chapterIndex}
+              module={vidIndex.modIndex}
+              courseId={courseId}
+              modules={modules}
+            />
+          </div>
         </div>
-        <DrawerFooter>
+        <DrawerFooter className="border-t border-white/10 px-4 sm:px-6 flex-shrink-0">
           <DrawerClose>
-            <Button className="w-full" variant="outline">
+            <Button 
+              className="w-full rounded-xl py-4 sm:py-6 text-base font-medium" 
+              variant="secondary"
+            >
               Close
             </Button>
           </DrawerClose>
@@ -309,6 +432,57 @@ export default function Main({
   function Paid() {
     const [disabledPrev, setDisabledPrev] = useState(false);
     const [disabledNext, setDisabledNext] = useState(false);
+    const [isClient, setIsClient] = useState(false);
+    const [sidebarWidth, setSidebarWidth] = useState(320);
+    const isResizing = useRef(false);
+    const startX = useRef(0);
+    const startWidth = useRef(0);
+
+    // Initialize state after component mounts
+    useEffect(() => {
+      setIsClient(true);
+      const screenWidth = window.innerWidth;
+      const defaultWidth = Math.min(Math.max(screenWidth * 0.2, 320), 500);
+      const savedWidth = parseInt(localStorage.getItem('courseSidebarWidth') || defaultWidth.toString());
+      setSidebarWidth(Math.min(Math.max(savedWidth, 280), screenWidth * 0.4));
+    }, []);
+
+    const startResizing = useCallback((e: React.MouseEvent) => {
+      isResizing.current = true;
+      startX.current = e.pageX;
+      startWidth.current = sidebarWidth;
+      document.body.style.cursor = 'col-resize';
+      document.body.style.userSelect = 'none';
+    }, [sidebarWidth]);
+
+    const stopResizing = useCallback(() => {
+      isResizing.current = false;
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    }, []);
+
+    const resize = useCallback((e: MouseEvent) => {
+      if (!isResizing.current) return;
+
+      const newWidth = startWidth.current + (e.pageX - startX.current);
+      const screenWidth = window.innerWidth;
+      const minWidth = Math.min(280, screenWidth * 0.15);
+      const maxWidth = Math.min(900, screenWidth * 0.4);
+
+      if (newWidth >= minWidth && newWidth <= maxWidth) {
+        setSidebarWidth(newWidth);
+        localStorage.setItem('courseSidebarWidth', newWidth.toString());
+      }
+    }, []);
+
+    useEffect(() => {
+      document.addEventListener('mousemove', resize);
+      document.addEventListener('mouseup', stopResizing);
+      return () => {
+        document.removeEventListener('mousemove', resize);
+        document.removeEventListener('mouseup', stopResizing);
+      };
+    }, [resize, stopResizing]);
 
     useEffect(() => {
       // Check if we're at the first video
@@ -358,7 +532,13 @@ export default function Main({
 
     return (
       <main className="bg-footer">
-        <section className="relative grid lg:grid-cols-[260px_1fr]">
+        <section className="relative grid" style={{ 
+          gridTemplateColumns: isClient ? 
+            `${window.innerWidth >= 1024 ? `minmax(280px, ${sidebarWidth}px) 1fr` : '1fr'}` : 
+            '1fr',
+          maxWidth: '100vw',
+          overflow: 'hidden'
+        }}>
           <div className="hidden lg:flex flex-col sticky top-8 h-fit">
             <div className="flex flex-col gap-4 p-7 h-full relative">
               <Link
@@ -379,7 +559,7 @@ export default function Main({
               </div>
             </div>
 
-            <div className="px-7 max-h-[65dvh] overflow-hidden overflow-y-auto horizontal-scroll">
+            <div className="px-7 max-h-[65dvh] overflow-hidden overflow-y-auto horizontal-scroll" id="course-drawer-content">
               <CourseList
                 courseId={courseId}
                 chapter={vidIndex.chapterIndex}
@@ -388,8 +568,12 @@ export default function Main({
                 setVidIndex={setVidIndex}
               />
             </div>
+            <div
+              className="absolute right-0 top-0 bottom-0 w-1 cursor-col-resize bg-transparent hover:bg-white/10 transition-colors"
+              onMouseDown={startResizing}
+            />
           </div>
-          <div className="bg-bg lg:rounded-s-3xl min-h-dvh py-6 max-tab:pt-[1rem] px-4 md:px-6 m-auto w-full flex">
+          <div className="bg-bg lg:rounded-s-3xl min-h-dvh py-4 sm:py-6 px-3 sm:px-6 m-auto w-full flex">
             <section className="relative flex max-md:flex-col gap-4 p-1 max-w-6xl w-full mx-auto">
               <Details
                 vidIndex={vidIndex}
@@ -405,25 +589,25 @@ export default function Main({
             </section>
           </div>
 
-          <div className="lg:hidden flex flex-col gap-1">
-            <span className="flex gap-0.5 w-full">
+          <div className="lg:hidden flex flex-col gap-2 sticky bottom-4 px-3 z-50">
+            <span className="flex gap-2 w-full">
               <Button
                 onClick={prevVideo}
                 disabled={disabledPrev}
                 variant={"outline"}
-                className="rounded-xl w-full"
+                className="rounded-xl w-full py-5 text-sm"
               >
-                <ChevronLeft className="h-4 w-4" />
-                Prev Video
+                <ChevronLeft className="h-4 w-4 mr-1" />
+                Previous
               </Button>
               <Button
                 onClick={nextVideo}
                 disabled={disabledNext}
                 variant={"outline"}
-                className="rounded-xl w-full"
+                className="rounded-xl w-full py-5 text-sm"
               >
-                Next Video
-                <ChevronRight className="h-4 w-4" />
+                Next
+                <ChevronRight className="h-4 w-4 ml-1" />
               </Button>
             </span>
             <CourseDrawer

@@ -3,7 +3,11 @@
 import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/audio.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
-import { MediaPlayer, MediaProvider } from '@vidstack/react';
+import { MediaPlayer, MediaProvider, Poster } from '@vidstack/react';
+import {
+  DefaultVideoLayout,
+  defaultLayoutIcons,
+} from "@vidstack/react/player/layouts/default";
 
 import { Button } from "../../../../components/ui/button"
 import { useEffect, useState } from "react"
@@ -61,11 +65,22 @@ export default function VideoPlayer({
   return (
     <div className="flex flex-col gap-4">
       <div className="aspect-video relative bg-black rounded-lg overflow-hidden">
-        <iframe
-          src={`https://www.youtube.com/embed/${ytId}`}
-          className="w-full h-full"
-          allowFullScreen
-        />
+        <MediaPlayer
+          src={`youtube/${ytId}#quality=2160p,1080p&vq=hd2160&hd=1&modestbranding=1&rel=0`}
+          viewType="video"
+          streamType="on-demand"
+          logLevel="silent"
+          crossOrigin
+          autoPlay
+          playsInline
+          title={title}
+          poster={thumbnail}
+        >
+          <MediaProvider>
+            <Poster className="vds-poster" />
+          </MediaProvider>
+          <DefaultVideoLayout icons={defaultLayoutIcons} />
+        </MediaPlayer>
       </div>
       {courseId && chapterId && (
         <div className="flex items-center justify-between p-4 border rounded-lg bg-card">

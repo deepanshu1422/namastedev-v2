@@ -490,7 +490,11 @@ function CourseDrawer({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant={"outline"} className="flex-1 rounded-xl">
+        <Button 
+          variant={"default"} 
+          className="flex-1 rounded-xl bg-prime hover:bg-prime/90 text-white font-medium py-6 text-base gap-2 shadow-lg shadow-prime/20 border border-prime/50"
+        >
+          <PlaySquare className="h-5 w-5" />
           Course Content
         </Button>
       </DrawerTrigger>

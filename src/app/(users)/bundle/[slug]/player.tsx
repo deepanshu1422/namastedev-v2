@@ -39,7 +39,7 @@ export default function VideoPlayer({
       {/* @ts-ignore */}
       {session?.user?.courseId?.includes(courseId) || free ? (
         <MediaPlayer
-          src={`youtube/${ytId}`}
+          src={`youtube/${ytId}#quality=2160p,1080p&vq=hd2160&hd=1`}
           viewType="video"
           streamType="on-demand"
           logLevel="warn"

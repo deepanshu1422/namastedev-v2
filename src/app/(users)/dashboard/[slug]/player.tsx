@@ -4,14 +4,14 @@ import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/audio.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 
-import { MediaPlayer, MediaProvider, Poster } from "@vidstack/react";
+import { MediaPlayer, MediaProvider, Poster, Track, useMediaStore } from "@vidstack/react";
 import {
   DefaultVideoLayout,
   defaultLayoutIcons,
 } from "@vidstack/react/player/layouts/default";
 import { Button } from "@/components/ui/button";
-import { Check, Star, Loader2, StickyNote, Save, Clock } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Check, Star, Loader2, StickyNote, Save, Clock, Settings } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
 import { getProgress, updateChapterProgress } from "../../../../../actions/updateProgress";
 import { starVideo, unstarVideo, isVideoStarred } from "../../../../../actions/starredVideos";
 import { saveVideoNotes, getVideoNotes } from "../../../../../actions/videoNotes";
@@ -42,6 +42,9 @@ export default function VideoPlayer({
   nextVideo(): 0 | void;
 }) {
   const { data: session } = useSession();
+  const playerRef = useRef(null);
+  const [selectedQuality, setSelectedQuality] = useState('1080p');
+  const [isClient, setIsClient] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isStarred, setIsStarred] = useState(false);
@@ -51,6 +54,61 @@ export default function VideoPlayer({
   const [hasNotes, setHasNotes] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
   const [isNotesLoading, setIsNotesLoading] = useState(false);
+
+  // Initialize client-side state
+  useEffect(() => {
+    setIsClient(true);
+    const savedQuality = localStorage.getItem('preferredQuality');
+    if (savedQuality) {
+      setSelectedQuality(savedQuality);
+    }
+  }, []);
+
+  // Update localStorage when quality changes (only on client)
+  useEffect(() => {
+    if (isClient) {
+      localStorage.setItem('preferredQuality', selectedQuality);
+    }
+  }, [selectedQuality, isClient]);
+
+  // Restore video time after page load
+  useEffect(() => {
+    if (isClient && playerRef.current) {
+      const savedTime = localStorage.getItem('videoTime');
+      if (savedTime) {
+        playerRef.current.currentTime = parseFloat(savedTime);
+        // Clear saved time after restoring
+        localStorage.removeItem('videoTime');
+      }
+    }
+  }, [isClient]);
+
+  // Initialize video with saved quality
+  useEffect(() => {
+    if (playerRef.current && ytId && isClient) {
+      const qualityParam = selectedQuality === '1080p' ? 'hd1080' : selectedQuality === '720p' ? 'hd720' : 'auto';
+      playerRef.current.src = `youtube/${ytId}#quality=auto&vq=${qualityParam}&hd=1&controls=1&modestbranding=1&rel=0&showinfo=1&enablejsapi=1`;
+      
+      // Restore playback position if exists
+      const savedTime = localStorage.getItem('videoTime');
+      if (savedTime) {
+        playerRef.current.currentTime = parseFloat(savedTime);
+        localStorage.removeItem('videoTime');
+      }
+    }
+  }, [ytId, selectedQuality, isClient]);
+
+  const handleQualitySelect = (quality: string) => {
+    setSelectedQuality(quality);
+    if (isClient) {
+      localStorage.setItem('preferredQuality', quality);
+      // Store current time before reload
+      const currentTime = playerRef.current?.currentTime || 0;
+      localStorage.setItem('videoTime', currentTime.toString());
+      // Reload the page
+      window.location.reload();
+    }
+  };
 
   useEffect(() => {
     const loadProgress = async () => {
@@ -144,24 +202,79 @@ export default function VideoPlayer({
 
   return !!ytId && (
     <div className="flex flex-col gap-4">
-      <div className="relative aspect-video rounded-xl overflow-hidden w-full bg-footer/90">
-        <MediaPlayer
-          onEnded={onComplete}
-          src={`youtube/${ytId}`}
-          viewType="video"
-          logLevel="silent"
-          crossOrigin
-          autoPlay
-          playsInline
-          title={title}
-          poster={thumbnail}
-        >
-          <MediaProvider>
-            <Poster className="vds-poster" />
-          </MediaProvider>
-          <DefaultVideoLayout icons={defaultLayoutIcons} />
-        </MediaPlayer>
+      <div className="flex flex-col gap-2">
+        <div className="relative aspect-video rounded-xl overflow-hidden w-full bg-footer/90">
+          <MediaPlayer
+            ref={playerRef}
+            onEnded={onComplete}
+            src={`youtube/${ytId}#quality=auto&vq=${selectedQuality === '1080p' ? 'hd1080' : selectedQuality === '720p' ? 'hd720' : 'auto'}&hd=1&controls=1&modestbranding=1&rel=0&showinfo=1&enablejsapi=1`}
+            viewType="video"
+            logLevel="silent"
+            crossOrigin
+            autoPlay
+            playsInline
+            title={title}
+            poster={thumbnail}
+          >
+            <MediaProvider>
+              <Poster className="vds-poster" />
+            </MediaProvider>
+            <DefaultVideoLayout 
+              icons={defaultLayoutIcons}
+              thumbnails="./"
+            >
+              <div slot="playback-rate" />
+              <div slot="pip" />
+            </DefaultVideoLayout>
+          </MediaPlayer>
+        </div>
+
+        <div className="flex items-center gap-3 p-3 bg-card/80 border rounded-lg">
+          <div className="flex items-center gap-2">
+            <Settings className="h-5 w-5 text-white/70" />
+            <span className="font-medium text-white/90">Quality</span>
+          </div>
+          <div className="flex gap-2 flex-wrap">
+            <Button
+              size="sm"
+              variant={selectedQuality === 'auto' ? "default" : "outline"}
+              className={`text-sm font-medium ${
+                selectedQuality === 'auto'
+                  ? "bg-primary hover:bg-primary/90"
+                  : "text-white/70 hover:text-white hover:bg-white/10"
+              }`}
+              onClick={() => handleQualitySelect('auto')}
+            >
+              Auto
+            </Button>
+            <Button
+              size="sm"
+              variant={selectedQuality === '720p' ? "default" : "outline"}
+              className={`text-sm font-medium ${
+                selectedQuality === '720p'
+                  ? "bg-primary hover:bg-primary/90"
+                  : "text-white/70 hover:text-white hover:bg-white/10"
+              }`}
+              onClick={() => handleQualitySelect('720p')}
+            >
+              720p
+            </Button>
+            <Button
+              size="sm"
+              variant={selectedQuality === '1080p' ? "default" : "outline"}
+              className={`text-sm font-medium ${
+                selectedQuality === '1080p'
+                  ? "bg-primary hover:bg-primary/90"
+                  : "text-white/70 hover:text-white hover:bg-white/10"
+              }`}
+              onClick={() => handleQualitySelect('1080p')}
+            >
+              1080p
+            </Button>
+          </div>
+        </div>
       </div>
+
       {courseId && chapterId && (
         <div className="flex items-center justify-between p-4 border rounded-lg bg-card hover:bg-card/80 transition-colors">
           <div className="flex items-center gap-4">

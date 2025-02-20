@@ -192,27 +192,27 @@ export default function Details({
             vidIndex.chapterIndex
           ].sys.id}
         />
-        <div className="lg:hidden flex flex-col gap-1">
-          <span className="flex gap-0.5 w-full">
+        <div className="lg:hidden flex flex-col gap-2">
+          <div className="flex gap-2 w-full">
             <Button
               onClick={() => prevVideo()}
               disabled={disabledPrev}
-              variant={"outline"}
-              className="rounded-xl w-full"
+              variant={"secondary"}
+              className="rounded-xl w-full py-6 text-base font-medium hover:bg-white/10"
             >
-              <ChevronLeft className="h-4 w-4" />
-              Prev Video
+              <ChevronLeft className="h-5 w-5 mr-2" />
+              Previous
             </Button>
             <Button
               onClick={() => nextVideo()}
               disabled={disabledNext}
-              variant={"outline"}
-              className="rounded-xl w-full"
+              variant={"secondary"}
+              className="rounded-xl w-full py-6 text-base font-medium hover:bg-white/10"
             >
-              Next Video
-              <ChevronRight className="h-4 w-4" />
+              Next
+              <ChevronRight className="h-5 w-5 ml-2" />
             </Button>
-          </span>
+          </div>
           <CourseDrawer
             vidIndex={vidIndex}
             setVidIndex={setVidIndex}
@@ -276,37 +276,9 @@ export function Publisher({
   src: string;
   disabledPrev: boolean;
   disabledNext: boolean;
-  nextVideo: () => 0 | void;
-  prevVideo: () => 0 | void;
+  nextVideo: () => void;
+  prevVideo: () => void;
 }) {
-  const [isCompleted, setIsCompleted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const loadProgress = async () => {
-      const { completedChapters } = await getProgress(courseId);
-      setIsCompleted(completedChapters.includes(chapterId));
-    };
-    loadProgress();
-  }, [courseId, chapterId]);
-
-  const onComplete = async () => {
-    try {
-      setIsLoading(true);
-      const { success } = await updateChapterProgress(courseId, chapterId);
-      if (success) {
-        setIsCompleted(true);
-        if (!disabledNext) {
-          nextVideo();
-        }
-      }
-    } catch (error) {
-      console.error("Error marking as complete:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
     <section className="flex w-full gap-1 justify-between mt-1">
       <div className="flex items-center gap-2">
@@ -326,48 +298,27 @@ export function Publisher({
         </span>
       </div>
 
-      <div className="lg:flex hidden gap-0.5">
-        
+      <div className="lg:flex hidden gap-2">
         <Button
           onClick={() => prevVideo()}
           disabled={disabledPrev}
-          variant={"outline"}
-          size={"sm"}
-          className="rounded-md"
+          variant={"secondary"}
+          size={"lg"}
+          className="rounded-xl font-medium hover:bg-white/10"
         >
-          <ChevronLeft className="h-4 w-4 translate-y-0.5" />
-          Prev Video
+          <ChevronLeft className="h-5 w-5 mr-2" />
+          Previous
         </Button>
         <Button
           onClick={() => nextVideo()}
           disabled={disabledNext}
-          variant={"outline"}
-          size={"sm"}
-          className="rounded-md"
+          variant={"secondary"}
+          size={"lg"}
+          className="rounded-xl font-medium hover:bg-white/10"
         >
-          Next video
-          <ChevronRight className="h-4 w-4 translate-y-0.5" />
+          Next
+          <ChevronRight className="h-5 w-5 ml-2" />
         </Button>
-        <Button
-          onClick={onComplete}
-          disabled={isCompleted || isLoading}
-          variant="default"
-          size={"sm"}
-          className={`${isCompleted ? "bg-green-600 hover:bg-green-700" : ""} rounded-md`}
-        >
-          {isCompleted ? (
-            <>
-              <CheckCircle2 className="h-4 w-4 mr-2" />
-              Completed
-            </>
-          ) : isLoading ? (
-            "Marking..."
-          ) : (
-            "Mark as Complete"
-          )}
-        </Button>
-
-        
       </div>
     </section>
   );
@@ -504,7 +455,11 @@ function CourseDrawer({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant={"outline"} className="flex-1 rounded-xl">
+        <Button 
+          variant={"default"} 
+          className="flex-1 rounded-xl bg-prime hover:bg-prime/90 text-white font-medium py-6 text-base gap-2 shadow-lg shadow-prime/20 border border-prime/50"
+        >
+          <PlaySquare className="h-5 w-5" />
           Course Content
         </Button>
       </DrawerTrigger>
