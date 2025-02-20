@@ -23,8 +23,12 @@ export function getPaymentUrl({
   utm_content?: string | null;
   utm_term?: string | null;
 }) {
+  // Ensure we're using the checkout path
   const baseUrl = `https://${domain}/checkout/${itemType}s/${itemId}`;
-  const params = new URLSearchParams();
+  const params = new URLSearchParams({
+    title: title,
+    amount: amount.toString(),
+  });
 
   // Add UTM parameters if they exist
   if (utm_source) params.append("utm_source", utm_source);
@@ -33,9 +37,6 @@ export function getPaymentUrl({
   if (utm_content) params.append("utm_content", utm_content);
   if (utm_term) params.append("utm_term", utm_term);
 
-  // Add other parameters
-  params.append("title", title);
-  params.append("amount", amount.toString());
-
+  // Force the checkout path
   return `${baseUrl}?${params.toString()}`;
 } 

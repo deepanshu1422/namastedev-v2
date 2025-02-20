@@ -60,14 +60,16 @@ export default function ProfessionalHero({
       amount: price.amount,
       itemId: bundleId,
       itemType: "bundle",
-      domain,
+      domain: "30dayscoding.com",  // Hardcoded domain
       utm_source: utmParams.get("utm_source"),
       utm_medium: utmParams.get("utm_medium"),
       utm_campaign: utmParams.get("utm_campaign"),
       utm_content: utmParams.get("utm_content"),
       utm_term: utmParams.get("utm_term"),
     });
-    router.push(paymentUrl);
+
+    // Direct navigation to checkout URL
+    window.location.href = paymentUrl;
   };
 
   return (
