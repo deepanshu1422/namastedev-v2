@@ -21,29 +21,28 @@ import TestimonyVideo from "@/app/(users)/testimony-video";
 import Image from "next/image";
 
 type TestimonialType = {
-  name: string;
+  name?: string;
   review: JSX.Element;
-  pos: string;
-  linkedin: string;
-  profile: string;
-  // course?: string;
+  pos?: string;
+  linkedin?: string;
+  profile?: string;
   link: string;
 };
 
 function MobileTestimonial({
-  name,
+  name = "Student",
   review,
   link,
-  linkedin,
-  pos,
-  profile,
-}: TestimonialType) {
+  linkedin = "#",
+  pos = "Student",
+  profile = "/avatar-fallback.png",
+}: Partial<TestimonialType> & { review: JSX.Element }) {
   return (
     <figure className="overflow-hidden flex rounded-xl p-0 bg-second/60">
       <Avatar className="w-20 h-full rounded-none">
         <AvatarImage className="object-cover" src={profile} />
         <AvatarFallback className="rounded-none">
-          {name
+          {(name || "ST")
             .split(" ")
             .map((e) => e[0])
             .join("")
@@ -62,13 +61,13 @@ function MobileTestimonial({
 }
 
 function Testimonial({
-  name,
+  name = "Student",
   review,
   link,
-  linkedin,
-  pos,
-  profile,
-}: TestimonialType) {
+  linkedin = "#",
+  pos = "Student",
+  profile = "/avatar-fallback.png",
+}: Partial<TestimonialType> & { review: JSX.Element }) {
   return (
     <div className="lg:hover:bg-opacity-70 transition-all duration-200 flex flex-col p-6 gap-4 bg-second/50 rounded-lg min-h-80">
       <div className="flex justify-between">
@@ -76,7 +75,7 @@ function Testimonial({
           <Avatar>
             <AvatarImage src={profile} />
             <AvatarFallback>
-              {name
+              {(name || "ST")
                 .split(" ")
                 .map((e) => e[0])
                 .join("")
@@ -95,7 +94,6 @@ function Testimonial({
           className="flex gap-1 p-2 rounded-full bg-sky-600/90 hover:bg-sky-600/70 text-sm font-semibold shadow-[rgb(0,_0,_0)_6px_6px_0px_0px] border-2 hover:translate-x-1 hover:translate-y-1 transition-all duration-75 hover:shadow-[rgb(0,_0,_0)_3px_3px_0px_0px]"
         >
           <Linkedin className="h-5 w-5" />
-          {/* Try Now */}
         </Link>
       </div>
       {review}
