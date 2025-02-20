@@ -22,6 +22,7 @@ import {
 import Mentors from "../mentorship/mentors";
 import Success from "@/components/mentorship-comp/success";
 import VideoSlider from "@/app/(guide)/testimonials/video-slider";
+import MissionSection from "@/components/mission-section";
 
 export default function Main({ courses }: { courses: CoursesType }) {
   const [state, setState] = useState("");
@@ -136,6 +137,7 @@ export default function Main({ courses }: { courses: CoursesType }) {
         slug={bundle?.slug ?? "complete-package-all-course-bundle"}
       />
       <Courses state={state} courses={courses} />
+      <MissionSection variant="course" />
       <VideoSlider />
       {/* <Reviews /> */}
       {/* <Success /> */}

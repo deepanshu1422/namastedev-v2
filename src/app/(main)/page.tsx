@@ -6,6 +6,7 @@ import Script from "next/script";
 import Success from "@/components/mentorship-comp/success";
 import Mentors from "./mentorship/mentors";
 import VideoSlider from "@/app/(guide)/testimonials/video-slider";
+import MissionSection from "@/components/mission-section";
 import {
   Code2,
   GraduationCap,
@@ -165,51 +166,53 @@ export default function Home() {
         ytId="enw3DVa1r5k"
       />
       
-    <section className="py-16 bg-gradient-to-b from-background to-muted/20">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Everything You Need to
-            <span className="text-primary"> Master Coding</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            From hands-on projects to interview prep, we've got you covered with our comprehensive learning ecosystem
-          </p>
-        </div>
+      <MissionSection variant="home" />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
-            return (
-              <div key={index} className="group relative overflow-hidden rounded-xl border bg-card p-6 hover:shadow-lg transition-all">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-3 rounded-lg bg-primary/10">
-                    <Icon className="h-6 w-6 text-primary" />
+      <section className="py-16 bg-gradient-to-b from-background to-muted/20">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Everything You Need to
+              <span className="text-primary"> Master Coding</span>
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              From hands-on projects to interview prep, we've got you covered with our comprehensive learning ecosystem
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <div key={index} className="group relative overflow-hidden rounded-xl border bg-card p-6 hover:shadow-lg transition-all">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="p-3 rounded-lg bg-primary/10">
+                      <Icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold">{feature.title}</h3>
                   </div>
-                  <h3 className="text-xl font-semibold">{feature.title}</h3>
+                  <p className="text-muted-foreground mb-4">
+                    {feature.description}
+                  </p>
+                  <div className="flex gap-2 mb-4">
+                    {feature.tags.map((tag, tagIndex) => (
+                      <span key={tagIndex} className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <Link 
+                    href={feature.link}
+                    className="text-sm text-primary hover:underline inline-flex items-center gap-1"
+                  >
+                    {feature.linkText} <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
-                <p className="text-muted-foreground mb-4">
-                  {feature.description}
-                </p>
-                <div className="flex gap-2 mb-4">
-                  {feature.tags.map((tag, tagIndex) => (
-                    <span key={tagIndex} className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <Link 
-                  href={feature.link}
-                  className="text-sm text-primary hover:underline inline-flex items-center gap-1"
-                >
-                  {feature.linkText} <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
       <Mentors />
       {/* <Store /> */}
       {/* <Success /> */}

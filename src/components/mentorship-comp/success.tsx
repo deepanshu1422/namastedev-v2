@@ -6,65 +6,23 @@ import { CreditCard, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 
 type TestimonialType = {
-  name: string;
   review: JSX.Element;
-  pos: string;
-  linkedin: string;
-  profile: string;
-  // course?: string;
   link: string;
 };
 
 function Testimonial({
-  name,
   review,
   link,
-  linkedin,
-  pos,
-  profile,
 }: TestimonialType) {
   return (
     <div className="lg:hover:bg-opacity-70 transition-all duration-200 flex flex-col p-6 gap-4 bg-second rounded-lg max-w-[350px]">
-      <div className="flex justify-between">
-        <Link
-          href={linkedin}
-          target="_blank"
-          className="flex items-center gap-2"
-        >
-          <Avatar>
-            <AvatarImage src={profile} />
-            <AvatarFallback>
-              {name
-                .split(" ")
-                .map((e) => e[0])
-                .join("")
-                .toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-          <span className="flex flex-col">
-            <span className="flex gap-1 font-bold leading-4">
-              {name}
-              <svg
-                className={`fill-sky-500 dark:fill-white h-5 w-5 transition-all hover:scale-110`}
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-              >
-                <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z" />
-              </svg>
-            </span>
-            <span className="text-white/60 text-sm">{pos}</span>
-          </span>
-        </Link>
-
-        <Link
-          target="_blank"
-          href={link}
-          className="flex gap-1 h-fit p-2 rounded-full bg-prime/90 hover:bg-prime/70 text-sm font-semibold shadow-[rgb(0,_0,_0)_6px_6px_0px_0px] border-2 hover:translate-x-1 hover:translate-y-1 transition-all duration-75 hover:shadow-[rgb(0,_0,_0)_3px_3px_0px_0px]"
-        >
-          <ShoppingBag className="h-5 w-5" />
-          {/* Try Now */}
-        </Link>
-      </div>
+      <Link
+        target="_blank"
+        href={link}
+        className="flex gap-1 h-fit p-2 rounded-full bg-prime/90 hover:bg-prime/70 text-sm font-semibold shadow-[rgb(0,_0,_0)_6px_6px_0px_0px] border-2 hover:translate-x-1 hover:translate-y-1 transition-all duration-75 hover:shadow-[rgb(0,_0,_0)_3px_3px_0px_0px]"
+      >
+        <ShoppingBag className="h-5 w-5" />
+      </Link>
       {review}
     </div>
   );
@@ -74,166 +32,156 @@ export const testimonials: TestimonialType[] = [
   {
     review: (
       <p className="leading-6 text-sm font-normal">
-        Before joining 30DC, I was struggling to make sense of the vast world
+        After struggling with countless job applications and rejections, I
+        discovered the coaching program.{" "}
+        <span className="bg-lime-500/40">
+          The structured courses and mentorship provided me with the direction
+          and skills I needed to stand out.
+        </span>{" "}
+        The supportive community kept me motivated throughout the process, and
+        I eventually landed a software engineering position,
+        transforming my career.
+      </p>
+    ),
+    link: "/courses"
+  },
+  {
+    review: (
+      <p className="leading-6 text-sm font-normal">
+        I&apos;m happy to share that I&apos;m starting a new position as
+        Software Engineer!
+        <span className="bg-lime-500/40">
+          I&apos;d also like to thank the coaches who
+          continuously guided me with placements with their community.
+        </span>
+      </p>
+    ),
+    link: "/courses"
+  },
+  {
+    review: (
+      <p className="leading-6 text-sm font-normal">
+        Before joining the program, I was struggling to make sense of the vast world
         of tech.{" "}
         <span className="bg-lime-500/40">
           The mentorship program gave me a structured approach and
           personalized guidance that I desperately needed.
         </span>{" "}
-        With 30DC&apos;s resources and community, I successfully transitioned
+        With the program's resources and community, I successfully transitioned
         from a non-tech background to securing a software engineering role.
       </p>
     ),
-    name: "Rojal Sapkota",
-    link: "/courses",
-    linkedin: "https://www.linkedin.com/in/rojal-sapkota-787130237/",
-    pos: "Internship @ Google",
-    profile: "/rojal-in.jpg",
+    link: "/courses"
   },
   {
     review: (
       <p className="leading-6 text-sm font-normal">
         I was stuck in a low-paying job and felt lost in my career.
-        30DC&apos;s mentorship group changed everything for me.{" "}
+        The mentorship group changed everything for me.{" "}
         <span className="bg-lime-500/40">
           The courses and community support helped me sharpen my skills and
           regain confidence.
         </span>{" "}
-        With the support from 30DC, I landed a remote job, doubling my salary
+        With the support from the program, I landed a remote job, doubling my salary
         and setting a new career trajectory.
       </p>
     ),
-    name: "Ishan",
-    link: "/",
-    linkedin: "https://www.linkedin.com/in/ishangupta305/",
-    pos: "Full time job @ Microsoft, Google",
-    profile: "/ishan-in.jpeg",
+    link: "/"
   },
   {
     review: (
       <p className="leading-6 text-sm font-normal">
-        Joining 30DC was the best decision I made for my career.{" "}
+        Joining this program was the best decision I made for my career.{" "}
         <span className="bg-lime-500/40">
           The personalized mentorship and the comprehensive courses provided
           me with the tools and strategies I needed to excel in interviews.
         </span>{" "}
-        Thanks to 30DC and the community, I secured an internship at LinkedIn,
-        which eventually turned into a full-time software engineering position
-        at TikTok.
+        Thanks to the program and community, I secured an internship which
+        eventually turned into a full-time software engineering position.
       </p>
     ),
-    name: "Umang Chaudhary",
-    link: "/courses",
-    linkedin: "https://www.linkedin.com/in/umang18oct/",
-    pos: "Full time job @ Amazon, TikTok",
-    profile: "/umang-in.jpg",
+    link: "/courses"
   },
   {
     review: (
       <p className="leading-6 text-sm font-normal">
         I had been applying to tech jobs for months with no success.{" "}
         <span className="bg-lime-500/40">
-          The 30DC mentorship program, particularly the courses and the
+          The mentorship program, particularly the courses and the
           supportive community, provided me with a clear roadmap and the
           confidence to ace my interviews.
         </span>{" "}
-        30DC&apos;s guidance was instrumental in helping me land a high-paying
-        role at Tesla right after graduation.
+        The program's guidance was instrumental in helping me land a high-paying
+        role right after graduation.
       </p>
     ),
-    name: "Kevin",
-    link: "/courses",
-    linkedin: "https://www.linkedin.com/in/kevinmsmith131/",
-    pos: "Full time job @ Tesla",
-    profile: "",
+    link: "/courses"
   },
   {
     review: (
       <p className="leading-6 text-sm font-normal">
         After struggling with countless job applications and rejections, I
-        discovered 30DC.{" "}
+        discovered this program.{" "}
         <span className="bg-lime-500/40">
           The structured courses and mentorship provided me with the direction
           and skills I needed to stand out.
         </span>{" "}
         The supportive community kept me motivated throughout the process, and
-        I eventually landed a software engineering position at Nasdaq,
+        I eventually landed a software engineering position,
         transforming my career.
       </p>
     ),
-    name: "Manan Patel",
-    link: "/courses",
-    linkedin: "https://www.linkedin.com/in/themananpatel/",
-    pos: "Full time job @Nasdaq",
-    profile: "/manan-in.jpg",
+    link: "/courses"
   },
   {
     review: (
       <p className="leading-6 text-sm font-normal">
         I&apos;m happy to share that I&apos;m starting a new position as
-        Software Engineer 1-B at Bank of America! I&apos;m grateful to Vellore
-        Institute of Technology for providing this amazing opportunity.
+        Software Engineer! I&apos;m grateful for this amazing opportunity.
         <span className="bg-lime-500/40">
-          I&apos;d also like to thank Aryan Singh and Deepanshu Udhwani, who
-          continuously guided me with placements with their community (30 Days
-          Coding).
+          I&apos;d also like to thank the coaches who
+          continuously guided me with placements with their community.
         </span>
       </p>
     ),
-    name: "Sneha Michelle V.",
-    link: "/courses",
-    linkedin: "https://www.linkedin.com/in/sneha-michelle-v-1b73b0213/",
-    pos: "Full time job @Bank of America",
-    profile: "/sneha-in.jpg",
+    link: "/courses"
   },
   {
     review: (
       <p className="leading-6 text-sm font-normal">
-        I cracked my internship at Vistaprint because of 30DC community and mentorship.
+        I cracked my internship because of the community and mentorship.
         The 1:1 mentorship and the community support helped me sharpen my skills and
         regain confidence. <span className="bg-lime-500/40">
-          I am grateful to 30DC for providing me with the resources and support to land my dream job.
+          I am grateful for the resources and support that helped me land my dream job.
         </span>
       </p>
     ),
-    name: "Shubham Batra",
-    link: "/courses",
-    linkedin: "https://www.linkedin.com/in/shubham-batra/",
-    pos: "Internship @ Vistaprint",
-    profile: "",
+    link: "/courses"
   },
   {
     review: (
       <p className="leading-6 text-sm font-normal">
-        I would like to express my deepest appreciation to my mentor Aryan Singh for their countless hours of invaluable 
+        I would like to express my deepest appreciation to the mentors for their countless hours of invaluable 
         guidance and continued support which has played an instrumental role in my success. <span className="bg-lime-500/40">
-          I landed a SDE role at Paypal.
+          I landed a software engineering role.
         </span>
       </p>
     ),
-    name: "Aditya Maheshwari",
-    link: "/courses",
-    linkedin: "https://www.linkedin.com/posts/aditya-maheshwari-05_gratitude-newbeginnings-softwareengineer-activity-7074263436834086912-EkW_?utm_source=share&utm_medium=member_desktop",
-    pos: "Full time job @ Paypal",
-    profile: "",
+    link: "/courses"
   },
   {
     review: (
       <p className="leading-6 text-sm font-normal">
-        I was very confused before joining 30DC. I did not know what to do and how to prepare for interviews.
+        I was very confused before joining the program. I did not know what to do and how to prepare for interviews.
         <span className="bg-lime-500/40">
           The 1:1 mentorship and the community support helped me sharpen my skills and
           regain confidence.
         </span>
-        I am grateful to 30DC for providing me with the resources and support to land my dream job.
+        I am grateful for the resources and support that helped me land my dream job.
       </p>
     ),
-    name: "Nikhil Seth",
-    link: "/courses",
-    linkedin: "https://www.linkedin.com/in/nikhil-seth9/",
-    pos: "Full time job @ Air Canada",
-    profile: "",
-  },
+    link: "/courses"
+  }
 ];
 
 export default function Success() {
@@ -254,15 +202,11 @@ export default function Success() {
       
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 py-5 lg:py-10 max-sm:place-items-center">
         {testimonials.map(
-          ({ name, review, link, linkedin, pos, profile }, i) => (
+          ({ review, link }, i) => (
             <Testimonial
               key={i}
-              name={name}
               review={review}
               link={link}
-              linkedin={linkedin}
-              pos={pos}
-              profile={profile}
             />
           )
         )}

@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import { usePostHog } from "posthog-js/react";
 import { sendEvent } from "@/services/fbpixel";
 import { BASE_URL } from "@/util/constants";
+import MissionSection from "@/components/mission-section";
 
 type BundleItem = {
   item: {
@@ -248,78 +249,43 @@ export default function Main({
       <main className="relative min-h-svh overflow-clip">
         <Hero
           bundleId={bundleId}
-          rating={rating}
           title={bundleTitle}
-          image={coverImage?.url}
+          image={coverImage.url}
+          rating={rating}
           price={
-            pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
-              amount: 0,
-              bigAmount: 0,
-              percentage: 0,
+            pricingsCollection.items.find((e) => e.countryCode === "IN") ?? {
+              amount: 999,
+              bigAmount: 9999,
+              percentage: 90,
             }
           }
           shortDescription={shortDescription}
           courseOffer={courseOffer}
-          videoId="hOcTPtZYTto"
-          domain={process.env.NEXT_PUBLIC_DOMAIN ?? "30dayscoding.com"}
+          videoId="enw3DVa1r5k"
+          domain={domain}
         />
+        <MissionSection variant="bundle" />
         <Detail
-          slug={slug}
           bundleId={bundleId}
+          slug={slug}
+          image={coverImage.url}
           coursesCollection={coursesCollection}
-          image={coverImage?.url}
-          price={
-            pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
-              amount: 0,
-              bigAmount: 0,
-              percentage: 0,
-            }
-          }
+          price={pricingsCollection.items.find((e) => e.countryCode === "IN") ?? {
+            amount: 999,
+            bigAmount: 9999,
+            percentage: 90,
+          }}
           courseOffer={courseOffer}
-          learn={learn ?? []}
-          setOpen={setOpen}
-          setYtOpen={setOpenYt}
+          learn={learn}
           faqs={faqCollection.items}
+          setOpen={setOpenPay}
+          setYtOpen={setOpenYt}
         />
-        <PaymentSheet
-          open={open}
-          guides={guidesCollection.items}
-          slug={slug}
-          posthog={posthog}
-          setOpen={setOpen}
-          bundleId={bundleId}
-          title={bundleTitle}
-          cover={coverImage?.url}
-          amount={
-            pricingsCollection.items.find((e) => e.countryCode == "IN")
-              ?.amount ?? 0
-          }
-          bigAmount={
-            pricingsCollection.items.find((e) => e.countryCode == "IN")
-              ?.bigAmount ?? 0
-          }
-          percentage={
-            pricingsCollection.items.find((e) => e.countryCode == "IN")
-              ?.percentage ?? 0
-          }
-          curreny={"INR"}
+        <PaymentModal
+          payModal={openPay}
           setOpenPay={setOpenPay}
         />
-        <YTModal open={openYt} setOpen={setOpenYt} url="hOcTPtZYTto" />
-        <Floating
-          slug={slug}
-          price={
-            pricingsCollection.items.find((e) => e.countryCode == "IN") ?? {
-              amount: 0,
-              bigAmount: 0,
-              percentage: 0,
-            }
-          }
-          open={open}
-          setOpen={setOpen}
-          bundleId={bundleId}
-        />
-        <PaymentModal payModal={openPay} setOpenPay={setOpenPay} />
+        <YTModal url="" open={openYt} setOpen={setOpenYt} />
       </main>
     );
   }

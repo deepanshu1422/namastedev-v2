@@ -13,79 +13,53 @@ import Image from "next/image";
 import { useState } from "react";
 import { Play, Star, Quote, ChevronRight, Users } from "lucide-react";
 import { motion } from "framer-motion";
+import MissionSection from "@/components/mission-section";
 
 function VideoCarousel() {
   const testimonials = [
     {
       id: "XSbsuxLfQuk",
-      name: "30 Days Coding",
-      company: "Awesome Homes",
-      text: "The 30 Days Coding course has completely transformed my understanding of programming. The hands-on projects and clear explanations made learning easy and enjoyable.",
-      profilePic: "/thumbs/t9.jpg",
+      text: "This course has completely transformed my understanding of programming. The hands-on projects and clear explanations made learning easy and enjoyable.",
       thumbnail: "/thumbs/t9.jpg"
     },
     {
       id: "DBHnTU8Glxk",
-      name: "30 Days Coding",
-      company: "Front Range HVAC",
       text: "I had zero coding experience before starting this course, but now I feel confident building my own projects. The structured lessons and real-world applications were exactly what I needed.",
-      profilePic: "/thumbs/t8.jpg",
       thumbnail: "/thumbs/t8.jpg"
     },
     {
       id: "_0byRr0WgZg",
-      name: "30 Days Coding",
-      company: "Walls By Design",
-      text: "The step-by-step guidance in this course made learning to code a breeze. I especially loved the community support and mentorship throughout the journey.",
-      profilePic: "/thumbs/t6.jpg",
+      text: "The step-by-step guidance made learning to code a breeze. I especially loved the community support and mentorship throughout the journey.",
       thumbnail: "/thumbs/t6.jpg"
     },
     {
       id: "G-q_thBCKL8",
-      name: "30 Days Coding",
-      company: "Walls By Design",
       text: "This course helped me transition from a complete beginner to someone who can confidently write and understand code. The projects really solidified my learning.",
-      profilePic: "/thumbs/t5.jpg",
       thumbnail: "/thumbs/t5.jpg"
     },
     {
       id: "bAVgLo6jxzA",
-      name: "30 Days Coding",
-      company: "Walls By Design",
-      text: "I've taken many online coding courses before, but none were as well-structured and engaging as this one. 30 Days Coding exceeded my expectations.",
-      profilePic: "/thumbs/t4.jpg",
+      text: "I've taken many online coding courses before, but none were as well-structured and engaging as this one. This program exceeded my expectations.",
       thumbnail: "/thumbs/t4.jpg"
     },
     {
-        id: "oi5mWIP1rt0",
-        name: "30 Days Coding",
-        company: "Walls By Design",
-        text: "Thanks to 30 Days Coding, I finally understand coding concepts that once seemed too complex. The practical exercises made all the difference.",
-        profilePic: "/thumbs/t3.jpg",
-        thumbnail: "/thumbs/t3.jpg"
+      id: "oi5mWIP1rt0",
+      text: "Thanks to this program, I finally understand coding concepts that once seemed too complex. The practical exercises made all the difference.",
+      thumbnail: "/thumbs/t3.jpg"
     },
     {
       id: "9sSe0RQrzpM",
-      name: "30 Days Coding",
-      company: "Walls By Design",
-      text: "If you're looking for a beginner-friendly coding course that actually teaches you how to build projects, this is the one! Highly recommended.",
-      profilePic: "/thumbs/t2.jpg",
+      text: "If you're looking for a beginner-friendly course that actually teaches you how to build projects, this is the one! Highly recommended.",
       thumbnail: "/thumbs/t2.jpg"
     },
     {
       id: "p3J3KlJbls0",
-      name: "30 Days Coding",
-      company: "Walls By Design",
-      text: "I never thought I could learn coding in just 30 days, but this course proved me wrong! The interactive lessons and challenges kept me motivated.",
-      profilePic: "/thumbs/t1.jpg",
+      text: "I never thought I could learn coding so quickly, but this course proved me wrong! The interactive lessons and challenges kept me motivated.",
       thumbnail: "/thumbs/t1.jpg"
     },
     {
       id: "v2ICShDxcaY",
-      name: "30 Days Coding",
-      company: "Walls By Design",
-      text: "Enrolling in 30 Days Coding was the best decision I've made. The course structure, mentorship, and community support made learning an incredible experience.",
-      profilePic: "/thumbs/t0.jpg",
+      text: "Enrolling in this program was the best decision I've made. The course structure, mentorship, and community support made learning an incredible experience.",
       thumbnail: "/thumbs/t0.jpg"
     }
   ];
@@ -102,7 +76,7 @@ function VideoCarousel() {
       </div>
 
       <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto px-4">
-        {testimonials.map(({ id, name, company, text, profilePic, thumbnail }, index) => (
+        {testimonials.map(({ id, text, thumbnail }, index) => (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -130,7 +104,7 @@ function VideoCarousel() {
                       src={thumbnail}
                       fill
                       className="object-cover transition-transform duration-500 group-hover/play:scale-105"
-                      alt={`${company} Testimonial`}
+                      alt="Testimonial"
                     />
                     <div className="absolute inset-0 bg-black/40 group-hover/play:bg-black/30 transition-colors">
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
@@ -146,25 +120,6 @@ function VideoCarousel() {
               </div>
 
               <div className="flex flex-col gap-4">
-                <div className="flex items-start gap-4">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full blur-md opacity-40" />
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-emerald-500/20">
-                      <Image
-                        src={profilePic}
-                        fill
-                        className="object-cover"
-                        alt={name}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-col">
-                    <h3 className="font-semibold text-xl bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
-                      {name}
-                    </h3>
-                    <p className="text-sm text-emerald-300/70">{company}</p>
-                  </div>
-                </div>
                 <div className="relative">
                   <Quote className="absolute -top-2 -left-2 w-6 h-6 text-emerald-500/20" />
                   <blockquote className="text-base text-emerald-100/80 italic pl-6">
@@ -182,35 +137,31 @@ function VideoCarousel() {
 
 function NewVideoCarousel() {
   const testimonialVideos = [
-    { 
-      ytId: "zA_jXlo_3YE",
-      title: "30 Days Coding",
-      views: "Featured Testimonial",
-    },
-    { ytId: "F2OsMQ7nz3k", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "HQG9ZCSTtr0", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "6lP2w6MLYXk", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "iHWCA-qckII", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "YJKnBut4qYg", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "wSlRs8EQubI", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "X8iGoKglP2c", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "KhwbMajuuKY", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "U8bf4-tsw9k", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "5rU6ZfXs9YY", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "nnEaMT93mTU", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "c_RbgqTQVIk", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "67pe9efDWic", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "soVJa7l9SRA", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "85_B4czAZrY", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "mWSZmMidGFM", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "aSP4X_lP0EM", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "um0L6w0FFZg", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "FbySzm0Igk8", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "QEIRTiQCD3c", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "hcxQFmavLOg", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "pHZhfQrJcQg", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "eeoDuEdOqpQ", title: "30 Days Coding", views: "Featured Testimonial",},
-    { ytId: "Zv7PRNFUmuA", title: "30 Days Coding", views: "Featured Testimonial",},
+    { ytId: "zA_jXlo_3YE", title: "", views: "",},
+    { ytId: "F2OsMQ7nz3k", title: "", views: "",},
+    { ytId: "HQG9ZCSTtr0", title: "", views: "",},
+    { ytId: "6lP2w6MLYXk", title: "", views: "",},
+    { ytId: "iHWCA-qckII", title: "", views: "",},
+    { ytId: "YJKnBut4qYg", title: "", views: "",},
+    { ytId: "wSlRs8EQubI", title: "", views: "",},
+    { ytId: "X8iGoKglP2c", title: "", views: "",},
+    { ytId: "KhwbMajuuKY", title: "", views: "",},
+    { ytId: "U8bf4-tsw9k", title: "", views: "",},
+    { ytId: "5rU6ZfXs9YY", title: "", views: "",},
+    { ytId: "nnEaMT93mTU", title: "", views: "",},
+    { ytId: "c_RbgqTQVIk", title: "", views: "",},
+    { ytId: "67pe9efDWic", title: "", views: "",},
+    { ytId: "soVJa7l9SRA", title: "", views: "",},
+    { ytId: "85_B4czAZrY", title: "", views: "",},
+    { ytId: "mWSZmMidGFM", title: "", views: "",},
+    { ytId: "aSP4X_lP0EM", title: "", views: "",},
+    { ytId: "um0L6w0FFZg", title: "", views: "",},
+    { ytId: "FbySzm0Igk8", title: "", views: "",},
+    { ytId: "QEIRTiQCD3c", title: "", views: "",},
+    { ytId: "hcxQFmavLOg", title: "", views: "",},
+    { ytId: "pHZhfQrJcQg", title: "", views: "",},
+    { ytId: "eeoDuEdOqpQ", title: "", views: "",},
+    { ytId: "Zv7PRNFUmuA", title: "", views: "",}
   ];
   
   const [activeVideo, setActiveVideo] = useState("");
@@ -233,7 +184,7 @@ function NewVideoCarousel() {
           </div>
           
           <h2 className="text-3xl font-bold bg-gradient-to-r from-emerald-400 via-green-300 to-emerald-200 bg-clip-text text-transparent">
-            Student Testimonials
+            Testimonials
           </h2>
           <p className="text-emerald-100/80 max-w-2xl mx-auto">
             Watch inspiring stories from our successful students
@@ -284,7 +235,7 @@ function NewVideoCarousel() {
                               src={`https://i3.ytimg.com/vi/${ytId}/maxresdefault.jpg`}
                               fill
                               className="object-cover transition-transform duration-500 group-hover/play:scale-105"
-                              alt={title}
+                              alt="Video thumbnail"
                             />
                             <div className="absolute inset-0 bg-black/40 group-hover/play:bg-black/30 transition-colors">
                               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
@@ -297,12 +248,6 @@ function NewVideoCarousel() {
                             </div>
                           </div>
                         )}
-                      </div>
-                      <div className="relative p-4">
-                        <h3 className="font-medium text-sm line-clamp-2 mb-1 text-emerald-100 group-hover:text-emerald-300 transition-colors">
-                          {title}
-                        </h3>
-                        <p className="text-xs text-emerald-300/60">{views}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -325,6 +270,9 @@ export default function VideoSlider() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
       </div>
 
+      <MissionSection variant="default" />
+
+      {/* Existing Testimonials Section */}
       <div className="relative max-w-7xl mx-auto px-4 mb-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -333,20 +281,20 @@ export default function VideoSlider() {
         >
           <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 backdrop-blur-sm">
             <Users className="w-4 h-4 text-emerald-400" />
-            <span className="text-emerald-300 text-sm font-medium">Student Success Stories</span>
+            <span className="text-emerald-300 text-sm font-medium">Success Stories</span>
           </div>
 
           <h2 className="text-4xl sm:text-5xl font-bold">
             <span className="relative">
               <span className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 to-green-500/20 blur-xl" />
               <span className="relative bg-gradient-to-r from-emerald-400 via-green-300 to-emerald-200 bg-clip-text text-transparent">
-                Hear it from our students!
+                Hear it from our community!
               </span>
             </span>
           </h2>
 
           <p className="text-lg text-emerald-100/80 max-w-2xl mx-auto">
-            The love we get from our students can't go unnoticed. Here are some of their inspiring stories.
+            The love we get from our community can't go unnoticed. Here are some of their inspiring stories.
           </p>
 
           <div className="w-px h-12 bg-gradient-to-b from-emerald-500 to-transparent mx-auto" />
