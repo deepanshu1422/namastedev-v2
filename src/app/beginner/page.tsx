@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import VideoGallery from '@/components/VideoGallery';
 import Footer from "@/components/new-cohort/footer";
 import UpsellBanner from '@/components/UpsellBanner';
+import useUtmTracker from '@/hooks/use-utm-tracker';
 
 const learningPath = [
   {
@@ -241,6 +242,14 @@ const courseDetails = {
 const BeginnerPage = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  // Add UTM tracker
+  const { appendUtmToUrl } = useUtmTracker();
+
+  const handleBuyNowClick = () => {
+    const baseUrl = 'https://30dc.graphy.com/single-checkout/67c84187483bc1739e05e1cb?pid=p1';
+    window.location.href = appendUtmToUrl(baseUrl);
+  };
+
   return (
     <div className="min-h-screen bg-[#0A1F1C] pb-24">
       <UpsellBanner 
@@ -287,7 +296,7 @@ const BeginnerPage = () => {
         >
           <Button 
             className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-12 py-6 text-xl rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-[#22C55E]/30 flex items-center gap-2"
-            onClick={() => window.location.href = 'https://30dc.graphy.com/single-checkout/67c84187483bc1739e05e1cb?pid=p1'}
+            onClick={handleBuyNowClick}
           >
             <span>Buy Now</span>
             <svg 
@@ -377,7 +386,7 @@ const BeginnerPage = () => {
         >
           <Button 
             className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-8 py-6 text-lg rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#22C55E]/20"
-            onClick={() => window.location.href = 'https://30dc.graphy.com/single-checkout/67c84187483bc1739e05e1cb?pid=p1'}
+            onClick={handleBuyNowClick}
           >
             Start Learning Now
           </Button>

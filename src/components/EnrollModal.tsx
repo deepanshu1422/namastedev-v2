@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "@/components/ui/button";
+import useUtmTracker from '@/hooks/use-utm-tracker';
 
 interface CourseOption {
   name: string;
@@ -70,6 +71,9 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
   onClose,
   currentPage
 }) => {
+  // Add UTM tracker
+  const { appendUtmToUrl } = useUtmTracker();
+
   if (!isOpen) return null;
 
   const options = courseOptions[currentPage];
@@ -78,6 +82,26 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
     intermediate: "₹1,999",
     advanced: "₹2,999"
   }[currentPage];
+
+  const getCheckoutUrl = (page: string) => {
+    const urls = {
+      'beginner': 'https://30dc.graphy.com/single-checkout/67c84187483bc1739e05e1cb?pid=p1',
+      'intermediate': 'https://30dc.graphy.com/single-checkout/67c8a9e153f717193c586641?pid=p1',
+      'advanced': 'https://30dc.graphy.com/single-checkout/652a1994e4b05a145bae5cd0?pid=p1'
+    };
+    return appendUtmToUrl(urls[page]);
+  };
+
+  const handleNavigation = (targetPage: string) => {
+    if (['beginner', 'intermediate', 'advanced'].includes(targetPage)) {
+      // For internal page navigation, preserve UTM in URL
+      const currentUtm = new URLSearchParams(window.location.search).get('utmpara');
+      const baseUrl = `/${targetPage}`;
+      window.location.href = currentUtm ? `${baseUrl}?utmpara=${currentUtm}` : baseUrl;
+    } else {
+      onClose();
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -174,9 +198,9 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
                     } px-3 sm:px-6 py-2.5 sm:py-4 rounded-md sm:rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-1.5 sm:gap-2 text-sm sm:text-lg`}
                     onClick={() => {
                       if (option.name === "Advanced Package") {
-                        window.location.href = '/advanced';
+                        handleNavigation('advanced');
                       } else if (option.name === "Intermediate Package") {
-                        window.location.href = '/intermediate';
+                        handleNavigation('intermediate');
                       }
                     }}
                   >
@@ -194,12 +218,8 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
               <p className="text-xs sm:text-base text-gray-400 mb-2 sm:mb-4">Happy with your current course?</p>
               <Button 
                 onClick={() => {
-                  if (currentPage === 'beginner') {
-                    window.location.href = 'https://30dc.graphy.com/single-checkout/67c84187483bc1739e05e1cb?pid=p1';
-                  } else if (currentPage === 'intermediate') {
-                    window.location.href = 'https://30dc.graphy.com/single-checkout/67c8a9e153f717193c586641?pid=p1';
-                  } else if (currentPage === 'advanced') {
-                    window.location.href = 'https://30dc.graphy.com/single-checkout/652a1994e4b05a145bae5cd0?pid=p1';
+                  if (['beginner', 'intermediate', 'advanced'].includes(currentPage)) {
+                    window.location.href = getCheckoutUrl(currentPage);
                   } else {
                     onClose();
                   }

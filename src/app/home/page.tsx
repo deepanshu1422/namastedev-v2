@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/home-components/navbar";
@@ -12,7 +14,12 @@ import { Award } from "lucide-react";
 import Image from "next/image";
 import TableHome from "@/components/TableHome";
 import HomeCurriculum from "@/components/HomeCurriculum";
-export default function TestPage() {
+import useUtmTracker from '@/hooks/use-utm-tracker';
+
+const HomePage = () => {
+  // Add UTM tracker
+  useUtmTracker();
+
   return (
     <>
       <Navbar />
@@ -59,4 +66,6 @@ export default function TestPage() {
       <Footer />
     </>
   );
-} 
+}
+
+export default HomePage; 
