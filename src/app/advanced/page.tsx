@@ -10,6 +10,199 @@ import UpsellBanner from '@/components/UpsellBanner';
 const learningPath = [
   {
     step: 1,
+    title: "HTML, CSS Complete Mastery Course",
+    description: "Master modern web development with HTML and CSS to create stunning websites and web applications",
+    points: [
+      "Master HTML basics and advanced techniques",
+      "Create stylish and responsive websites with CSS",
+      "Explore Flexbox, Grid, and CSS animations for modern web design",
+      "Create dynamic web pages and responsive designs",
+      "Advanced styling techniques with modern CSS"
+    ],
+    details: {
+      keyHighlights: [
+        "Master HTML basics and advanced techniques",
+        "Create stylish and responsive websites with CSS",
+        "Explore Flexbox, Grid, and CSS animations for modern web design"
+      ],
+      outcomes: [
+        "Create Dynamic Web Pages",
+        "Responsive Web Design",
+        "Advanced Styling Techniques"
+      ]
+    }
+  },
+  {
+    step: 2,
+    title: "Complete Java Course",
+    description: "Comprehensive Java programming course from basics to advanced concepts with lifetime access",
+    points: [
+      "Learn Java programming from scratch",
+      "Master object-oriented programming principles",
+      "Build GUI applications with JavaFX",
+      "Implement multi-threading and collections",
+      "Advanced exception handling and file management"
+    ],
+    details: {
+      keyHighlights: [
+        "Understand Java fundamentals",
+        "Master object-oriented programming",
+        "Create GUI applications",
+        "Implement multi-threading",
+        "Handle exceptions and file management"
+      ]
+    }
+  },
+  {
+    step: 3,
+    title: "Complete Python Course",
+    description: "Learn Python programming from scratch and master core concepts through practical exercises",
+    points: [
+      "Build strong foundation in Python concepts",
+      "Gain hands-on experience with practical coding",
+      "Master Python's built-in libraries and modules",
+      "Develop real-world applications",
+      "Learn Python's syntax and features"
+    ],
+    details: {
+      keyHighlights: [
+        "Learn Python from scratch",
+        "Build strong foundation in concepts",
+        "Gain hands-on experience",
+        "Master built-in libraries"
+      ],
+      outcomes: [
+        "Write Python code confidently",
+        "Understand core programming concepts",
+        "Develop real-world applications",
+        "Master Python libraries and modules"
+      ]
+    }
+  },
+  {
+    step: 4,
+    title: "Complete JavaScript Mastery Course",
+    description: "Master JavaScript and build interactive web applications with hands-on exercises",
+    points: [
+      "Learn JavaScript from fundamentals to advanced concepts",
+      "Build interactive web applications",
+      "Master advanced JavaScript techniques",
+      "Optimize code performance",
+      "Implement modern JavaScript features"
+    ],
+    details: {
+      keyHighlights: [
+        "Master JavaScript from scratch",
+        "Build interactive applications",
+        "Learn advanced concepts",
+        "Hands-on exercises"
+      ],
+      outcomes: [
+        "Create dynamic web applications",
+        "Master JavaScript fundamentals",
+        "Implement advanced techniques",
+        "Optimize code performance"
+      ]
+    }
+  },
+  {
+    step: 5,
+    title: "SQL and Databases Mastery Course",
+    description: "Comprehensive course covering SQL fundamentals to advanced database concepts",
+    points: [
+      "Master SQL fundamentals and queries",
+      "Learn advanced database concepts",
+      "Optimize database performance",
+      "Handle complex database structures",
+      "Implement efficient data management"
+    ],
+    details: {
+      keyHighlights: [
+        "Master SQL fundamentals",
+        "Learn advanced concepts",
+        "Optimize performance"
+      ],
+      outcomes: [
+        "Write complex SQL queries",
+        "Manage database structures",
+        "Optimize database performance"
+      ]
+    }
+  },
+  {
+    step: 6,
+    title: "Complete MERN Stack Development",
+    description: "Master Full-Stack Web Development",
+    points: [
+      "Front-End: HTML, CSS, JavaScript, React with modern practices",
+      "Back-End: Node.js, Express.js, MongoDB, GraphQL",
+      "15+ JavaScript and React projects",
+      "5+ major full-stack projects including E-commerce & YouTube clone",
+      "Industry-relevant skill development and interview preparation"
+    ]
+  },
+  {
+    step: 7,
+    title: "Next.js Full-Stack Mastery",
+    description: "Advanced Modern Web Development",
+    points: [
+      "Server-side rendering (SSR), Static site generation (SSG)",
+      "TypeScript integration and API development",
+      "Performance optimization and state management",
+      "10+ complex projects including E-commerce and real-time chat",
+      "Deployment strategies and serverless functions"
+    ]
+  },
+  {
+    step: 8,
+    title: "Complete Node.js Backend Development",
+    description: "Master Server-Side Programming",
+    points: [
+      "Backend programming fundamentals and scalability",
+      "Database management and optimization",
+      "Server security best practices",
+      "API development and integration",
+      "Real-world backend architecture"
+    ]
+  },
+  {
+    step: 9,
+    title: "ChatGPT AI & Prompt Engineering",
+    description: "Master AI Integration and Prompting",
+    points: [
+      "Chat GPT APIs, vision, and whisper integration",
+      "Specialized prompts for different professions",
+      "Image and video prompting resources",
+      "Building apps and games with AI prompts",
+      "Advanced prompting techniques"
+    ]
+  },
+  {
+    step: 10,
+    title: "Advanced React.js Development",
+    description: "Professional React Development",
+    points: [
+      "Modern React patterns and hooks",
+      "Advanced state management (Redux, Context, Zustand)",
+      "Performance optimization techniques",
+      "Testing and TypeScript integration",
+      "8 real-world projects including E-commerce platform"
+    ]
+  },
+  {
+    step: 11,
+    title: "BONUS: Complete Beginner Package Access",
+    description: "Access to All Beginner Level Courses",
+    points: [
+      "HTML & CSS Complete Mastery Course",
+      "Complete Java Programming Course",
+      "Complete Python Development Course",
+      "JavaScript Fundamentals to Advanced",
+      "SQL and Databases Mastery Course"
+    ]
+  },
+  {
+    step: 12,
     title: "🤖 AI Mastery Course",
     description: "Master AI Integration & Development",
     points: [
@@ -21,7 +214,7 @@ const learningPath = [
     ]
   },
   {
-    step: 2,
+    step: 13,
     title: "📊 DSA & FAANG Job Preparation",
     description: "Complete Interview Preparation",
     points: [
@@ -33,7 +226,7 @@ const learningPath = [
     ]
   },
   {
-    step: 3,
+    step: 14,
     title: "💡 Project Mastery Bundle",
     description: "Build Real-World Projects",
     points: [
@@ -45,7 +238,7 @@ const learningPath = [
     ]
   },
   {
-    step: 4,
+    step: 15,
     title: "🔗 Blockchain & DeFi",
     description: "Complete Web3 Development",
     points: [
@@ -57,7 +250,7 @@ const learningPath = [
     ]
   },
   {
-    step: 5,
+    step: 16,
     title: "📈 Data & Interview Prep",
     description: "Data Analytics & Job Preparation",
     points: [
@@ -69,7 +262,7 @@ const learningPath = [
     ]
   },
   {
-    step: 6,
+    step: 17,
     title: "🎁 BONUS: Complete Access",
     description: "Access to All Course Levels",
     points: [
@@ -123,7 +316,7 @@ const supportFeatures = [
 const faqs = [
   {
     question: "What's included in this complete package?",
-    answer: "This is our most comprehensive package that includes: 1) All Beginner Courses (HTML, CSS, Java, Python, JavaScript, SQL) 2) All Intermediate Courses (MERN Stack, Next.js, Node.js, React, ChatGPT) 3) All Advanced Courses (AI/ML, Blockchain, DSA, FAANG Prep, Data Analytics) 4) 50+ Industry Projects 5) Interview Preparation 6) 1-on-1 Mentorship. Total value of ₹5,997 (₹999 + ₹1,999 + ₹2,999) available at a special price!"
+    answer: "This is our most comprehensive package that includes: 1) All Beginner Courses (HTML, CSS, Java, Python, JavaScript, SQL) 2) All Intermediate Courses (MERN Stack, Next.js, Node.js, React, ChatGPT) 3) All Advanced Courses (AI/ML, Blockchain, DSA, FAANG Prep, Data Analytics) 4) 50+ Industry Projects 5) Interview Preparation . Total value of ₹5,997 (₹999 + ₹1,999 + ₹2,999) available at a special price!"
   },
   {
     question: "Is this suitable for complete beginners?",
@@ -135,18 +328,23 @@ const faqs = [
   },
   {
     question: "What career support is provided?",
-    answer: "You get comprehensive career support including: 1) Complete DSA and FAANG interview preparation 2) Resume building and LinkedIn optimization 3) 1-on-1 mentorship from industry experts 4) Mock interviews and feedback 5) Networking strategies for tech jobs 6) Personalized roadmap for job preparation 7) Access to our hiring partners 8) Interview preparation for both service and product companies."
+    answer: "You get comprehensive career support including: 1) Complete DSA and FAANG interview preparation 2) Resume building and LinkedIn optimization 3) Networking strategies for tech jobs 4) Personalized roadmap for job preparation 5) Interview preparation for both service and product companies."
   },
   
   {
     question: "What makes this package worth the investment?",
-    answer: "This package offers exceptional value: 1) Access to 20+ premium courses covering full-stack, AI, blockchain, and more 2) 50+ real-world projects for portfolio building 3) Complete FAANG interview preparation 4) 1-on-1 mentorship worth ₹20,000 5) Career guidance and job support 6) Lifetime access to all future updates 7) Certificate of completion. The skills you learn will help you land high-paying tech jobs or build successful tech products."
+    answer: "This package offers exceptional value: 1) Access to 20+ premium courses covering full-stack, AI, blockchain, and more 2) 50+ real-world projects for portfolio building 3) Complete FAANG interview preparation 4) Career guidance and job support 6) Lifetime access to all future updates 7) Certificate of completion. The skills you learn will help you land high-paying tech jobs or build successful tech products."
   },
  
 ];
 
 const AdvancedPage = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showAllSteps, setShowAllSteps] = useState(false);
+
+  const visibleLearningPath = showAllSteps 
+    ? learningPath 
+    : learningPath.slice(0, 5);
 
   return (
     <div className="min-h-screen bg-[#0A1F1C] pb-24">
@@ -177,8 +375,11 @@ const AdvancedPage = () => {
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Advanced Level (Mastery & Industry-Ready Courses)
           </h1>
-          <p className="text-[#E5E7EB] text-lg mb-8">
+          <p className="text-[#E5E7EB] text-lg mb-1">
             For professionals & advanced learners targeting cutting-edge expertise and career transformation
+          </p>
+          <p className="text-[#22C55E] text-xl font-semibold mb-8">
+            BONUS: Get Complete Access to All Intermediate Courses Worth ₹1,999!
           </p>
           
           <div className="flex flex-col items-center mb-8">
@@ -315,7 +516,7 @@ const AdvancedPage = () => {
           <div className="absolute left-1/2 top-[100px] bottom-0 w-px bg-gradient-to-b from-[#22C55E] via-[#22C55E]/50 to-transparent hidden md:block" />
 
           <div className="space-y-20">
-            {learningPath.map((step, index) => (
+            {visibleLearningPath.map((step, index) => (
               <motion.div
                 key={step.step}
                 initial={{ opacity: 0, y: 20 }}
@@ -347,6 +548,36 @@ const AdvancedPage = () => {
               </motion.div>
             ))}
           </div>
+          
+          {/* See More Button */}
+          {!showAllSteps && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="flex justify-center mt-16"
+            >
+              <Button 
+                className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-8 py-4 text-lg rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#22C55E]/20 flex items-center gap-2"
+                onClick={() => setShowAllSteps(true)}
+              >
+                <span>See More</span>
+                <svg 
+                  className="w-5 h-5" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M19 9l-7 7-7-7" 
+                  />
+                </svg>
+              </Button>
+            </motion.div>
+          )}
         </motion.div>
 
         {/* FAQ Section */}

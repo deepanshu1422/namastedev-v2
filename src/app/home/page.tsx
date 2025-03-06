@@ -11,12 +11,14 @@ import { Badge } from "@/components/ui/badge";
 import { Award } from "lucide-react";
 import Image from "next/image";
 import TableHome from "@/components/TableHome";
+import HomeCurriculum from "@/components/HomeCurriculum";
 export default function TestPage() {
   return (
     <>
       <Navbar />
       <main className="min-h-screen">
         <Hero />
+        <HomeCurriculum />
         <CourseSection />
        <TableHome />
         <WhyChooseUs />

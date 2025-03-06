@@ -10,6 +10,127 @@ import UpsellBanner from '@/components/UpsellBanner';
 const learningPath = [
   {
     step: 1,
+    title: "HTML, CSS Complete Mastery Course",
+    description: "Master modern web development with HTML and CSS to create stunning websites and web applications",
+    points: [
+      "Master HTML basics and advanced techniques",
+      "Create stylish and responsive websites with CSS",
+      "Explore Flexbox, Grid, and CSS animations for modern web design",
+      "Create dynamic web pages and responsive designs",
+      "Advanced styling techniques with modern CSS"
+    ],
+    details: {
+      keyHighlights: [
+        "Master HTML basics and advanced techniques",
+        "Create stylish and responsive websites with CSS",
+        "Explore Flexbox, Grid, and CSS animations for modern web design"
+      ],
+      outcomes: [
+        "Create Dynamic Web Pages",
+        "Responsive Web Design",
+        "Advanced Styling Techniques"
+      ]
+    }
+  },
+  {
+    step: 2,
+    title: "Complete Java Course",
+    description: "Comprehensive Java programming course from basics to advanced concepts with lifetime access",
+    points: [
+      "Learn Java programming from scratch",
+      "Master object-oriented programming principles",
+      "Build GUI applications with JavaFX",
+      "Implement multi-threading and collections",
+      "Advanced exception handling and file management"
+    ],
+    details: {
+      keyHighlights: [
+        "Understand Java fundamentals",
+        "Master object-oriented programming",
+        "Create GUI applications",
+        "Implement multi-threading",
+        "Handle exceptions and file management"
+      ]
+    }
+  },
+  {
+    step: 3,
+    title: "Complete Python Course",
+    description: "Learn Python programming from scratch and master core concepts through practical exercises",
+    points: [
+      "Build strong foundation in Python concepts",
+      "Gain hands-on experience with practical coding",
+      "Master Python's built-in libraries and modules",
+      "Develop real-world applications",
+      "Learn Python's syntax and features"
+    ],
+    details: {
+      keyHighlights: [
+        "Learn Python from scratch",
+        "Build strong foundation in concepts",
+        "Gain hands-on experience",
+        "Master built-in libraries"
+      ],
+      outcomes: [
+        "Write Python code confidently",
+        "Understand core programming concepts",
+        "Develop real-world applications",
+        "Master Python libraries and modules"
+      ]
+    }
+  },
+  {
+    step: 4,
+    title: "Complete JavaScript Mastery Course",
+    description: "Master JavaScript and build interactive web applications with hands-on exercises",
+    points: [
+      "Learn JavaScript from fundamentals to advanced concepts",
+      "Build interactive web applications",
+      "Master advanced JavaScript techniques",
+      "Optimize code performance",
+      "Implement modern JavaScript features"
+    ],
+    details: {
+      keyHighlights: [
+        "Master JavaScript from scratch",
+        "Build interactive applications",
+        "Learn advanced concepts",
+        "Hands-on exercises"
+      ],
+      outcomes: [
+        "Create dynamic web applications",
+        "Master JavaScript fundamentals",
+        "Implement advanced techniques",
+        "Optimize code performance"
+      ]
+    }
+  },
+  {
+    step: 5,
+    title: "SQL and Databases Mastery Course",
+    description: "Comprehensive course covering SQL fundamentals to advanced database concepts",
+    points: [
+      "Master SQL fundamentals and queries",
+      "Learn advanced database concepts",
+      "Optimize database performance",
+      "Handle complex database structures",
+      "Implement efficient data management"
+    ],
+    details: {
+      keyHighlights: [
+        "Master SQL fundamentals",
+        "Learn advanced concepts",
+        "Optimize performance"
+      ],
+      outcomes: [
+        "Write complex SQL queries",
+        "Manage database structures",
+        "Optimize database performance"
+      ]
+    }
+  },
+  {
+    step: 6,
     title: "Complete MERN Stack Development",
     description: "Master Full-Stack Web Development",
     points: [
@@ -21,7 +142,7 @@ const learningPath = [
     ]
   },
   {
-    step: 2,
+    step: 7,
     title: "Next.js Full-Stack Mastery",
     description: "Advanced Modern Web Development",
     points: [
@@ -33,7 +154,7 @@ const learningPath = [
     ]
   },
   {
-    step: 3,
+    step: 8,
     title: "Complete Node.js Backend Development",
     description: "Master Server-Side Programming",
     points: [
@@ -45,7 +166,7 @@ const learningPath = [
     ]
   },
   {
-    step: 4,
+    step: 9,
     title: "ChatGPT AI & Prompt Engineering",
     description: "Master AI Integration and Prompting",
     points: [
@@ -57,7 +178,7 @@ const learningPath = [
     ]
   },
   {
-    step: 5,
+    step: 10,
     title: "Advanced React.js Development",
     description: "Professional React Development",
     points: [
@@ -69,7 +190,7 @@ const learningPath = [
     ]
   },
   {
-    step: 6,
+    step: 11,
     title: "BONUS: Complete Beginner Package Access",
     description: "Access to All Beginner Level Courses",
     points: [
@@ -165,6 +286,11 @@ const faqs = [
 
 const IntermediatePage = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showAllSteps, setShowAllSteps] = useState(false);
+
+  const visibleLearningPath = showAllSteps 
+    ? learningPath 
+    : learningPath.slice(0, 5);
 
   return (
     <div className="min-h-screen bg-[#0A1F1C] pb-24">
@@ -335,7 +461,7 @@ const IntermediatePage = () => {
           <div className="absolute left-1/2 top-[100px] bottom-0 w-px bg-gradient-to-b from-[#22C55E] via-[#22C55E]/50 to-transparent hidden md:block" />
 
           <div className="space-y-20">
-            {learningPath.map((step, index) => (
+            {visibleLearningPath.map((step, index) => (
               <motion.div
                 key={step.step}
                 initial={{ opacity: 0, y: 20 }}
@@ -367,6 +493,36 @@ const IntermediatePage = () => {
               </motion.div>
             ))}
           </div>
+          
+          {/* See More Button */}
+          {!showAllSteps && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="flex justify-center mt-16"
+            >
+              <Button 
+                className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-8 py-4 text-lg rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#22C55E]/20 flex items-center gap-2"
+                onClick={() => setShowAllSteps(true)}
+              >
+                <span>See More</span>
+                <svg 
+                  className="w-5 h-5" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M19 9l-7 7-7-7" 
+                  />
+                </svg>
+              </Button>
+            </motion.div>
+          )}
         </motion.div>
 
         {/* FAQ Section */}

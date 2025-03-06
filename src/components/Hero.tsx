@@ -1,34 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { Suspense, useState } from "react";
 import { motion } from "framer-motion";
-import { Button } from "./ui/button";
+
 
 export default function Hero() {
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden  bg-[#0A1A1A]">
       {/* Main content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Top badge */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-block"
-        >
-          <div className="px-4 py-1 rounded-full bg-[#0A2818] border border-green-500/20">
-            <span className="text-[#22C55E] text-sm font-medium">
-              Trusted by 21,000+ Developers
-            </span>
-          </div>
-        </motion.div>
+       
 
         {/* Main heading */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-8 text-5xl md:text-7xl font-bold tracking-tight"
+          className="mt-6 text-5xl md:text-7xl font-bold tracking-tight"
         >
           <span className="text-[#22C55E]">
             Master Coding.
@@ -42,28 +32,40 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-6 text-xl text-gray-300 max-w-3xl mx-auto"
+          className=" text-xl text-gray-300 max-w-3xl mx-auto"
         >
           Join India's most comprehensive coding program. Learn from experts, build real
           projects, and land your dream job.
         </motion.p>
 
-        {/* CTA Button with Price */}
+        {/* Video Section - Added here */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-10 flex flex-col items-center gap-4"
+          className="mt-10"
         >
-          {/* Buy Button */}
-          <Button
-            size="lg"
-            className="bg-[#22C55E] hover:bg-[#1EA052] text-white px-12 py-6 text-xl rounded-xl transition-all duration-200 hover:scale-105 w-full sm:w-auto"
-          >
-            Choose Your Path Now 🔥
-          </Button>
-
-        
+          <div className="relative max-w-3xl mx-auto">
+            <div className="relative rounded-2xl overflow-hidden border-2 border-green-500/20 shadow-2xl shadow-green-500/10">
+              <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-green-500/10 mix-blend-overlay" />
+              <div className="relative pb-[56.25%] h-0">
+                <Suspense fallback={
+                  <div className="absolute inset-0 flex items-center justify-center bg-green-500/10">
+                    <div className="text-green-400">Loading...</div>
+                  </div>
+                }>
+                  <iframe
+                    src={`https://www.youtube.com/embed/hOcTPtZYTto?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1`}
+                    className="absolute top-0 left-0 w-full h-full"
+                    allowFullScreen
+                    loading="lazy"
+                    onLoad={() => setIsVideoLoaded(true)}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  />
+                </Suspense>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         {/* Stats */}
@@ -71,7 +73,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
-          className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center"
+          className="m-10 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center"
         >
           <div className="bg-[#0A0A0A] rounded-2xl p-6 border border-[#1C1C1C]">
             <div className="flex justify-center mb-2">

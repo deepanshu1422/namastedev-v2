@@ -156,7 +156,6 @@ const courseData = {
       "150+ Hours of Video Content",
       "40+ Industry Projects",
       "Lifetime Access to All Courses",
-      "1-on-1 Mentorship Support",
       "Career Guidance & Interview Prep"
     ],
     buttonText: "Level Up Your Career"

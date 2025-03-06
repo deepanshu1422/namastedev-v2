@@ -25,11 +25,7 @@ const features = [
     title: "Industry Expert Mentors",
     description: "Learn from experienced professionals with expertise in FAANG companies and startups."
   },
-  {
-    icon: <Clock className="w-8 h-8 text-emerald-400" />,
-    title: "Flexible Learning",
-    description: "6-month access to most courses with self-paced learning to fit your schedule."
-  },
+  
   {
     icon: <BookOpen className="w-8 h-8 text-emerald-400" />,
     title: "Comprehensive Curriculum",
