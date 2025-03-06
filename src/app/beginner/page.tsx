@@ -10,43 +10,124 @@ import UpsellBanner from '@/components/UpsellBanner';
 const learningPath = [
   {
     step: 1,
-    title: "Introduction to Programming",
-    description: "Start with the basics of coding and understand core programming concepts",
+    title: "HTML, CSS Complete Mastery Course",
+    description: "Master modern web development with HTML and CSS to create stunning websites and web applications",
     points: [
-      "Understanding how code works",
-      "Basic programming logic",
-      "Problem-solving approach"
-    ]
+      "Master HTML basics and advanced techniques",
+      "Create stylish and responsive websites with CSS",
+      "Explore Flexbox, Grid, and CSS animations for modern web design",
+      "Create dynamic web pages and responsive designs",
+      "Advanced styling techniques with modern CSS"
+    ],
+    details: {
+      keyHighlights: [
+        "Master HTML basics and advanced techniques",
+        "Create stylish and responsive websites with CSS",
+        "Explore Flexbox, Grid, and CSS animations for modern web design"
+      ],
+      outcomes: [
+        "Create Dynamic Web Pages",
+        "Responsive Web Design",
+        "Advanced Styling Techniques"
+      ]
+    }
   },
   {
     step: 2,
-    title: "Core Programming Languages",
-    description: "Master fundamental programming with Python, Java & JavaScript",
+    title: "Complete Java Course",
+    description: "Comprehensive Java programming course from basics to advanced concepts with lifetime access",
     points: [
-      "Python for beginners",
-      "Java fundamentals",
-      "JavaScript essentials"
-    ]
+      "Learn Java programming from scratch",
+      "Master object-oriented programming principles",
+      "Build GUI applications with JavaFX",
+      "Implement multi-threading and collections",
+      "Advanced exception handling and file management"
+    ],
+    details: {
+      keyHighlights: [
+        "Understand Java fundamentals",
+        "Master object-oriented programming",
+        "Create GUI applications",
+        "Implement multi-threading",
+        "Handle exceptions and file management"
+      ]
+    }
   },
   {
     step: 3,
-    title: "Web Development Basics",
-    description: "Learn the building blocks of web development",
+    title: "Complete Python Course",
+    description: "Learn Python programming from scratch and master core concepts through practical exercises",
     points: [
-      "HTML structure",
-      "CSS styling",
-      "Basic SQL queries"
-    ]
+      "Build strong foundation in Python concepts",
+      "Gain hands-on experience with practical coding",
+      "Master Python's built-in libraries and modules",
+      "Develop real-world applications",
+      "Learn Python's syntax and features"
+    ],
+    details: {
+      keyHighlights: [
+        "Learn Python from scratch",
+        "Build strong foundation in concepts",
+        "Gain hands-on experience",
+        "Master built-in libraries"
+      ],
+      outcomes: [
+        "Write Python code confidently",
+        "Understand core programming concepts",
+        "Develop real-world applications",
+        "Master Python libraries and modules"
+      ]
+    }
   },
   {
     step: 4,
-    title: "AI & Modern Tools",
-    description: "Get started with AI tools and modern development practices",
+    title: "Complete JavaScript Mastery Course",
+    description: "Master JavaScript and build interactive web applications with hands-on exercises",
     points: [
-      "ChatGPT basics",
-      "AI prompt writing",
-      "Developer tools"
-    ]
+      "Learn JavaScript from fundamentals to advanced concepts",
+      "Build interactive web applications",
+      "Master advanced JavaScript techniques",
+      "Optimize code performance",
+      "Implement modern JavaScript features"
+    ],
+    details: {
+      keyHighlights: [
+        "Master JavaScript from scratch",
+        "Build interactive applications",
+        "Learn advanced concepts",
+        "Hands-on exercises"
+      ],
+      outcomes: [
+        "Create dynamic web applications",
+        "Master JavaScript fundamentals",
+        "Implement advanced techniques",
+        "Optimize code performance"
+      ]
+    }
+  },
+  {
+    step: 5,
+    title: "SQL and Databases Mastery Course",
+    description: "Comprehensive course covering SQL fundamentals to advanced database concepts",
+    points: [
+      "Master SQL fundamentals and queries",
+      "Learn advanced database concepts",
+      "Optimize database performance",
+      "Handle complex database structures",
+      "Implement efficient data management"
+    ],
+    details: {
+      keyHighlights: [
+        "Master SQL fundamentals",
+        "Learn advanced concepts",
+        "Optimize performance"
+      ],
+      outcomes: [
+        "Write complex SQL queries",
+        "Manage database structures",
+        "Optimize database performance"
+      ]
+    }
   }
 ];
 
@@ -60,7 +141,7 @@ const courseBenefits = [
     icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
   },
   {
-    title: "4 Real-World Projects",
+    title: "10+ Real-World Projects",
     icon: "M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
   },
   {
@@ -71,7 +152,7 @@ const courseBenefits = [
 
 const supportFeatures = [
   {
-    title: "6 Months Access",
+    title: "Lifetime Access",
     icon: "M13 10V3L4 14h7v7l9-11h-7z"
   },
  
@@ -91,18 +172,71 @@ const supportFeatures = [
 
 const faqs = [
   {
-    question: "What is included in the Beginner Level Course Package?",
-    answer: "The package includes Introduction to Coding (Basic coding overview), Complete Python, Java & JavaScript Course (Lifetime access), HTML, CSS, and SQL Fundamentals (Web development basics), and Chat GPT & AI Prompt Engineering Course (Basic AI knowledge for beginners)."
+    question: "What courses are included in the beginner package?",
+    answer: "The beginner package includes five comprehensive courses: HTML & CSS Complete Mastery Course, Complete Java Course, Complete Python Course, Complete JavaScript Mastery Course, and SQL & Databases Mastery Course. Each course is designed to take you from basics to advanced concepts with lifetime access."
   },
   {
-    question: "Is this course suitable for absolute beginners?",
-    answer: "Yes, this course is specifically designed for absolute beginners or those new to coding. We start from the very basics and gradually build up your programming knowledge with a solid foundation."
+    question: "Do I need any prior programming experience?",
+    answer: "No prior programming experience is needed! Our courses are designed for absolute beginners. Each course starts from the fundamentals and progressively builds up to advanced concepts. We ensure you build a strong foundation before moving to complex topics."
   },
   {
-    question: "Do I get lifetime access to the courses?",
-    answer: "Yes, you get lifetime access to all the courses included in the package. Once enrolled, you can learn at your own pace and revisit the content whenever you need to."
+    question: "What will I learn in the HTML & CSS course?",
+    answer: "In the HTML & CSS course, you'll learn everything from basics to advanced techniques including creating dynamic web pages, responsive design, Flexbox, Grid, and CSS animations. You'll master modern web design principles and learn to create stunning, responsive websites."
+  },
+  {
+    question: "What does the Java course cover?",
+    answer: "The Complete Java course covers everything from Java fundamentals to advanced concepts. You'll learn object-oriented programming, GUI development with JavaFX, multi-threading, collections, exception handling, and file management. By the end, you'll be able to build complex Java applications."
+  },
+  {
+    question: "What will I learn in the Python course?",
+    answer: "The Python course teaches you Python programming from scratch. You'll learn Python syntax, core concepts, built-in libraries and modules, and how to develop real-world applications. The course includes practical coding exercises and hands-on projects to reinforce your learning."
+  },
+  {
+    question: "What's included in the JavaScript course?",
+    answer: "The JavaScript course covers everything from fundamentals to advanced concepts. You'll learn to build interactive web applications, master advanced JavaScript techniques, optimize code performance, and implement modern JavaScript features. The course includes hands-on exercises and real-world examples."
+  },
+  {
+    question: "What will I learn in the SQL and Databases course?",
+    answer: "The SQL and Databases course teaches you database fundamentals, advanced concepts, and performance optimization. You'll learn to write complex SQL queries, manage database structures, and implement efficient data management techniques. The course covers everything needed for modern database development."
+  },
+  {
+    question: "How long do I have access to these courses?",
+    answer: "You get lifetime access to all five courses, including any future updates. You can learn at your own pace and revisit the materials whenever you need to refresh your knowledge. This ensures you have continuous support throughout your learning journey."
+  },
+  {
+    question: "Will these courses help me in my career?",
+    answer: "Absolutely! These courses are designed with job readiness in mind. You'll learn industry-standard technologies and practices, build practical projects, and gain hands-on experience. The skills you learn are highly sought after in the tech industry and will help you launch or advance your programming career."
   }
 ];
+
+// Course details content
+const courseDetails = {
+  title: "Course Details for Beginner Plan (₹999)",
+  description: "In this beginner-friendly course, you will learn everything from the basics to advanced concepts, ensuring you gain hands-on experience with real-world projects.",
+  
+  technologies: [
+    "HTML & CSS – Learn the fundamentals of web development and responsive design.",
+    "JavaScript (Complete) – Master JavaScript from basics to advanced concepts.",
+    "React.js – Build dynamic web applications with 10+ real-world projects (easy to medium level).",
+    "Git & GitHub – Learn version control, collaboration, and best practices.",
+    "Deployment – Deploy your projects online with confidence.",
+    "Node.js (Full – Beginner to Advanced) – Back-end development with APIs, authentication, and more.",
+    "Databases – Learn database management and integration."
+  ],
+  
+  projects: [
+    "Chat Application – Build a fully functional chat app.",
+    "Advanced Beginner Projects – Work on multiple hands-on projects to strengthen your skills."
+  ],
+  
+  improvements: [
+    "Structured Format – Clear sections for easy readability.",
+    "Engaging Language – Using active words like 'Master,' 'Build,' and 'Learn' makes it more appealing.",
+    "Better Flow – The content is now more logically ordered.",
+    "Highlights & Emoji Enhancements – They make the information visually appealing and easier to skim.",
+    "Clarity on Projects – Mentioning the chat app and various advanced beginner projects makes it clearer."
+  ]
+};
 
 const BeginnerPage = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -212,6 +346,7 @@ const BeginnerPage = () => {
         >
           <Button 
             className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-8 py-6 text-lg rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#22C55E]/20"
+            onClick={() => window.location.href = 'https://30dc.graphy.com/single-checkout/67c84187483bc1739e05e1cb?pid=p1'}
           >
             Start Learning Now
           </Button>

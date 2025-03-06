@@ -7,12 +7,10 @@ import FAQ from "@/components/FAQ";
 import Footer from "@/components/new-cohort/footer";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Mentors from "@/app/(users)/mentors";
-import Comparison from "@/app/(users)/bundle/[slug]/unpaid/comparison";
 import { Badge } from "@/components/ui/badge";
 import { Award } from "lucide-react";
 import Image from "next/image";
-import VideoSlider from "@/app/(guide)/testimonials/video-slider";
-
+import TableHome from "@/components/TableHome";
 export default function TestPage() {
   return (
     <>
@@ -20,7 +18,7 @@ export default function TestPage() {
       <main className="min-h-screen">
         <Hero />
         <CourseSection />
-        <Comparison />
+       <TableHome />
         <WhyChooseUs />
         <Mentors />
         

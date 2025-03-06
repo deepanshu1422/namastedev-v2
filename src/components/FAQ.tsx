@@ -7,19 +7,15 @@ import { ChevronDown, HelpCircle } from 'lucide-react';
 const faqs = [
   {
     question: "What courses are included in the Beginner Level (₹999)?",
-    answer: "The Beginner Level includes 4 foundational courses: Introduction to Coding (Basic coding overview), Complete Python, Java & JavaScript Course (Lifetime), HTML, CSS, and SQL Fundamentals (Web development basics), and Chat GPT & AI Prompt Engineering Course (Basic AI knowledge for beginners)."
+    answer: "The Beginner Level includes: SQL, Python, JavaScript, Java, HTML, and CSS."
   },
   {
     question: "What's included in the Intermediate Level (₹1999)?",
-    answer: "The Intermediate Level includes 6 skill-building courses: JavaScript & React JS Mastery Course (Frontend specialization), Backend Development with Node.js & Express.js, Data Analytics & SQL Mastery Course, Full Stack Interview Questions & Project-Based Learning, DSA Revision & Mastery Course, and FAANG & Startup Tech Job Roadmap (Lifetime)."
+    answer: "The Intermediate Level includes all Beginner Level courses plus MERN stack, Next.js, Backend development, Node.js end to end, Chat GPT & AI prompt engineering course, and React.js."
   },
   {
     question: "What does the Advanced Level (₹2999) offer?",
-    answer: "The Advanced Level includes 4 mastery courses: AI & Machine Learning Mastery (Advanced AI applications), Blockchain, Solidity, and DeFi Complete Course (Lifetime), Advanced Full Stack Projects & System Design, and MERN & Next.js Full Stack Web Development."
-  },
-  {
-    question: "How long do I have access to the courses?",
-    answer: "Most courses come with 6 months of access. However, some courses like the Complete Python, Java & JavaScript Course, FAANG & Startup Tech Job Roadmap, and Blockchain course come with lifetime access."
+    answer: "The Advanced Level includes all Intermediate & Beginner Level courses plus: 1. AI mastery course - Workflows, Tools, Chat GPT, Full stack projects, and prompting course, 2. FAANG and Startup Tech job roadmap, 3. Coding Project Ideas, 4. Blockchain, Solidity, Defi complete course, 5. Data analytics course, 6. Full stack Interview Questions and projects."
   },
   {
     question: "Are these courses suitable for complete beginners?",

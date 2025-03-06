@@ -10,97 +10,139 @@ import UpsellBanner from '@/components/UpsellBanner';
 const learningPath = [
   {
     step: 1,
-    title: "AI & Machine Learning Mastery",
-    description: "Chat GPT, Workflows, & Full Stack AI Projects (Advanced AI Applications)",
+    title: "🤖 AI Mastery Course",
+    description: "Master AI Integration & Development",
     points: [
-      "Comprehensive AI technology exploration",
-      "Hands-on projects with cutting-edge AI tools",
-      "Advanced workflow implementation"
+      "Comprehensive coverage of AI workflows and tools",
+      "Chat GPT implementation and integration",
+      "Full-stack AI project development",
+      "Advanced prompting techniques and strategies",
+      "Hands-on experience with various AI tools"
     ]
   },
   {
     step: 2,
-    title: "Blockchain, Solidity, and DeFi Complete Course",
-    description: "For blockchain & Web3 enthusiasts",
+    title: "📊 DSA & FAANG Job Preparation",
+    description: "Complete Interview Preparation",
     points: [
-      "Deep dive into blockchain technologies",
-      "Smart contract development with Solidity",
-      "Comprehensive decentralized finance (DeFi) strategies"
+      "Complete DSA revision and mastery",
+      "FAANG and Startup Tech job roadmap",
+      "Technical interview preparation",
+      "Resume writing and networking strategies",
+      "Personalized guidance from industry experts"
     ]
   },
   {
     step: 3,
-    title: "Advanced Full Stack Projects & System Design",
-    description: "Hands-on real-world projects + system architecture",
+    title: "💡 Project Mastery Bundle",
+    description: "Build Real-World Projects",
     points: [
-      "Complex architectural pattern implementation",
-      "Enterprise-level system design techniques",
-      "Scalable solution development"
+      "50+ Unique coding project ideas",
+      "Full-stack projects and SaaS tools",
+      "MVP product development",
+      "Real-world implementation guides",
+      "Constantly updated project content"
     ]
   },
   {
     step: 4,
-    title: "MERN & Next.js Full Stack Web Development",
-    description: "Advanced full-stack web development expertise",
+    title: "🔗 Blockchain & DeFi",
+    description: "Complete Web3 Development",
     points: [
-      "Advanced JavaScript ecosystem mastery",
-      "Modern web application architecture",
-      "High-performance web development techniques"
+      "Complete Blockchain fundamentals",
+      "Solidity programming mastery",
+      "DeFi protocols and applications",
+      "Smart contract development",
+      "Real-world blockchain projects"
+    ]
+  },
+  {
+    step: 5,
+    title: "📈 Data & Interview Prep",
+    description: "Data Analytics & Job Preparation",
+    points: [
+      "Complete data analytics course",
+      "Statistical methods and visualization",
+      "Full-stack interview preparation",
+      "Comprehensive job-ready skills",
+      "Expert guidance and support"
+    ]
+  },
+  {
+    step: 6,
+    title: "🎁 BONUS: Complete Access",
+    description: "Access to All Course Levels",
+    points: [
+      "All Beginner Courses (₹999 value)",
+      "All Intermediate Courses (₹1,999 value)",
+      "Lifetime updates and support",
+      "Priority mentorship access",
+      "Interview preparation resources"
     ]
   }
 ];
 
 const courseBenefits = [
   {
-    title: "4 Advanced Courses",
+    title: "20+ Premium Courses",
     icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
   },
   {
-    title: "100+ Hours of Content",
+    title: "200+ Hours of Content",
     icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
   },
   {
-    title: "Industry-Level Projects",
+    title: "50+ Industry Projects",
     icon: "M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
   },
   {
-    title: "Lifetime Access",
-    icon: "M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+    title: "Job & Interview Prep",
+    icon: "M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
   }
 ];
 
 const supportFeatures = [
   {
-    title: "Lifetime Access",
+    title: "Structured Learning",
     icon: "M13 10V3L4 14h7v7l9-11h-7z"
   },
   {
-    title: "Coding Practice & Challenges",
+    title: "Lifetime Access ",
+    icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+  },
+  {
+    title: "Industry Ready Projects",
     icon: "M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
   },
   {
-    title: "Advanced Resources",
-    icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-  },
-  {
-    title: "Project Reviews",
+    title: "High Quality Resources",
     icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
   }
 ];
 
 const faqs = [
   {
-    question: "What prerequisites are needed for the Advanced Course?",
-    answer: "You should have strong programming fundamentals, experience with web development, and a good understanding of JavaScript and modern frameworks. Our intermediate course or equivalent professional experience is recommended."
+    question: "What's included in this complete package?",
+    answer: "This is our most comprehensive package that includes: 1) All Beginner Courses (HTML, CSS, Java, Python, JavaScript, SQL) 2) All Intermediate Courses (MERN Stack, Next.js, Node.js, React, ChatGPT) 3) All Advanced Courses (AI/ML, Blockchain, DSA, FAANG Prep, Data Analytics) 4) 50+ Industry Projects 5) Interview Preparation 6) 1-on-1 Mentorship. Total value of ₹5,997 (₹999 + ₹1,999 + ₹2,999) available at a special price!"
   },
   {
-    question: "What makes this different from the Intermediate Course?",
-    answer: "The Advanced Course focuses on cutting-edge technologies like AI, Blockchain, and System Design. You'll work on complex industry-level projects and gain expertise in advanced architectural patterns and modern development practices."
+    question: "Is this suitable for complete beginners?",
+    answer: "Absolutely! This package is designed for everyone - from complete beginners to advanced developers. You get access to our complete beginner courses (worth ₹999) that start from basics, intermediate courses (worth ₹1,999) for skill advancement, and advanced courses (worth ₹2,999) for mastery. The learning path is structured to ensure smooth progression from basics to advanced topics."
   },
   {
-    question: "Will this help me in getting into top tech companies?",
-    answer: "Yes! The course is designed to prepare you for senior developer positions and tech leadership roles. You'll master advanced concepts, work on complex projects, and learn industry best practices that top tech companies look for."
-  }
+    question: "What kind of projects will I build?",
+    answer: "You'll work on 50+ diverse projects including: 1) E-commerce platforms and YouTube clones 2) AI/ChatGPT applications and tools 3) Blockchain DApps and Smart Contracts 4) Data Analytics dashboards 5) Full-stack SaaS applications 6) Real-time chat applications 7) Social media platforms 8) Payment integration projects. All projects include step-by-step guidance and code reviews from mentors."
+  },
+  {
+    question: "What career support is provided?",
+    answer: "You get comprehensive career support including: 1) Complete DSA and FAANG interview preparation 2) Resume building and LinkedIn optimization 3) 1-on-1 mentorship from industry experts 4) Mock interviews and feedback 5) Networking strategies for tech jobs 6) Personalized roadmap for job preparation 7) Access to our hiring partners 8) Interview preparation for both service and product companies."
+  },
+  
+  {
+    question: "What makes this package worth the investment?",
+    answer: "This package offers exceptional value: 1) Access to 20+ premium courses covering full-stack, AI, blockchain, and more 2) 50+ real-world projects for portfolio building 3) Complete FAANG interview preparation 4) 1-on-1 mentorship worth ₹20,000 5) Career guidance and job support 6) Lifetime access to all future updates 7) Certificate of completion. The skills you learn will help you land high-paying tech jobs or build successful tech products."
+  },
+ 
 ];
 
 const AdvancedPage = () => {
@@ -109,8 +151,8 @@ const AdvancedPage = () => {
   return (
     <div className="min-h-screen bg-[#0A1F1C] pb-24">
       <UpsellBanner 
-        currentPrice="₹3,999"
-        originalPrice="₹4,999"
+        currentPrice="₹2,999"
+        originalPrice="₹43,999"
         discountPercentage="25%"
         currentPage="advanced"
       />
@@ -146,7 +188,7 @@ const AdvancedPage = () => {
             
             <Button 
               className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-12 py-6 text-xl rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-[#22C55E]/30 flex items-center gap-2"
-              onClick={() => window.location.href = 'https://courses.30dayscoding.com/courses/Advance-67c84bf8a8b9000d1b93a8cc'}
+              onClick={() => window.location.href = 'https://30dc.graphy.com/single-checkout/652a1994e4b05a145bae5cd0?pid=p1'}
             >
               <span>Buy Now</span>
               <svg 
@@ -196,6 +238,7 @@ const AdvancedPage = () => {
             </div>
           </motion.div>
 
+        
           {/* Support Features */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -232,6 +275,7 @@ const AdvancedPage = () => {
         >
           <Button 
             className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-8 py-6 text-lg rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#22C55E]/20"
+            onClick={() => window.location.href = 'https://30dc.graphy.com/single-checkout/652a1994e4b05a145bae5cd0?pid=p1'}
           >
             Start Learning Now
           </Button>
