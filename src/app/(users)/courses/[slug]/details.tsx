@@ -41,6 +41,7 @@ import { serialize } from "next-mdx-remote-client/serialize";
 import { Badge } from "@/components/ui/badge";
 // import { courseProgress } from "@/lib/jotai";
 import { useAtom } from "jotai";
+import MobilePopup from "@/components/MobilePopup";
 
 const CodeSnippet = ({ children }: { children: string }) => (
   <div className="md:max-w-full horizontal-scroll w-full bg-slate-500 max-sm:w-[90dvw] font-semibold shrink">
@@ -184,6 +185,7 @@ export default function Details({
 
   return (
     <div className="flex flex-col gap-4 tab:w-3/4 w-full break-all">
+      <MobilePopup />
       <section className="flex flex-col gap-2">
         <VideoPlayer
           nextVideo={nextVideo}

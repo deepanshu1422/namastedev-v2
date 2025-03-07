@@ -1,5 +1,5 @@
 import MobileMenu from "@/components/mobile-menu";
-import Navbar from "@/components/home-components/navbar";
+import BundleNavbar from "@/components/BundleNavbar";
 import Footer from "@/components/new-cohort/footer";
 import { Toaster } from "sonner";
 
@@ -11,7 +11,7 @@ export default function MainLayout({
   return (
     <>
       {/* <MobileMenu /> */}
-      <Navbar />
+      <BundleNavbar />
       {children}
       <Footer />
     </>

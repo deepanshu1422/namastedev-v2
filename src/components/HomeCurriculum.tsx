@@ -3,6 +3,8 @@
 import { Check, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import React from "react";
+import Link from "next/link";
+import FloatingButton from "./FloatingButton";
 
 function Section({ title, items, isOpen }: { title: string; items: string[]; isOpen: boolean }) {
   if (!isOpen) return null;
@@ -11,18 +13,18 @@ function Section({ title, items, isOpen }: { title: string; items: string[]; isO
     <div className="overflow-hidden">
       <div className="pl-8 relative">
         <div className="absolute left-0 top-0 w-px h-full bg-gradient-to-b from-emerald-500/50 to-transparent" />
-        <h3 className="text-sm font-medium bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+        <h3 className="text-base font-medium bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
           {title}
         </h3>
-        <ul className="mt-2 space-y-1.5 text-emerald-100/90 relative">
+        <ul className="mt-4 space-y-3 text-emerald-100/90 relative">
           {items.map((item, index) => (
             <li 
               key={index} 
-              className="flex items-center gap-2 group relative text-sm"
+              className="flex items-center gap-3 group relative text-sm"
             >
               <div className="absolute -left-[16px] top-1/2 w-4 h-px bg-emerald-500/30" />
-              <div className="shrink-0 p-1 bg-emerald-500/10 rounded-lg group-hover:bg-emerald-500/20 transition-colors">
-                <Check className="w-3 h-3 text-emerald-400" />
+              <div className="shrink-0 p-1.5 bg-emerald-500/10 rounded-lg group-hover:bg-emerald-500/20 transition-colors">
+                <Check className="w-4 h-4 text-emerald-400" />
               </div>
               <span className="group-hover:text-emerald-300 transition-colors">{item}</span>
             </li>
@@ -33,313 +35,171 @@ function Section({ title, items, isOpen }: { title: string; items: string[]; isO
   );
 }
 
-function Module({ module, index }: { module: any; index: number }) {
-  const [isOpen, setIsOpen] = useState(false);
+function Module({ module, index, bundle }: { module: any; index: number; bundle: string }) {
+  return (
+    <Link href={`/${bundle}`} className="relative group">
+      <div className="absolute -left-3 top-1/2 w-3 h-px bg-emerald-500/30" />
+      <div className="relative bg-gradient-to-br from-[#112121] to-[#0A1A1A] p-4 rounded-xl border border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 hover:scale-[1.02]">
+        <div className="flex items-center gap-3">
+          <div className="text-xl bg-emerald-500/10 p-2 rounded-lg">
+            {module.emoji}
+          </div>
+          <div>
+            <h2 className="text-base font-semibold bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+              {module.title}
+            </h2>
+            <p className="text-sm text-gray-400 mt-1 line-clamp-2">{module.description}</p>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+const mainModules = [
+  {
+    bundle: "beginner",
+    bundleTitle: "🌟 Beginner Bundle",
+    bundleDescription: "Perfect starting point for aspiring developers",
+    courses: [
+      {
+        emoji: "💻",
+        title: "HTML, CSS complete mastery course",
+        description: "Master modern web development with HTML and CSS to create stunning websites and web applications"
+      },
+      {
+        emoji: "⚡",
+        title: "Complete JavaScript mastery course (lifetime + certificate)",
+        description: "Master JavaScript from basics to advanced concepts with hands-on projects and lifetime access"
+      },
+      {
+        emoji: "☕",
+        title: "Complete Java course (lifetime)",
+        description: "Comprehensive Java programming course from basics to advanced concepts with lifetime access"
+      },
+      {
+        emoji: "🐍",
+        title: "Complete Python course (lifetime)",
+        description: "Learn Python programming from scratch and master core concepts through practical exercises"
+      },
+      {
+        emoji: "📊",
+        title: "SQL and Databases mastery course",
+        description: "Master database concepts, SQL queries, and data management with practical examples"
+      }
+    ]
+  },
+  {
+    bundle: "intermediate",
+    bundleTitle: "🚀 Intermediate Bundle",
+    bundleDescription: "Level up with full-stack development and modern frameworks",
+    bonusDescription: "BONUS: Includes all Beginner courses worth ₹999!",
+    courses: [
+      {
+        emoji: "⚡",
+        title: "MERN full-stack web development course",
+        description: "Master Full-Stack Web Development with MongoDB, Express.js, React, and Node.js"
+      },
+      {
+        emoji: "📱",
+        title: "Next JS full stack web development course",
+        description: "Learn server-side rendering, static generation, and full-stack development with Next.js"
+      },
+      {
+        emoji: "🖥️",
+        title: "Backend development with Node-Express JS",
+        description: "Master backend development with Node.js and Express.js framework"
+      },
+      {
+        emoji: "🤖",
+        title: "Chat GPT AI prompt engineering course (lifetime)",
+        description: "Master AI integration, prompt engineering, and building AI-powered applications"
+      },
+      {
+        emoji: "⚛️",
+        title: "React JS course",
+        description: "Master React.js and build modern web applications"
+      }
+    ]
+  },
+  {
+    bundle: "advanced",
+    bundleTitle: "💎 Advanced Bundle",
+    bundleDescription: "Master advanced technologies and prepare for top tech roles",
+    bonusDescription: "BONUS: Includes all Beginner (₹999) & Intermediate (₹1,999) courses!",
+    courses: [
+      {
+        emoji: "🤖",
+        title: "AI mastery course - Workflows, Tools, Chat GPT, Full stack projects",
+        description: "Comprehensive AI development course with practical applications"
+      },
+      {
+        emoji: "🎯",
+        title: "DSA revision and mastery course",
+        description: "Master Data Structures and Algorithms with interview preparation"
+      },
+      {
+        emoji: "📈",
+        title: "FAANG and Startup Tech job roadmap",
+        description: "Complete preparation guide for top tech company interviews"
+      },
+      {
+        emoji: "🔗",
+        title: "Blockchain, Solidity, Defi complete course",
+        description: "Master blockchain development, smart contracts, and DeFi"
+      },
+      {
+        emoji: "📊",
+        title: "Data analytics course",
+        description: "Comprehensive data analytics and visualization"
+      }
+    ]
+  }
+];
+
+function BundleSection({ bundle, index }: { bundle: any; index: number }) {
+  const bundleColors = {
+    beginner: "from-green-400/20 to-emerald-400/20",
+    intermediate: "from-blue-400/20 to-cyan-400/20",
+    advanced: "from-purple-400/20 to-pink-400/20"
+  };
 
   return (
-    <div className="relative group">
-      <div className="absolute -left-3 top-1/2 w-3 h-px bg-emerald-500/30" />
-      <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-      <div className="relative bg-gradient-to-br from-[#112121] to-[#0A1A1A] p-4 rounded-xl border border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300">
-        <button 
-          onClick={() => setIsOpen(!isOpen)}
-          className="w-full text-left"
-        >
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <div className="text-xl bg-emerald-500/10 p-2 rounded-lg">
-                {module.emoji}
+    <div className="space-y-4" data-bundle={bundle.bundle}>
+      <div className={`p-4 rounded-xl bg-gradient-to-r ${bundleColors[bundle.bundle]} border border-emerald-500/20`}>
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-bold text-white">{bundle.bundleTitle}</h2>
+              <p className="text-gray-300 text-sm mt-1">{bundle.bundleDescription}</p>
+            </div>
+            <div className="text-right">
+              <div className="text-emerald-400 font-bold text-lg">
+                {bundle.bundle === "beginner" ? "₹999" : bundle.bundle === "intermediate" ? "₹1,999" : "₹2,999"}
               </div>
-              <div>
-                <h2 className="text-base font-semibold bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
-                  {module.title}
-                </h2>
-                <p className="text-emerald-300/70 mt-1 text-xs line-clamp-1">
-                  {module.description}
-                </p>
+              <div className="text-sm text-emerald-500">
+                {bundle.bundle === "beginner" ? "50% OFF" : bundle.bundle === "intermediate" ? "33% OFF" : "25% OFF"}
               </div>
             </div>
-            <ChevronDown 
-              className={`w-4 h-4 text-emerald-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-            />
           </div>
-        </button>
-        <div className="mt-4 space-y-4">
-          {module.sections.map((section: any, sIndex: number) => (
-            <Section key={sIndex} {...section} isOpen={isOpen} />
-          ))}
+          {bundle.bonusDescription && (
+            <p className="text-emerald-400 text-sm font-medium">{bundle.bonusDescription}</p>
+          )}
         </div>
+      </div>
+      <div className="grid grid-cols-1 gap-3 pl-4">
+        {bundle.courses.map((module: any, moduleIndex: number) => (
+          <Module key={moduleIndex} module={module} index={moduleIndex} bundle={bundle.bundle} />
+        ))}
       </div>
     </div>
   );
 }
 
 export default function CourseCurriculum() {
-  const [showMore, setShowMore] = useState(false);
-  
-  const mainModules = [
-    {
-      emoji: "🎯",
-      title: "Master DSA - Job Ready Course",
-      description: "Master DSA with this Job Ready Course which includes 250+ videos, revision guides, roadmaps, and more!",
-      sections: [
-        {
-          title: "DSA Mastery",
-          items: [
-            "Comprehensive DSA Training",
-            "Coding Interview Preparation",
-            "Problem Solving Optimization",
-          ]
-        }
-      ]
-    },
-    {
-      emoji: "🔗",
-      title: "Blockchain Mastery Complete Course",
-      description: "Blockchain Mastery Complete Course - Solidity, Defi, NFTs, Projects",
-      sections: [
-        {
-          title: "Blockchain Development",
-          items: [
-            "Smart Contracts & Solidity",
-            "DeFi & NFT Development",
-            "dApps Architecture",
-          ]
-        }
-      ]
-    },
-    {
-      emoji: "💻",
-      title: "HTML, CSS, and JS Course",
-      description: "HTML, CSS, and JavaScript Beginner to Advanced Course takes you from the basics of web development to building interactive, responsive websites",
-      sections: [
-        {
-          title: "Web Development",
-          items: [
-            "HTML5 & CSS3 Mastery",
-            "JavaScript Fundamentals",
-            "Responsive Web Design",
-          ]
-        }
-      ]
-    },
-    {
-      emoji: "⚛️",
-      title: "JavaScript and React.js Frontend",
-      description: "Frontend Complete Course guides you through building and designing responsive, interactive websites",
-      sections: [
-        {
-          title: "Frontend Development",
-          items: [
-            "Advanced JavaScript",
-            "React.js Development",
-            "Modern UI/UX Design",
-          ]
-        }
-      ]
-    },
-    {
-      emoji: "📊",
-      title: "SQL Mastery - Data Analytics",
-      description: "Elevate your SQL skills from basics to advanced techniques. Learn to design databases, craft complex queries, and optimize performance",
-      sections: [
-        {
-          title: "SQL & Analytics",
-          items: [
-            "Database Design",
-            "Advanced SQL Queries",
-            "Data Analysis",
-          ]
-        }
-      ]
-    }
-  ];
-
-  const additionalModules = [
-    {
-      emoji: "🐍",
-      title: "Complete Python Mastery Course",
-      description: "The Complete Python Mastery Course equips you with the skills to master Python programming from scratch",
-      sections: [
-        {
-          title: "Python Development",
-          items: [
-            "Python Core Concepts",
-            "Advanced Applications",
-            "Automation & Analysis",
-          ]
-        }
-      ]
-    },
-    {
-      emoji: "🤖",
-      title: "Build Coding Projects with AI",
-      description: "AI Complete Course offers an in-depth exploration of AI, Tools, Workflows, Prompts, Full stack projects, SaaS tools, Freelancing",
-      sections: [
-        {
-          title: "AI Development",
-          items: [
-            "AI Tools Integration",
-            "SaaS Development",
-            "AI Project Building",
-          ]
-        }
-      ]
-    },
-    {
-      emoji: "🔮",
-      title: "Prompt Engineering - ChatGPT",
-      description: "The Prompt Engineering for ChatGPT Course teaches you how to craft effective prompts to maximize the potential of ChatGPT",
-      sections: [
-        {
-          title: "Prompt Engineering",
-          items: [
-            "ChatGPT Mastery",
-            "Effective Prompting",
-            "AI Integration",
-          ]
-        }
-      ]
-    },
-    {
-      emoji: "☕",
-      title: "Java Mastery Course",
-      description: "Java Mastery Course guides you through the essentials to advanced concepts of Java programming",
-      sections: [
-        {
-          title: "Java Development",
-          items: [
-            "Core Java Concepts",
-            "Object-Oriented Programming",
-            "Enterprise Applications",
-          ]
-        }
-      ]
-    },
-    {
-      emoji: "🚀",
-      title: "Full Stack Projects Course",
-      description: "Master Full Stack Dev with  Projects! Build real-world applications",
-      sections: [
-        {
-          title: "Project Building",
-          items: [
-            "Real-world Projects",
-            "Industry Best Practices",
-            "Portfolio Development",
-            "etc.."
-          ]
-        }
-      ]
-    },
-   
-    {
-      emoji: "⚡",
-      title: "Master MERN Stack",
-      description: "Master MERN stack with this certified course which includes 300+ videos, 45+ projects, 25+ interview guides!",
-      sections: [
-        {
-          title: "Full Stack Development",
-          items: [
-            "MongoDB & Express.js",
-            "React.js & Node.js",
-            "Full Stack Architecture",
-          ]
-        }
-      ]
-    },
-    {
-      emoji: "🎨",
-      title: "Unique Full Stack Projects",
-      description: "Dive into innovative projects like building real-time applications. Push the boundaries of creativity and technology",
-      sections: [
-        {
-          title: "Creative Development",
-          items: [
-            "Real-time Applications",
-            "Innovative Solutions",
-            "Advanced Integration",
-          ]
-        }
-      ]
-    },
-    {
-      emoji: "🎯",
-      title: "Interview Focused Prep Course",
-      description: "Prepare for your interviews in the best possible way - Full stack, DSA, Python",
-      sections: [
-        {
-          title: "Interview Preparation",
-          items: [
-            "Technical Interview Prep",
-            "Problem Solving Skills",
-            "Mock Interviews",
-          ]
-        }
-      ]
-    },
-    {
-        emoji: "📱",
-        title: "Data Analytics Course",
-        description: "Data Analytics Course teaches you how to analyze data and make informed decisions",
-        sections: [
-            {
-                title: "Data Analytics",
-                items: [
-                    "Data Analysis",
-                    "Data Visualization",
-                    "Data Reporting",
-                ]
-            }
-        ]
-    },
-    {
-        emoji: "📱",
-        title: "backend Development with Node.js and Express.js",
-        description: "backend Development with Node.js and Express.js",
-        sections: [
-            {
-                title: "Node.js and Express.js",
-                items: [
-                    "Node.js and Express.js",
-                   
-                ]
-            }
-        ]
-    },
-    {
-      emoji: "📱",
-      title: "Complete Next.js Mastery",
-      description: "The Complete Next.js Mastery Course takes you from basics to advanced skills in server-rendered applications",
-      sections: [
-        {
-          title: "Next.js Development",
-          items: [
-            "Server-side Rendering",
-            "Dynamic Routing",
-            "Full Stack Next.js",
-          ]
-        }
-      ]
-    },{
-        emoji: "📈",
-      title: "FAANG Roadmap",
-      description: "FAANG Roadmap for Software Engineers",
-      sections: [
-        {
-          title: "FAANG Roadmap",
-          items: [
-            "FAANG Roadmap",
-          ]
-        }
-      ]
-    }
-  ];
-
-  const modules = showMore ? [...mainModules, ...additionalModules] : mainModules;
-
   return (
-    <div className="relative bg-gradient-to-br from-[#112121] via-[#0A1A1A] to-[#112121] py-12 text-white overflow-hidden">
+    <div className="relative bg-gradient-to-br from-[#112121] via-[#0A1A1A] to-[#112121] py-12 text-white overflow-hidden course-curriculum-section">
+      <FloatingButton />
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)] -z-10" />
         <div className="absolute top-0 -left-4 w-[600px] h-[600px] bg-emerald-500 opacity-20 blur-[100px]" />
@@ -357,24 +217,11 @@ export default function CourseCurriculum() {
           <div className="w-px h-12 bg-gradient-to-b from-emerald-500 to-transparent mx-auto" />
         </div>
 
-        <div className="mt-8 space-y-4 relative pl-3">
+        <div className="mt-8 space-y-8 relative pl-3">
           <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-emerald-500 via-emerald-500/50 to-transparent" />
-          {modules.map((module, index) => (
-            <Module key={index} module={module} index={index} />
+          {mainModules.map((bundle, index) => (
+            <BundleSection key={index} bundle={bundle} index={index} />
           ))}
-          
-          <div className="flex justify-center mt-8">
-            <button
-              onClick={() => setShowMore(!showMore)}
-              className="group relative px-4 py-2 text-sm font-medium"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity blur-xl" />
-              <div className="relative flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors">
-                <span>{showMore ? 'Show Less Courses' : 'View More Courses'}</span>
-                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showMore ? 'rotate-180' : ''}`} />
-              </div>
-            </button>
-          </div>
         </div>
       </div>
     </div>

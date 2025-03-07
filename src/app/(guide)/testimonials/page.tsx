@@ -1,5 +1,8 @@
+'use client';
+
+import React from "react";
 import type { Metadata } from "next";
-import Navbar from "@/components/home-components/navbar";
+import BundleNavbar from "@/components/BundleNavbar";
 import Hero from "./hero";
 import Inspirational from "./inspirational";
 import Watch from "./watch";
@@ -9,6 +12,7 @@ import NewHero from "./new-hero";
 import VideoSlider from "./video-slider";
 import { CreditCard } from "lucide-react";
 import Link from "next/link";
+import Footer from "@/components/new-cohort/footer";
 
 export const dynamic = "force-static";
 
@@ -57,6 +61,7 @@ export default function Testimonial() {
 
   return (
     <main className={`font-jakarta bg-bg min-h-svh text-white overflow-hidden`}>
+      <BundleNavbar />
       <NewHero
         title="20,000+ Successful Students from 10+ countries"
         desc="Our aim is to provide quality education to everyone, everywhere at affordable prices. Join us and become a part of our community."

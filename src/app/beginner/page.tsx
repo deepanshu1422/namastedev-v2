@@ -7,128 +7,84 @@ import VideoGallery from '@/components/VideoGallery';
 import Footer from "@/components/new-cohort/footer";
 import UpsellBanner from '@/components/UpsellBanner';
 import useUtmTracker from '@/hooks/use-utm-tracker';
+import EnrollModal from '@/components/EnrollModal';
+import BundleNavbar from '@/components/BundleNavbar';
 
 const learningPath = [
   {
     step: 1,
-    title: "HTML, CSS Complete Mastery Course",
+    title: "HTML, CSS complete mastery course",
     description: "Master modern web development with HTML and CSS to create stunning websites and web applications",
-    points: [
-      "Master HTML basics and advanced techniques",
-      "Create stylish and responsive websites with CSS",
-      "Explore Flexbox, Grid, and CSS animations for modern web design",
-      "Create dynamic web pages and responsive designs",
-      "Advanced styling techniques with modern CSS"
-    ],
-    details: {
-      keyHighlights: [
-        "Master HTML basics and advanced techniques",
-        "Create stylish and responsive websites with CSS",
-        "Explore Flexbox, Grid, and CSS animations for modern web design"
-      ],
-      outcomes: [
-        "Create Dynamic Web Pages",
-        "Responsive Web Design",
-        "Advanced Styling Techniques"
-      ]
-    }
+    emoji: "💻",
+    details: [
+      "HTML5 Fundamentals - Structure, semantics, and modern elements",
+      "CSS3 Advanced Features - Flexbox, Grid, Animations",
+      "Responsive Design - Mobile-first approach, media queries",
+      "CSS Frameworks - Bootstrap, Tailwind CSS basics",
+      "Web Design Principles - Typography, color theory, layout",
+      "Performance Optimization - Best practices for web performance",
+      "Projects - Portfolio website, landing pages, responsive layouts"
+    ]
   },
   {
     step: 2,
-    title: "Complete Java Course",
-    description: "Comprehensive Java programming course from basics to advanced concepts with lifetime access",
-    points: [
-      "Learn Java programming from scratch",
-      "Master object-oriented programming principles",
-      "Build GUI applications with JavaFX",
-      "Implement multi-threading and collections",
-      "Advanced exception handling and file management"
-    ],
-    details: {
-      keyHighlights: [
-        "Understand Java fundamentals",
-        "Master object-oriented programming",
-        "Create GUI applications",
-        "Implement multi-threading",
-        "Handle exceptions and file management"
-      ]
-    }
+    title: "Complete JavaScript mastery course (lifetime + certificate)",
+    description: "Master JavaScript from basics to advanced concepts with hands-on projects and lifetime access",
+    emoji: "⚡",
+    details: [
+      "Core JavaScript - Variables, functions, objects, arrays",
+      "ES6+ Features - Arrow functions, destructuring, modules",
+      "DOM Manipulation - Events, selectors, dynamic content",
+      "Asynchronous JS - Promises, async/await, fetch API",
+      "Error Handling - Try/catch, custom errors, debugging",
+      "Performance - Memory management, optimization techniques",
+      "Projects - Todo app, quiz app, weather app"
+    ]
   },
   {
     step: 3,
-    title: "Complete Python Course",
-    description: "Learn Python programming from scratch and master core concepts through practical exercises",
-    points: [
-      "Build strong foundation in Python concepts",
-      "Gain hands-on experience with practical coding",
-      "Master Python's built-in libraries and modules",
-      "Develop real-world applications",
-      "Learn Python's syntax and features"
-    ],
-    details: {
-      keyHighlights: [
-        "Learn Python from scratch",
-        "Build strong foundation in concepts",
-        "Gain hands-on experience",
-        "Master built-in libraries"
-      ],
-      outcomes: [
-        "Write Python code confidently",
-        "Understand core programming concepts",
-        "Develop real-world applications",
-        "Master Python libraries and modules"
-      ]
-    }
+    title: "Complete Java course (lifetime)",
+    description: "Comprehensive Java programming course from basics to advanced concepts with lifetime access",
+    emoji: "☕",
+    details: [
+      "Java Basics - Syntax, data types, control structures",
+      "OOP Concepts - Classes, inheritance, polymorphism",
+      "Collections Framework - Lists, sets, maps",
+      "Exception Handling - Try/catch, custom exceptions",
+      "File I/O - Reading/writing files, serialization",
+      "Multithreading - Thread creation, synchronization",
+      "Projects - Banking system, inventory management"
+    ]
   },
   {
     step: 4,
-    title: "Complete JavaScript Mastery Course",
-    description: "Master JavaScript and build interactive web applications with hands-on exercises",
-    points: [
-      "Learn JavaScript from fundamentals to advanced concepts",
-      "Build interactive web applications",
-      "Master advanced JavaScript techniques",
-      "Optimize code performance",
-      "Implement modern JavaScript features"
-    ],
-    details: {
-      keyHighlights: [
-        "Master JavaScript from scratch",
-        "Build interactive applications",
-        "Learn advanced concepts",
-        "Hands-on exercises"
-      ],
-      outcomes: [
-        "Create dynamic web applications",
-        "Master JavaScript fundamentals",
-        "Implement advanced techniques",
-        "Optimize code performance"
-      ]
-    }
+    title: "Complete Python course (lifetime)",
+    description: "Learn Python programming from scratch and master core concepts through practical exercises",
+    emoji: "🐍",
+    details: [
+      "Python Fundamentals - Syntax, data types, functions",
+      "Data Structures - Lists, tuples, dictionaries, sets",
+      "File Operations - Reading/writing files, CSV, JSON",
+      "Object-Oriented Python - Classes, inheritance",
+      "Libraries - NumPy, Pandas basics",
+      "Error Handling - Try/except, debugging",
+      "Projects - Data analysis, automation scripts"
+    ]
   },
   {
     step: 5,
-    title: "SQL and Databases Mastery Course",
-    description: "Comprehensive course covering SQL fundamentals to advanced database concepts",
-    points: [
-      "Master SQL fundamentals and queries",
-      "Learn advanced database concepts",
-      "Optimize database performance",
-      "Handle complex database structures",
-      "Implement efficient data management"
-    ],
-    details: {
-      keyHighlights: [
-        "Master SQL fundamentals",
-        "Learn advanced concepts",
-        "Optimize performance"
-      ],
-      outcomes: [
-        "Write complex SQL queries",
-        "Manage database structures",
-        "Optimize database performance"
-      ]
-    }
+    title: "SQL and Databases mastery course",
+    description: "Master database concepts, SQL queries, and data management with practical examples",
+    emoji: "📊",
+    details: [
+      "SQL Fundamentals - SELECT, INSERT, UPDATE, DELETE",
+      "Database Design - Tables, relationships, normalization",
+      "Advanced Queries - Joins, subqueries, aggregations",
+      "Indexing and Performance - Query optimization",
+      "Transaction Management - ACID properties",
+      "Database Security - User management, permissions",
+      "Projects - E-commerce database, analytics dashboard"
+    ]
   }
 ];
 
@@ -241,17 +197,19 @@ const courseDetails = {
 
 const BeginnerPage = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [openCourse, setOpenCourse] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Add UTM tracker
   const { appendUtmToUrl } = useUtmTracker();
 
-  const handleBuyNowClick = () => {
-    const baseUrl = 'https://30dc.graphy.com/single-checkout/67c84187483bc1739e05e1cb?pid=p1';
-    window.location.href = appendUtmToUrl(baseUrl);
+  const handleEnrollClick = () => {
+    setIsModalOpen(true);
   };
 
   return (
     <div className="min-h-screen bg-[#0A1F1C] pb-24">
+      <BundleNavbar />
       <UpsellBanner 
         currentPrice="₹999"
         originalPrice="₹9,999"
@@ -286,8 +244,8 @@ const BeginnerPage = () => {
           <div className="flex flex-col items-center mb-8">
             <div className="text-5xl md:text-7xl font-bold text-[#22C55E] mb-4">₹999</div>
             <p className="text-[#E5E7EB]">One-time payment • Lifetime access to select courses</p>
-             {/* Buy Now Button Section */}
-      <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+             {/* Enroll Now Button Section */}
+      <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -295,10 +253,10 @@ const BeginnerPage = () => {
           className="text-center"
         >
           <Button 
-            className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-12 py-6 text-xl rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-[#22C55E]/30 flex items-center gap-2"
-            onClick={handleBuyNowClick}
+            className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-8 py-6 text-lg rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#22C55E]/20 flex items-center gap-2"
+            onClick={handleEnrollClick}
           >
-            <span>Buy Now</span>
+            <span>Enroll Now</span>
             <svg 
               className="w-6 h-6" 
               fill="none" 
@@ -385,17 +343,24 @@ const BeginnerPage = () => {
           className="text-center"
         >
           <Button 
-            className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-8 py-6 text-lg rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#22C55E]/20"
-            onClick={handleBuyNowClick}
+            className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-8 py-6 text-lg rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#22C55E]/20 flex items-center gap-2"
+            onClick={handleEnrollClick}
           >
-            Start Learning Now
-          </Button>
-          <div className="flex items-center justify-center gap-2 mt-6 text-gray-400">
-            <svg className="w-5 h-5 text-[#22C55E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            <span>Enroll Now</span>
+            <svg 
+              className="w-6 h-6" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
             </svg>
-
-          </div>
+          </Button>
         </motion.div>
       </div>
 
@@ -424,13 +389,13 @@ const BeginnerPage = () => {
           className="my-20 relative"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16">
-            Your Learning Journey
+            Your Learning Path
           </h2>
 
           {/* Vertical line connecting all steps */}
           <div className="absolute left-1/2 top-[100px] bottom-0 w-px bg-gradient-to-b from-[#22C55E] via-[#22C55E]/50 to-transparent hidden md:block" />
 
-          <div className="space-y-20">
+          <div className="space-y-8">
             {learningPath.map((step, index) => (
               <motion.div
                 key={step.step}
@@ -447,18 +412,46 @@ const BeginnerPage = () => {
 
                 {/* Content Card */}
                 <div className={`w-full md:w-[calc(50%-2.5rem)] bg-[#0A0A0A] rounded-2xl p-6 border border-[#1C1C1C] hover:border-[#22C55E]/50 transition-all duration-300`}>
-                  <h3 className="text-[#22C55E] text-xl font-bold mb-2">{step.title}</h3>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-2xl">{step.emoji}</span>
+                    <h3 className="text-[#22C55E] text-xl font-bold">{step.title}</h3>
+                  </div>
                   <p className="text-gray-400 mb-4">{step.description}</p>
-                  <ul className="space-y-2">
-                    {step.points.map((point, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-gray-400">
-                        <svg className="w-4 h-4 text-[#22C55E]" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                        </svg>
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
+                  
+                  {/* Collapsible Details */}
+                  <div className="mt-4 space-y-2">
+                    <button
+                      onClick={() => setOpenCourse(openCourse === index ? null : index)}
+                      className="flex items-center justify-between w-full text-[#22C55E] hover:text-[#16A34A] transition-colors duration-200"
+                    >
+                      <span className="text-sm font-medium">View Course Details</span>
+                      <svg
+                        className={`w-5 h-5 transform transition-transform duration-200 ${
+                          openCourse === index ? 'rotate-180' : ''
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    
+                    <div
+                      className={`transition-all duration-200 ease-in-out overflow-hidden ${
+                        openCourse === index ? 'max-h-96' : 'max-h-0'
+                      }`}
+                    >
+                      <ul className="mt-2 space-y-2 text-sm text-gray-400">
+                        {step.details.map((detail, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <span className="text-[#22C55E] mt-1">•</span>
+                            <span>{detail}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -483,12 +476,8 @@ const BeginnerPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-[#22C55E] mb-4">
-              Student Success Stories
-            </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Hear from our students who have transformed their careers through our courses
-            </p>
+
+
           </motion.div>
 
           <motion.div
@@ -557,6 +546,12 @@ const BeginnerPage = () => {
 
       {/* Footer Section */}
       <Footer />
+
+      <EnrollModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        currentPage="beginner"
+      />
     </div>
   );
 };

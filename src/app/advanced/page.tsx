@@ -7,271 +7,293 @@ import VideoGallery from '@/components/VideoGallery';
 import Footer from "@/components/new-cohort/footer";
 import UpsellBanner from '@/components/UpsellBanner';
 import useUtmTracker from '@/hooks/use-utm-tracker';
+import EnrollModal from '@/components/EnrollModal';
+import BundleNavbar from '@/components/BundleNavbar';
 
 const learningPath = [
   {
     step: 1,
-    title: "HTML, CSS Complete Mastery Course",
-    description: "Master modern web development with HTML and CSS to create stunning websites and web applications",
-    points: [
-      "Master HTML basics and advanced techniques",
-      "Create stylish and responsive websites with CSS",
-      "Explore Flexbox, Grid, and CSS animations for modern web design",
-      "Create dynamic web pages and responsive designs",
-      "Advanced styling techniques with modern CSS"
-    ],
-    details: {
-      keyHighlights: [
-        "Master HTML basics and advanced techniques",
-        "Create stylish and responsive websites with CSS",
-        "Explore Flexbox, Grid, and CSS animations for modern web design"
-      ],
-      outcomes: [
-        "Create Dynamic Web Pages",
-        "Responsive Web Design",
-        "Advanced Styling Techniques"
-      ]
-    }
+    title: "MERN full-stack web development course",
+    description: "Advanced MERN stack development with enterprise-level applications",
+    emoji: "⚡",
+    details: [
+      "Enterprise Architecture - Microservices, scalable systems",
+      "Advanced MongoDB - Sharding, replication, optimization",
+      "Complex State Management - Redux toolkit, context patterns",
+      "Advanced React Patterns - HOCs, render props, hooks",
+      "Performance Optimization - Caching, lazy loading",
+      "DevOps Integration - CI/CD, Docker, Kubernetes",
+      "Projects - Enterprise SaaS platform, marketplace"
+    ]
   },
   {
     step: 2,
-    title: "Complete Java Course",
-    description: "Comprehensive Java programming course from basics to advanced concepts with lifetime access",
-    points: [
-      "Learn Java programming from scratch",
-      "Master object-oriented programming principles",
-      "Build GUI applications with JavaFX",
-      "Implement multi-threading and collections",
-      "Advanced exception handling and file management"
-    ],
-    details: {
-      keyHighlights: [
-        "Understand Java fundamentals",
-        "Master object-oriented programming",
-        "Create GUI applications",
-        "Implement multi-threading",
-        "Handle exceptions and file management"
-      ]
-    }
+    title: "AI mastery course - Workflows, Tools, Chat GPT, Full stack projects",
+    description: "Comprehensive AI development course with practical applications",
+    emoji: "🤖",
+    details: [
+      "AI Integration - OpenAI API, custom models",
+      "Machine Learning Basics - TensorFlow, PyTorch",
+      "NLP Applications - Text analysis, sentiment analysis",
+      "AI Tools Development - Custom AI assistants",
+      "Prompt Engineering - Advanced techniques",
+      "AI Project Architecture - Scalable AI systems",
+      "Projects - AI-powered applications, chatbots"
+    ]
   },
   {
     step: 3,
-    title: "Complete Python Course",
-    description: "Learn Python programming from scratch and master core concepts through practical exercises",
-    points: [
-      "Build strong foundation in Python concepts",
-      "Gain hands-on experience with practical coding",
-      "Master Python's built-in libraries and modules",
-      "Develop real-world applications",
-      "Learn Python's syntax and features"
-    ],
-    details: {
-      keyHighlights: [
-        "Learn Python from scratch",
-        "Build strong foundation in concepts",
-        "Gain hands-on experience",
-        "Master built-in libraries"
-      ],
-      outcomes: [
-        "Write Python code confidently",
-        "Understand core programming concepts",
-        "Develop real-world applications",
-        "Master Python libraries and modules"
-      ]
-    }
+    title: "Next JS full stack web development course",
+    description: "Enterprise-level Next.js development and deployment",
+    emoji: "📱",
+    details: [
+      "Advanced Next.js - Custom server, middleware",
+      "State Management - Advanced patterns, Zustand",
+      "Performance - Edge functions, caching strategies",
+      "Internationalization - Multi-language support",
+      "Testing - E2E testing, component testing",
+      "Deployment - AWS, Google Cloud Platform",
+      "Projects - Enterprise CMS, e-commerce platform"
+    ]
   },
   {
     step: 4,
-    title: "Complete JavaScript Mastery Course",
-    description: "Master JavaScript and build interactive web applications with hands-on exercises",
-    points: [
-      "Learn JavaScript from fundamentals to advanced concepts",
-      "Build interactive web applications",
-      "Master advanced JavaScript techniques",
-      "Optimize code performance",
-      "Implement modern JavaScript features"
-    ],
-    details: {
-      keyHighlights: [
-        "Master JavaScript from scratch",
-        "Build interactive applications",
-        "Learn advanced concepts",
-        "Hands-on exercises"
-      ],
-      outcomes: [
-        "Create dynamic web applications",
-        "Master JavaScript fundamentals",
-        "Implement advanced techniques",
-        "Optimize code performance"
-      ]
-    }
+    title: "DSA revision and mastery course",
+    description: "Master Data Structures and Algorithms with interview preparation",
+    emoji: "🎯",
+    details: [
+      "Advanced Algorithms - Dynamic programming, graphs",
+      "Complex Data Structures - Trees, heaps, tries",
+      "Algorithm Design - Problem-solving strategies",
+      "Space-Time Complexity - Optimization techniques",
+      "System Design - Scalable architecture patterns",
+      "Interview Preparation - FAANG-style questions",
+      "Projects - Algorithm visualizer, problem solver"
+    ]
   },
   {
     step: 5,
-    title: "SQL and Databases Mastery Course",
-    description: "Comprehensive course covering SQL fundamentals to advanced database concepts",
-    points: [
-      "Master SQL fundamentals and queries",
-      "Learn advanced database concepts",
-      "Optimize database performance",
-      "Handle complex database structures",
-      "Implement efficient data management"
-    ],
-    details: {
-      keyHighlights: [
-        "Master SQL fundamentals",
-        "Learn advanced concepts",
-        "Optimize performance"
-      ],
-      outcomes: [
-        "Write complex SQL queries",
-        "Manage database structures",
-        "Optimize database performance"
-      ]
-    }
+    title: "JavaScript and React JS mastery course",
+    description: "Advanced JavaScript and React.js patterns and architectures",
+    emoji: "⚛️",
+    details: [
+      "Advanced JS - Functional programming, design patterns",
+      "React Architecture - Micro-frontends, modular design",
+      "Performance - Bundle optimization, code splitting",
+      "Testing - Advanced testing patterns, CI/CD",
+      "State Management - Advanced Redux, MobX patterns",
+      "Custom Hooks - Complex hook patterns",
+      "Projects - Enterprise React applications"
+    ]
   },
   {
     step: 6,
-    title: "Complete MERN Stack Development",
-    description: "Master Full-Stack Web Development",
-    points: [
-      "Front-End: HTML, CSS, JavaScript, React with modern practices",
-      "Back-End: Node.js, Express.js, MongoDB, GraphQL",
-      "15+ JavaScript and React projects",
-      "5+ major full-stack projects including E-commerce & YouTube clone",
-      "Industry-relevant skill development and interview preparation"
+    title: "Backend development with Node-Express JS",
+    description: "Advanced backend development and system design",
+    emoji: "🖥️",
+    details: [
+      "Microservices Architecture - Design, implementation",
+      "Advanced Express - Custom middleware, scaling",
+      "Database Optimization - Indexing, query tuning",
+      "Security - OAuth2.0, JWT advanced patterns",
+      "API Design - GraphQL, REST best practices",
+      "Message Queues - RabbitMQ, Redis",
+      "Projects - Scalable backend systems"
     ]
   },
   {
     step: 7,
-    title: "Next.js Full-Stack Mastery",
-    description: "Advanced Modern Web Development",
-    points: [
-      "Server-side rendering (SSR), Static site generation (SSG)",
-      "TypeScript integration and API development",
-      "Performance optimization and state management",
-      "10+ complex projects including E-commerce and real-time chat",
-      "Deployment strategies and serverless functions"
+    title: "FAANG and Startup Tech job roadmap",
+    description: "Complete preparation guide for top tech company interviews",
+    emoji: "📈",
+    details: [
+      "Interview Strategies - FAANG-specific preparation",
+      "System Design - Scalable architectures",
+      "Behavioral Questions - Leadership principles",
+      "Mock Interviews - Real interview simulation",
+      "Resume Building - Portfolio optimization",
+      "Negotiation Skills - Offer negotiation",
+      "Career Growth - Professional development"
     ]
   },
   {
     step: 8,
-    title: "Complete Node.js Backend Development",
-    description: "Master Server-Side Programming",
-    points: [
-      "Backend programming fundamentals and scalability",
-      "Database management and optimization",
-      "Server security best practices",
-      "API development and integration",
-      "Real-world backend architecture"
+    title: "Coding Project Ideas",
+    description: "Advanced project ideas and implementation guides",
+    emoji: "💡",
+    details: [
+      "Full-Stack Projects - Complex application ideas",
+      "AI/ML Projects - Innovative AI applications",
+      "Blockchain Projects - DeFi, NFT platforms",
+      "Mobile Apps - Cross-platform development",
+      "Cloud Projects - AWS, Azure implementations",
+      "IoT Projects - Smart device applications",
+      "Open Source - Contributing to projects"
     ]
   },
   {
     step: 9,
-    title: "ChatGPT AI & Prompt Engineering",
-    description: "Master AI Integration and Prompting",
-    points: [
-      "Chat GPT APIs, vision, and whisper integration",
-      "Specialized prompts for different professions",
-      "Image and video prompting resources",
-      "Building apps and games with AI prompts",
-      "Advanced prompting techniques"
+    title: "Full stack projects and ideas",
+    description: "Enterprise-level full stack project implementations",
+    emoji: "🚀",
+    details: [
+      "E-commerce Platform - Complete marketplace",
+      "Social Network - Real-time features",
+      "Project Management Tool - Team collaboration",
+      "Learning Management System - Online courses",
+      "Booking System - Real-time scheduling",
+      "Analytics Dashboard - Data visualization",
+      "Payment Gateway - Financial transactions"
     ]
   },
   {
     step: 10,
-    title: "Advanced React.js Development",
-    description: "Professional React Development",
-    points: [
-      "Modern React patterns and hooks",
-      "Advanced state management (Redux, Context, Zustand)",
-      "Performance optimization techniques",
-      "Testing and TypeScript integration",
-      "8 real-world projects including E-commerce platform"
+    title: "Chat GPT AI prompt engineering course",
+    description: "Advanced AI integration and prompt engineering",
+    emoji: "🤖",
+    details: [
+      "Advanced Prompting - Complex query handling",
+      "AI Integration - Multiple model integration",
+      "Custom Solutions - Industry-specific AI",
+      "Optimization - Response quality improvement",
+      "Error Handling - Edge case management",
+      "Security - AI system security",
+      "Projects - Advanced AI applications"
     ]
   },
   {
     step: 11,
-    title: "BONUS: Complete Beginner Package Access",
-    description: "Access to All Beginner Level Courses",
-    points: [
-      "HTML & CSS Complete Mastery Course",
-      "Complete Java Programming Course",
-      "Complete Python Development Course",
-      "JavaScript Fundamentals to Advanced",
-      "SQL and Databases Mastery Course"
+    title: "SQL and Databases mastery course",
+    description: "Enterprise database design and optimization",
+    emoji: "📊",
+    details: [
+      "Advanced Database Design - Complex schemas",
+      "Query Optimization - Performance tuning",
+      "Data Warehousing - Big data handling",
+      "Database Security - Advanced protection",
+      "Replication - Multi-master setup",
+      "Migration - Large-scale data migration",
+      "Projects - Enterprise database systems"
     ]
   },
   {
     step: 12,
-    title: "🤖 AI Mastery Course",
-    description: "Master AI Integration & Development",
-    points: [
-      "Comprehensive coverage of AI workflows and tools",
-      "Chat GPT implementation and integration",
-      "Full-stack AI project development",
-      "Advanced prompting techniques and strategies",
-      "Hands-on experience with various AI tools"
+    title: "Blockchain, Solidity, Defi complete course",
+    description: "Master blockchain development, smart contracts, and DeFi",
+    emoji: "🔗",
+    details: [
+      "Smart Contracts - Advanced Solidity patterns",
+      "DeFi Protocols - Lending, trading platforms",
+      "NFT Development - Marketplace creation",
+      "Security - Smart contract auditing",
+      "Web3 Integration - dApp development",
+      "Testing - Blockchain testing frameworks",
+      "Projects - DeFi platform, NFT marketplace"
     ]
   },
   {
     step: 13,
-    title: "📊 DSA & FAANG Job Preparation",
-    description: "Complete Interview Preparation",
-    points: [
-      "Complete DSA revision and mastery",
-      "FAANG and Startup Tech job roadmap",
-      "Technical interview preparation",
-      "Resume writing and networking strategies",
-      "Personalized guidance from industry experts"
+    title: "Data analytics course",
+    description: "Comprehensive data analytics and visualization",
+    emoji: "📊",
+    details: [
+      "Data Analysis - Advanced statistical methods",
+      "Visualization - Complex data presentation",
+      "Machine Learning - Predictive analytics",
+      "Big Data - Hadoop, Spark integration",
+      "ETL Processes - Data pipeline design",
+      "Business Intelligence - Reporting tools",
+      "Projects - Analytics dashboard, BI tools"
     ]
   },
   {
     step: 14,
-    title: "💡 Project Mastery Bundle",
-    description: "Build Real-World Projects",
-    points: [
-      "50+ Unique coding project ideas",
-      "Full-stack projects and SaaS tools",
-      "MVP product development",
-      "Real-world implementation guides",
-      "Constantly updated project content"
+    title: "HTML, CSS complete mastery course",
+    description: "Advanced web development and responsive design",
+    emoji: "💻",
+    details: [
+      "Advanced CSS - Complex animations, layouts",
+      "CSS Architecture - Large-scale systems",
+      "Performance - Critical rendering path",
+      "Accessibility - WCAG compliance",
+      "CSS Frameworks - Custom framework design",
+      "Responsive Design - Complex patterns",
+      "Projects - Advanced UI components"
     ]
   },
   {
     step: 15,
-    title: "🔗 Blockchain & DeFi",
-    description: "Complete Web3 Development",
-    points: [
-      "Complete Blockchain fundamentals",
-      "Solidity programming mastery",
-      "DeFi protocols and applications",
-      "Smart contract development",
-      "Real-world blockchain projects"
+    title: "React JS course",
+    description: "Enterprise React.js development and best practices",
+    emoji: "⚛️",
+    details: [
+      "Advanced Patterns - Architecture patterns",
+      "Performance - Advanced optimization",
+      "State Management - Complex state patterns",
+      "Testing - Comprehensive test coverage",
+      "Component Design - Reusable systems",
+      "Animation - Complex UI animations",
+      "Projects - Enterprise React applications"
     ]
   },
   {
     step: 16,
-    title: "📈 Data & Interview Prep",
-    description: "Data Analytics & Job Preparation",
-    points: [
-      "Complete data analytics course",
-      "Statistical methods and visualization",
-      "Full-stack interview preparation",
-      "Comprehensive job-ready skills",
-      "Expert guidance and support"
+    title: "Full stack Interview Questions and projects",
+    description: "Comprehensive interview preparation with projects",
+    emoji: "📚",
+    details: [
+      "Technical Questions - In-depth concepts",
+      "System Design - Architecture patterns",
+      "Project Discussion - Portfolio review",
+      "Code Review - Best practices",
+      "Problem Solving - Algorithm strategies",
+      "Behavioral Questions - Soft skills",
+      "Mock Interviews - Practice sessions"
     ]
   },
   {
     step: 17,
-    title: "🎁 BONUS: Complete Access",
-    description: "Access to All Course Levels",
-    points: [
-      "All Beginner Courses (₹999 value)",
-      "All Intermediate Courses (₹1,999 value)",
-      "Lifetime updates and support",
-      "Priority mentorship access",
-      "Interview preparation resources"
+    title: "Complete Java course",
+    description: "Advanced Java development and enterprise patterns",
+    emoji: "☕",
+    details: [
+      "Enterprise Java - Advanced concepts",
+      "Spring Cloud - Microservices patterns",
+      "Performance - JVM optimization",
+      "Security - Enterprise security",
+      "Integration - System integration",
+      "Testing - Advanced testing patterns",
+      "Projects - Enterprise applications"
+    ]
+  },
+  {
+    step: 18,
+    title: "Complete JavaScript mastery course",
+    description: "Expert-level JavaScript and modern development",
+    emoji: "⚡",
+    details: [
+      "Advanced Concepts - Deep JavaScript",
+      "Performance - Runtime optimization",
+      "Architecture - Application patterns",
+      "Testing - Comprehensive testing",
+      "Build Systems - Advanced configuration",
+      "Modern Features - Latest standards",
+      "Projects - Complex JS applications"
+    ]
+  },
+  {
+    step: 19,
+    title: "Complete Python course",
+    description: "Advanced Python development and applications",
+    emoji: "🐍",
+    details: [
+      "Advanced Python - Language internals",
+      "Web Development - Advanced frameworks",
+      "Data Science - Complex analysis",
+      "Machine Learning - ML applications",
+      "Automation - System automation",
+      "Testing - Test automation",
+      "Projects - Enterprise Python systems"
     ]
   }
 ];
@@ -341,14 +363,15 @@ const faqs = [
 
 const AdvancedPage = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [openCourse, setOpenCourse] = useState<number | null>(null);
   const [showAllSteps, setShowAllSteps] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Add UTM tracker
   const { appendUtmToUrl } = useUtmTracker();
 
-  const handleBuyNowClick = () => {
-    const baseUrl = 'https://30dc.graphy.com/single-checkout/652a1994e4b05a145bae5cd0?pid=p1';
-    window.location.href = appendUtmToUrl(baseUrl);
+  const handleEnrollClick = () => {
+    setIsModalOpen(true);
   };
 
   const visibleLearningPath = showAllSteps 
@@ -357,6 +380,7 @@ const AdvancedPage = () => {
 
   return (
     <div className="min-h-screen bg-[#0A1F1C] pb-24">
+      <BundleNavbar />
       <UpsellBanner 
         currentPrice="₹2,999"
         originalPrice="₹43,999"
@@ -398,9 +422,9 @@ const AdvancedPage = () => {
             
             <Button 
               className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-12 py-6 text-xl rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-[#22C55E]/30 flex items-center gap-2"
-              onClick={handleBuyNowClick}
+              onClick={handleEnrollClick}
             >
-              <span>Buy Now</span>
+              <span>Enroll Now</span>
               <svg 
                 className="w-6 h-6" 
                 fill="none" 
@@ -476,21 +500,35 @@ const AdvancedPage = () => {
           </motion.div>
         </div>
 
-        {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
-          <Button 
-            className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-8 py-6 text-lg rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#22C55E]/20"
-            onClick={handleBuyNowClick}
+        {/* Enroll Now Button Section */}
+        <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
           >
-            Start Learning Now
-          </Button>
-          
-        </motion.div>
+            <Button 
+              className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-8 py-6 text-lg rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#22C55E]/20 flex items-center gap-2"
+              onClick={handleEnrollClick}
+            >
+              <span>Enroll Now</span>
+              <svg 
+                className="w-6 h-6" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </Button>
+          </motion.div>
+        </div>
       </div>
 
       {/* Learning Journey Section */}
@@ -524,8 +562,8 @@ const AdvancedPage = () => {
           {/* Vertical line connecting all steps */}
           <div className="absolute left-1/2 top-[100px] bottom-0 w-px bg-gradient-to-b from-[#22C55E] via-[#22C55E]/50 to-transparent hidden md:block" />
 
-          <div className="space-y-20">
-            {visibleLearningPath.map((step, index) => (
+          <div className="space-y-8">
+            {learningPath.map((step, index) => (
               <motion.div
                 key={step.step}
                 initial={{ opacity: 0, y: 20 }}
@@ -541,18 +579,46 @@ const AdvancedPage = () => {
 
                 {/* Content Card */}
                 <div className={`w-full md:w-[calc(50%-2.5rem)] bg-[#0A0A0A] rounded-2xl p-6 border border-[#1C1C1C] hover:border-[#22C55E]/50 transition-all duration-300`}>
-                  <h3 className="text-[#22C55E] text-xl font-bold mb-2">{step.title}</h3>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-2xl">{step.emoji}</span>
+                    <h3 className="text-[#22C55E] text-xl font-bold">{step.title}</h3>
+                  </div>
                   <p className="text-gray-400 mb-4">{step.description}</p>
-                  <ul className="space-y-2">
-                    {step.points.map((point, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-gray-400">
-                        <svg className="w-4 h-4 text-[#22C55E]" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                        </svg>
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
+                  
+                  {/* Collapsible Details */}
+                  <div className="mt-4 space-y-2">
+                    <button
+                      onClick={() => setOpenCourse(openCourse === index ? null : index)}
+                      className="flex items-center justify-between w-full text-[#22C55E] hover:text-[#16A34A] transition-colors duration-200"
+                    >
+                      <span className="text-sm font-medium">View Course Details</span>
+                      <svg
+                        className={`w-5 h-5 transform transition-transform duration-200 ${
+                          openCourse === index ? 'rotate-180' : ''
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    
+                    <div
+                      className={`transition-all duration-200 ease-in-out overflow-hidden ${
+                        openCourse === index ? 'max-h-96' : 'max-h-0'
+                      }`}
+                    >
+                      <ul className="mt-2 space-y-2 text-sm text-gray-400">
+                        {step.details.map((detail, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <span className="text-[#22C55E] mt-1">•</span>
+                            <span>{detail}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -651,12 +717,8 @@ const AdvancedPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-[#22C55E] mb-4">
-              Student Success Stories
-            </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Hear from our intermediate students who have advanced their careers
-            </p>
+
+
           </motion.div>
           <VideoGallery />
         </div>
@@ -664,6 +726,12 @@ const AdvancedPage = () => {
 
       {/* Footer Section */}
       <Footer />
+
+      <EnrollModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        currentPage="advanced"
+      />
     </div>
   );
 };

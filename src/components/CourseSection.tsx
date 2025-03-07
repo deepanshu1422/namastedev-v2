@@ -243,14 +243,34 @@ const courseData = {
 
 const CourseSection = () => {
   const router = useRouter();
+  const sectionRef = React.useRef<HTMLDivElement>(null);
   const [expandedCards, setExpandedCards] = useState<{[key: string]: boolean}>({
     beginner: false,
     intermediate: false,
     advanced: false
   });
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, []);
 
   const handleGetStarted = (level: string) => {
     router.push(`/${level.toLowerCase()}`);
+  };
+
+  const handleStickyButtonClick = () => {
+    if (!selectedPlan && sectionRef.current) {
+      sectionRef.current.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    } else if (selectedPlan) {
+      handleGetStarted(selectedPlan);
+    }
   };
 
   const toggleCard = (level: string) => {
@@ -260,8 +280,15 @@ const CourseSection = () => {
     }));
   };
 
+  // Quick comparison data for mobile view
+  const quickComparison = {
+    beginner: ["5 Programming Languages", "Lifetime Access", "24/7 Support"],
+    intermediate: ["Full Stack Development", "All Beginner Content", "Industry Projects"],
+    advanced: ["AI & Blockchain", "All Previous Content", "Career Support"]
+  };
+
   return (
-    <section className="relative py-20 px-4 md:px-8 lg:px-16 bg-[#0A1F1C] overflow-hidden">
+    <section ref={sectionRef} className="relative py-12 md:py-20 px-4 md:px-8 lg:px-16 bg-[#0A1F1C] overflow-x-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Diagonal lines */}
@@ -292,35 +319,77 @@ const CourseSection = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.3 }}
         className="relative z-10 max-w-7xl mx-auto"
       >
         {/* Section heading */}
-        <div className="text-center mb-24 relative">
-          <div className="absolute inset-0 -top-20 bg-gradient-radial from-[#22C55E]/10 via-transparent to-transparent blur-2xl opacity-30" />
+        <div className="text-center mb-8 md:mb-24 relative">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold text-[#22C55E] mb-6 relative"
+            transition={{ duration: 0.3, delay: 0.1 }}
+            className="text-3xl md:text-6xl font-bold text-[#22C55E] mb-4 md:mb-6 relative"
           >
             Choose Your Learning Path
           </motion.h2>
-          <p className="text-gray-400 text-xl max-w-2xl mx-auto">
+          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
             Select the perfect course package that matches your experience level and career goals
           </p>
-          <div className="w-px h-24 bg-gradient-to-b from-[#22C55E] via-emerald-500/50 to-transparent mx-auto mt-8" />
         </div>
 
-        {/* Course cards grid */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+        {/* Mobile Quick Compare */}
+        <div className="md:hidden mb-24">
+          <div className="bg-[#0A0A0A]/50 rounded-xl p-4 border border-[#22C55E]/20">
+            <h3 className="text-[#22C55E] font-semibold mb-4">Quick Comparison</h3>
+            <div className="space-y-4">
+              {Object.entries(quickComparison).map(([level, features], index) => (
+                <motion.div 
+                  key={level}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2, delay: index * 0.05 }}
+                  className={`p-4 rounded-lg transition-all duration-200 ${
+                    selectedPlan === level 
+                      ? 'bg-[#22C55E]/20 border-[#22C55E]' 
+                      : 'bg-[#0A0A0A] border-[#1C1C1C]'
+                  } border`}
+                  onClick={() => setSelectedPlan(level)}
+                >
+                  <div className="flex justify-between items-center mb-2">
+                    <h4 className="font-semibold text-white">{courseData[level].title}</h4>
+                    <span className="text-[#22C55E] font-bold">{courseData[level].price}</span>
+                  </div>
+                  <ul className="space-y-2">
+                    {features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center text-sm text-gray-400">
+                        <svg className="w-4 h-4 text-[#22C55E] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button
+                    className="w-full mt-4 bg-[#22C55E] hover:bg-[#1EA052] text-white"
+                    onClick={() => handleGetStarted(level)}
+                  >
+                    Choose {courseData[level].title}
+                  </Button>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Course cards grid - visible on larger screens */}
+        <div className="hidden md:grid lg:grid-cols-3 gap-8 mb-16">
           {Object.entries(courseData).map(([level, data], index) => (
             <motion.div
               key={level}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.3, delay: index * 0.05 }}
               className="group relative"
             >
               <div className="relative bg-[#0A0A0A] rounded-2xl p-8 border border-[#1C1C1C] group-hover:border-[#22C55E]/50 transition-all duration-300 h-full">
@@ -343,7 +412,7 @@ const CourseSection = () => {
                 </div>
 
                 {/* Feature sections - Conditionally rendered based on expandedCards state */}
-                <div className={`transition-all duration-300 overflow-hidden ${expandedCards[level] ? 'max-h-[2000px]' : 'max-h-[300px]'}`}>
+                <div className={`transition-all duration-150 overflow-hidden ${expandedCards[level] ? 'max-h-[2000px]' : 'max-h-[300px]'}`}>
                   {data.features.map((section, sectionIndex) => (
                     <div key={sectionIndex} className="mb-6">
                       <h4 className="text-[#22C55E] font-semibold mb-4">{section.title}</h4>
@@ -354,7 +423,7 @@ const CourseSection = () => {
                             initial={{ opacity: 0, x: -10 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.3, delay: idx * 0.1 }}
+                            transition={{ duration: 0.15, delay: idx * 0.02 }}
                             className="flex items-center gap-3"
                           >
                             <svg className="w-5 h-5 text-[#22C55E]" fill="currentColor" viewBox="0 0 20 20">
@@ -366,8 +435,6 @@ const CourseSection = () => {
                       </div>
                     </div>
                   ))}
-
-                
                 </div>
 
                 {/* See More / See Less Button */}
@@ -401,7 +468,20 @@ const CourseSection = () => {
           ))}
         </div>
 
-      
+        {/* Sticky CTA for mobile */}
+        <div className="md:hidden fixed bottom-0 left-0 right-0 bg-[#0A1F1C]/95 backdrop-blur-lg border-t border-[#22C55E]/20 p-4 z-50">
+          <Button
+            className="w-full bg-[#22C55E] hover:bg-[#1EA052] text-white py-4 text-lg font-semibold rounded-xl transition-all duration-200"
+            onClick={handleStickyButtonClick}
+          >
+            {selectedPlan 
+              ? `Get Started with ${courseData[selectedPlan].title}` 
+              : 'Select a Plan to Continue'}
+          </Button>
+        </div>
+
+        {/* Bottom padding for mobile to prevent content from being hidden behind sticky CTA */}
+        <div className="md:hidden h-24" />
       </motion.div>
     </section>
   );
