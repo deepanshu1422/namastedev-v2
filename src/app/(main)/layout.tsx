@@ -1,3 +1,5 @@
+'use client';
+
 import MobileMenu from "@/components/mobile-menu";
 import BundleNavbar from "@/components/BundleNavbar";
 import Footer from "@/components/new-cohort/footer";
