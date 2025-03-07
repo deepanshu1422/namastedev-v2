@@ -400,9 +400,9 @@ const AdvancedPage = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#22C55E] rounded-full opacity-[0.15] blur-[100px]" />
         
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
           className="relative z-10 max-w-4xl mx-auto text-center"
         >
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
@@ -502,12 +502,7 @@ const AdvancedPage = () => {
 
         {/* Enroll Now Button Section */}
         <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
+          <div className="text-center">
             <Button 
               className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-8 py-6 text-lg rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#22C55E]/20 flex items-center gap-2"
               onClick={handleEnrollClick}
@@ -527,34 +522,24 @@ const AdvancedPage = () => {
                 />
               </svg>
             </Button>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       {/* Learning Journey Section */}
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
         {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
+        <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-[#22C55E] mb-6">
             Your Advanced Journey
           </h1>
           <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
             Master cutting-edge technologies and transform your career with industry-leading expertise
           </p>
-        </motion.div>
+        </div>
 
         {/* Learning Journey Roadmap */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className="my-20 relative"
-        >
+        <div className="my-20 relative">
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16">
             Your Learning Path
           </h2>
@@ -563,13 +548,9 @@ const AdvancedPage = () => {
           <div className="absolute left-1/2 top-[100px] bottom-0 w-px bg-gradient-to-b from-[#22C55E] via-[#22C55E]/50 to-transparent hidden md:block" />
 
           <div className="space-y-8">
-            {learningPath.map((step, index) => (
-              <motion.div
+            {visibleLearningPath.map((step, index) => (
+              <div
                 key={step.step}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
                 className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 relative`}
               >
                 {/* Step Number Circle */}
@@ -620,18 +601,13 @@ const AdvancedPage = () => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
           
           {/* See More Button */}
           {!showAllSteps && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex justify-center mt-16"
-            >
+            <div className="flex justify-center mt-16">
               <Button 
                 className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-8 py-4 text-lg rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#22C55E]/20 flex items-center gap-2"
                 onClick={() => setShowAllSteps(true)}
@@ -651,17 +627,12 @@ const AdvancedPage = () => {
                   />
                 </svg>
               </Button>
-            </motion.div>
+            </div>
           )}
-        </motion.div>
+        </div>
 
         {/* FAQ Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mt-20"
-        >
+        <div className="mt-20">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-[#22C55E] mb-4">
               Frequently Asked Questions
@@ -673,11 +644,8 @@ const AdvancedPage = () => {
 
           <div className="max-w-3xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
                 className="bg-[#0A0A0A] rounded-xl border border-[#1C1C1C] overflow-hidden"
               >
                 <button
@@ -704,22 +672,17 @@ const AdvancedPage = () => {
                 >
                   <p className="text-gray-400">{faq.answer}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Video Gallery Section */}
         <div className="mt-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
+          <div className="text-center mb-12">
 
 
-          </motion.div>
+          </div>
           <VideoGallery />
         </div>
       </div>

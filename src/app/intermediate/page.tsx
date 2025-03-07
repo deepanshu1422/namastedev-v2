@@ -283,9 +283,9 @@ const IntermediatePage = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#22C55E] rounded-full opacity-[0.15] blur-[100px]" />
         
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
           className="relative z-10 max-w-4xl mx-auto text-center"
         >
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
@@ -330,56 +330,40 @@ const IntermediatePage = () => {
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-24 mb-16 max-w-4xl mx-auto">
           {/* Course Benefits */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
-          >
+          <div className="space-y-8">
             <h2 className="text-3xl font-bold text-[#22C55E] mb-12">Course Benefits</h2>
             <div className="space-y-8">
               {courseBenefits.map((benefit, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
                   className="flex items-center gap-5 text-white"
                 >
                   <svg className="w-7 h-7 text-[#22C55E] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={benefit.icon} />
                   </svg>
                   <span className="text-xl font-medium">{benefit.title}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Support Features */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
-          >
+          <div className="space-y-8">
             <h2 className="text-3xl font-bold text-[#22C55E] mb-12">Support Features</h2>
             <div className="space-y-8">
               {supportFeatures.map((feature, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
                   className="flex items-center gap-5 text-white"
                 >
                   <svg className="w-7 h-7 text-[#22C55E] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={feature.icon} />
                   </svg>
                   <span className="text-xl font-medium">{feature.title}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Enroll Now Button Section */}
@@ -431,12 +415,7 @@ const IntermediatePage = () => {
         </motion.div>
 
         {/* Learning Journey Roadmap */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className="my-20 relative"
-        >
+        <div className="my-20 relative">
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16">
             Your Learning Path
           </h2>
@@ -445,13 +424,9 @@ const IntermediatePage = () => {
           <div className="absolute left-1/2 top-[100px] bottom-0 w-px bg-gradient-to-b from-[#22C55E] via-[#22C55E]/50 to-transparent hidden md:block" />
 
           <div className="space-y-8">
-            {learningPath.map((step, index) => (
-              <motion.div
+            {visibleLearningPath.map((step, index) => (
+              <div
                 key={step.step}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
                 className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 relative`}
               >
                 {/* Step Number Circle */}
@@ -502,10 +477,10 @@ const IntermediatePage = () => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* FAQ Section */}
         <motion.div
