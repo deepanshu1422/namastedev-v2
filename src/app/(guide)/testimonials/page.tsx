@@ -1,43 +1,16 @@
 'use client';
 
 import React from "react";
-import type { Metadata } from "next";
 import BundleNavbar from "@/components/BundleNavbar";
 import Hero from "./hero";
 import Inspirational from "./inspirational";
 import Watch from "./watch";
 import Public from "./public";
-// import Floating from "../resources/floating";
 import NewHero from "./new-hero";
 import VideoSlider from "./video-slider";
 import { CreditCard } from "lucide-react";
 import Link from "next/link";
 import Footer from "@/components/new-cohort/footer";
-
-export const dynamic = "force-static";
-
-export const metadata: Metadata = {
-  title: "Testimonial | 30DaysCoding",
-  description:
-    "A testimonial page for our development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
-  openGraph: {
-    images: "https://i.ibb.co/qyW3Xbw/testimonials.webp",
-    title: "Testimonial | 30DaysCoding",
-    description:
-      "A testimonial page for our development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
-    url: "https://30dayscoding.com",
-    type: "website",
-  },
-  keywords: ["30 days coding, coding, coding challenges"],
-  twitter: {
-    card: "summary_large_image",
-    images: "https://i.ibb.co/qyW3Xbw/testimonials.webp",
-    title: "Testimonial | 30DaysCoding",
-    description:
-      "A testimonial page for our development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
-    site: "https://30dayscoding.com",
-  },
-};
 
 export default function Testimonial() {
   const webinarSessions = [
