@@ -250,38 +250,9 @@ const BeginnerPage = () => {
             Start your coding journey with a solid foundation
           </p>
           
-          <div className="flex flex-col items-center mb-8">
+          <div className="flex flex-col items-center">
             <div className="text-5xl md:text-7xl font-bold text-[#22C55E] mb-4">₹999</div>
-            <p className="text-[#E5E7EB]">One-time payment • Lifetime access to select courses</p>
-             {/* Enroll Now Button Section */}
-      <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex justify-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          className="text-center"
-        >
-          <Button 
-            className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-8 py-6 text-lg rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#22C55E]/20 flex items-center gap-2"
-            onClick={handleEnrollClick}
-          >
-            <span>Enroll Now</span>
-            <svg 
-              className="w-6 h-6" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </Button>
-        </motion.div>
-      </div>
+            <p className="text-[#E5E7EB] mb-4">One-time payment • Lifetime access to select courses</p>
           </div>
         </motion.div>
       </div>
@@ -289,8 +260,8 @@ const BeginnerPage = () => {
      
 
       {/* Benefits Grid */}
-      <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-24 mb-16 max-w-4xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-2 gap-24 mb-12 max-w-4xl mx-auto">
           {/* Course Benefits */}
           <div className="space-y-8">
             <h2 className="text-3xl font-bold text-[#22C55E] mb-12">Course Benefits</h2>
@@ -328,27 +299,9 @@ const BeginnerPage = () => {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center">
-          <Button 
-            className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-8 py-6 text-lg rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#22C55E]/20 flex items-center gap-2"
-            onClick={handleEnrollClick}
-          >
-            <span>Enroll Now</span>
-            <svg 
-              className="w-6 h-6" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </Button>
+        {/* CTA Section - Removed button but keeping proper spacing */}
+        <div className="text-center mb-8">
+          {/* Button removed */}
         </div>
       </div>
 

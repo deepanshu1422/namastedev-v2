@@ -3,54 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
-  let cousre = {
-    title: "Courses",
-    href: [
-      // {
-      //   title: "Mern FullStack Course",
-      //   href: "/course/mern-full-stack-developer-course",
-      //   description:
-      //     "A complete mern full stack development course for 30 days coding challenge. Checkout on www.courses.30dayscoding.com",
-      // },
-      // {
-      //   title: "Live MERN Cohort",
-      //   href: "/course/mern-cohort",
-      //   description:
-      //     "A live mern stack development cohort from 30 days coding. Checkout on www.courses.30dayscoding.com",
-      // },
-      // {
-      //   title: "DSA Live Placement",
-      //   href: "/course/dsa-live-placement-ready-course",
-      //   description:
-      //     "A live dsa placement ready course from 30 days coding. Checkout on www.courses.30dayscoding.com",
-      // },
-      {
-        title: "All Course Package",
-        link: "/bundle/complete-package-all-course-bundle",
-      },
-      {
-        title: "Complete MERN Full Stack Course",
-        link: "/courses/complete-mern-stack-course",
-      },
-      {
-        title: "DSA Complete Job Ready Course",
-        link: "/courses/dsa-complete-course",
-      },
-      {
-        title: "Complete AI mastery Course",
-        link: "/courses/ai-complete-course",
-      },
-      {
-        title: "SQL Mastery Complete Course",
-        link: "/courses/sql-mastery-complete-course",
-      },
-      {
-        title: "Blockchain Mastery Complete Course",
-        link: "/courses/complete-blockchain-course",
-      },
-    ],
-  };
-
   return (
     <Reveal>
       <div className="bg-footer w-full">
@@ -122,54 +74,6 @@ export default function Footer() {
           </section>
 
           <section className="flex max-md:flex-col flex-[2] lg:justify-around font-semibold lg:p-5 py-5 w-full max-lg:gap-8">
-            <Reveal>
-              <div className="flex text-sm gap-4 flex-col max-w-64">
-                <span className="text-muted-foreground uppercase">
-                  LIVE COURSES
-                </span>
-                {cousre.href.map(({ title, link }, i) => (
-                  <Link
-                    key={i}
-                    className="lg:hover:text-prime transition-all"
-                    href={link}
-                  >
-                    {title}
-                  </Link>
-                ))}
-
-                {/* <Link
-                  className="lg:hover:text-head transition-all"
-                  href={"/course/mern-cohort"}
-                >
-                  Live FullStack Web Development MERN & NEXT
-                </Link> */}
-              </div>
-            </Reveal>
-            {/* <Reveal>
-              <div className="flex text-sm gap-4 flex-col max-w-64">
-                <span className="text-muted-foreground uppercase">
-                  Resources
-                </span>
-                <Link
-                  className="lg:hover:text-prime transition-all"
-                  href={"/courses"}
-                >
-                  DSA Sheets
-                </Link>
-                <Link
-                  className="lg:hover:text-prime transition-all"
-                  href={"/resume/personal-detail"}
-                >
-                  Resume Builder
-                </Link>
-                <Link
-                  className="lg:hover:text-prime transition-all"
-                  href={"https://courses.30dayscoding.com/products"}
-                >
-                  Premium Guides
-                </Link>
-              </div>
-            </Reveal> */}
             <Reveal>
               <div className="flex text-sm gap-4 flex-col max-w-64">
                 <span className="text-muted-foreground uppercase">

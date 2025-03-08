@@ -21,6 +21,20 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  async redirects() {
+    return [
+      {
+        source: '/bundle/:path*',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/courses/:path*',
+        destination: '/',
+        permanent: false,
+      }
+    ];
+  },
 };
 
 
