@@ -85,7 +85,7 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
 
   const getCheckoutUrl = (page: string) => {
     const urls = {
-      'beginner': 'https://30dc.graphy.com/single-checkout/67c84187483bc1739e05e1cb?pid=p1',
+      'beginner': 'https://30dc.graphy.com/single-checkout/67c8a985a2fc8675d8e821ba?pid=p1',
       'intermediate': 'https://30dc.graphy.com/single-checkout/67c8a9e153f717193c586641?pid=p1',
       'advanced': 'https://30dc.graphy.com/single-checkout/652a1994e4b05a145bae5cd0?pid=p1'
     };
