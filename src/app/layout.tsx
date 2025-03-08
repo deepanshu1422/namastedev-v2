@@ -1,7 +1,6 @@
 import "./globals.css";
 import { outfit, bric, localJakarta } from "@/lib/font";
 import Clarity from "@/util/clarity";
-import Pixel from "@/util/pixel";
 import { Toaster } from "@/components/ui/sonner";
 import { SessionProvider } from "next-auth/react";
 import Script from "next/script";
@@ -11,12 +10,9 @@ import { DataProvider } from "../context/resume-context";
 import PageSense from "@/util/pagesense";
 
 import AdSense from "@/util/ads";
-import PixelEvents from "@/services/fbpixel";
 import GoogleAnalytics from "@/util/ga";
 import GoogleAds from "@/util/googleAds";
 import FullStory from "@/util/fullStory";
-import GoogleTagManagerWebContainerHead from "@/components/tracking/GoogletagManagerWebContainerHead";
-import GoogleTagManagerWebContainerBody from "@/components/tracking/GoogleTagManagerWebContainerBody";
 import MixpanelAnalytics from "@/util/mixpanel";
 import { PostHogProvider } from "@/util/posthog";
 import { StreakTracker } from '../components/StreakTracker';
@@ -31,7 +27,6 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <GoogleTagManagerWebContainerHead />
         <GoogleAnalytics gaId="G-4M8L4RM0LB" />
         <MixpanelAnalytics
           projectToken={process.env.NEXT_PUBLIC_MIXPANEL_TOKEN!}
@@ -42,7 +37,6 @@ export default async function RootLayout({
           async
         />
         {/* <Script id="lemonSqueezy" src="https://app.lemonsqueezy.com/js/lemon.js" defer /> */}
-        <Pixel />
         <AdSense />
         <GoogleAds />
       </head>
@@ -53,8 +47,6 @@ export default async function RootLayout({
               <body
                 className={`${outfit.className} ${bric.variable} bg-bg`}
               >
-                <GoogleTagManagerWebContainerBody />
-                <PixelEvents />
                 <StreakTracker />
                 {children}
                 <Toaster richColors />
@@ -63,7 +55,6 @@ export default async function RootLayout({
           </DataProvider>
         </QueryProvider>
       </SessionProvider>
-      {/* <Pixel /> */}
       {/* <Intercom /> */}
       <Clarity />
       <FullStory />

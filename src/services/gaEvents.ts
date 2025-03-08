@@ -2,17 +2,7 @@
 
 import mixpanel from 'mixpanel-browser';
 
-// Add gtag type definition
-declare global {
-  interface Window {
-    gtag: (
-        command: 'event',
-        action: string,
-        params: any
-    ) => void;
-  }
-}
-
+// Remove gtag type definition
 // Rest of the code remains the same...
 const EVENTS = {
   VIEW_ITEM_PAGE: {
@@ -93,14 +83,7 @@ const EVENTS = {
   }
 };
 
-function sendGAEvent(params: any) {
-  if (typeof window !== "undefined" && window.gtag) {
-    window.gtag("event", params.event, params);
-  } else {
-    console.error("Google Analytics not initialized");
-  }
-}
-
+// Remove sendGAEvent function
 function sendMixpanelEvent(eventName: string, properties: any) {
   try {
     // Set user identity if email is available
@@ -143,151 +126,8 @@ function sendEnhancedEvent(eventName: string, eventParams: any) {
   // Prepare Mixpanel properties
   const mixpanelProperties = eventConfig.properties(eventParams);
 
-  // Prepare GA payload based on event type
-  let gaPayload: any = {
-    event: eventName,
-    event_id: Date.now().toString(),
-    currency: "INR",
-    session_id: sessionId,
-  };
-
-  // Add event-specific GA properties
-  switch (eventName) {
-    case "view_item":
-      gaPayload = {
-        ...gaPayload,
-        value: eventParams?.value || 0,
-        quantity: eventParams?.quantity || 1,
-        item_id: eventParams?.itemId || "unknown",
-        event_type: eventName,
-        event_timestamp: eventParams?.eventTimestamp || Date.now(),
-        user_id: eventParams?.userId || "anonymous",
-        email: eventParams?.email || "unknown@example.com",
-        items: [
-          {
-            item_id: eventParams?.itemId || "unknown",
-            item_name: eventParams?.title || "Untitled",
-            price: eventParams?.value || 0,
-            item_category: eventParams?.itemType || "Uncategorized",
-            item_variant: eventParams?.slug || "N/A",
-            quantity: eventParams?.quantity || 1,
-          },
-        ],
-      };
-      break;
-
-    case "add_to_cart":
-      gaPayload = {
-        ...gaPayload,
-        value: eventParams?.value || 0,
-        quantity: eventParams?.quantity || 1,
-        item_id: eventParams?.itemId || "unknown",
-        event_type: eventName,
-        event_timestamp: eventParams?.eventTimestamp || Date.now(),
-        user_id: eventParams?.userId || "anonymous",
-        email: eventParams?.email || "unknown@example.com",
-        items: [
-          {
-            item_id: eventParams?.itemId || "unknown",
-            item_name: eventParams?.title || "Untitled",
-            price: eventParams?.value || 0,
-            item_category: eventParams?.itemType || "Uncategorized",
-            item_variant: eventParams?.slug || "N/A",
-            quantity: eventParams?.quantity || 1,
-          },
-        ],
-      };
-      break;
-
-    case "begin_checkout":
-      gaPayload = {
-        ...gaPayload,
-        value: eventParams?.amount || 0,
-        quantity: eventParams?.quantity || 1,
-        item_id: eventParams?.itemId || "unknown",
-        event_type: eventName,
-        event_timestamp: eventParams?.eventTimestamp || Date.now(),
-        user_id: eventParams?.userId || "anonymous",
-        email: eventParams?.email || "unknown@example.com",
-        items: [
-          {
-            item_name: eventParams?.title || "Untitled",
-            item_id: eventParams?.itemId || "unknown",
-            price: eventParams?.amount || 0,
-            item_category: eventParams?.itemType || "Uncategorized",
-            quantity: eventParams?.quantity || 1,
-          },
-        ],
-        user_properties: {
-          user_id: eventParams?.userId || "anonymous",
-          name: eventParams?.name || "Anonymous",
-          email: eventParams?.email || "unknown@example.com",
-          state: eventParams?.state || "Unknown",
-          logged_in: eventParams?.loggedIn || false,
-        },
-      };
-      break;
-
-    case "purchase":
-      gaPayload = {
-        ...gaPayload,
-        value: eventParams?.amount || 0,
-        quantity: eventParams?.quantity || 1,
-        item_id: eventParams?.itemId || "unknown",
-        event_type: eventName,
-        event_timestamp: eventParams?.eventTimestamp || Date.now(),
-        user_id: eventParams?.userId || "anonymous",
-        email: eventParams?.email || "unknown@example.com",
-        items: [
-          {
-            item_name: eventParams?.title || "Untitled",
-            item_id: eventParams?.itemId || "unknown",
-            price: eventParams?.amount || 0,
-            item_category: eventParams?.itemType || "Uncategorized",
-            quantity: eventParams?.quantity || 1,
-          },
-        ],
-        user_properties: {
-          user_id: eventParams?.userId || "anonymous",
-          name: eventParams?.name || "Anonymous",
-          email: eventParams?.email || "unknown@example.com",
-          state: eventParams?.state || "Unknown",
-          logged_in: eventParams?.loggedIn || false,
-        },
-        transaction_id: eventParams?.transactionId || Date.now().toString(),
-      };
-      break;
-
-    default:
-      gaPayload = {
-        ...gaPayload,
-        event_type: eventName,
-        event_timestamp: Date.now(),
-        user_id: "unknown",
-        email: "unknown@example.com",
-      };
-      console.warn(`Unhandled event name: ${eventName}`);
-      break;
-  }
-
-
-  console.log(`Sending ${eventName} event`, JSON.stringify(gaPayload, null, 2));
-
-  try {
-    sendGAEvent(gaPayload);
-    sendMixpanelEvent(eventConfig.mixpanel, mixpanelProperties);
-
-    // Send additional conversion event for purchases
-    if (eventName === "purchase") {
-      const conversionPayload = {
-        ...gaPayload,
-        event: "conversion_event_purchase"
-      };
-      sendGAEvent(conversionPayload);
-    }
-  } catch (error) {
-    console.error(`Error sending ${eventName} event:`, error);
-  }
+  // Send to Mixpanel
+  sendMixpanelEvent(eventConfig.mixpanel, mixpanelProperties);
 }
 
 export function viewItemPage({

@@ -1,5 +1,4 @@
 import { sha256 } from "js-sha256";
-import * as fbq from "./fbpixel";
 
 const createSendingData = async ({
   eventId,
@@ -29,28 +28,12 @@ const createSendingData = async ({
   };
 };
 
-export default async function triggerEvent(data: Record<string, any>) {
-  const eventId: string = crypto.randomUUID();
-
-  // const sendData = await createSendingData({ eventId, name, value });
-
-  fbq.event("Purchase", data, { eventID: eventId });
-
-  // fetch(
-  //   `https://graph.facebook.com/v18.0/${process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}/events?access_token=${process.env.NEXT_PUBLIC_FBACCESSKEY}`,
-  //   {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       data: [sendData],
-  //       test_event_code: process.env.NEXT_PUBLIC_TEST_ID,
-  //     }),
-  //   }
-  // )
-  //   .then((response) => response.json())
-  //   .then((data) => console.log(data))
-  //   .catch((error) => console.error("Error:", error));
-}
+export const trackPurchase = async (data: any, eventId: string) => {
+  try {
+    // Remove Facebook Pixel event tracking
+    // ... existing code ...
+  } catch (error) {
+    console.error("Error tracking purchase:", error);
+  }
+};
 

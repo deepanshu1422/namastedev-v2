@@ -58,7 +58,6 @@
     "dotenv": "^16.4.5",
     "embla-carousel-autoplay": "^8.0.0",
     "embla-carousel-react": "^8.0.0",
-    "facebook-nodejs-business-sdk": "^21.0.3",
     "framer-motion": "^11.18.2",
     "google-ads-api": "^17.1.0-rest-beta",
     "jotai": "^2.8.3",
