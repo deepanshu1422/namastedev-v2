@@ -27,7 +27,7 @@ export default function Home() {
     <main className="bg-bg dark:bg-bg min-h-svh transition-all">
       <div className="max-w-[1800px] m-auto flex flex-col lg:px-20 lg:py-10 px-4 py-5 md:gap-10">
         <Hero
-          courseLink="https://courses.30dayscoding.com/s/store"
+          courseLink="https://30dc.graphy.com/s/store"
           title="MERN Full Stack Development Course"
           youtube="dao2HaGzc3M"
         />
