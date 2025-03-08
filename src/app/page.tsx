@@ -15,7 +15,7 @@ import Image from "next/image";
 import TableHome from "@/components/TableHome";
 import HomeCurriculum from "@/components/HomeCurriculum";
 import useUtmTracker from '@/hooks/use-utm-tracker';
-import { motion } from "framer-motion";
+
 
 const HomePage = () => {
   // Add UTM tracker

@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 
 const COOKIE_NAME = 'codemasterUtmtest';
 const COOKIE_EXPIRY = 30; // Days
-const TRACKED_ROUTES = ['/home', '/advanced', '/intermediate', '/beginner'];
+const TRACKED_ROUTES = ['/home', '/advanced', '/intermediate', '/beginner','/'];
 
 const useUtmTracker = () => {
   const pathname = usePathname();
