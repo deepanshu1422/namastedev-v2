@@ -15,11 +15,15 @@ import Image from "next/image";
 import { Play, Star, ChevronRight } from "lucide-react";
 
 const mainVideoData = [
-  { ytId: "APn3NX93qYQ", title: "This course has completely transformed my understanding of programming. The hands-on projects and clear explanations." },
+  { ytId: "-iUaW0RFnsY", title: "This course has completely transformed my understanding of programming. The hands-on projects and clear explanations." },
+  { ytId: "lwbiCt32hk8", title: "GraphQL & Apollo Complete Guide" },
+  { ytId: "PD-4lCg0m1Y", title: "Docker & Kubernetes Essentials" },
   { ytId: "Lf2IxMQYn3Q", title: "I had zero coding experience before starting this course, but now I feel confident building my own projects." },
   { ytId: "oSVlTXH0yU8", title: "The step-by-step guidance made learning to code a breeze. I especially loved the community support and mentorship."  },
   { ytId: "bVFUF-mpEIo", title: "This course helped me transition from a complete beginner to someone who can confidently write and understand code." },
-  { ytId: "y44UmGnU3JA", title: "I've taken many online coding courses before, but none were as well-structured and engaging as this one." },
+  { ytId: "fp975mgrQjI", title: "Next.js 14 Advanced Concepts" },
+  { ytId: "85gPxiJiWtc", title: "I've taken many online coding courses before, but none were as well-structured and engaging as this one." },
+  { ytId: "zCDkAgWWvzw", title: "MERN Stack Project Course" },
   { ytId: "wpBfGNGKKg0", title: "Thanks to this program, I finally understand coding concepts that once seemed too complex." }
 ];
 
@@ -29,12 +33,8 @@ const carouselVideoData = [
   { ytId: "fUuuC0-BbhQ", title: "Complete DSA Course" },
   { ytId: "-iUaW0RFnsY", title: "Complete Interview Preparation" },
   { ytId: "KPcOMfIBBcY", title: "Master React Native Development" },
-  { ytId: "DNQj_xrf0gE", title: "Advanced TypeScript Mastery" },
   { ytId: "lwbiCt32hk8", title: "GraphQL & Apollo Complete Guide" },
   { ytId: "PD-4lCg0m1Y", title: "Docker & Kubernetes Essentials" },
-  { ytId: "jNe-UIy3A6U", title: "AWS Cloud Computing Masterclass" },
-  { ytId: "jNsmmvYbaKg", title: "MongoDB Database Design" },
-  { ytId: "ugZHbDFWEzo", title: "Redux Toolkit Complete Tutorial" },
   { ytId: "fp975mgrQjI", title: "Next.js 14 Advanced Concepts" },
   { ytId: "zCDkAgWWvzw", title: "MERN Stack Project Course" },
   { ytId: "hvNitUGAtsI", title: "Advanced JavaScript Patterns" }

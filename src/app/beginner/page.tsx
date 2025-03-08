@@ -204,7 +204,11 @@ const BeginnerPage = () => {
   const { appendUtmToUrl } = useUtmTracker();
 
   const handleEnrollClick = () => {
+    // Show a clear modal with options
     setIsModalOpen(true);
+    
+    // Scroll to top to ensure modal is visible
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

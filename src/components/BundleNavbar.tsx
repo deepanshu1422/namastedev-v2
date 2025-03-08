@@ -50,7 +50,7 @@ export default function BundleNavbar() {
         {/* Right side items */}
         <div className="flex items-center gap-4">
           <a
-            href="https://30dc.graphy.com/s/dashboard"
+            href="https://courses.30dayscoding.com/s/dashboard"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
