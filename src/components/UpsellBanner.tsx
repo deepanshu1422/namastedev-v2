@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { motion } from 'framer-motion';
 import EnrollModal from './EnrollModal';
+import useUtmTracker from '@/hooks/use-utm-tracker';
 
 interface UpsellBannerProps {
   currentPrice: string;
@@ -17,11 +18,23 @@ const UpsellBanner: React.FC<UpsellBannerProps> = ({
   currentPage
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { appendUtmToUrl } = useUtmTracker();
 
   const courseNames = {
     'beginner': 'Beginner',
     'intermediate': 'Intermediate',
     'advanced': 'Advanced'
+  };
+
+  const handleEnrollClick = () => {
+    // For advanced page, directly go to checkout without showing modal
+    if (currentPage === 'advanced') {
+      const advancedCheckoutUrl = 'https://30dc.graphy.com/single-checkout/652a1994e4b05a145bae5cd0?pid=p1';
+      window.location.href = appendUtmToUrl(advancedCheckoutUrl);
+    } else {
+      // For other pages, show the modal
+      setIsModalOpen(true);
+    }
   };
 
   return (
@@ -52,35 +65,39 @@ const UpsellBanner: React.FC<UpsellBannerProps> = ({
             
             <div className="flex items-center gap-3 w-full sm:w-auto">
               <Button 
-                onClick={() => setIsModalOpen(true)}
+                onClick={handleEnrollClick}
                 className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold transition-all duration-300 transform hover:scale-105 w-full sm:w-auto flex items-center justify-center gap-2"
               >
-                <span>Enroll Now</span>
+                <span>{currentPage === 'advanced' ? 'Continue to Checkout' : 'Enroll Now'}</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </Button>
               
-              <Button 
-                onClick={() => setIsModalOpen(true)}
-                variant="outline"
-                className="border-[#22C55E]/30 text-[#22C55E] hover:bg-[#22C55E]/10 px-4 py-2.5 rounded-lg text-sm font-medium hidden sm:flex items-center gap-2"
-              >
-                <span>View Options</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Button>
+              {currentPage !== 'advanced' && (
+                <Button 
+                  onClick={() => setIsModalOpen(true)}
+                  variant="outline"
+                  className="border-[#22C55E]/30 text-[#22C55E] hover:bg-[#22C55E]/10 px-4 py-2.5 rounded-lg text-sm font-medium hidden sm:flex items-center gap-2"
+                >
+                  <span>View Options</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Button>
+              )}
             </div>
           </div>
         </div>
       </motion.div>
 
-      <EnrollModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        currentPage={currentPage}
-      />
+      {currentPage !== 'advanced' && (
+        <EnrollModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          currentPage={currentPage}
+        />
+      )}
     </>
   );
 };

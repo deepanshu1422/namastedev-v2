@@ -15,29 +15,29 @@ import Image from "next/image";
 import { Play, Star, ChevronRight } from "lucide-react";
 
 const mainVideoData = [
-  { ytId: "-iUaW0RFnsY", title: "This course has completely transformed my understanding of programming. The hands-on projects and clear explanations." },
-  { ytId: "lwbiCt32hk8", title: "GraphQL & Apollo Complete Guide" },
-  { ytId: "PD-4lCg0m1Y", title: "Docker & Kubernetes Essentials" },
-  { ytId: "Lf2IxMQYn3Q", title: "I had zero coding experience before starting this course, but now I feel confident building my own projects." },
-  { ytId: "oSVlTXH0yU8", title: "The step-by-step guidance made learning to code a breeze. I especially loved the community support and mentorship."  },
+  { ytId: "-iUaW0RFnsY", title: "This course has completely transformed my understanding of programming. The hands-on projects and clear explanations made all the difference." },
+  { ytId: "lwbiCt32hk8", title: "Finally, all my coding concepts that once seemed too complex are now crystal clear." },
+  { ytId: "PD-4lCg0m1Y", title: "I struggled with DevOps before, but this course made Docker & Kubernetes easy to grasp with practical examples." },
+  { ytId: "Lf2IxMQYn3Q", title: "I had zero coding experience before, but now I feel confident building my own projects from scratch." },
+  { ytId: "oSVlTXH0yU8", title: "The step-by-step guidance made learning to code a breeze. I especially loved the community support and mentorship." },
   { ytId: "bVFUF-mpEIo", title: "This course helped me transition from a complete beginner to someone who can confidently write and understand code." },
-  { ytId: "fp975mgrQjI", title: "Next.js 14 Advanced Concepts" },
+  { ytId: "fp975mgrQjI", title: "I finally understand Next.js deeply! The explanations and real-world projects were game-changers." },
   { ytId: "85gPxiJiWtc", title: "I've taken many online coding courses before, but none were as well-structured and engaging as this one." },
-  { ytId: "zCDkAgWWvzw", title: "MERN Stack Project Course" },
+  { ytId: "zCDkAgWWvzw", title: "Building full-stack projects has never been this easy. The hands-on approach kept me hooked!" },
   { ytId: "wpBfGNGKKg0", title: "Thanks to this program, I finally understand coding concepts that once seemed too complex." }
 ];
 
 const carouselVideoData = [
-  { ytId: "85gPxiJiWtc", title: "Complete Full Stack Development" },
-  { ytId: "kq99NxArQss", title: "Complete System Design Course" },
-  { ytId: "fUuuC0-BbhQ", title: "Complete DSA Course" },
-  { ytId: "-iUaW0RFnsY", title: "Complete Interview Preparation" },
-  { ytId: "KPcOMfIBBcY", title: "Master React Native Development" },
-  { ytId: "lwbiCt32hk8", title: "GraphQL & Apollo Complete Guide" },
-  { ytId: "PD-4lCg0m1Y", title: "Docker & Kubernetes Essentials" },
-  { ytId: "fp975mgrQjI", title: "Next.js 14 Advanced Concepts" },
-  { ytId: "zCDkAgWWvzw", title: "MERN Stack Project Course" },
-  { ytId: "hvNitUGAtsI", title: "Advanced JavaScript Patterns" }
+  { ytId: "85gPxiJiWtc", title: "This course covered everything I needed to become a full-stack developer in a structured and engaging way." },
+  { ytId: "kq99NxArQss", title: "The best resource for system design! The real-world examples made it so easy to understand." },
+  { ytId: "fUuuC0-BbhQ", title: "Data structures and algorithms finally make sense! The explanations and coding exercises were top-notch." },
+  { ytId: "-iUaW0RFnsY", title: "The interview prep strategies here helped me land my dream job. Highly recommended!" },
+  { ytId: "KPcOMfIBBcY", title: "React Native felt overwhelming at first, but this course simplified everything with clear examples and projects." },
+  { ytId: "lwbiCt32hk8", title: "GraphQL & Apollo always seemed complex, but this course broke it down in such an easy way!" },
+  { ytId: "PD-4lCg0m1Y", title: "I finally understand Docker & Kubernetes, thanks to the detailed yet beginner-friendly approach." },
+  { ytId: "fp975mgrQjI", title: "Next.js concepts finally make sense! The advanced topics were explained so well." },
+  { ytId: "zCDkAgWWvzw", title: "Building MERN stack projects has never been this fun and easy. The hands-on approach was perfect!" },
+  { ytId: "hvNitUGAtsI", title: "Advanced JavaScript patterns explained in the most practical and understandable way!" }
 ];
 
 function VideoGrid() {

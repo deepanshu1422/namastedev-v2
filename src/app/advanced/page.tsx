@@ -371,11 +371,9 @@ const AdvancedPage = () => {
   const { appendUtmToUrl } = useUtmTracker();
 
   const handleEnrollClick = () => {
-    // Show a clear modal with options
-    setIsModalOpen(true);
-    
-    // Scroll to top to ensure modal is visible
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // For advanced page, directly go to checkout without showing modal
+    const advancedCheckoutUrl = 'https://30dc.graphy.com/single-checkout/652a1994e4b05a145bae5cd0?pid=p1';
+    window.location.href = appendUtmToUrl(advancedCheckoutUrl);
   };
 
   const visibleLearningPath = showAllSteps 
