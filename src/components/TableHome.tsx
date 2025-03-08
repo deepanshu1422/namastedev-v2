@@ -33,9 +33,9 @@ export default function Comparison() {
       <div className="relative max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
         {/* Header */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0 }}
           className="text-center space-y-6 md:space-y-8 mb-10 md:mb-16"
         >
           <div className="flex flex-col items-center gap-3 md:gap-4">
@@ -56,9 +56,9 @@ export default function Comparison() {
 
         {/* Table Container */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0 }}
           className="relative -mx-4 sm:mx-0"
         >
           {/* Glassmorphism Card */}
@@ -88,9 +88,9 @@ export default function Comparison() {
                 <tbody>
                   {features.map((item, i) => (
                     <motion.tr
-                      initial={{ opacity: 0, x: -20 }}
+                      initial={{ opacity: 1, x: 0 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: i * 0.1 }}
+                      transition={{ duration: 0 }}
                       key={i}
                       className="border-b border-emerald-500/20 transition-colors hover:bg-emerald-500/5"
                     >

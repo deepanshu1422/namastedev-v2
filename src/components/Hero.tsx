@@ -15,9 +15,9 @@ export default function Hero() {
 
         {/* Main heading */}
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0, delay: 0 }}
           className="mt-6 text-5xl md:text-7xl font-bold tracking-tight"
         >
           <span className="text-[#22C55E]">
@@ -29,9 +29,9 @@ export default function Hero() {
 
         {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0, delay: 0 }}
           className=" text-xl text-gray-300 max-w-3xl mx-auto"
         >
           Join India's most comprehensive coding program. Learn from experts, build real
@@ -40,9 +40,9 @@ export default function Hero() {
 
         {/* Video Section - Added here */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          transition={{ duration: 0, delay: 0 }}
           className="mt-10"
         >
           <div className="relative max-w-3xl mx-auto">
@@ -70,9 +70,9 @@ export default function Hero() {
 
         {/* Stats */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
+          transition={{ duration: 0, delay: 0 }}
           className="m-10 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center"
         >
           <div className="bg-[#0A0A0A] rounded-2xl p-6 border border-[#1C1C1C]">

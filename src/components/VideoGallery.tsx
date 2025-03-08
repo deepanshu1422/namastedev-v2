@@ -237,8 +237,9 @@ export default function VideoGallery() {
       {/* Section Header */}
       <div className="relative max-w-7xl mx-auto px-4 mb-16">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0 }}
           className="text-center space-y-4"
         >
           <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 backdrop-blur-sm">

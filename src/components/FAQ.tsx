@@ -45,7 +45,7 @@ function FAQItem({ question, answer, isOpen, onClick }: {
         <span className="text-lg font-medium text-white">{question}</span>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0 }}
           className="flex-shrink-0 ml-4"
         >
           <ChevronDown className="w-5 h-5 text-emerald-400" />
@@ -54,10 +54,10 @@ function FAQItem({ question, answer, isOpen, onClick }: {
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
+            initial={{ height: "auto", opacity: 1 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0 }}
           >
             <div className="p-6 pt-0 text-emerald-100/80">
               {answer}
@@ -82,8 +82,9 @@ export default function FAQ() {
 
       <div className="relative max-w-4xl mx-auto px-4">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0 }}
           className="text-center space-y-4 mb-16"
         >
           <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 backdrop-blur-sm">
@@ -111,9 +112,9 @@ export default function FAQ() {
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ duration: 0, delay: 0 }}
             >
               <FAQItem
                 question={faq.question}

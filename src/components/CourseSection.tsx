@@ -317,17 +317,17 @@ const CourseSection = () => {
 
       {/* Main content */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 1, y: 0 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0 }}
         className="relative z-10 max-w-7xl mx-auto"
       >
         {/* Section heading */}
         <div className="text-center mb-8 md:mb-24 relative">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
+            transition={{ duration: 0, delay: 0 }}
             className="text-3xl md:text-6xl font-bold text-[#22C55E] mb-4 md:mb-6 relative"
           >
             Choose Your Learning Path
@@ -345,9 +345,9 @@ const CourseSection = () => {
               {Object.entries(quickComparison).map(([level, features], index) => (
                 <motion.div 
                   key={level}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 1, y: 0 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.2, delay: index * 0.05 }}
+                  transition={{ duration: 0, delay: 0 }}
                   className={`p-4 rounded-lg transition-all duration-200 ${
                     selectedPlan === level 
                       ? 'bg-[#22C55E]/20 border-[#22C55E]' 
