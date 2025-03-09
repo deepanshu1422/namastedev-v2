@@ -7,6 +7,7 @@ import VideoGallery from '@/components/VideoGallery';
 import Footer from "@/components/new-cohort/footer";
 import UpsellBanner from '@/components/UpsellBanner';
 import useUtmTracker from '@/hooks/use-utm-tracker';
+import useFacebookPixel from '@/hooks/use-facebook-pixel';
 import EnrollModal from '@/components/EnrollModal';
 import BundleNavbar from '@/components/BundleNavbar';
 import WhyChooseUs from '@/components/WhyChooseUs';
@@ -374,6 +375,13 @@ const AdvancedPage = () => {
 
   // Add UTM tracker
   const { appendUtmToUrl } = useUtmTracker();
+  
+  // Add Facebook Pixel tracking with content ID - ViewContent only
+  useFacebookPixel({
+    contentIds: ["652a1994e4b05a145bae5cd0"],
+    trackViewContent: true,
+    trackPageView: false
+  });
 
   const handleEnrollClick = () => {
     // For advanced page, directly go to checkout without showing modal

@@ -7,6 +7,7 @@ import VideoGallery from '@/components/VideoGallery';
 import Footer from "@/components/new-cohort/footer";
 import UpsellBanner from '@/components/UpsellBanner';
 import useUtmTracker from '@/hooks/use-utm-tracker';
+import useFacebookPixel from '@/hooks/use-facebook-pixel';
 import EnrollModal from '@/components/EnrollModal';
 import BundleNavbar from '@/components/BundleNavbar';
 import WhyChooseUs from '@/components/WhyChooseUs';
@@ -206,7 +207,14 @@ const BeginnerPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Add UTM tracker
-  const { appendUtmToUrl } = useUtmTracker();
+  useUtmTracker();
+  
+  // Add Facebook Pixel tracking with content ID - ViewContent only
+  useFacebookPixel({
+    contentIds: ["67c8a985a2fc8675d8e821ba"],
+    trackViewContent: true,
+    trackPageView: false
+  });
 
   const handleEnrollClick = () => {
     // Show a clear modal with options

@@ -15,11 +15,18 @@ import Image from "next/image";
 import TableHome from "@/components/TableHome";
 import HomeCurriculum from "@/components/HomeCurriculum";
 import useUtmTracker from '@/hooks/use-utm-tracker';
+import useFacebookPixel from '@/hooks/use-facebook-pixel';
 
 
 const HomePage = () => {
   // Add UTM tracker
   useUtmTracker();
+  
+  // Add Facebook Pixel tracking - PageView only
+  useFacebookPixel({
+    trackPageView: true,
+    trackViewContent: false
+  });
 
   return (
     <>
