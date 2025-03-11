@@ -163,7 +163,7 @@ export async function sendToAdDataApi(eventData: AdEventData): Promise<void> {
     };
     
     // Use a production API endpoint instead of localhost
-    const apiEndpoint ='http://localhost:3001/api/addata';
+    const apiEndpoint ='https://king-prawn-app-c4g7k.ondigitalocean.app/api/addata';
     
     console.log(`Sending event data to ${apiEndpoint}:`, eventData.event_name, 
       eventData.custom_data.content_ids ? `content_ids: ${eventData.custom_data.content_ids}` : '');
