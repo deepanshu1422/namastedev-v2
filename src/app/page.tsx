@@ -22,10 +22,11 @@ const HomePage = () => {
   // Add UTM tracker
   useUtmTracker();
   
-  // Add Facebook Pixel tracking - PageView only
+  // Add Facebook Pixel tracking - Track both PageView and ViewContent
   useFacebookPixel({
     trackPageView: true,
-    trackViewContent: false
+    trackViewContent: true,
+    contentIds: ["homepage_content"]
   });
 
   return (

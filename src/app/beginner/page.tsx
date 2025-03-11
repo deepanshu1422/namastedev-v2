@@ -209,11 +209,11 @@ const BeginnerPage = () => {
   // Add UTM tracker
   useUtmTracker();
   
-  // Add Facebook Pixel tracking with content ID - ViewContent only
+  // Add Facebook Pixel tracking with content ID - Track both PageView and ViewContent
   useFacebookPixel({
     contentIds: ["67c8a985a2fc8675d8e821ba"],
     trackViewContent: true,
-    trackPageView: false
+    trackPageView: true
   });
 
   const handleEnrollClick = () => {

@@ -259,11 +259,11 @@ const IntermediatePage = () => {
   // Add UTM tracker
   useUtmTracker();
   
-  // Add Facebook Pixel tracking with content ID - ViewContent only
+  // Add Facebook Pixel tracking with content ID - Track both PageView and ViewContent
   useFacebookPixel({
     contentIds: ["652a1994e4b05a145bae5cd0"],
     trackViewContent: true,
-    trackPageView: false
+    trackPageView: true
   });
 
   const handleEnrollClick = () => {
