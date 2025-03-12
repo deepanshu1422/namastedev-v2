@@ -73,6 +73,18 @@ export function hashEmail(email: string): string {
   return sha256(email.trim().toLowerCase());
 }
 
+// Function to get client IP address
+async function getClientIpAddress(): Promise<string | null> {
+  try {
+    const response = await fetch('https://api64.ipify.org/?format=json');
+    const data = await response.json();
+    return data.ip;
+  } catch (error) {
+    console.error('Error fetching IP address:', error);
+    return null;
+  }
+}
+
 // Function to collect data from both GA and FB Pixel
 export async function collectAdData(
   eventName: string,
@@ -98,6 +110,9 @@ export async function collectAdData(
   // Get current URL
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
   
+  // Get client IP address
+  const clientIpAddress = await getClientIpAddress();
+  
   // Prepare user data
   const adUserData = {
     em: userData.email ? [hashEmail(userData.email)] : undefined,
@@ -107,15 +122,18 @@ export async function collectAdData(
     fbc: getCookie("fbclick_id"),
     external_id: externalId ? [externalId] : undefined,
     client_user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : undefined,
-    client_ip_address: null, // Will be filled by the server
+    client_ip_address: clientIpAddress, // Use the fetched IP address
     ...userData
   };
   
+  // Remove event_id from customData to prevent duplication
+  const { event_id, ...cleanCustomData } = customData;
+  
   // Prepare custom data
   const adCustomData = {
-    currency: customData.currency || "USD",
-    value: customData.value || "0.00",
-    ...customData
+    currency: cleanCustomData.currency || "USD",
+    value: cleanCustomData.value || "0.00",
+    ...cleanCustomData
   };
   
   // Create event data
@@ -250,51 +268,60 @@ export async function trackEvent(
   customData: Record<string, any> = {},
   userData: Record<string, any> = {}
 ): Promise<void> {
-  // Check if this event was recently sent to prevent duplicates
-  if (wasEventRecentlySent(eventName)) {
-    console.log(`Prevented duplicate event: ${eventName}`);
-    return;
+  let eventData: AdEventData | undefined;
+  try {
+    // Check if this event was recently sent to prevent duplicates
+    if (wasEventRecentlySent(eventName)) {
+      console.log(`Prevented duplicate event: ${eventName}`);
+      return;
+    }
+    
+    // Extract email and phone from customData if they exist
+    if (customData.em && !userData.email) {
+      userData.email = customData.em;
+    }
+    
+    if (customData.ph && !userData.phone) {
+      userData.phone = customData.ph;
+    }
+    
+    if (customData.fn && !userData.name) {
+      userData.name = customData.fn;
+    }
+    
+    // Ensure content_ids is passed from customData to userData if not already present
+    if (customData.content_ids && !userData.content_ids) {
+      userData.content_ids = customData.content_ids;
+    }
+    
+    eventData = await collectAdData(eventName, customData, userData);
+    
+    // Create a unique key for this event
+    const eventKey = `${eventName}_${JSON.stringify(customData)}_${Date.now()}`;
+    
+    // Check if we've already sent this exact event
+    if (sentEvents.has(eventKey)) {
+      console.log(`Prevented duplicate event with key: ${eventKey}`);
+      return;
+    }
+    
+    // Mark this event as sent
+    sentEvents.add(eventKey);
+    
+    // Send the event data
+    await sendToAdDataApi(eventData);
+    
+    // Try to retry any failed events
+    setTimeout(() => {
+      retryFailedEvents();
+    }, 5000);
+  } catch (error) {
+    console.error('Error tracking event:', error);
+    // Store failed event for retry
+    if (eventData) {
+      storeFailedEvent(eventData);
+    }
   }
-  
-  // Extract email and phone from customData if they exist
-  if (customData.em && !userData.email) {
-    userData.email = customData.em;
-  }
-  
-  if (customData.ph && !userData.phone) {
-    userData.phone = customData.ph;
-  }
-  
-  if (customData.fn && !userData.name) {
-    userData.name = customData.fn;
-  }
-  
-  // Ensure content_ids is passed from customData to userData if not already present
-  if (customData.content_ids && !userData.content_ids) {
-    userData.content_ids = customData.content_ids;
-  }
-  
-  const eventData = await collectAdData(eventName, customData, userData);
-  
-  // Create a unique key for this event
-  const eventKey = `${eventName}_${JSON.stringify(customData)}_${Date.now()}`;
-  
-  // Check if we've already sent this exact event
-  if (sentEvents.has(eventKey)) {
-    console.log(`Prevented duplicate event with key: ${eventKey}`);
-    return;
-  }
-  
-  // Mark this event as sent
-  sentEvents.add(eventKey);
-  
-  // Send the event data
-  await sendToAdDataApi(eventData);
-  
-  // Try to retry any failed events
-  setTimeout(() => {
-    retryFailedEvents();
-  }, 5000);
 }
 
 // Function to send event in the exact format required by Facebook
@@ -315,7 +342,7 @@ export async function sendExactFormatEvent(
   };
   
   try {
-    const response = await fetch('http://localhost:3001/api/addata', {
+    const response = await fetch('https://king-prawn-app-c4g7k.ondigitalocean.app/addata', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

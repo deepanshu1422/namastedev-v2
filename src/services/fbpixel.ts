@@ -81,10 +81,17 @@ function getBaseEventData() {
     fbc: getCookie("fbclick_id"),
     external_id: localStorage.getItem("hashed-ext-ID"),
     client_user_agent: navigator.userAgent,
-    event_id: crypto.randomUUID(),
     page_location: window.location.href,
     page_title: document.title,
     page_path: window.location.pathname
+  };
+}
+
+// Helper function to create event data with ID
+function createEventData(baseData: ReturnType<typeof getBaseEventData>) {
+  return {
+    ...baseData,
+    event_id: crypto.randomUUID()
   };
 }
 
@@ -161,15 +168,16 @@ export const pageview = async () => {
   if (typeof window === 'undefined') return;
   
   const baseData = getBaseEventData();
-  const eventKey = getEventKey(FB_EVENTS.PAGE_VIEW, baseData.event_id);
+  const eventData = createEventData(baseData);
+  const eventKey = getEventKey(FB_EVENTS.PAGE_VIEW, eventData.event_id);
   
   // Check both set-based and time-based duplicate prevention
   if (firedEvents.has(eventKey) || wasEventRecentlyFired(FB_EVENTS.PAGE_VIEW)) return;
   
-  window.fbq("track", FB_EVENTS.PAGE_VIEW, baseData);
+  window.fbq("track", FB_EVENTS.PAGE_VIEW, eventData);
 
   await trackEvent(FB_EVENTS.PAGE_VIEW, {
-    ...baseData,
+    ...eventData,
     page_location: window.location.href,
     page_title: document.title,
     page_path: window.location.pathname
@@ -180,7 +188,7 @@ export const pageview = async () => {
     client_user_agent: navigator.userAgent
   });
 
-  markEventAsFired(FB_EVENTS.PAGE_VIEW, baseData.event_id);
+  markEventAsFired(FB_EVENTS.PAGE_VIEW, eventData.event_id);
 };
 
 // Track content view
@@ -188,27 +196,27 @@ export const viewContent = async (contentIds: string[]) => {
   if (typeof window === 'undefined') return;
   
   const baseData = getBaseEventData();
-  const eventKey = getEventKey(FB_EVENTS.VIEW_CONTENT, baseData.event_id);
+  const eventData = createEventData(baseData);
+  const eventKey = getEventKey(FB_EVENTS.VIEW_CONTENT, eventData.event_id);
   
   // Check both set-based and time-based duplicate prevention
   if (firedEvents.has(eventKey) || wasEventRecentlyFired(FB_EVENTS.VIEW_CONTENT)) return;
   
-  window.fbq("track", FB_EVENTS.VIEW_CONTENT, {
-    ...baseData,
+  const viewContentData = {
+    ...eventData,
     content_ids: contentIds
-  });
+  };
+  
+  window.fbq("track", FB_EVENTS.VIEW_CONTENT, viewContentData);
 
-  await trackEvent(FB_EVENTS.VIEW_CONTENT, {
-    ...baseData,
-    content_ids: contentIds
-  }, {
+  await trackEvent(FB_EVENTS.VIEW_CONTENT, viewContentData, {
     external_id: localStorage.getItem("hashed-ext-ID"),
     fbp: getCookie("_fbp"),
     fbc: getCookie("fbclick_id"),
     client_user_agent: navigator.userAgent
   });
 
-  markEventAsFired(FB_EVENTS.VIEW_CONTENT, baseData.event_id);
+  markEventAsFired(FB_EVENTS.VIEW_CONTENT, eventData.event_id);
 };
 
 // Handle link clicks for potential events
@@ -265,13 +273,14 @@ export const trackCustomEvent = async (
   if (typeof window === 'undefined') return;
   
   const baseData = getBaseEventData();
-  const eventKey = getEventKey(eventName, baseData.event_id);
+  const eventData = createEventData(baseData);
+  const eventKey = getEventKey(eventName, eventData.event_id);
   
   // Check both set-based and time-based duplicate prevention
   if (firedEvents.has(eventKey) || wasEventRecentlyFired(eventName)) return;
   
-  const eventData = {
-    ...baseData,
+  const fullEventData = {
+    ...eventData,
     ...customData
   };
   
@@ -279,7 +288,7 @@ export const trackCustomEvent = async (
   console.log(`Tracking FB event: ${eventName}`, 
     customData.content_ids ? `content_ids: ${JSON.stringify(customData.content_ids)}` : '');
   
-  window.fbq("track", eventName, eventData);
+  window.fbq("track", eventName, fullEventData);
   
   // Prepare userData with content_ids if available
   const userData: Record<string, any> = {
@@ -294,9 +303,9 @@ export const trackCustomEvent = async (
     userData.content_ids = customData.content_ids;
   }
   
-  await trackEvent(eventName, eventData, userData);
+  await trackEvent(eventName, fullEventData, userData);
 
-  markEventAsFired(eventName, baseData.event_id);
+  markEventAsFired(eventName, eventData.event_id);
 };
 
 // Reset tracked events (useful when pathname changes)
@@ -367,7 +376,8 @@ export const trackCheckoutEvent = async (
   if (typeof window === 'undefined') return;
   
   const baseData = getBaseEventData();
-  const eventKey = getEventKey(FB_EVENTS.INITIATE_CHECKOUT, baseData.event_id);
+  const eventData = createEventData(baseData);
+  const eventKey = getEventKey(FB_EVENTS.INITIATE_CHECKOUT, eventData.event_id);
   
   // Check both set-based and time-based duplicate prevention
   if (firedEvents.has(eventKey) || wasEventRecentlyFired(FB_EVENTS.INITIATE_CHECKOUT)) return;
@@ -376,7 +386,7 @@ export const trackCheckoutEvent = async (
   const numericPrice = parseFloat(coursePrice.replace(/[^0-9.]/g, ''));
   
   const checkoutData = {
-    ...baseData,
+    ...eventData,
     content_ids: [courseType],
     content_type: 'product',
     content_name: courseName,
@@ -402,7 +412,7 @@ export const trackCheckoutEvent = async (
     content_ids: [courseType]
   });
 
-  markEventAsFired(FB_EVENTS.INITIATE_CHECKOUT, baseData.event_id);
+  markEventAsFired(FB_EVENTS.INITIATE_CHECKOUT, eventData.event_id);
   
   // Return true to indicate the event was tracked
   return true;
