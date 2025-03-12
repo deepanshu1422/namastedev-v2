@@ -14,7 +14,8 @@ const nextConfig = {
       "lh7-us.googleusercontent.com",
       "d502jbuhuh9wk.cloudfront.net",
       "upload.wikimedia.org",
-      "img.youtube.com"
+      "img.youtube.com",
+      "images.remotePatterns"
     ],
   },
   typescript: {

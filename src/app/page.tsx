@@ -8,26 +8,21 @@ import VideoGallery from "@/components/VideoGallery";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/new-cohort/footer";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import Mentors from "@/app/(users)/mentors";
+import Mentors from "@/components/mentors";
 import { Badge } from "@/components/ui/badge";
 import { Award } from "lucide-react";
 import Image from "next/image";
 import TableHome from "@/components/TableHome";
 import HomeCurriculum from "@/components/HomeCurriculum";
 import useUtmTracker from '@/hooks/use-utm-tracker';
-import useFacebookPixel from '@/hooks/use-facebook-pixel';
+
 
 
 const HomePage = () => {
   // Add UTM tracker
   useUtmTracker();
   
-  // Add Facebook Pixel tracking - Track both PageView and ViewContent
-  useFacebookPixel({
-    trackPageView: true,
-    trackViewContent: true,
-    contentIds: ["homepage_content"]
-  });
+  
 
   return (
     <>

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import useUtmTracker from '@/hooks/use-utm-tracker';
-import { trackCheckoutClick, getCourseInfo } from '@/services/checkoutTracker';
+
 
 interface CourseOption {
   name: string;
@@ -119,26 +119,8 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
     try {
       setIsCheckoutInProgress(true);
       
-      // Get course information
-      const courseInfo = getCourseInfo(page as 'beginner' | 'intermediate' | 'advanced');
+    
       
-      // Track the checkout event
-      await trackCheckoutClick({
-        courseId: courseInfo.id,
-        courseName: courseInfo.name,
-        coursePrice: courseInfo.price,
-        courseType: page,
-        additionalData: {
-          source: 'enroll_modal',
-          button_location: 'modal',
-          utm_source: new URLSearchParams(window.location.search).get('utm_source') || 'direct',
-          utm_medium: new URLSearchParams(window.location.search).get('utm_medium') || 'none',
-          utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign') || 'none'
-        }
-      });
-      
-      // Log the event for debugging
-      console.log(`Checkout initiated for ${page} package:`, courseInfo);
       
       // Navigate to checkout URL
       window.location.href = getCheckoutUrl(page);

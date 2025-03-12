@@ -7,11 +7,11 @@ import VideoGallery from '@/components/VideoGallery';
 import Footer from "@/components/new-cohort/footer";
 import UpsellBanner from '@/components/UpsellBanner';
 import useUtmTracker from '@/hooks/use-utm-tracker';
-import useFacebookPixel from '@/hooks/use-facebook-pixel';
+
 import EnrollModal from '@/components/EnrollModal';
 import BundleNavbar from '@/components/BundleNavbar';
 import WhyChooseUs from '@/components/WhyChooseUs';
-import Mentors from '@/app/(users)/mentors';
+import Mentors from '@/components/mentors';
 import { Badge } from "@/components/ui/badge";
 import { Award } from "lucide-react";
 import Image from "next/image";
@@ -209,12 +209,6 @@ const BeginnerPage = () => {
   // Add UTM tracker
   useUtmTracker();
   
-  // Add Facebook Pixel tracking with content ID - Track both PageView and ViewContent
-  useFacebookPixel({
-    contentIds: ["67c8a985a2fc8675d8e821ba"],
-    trackViewContent: true,
-    trackPageView: true
-  });
 
   const handleEnrollClick = () => {
     // Show a clear modal with options
