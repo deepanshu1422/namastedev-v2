@@ -3,8 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "@/components/ui/button";
-import useUtmTracker from '@/hooks/use-utm-tracker';
-
+import { useRouter } from 'next/navigation';
 
 interface CourseOption {
   name: string;
@@ -20,6 +19,38 @@ interface EnrollModalProps {
   onClose: () => void;
   currentPage: 'beginner' | 'intermediate' | 'advanced';
 }
+
+// List of Indian states
+const indianStates = [
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chhattisgarh",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal"
+];
 
 const courseOptions: Record<string, CourseOption[]> = {
   beginner: [
@@ -74,8 +105,8 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
   onClose,
   currentPage
 }) => {
-  // Add UTM tracker
-  const { appendUtmToUrl } = useUtmTracker();
+  const router = useRouter();
+  
   // Add state to track if checkout is in progress
   const [isCheckoutInProgress, setIsCheckoutInProgress] = useState(false);
 
@@ -88,13 +119,6 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
     advanced: "₹2,999"
   }[currentPage];
   
-  // Course IDs mapping
-  const courseIds = {
-    'beginner': '67c8a985a2fc8675d8e821ba',
-    'intermediate': '67c8a9e153f717193c586641',
-    'advanced': '652a1994e4b05a145bae5cd0'
-  };
-  
   // Course names mapping
   const courseNames = {
     'beginner': 'Beginner Package',
@@ -102,43 +126,22 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
     'advanced': 'Advanced Package'
   };
 
-  const getCheckoutUrl = (page: string) => {
-    const urls = {
-      'beginner': 'https://30dc.graphy.com/single-checkout/67c8a985a2fc8675d8e821ba?pid=p1',
-      'intermediate': 'https://30dc.graphy.com/single-checkout/67c8a9e153f717193c586641?pid=p1',
-      'advanced': 'https://30dc.graphy.com/single-checkout/652a1994e4b05a145bae5cd0?pid=p1'
-    };
-    return appendUtmToUrl(urls[page]);
-  };
-  
-  // Handle checkout with tracking
-  const handleCheckout = async (page: string) => {
+  // Handle redirect to checkout page
+  const handleCheckoutRedirect = (page: string) => {
     // Prevent multiple clicks
     if (isCheckoutInProgress) return;
     
     try {
       setIsCheckoutInProgress(true);
       
-    
-      
-      
-      // Navigate to checkout URL
-      window.location.href = getCheckoutUrl(page);
-    } catch (error) {
-      console.error('Error during checkout:', error);
-      // Navigate anyway in case of error
-      window.location.href = getCheckoutUrl(page);
-    }
-  };
-
-  const handleNavigation = (targetPage: string) => {
-    if (['beginner', 'intermediate', 'advanced'].includes(targetPage)) {
-      // For internal page navigation, preserve UTM in URL
-      const currentUtm = new URLSearchParams(window.location.search).get('utmpara');
-      const baseUrl = `/${targetPage}`;
-      window.location.href = currentUtm ? `${baseUrl}?utmpara=${currentUtm}` : baseUrl;
-    } else {
+      // Close modal
       onClose();
+      
+      // Redirect to checkout page with course type
+      router.push(`/checkout?course=${page}`);
+    } catch (error) {
+      console.error('Error redirecting to checkout:', error);
+      setIsCheckoutInProgress(false);
     }
   };
 
@@ -172,31 +175,6 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
               </svg>
             </button>
 
-            {/* Sticky "Happy with your current course" section at the top - DESKTOP ONLY */}
-            <div className="hidden sm:block sticky top-0 z-10 bg-[#0A2818] border-b border-[#22C55E]/20 py-3 sm:py-4 mb-4 sm:mb-6">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 px-2">
-                <div className="text-center sm:text-left">
-                  <h4 className="text-base sm:text-lg font-semibold text-white">Happy with your current course?</h4>
-                  <p className="text-xs sm:text-sm text-gray-400">Continue with {currentPage} package at {currentCoursePrice}</p>
-                </div>
-                <Button 
-                  onClick={() => {
-                    if (['beginner', 'intermediate', 'advanced'].includes(currentPage)) {
-                      handleCheckout(currentPage);
-                    } else {
-                      onClose();
-                    }
-                  }}
-                  className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-3 sm:px-6 py-2 sm:py-3 rounded-md sm:rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-base w-full sm:w-auto"
-                >
-                  <span>Continue with Current Course</span>
-                  <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </Button>
-              </div>
-            </div>
-
             {/* Content */}
             <div className="text-center mb-4 sm:mb-8">
               <h3 className="text-lg sm:text-2xl font-bold text-white mb-1.5 sm:mb-2 px-4 sm:px-8">
@@ -212,7 +190,7 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
 
             {/* Course Options */}
             {options.length > 0 ? (
-              <div className={`${currentPage === 'advanced' ? 'max-w-2xl mx-auto' : 'grid md:grid-cols-2 gap-3 sm:gap-6'} mb-4 sm:mb-8`}>
+              <div className={`${currentPage === 'advanced' ? 'max-w-2xl mx-auto' : 'grid md:grid-cols-2 gap-3 sm:gap-6'} mb-4 sm:mb-8 pb-24 sm:pb-0`}>
                 {options.map((option, index) => (
                   <motion.div
                     key={index}
@@ -263,9 +241,9 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
                       } px-3 sm:px-6 py-2.5 sm:py-4 rounded-md sm:rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-1.5 sm:gap-2 text-sm sm:text-lg`}
                       onClick={() => {
                         if (option.name === "Advanced Package") {
-                          handleNavigation('advanced');
+                          handleCheckoutRedirect('advanced');
                         } else if (option.name === "Intermediate Package") {
-                          handleNavigation('intermediate');
+                          handleCheckoutRedirect('intermediate');
                         }
                       }}
                     >
@@ -278,7 +256,7 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
                 ))}
               </div>
             ) : (
-              <div className="text-center py-6 mb-4">
+              <div className="text-center py-6 mb-4 pb-24 sm:pb-0">
                 <div className="mx-auto w-16 h-16 bg-[#22C55E]/10 rounded-full flex items-center justify-center mb-4">
                   <svg className="w-8 h-8 text-[#22C55E]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -291,19 +269,48 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
               </div>
             )}
 
-            {/* Sticky footer for mobile */}
-            <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-[#0A2818] border-t border-[#22C55E]/20 p-3 z-20">
+            {/* Current Course Option - Desktop version */}
+            <div className="hidden sm:block mt-4 mb-8 p-4 sm:p-6 bg-[#22C55E]/10 rounded-lg sm:rounded-xl border border-[#22C55E]/20">
+              <div className="flex flex-col items-center text-center mb-4">
+                <h4 className="text-lg sm:text-xl font-bold text-white mb-1">Happy with your current course?</h4>
+                <p className="text-xs sm:text-sm text-gray-400">Continue with {currentPage} package at {currentCoursePrice}</p>
+              </div>
               <Button 
                 onClick={() => {
                   if (['beginner', 'intermediate', 'advanced'].includes(currentPage)) {
-                    handleCheckout(currentPage);
+                    handleCheckoutRedirect(currentPage);
                   } else {
                     onClose();
                   }
                 }}
-                className="bg-[#22C55E] hover:bg-[#16A34A] text-white py-3 rounded-xl font-semibold w-full flex items-center justify-center gap-2"
+                disabled={isCheckoutInProgress}
+                className="w-full bg-[#22C55E] hover:bg-[#16A34A] text-white py-3 sm:py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-2 text-sm sm:text-lg disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                <span>Continue with Current Course ({currentCoursePrice})</span>
+                <span>{isCheckoutInProgress ? 'Processing...' : 'Continue with Current Course'}</span>
+                <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Button>
+            </div>
+
+            {/* Mobile sticky version */}
+            <div className="sm:hidden fixed bottom-0 left-0 right-0 p-3 z-50 bg-[#0A2818] border-t border-[#22C55E]/20 shadow-lg">
+              <div className="flex flex-col items-center text-center mb-2">
+                <h4 className="text-base font-bold text-white mb-0.5">Happy with your current course?</h4>
+                <p className="text-xs text-gray-400">Continue with {currentPage} package at {currentCoursePrice}</p>
+              </div>
+              <Button 
+                onClick={() => {
+                  if (['beginner', 'intermediate', 'advanced'].includes(currentPage)) {
+                    handleCheckoutRedirect(currentPage);
+                  } else {
+                    onClose();
+                  }
+                }}
+                disabled={isCheckoutInProgress}
+                className="w-full bg-[#22C55E] hover:bg-[#16A34A] text-white py-2.5 rounded-xl font-semibold shadow-lg flex items-center justify-center gap-2 text-sm disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                <span>{isCheckoutInProgress ? 'Processing...' : 'Continue with Current Course'}</span>
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
@@ -311,7 +318,7 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
             </div>
 
             {/* Security note */}
-            <div className="mt-3 sm:mt-6 flex items-center justify-center gap-1 sm:gap-2 text-[10px] sm:text-sm text-gray-400 mb-12 sm:mb-0">
+            <div className="mt-3 sm:mt-6 flex items-center justify-center gap-1 sm:gap-2 text-[10px] sm:text-sm text-gray-400 mb-4">
               <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>

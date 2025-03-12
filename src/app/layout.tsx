@@ -1,9 +1,6 @@
 import "./globals.css";
 
-import { Toaster } from "@/components/ui/sonner";
-
-
-
+import { Toaster } from "@/components/ui/toaster";
 
 export default async function RootLayout({
   children,
@@ -11,7 +8,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
  
-
   return (
     <html lang="en">
       <head>
@@ -27,7 +23,7 @@ export default async function RootLayout({
                 {/* End Google Tag Manager (noscript) */}
                
                 {children}
-                <Toaster richColors />
+                <Toaster />
               </body>
             
      
