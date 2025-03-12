@@ -17,7 +17,7 @@ const razorpay = new Razorpay({
 // Course pricing information with course IDs
 const coursePricing = {
   beginner: { 
-    amount: 99900, 
+    amount: 100, 
     currency: "INR", 
     name: "Beginner Package",
     courseId: "67c8a985a2fc8675d8e821ba"

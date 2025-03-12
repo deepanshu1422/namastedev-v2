@@ -14,6 +14,10 @@ const courseIds = {
   advanced: "652a1994e4b05a145bae5cd0"
 };
 
+// Graphy API credentials
+const GRAPHY_MID = "deepanshuudhwani";
+const GRAPHY_KEY = "7c96f372-799e-4f3f-a202-62add1edd62f";
+
 // Connect to MongoDB
 async function connectToDatabase() {
   try {
@@ -34,6 +38,68 @@ function verifyWebhookSignature(body: string, signature: string) {
     .digest("hex");
   
   return expectedSignature === signature;
+}
+
+// Create learner in Graphy
+async function createGraphyLearner(name: string, email: string) {
+  try {
+    console.log(`Creating Graphy learner: ${name} (${email})`);
+    
+    const formData = new URLSearchParams();
+    formData.append('mid', GRAPHY_MID);
+    formData.append('key', GRAPHY_KEY);
+    formData.append('email', email);
+    formData.append('name', name);
+    
+    const response = await fetch('https://api.ongraphy.com/public/v1/learners', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formData.toString(),
+    });
+    
+    const data = await response.json();
+    console.log('Graphy learner creation response:', data);
+    
+    // Return true if successful or if user already exists
+    return data.status === 'success' || (data.error && data.error.code === 22);
+  } catch (error) {
+    console.error('Error creating Graphy learner:', error);
+    return false;
+  }
+}
+
+// Assign course to learner in Graphy
+async function assignGraphyCourse(email: string, productId: string, paymentId: string) {
+  try {
+    console.log(`Assigning Graphy course ${productId} to learner: ${email}`);
+    
+    const formData = new URLSearchParams();
+    formData.append('mid', GRAPHY_MID);
+    formData.append('key', GRAPHY_KEY);
+    formData.append('email', email);
+    formData.append('productId', productId);
+    formData.append('extPG', 'razorpay');
+    formData.append('extPaymentId', paymentId);
+    
+    const response = await fetch('https://api.spayee.com/public/v1/assign', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formData.toString(),
+    });
+    
+    const data = await response.json();
+    console.log('Graphy course assignment response:', data);
+    
+    // Return true if successful or if course is already assigned
+    return data.status === 'success' || (data.error && data.error.code === 19);
+  } catch (error) {
+    console.error('Error assigning Graphy course:', error);
+    return false;
+  }
 }
 
 // API route to handle Razorpay webhooks
@@ -63,6 +129,7 @@ export async function POST(request: NextRequest) {
     const webhooksCollection = db.collection('webhooks');
     const ordersCollection = db.collection('orders');
     const paymentsCollection = db.collection('payments');
+    const graphyApiCallsCollection = db.collection('graphyApiCalls');
     
     // Store the complete webhook data
     await webhooksCollection.insertOne({
@@ -73,11 +140,21 @@ export async function POST(request: NextRequest) {
     });
     
     // Handle different webhook events
-    if (event === 'payment.authorized' || event === 'payment.captured') {
+    if (event === 'payment.captured') {
       const { payment } = payload;
       const orderId = payment.entity.order_id;
+      const paymentId = payment.entity.id;
       
       console.log(`Processing successful payment for order: ${orderId}`);
+      
+      // Extract customer details from payment entity and notes
+      const notes = payment.entity.notes || {};
+      const customerEmail = notes.email || payment.entity.email || '';
+      const customerName = notes.name || '';
+      const customerPhone = notes.phone || payment.entity.contact || '';
+      const state = notes.state || '';
+      const courseType = notes.courseType;
+      const courseId = notes.courseId || (courseType ? courseIds[courseType as keyof typeof courseIds] : null);
       
       // Get the order details
       const order = await ordersCollection.findOne({ orderId });
@@ -125,11 +202,6 @@ export async function POST(request: NextRequest) {
         
         // Try to extract course information from notes if order is not found
         try {
-          const notes = payment.entity.notes || {};
-          const courseType = notes.courseType;
-          const courseId = notes.courseId || (courseType ? courseIds[courseType as keyof typeof courseIds] : null);
-          const state = notes.state || '';
-          
           if (courseId) {
             // Create a new order record
             await ordersCollection.insertOne({
@@ -140,9 +212,9 @@ export async function POST(request: NextRequest) {
               courseType,
               courseId,
               customerDetails: {
-                email: notes.email || '',
-                name: notes.name || '',
-                phone: notes.phone || '',
+                email: customerEmail,
+                name: customerName,
+                phone: customerPhone,
                 state: state
               },
               status: 'paid',
@@ -163,9 +235,9 @@ export async function POST(request: NextRequest) {
               courseType,
               courseId,
               customerDetails: {
-                email: notes.email || '',
-                name: notes.name || '',
-                phone: notes.phone || '',
+                email: customerEmail,
+                name: customerName,
+                phone: customerPhone,
                 state: state
               },
               webhookVerified: true,
@@ -177,6 +249,75 @@ export async function POST(request: NextRequest) {
           }
         } catch (error) {
           console.error(`Failed to create order from webhook data: ${error}`);
+        }
+      }
+      
+      // For payment.captured event, call Graphy APIs
+      if (event === 'payment.captured' && customerEmail && courseId) {
+        try {
+          console.log(`Calling Graphy APIs for payment ${paymentId}`);
+          
+          // Step 1: Create learner in Graphy
+          const learnerCreated = await createGraphyLearner(customerName, customerEmail);
+          
+          // Log the API call
+          await graphyApiCallsCollection.insertOne({
+            type: 'createLearner',
+            email: customerEmail,
+            name: customerName,
+            success: learnerCreated,
+            paymentId,
+            orderId,
+            timestamp: new Date()
+          });
+          
+          // Step 2: Assign course to learner
+          if (learnerCreated) {
+            const courseAssigned = await assignGraphyCourse(customerEmail, courseId, paymentId);
+            
+            // Log the API call
+            await graphyApiCallsCollection.insertOne({
+              type: 'assignCourse',
+              email: customerEmail,
+              courseId,
+              paymentId,
+              orderId,
+              success: courseAssigned,
+              timestamp: new Date()
+            });
+            
+            // Update order and payment with Graphy API status
+            const graphyStatus = {
+              graphyLearnerCreated: learnerCreated,
+              graphyCourseAssigned: courseAssigned,
+              graphyApiCalledAt: new Date()
+            };
+            
+            await ordersCollection.updateOne(
+              { orderId },
+              { $set: { graphyStatus } }
+            );
+            
+            await paymentsCollection.updateOne(
+              { paymentId },
+              { $set: { graphyStatus } }
+            );
+            
+            console.log(`Graphy API calls completed for payment ${paymentId}`);
+          }
+        } catch (error) {
+          console.error(`Error calling Graphy APIs: ${error}`);
+          
+          // Log the error
+          await graphyApiCallsCollection.insertOne({
+            type: 'error',
+            email: customerEmail,
+            courseId,
+            paymentId,
+            orderId,
+            error: error.toString(),
+            timestamp: new Date()
+          });
         }
       }
     } else if (event === 'payment.failed') {
@@ -237,9 +378,9 @@ export async function POST(request: NextRequest) {
             courseType,
             courseId,
             customerDetails: {
-              email: notes.email || '',
+              email: notes.email || payment.entity.email || '',
               name: notes.name || '',
-              phone: notes.phone || '',
+              phone: notes.phone || payment.entity.contact || '',
               state: state
             },
             failureReason: payment.entity.error_description || payment.entity.error_code,
