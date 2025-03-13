@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import VideoGallery from '@/components/VideoGallery';
@@ -13,6 +13,7 @@ import Mentors from '@/components/mentors';
 import { Badge } from "@/components/ui/badge";
 import { Award } from "lucide-react";
 import Image from "next/image";
+import { usePixelTracking } from '@/hooks/usePixelTracking';
 
 const learningPath = [
   {
@@ -253,6 +254,22 @@ const IntermediatePage = () => {
   const [openCourse, setOpenCourse] = useState<number | null>(null);
   const [showAllSteps, setShowAllSteps] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { trackProductView } = usePixelTracking();
+  const viewContentFired = useRef(false);
+
+  // Track ViewContent only once
+  useEffect(() => {
+    if (!viewContentFired.current) {
+      // Track ViewContent event
+      trackProductView({
+        contentName: 'Intermediate Level Course Package',
+        contentCategory: 'Coding Courses',
+        contentIds: ['intermediate-package'],
+        value: 1999
+      });
+      viewContentFired.current = true;
+    }
+  }, [trackProductView]);
 
   const handleEnrollClick = () => {
     // Show a clear modal with options
