@@ -85,33 +85,17 @@ function prepareEventData(
   // Add user data
   event.user_data = {
     client_ip_address: clientIp,
-    client_user_agent: userAgent
+    client_user_agent: userAgent,
+    fbp: userData?.fbp || undefined,
+    fbc: userData?.fbc || undefined
   };
 
-  // Add FBP and FBC if available
-  if (userData?.fbp) {
-    event.user_data.fbp = userData.fbp;
-  }
-  
-  if (userData?.fbc) {
-    event.user_data.fbc = userData.fbc;
-  }
-
   // Add hashed user data if available
-  if (userData?.name || userData?.email || userData?.phone) {
-    const hashedData = hashUserDetails({
-      name: userData.name,
-      email: userData.email,
-      phone: userData.phone
-    });
-
-    // Add hashed data to user_data
-    if (hashedData.em) event.user_data.em = [hashedData.em];
-    if (hashedData.ph) event.user_data.ph = [hashedData.ph];
-    if (hashedData.fn) event.user_data.fn = [hashedData.fn];
-    if (hashedData.ln) event.user_data.ln = [hashedData.ln];
-  }
-
+  if (userData?.em) event.user_data.em = Array.isArray(userData.em) ? userData.em : [userData.em];
+  if (userData?.ph) event.user_data.ph = Array.isArray(userData.ph) ? userData.ph : [userData.ph];
+  if (userData?.fn) event.user_data.fn = Array.isArray(userData.fn) ? userData.fn : [userData.fn];
+  if (userData?.ln) event.user_data.ln = Array.isArray(userData.ln) ? userData.ln : [userData.ln];
+  
   // Add custom data based on event type
   event.custom_data = {};
 

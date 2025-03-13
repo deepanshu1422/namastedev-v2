@@ -122,9 +122,12 @@ const ThankYouPage = () => {
               contents: [course.name],
               numItems: 1,
               event_id: eventId,
-              event_time: Math.floor(Date.now() / 1000), // Add Unix timestamp in seconds
+              event_time: Math.floor(Date.now() / 1000),
               userInfo: {
-                ...hashedUserData,
+                em: hashedUserData.em,
+                ph: hashedUserData.ph,
+                fn: hashedUserData.fn,
+                ln: hashedUserData.ln,
                 ip: trackingInfo.ip,
                 userAgent: trackingInfo.userAgent,
                 fbp: trackingInfo.fbp,
@@ -132,16 +135,14 @@ const ThankYouPage = () => {
                 fb_login_id: trackingInfo.fb_login_id
               }
             });
+            
+            // Store that this purchase has been tracked
+            localStorage.setItem(purchaseKey, 'true');
+            purchaseTracked.current = true;
           };
           
           // Execute the tracking
           trackPurchase();
-          
-          // Mark as tracked in localStorage
-          localStorage.setItem(purchaseKey, 'true');
-          
-          // Also mark as tracked in memory for this session
-          purchaseTracked.current = true;
         }
       }
     }

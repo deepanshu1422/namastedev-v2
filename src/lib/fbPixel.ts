@@ -275,11 +275,22 @@ export const trackPurchase = (
       contents,
       numItems,
       event_id,
-      event_time
+      event_time,
+      contentType: 'product'
     };
     
     // Send to server asynchronously (don't await)
-    sendToServerConversionApi('Purchase', serverEventData, userInfo);
+    sendToServerConversionApi('Purchase', serverEventData, {
+      ...userInfo,
+      em: userInfo?.em ? [userInfo.em] : undefined,
+      ph: userInfo?.ph ? [userInfo.ph] : undefined,
+      fn: userInfo?.fn ? [userInfo.fn] : undefined,
+      ln: userInfo?.ln ? [userInfo.ln] : undefined,
+      fbp: userInfo?.fbp,
+      fbc: userInfo?.fbc,
+      ip: userInfo?.ip,
+      userAgent: userInfo?.userAgent
+    });
   }
 };
 
