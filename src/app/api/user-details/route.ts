@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { MongoClient } from "mongodb";
 
 // MongoDB connection string
-const uri = "mongodb+srv://ankit1478:ankit1478@cluster0.bgltbjs.mongodb.net/";
-const client = new MongoClient(uri);
-const dbName = "razorpay_payments";
+const uri = process.env.MONGODB_URI;
+const client = new MongoClient(uri || '');
+const dbName = process.env.MONGODB_DB_NAME || 'razorpay_payments';
 
 // Connect to MongoDB
 async function connectToDatabase() {

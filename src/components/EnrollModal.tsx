@@ -287,10 +287,11 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
                       } px-3 sm:px-6 py-2.5 sm:py-4 rounded-md sm:rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-1.5 sm:gap-2 text-sm sm:text-lg`}
                       onClick={() => {
                         if (option.name === "Advanced Package") {
-                          handleCheckoutRedirect('advanced');
+                          router.push('/advanced');
                         } else if (option.name === "Intermediate Package") {
-                          handleCheckoutRedirect('intermediate');
+                          router.push('/intermediate');
                         }
+                        onClose();
                       }}
                     >
                       <span>Get Started</span>

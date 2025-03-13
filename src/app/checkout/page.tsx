@@ -451,14 +451,26 @@ const CheckoutContent = () => {
               
               <div>
                 <label htmlFor="phone" className="block text-sm text-gray-400 mb-1">Phone</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  value={userDetails.phone}
-                  onChange={handleInputChange}
-                  className="w-full bg-black/30 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-[#22C55E]"
-                  placeholder="Your phone number"
-                />
+                <div className="flex">
+                  <span className="inline-flex items-center px-3 py-2 text-white bg-black/30 border border-r-0 border-gray-700 rounded-l-lg">
+                    +91
+                  </span>
+                  <input
+                    type="tel"
+                    id="phone"
+                    value={userDetails.phone}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/\D/g, '');
+                      if (value.length <= 10) {
+                        setUserDetails(prev => ({ ...prev, phone: value }));
+                      }
+                    }}
+                    className="w-full bg-black/30 border border-gray-700 rounded-r-lg px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-[#22C55E]"
+                    placeholder="10 digit number"
+                    maxLength={10}
+                    pattern="[0-9]{10}"
+                  />
+                </div>
               </div>
               
               <div>
