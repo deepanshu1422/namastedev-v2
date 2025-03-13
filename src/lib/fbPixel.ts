@@ -56,8 +56,8 @@ const sendToServerConversionApi = async (
       event_source_url: eventSourceUrl
     };
     
-    // Send to our API endpoint
-    const response = await fetch('/api/facebook-conversion', {
+    // Send to our external API endpoint
+    const response = await fetch('https://clownfish-app-zjqrb.ondigitalocean.app/api/facebook', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
