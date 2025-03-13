@@ -276,7 +276,7 @@ const IntermediatePage = () => {
       
       trackEvent();
     }
-  }, [trackProductView]);
+  }, [trackProductView , eventId]);
 
   const handleEnrollClick = () => {
     // Show a clear modal with options

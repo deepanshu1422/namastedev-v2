@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { usePixelTracking } from '@/hooks/usePixelTracking';
@@ -130,7 +130,33 @@ const useToast = () => {
   return { toast, toasts };
 };
 
-export default function CheckoutPage() {
+// Loading component to show while suspense is resolving
+const CheckoutPageLoading = () => (
+  <div className="min-h-screen bg-gradient-to-b from-[#0A1F1C] to-[#0A2818] p-4 md:p-8 flex flex-col items-center justify-center">
+    <div className="w-full max-w-4xl bg-black/20 rounded-xl p-6 border border-[#22C55E]/20">
+      <div className="animate-pulse space-y-8">
+        <div className="h-8 bg-[#22C55E]/20 rounded w-1/2 mx-auto"></div>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <div className="h-6 bg-[#22C55E]/20 rounded w-3/4"></div>
+            <div className="h-10 bg-[#22C55E]/20 rounded"></div>
+            <div className="h-6 bg-[#22C55E]/20 rounded w-3/4"></div>
+            <div className="h-10 bg-[#22C55E]/20 rounded"></div>
+          </div>
+          <div className="bg-black/30 rounded-lg p-6 space-y-4">
+            <div className="h-6 bg-[#22C55E]/20 rounded w-1/2"></div>
+            <div className="h-4 bg-[#22C55E]/20 rounded"></div>
+            <div className="h-4 bg-[#22C55E]/20 rounded"></div>
+            <div className="h-10 bg-[#22C55E]/20 rounded w-full mt-6"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+// Main component that uses useSearchParams
+const CheckoutContent = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { toast, toasts } = useToast();
@@ -369,6 +395,12 @@ export default function CheckoutPage() {
     }
   };
 
+  // Handle input change
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { id, value } = e.target;
+    setUserDetails(prev => ({ ...prev, [id]: value }));
+  };
+
   return (
     <div className="min-h-screen bg-[#051209] text-white py-10 px-4">
       <div className="max-w-6xl mx-auto">
@@ -396,7 +428,7 @@ export default function CheckoutPage() {
                   type="text"
                   id="name"
                   value={userDetails.name}
-                  onChange={(e) => setUserDetails(prev => ({ ...prev, name: e.target.value }))}
+                  onChange={handleInputChange}
                   className="w-full bg-black/30 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-[#22C55E]"
                   placeholder="Your name"
                 />
@@ -410,7 +442,7 @@ export default function CheckoutPage() {
                   type="email"
                   id="email"
                   value={userDetails.email}
-                  onChange={(e) => setUserDetails(prev => ({ ...prev, email: e.target.value }))}
+                  onChange={handleInputChange}
                   className="w-full bg-black/30 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-[#22C55E]"
                   placeholder="your.email@example.com"
                   required
@@ -423,7 +455,7 @@ export default function CheckoutPage() {
                   type="tel"
                   id="phone"
                   value={userDetails.phone}
-                  onChange={(e) => setUserDetails(prev => ({ ...prev, phone: e.target.value }))}
+                  onChange={handleInputChange}
                   className="w-full bg-black/30 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-[#22C55E]"
                   placeholder="Your phone number"
                 />
@@ -434,7 +466,7 @@ export default function CheckoutPage() {
                 <select
                   id="state"
                   value={userDetails.state}
-                  onChange={(e) => setUserDetails(prev => ({ ...prev, state: e.target.value }))}
+                  onChange={handleInputChange}
                   className="w-full bg-black/30 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-[#22C55E] appearance-none"
                 >
                   <option value="">Select your state</option>
@@ -561,5 +593,14 @@ export default function CheckoutPage() {
         ))}
       </div>
     </div>
+  );
+};
+
+// Main page component with Suspense boundary
+export default function CheckoutPage() {
+  return (
+    <Suspense fallback={<CheckoutPageLoading />}>
+      <CheckoutContent />
+    </Suspense>
   );
 } 

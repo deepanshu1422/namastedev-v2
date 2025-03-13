@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
@@ -27,7 +27,22 @@ interface UserDetails {
   state?: string;
 }
 
-const ThankYouPage = () => {
+// Loading component to show while suspense is resolving
+const ThankYouPageLoading = () => (
+  <div className="min-h-screen bg-[#0A1F1C] flex flex-col items-center justify-center p-4">
+    <div className="max-w-2xl w-full bg-[#0A2818] rounded-2xl p-8 border border-[#22C55E]/20 text-center">
+      <div className="animate-pulse flex flex-col items-center">
+        <div className="w-16 h-16 bg-[#22C55E]/20 rounded-full mb-6"></div>
+        <div className="h-8 bg-[#22C55E]/20 rounded w-3/4 mb-4"></div>
+        <div className="h-4 bg-[#22C55E]/20 rounded w-1/2 mb-8"></div>
+        <div className="h-10 bg-[#22C55E]/20 rounded-lg w-40"></div>
+      </div>
+    </div>
+  </div>
+);
+
+// Main component that uses useSearchParams
+const ThankYouContent = () => {
   const searchParams = useSearchParams();
   const { trackProductPurchase, preventEvent } = usePixelTracking();
   const purchaseTracked = useRef(false);
@@ -281,6 +296,15 @@ const ThankYouPage = () => {
         </div>
       </motion.div>
     </div>
+  );
+};
+
+// Main page component with Suspense boundary
+const ThankYouPage = () => {
+  return (
+    <Suspense fallback={<ThankYouPageLoading />}>
+      <ThankYouContent />
+    </Suspense>
   );
 };
 
