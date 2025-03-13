@@ -49,3 +49,197 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+# 30 Days Coding Platform
+
+## Meta Pixel Implementation
+
+This document outlines the implementation of Meta Pixel tracking in our application.
+
+### Overview
+
+We've implemented a comprehensive solution for Meta Pixel tracking that prevents duplicate events and ensures reliable tracking across page navigations. The implementation consists of three main components:
+
+1. **Utility Functions** (`src/lib/fbPixel.ts`)
+2. **Custom React Hook** (`src/hooks/usePixelTracking.ts`)
+3. **Page-Level Implementation** (in each page component)
+
+### 1. Utility Functions (`src/lib/fbPixel.ts`)
+
+The base utility functions handle direct interaction with the Facebook Pixel API and include:
+
+- **Debounce Mechanism**: Prevents the same event from firing multiple times within a short period (1 second)
+- **Safety Checks**: Ensures the fbq function is available before attempting to use it
+- **Standardized Event Tracking**: Consistent format for all tracking events
+
+```typescript
+// Example of the debounce mechanism
+const shouldTrackEvent = (eventName: string): boolean => {
+  const now = Date.now();
+  const lastTime = lastEventTime[eventName] || 0;
+  
+  if (now - lastTime < DEBOUNCE_TIME) {
+    return false;
+  }
+  
+  lastEventTime[eventName] = now;
+  return true;
+};
+
+// Example of a tracking function
+export const trackViewContent = (
+  contentName: string,
+  contentCategory: string,
+  contentIds: string[],
+  value: number,
+  currency: string = 'INR'
+) => {
+  if (typeof window !== 'undefined' && (window as any).fbq && shouldTrackEvent('ViewContent')) {
+    (window as any).fbq('track', 'ViewContent', {
+      content_name: contentName,
+      content_category: contentCategory,
+      content_ids: contentIds,
+      content_type: 'product',
+      value: value,
+      currency: currency
+    });
+  }
+};
+```
+
+### 2. Custom React Hook (`src/hooks/usePixelTracking.ts`)
+
+The custom hook provides a React-friendly way to use the tracking functions:
+
+- **Automatic PageView Tracking**: Tracks PageView event once when a component mounts
+- **Ref-Based Tracking**: Uses React refs to ensure events are only fired once
+- **TypeScript Interfaces**: Properly typed parameters for better developer experience
+
+```typescript
+export const usePixelTracking = () => {
+  // Use refs to track if events have been fired
+  const pageViewFired = useRef(false);
+  
+  // Track PageView only once on mount
+  useEffect(() => {
+    if (!pageViewFired.current) {
+      trackPageView();
+      pageViewFired.current = true;
+    }
+    
+    return () => {
+      pageViewFired.current = false;
+    };
+  }, []);
+
+  // Function to track ViewContent
+  const trackProductView = ({
+    contentName,
+    contentCategory,
+    contentIds,
+    value,
+    currency = 'INR'
+  }: ViewContentProps) => {
+    trackViewContent(contentName, contentCategory, contentIds, value, currency);
+  };
+
+  // Additional tracking functions...
+
+  return {
+    trackProductView,
+    trackProductPurchase,
+    trackCheckout,
+    trackCart,
+    trackPageView
+  };
+};
+```
+
+### 3. Page-Level Implementation
+
+In each page component, we use the custom hook and add an additional layer of protection:
+
+- **Component-Level Ref**: Each page has its own ref to track if ViewContent has been fired
+- **useEffect Dependency Array**: Properly configured to prevent unnecessary re-renders
+- **Event-Specific Tracking**: Each page tracks ViewContent with appropriate parameters
+
+```typescript
+const BeginnerPage = () => {
+  // Other state...
+  const { trackProductView } = usePixelTracking();
+  const viewContentFired = useRef(false);
+
+  // Track ViewContent only once
+  useEffect(() => {
+    if (!viewContentFired.current) {
+      trackProductView({
+        contentName: 'Beginner Level Course Package',
+        contentCategory: 'Coding Courses',
+        contentIds: ['beginner-package'],
+        value: 999
+      });
+      viewContentFired.current = true;
+    }
+  }, [trackProductView]);
+
+  // Rest of the component...
+};
+```
+
+### Supported Events
+
+The implementation supports the following Meta Pixel events:
+
+1. **PageView**: Automatically tracked when a page loads
+2. **ViewContent**: Tracked when a user views a product/course page
+3. **InitiateCheckout**: Tracked when a user begins the checkout process
+4. **Purchase**: Tracked when a user completes a purchase
+5. **AddToCart**: Tracked when a user adds a product to cart
+
+### Benefits of This Approach
+
+1. **Reliability**: Multiple layers of protection against duplicate events
+2. **Performance**: Debounce mechanism prevents excessive API calls
+3. **Maintainability**: Centralized tracking logic in dedicated files
+4. **Type Safety**: TypeScript interfaces ensure correct parameters
+5. **Flexibility**: Easy to add or modify tracking events
+
+### Usage Examples
+
+#### Tracking a Product View
+```typescript
+const { trackProductView } = usePixelTracking();
+trackProductView({
+  contentName: 'Product Name',
+  contentCategory: 'Category',
+  contentIds: ['product-id'],
+  value: 999
+});
+```
+
+#### Tracking a Purchase
+```typescript
+const { trackProductPurchase } = usePixelTracking();
+trackProductPurchase({
+  value: 999,
+  contentIds: ['product-id']
+});
+```
+
+#### Tracking Checkout Initiation
+```typescript
+const { trackCheckout } = usePixelTracking();
+trackCheckout({
+  value: 999,
+  contentIds: ['product-id']
+});
+```
+
+### Troubleshooting
+
+If you encounter issues with Meta Pixel tracking:
+
+1. **Check Browser Console**: Look for any errors related to fbq
+2. **Use Meta Pixel Helper**: Install the Chrome extension to debug tracking
+3. **Verify Implementation**: Ensure the base Pixel code is correctly installed in layout.tsx
+4. **Check for Duplicate Events**: Use the Meta Pixel Helper to verify events aren't firing multiple times
