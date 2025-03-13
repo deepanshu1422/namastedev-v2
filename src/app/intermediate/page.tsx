@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import VideoGallery from '@/components/VideoGallery';
 import Footer from "@/components/new-cohort/footer";
 import UpsellBanner from '@/components/UpsellBanner';
-import useUtmTracker from '@/hooks/use-utm-tracker';
 import EnrollModal from '@/components/EnrollModal';
 import BundleNavbar from '@/components/BundleNavbar';
 import WhyChooseUs from '@/components/WhyChooseUs';
@@ -255,10 +254,6 @@ const IntermediatePage = () => {
   const [showAllSteps, setShowAllSteps] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Add UTM tracker
-  useUtmTracker();
-  
-  
   const handleEnrollClick = () => {
     // Show a clear modal with options
     setIsModalOpen(true);

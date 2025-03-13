@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { motion } from 'framer-motion';
 import EnrollModal from './EnrollModal';
-import useUtmTracker from '@/hooks/use-utm-tracker';
 import { useToast } from "@/components/ui/use-toast";
 
 interface UpsellBannerProps {
@@ -20,7 +19,6 @@ const UpsellBanner: React.FC<UpsellBannerProps> = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCheckoutInProgress, setIsCheckoutInProgress] = useState(false);
-  const { appendUtmToUrl } = useUtmTracker();
   const { toast } = useToast();
   
   const [userDetails, setUserDetails] = useState({

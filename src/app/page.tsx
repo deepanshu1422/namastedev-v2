@@ -14,13 +14,10 @@ import { Award } from "lucide-react";
 import Image from "next/image";
 import TableHome from "@/components/TableHome";
 import HomeCurriculum from "@/components/HomeCurriculum";
-import useUtmTracker from '@/hooks/use-utm-tracker';
 
 
 
 const HomePage = () => {
-  // Add UTM tracker
-  useUtmTracker();
   
   
 

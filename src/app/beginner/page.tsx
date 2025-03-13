@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import VideoGallery from '@/components/VideoGallery';
 import Footer from "@/components/new-cohort/footer";
 import UpsellBanner from '@/components/UpsellBanner';
-import useUtmTracker from '@/hooks/use-utm-tracker';
 
 import EnrollModal from '@/components/EnrollModal';
 import BundleNavbar from '@/components/BundleNavbar';
@@ -206,8 +205,6 @@ const BeginnerPage = () => {
   const [openCourse, setOpenCourse] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Add UTM tracker
-  useUtmTracker();
   
 
   const handleEnrollClick = () => {

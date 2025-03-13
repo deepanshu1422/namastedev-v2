@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import VideoGallery from '@/components/VideoGallery';
 import Footer from "@/components/new-cohort/footer";
 import UpsellBanner from '@/components/UpsellBanner';
-import useUtmTracker from '@/hooks/use-utm-tracker';
 
 import EnrollModal from '@/components/EnrollModal';
 import BundleNavbar from '@/components/BundleNavbar';
@@ -373,15 +372,12 @@ const AdvancedPage = () => {
   const [showAllSteps, setShowAllSteps] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Add UTM tracker
-  const { appendUtmToUrl } = useUtmTracker();
   
-
 
   const handleEnrollClick = () => {
     // For advanced page, directly go to checkout without showing modal
     const advancedCheckoutUrl = 'https://30dc.graphy.com/single-checkout/652a1994e4b05a145bae5cd0?pid=p1';
-    window.location.href = appendUtmToUrl(advancedCheckoutUrl);
+    window.location.href = advancedCheckoutUrl;
   };
 
   const visibleLearningPath = showAllSteps 
