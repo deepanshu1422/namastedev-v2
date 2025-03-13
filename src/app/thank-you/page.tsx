@@ -124,7 +124,7 @@ const ThankYouPage = () => {
         </div>
         
         <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <Link href={`/dashboard/${courseType}`}>
+          <Link href={`https://30dc.graphy.com/s/dashboard`}>
             <Button className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-6 py-3 rounded-lg text-base font-semibold w-full">
               Go to Course Dashboard
             </Button>
