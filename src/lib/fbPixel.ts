@@ -100,7 +100,7 @@ export const trackViewContent = (
         eventParams.fb_login_id = userInfo.fb_login_id;
       }
     }
-    
+
     (window as any).fbq('track', 'ViewContent', eventParams);
   }
 };
@@ -125,6 +125,10 @@ export const trackPurchase = (
     fbp?: string;
     fbc?: string;
     fb_login_id?: string;
+    em?: string;  // Hashed email
+    ph?: string;  // Hashed phone
+    fn?: string;  // Hashed first name
+    ln?: string;  // Hashed last name
   },
   event_id?: string,
   event_time?: number
@@ -176,6 +180,23 @@ export const trackPurchase = (
       
       if (userInfo.fb_login_id) {
         eventParams.fb_login_id = userInfo.fb_login_id;
+      }
+      
+      // Add hashed user data for advanced matching
+      if (userInfo.em) {
+        eventParams.em = userInfo.em;
+      }
+      
+      if (userInfo.ph) {
+        eventParams.ph = userInfo.ph;
+      }
+      
+      if (userInfo.fn) {
+        eventParams.fn = userInfo.fn;
+      }
+      
+      if (userInfo.ln) {
+        eventParams.ln = userInfo.ln;
       }
     }
 

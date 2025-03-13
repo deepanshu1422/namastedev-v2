@@ -33,6 +33,10 @@ interface PurchaseProps {
     fbp?: string;
     fbc?: string;
     fb_login_id?: string; // Facebook Login ID (App-Scoped ID)
+    em?: string;  // Hashed email
+    ph?: string;  // Hashed phone
+    fn?: string;  // Hashed first name
+    ln?: string;  // Hashed last name
   };
 }
 
@@ -104,14 +108,15 @@ export const usePixelTracking = () => {
       userTrackingInfo = await getUserTrackingInfo();
     }
     
+    // Track the purchase
     trackPurchase(
-      value, 
-      currency, 
-      contentIds, 
-      contents, 
-      numItems, 
-      userTrackingInfo, 
-      event_id, 
+      value,
+      currency,
+      contentIds,
+      contents,
+      numItems,
+      userTrackingInfo,
+      event_id,
       event_time
     );
   };

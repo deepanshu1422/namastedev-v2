@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import { preventEvent } from '@/lib/fbPixel';
 import Link from 'next/link';
 import Image from 'next/image';
 import { CheckCircle } from 'lucide-react';
+import { hashUserDetails } from '@/lib/hashUtils';
 
 // Course pricing information
 const coursePricing = {
@@ -17,15 +18,65 @@ const coursePricing = {
   'advanced': { value: 2999, name: 'Advanced Package' }
 };
 
+// Interface for user details
+interface UserDetails {
+  name: string;
+  email: string;
+  phone: string;
+  state?: string;
+}
+
 const ThankYouPage = () => {
   const searchParams = useSearchParams();
   const { trackProductPurchase, preventEvent } = usePixelTracking();
   const purchaseTracked = useRef(false);
+  const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   
   // Get course type and payment ID from URL parameters
   const courseType = searchParams.get('course') as 'beginner' | 'intermediate' | 'advanced' | null;
   const paymentId = searchParams.get('payment_id');
   const orderId = searchParams.get('order_id');
+  
+  // Fetch user details from localStorage or API
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      if (!orderId) {
+        setIsLoading(false);
+        return;
+      }
+      
+      try {
+        // First try to get from localStorage
+        const savedDetails = localStorage.getItem('userDetails');
+        if (savedDetails) {
+          try {
+            const parsedDetails = JSON.parse(savedDetails);
+            setUserDetails(parsedDetails);
+            setIsLoading(false);
+            return;
+          } catch (error) {
+            console.error('Error parsing saved user details:', error);
+          }
+        }
+        
+        // If not in localStorage, fetch from API
+        const response = await fetch(`/api/user-details?orderId=${orderId}`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.customerDetails) {
+            setUserDetails(data.customerDetails);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    fetchUserDetails();
+  }, [orderId]);
   
   // Prevent InitiateCheckout event from being tracked on this page
   useEffect(() => {
@@ -33,8 +84,13 @@ const ThankYouPage = () => {
     preventEvent('InitiateCheckout');
   }, [preventEvent]);
   
-  // Track purchase event only once
+  // Track purchase event only once after user details are loaded
   useEffect(() => {
+    // Only proceed if loading is complete
+    if (isLoading) {
+      return;
+    }
+    
     // Only track if we have valid course type and payment ID
     // and if the purchase hasn't been tracked yet
     if (courseType && paymentId && !purchaseTracked.current) {
@@ -46,8 +102,13 @@ const ThankYouPage = () => {
         
         // Check if this purchase has already been tracked
         if (!localStorage.getItem(purchaseKey)) {
+          console.log('Tracking purchase with user details:', userDetails);
+          
           // Generate a unique event ID
           const eventId = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}`;
+          
+          // Hash user details for advanced matching if available
+          const hashedUserData = userDetails ? hashUserDetails(userDetails) : {};
           
           // Track the purchase with enhanced tracking
           trackProductPurchase({
@@ -56,7 +117,10 @@ const ThankYouPage = () => {
             contents: [course.name],
             numItems: 1,
             event_id: eventId,
-            event_time: Math.floor(Date.now() / 1000) // Add Unix timestamp in seconds
+            event_time: Math.floor(Date.now() / 1000), // Add Unix timestamp in seconds
+            userInfo: {
+              ...hashedUserData
+            }
           });
           
           // Mark as tracked in localStorage
@@ -67,7 +131,7 @@ const ThankYouPage = () => {
         }
       }
     }
-  }, [courseType, paymentId, orderId, trackProductPurchase]);
+  }, [courseType, paymentId, orderId, trackProductPurchase, userDetails, isLoading]);
   
   // If no course type or payment ID, show generic thank you
   if (!courseType || !paymentId) {
@@ -90,6 +154,17 @@ const ThankYouPage = () => {
   // Get course details
   const course = coursePricing[courseType];
   
+  // Parse name into first and last name
+  const getFirstAndLastName = (fullName: string) => {
+    if (!fullName) return { firstName: '', lastName: '' };
+    const nameParts = fullName.trim().split(' ');
+    const firstName = nameParts[0] || '';
+    const lastName = nameParts.slice(1).join(' ') || '';
+    return { firstName, lastName };
+  };
+  
+  const { firstName, lastName } = userDetails?.name ? getFirstAndLastName(userDetails.name) : { firstName: '', lastName: '' };
+  
   return (
     <div className="min-h-screen bg-[#0A1F1C] flex flex-col items-center justify-center p-4">
       <motion.div 
@@ -104,6 +179,9 @@ const ThankYouPage = () => {
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">Payment Successful!</h1>
           <p className="text-gray-400 text-lg">Thank you for purchasing the {course.name}</p>
+          {userDetails?.name && (
+            <p className="text-[#22C55E] text-lg mt-2">Welcome aboard, {firstName}!</p>
+          )}
         </div>
         
         <div className="bg-black/20 rounded-xl p-6 mb-8 border border-[#1C1C1C]">
@@ -127,6 +205,52 @@ const ThankYouPage = () => {
             </div>
           </div>
         </div>
+        
+        {isLoading ? (
+          <div className="bg-black/20 rounded-xl p-6 mb-8 border border-[#1C1C1C] flex justify-center">
+            <div className="animate-pulse flex space-x-4">
+              <div className="flex-1 space-y-4 py-1">
+                <div className="h-4 bg-gray-700 rounded w-3/4"></div>
+                <div className="space-y-2">
+                  <div className="h-4 bg-gray-700 rounded"></div>
+                  <div className="h-4 bg-gray-700 rounded w-5/6"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : userDetails ? (
+          <div className="bg-black/20 rounded-xl p-6 mb-8 border border-[#1C1C1C]">
+            <h2 className="text-xl font-semibold text-white mb-4">Your Information</h2>
+            <div className="space-y-3">
+              {userDetails.name && (
+                <>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">First Name:</span>
+                    <span className="text-white font-medium">{firstName}</span>
+                  </div>
+                  {lastName && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Last Name:</span>
+                      <span className="text-white font-medium">{lastName}</span>
+                    </div>
+                  )}
+                </>
+              )}
+              {userDetails.email && (
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Email:</span>
+                  <span className="text-white font-medium">{userDetails.email}</span>
+                </div>
+              )}
+              {userDetails.phone && (
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Phone:</span>
+                  <span className="text-white font-medium">{userDetails.phone}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        ) : null}
         
         <div className="flex flex-col md:flex-row gap-4 justify-center">
           <Link href={`https://30dc.graphy.com/s/dashboard`}>
