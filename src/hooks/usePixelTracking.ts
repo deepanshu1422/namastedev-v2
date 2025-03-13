@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { trackViewContent, trackPageView, trackPurchase, trackInitiateCheckout, trackAddToCart, preventEvent } from '@/lib/fbPixel';
+import { getUserTrackingInfo } from '@/lib/userInfo';
 
 interface ViewContentProps {
   contentName: string;
@@ -7,6 +8,15 @@ interface ViewContentProps {
   contentIds: string[];
   value: number;
   currency?: string;
+  event_id?: string; // Add optional eventId for deduplication
+  event_time?: number; // Add optional event_time for tracking when the event occurred
+  userInfo?: {
+    ip?: string;
+    userAgent?: string;
+    fbp?: string;
+    fbc?: string;
+    fb_login_id?: string; // Facebook Login ID (App-Scoped ID)
+  };
 }
 
 interface PurchaseProps {
@@ -15,6 +25,15 @@ interface PurchaseProps {
   contentIds?: string[];
   contents?: string[]; // Product names
   numItems?: number;   // Number of items
+  event_id?: string;   // Add optional eventId for deduplication
+  event_time?: number; // Add optional event_time for tracking when the event occurred
+  userInfo?: {
+    ip?: string;
+    userAgent?: string;
+    fbp?: string;
+    fbc?: string;
+    fb_login_id?: string; // Facebook Login ID (App-Scoped ID)
+  };
 }
 
 // Custom hook for Facebook Pixel tracking
@@ -36,51 +55,123 @@ export const usePixelTracking = () => {
   }, []);
 
   // Function to track ViewContent - only call once per render
-  const trackProductView = ({
+  const trackProductView = async ({
     contentName,
     contentCategory,
     contentIds,
     value,
-    currency = 'INR'
+    currency = 'INR',
+    event_id,
+    event_time,
+    userInfo
   }: ViewContentProps) => {
+    // If userInfo is not provided, try to fetch it
+    let userTrackingInfo = userInfo;
+    if (!userTrackingInfo) {
+      userTrackingInfo = await getUserTrackingInfo();
+    }
+    
     // We don't need to check if it's been fired because this is called explicitly
-    trackViewContent(contentName, contentCategory, contentIds, value, currency);
+    trackViewContent(
+      contentName, 
+      contentCategory, 
+      contentIds, 
+      value, 
+      currency, 
+      event_id, 
+      event_time, 
+      userTrackingInfo
+    );
   };
 
   // Function to track Purchase
-  const trackProductPurchase = ({
+  const trackProductPurchase = async ({
     value,
     currency = 'INR',
     contentIds = [],
     contents = [],
-    numItems
+    numItems,
+    event_id,
+    event_time,
+    userInfo
   }: PurchaseProps) => {
     // Prevent InitiateCheckout event when tracking a purchase
     preventEvent('InitiateCheckout');
     
-    trackPurchase(value, currency, contentIds, contents, numItems);
+    // If userInfo is not provided, try to fetch it
+    let userTrackingInfo = userInfo;
+    if (!userTrackingInfo) {
+      userTrackingInfo = await getUserTrackingInfo();
+    }
+    
+    trackPurchase(
+      value, 
+      currency, 
+      contentIds, 
+      contents, 
+      numItems, 
+      userTrackingInfo, 
+      event_id, 
+      event_time
+    );
   };
 
   // Function to track InitiateCheckout
-  const trackCheckout = ({
+  const trackCheckout = async ({
     value,
     currency = 'INR',
     contentIds = [],
     contents = [],
-    numItems
+    numItems,
+    event_id,
+    event_time,
+    userInfo
   }: PurchaseProps) => {
-    trackInitiateCheckout(value, currency, contentIds, contents, numItems);
+    // If userInfo is not provided, try to fetch it
+    let userTrackingInfo = userInfo;
+    if (!userTrackingInfo) {
+      userTrackingInfo = await getUserTrackingInfo();
+    }
+    
+    trackInitiateCheckout(
+      value, 
+      currency, 
+      contentIds, 
+      contents, 
+      numItems, 
+      userTrackingInfo, 
+      event_id, 
+      event_time
+    );
   };
 
   // Function to track AddToCart
-  const trackCart = ({
+  const trackCart = async ({
     value,
     currency = 'INR',
     contentIds = [],
     contents = [],
-    numItems
+    numItems,
+    event_id,
+    event_time,
+    userInfo
   }: PurchaseProps) => {
-    trackAddToCart(value, currency, contentIds, contents, numItems);
+    // If userInfo is not provided, try to fetch it
+    let userTrackingInfo = userInfo;
+    if (!userTrackingInfo) {
+      userTrackingInfo = await getUserTrackingInfo();
+    }
+    
+    trackAddToCart(
+      value, 
+      currency, 
+      contentIds, 
+      contents, 
+      numItems, 
+      userTrackingInfo, 
+      event_id, 
+      event_time
+    );
   };
 
   return {

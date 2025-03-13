@@ -46,12 +46,17 @@ const ThankYouPage = () => {
         
         // Check if this purchase has already been tracked
         if (!localStorage.getItem(purchaseKey)) {
-          // Track the purchase
+          // Generate a unique event ID
+          const eventId = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}`;
+          
+          // Track the purchase with enhanced tracking
           trackProductPurchase({
             value: course.value,
             contentIds: [`${courseType}-package`],
             contents: [course.name],
-            numItems: 1
+            numItems: 1,
+            event_id: eventId,
+            event_time: Math.floor(Date.now() / 1000) // Add Unix timestamp in seconds
           });
           
           // Mark as tracked in localStorage

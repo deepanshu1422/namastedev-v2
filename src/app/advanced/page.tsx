@@ -375,15 +375,18 @@ const AdvancedPage = () => {
   const { trackProductView, trackCheckout } = usePixelTracking();
   const viewContentFired = useRef(false);
 
+  const eventId = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}`;
   // Track ViewContent only once
   useEffect(() => {
     if (!viewContentFired.current) {
       // Track ViewContent event
       trackProductView({
-        contentName: 'Advanced Level Course Package',
+        contentName: 'advanced Course',
         contentCategory: 'Coding Courses',
         contentIds: ['advanced-package'],
-        value: 2999
+        value: 2999,
+        event_id: eventId,
+        event_time: Math.floor(Date.now() / 1000)
       });
       viewContentFired.current = true;
     }

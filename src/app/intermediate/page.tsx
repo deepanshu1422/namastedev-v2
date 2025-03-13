@@ -256,18 +256,25 @@ const IntermediatePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { trackProductView } = usePixelTracking();
   const viewContentFired = useRef(false);
+  const eventId = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}`;
 
   // Track ViewContent only once
   useEffect(() => {
     if (!viewContentFired.current) {
-      // Track ViewContent event
-      trackProductView({
-        contentName: 'Intermediate Level Course Package',
-        contentCategory: 'Coding Courses',
-        contentIds: ['intermediate-package'],
-        value: 1999
-      });
-      viewContentFired.current = true;
+      // Track ViewContent event with user information
+      const trackEvent = async () => {
+        await trackProductView({
+          contentName: 'Intermediate Level Course',
+          contentCategory: 'Coding Courses',
+          contentIds: ['intermediate-package'],
+          value: 1999,
+          event_id: eventId,
+          event_time: Math.floor(Date.now() / 1000) // Add Unix timestamp in seconds
+        });
+        viewContentFired.current = true;
+      };
+      
+      trackEvent();
     }
   }, [trackProductView]);
 

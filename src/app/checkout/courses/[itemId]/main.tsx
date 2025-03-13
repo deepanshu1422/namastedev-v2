@@ -172,6 +172,21 @@ export default function Main({ courseCollection: { items } }: Courses) {
         event_source_url: window.location.href,
       });
 
+      sendEvent("InitiateCheckout", {
+        value:
+          item.pricingsCollection?.items?.find((e) => e.countryCode == "IN")
+            ?.amount ?? 399,
+        content_ids: [item.courseId],
+        content_type: "course",
+        em: sha256(formData.email ?? ""),
+        // @ts-ignore
+        ph: sha256(formData.phone ?? ""),
+        fn: sha256(formData.name?.split(" ")[0] ?? ""),
+        event_source_url: window.location.href,
+        event_id: `${Math.random().toString(36).substring(2, 15)}_${Date.now()}`,
+        event_time: Math.floor(Date.now() / 1000)
+      });
+
       flag = false;
     }
   }, [pathName]);
@@ -236,6 +251,8 @@ export default function Main({ courseCollection: { items } }: Courses) {
           ph: sha256(formData.phone ?? ""),
           fn: sha256(formData.name?.split(" ")[0] ?? ""),
           event_source_url: window.location.href,
+          event_id: `${Math.random().toString(36).substring(2, 15)}_${Date.now()}`,
+          event_time: Math.floor(Date.now() / 1000)
         });
 
         res = await createPayments({
