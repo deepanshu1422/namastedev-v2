@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { trackViewContent, trackPageView, trackPurchase, trackInitiateCheckout, trackAddToCart } from '@/lib/fbPixel';
+import { trackViewContent, trackPageView, trackPurchase, trackInitiateCheckout, trackAddToCart, preventEvent } from '@/lib/fbPixel';
 
 interface ViewContentProps {
   contentName: string;
@@ -55,7 +55,10 @@ export const usePixelTracking = () => {
     contents = [],
     numItems
   }: PurchaseProps) => {
-    trackPurchase(value, currency, contentIds);
+    // Prevent InitiateCheckout event when tracking a purchase
+    preventEvent('InitiateCheckout');
+    
+    trackPurchase(value, currency, contentIds, contents, numItems);
   };
 
   // Function to track InitiateCheckout
@@ -85,6 +88,7 @@ export const usePixelTracking = () => {
     trackProductPurchase,
     trackCheckout,
     trackCart,
-    trackPageView
+    trackPageView,
+    preventEvent
   };
 }; 

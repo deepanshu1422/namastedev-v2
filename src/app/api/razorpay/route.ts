@@ -17,7 +17,7 @@ const razorpay = new Razorpay({
 // Course pricing information with course IDs
 const coursePricing = {
   beginner: { 
-    amount: 100, 
+    amount: 99900, 
     currency: "INR", 
     name: "Beginner Package",
     courseId: "67c8a985a2fc8675d8e821ba"
@@ -186,9 +186,13 @@ export async function PUT(request: NextRequest) {
       createdAt: new Date(),
     });
 
+    // Generate thank you page URL with parameters
+    const thankYouUrl = `/thank-you?course=${order.courseType}&payment_id=${razorpay_payment_id}&order_id=${razorpay_order_id}`;
+
     return NextResponse.json({
       success: true,
       message: "Payment verified successfully",
+      redirectUrl: thankYouUrl
     });
   } catch (error) {
     console.error("Error verifying Razorpay payment:", error);

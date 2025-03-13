@@ -274,7 +274,7 @@ export default function CheckoutPage() {
         handler: async function (response: any) {
           try {
             // Verify payment
-            await verifyPayment({
+            const verificationResult = await verifyPayment({
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_order_id: response.razorpay_order_id,
               razorpay_signature: response.razorpay_signature,
@@ -287,10 +287,14 @@ export default function CheckoutPage() {
               variant: "default"
             });
             
-            // Redirect to course page
+            // Redirect to thank you page if available, otherwise to dashboard
             setTimeout(() => {
-              router.push(`/dashboard/${courseType}`);
-            }, 2000);
+              if (verificationResult.redirectUrl) {
+                router.push(verificationResult.redirectUrl);
+              } else {
+                router.push(`/dashboard/${courseType}`);
+              }
+            }, 1500);
           } catch (error) {
             console.error('Payment verification failed:', error);
             toast({

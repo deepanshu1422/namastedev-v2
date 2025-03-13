@@ -17,6 +17,16 @@ const shouldTrackEvent = (eventName: string): boolean => {
   return true;
 };
 
+// Helper to prevent specific events from being tracked
+export const preventEvent = (eventName: string): void => {
+  if (typeof window !== 'undefined' && (window as any)._fbq && (window as any)._fbq.queue) {
+    // Filter out any events of the specified type from the queue
+    (window as any)._fbq.queue = (window as any)._fbq.queue.filter((item: any) => {
+      return !(item[0] === 'track' && item[1] === eventName);
+    });
+  }
+};
+
 // Track ViewContent event
 export const trackViewContent = (
   contentName: string,
@@ -49,15 +59,28 @@ export const trackPageView = () => {
 export const trackPurchase = (
   value: number,
   currency: string = 'INR',
-  contentIds: string[] = []
+  contentIds: string[] = [],
+  contents: string[] = [],
+  numItems?: number
 ) => {
   if (typeof window !== 'undefined' && (window as any).fbq && shouldTrackEvent('Purchase')) {
-    (window as any).fbq('track', 'Purchase', {
+    const eventParams: Record<string, any> = {
       value: value,
       currency: currency,
       content_ids: contentIds,
       content_type: 'product'
-    });
+    };
+
+    // Add optional parameters if provided
+    if (contents.length > 0) {
+      eventParams.contents = contents.map(name => ({ id: contentIds[0] || '', name }));
+    }
+    
+    if (numItems !== undefined) {
+      eventParams.num_items = numItems;
+    }
+
+    (window as any).fbq('track', 'Purchase', eventParams);
   }
 };
 

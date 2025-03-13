@@ -243,6 +243,34 @@ The implementation supports the following Meta Pixel events:
 4. **Purchase**: Tracked when a user completes a purchase
 5. **AddToCart**: Tracked when a user adds a product to cart
 
+### Purchase Event Implementation
+
+We've implemented a robust solution for tracking purchase events that ensures each purchase is only tracked once, even if the thank you page is refreshed multiple times:
+
+1. **Thank You Page** (`src/app/thank-you/page.tsx`):
+   - Receives order details via URL parameters (course type, payment ID, order ID)
+   - Uses localStorage to store tracked purchases
+   - Checks both memory state and localStorage before firing the event
+   - Displays order details and provides navigation options
+   - Prevents InitiateCheckout events from being triggered on the thank you page
+
+2. **Razorpay Integration**:
+   - The API route (`src/app/api/razorpay/route.ts`) includes a redirect URL to the thank you page
+   - The checkout page redirects to the thank you page after successful payment
+   - All necessary parameters are passed via URL for proper tracking
+
+3. **Deduplication Mechanism**:
+   - Each purchase is tracked with a unique key based on the order ID
+   - The key is stored in localStorage to persist across page refreshes
+   - A React ref is used to prevent duplicate tracking within the same session
+   - The fbPixel utility has its own debounce mechanism as an additional safeguard
+
+4. **Event Prevention Mechanism**:
+   - The `preventEvent` function filters out specific events from the Facebook Pixel queue
+   - The thank you page uses this function to prevent InitiateCheckout events
+   - The `trackProductPurchase` function automatically prevents InitiateCheckout events
+   - This ensures that only the Purchase event is tracked on the thank you page
+
 ### Benefits of This Approach
 
 1. **Reliability**: Multiple layers of protection against duplicate events
