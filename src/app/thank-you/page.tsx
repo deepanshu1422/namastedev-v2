@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { CheckCircle } from 'lucide-react';
 import { hashUserDetails } from '@/lib/hashUtils';
+import { getUserTrackingInfo } from '@/lib/userInfo';
 
 // Course pricing information
 const coursePricing = {
@@ -110,18 +111,31 @@ const ThankYouPage = () => {
           // Hash user details for advanced matching if available
           const hashedUserData = userDetails ? hashUserDetails(userDetails) : {};
           
-          // Track the purchase with enhanced tracking
-          trackProductPurchase({
-            value: course.value,
-            contentIds: [`${courseType}-package`],
-            contents: [course.name],
-            numItems: 1,
-            event_id: eventId,
-            event_time: Math.floor(Date.now() / 1000), // Add Unix timestamp in seconds
-            userInfo: {
-              ...hashedUserData
-            }
-          });
+          // Get tracking info (IP, user agent, FBP, FBC)
+          const trackPurchase = async () => {
+            const trackingInfo = await getUserTrackingInfo();
+            
+            // Track the purchase with enhanced tracking
+            trackProductPurchase({
+              value: course.value,
+              contentIds: [`${courseType}-package`],
+              contents: [course.name],
+              numItems: 1,
+              event_id: eventId,
+              event_time: Math.floor(Date.now() / 1000), // Add Unix timestamp in seconds
+              userInfo: {
+                ...hashedUserData,
+                ip: trackingInfo.ip,
+                userAgent: trackingInfo.userAgent,
+                fbp: trackingInfo.fbp,
+                fbc: trackingInfo.fbc,
+                fb_login_id: trackingInfo.fb_login_id
+              }
+            });
+          };
+          
+          // Execute the tracking
+          trackPurchase();
           
           // Mark as tracked in localStorage
           localStorage.setItem(purchaseKey, 'true');
