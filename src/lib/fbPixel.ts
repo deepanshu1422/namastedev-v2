@@ -40,6 +40,47 @@ export const preventEvent = (eventName: string): void => {
   }
 };
 
+// Helper to send event to server-side Conversion API
+const sendToServerConversionApi = async (
+  eventName: string,
+  eventData: any,
+  userData?: any
+) => {
+  try {
+    // Get current URL for event_source_url
+    const eventSourceUrl = typeof window !== 'undefined' ? window.location.href : '';
+    
+    // Add event_source_url to eventData
+    const enhancedEventData = {
+      ...eventData,
+      event_source_url: eventSourceUrl
+    };
+    
+    // Send to our API endpoint
+    const response = await fetch('/api/facebook-conversion', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        eventName,
+        eventData: enhancedEventData,
+        userData
+      }),
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Error sending to server: ${response.status}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error(`Error sending ${eventName} to server Conversion API:`, error);
+    // Don't throw error to prevent breaking the user experience
+    return null;
+  }
+};
+
 // Track ViewContent event
 export const trackViewContent = (
   contentName: string,
@@ -55,6 +96,10 @@ export const trackViewContent = (
     fbp?: string;
     fbc?: string;
     fb_login_id?: string;
+    em?: string;
+    ph?: string;
+    fn?: string;
+    ln?: string;
   }
 ) => {
   // Make sure fbq is available and debounce
@@ -101,14 +146,33 @@ export const trackViewContent = (
       }
     }
 
+    // Track via browser pixel
     (window as any).fbq('track', 'ViewContent', eventParams);
+    
+    // Also send to server Conversion API
+    const serverEventData = {
+      contentName,
+      contentCategory,
+      contentIds,
+      value,
+      currency,
+      event_id,
+      event_time
+    };
+    
+    // Send to server asynchronously (don't await)
+    sendToServerConversionApi('ViewContent', serverEventData, userInfo);
   }
 };
 
 // Track PageView event
 export const trackPageView = () => {
   if (typeof window !== 'undefined' && (window as any).fbq && shouldTrackEvent('PageView')) {
+    // Track via browser pixel
     (window as any).fbq('track', 'PageView');
+    
+    // Also send to server Conversion API
+    sendToServerConversionApi('PageView', {});
   }
 };
 
@@ -200,7 +264,22 @@ export const trackPurchase = (
       }
     }
 
+    // Track via browser pixel
     (window as any).fbq('track', 'Purchase', eventParams);
+    
+    // Also send to server Conversion API
+    const serverEventData = {
+      value,
+      currency,
+      contentIds,
+      contents,
+      numItems,
+      event_id,
+      event_time
+    };
+    
+    // Send to server asynchronously (don't await)
+    sendToServerConversionApi('Purchase', serverEventData, userInfo);
   }
 };
 
@@ -217,11 +296,18 @@ export const trackInitiateCheckout = (
     fbp?: string;
     fbc?: string;
     fb_login_id?: string;
+    em?: string;  // Hashed email
+    ph?: string;  // Hashed phone
+    fn?: string;  // Hashed first name
+    ln?: string;  // Hashed last name
   },
   event_id?: string,
   event_time?: number
 ) => {
   if (typeof window !== 'undefined' && (window as any).fbq && shouldTrackEvent('InitiateCheckout', event_id)) {
+    // Generate event ID if not provided
+    const finalEventId = event_id || `checkout_${Math.random().toString(36).substring(2, 15)}_${Date.now()}`;
+    
     const eventParams: Record<string, any> = {
       value: value,
       currency: currency,
@@ -231,6 +317,7 @@ export const trackInitiateCheckout = (
 
     // Add optional parameters if provided
     if (contents.length > 0) {
+      // For browser pixel, we can include name
       eventParams.contents = contents.map(name => ({ id: contentIds[0] || '', name }));
     }
     
@@ -238,10 +325,8 @@ export const trackInitiateCheckout = (
       eventParams.num_items = numItems;
     }
     
-    // Add eventId if provided
-    if (event_id) {
-      eventParams.event_id = event_id;
-    }
+    // Add eventId
+    eventParams.event_id = finalEventId;
     
     // Add event_time if provided
     if (event_time) {
@@ -269,9 +354,44 @@ export const trackInitiateCheckout = (
       if (userInfo.fb_login_id) {
         eventParams.fb_login_id = userInfo.fb_login_id;
       }
+      
+      // Add hashed user data for advanced matching
+      if (userInfo.em) {
+        eventParams.em = userInfo.em;
+      }
+      
+      if (userInfo.ph) {
+        eventParams.ph = userInfo.ph;
+      }
+      
+      if (userInfo.fn) {
+        eventParams.fn = userInfo.fn;
+      }
+      
+      if (userInfo.ln) {
+        eventParams.ln = userInfo.ln;
+      }
     }
 
+    // Track via browser pixel
     (window as any).fbq('track', 'InitiateCheckout', eventParams);
+    
+    // Also send to server Conversion API
+    // For server API, we need to format the data differently
+    const serverEventData = {
+      value,
+      currency,
+      contentIds,
+      // For server API, we only send content IDs, not names
+      contents: contentIds,
+      numItems,
+      event_id: finalEventId,
+      event_time: event_time || Math.floor(Date.now() / 1000),
+      contentType: 'product'
+    };
+    
+    // Send to server asynchronously (don't await)
+    sendToServerConversionApi('InitiateCheckout', serverEventData, userInfo);
   }
 };
 
@@ -288,6 +408,10 @@ export const trackAddToCart = (
     fbp?: string;
     fbc?: string;
     fb_login_id?: string;
+    em?: string;  // Hashed email
+    ph?: string;  // Hashed phone
+    fn?: string;  // Hashed first name
+    ln?: string;  // Hashed last name
   },
   event_id?: string,
   event_time?: number
@@ -340,8 +464,40 @@ export const trackAddToCart = (
       if (userInfo.fb_login_id) {
         eventParams.fb_login_id = userInfo.fb_login_id;
       }
+      
+      // Add hashed user data for advanced matching
+      if (userInfo.em) {
+        eventParams.em = userInfo.em;
+      }
+      
+      if (userInfo.ph) {
+        eventParams.ph = userInfo.ph;
+      }
+      
+      if (userInfo.fn) {
+        eventParams.fn = userInfo.fn;
+      }
+      
+      if (userInfo.ln) {
+        eventParams.ln = userInfo.ln;
+      }
     }
 
+    // Track via browser pixel
     (window as any).fbq('track', 'AddToCart', eventParams);
+    
+    // Also send to server Conversion API
+    const serverEventData = {
+      value,
+      currency,
+      contentIds,
+      contents,
+      numItems,
+      event_id,
+      event_time
+    };
+    
+    // Send to server asynchronously (don't await)
+    sendToServerConversionApi('AddToCart', serverEventData, userInfo);
   }
 }; 

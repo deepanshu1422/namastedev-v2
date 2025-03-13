@@ -48,58 +48,81 @@ export const getFacebookClickId = (): string => {
   }
   
   // If no cookie, check URL for fbclid parameter
-  const urlParams = new URLSearchParams(window.location.search);
-  const fbclid = urlParams.get('fbclid');
-  
-  if (fbclid) {
-    // Format according to Facebook's requirements
-    const domain = window.location.hostname;
-    const timestamp = Math.floor(Date.now() / 1000);
-    return `fb.1.${timestamp}.${fbclid}`;
+  try {
+    const url = new URL(window.location.href);
+    const fbclid = url.searchParams.get('fbclid');
+    
+    if (fbclid) {
+      // Format: fb.1.{timestamp}.{fbclid}
+      const timestamp = Math.floor(Date.now() / 1000);
+      const fbc = `fb.1.${timestamp}.${fbclid}`;
+      
+      // Set as cookie for future use
+      document.cookie = `_fbc=${fbc}; path=/; max-age=7776000`; // 90 days
+      
+      return fbc;
+    }
+  } catch (error) {
+    console.error('Error processing fbclid:', error);
   }
   
   return '';
 };
 
-// Function to get Facebook Login ID (fb_login_id)
+// Function to get Facebook Login ID
 export const getFacebookLoginId = (): string => {
   if (typeof window === 'undefined') return '';
   
-  // Check localStorage for Facebook Login ID
-  const fbLoginId = localStorage.getItem('fb_login_id');
-  if (fbLoginId) {
-    return fbLoginId;
-  }
+  // This is a placeholder. In a real implementation, you would:
+  // 1. Check if the user is logged in with Facebook
+  // 2. Get their Facebook ID from your auth system
+  // 3. Return it for tracking
   
-  // Check sessionStorage for Facebook Login ID
-  const sessionFbLoginId = sessionStorage.getItem('fb_login_id');
-  if (sessionFbLoginId) {
-    return sessionFbLoginId;
-  }
-  
-  // Check cookies for Facebook Login ID
-  const cookies = document.cookie.split(';');
-  const fbLoginIdCookie = cookies.find(cookie => cookie.trim().startsWith('fb_login_id='));
-  if (fbLoginIdCookie) {
-    return fbLoginIdCookie.trim().substring(12); // Remove 'fb_login_id=' prefix
-  }
-  
+  // For now, we'll return an empty string
   return '';
+};
+
+// Function to get stored user data from localStorage
+export const getStoredUserData = (): { name?: string; email?: string; phone?: string } => {
+  if (typeof window === 'undefined') return {};
+  
+  try {
+    const savedDetails = localStorage.getItem('userDetails');
+    if (savedDetails) {
+      return JSON.parse(savedDetails);
+    }
+  } catch (error) {
+    console.error('Error parsing saved user details:', error);
+  }
+  
+  return {};
 };
 
 // Get all user tracking information
 export const getUserTrackingInfo = async () => {
+  // Get basic tracking info
   const ip = await getUserIP();
   const userAgent = getUserAgent();
   const fbp = getFacebookBrowserId();
   const fbc = getFacebookClickId();
   const fb_login_id = getFacebookLoginId();
   
+  // Get stored user data
+  const userData = getStoredUserData();
+  
   return {
+    // Browser and network info
     ip,
     userAgent,
+    
+    // Facebook parameters
     fbp,
     fbc,
-    fb_login_id
+    fb_login_id,
+    
+    // User data (if available)
+    ...(userData.name && { name: userData.name }),
+    ...(userData.email && { email: userData.email }),
+    ...(userData.phone && { phone: userData.phone })
   };
 }; 

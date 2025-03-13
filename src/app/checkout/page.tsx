@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { usePixelTracking } from '@/hooks/usePixelTracking';
+import { getUserTrackingInfo } from '@/lib/userInfo';
 
 // List of Indian states
 const indianStates = [
@@ -132,6 +134,7 @@ export default function CheckoutPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { toast, toasts } = useToast();
+  const { trackCheckout } = usePixelTracking();
   
   const courseType = searchParams.get('course') || 'beginner';
   const course = courseInfo[courseType as keyof typeof courseInfo];
@@ -143,6 +146,7 @@ export default function CheckoutPage() {
     phone: '',
     state: ''
   });
+  const [checkoutTracked, setCheckoutTracked] = useState(false);
 
   // Load user details from localStorage if available
   useEffect(() => {
@@ -156,6 +160,41 @@ export default function CheckoutPage() {
       }
     }
   }, []);
+
+  // Track InitiateCheckout event when page loads
+  useEffect(() => {
+    const trackInitiateCheckout = async () => {
+      if (checkoutTracked || !course) return;
+      
+      try {
+        // Get user tracking info
+        const userInfo = await getUserTrackingInfo();
+        
+        // Track the checkout event
+        trackCheckout({
+          value: course.amount / 100, // Convert from paise to rupees
+          currency: 'INR',
+          contentIds: [`${courseType}-package`],
+          contents: [course.name],
+          numItems: 1,
+          userInfo: {
+            ...userInfo,
+            // If we have user data from localStorage, include it
+            ...(userDetails.name && { name: userDetails.name }),
+            ...(userDetails.email && { email: userDetails.email }),
+            ...(userDetails.phone && { phone: userDetails.phone })
+          },
+          event_id: `checkout_${courseType}_${Date.now()}`
+        });
+        
+        setCheckoutTracked(true);
+      } catch (error) {
+        console.error('Error tracking checkout event:', error);
+      }
+    };
+    
+    trackInitiateCheckout();
+  }, [courseType, course, trackCheckout, userDetails, checkoutTracked]);
 
   // Load Razorpay script
   useEffect(() => {
