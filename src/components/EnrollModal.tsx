@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { useRouter } from 'next/navigation';
+import { usePixelTracking } from '@/hooks/usePixelTracking';
 
 interface CourseOption {
   name: string;
@@ -52,6 +53,13 @@ const indianStates = [
   "West Bengal"
 ];
 
+// Course pricing and details mapping
+const coursePricing = {
+  'beginner': { value: 999, name: 'Beginner Package' },
+  'intermediate': { value: 1999, name: 'Intermediate Package' },
+  'advanced': { value: 2999, name: 'Advanced Package' }
+};
+
 const courseOptions: Record<string, CourseOption[]> = {
   beginner: [
     {
@@ -97,7 +105,22 @@ const courseOptions: Record<string, CourseOption[]> = {
       ]
     }
   ],
-  advanced: []
+  advanced: [
+    {
+      name: "Advanced Package",
+      price: "₹2,999",
+      originalPrice: "₹3,999",
+      discount: "25%",
+      features: [
+        "All Intermediate + Beginner Content",
+        "AI & Machine Learning",
+        "System Design",
+        "Advanced Architecture",
+        "Expert Mentorship"
+      ],
+      recommended: true
+    }
+  ]
 };
 
 const EnrollModal: React.FC<EnrollModalProps> = ({
@@ -106,6 +129,7 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
   currentPage
 }) => {
   const router = useRouter();
+  const { trackCheckout } = usePixelTracking();
   
   // Add state to track if checkout is in progress
   const [isCheckoutInProgress, setIsCheckoutInProgress] = useState(false);
@@ -126,6 +150,20 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
     'advanced': 'Advanced Package'
   };
 
+  // Track InitiateCheckout event
+  const trackInitiateCheckout = (courseType: string) => {
+    const course = coursePricing[courseType as keyof typeof coursePricing];
+    
+    if (course) {
+      trackCheckout({
+        value: course.value,
+        contentIds: [`${courseType}-package`],
+        contents: [course.name],
+        numItems: 1
+      });
+    }
+  };
+
   // Handle redirect to checkout page
   const handleCheckoutRedirect = (page: string) => {
     // Prevent multiple clicks
@@ -133,6 +171,9 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
     
     try {
       setIsCheckoutInProgress(true);
+      
+      // Track InitiateCheckout event before redirecting
+      trackInitiateCheckout(page);
       
       // Close modal
       onClose();

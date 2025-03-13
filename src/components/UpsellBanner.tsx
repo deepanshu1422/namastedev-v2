@@ -102,105 +102,9 @@ const UpsellBanner: React.FC<UpsellBannerProps> = ({
     }
   };
 
-  const handleDirectCheckout = async () => {
-    // Prevent multiple clicks
-    if (isCheckoutInProgress) return;
-    
-    try {
-      setIsCheckoutInProgress(true);
-      
-      // For advanced page, show email collection modal
-      const emailInput = prompt("Please enter your email to continue:");
-      if (!emailInput) {
-        setIsCheckoutInProgress(false);
-        return;
-      }
-      
-      setUserDetails(prev => ({ ...prev, email: emailInput }));
-      
-      // Initialize Razorpay order
-      const orderData = await initializeRazorpay(currentPage);
-      
-      // @ts-ignore - Razorpay is loaded via script
-      const razorpay = new window.Razorpay({
-        key: orderData.key,
-        amount: orderData.amount,
-        currency: orderData.currency,
-        order_id: orderData.id,
-        name: "Namaste Dev",
-        description: `${courseNames[currentPage]} Package - 30 Days of Code`,
-        image: "https://namastedev.com/logo.png",
-        prefill: {
-          name: userDetails.name,
-          email: emailInput,
-          contact: userDetails.phone,
-        },
-        theme: {
-          color: "#22C55E",
-        },
-        handler: async function (response: any) {
-          try {
-            // Verify payment
-            await verifyPayment({
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_signature: response.razorpay_signature,
-            });
-            
-            // Show success message
-            toast({
-              title: "Payment Successful",
-              description: "Thank you for enrolling in the course!",
-              variant: "default"
-            });
-            
-            // Redirect to course page
-            setTimeout(() => {
-              window.location.href = `/dashboard/${currentPage}`;
-            }, 2000);
-          } catch (error) {
-            console.error('Payment verification failed:', error);
-            toast({
-              title: "Payment Verification Failed",
-              description: "Please contact support if payment was deducted",
-              variant: "destructive"
-            });
-          } finally {
-            setIsCheckoutInProgress(false);
-          }
-        },
-        modal: {
-          ondismiss: function() {
-            setIsCheckoutInProgress(false);
-            toast({
-              title: "Payment Cancelled",
-              description: "You can try again when you're ready",
-              variant: "default"
-            });
-          },
-        },
-      });
-      
-      razorpay.open();
-    } catch (error) {
-      console.error('Error during checkout:', error);
-      toast({
-        title: "Checkout Failed",
-        description: "Please try again later or contact support",
-        variant: "destructive"
-      });
-      setIsCheckoutInProgress(false);
-    }
-  };
-
   const handleEnrollClick = () => {
-    // For advanced page, directly go to checkout without showing modal
-    if (currentPage === 'advanced') {
-      handleDirectCheckout();
-    } else {
-      // For other pages, show the modal
-      setIsModalOpen(true);
-    }
+    // For all pages, show the modal
+    setIsModalOpen(true);
   };
 
   return (
@@ -235,7 +139,7 @@ const UpsellBanner: React.FC<UpsellBannerProps> = ({
                 disabled={isCheckoutInProgress}
                 className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold transition-all duration-300 transform hover:scale-105 w-full sm:w-auto flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                <span>{isCheckoutInProgress ? 'Processing...' : currentPage === 'advanced' ? 'Continue to Checkout' : 'Enroll Now'}</span>
+                <span>{isCheckoutInProgress ? 'Processing...' : 'Enroll Now'}</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
@@ -258,13 +162,11 @@ const UpsellBanner: React.FC<UpsellBannerProps> = ({
         </div>
       </motion.div>
 
-      {currentPage !== 'advanced' && (
-        <EnrollModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          currentPage={currentPage}
-        />
-      )}
+      <EnrollModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        currentPage={currentPage}
+      />
     </>
   );
 };

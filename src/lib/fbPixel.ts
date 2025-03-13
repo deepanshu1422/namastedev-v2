@@ -65,15 +65,28 @@ export const trackPurchase = (
 export const trackInitiateCheckout = (
   value: number,
   currency: string = 'INR',
-  contentIds: string[] = []
+  contentIds: string[] = [],
+  contents: string[] = [],
+  numItems?: number
 ) => {
   if (typeof window !== 'undefined' && (window as any).fbq && shouldTrackEvent('InitiateCheckout')) {
-    (window as any).fbq('track', 'InitiateCheckout', {
+    const eventParams: Record<string, any> = {
       value: value,
       currency: currency,
       content_ids: contentIds,
       content_type: 'product'
-    });
+    };
+
+    // Add optional parameters if provided
+    if (contents.length > 0) {
+      eventParams.contents = contents.map(name => ({ id: contentIds[0] || '', name }));
+    }
+    
+    if (numItems !== undefined) {
+      eventParams.num_items = numItems;
+    }
+
+    (window as any).fbq('track', 'InitiateCheckout', eventParams);
   }
 };
 
@@ -81,14 +94,27 @@ export const trackInitiateCheckout = (
 export const trackAddToCart = (
   value: number,
   currency: string = 'INR',
-  contentIds: string[] = []
+  contentIds: string[] = [],
+  contents: string[] = [],
+  numItems?: number
 ) => {
   if (typeof window !== 'undefined' && (window as any).fbq && shouldTrackEvent('AddToCart')) {
-    (window as any).fbq('track', 'AddToCart', {
+    const eventParams: Record<string, any> = {
       value: value,
       currency: currency,
       content_ids: contentIds,
       content_type: 'product'
-    });
+    };
+
+    // Add optional parameters if provided
+    if (contents.length > 0) {
+      eventParams.contents = contents.map(name => ({ id: contentIds[0] || '', name }));
+    }
+    
+    if (numItems !== undefined) {
+      eventParams.num_items = numItems;
+    }
+
+    (window as any).fbq('track', 'AddToCart', eventParams);
   }
 }; 

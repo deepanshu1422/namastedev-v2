@@ -13,6 +13,8 @@ interface PurchaseProps {
   value: number;
   currency?: string;
   contentIds?: string[];
+  contents?: string[]; // Product names
+  numItems?: number;   // Number of items
 }
 
 // Custom hook for Facebook Pixel tracking
@@ -49,7 +51,9 @@ export const usePixelTracking = () => {
   const trackProductPurchase = ({
     value,
     currency = 'INR',
-    contentIds = []
+    contentIds = [],
+    contents = [],
+    numItems
   }: PurchaseProps) => {
     trackPurchase(value, currency, contentIds);
   };
@@ -58,18 +62,22 @@ export const usePixelTracking = () => {
   const trackCheckout = ({
     value,
     currency = 'INR',
-    contentIds = []
+    contentIds = [],
+    contents = [],
+    numItems
   }: PurchaseProps) => {
-    trackInitiateCheckout(value, currency, contentIds);
+    trackInitiateCheckout(value, currency, contentIds, contents, numItems);
   };
 
   // Function to track AddToCart
   const trackCart = ({
     value,
     currency = 'INR',
-    contentIds = []
+    contentIds = [],
+    contents = [],
+    numItems
   }: PurchaseProps) => {
-    trackAddToCart(value, currency, contentIds);
+    trackAddToCart(value, currency, contentIds, contents, numItems);
   };
 
   return {

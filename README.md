@@ -63,6 +63,7 @@ We've implemented a comprehensive solution for Meta Pixel tracking that prevents
 1. **Utility Functions** (`src/lib/fbPixel.ts`)
 2. **Custom React Hook** (`src/hooks/usePixelTracking.ts`)
 3. **Page-Level Implementation** (in each page component)
+4. **Component-Level Implementation** (in specific components like EnrollModal)
 
 ### 1. Utility Functions (`src/lib/fbPixel.ts`)
 
@@ -186,6 +187,52 @@ const BeginnerPage = () => {
 };
 ```
 
+### 4. Component-Level Implementation
+
+For specific user interactions, we implement tracking in the relevant components:
+
+#### EnrollModal Component
+
+The EnrollModal component tracks the InitiateCheckout event when a user clicks on a checkout button:
+
+```typescript
+// Track InitiateCheckout event
+const trackInitiateCheckout = (courseType: string) => {
+  const course = coursePricing[courseType as keyof typeof coursePricing];
+  
+  if (course) {
+    trackCheckout({
+      value: course.value,
+      contentIds: [`${courseType}-package`],
+      contents: [course.name],
+      numItems: 1
+    });
+  }
+};
+
+// Handle redirect to checkout page
+const handleCheckoutRedirect = (page: string) => {
+  // Prevent multiple clicks
+  if (isCheckoutInProgress) return;
+  
+  try {
+    setIsCheckoutInProgress(true);
+    
+    // Track InitiateCheckout event before redirecting
+    trackInitiateCheckout(page);
+    
+    // Close modal
+    onClose();
+    
+    // Redirect to checkout page with course type
+    router.push(`/checkout?course=${page}`);
+  } catch (error) {
+    console.error('Error redirecting to checkout:', error);
+    setIsCheckoutInProgress(false);
+  }
+};
+```
+
 ### Supported Events
 
 The implementation supports the following Meta Pixel events:
@@ -231,7 +278,9 @@ trackProductPurchase({
 const { trackCheckout } = usePixelTracking();
 trackCheckout({
   value: 999,
-  contentIds: ['product-id']
+  contentIds: ['product-id'],
+  contents: ['Product Name'],
+  numItems: 1
 });
 ```
 
