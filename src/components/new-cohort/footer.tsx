@@ -103,12 +103,12 @@ export default function Footer() {
                 >
                   Support
                 </Link>
-                <Link
+                {/* <Link
                   className="lg:hover:text-prime transition-all"
                   href={"/aboutus"}
                 >
                   About Us
-                </Link>
+                </Link> */}
               </div>
             </Reveal>
           </section>
